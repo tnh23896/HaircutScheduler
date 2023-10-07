@@ -11,15 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('name');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('admin_id');
             $table->string('phone');
+            $table->unsignedBigInteger('promo_id');
+            $table->integer('status');
+            $table->integer('price');
             $table->string('email');
-            $table->string('password');
-            $table->integer('black_status');
+            $table->date('day');
+            $table->unsignedBigInteger('work_schedule_detail_id');
             $table->timestamp('created_at');
-            $table->softDeletes(); // add this line
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bookings');
     }
 };
