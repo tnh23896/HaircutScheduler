@@ -13,10 +13,9 @@ use App\Http\Controllers\Admin\DashboardController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
-// 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-// });
-Route::get('/', function () {
-	return view('welcome');
+/*
+ * đây là route để hiển thị view admin
+*/
+Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
+	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });

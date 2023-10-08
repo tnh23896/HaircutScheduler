@@ -13,4 +13,8 @@ class Time extends Model
     protected $fillable = [
         'time',
     ];
+    public function work_schedule_details()
+    {
+        return $this->hasMany(WorkScheduleDetail::class);
+    }
 }

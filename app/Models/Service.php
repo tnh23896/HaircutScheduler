@@ -13,4 +13,20 @@ class Service extends Model
     protected $fillable = [
         'name', 'price', 'image', 'description', 'category_services_id', 'percentage_discount'
     ];
+    public function booking_details()
+    {
+        return $this->hasMany(BookingDetail::class);
+    }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    public function category_services()
+    {
+        return $this->belongsTo(CategoryService::class);
+    }
 }

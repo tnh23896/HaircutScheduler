@@ -13,4 +13,12 @@ class WorkSchedule extends Model
     protected $fillable = [
         'admin_id', 'day',
     ];
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+    public function work_schedule_details()
+    {
+        return $this->hasMany(WorkScheduleDetail::class);
+    }
 }
