@@ -2,5 +2,5 @@
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <script src="https://kit.fontawesome.com/86807bc2b2.js" crossorigin="anonymous"></script>
-
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="{{asset('js/helper-ajax.js')}}"></script>
