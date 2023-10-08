@@ -14,6 +14,4 @@ use App\Http\Controllers\Admin\DashboardController;
 |
 */
 
-Route::group(['prefix' => 'admin'], function () {
-	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
+
