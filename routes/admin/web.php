@@ -16,9 +16,8 @@ use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
 /*
  * đây là route để hiển thị view admin
 */
-Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
+Route::group(['middleware' => 'auth.admin'], function () {
 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-
 });
 //Category Service
 Route::get('category-service', [CategoryController::class, 'index'])
