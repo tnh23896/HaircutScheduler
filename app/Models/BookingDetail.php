@@ -16,4 +16,13 @@ class BookingDetail extends Model
         'total_price',
         'booking_id',
     ];
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class);
+    }
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+    
 }

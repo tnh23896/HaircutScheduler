@@ -13,4 +13,8 @@ class Promotion extends Model
     protected $fillable = [
         'promocode', 'description', 'discount', 'expire_date',
     ];
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

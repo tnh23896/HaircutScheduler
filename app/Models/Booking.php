@@ -13,4 +13,24 @@ class Booking extends Model
     protected $fillable = [
         'name', 'user_id', 'admin_id', 'phone', 'promo_id', 'status', 'price', 'email', 'day', 'work_schedule_detail_id',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+    public function promotion()
+    {
+        return $this->belongsTo(Promotion::class);
+    }
+    public function work_schedule_detail()
+    {
+        return $this->belongsTo(WorkScheduleDetail::class);
+    }
+    public function booking_details()
+    {
+        return $this->hasMany(BookingDetail::class);
+    }
 }
