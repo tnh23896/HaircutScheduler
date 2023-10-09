@@ -14,7 +14,7 @@ if (!function_exists('upload_file')){
             $path = $file->storeAs('public/images', $newFileName);
 
             // Trả về đường dẫn tương đối đến tệp đã lưu
-            return $path;
+            return $newFileName;
         }
 
         // Trả về null hoặc thông báo lỗi tùy thuộc vào cách bạn muốn xử lý lỗi
