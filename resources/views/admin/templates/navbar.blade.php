@@ -6,7 +6,7 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="" class="side-menu side-menu--active">
+            <a href="/" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
                 <div class="side-menu__title"> Dashboard </div>
             </a>
@@ -18,9 +18,9 @@
             </a>
         </li>
         <li>
-            <a href="" class="side-menu">
+            <a href="{{route('admin.scheduleManagement.index')}}" class="side-menu side-menu--active">
                 <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
-                <div class="side-menu__title"> Author </div>
+                <div class="side-menu__title"> Schedule Management </div>
             </a>
         </li>
         <li>

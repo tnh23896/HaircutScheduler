@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
@@ -16,8 +17,11 @@ use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
 /*
  * đây là route để hiển thị view admin
 */
-Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
-	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::group(['middleware' => 'auth.admin'], function () {
+	Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+
+
 
 });
 //Category Service
@@ -32,6 +36,13 @@ Route::get('category-service/edit/{id}', [CategoryController::class, 'edit'])
 Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
     ->name('admin.serviceManagement.category.update');
 
-
-
+// Schedule Management
+Route::get('schedule-management', [ScheduleController::class, 'index'])
+    ->name('admin.scheduleManagement.index');
+Route::get('schedule-management/edit/{id}', [ScheduleController::class, 'edit'])
+    ->name('admin.scheduleManagement.edit');
+Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update'])
+    ->name('admin.scheduleManagement.update');
+Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
+    ->name('admin.scheduleManagement.show');
 
