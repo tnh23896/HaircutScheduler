@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
@@ -50,6 +51,13 @@ Route::post('service/edit/{id}', [ServiceController::class, 'update'])
 Route::delete('service/delete/{id}', [ServiceController::class, 'destroy'])
 ->name('admin.serviceManagement.service.delete');
 
-
-
+// Schedule Management
+Route::get('schedule-management', [ScheduleController::class, 'index'])
+    ->name('admin.scheduleManagement.index');
+Route::get('schedule-management/edit/{id}', [ScheduleController::class, 'edit'])
+    ->name('admin.scheduleManagement.edit');
+Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update'])
+    ->name('admin.scheduleManagement.update');
+Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
+    ->name('admin.scheduleManagement.show');
 
