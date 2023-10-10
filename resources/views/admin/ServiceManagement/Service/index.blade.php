@@ -45,7 +45,7 @@
                                 <input class="form-check-input" type="checkbox">
                             </td>
                             <td class="!py-3.5">
-                                <img alt="Image service" class="w-20 h-20 rounded" src="{{ asset($service->image) }}"
+                                <img alt="Image service" class="w-20 h-auto rounded" src="{{ asset($service->image) }}"
                                     title="{{ $service->created_at }}">
                             </td>
                             <td class="text-center">
@@ -53,7 +53,7 @@
                             </td>
                             <td class="text-center capitalize">{{ $service->price }}</td>
                             <td class="text-center capitalize">{{ $service->description }}</td>
-                            <td class="text-center capitalize">{{ $service->category_services->name }}</td>
+                            <td class="text-center capitalize">{{ $service->category_services->name ?? '' }}</td>
                             <td class="text-center capitalize">{{ $service->percentage_discount }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
@@ -123,9 +123,9 @@
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-            <div style="display: flex;justify-content: center;width: 100%;">
-                {{-- {{ $services->links() }} --}}
-            </div>
+            <nav class="w-full sm:w-auto sm:mr-auto">
+                {{ $services->links('pagination::bootstrap-4') }}
+            </nav>
         </div>
         <!-- END: Pagination -->
     </div>

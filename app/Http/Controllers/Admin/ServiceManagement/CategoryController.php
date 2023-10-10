@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ServiceManagement\Category\StoreRequest;
 use App\Http\Requests\Admin\ServiceManagement\Category\UpdateRequest;
 use App\Models\CategoryService;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -21,7 +22,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category_service = $this->model::paginate(5);
+        $category_service = $this->model->latest()->paginate(5);
 
         return view('admin.serviceManagement.category.index', compact('category_service'));
     }

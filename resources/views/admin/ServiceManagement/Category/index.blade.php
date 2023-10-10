@@ -67,11 +67,11 @@
                                     </form>
                                 </div>
                             </td>
-                            <td class="text-center capitalize"></td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-danger"></div>
+                            <td class=""></td>
+                            <td class="">
+                                <div class=""></div>
                             </td>
-                            <td class="text-center"></td>
+                            <td class=""></td>
                         </tr>
                     </tbody>
                 @endforeach
@@ -118,9 +118,9 @@
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-            <div style="display: flex;justify-content: center;width: 100%;">
-                {{ $category_service->links() }}
-            </div>
+            <nav class="w-full sm:w-auto sm:mr-auto">
+                {{ $category_service->links('pagination::bootstrap-4') }}
+            </nav>
         </div>
         <!-- END: Pagination -->
     </div>

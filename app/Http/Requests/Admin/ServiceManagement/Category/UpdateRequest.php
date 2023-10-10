@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required | regex:/^[\pL\pM\s]+$/u | min:2 | max:255',
+            'name' => 'required | min:2 | max:255',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }

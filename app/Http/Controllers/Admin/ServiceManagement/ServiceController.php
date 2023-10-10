@@ -24,7 +24,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = $this->Servicemodel::all();
+        $services = $this->Servicemodel->latest()->paginate(10);
 
         return view('admin.serviceManagement.service.index', compact('services'));
     }

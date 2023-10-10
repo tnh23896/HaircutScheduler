@@ -100,7 +100,7 @@
 
                             if (errorMessages.length > 0) {
                                 var errorDiv = $('#errorDiv');
-                                errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
+                                errorDiv.html("<p>Error:</p><ul>");
                                 var errorList = errorDiv.find("ul");
                                 for (var i = 0; i < errorMessages.length; i++) {
                                     errorList.append("<li>" + " - " + errorMessages[i] +
