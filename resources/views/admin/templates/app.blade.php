@@ -14,6 +14,7 @@
         content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
     <title>@yield('title')</title>
+    @include('admin.templates.link_header')
     @yield('css_header_custom')
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
     <script src="{{ asset('js/helper-ajax.js') }}"></script>
@@ -34,7 +35,6 @@
     <!-- END: Content -->
     </div>
 
-    </script>
     <script src="{{ asset('dist/js/app.js') }}"></script>
 
     <!-- END: JS Assets-->
@@ -43,10 +43,6 @@
     @yield('js_footer_custom')
     @yield('ajax')
     @include('admin.templates.link_footer')
-    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('libs/input-mask/jquery.inputmask.js') }}"></script>
-    <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
 </body>
 
 <!-- Mirrored from rubick-html.vercel.app/side-menu-dark-accordion.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Jun 2023 10:58:45 GMT -->
