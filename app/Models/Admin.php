@@ -15,7 +15,7 @@ class Admin extends Authenticatable
     protected $table = 'admins';
     protected $guarded = 'admin';
     protected $fillable = [
-        'username', 'avatar', 'phone', 'email', 'password', 'description',
+        'username', 'avatar', 'phone', 'email', 'password', 'description','remember_token',
     ];
     public function bookings()
     {
