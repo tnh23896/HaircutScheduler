@@ -41,7 +41,7 @@
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Status</label>
-                    <select data-placeholder="Select your favorite actors" name="status" class="tom-select w-full" id="crud-form-2" multiple>
+                    <select data-placeholder="Select your favorite actors" name="status" class="tom-select w-full" id="crud-form-2">
                         <option value="1" @if($data->status == "pending") selected @endif>Pending</option>
                         <option value="2" @if($data->status == "success") selected @endif>Success</option>
                         <option value="3" @if($data->status == "canceled") selected @endif>Canceled</option>
