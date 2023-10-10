@@ -13,13 +13,13 @@
                     Manage all your e-commerce accounts in one place</div>
                 <div class="intro-x mt-8">
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block" placeholder="Email"
-                        name="email">
+                        name="email" value="{{ old('email') }}">
                     <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4"
                         placeholder="Password" name="password">
                 </div>
                 <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
                     <div class="flex items-center mr-auto">
-                        <input  name="remember_token" type="checkbox" class="form-check-input border mr-2" id="remember_token" {{ old('remember_token') ? 'checked' : '' }}>
+                        <input  name="remember" type="checkbox" class="form-check-input border mr-2" id="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label class="cursor-pointer select-none" for="remember">Remember me</label>
                     </div>
                     <a href="#">Forgot Password?</a>
