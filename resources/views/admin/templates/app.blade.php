@@ -30,9 +30,7 @@
             </div>
         </div>
     </div>
-    </div>
-    <!-- END: Content -->
-    </div>
+
 
     <script src="{{ asset('dist/js/app.js') }}"></script>
 
