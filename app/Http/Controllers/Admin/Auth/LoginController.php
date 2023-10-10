@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,7 @@ use App\Providers\RouteServiceProvider;
 class LoginController extends Controller
 
 {
-   
+
 
     public function showAdminLoginForm()
     {
@@ -19,20 +20,31 @@ class LoginController extends Controller
 
     public function adminLogin(Request $request)
     {
-        
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
 
-        if (Auth::guard('admin')->attempt($request->only(['email','password']))){
-            return to_route('admin.dashboard');
-        }
+        $credentials = $request->only(['email', 'password']);
 
-        return back()->withInput($request->only('email', 'remember'));
+        if (Auth::guard('admin')->attempt($credentials, $request->input('remember_token'))) {
+            // Xác thực đăng nhập thành công
+            $admin = Auth::guard('admin')->user();
+            $remember_token = Str::random(60);
+            $admin->remember_token = $remember_token;
+            $admin->save();
+            return redirect()->route('admin.dashboard')->with('success','Đăng nhập thành công');
+        }
+        return back()->withInput($request->only('email', 'remember_token'));
     }
 
-    public function logout(){
+
+    public function logout()
+    {
+        $admin = Auth::guard('admin')->user();
+        if ($admin) {
+            $admin->update(['remember_token' => null]);
+        }
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     }
