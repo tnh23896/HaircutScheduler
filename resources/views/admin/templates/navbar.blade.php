@@ -12,10 +12,27 @@
             </a>
         </li>
         <li>
-            <a href="side-menu-dark-file-manager.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                <div class="side-menu__title"> Book </div>
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"><i data-lucide="align-justify" class="block mx-auto"></i> </div>
+                <div class="side-menu__title">
+                    Category and Service
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
             </a>
+            <ul class="">
+                <li>
+                    <a href="{{route('admin.serviceManagement.category.index')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Category</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.serviceManagement.service.index')}}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Service</div>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="{{route('admin.scheduleManagement.index')}}" class="side-menu side-menu--active">
