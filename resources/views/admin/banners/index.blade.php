@@ -59,8 +59,8 @@
                         <input class="form-check-input" type="checkbox">
                     </td>
                     <td class="!py-3.5">
-                        <a href="{{ asset(str_replace('admin/', '', $banner->image)) }}" data-fancybox="images">
-                            <img alt="Image" class="rounded-lg border-white shadow-md tooltip w-10 h-10" src="{{ asset(str_replace('admin/', '', $banner->image)) }}" title="{{$banner->updated_at}}">
+                        <a href="{{ asset($banner->image) }}" data-fancybox="images">
+                            <img alt="Image" class="rounded-lg border-white shadow-md tooltip w-10 h-10" src="{{ asset($banner->image) }}" title="{{$banner->updated_at}}">
                         </a>
                     </td>
                     <td class="!py-3.5">
@@ -89,21 +89,7 @@
     <!-- BEGIN: Pagination -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
         <nav class="w-full sm:w-auto sm:mr-auto">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-left"></i> </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-left"></i> </a>
-                </li>
-                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-right"></i> </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-right"></i> </a>
-                </li>
-            </ul>
+            {{ $banners->links('pagination::bootstrap-4') }}
         </nav>
         <select class="w-20 form-select box mt-3 sm:mt-0">
             <option>10</option>

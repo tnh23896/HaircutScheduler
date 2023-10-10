@@ -12,7 +12,7 @@ class BannerController extends Controller
 {
     public function index()
     {
-        $banners = Banner::paginate(5);
+        $banners = Banner::latest()->paginate(10);
         return view('admin.Banners.index', compact('banners'));
     }
 
@@ -28,12 +28,10 @@ class BannerController extends Controller
 
             $banner->fill($request->all());
 
-            if ($request->hasFile('image')) {
-                $banner->image = upload_file('uploads', $request->file('image'));
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $banner->image = upload_file('admin/Banner', $request->file('image'));
             }
-
             $banner->save();
-
             return response()->json(['success' => 'Banner created successfully']);
         } catch (\Exception $exception) {
             return response()->json(['error' => 'Banner created false']);
@@ -50,10 +48,10 @@ class BannerController extends Controller
     {
         try {
             $banner = Banner::query()->findOrFail($id);
-            $banner->fill($request->all());
             $imgOld = $banner->image;
-            if ($request->hasFile('image')) {
-                $banner->image = upload_file('uploads', $request->file('image'));
+            $banner->fill($request->all());
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $banner->image = upload_file('admin/Banner', $request->file('image'));
                 delete_file($imgOld);
             }
             $banner->save();
