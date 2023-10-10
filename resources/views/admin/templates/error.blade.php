@@ -20,6 +20,5 @@
         <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
     </div>
 @endif
-<div id="errorDiv"class="alert alert-danger alert-dismissible" role="alert">
-</div>
+<div id="errorDiv" class="alert alert-danger" style="display: none;"></div>
 
