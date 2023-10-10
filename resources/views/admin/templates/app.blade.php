@@ -22,7 +22,6 @@
     @yield('css_header_custom')
     @include('admin.templates.link_header')
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
-    <script src="{{asset('js/helper-ajax.js')}}"></script>
 </head>
 
 <body class="py-5">
