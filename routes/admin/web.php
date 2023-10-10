@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\EmployeeManagement\EmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +33,4 @@ Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
     ->name('admin.serviceManagement.category.update');
 
 
-Route::get('employee/list', [EmployeeController::class, 'list6'])->name('employee.list');
 Route::resource('employee', EmployeeController::class);
