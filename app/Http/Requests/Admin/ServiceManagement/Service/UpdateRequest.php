@@ -11,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|regex:/^[\pL\pM\s]+$/u|min:2|max:255',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string|max:255',
+            'percentage_discount' => 'nullable|numeric|min:0',
+             'category_services_id' => 'required',
+            'image' =>'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
