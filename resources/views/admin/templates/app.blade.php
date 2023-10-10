@@ -16,6 +16,7 @@
     <title>@yield('title')</title>
     @yield('css_header_custom')
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
+    <script src="{{ asset('js/helper-ajax.js') }}"></script>
 </head>
 
 <body class="py-5">
@@ -40,7 +41,7 @@
     @include('admin.templates.footer')
 
     @yield('js_footer_custom')
-
+    @yield('ajax')
     @include('admin.templates.link_footer')
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
