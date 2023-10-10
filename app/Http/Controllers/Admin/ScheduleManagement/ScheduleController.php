@@ -48,8 +48,8 @@ class ScheduleController extends Controller
      */
     public function edit(string $id)
     {
-//        $data = Booking::query()->findOrFail($id);
-//        return view('admin.scheduleManagement.edit', compact('data'));
+        $data = Booking::query()->findOrFail($id);
+        return view('admin.scheduleManagement.edit', compact('data'));
     }
 
     /**
