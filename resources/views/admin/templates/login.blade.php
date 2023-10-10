@@ -1,48 +1,29 @@
 <!DOCTYPE html>
 
 <html lang="en" class="dark">
-
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-
 <head>
-    <meta charset="utf-8">
-    <link href="dist/images/logo.svg" rel="shortcut icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="LEFT4CODE">
-    <title>@yield('title')</title>
-    @yield('css_header_custom')
-    <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
-</head>
+        <meta charset="utf-8">
+        <link href="dist/images/logo.svg" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+        <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+        <meta name="author" content="LEFT4CODE">
+        <title>Login - Midone - Tailwind HTML Admin Template</title>
 
-<body class="py-5">
-    <div class="container ">
-      
-        @include('admin.templates.error')
-                @yield('content')
-    </div>
-    </div>
-    <!-- END: Content -->
-    </div>
+        <link rel="stylesheet" href="{{asset('dist/css/app.css')}}" />
+ 
+    </head>
+    <!-- END: Head -->
+    <body class="login ">
+        <div class="absolute top-1/2 ml-12 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm bg-black bg-opacity-75 p-2 rounded-lg z-10">
 
-    </script>
-    <script src="{{ asset('dist/js/app.js') }}"></script>
+            @include('admin.templates.error')
+        </div>
+        @yield('content')
+        <script src="{{asset('dist/js/app.js')}}"></script>
+        <!-- END: JS Assets-->
+    </body>
 
-    <!-- END: JS Assets-->
-    @include('admin.templates.footer')
-
-    @yield('js_footer_custom')
-
-    @include('admin.templates.link_footer')
-    <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('libs/input-mask/jquery.inputmask.js') }}"></script>
-    <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
-</body>
-
-<!-- Mirrored from rubick-html.vercel.app/side-menu-dark-accordion.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Jun 2023 10:58:45 GMT -->
-
+<!-- Mirrored from rubick-html.vercel.app/login-dark-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Jun 2023 10:58:44 GMT -->
 </html>
