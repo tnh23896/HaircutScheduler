@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use App\Http\Requests\Admin\Auth\LoginRequests;
 
 class LoginController extends Controller
 
@@ -18,12 +19,9 @@ class LoginController extends Controller
         return view('admin.Auth.login');
     }
 
-    public function adminLogin(Request $request)
+    public function adminLogin(LoginRequests $request)
     {
-        $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+        
 
         $credentials = $request->only(['email', 'password']);
 
@@ -35,7 +33,7 @@ class LoginController extends Controller
             $admin->save();
             return redirect()->route('admin.dashboard')->with('success','Đăng nhập thành công');
         }
-        return back()->withInput($request->only('email', 'remember_token'));
+        return back()->withInput($request->only('email', 'remember_token'))->with('error','Đăng nhập không thành công');
     }
 
 
@@ -46,6 +44,6 @@ class LoginController extends Controller
             $admin->update(['remember_token' => null]);
         }
         Auth::guard('admin')->logout();
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.login')->with('success','Đăng xuất thành công');
     }
 }
