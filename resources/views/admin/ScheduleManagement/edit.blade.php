@@ -1,8 +1,5 @@
 @extends('admin.templates.app')
 @section ('title','Edit Schedule Management')
-@section('css_header_custom')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-@endsection
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
@@ -64,7 +61,6 @@
 
 
     <script>
-        $(function() {
             var editId = {{$data->id}};
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
@@ -106,7 +102,7 @@
                     }
                 );
             });
-        });
+
     </script>
 
 
