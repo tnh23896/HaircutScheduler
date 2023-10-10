@@ -56,8 +56,6 @@
                             text: response.success,
                             icon: 'success',
                         }).then(() => {
-                            // Xoá thông tin trong form sau khi thêm mới
-                            $('.clearable').val('');
                             $('#errorDiv').hide(); // ẩn thông báo lỗi
                         });
                     }
@@ -67,7 +65,6 @@
                     if (error.responseJSON && error.responseJSON.errors) {
                         // Xử lý lỗi
                         var errorMessages = [];
-
                         if (error.responseJSON.errors.name) {
                             errorMessages.push(error.responseJSON.errors.image);
                         }

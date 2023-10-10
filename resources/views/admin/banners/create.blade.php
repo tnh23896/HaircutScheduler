@@ -35,11 +35,11 @@
 </div>
 <script>
     $(function() {
-        $('#crud-form-1').on('change', function (e) {
+        $('#crud-form-1').on('change', function(e) {
             var input = e.target;
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     $('#previewImage').attr('src', e.target.result);
                 };
                 reader.readAsDataURL(input.files[0]);
@@ -57,7 +57,9 @@
                             icon: 'success',
                         }).then(() => {
                             // Xoá thông tin trong form sau khi thêm mới
-                            $('.clearable').val('');
+                            $('#crud-form-1').val(''); // Xóa giá trị của trường input hình ảnh
+                            $('#crud-form-4').val('');
+                            $('#previewImage').attr('src', '');
                             $('#errorDiv').hide(); // ẩn thông báo lỗi
                         });
                     }
