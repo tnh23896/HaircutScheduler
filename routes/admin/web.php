@@ -3,12 +3,15 @@
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmployeeManagement\EmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
+use App\Http\Controllers\Admin\WorkScheduleManagement\WorkScheduleController;
 use App\Http\Controllers\Admin\BlogManagement\CategoryController as BlogCategoryController;
 use App\Http\Controllers\Admin\BlogManagement\BlogController as BlogController;
 use App\Http\Controllers\Admin\BannerManagement\BannerController;
 use App\Http\Controllers\Admin\ServiceManagement\ServiceController;
 use App\Models\Service;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +60,14 @@ Route::post('banner/update/{id}', [BannerController::class, 'update'])
 	->name('admin.banners.update');
 Route::delete('banner/delete/{id}', [BannerController::class, 'delete'])
 	->name('admin.banners.delete');
+
+
+Route::name('admin.')->group(function () {  
+    //employee
+    Route::resource('employee', EmployeeController::class);
+    //workschedule
+    Route::resource('work-schedule', WorkScheduleController::class);
+});
 
 //Service
 Route::get('service', [ServiceController::class, 'index'])

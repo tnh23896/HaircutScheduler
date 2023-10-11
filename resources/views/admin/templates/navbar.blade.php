@@ -11,6 +11,12 @@
                 <div class="side-menu__title"> Dashboard </div>
             </a>
         </li>
+         <li>
+           <a href="{{ route('admin.employee.index') }}" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
+                <div class="side-menu__title"> Employee </div>
+            </a>
+        </li>
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"><i data-lucide="align-justify" class="block mx-auto"></i> </div>
