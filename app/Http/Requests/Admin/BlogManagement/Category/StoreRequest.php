@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             //
-						'title' => 'required | regex:/^[\pL\pM\s]+$/u | min:2 | max:255'
+						'title' => 'required | min:2 | max:255',
         ];
     }
 }

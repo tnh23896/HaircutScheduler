@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\BlogManagement;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BlogManagement\Category\UpdateRequest;
 use App\Models\CategoryBlog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,10 +14,13 @@ class CategoryController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 */
+	public function __construct(
+		private CategoryBlog $model,
+	) {
+	}
 	public function index()
 	{
-		//
-		$list_blog_category = CategoryBlog::all();
+		$list_blog_category = $this->model->latest()->paginate(5);
 		return view('admin.blogManagement.category.index', compact('list_blog_category'));
 	}
 
@@ -34,11 +38,13 @@ class CategoryController extends Controller
 	 */
 	public function store(StoreRequest $request)
 	{
-		//
-		$category_blog = new CategoryBlog();
-		$category_blog->fill($request->all());
-		$category_blog->save();
-		return response()->json(['success' => 'category_blog created successfully']);
+		try {
+			$newCategory = $this->model::create($request->validated());
+			$newCategory->save();
+			return response()->json(['success' => 'Successfully']);
+		} catch (\Exception $e) {
+			return response()->json(['error' => 'An error occurred while creating the category'], 500);
+		}
 	}
 
 	/**
@@ -55,14 +61,28 @@ class CategoryController extends Controller
 	public function edit(string $id)
 	{
 		//
+		$one_category_blog = $this->model::find($id);
+
+		return view('admin.blogManagement.category.edit', compact('one_category_blog'));
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 */
-	public function update(Request $request, string $id)
+	public function update(UpdateRequest $request, string $id)
 	{
 		//
+		try {
+			$category_service = $this->model::query()->findOrFail($id);
+
+			$category_service->fill($request->all());
+
+			$category_service->save();
+
+			return response()->json(['success' => 'Successfully']);
+		} catch (\Exception $e) {
+			return response()->json(['error' => 'An error occurred while creating the category'], 500);
+		}
 	}
 
 	/**
@@ -71,5 +91,14 @@ class CategoryController extends Controller
 	public function destroy(string $id)
 	{
 		//
+		try {
+			$category_service = $this->model::findOrFail($id);
+			if ($category_service) {
+				$category_service->delete();
+				return response()->json(['success' => 'Successfully']);
+			}
+		} catch (\Exception $e) {
+			return response()->json(['error' => 'An error occurred while deleting the product'], 500);
+		}
 	}
 }
