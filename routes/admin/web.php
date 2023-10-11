@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmployeeManagement\EmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
 use App\Http\Controllers\Admin\WorkScheduleManagement\WorkScheduleController;
 
@@ -33,4 +34,10 @@ Route::get('category-service/edit/{id}', [CategoryController::class, 'edit'])
 Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
     ->name('admin.serviceManagement.category.update');
 
-Route::resource('work-schedule', WorkScheduleController::class);
+Route::name('admin.')->group(function () {  
+    //employee
+    Route::resource('employee', EmployeeController::class);
+    //workschedule
+    Route::resource('work-schedule', WorkScheduleController::class);
+});
+
