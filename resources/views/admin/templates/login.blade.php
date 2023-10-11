@@ -16,10 +16,10 @@
     </head>
     <!-- END: Head -->
     <body class="login ">
-        <div class="absolute top-1/2 ml-12 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm bg-black bg-opacity-75 p-2 rounded-lg z-10">
+        {{-- <div class="absolute top-1/2 ml-12 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm bg-black bg-opacity-75 p-2 rounded-lg z-10">
 
-            @include('admin.templates.error')
-        </div>
+        </div> --}}
+        {{-- @include('admin.templates/.error') --}}
         @yield('content')
         <script src="{{asset('dist/js/app.js')}}"></script>
         <!-- END: JS Assets-->
