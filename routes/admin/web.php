@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
+use App\Http\Controllers\Admin\BannerManagement\BannerController;
+use App\Http\Controllers\Admin\ServiceManagement\ServiceController;
+use App\Models\Service;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +19,9 @@ use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
 */
 /*
  * đây là route để hiển thị view admin
-// */
-
+*/
 Route::group(['middleware' => 'auth.admin'], function () {
-	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
 //Category Service
 Route::get('category-service', [CategoryController::class, 'index'])
@@ -30,21 +33,8 @@ Route::post('category-service/create', [CategoryController::class, 'store'])
 Route::get('category-service/edit/{id}', [CategoryController::class, 'edit'])
 	->name('admin.serviceManagement.category.edit');
 Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
-	->name('admin.serviceManagement.category.update');
+    ->name('admin.serviceManagement.category.update');
 
-//__BlogManagement__
-//BlogCategoy
-Route::get('blog-category', [App\Http\Controllers\Admin\BlogManagement\CategoryController::class, 'index'])
-	->name('admin.blogManagement.category.index');
 
-Route::get('blog-category/create', [App\Http\Controllers\Admin\BlogManagement\CategoryController::class, 'create'])
-	->name('admin.blogManagement.category.create');
 
-Route::post('blog-category/create', [App\Http\Controllers\Admin\BlogManagement\CategoryController::class, 'store'])
-	->name('admin.blogManagement.category.store');
 
-Route::get('blog-category/edit/{id}', [App\Http\Controllers\Admin\BlogManagement\CategoryController::class, 'edit'])
-	->name('admin.blogManagement.category.edit');
-	
-Route::post('blog-category/edit/{id}', [App\Http\Controllers\Admin\BlogManagement\CategoryController::class, 'update'])
-	->name('admin.blogManagement.category.update');
