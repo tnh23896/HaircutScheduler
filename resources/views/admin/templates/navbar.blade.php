@@ -12,9 +12,9 @@
             </a>
         </li>
         <li>
-            <a href="side-menu-dark-file-manager.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                <div class="side-menu__title"> Book </div>
+            <a href="{{ route('admin.employee.index') }}" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
+                <div class="side-menu__title"> Employee </div>
             </a>
         </li>
         <li>
