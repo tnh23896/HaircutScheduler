@@ -32,5 +32,6 @@ Route::get('category-service/edit/{id}', [CategoryController::class, 'edit'])
 Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
     ->name('admin.serviceManagement.category.update');
 
-
-Route::resource('employee', EmployeeController::class);
+Route::name('admin.')->group(function () {  
+    Route::resource('employee', EmployeeController::class);
+});
