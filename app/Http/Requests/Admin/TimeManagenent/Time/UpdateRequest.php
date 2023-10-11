@@ -22,7 +22,13 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'time'=>'required|unique:times'
+        ];
+    }
+    public function messages(){
+        return [
+            'time.required' => 'Bạn chưa nhập thời gian',
+            'time.unique' => 'Thời gian đã tồn tại'
         ];
     }
 }

@@ -54,8 +54,8 @@
                             // Xử lý lỗi
                             var errorMessages = [];
 
-                            if (error.responseJSON.errors.name) {
-                                errorMessages.push(error.responseJSON.errors.name);
+                            if (error.responseJSON.errors.time) {
+                                errorMessages.push(error.responseJSON.errors.time);
                             }
                             if (errorMessages.length > 0) {
                                 var errorDiv = $('#errorDiv');

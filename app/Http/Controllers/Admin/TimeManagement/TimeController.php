@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\TimeManagement;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TimeManagenent\Time\StoreRequest;
 use App\Models\Time;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,11 @@ class TimeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         try {
-            $param = $request->except('_token');
-            Time::create($param);
+          
+            Time::create($request->validated());
             return response()->json([
                 "success" => "Created successfully ",
                 "status" => 200
@@ -65,11 +66,11 @@ class TimeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreRequest $request, string $id)
     {
         try {
-            $param = $request->except('_token');
-            Time::where('id', $id)->update($param);
+           
+            Time::where('id', $id)->update($request->validated());
             return response()->json([
                 "success" => "Created successfully ",
                 "status" => 200
