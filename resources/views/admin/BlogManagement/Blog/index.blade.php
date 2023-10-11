@@ -1,13 +1,13 @@
 @extends('admin.templates.app')
-@section('title', 'Services')
+@section('title', 'Create blogs')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
-        Service List
+        Blog List
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <a href="{{ route('admin.serviceManagement.service.create') }}" class="btn btn-primary">Add Service</a>
+            <a href="{{ route('admin.blogManagement.blog.create') }}" class="btn btn-primary">Add Blog</a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <div class="w-56 relative text-slate-500">
@@ -30,52 +30,52 @@
                             <input class="form-check-input" type="checkbox">
                         </th>
                         <th class="whitespace-nowrap">Image</th>
-                        <th class="text-center whitespace-nowrap">Name</th>
-                        <th class="text-center whitespace-nowrap">Price</th>
+                        <th class="text-center whitespace-nowrap">Title</th>
                         <th class="text-center whitespace-nowrap">Description</th>
                         <th class="text-center whitespace-nowrap">Category</th>
-                        <th class="text-center whitespace-nowrap">Percentage Discount</th>
                         <th class="text-center whitespace-nowrap">Action</th>
                     </tr>
                 </thead>
-                @foreach ($services as $service)
+                @foreach ($blogs as $blog)
                     <tbody>
                         <tr class="intro-x">
                             <td class="w-10">
                                 <input class="form-check-input" type="checkbox">
                             </td>
                             <td class="!py-3.5">
-                                <img alt="Image service" class="w-20 h-auto rounded" src="{{ asset($service->image) }}"
-                                    title="{{ $service->created_at }}">
+                                <img alt="Image blog" class="w-24 h-20 rounded" src="{{ asset($blog->image) }}"
+                                    title="{{ $blog->created_at }}">
                             </td>
-                            <td class="text-center">
-                                <a class="flex items-center justify-center" href="">{{ $service->name }}</a>
-                            </td>
-                            <td class="text-center capitalize">{{ $service->price }}</td>
-                            <td class="text-center capitalize">{{ $service->description }}</td>
-                            <td class="text-center capitalize">{{ $service->category_services->name ?? '' }}</td>
-                            <td class="text-center capitalize">{{ $service->percentage_discount }}</td>
+                            <td class="text-center"><a class="flex items-center justify-center"
+                                    href="">{{ $blog->title }}</a></td>
+                            <td class="text-center"><a class="flex items-center justify-center"
+                                    href="">{{ $blog->description }}</a></td>
+                            <td class="text-center"><a class="flex items-center justify-center"
+                                    href="">{{ $blog->category_blog->title ?? '' }}</a></td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3"
-                                        href="{{ route('admin.serviceManagement.service.edit', $service->id) }}">
+                                        href="{{ route('admin.blogManagement.blog.edit', $blog->id) }}">
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
                                         Edit </a>
                                     <form class="delete-form"
-                                        action="{{ route('admin.serviceManagement.service.delete', $service->id) }}"
-                                        method="POST">
+                                        action="{{ route('admin.blogManagement.blog.delete', $blog->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
                                             <button type="submit" class="flex items-center text-danger"
-                                                data-id="{{ $service->id }}">
+                                                data-id="{{ $blog->id }}">
                                                 <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
                                             </button>
                                         </div>
                                     </form>
                                 </div>
                             </td>
-
+                            <td class=""></td>
+                            <td class="">
+                                <div class=""></div>
+                            </td>
+                            <td class=""></td>
                         </tr>
                     </tbody>
                 @endforeach
@@ -123,7 +123,7 @@
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
             <nav class="w-full sm:w-auto sm:mr-auto">
-                {{ $services->links('pagination::bootstrap-4') }}
+                {{ $blogs->links('pagination::bootstrap-4') }}
             </nav>
         </div>
         <!-- END: Pagination -->
