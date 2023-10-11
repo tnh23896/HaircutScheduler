@@ -10,21 +10,46 @@ use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory,Notifiable,SoftDeletes;
-    
+    use HasFactory, Notifiable, SoftDeletes;
+
     protected $table = 'admins';
     protected $guarded = 'admin';
     protected $fillable = [
-        'username', 'avatar', 'phone', 'email', 'password', 'description',
+        'username',
+        'avatar',
+        'phone',
+        'email',
+        'password',
+        'description',
     ];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'password' => 'hashed',
+    ];
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);
     }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
+
     public function work_schedules()
     {
         return $this->hasMany(WorkSchedule::class);
