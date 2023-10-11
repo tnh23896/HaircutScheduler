@@ -89,7 +89,7 @@
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
                             <a class="flex items-center mr-3"
-                                href="{{route('admin.employee.edit', $item)}}"> <i
+                                href="{{route('admin.work-schedule.index', ['id' => $item->id])}}"> <i
                                     data-lucide="calendar" class="w-4 h-4 mr-1"></i> Lịch </a>
                             <a class="flex items-center mr-3"
                                 href="{{route('admin.employee.edit', $item)}}"> <i
