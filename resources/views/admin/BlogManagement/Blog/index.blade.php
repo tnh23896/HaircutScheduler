@@ -51,7 +51,7 @@
                             <td class="text-center"><a class="flex items-center justify-center"
                                     href="">{{ $blog->description }}</a></td>
                             <td class="text-center"><a class="flex items-center justify-center"
-                                    href="">{{ $blog->category_blog->title }}</a></td>
+                                    href="">{{ $blog->category_blog->title ?? '' }}</a></td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3"
