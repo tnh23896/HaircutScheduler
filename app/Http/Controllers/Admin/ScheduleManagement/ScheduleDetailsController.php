@@ -53,12 +53,20 @@ class ScheduleDetailsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
         try {
+            $booking = Booking::query()->findOrFail($id);
+            $allIds = $booking->booking_details()->pluck('id');
+            $uncheckedIds = $allIds->diff($request->status);
             foreach ($request->status as $value) {
                 $bookingDetail = BookingDetail::query()->findOrFail($value);
                 $bookingDetail->status = "success";
+                $bookingDetail->save();
+            }
+            foreach ($uncheckedIds as $value) {
+                $bookingDetail = BookingDetail::query()->findOrFail($value);
+                $bookingDetail->status = "cancel";
                 $bookingDetail->save();
             }
             return redirect()->back()->with('success', 'Cập nhật thành công');
