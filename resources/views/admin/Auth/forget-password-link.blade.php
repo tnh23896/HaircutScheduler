@@ -44,30 +44,34 @@
                 <div
                     class="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
-                        Sign In
+                        Request a password reset
                     </h2>
                     <div class="intro-x mt-2 text-slate-400 xl:hidden text-center">A few more clicks to sign in to your
                         account. Manage all your e-commerce accounts in one place</div>
-                    <form action="{{ route('admin.auth.login') }}" method="post">
+                    <form action="{{ url('admin/reset-password') }}" method="post">
                         @csrf
+                        <input type="hidden" name="token" value="{{ $token }}">
                         <div class="intro-x mt-8">
                             <input type="text" class="intro-x login__input form-control py-3 px-4 block"
-                                placeholder="Email" value="{{ old('email') }}" name="email">
-                            <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4"
-                                placeholder="Password" name="password">
+                                placeholder="Email" value="{{ $email }}" name="email" >
+
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
+                            <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password" name="password" >
+                            @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                            @endif
+                            <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password Confirmation"  name="password_confirmation" >
+                            @if ($errors->has('password_confirmation'))
+                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                            @endif
                         </div>
-                        <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
-                            <div class="flex items-center mr-auto">
-                                <input id="remember" type="checkbox" name="remember" class="form-check-input border mr-2">
-                                <label class="cursor-pointer select-none" for="remember-me">Remember me</label>
-                            </div>
-                            <a href="{{url('admin/forget-password')}}">Forgot Password?</a>
-                        </div>
+
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
-                                type="submit">Login</button>
-                            <button
-                                class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">Register</button>
+                                type="submit">Submit</button>
+
                         </div>
                     </form>
 
