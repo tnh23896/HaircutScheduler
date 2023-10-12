@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 255);
+            $table->string('username', 255)->nullable();
             $table->string('avatar')->nullable();
             $table->string('phone');
             $table->string('email')->unique();
             $table->string('password');
             $table->text('description')->nullable();
+            $table->string('token')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

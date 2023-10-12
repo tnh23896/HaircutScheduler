@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\ForgotPassword;
+use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -43,3 +45,12 @@ Route::get('category-service/edit/{id}', [CategoryController::class, 'edit'])
     ->name('admin.serviceManagement.category.edit');
 Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
     ->name('admin.serviceManagement.category.update');
+// forgot password
+// Route cho quên mật khẩu
+
+Route::get('forget-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('ForgetPasswordGet');
+Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('ForgetPasswordPost');
+
+// Route cho đặt lại mật khẩu
+Route::get('reset-password/{token}/{email}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
+Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');

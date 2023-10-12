@@ -15,7 +15,7 @@ class Admin extends Authenticatable
     protected $table = 'admins';
     protected $guarded = 'admin';
     protected $fillable = [
-        'username', 'avatar', 'phone', 'email', 'password', 'description','remember_token',
+        'username', 'avatar', 'phone', 'email', 'password', 'description','remember_token','token',
     ];
         /**
      * The attributes that should be hidden for serialization.
