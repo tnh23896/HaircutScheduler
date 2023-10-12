@@ -43,7 +43,7 @@
     @include('admin.templates.footer')
 
     @yield('js_footer_custom')
-
+    @yield('ajax')
     @include('admin.templates.link_footer')
 </body>
 

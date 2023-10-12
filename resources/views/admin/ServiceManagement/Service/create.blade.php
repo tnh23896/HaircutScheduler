@@ -19,7 +19,7 @@
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Price</label>
-                        <input type="text" name="price" id="price" class="clearable form-control w-full"
+                        <input type="number" name="price" id="price" class="clearable form-control w-full"
                             placeholder="Price">
                     </div>
                     <div class="mt-3">

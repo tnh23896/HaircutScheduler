@@ -16,7 +16,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $data = Booking::all();
+        $data = Booking::latest()->paginate(5);
         return view('admin.scheduleManagement.index', compact('data'));
     }
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Admin\ServiceManagement\Service;
+namespace App\Http\Requests\Admin\Employee;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -22,12 +23,15 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:2|max:255',
-            'price' => 'required|numeric|min:0',
-            'description' => 'required|string|max:255',
-            'percentage_discount' => 'nullable|numeric|min:0',
-            'category_services_id' => 'required',
-            'image' =>'image|mimes:jpeg,png,jpg,gif|max:2048',
+            "username" => "required",
+            "avatar" => "image|mimes:jpeg,png,jpg,gif,svg|max:2048",
+            "phone" => "required",
+            'email' => [
+                'required',
+                Rule::unique('admins', 'email')->ignore($this->employee),
+            ],
+            "password" => "required",
+            "description" => "required",
         ];
     }
 }

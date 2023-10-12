@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section('title', 'Edit Category Services')
+@section('title', 'Edit Category blogs')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Edit Category Service
+            Edit Category blog
         </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -13,25 +13,12 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Category Name</label>
-                        <input type="text" name="name" id="name" class="clearable form-control w-full"
-                            value="{{ $one_category_service->name }}" placeholder="Category Name">
-                    </div>
-                    <div class="mt-3">
-                        <label for="crud-form-3" class="form-label">Old Image</label>
-                        <div class="input-group">
-                            <img src="{{ asset($one_category_service->image) }}" alt="" class="w-24 h-18">
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <label for="crud-form-3" class="form-label">Image</label>
-                        <div class="input-group">
-                            <input type="file" name="image" id="image" class="clearable form-control"
-                                placeholder="Image" aria-describedby="input-group-1">
-                        </div>
+                        <label for="crud-form-1" class="form-label">Category title</label>
+                        <input type="text" name="title" id="title" class="clearable form-control w-full"
+                            value="{{ $one_category_blog->title }}" placeholder="Category title">
                     </div>
                     <div class="text-right mt-5">
-                        <a href="{{ route('admin.serviceManagement.category.index') }}" type="button"
+                        <a href="{{ route('admin.blogManagement.category.index') }}" type="button"
                             class="btn btn-outline-secondary w-24 mr-1">Back</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
                     </div>
@@ -42,12 +29,11 @@
     </div>
     <script>
         $(function() {
-            var categoryId = {{ $one_category_service->id }};
+            var categoryId = {{ $one_category_blog->id }};
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
-                var url = "{{ route('admin.serviceManagement.category.edit', ['id' => ':categoryId']) }}";
+                var url = "{{ route('admin.blogManagement.category.edit', ['id' => ':categoryId']) }}";
                 url = url.replace(':categoryId', categoryId);
-
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         if (response.success) {
@@ -59,7 +45,7 @@
                                 timer: 1500
                             }).then(() => {
                                 window.location.href =
-                                    "{{ route('admin.serviceManagement.category.index') }}";
+                                    "{{ route('admin.blogManagement.category.index') }}";
                             });
                         }
                     },
@@ -68,14 +54,9 @@
                         if (error.responseJSON && error.responseJSON.errors) {
                             // Xử lý lỗi
                             var errorMessages = [];
-
-                            if (error.responseJSON.errors.name) {
-                                errorMessages.push(error.responseJSON.errors.name);
+                            if (error.responseJSON.errors.title) {
+                                errorMessages.push(error.responseJSON.errors.title);
                             }
-                            if (error.responseJSON.errors.image) {
-                                errorMessages.push(error.responseJSON.errors.image);
-                            }
-
                             if (errorMessages.length > 0) {
                                 var errorDiv = $('#errorDiv');
                                 errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
