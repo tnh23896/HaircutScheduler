@@ -19,3 +19,6 @@ use App\Http\Controllers\Admin\DashboardController;
 Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
+Route::get('admin/404', function () {
+		return view('admin.errors.404');
+});
