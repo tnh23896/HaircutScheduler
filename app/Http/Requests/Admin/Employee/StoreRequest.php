@@ -30,21 +30,4 @@ class StoreRequest extends FormRequest
             "description" => "required",
         ];
     }
-
-    public function messages()
-    {
-        return [
-            "username.required" => "Tên nhân viên Không được để trống",
-            "avatar.required" => "Ảnh đại diện Không được để trống",
-            "avatar.image" => "Không đúng định dạng",
-            "avatar.mimes" => "Không đúng định dạng",
-            "avatar.max" => "Không được vượt quá 2MB",
-            "phone.required" => "Không được để trống",
-            "email.required" => "Không được để trống",
-            "email.email" => "Không đúng định dạng",
-            "email.unique" => "Email đã tồn tại",
-            "password.required" => "Không được để trống",
-            "description.required" => "Không được để trống",
-        ];
-    }
 }

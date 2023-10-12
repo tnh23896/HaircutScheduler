@@ -33,7 +33,7 @@ class WorkScheduleController extends Controller
             return view('admin.WorkSchedule.index', compact('workSchedules', 'employee'));
         } catch (\Throwable $th) {
             if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Không tìm thấy nhân viên'], 404);
+                return response(['message' => 'Not found employee'], 404);
             }
 
             return response(['message' => $th->getMessage()], 500);
@@ -52,7 +52,7 @@ class WorkScheduleController extends Controller
             return view('admin.WorkSchedule.create', compact('times', 'employee'));
         } catch (Throwable $th) {
             if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Không tìm thấy nhân viên'], 404);
+                return response(['message' => 'Not found employee'], 404);
             }
             return response(['message' => $th->getMessage()], 500);
         }
@@ -66,7 +66,7 @@ class WorkScheduleController extends Controller
         try {
             $workSchedule = WorkSchedule::create($request->all());
             $workSchedule->times()->sync($request->times);
-            return redirect()->route('admin.work-schedule.index',['id' => $workSchedule->admin_id])->with('success', 'Lịch làm việc đã được thêm thành công');
+            return redirect()->route('admin.work-schedule.index',['id' => $workSchedule->admin_id])->with('success', 'Work schedule created successfully');
         } catch (Throwable $th) {
             return response(['message' => $th->getMessage()], 500);
         }
@@ -85,7 +85,7 @@ class WorkScheduleController extends Controller
             return view('admin.WorkSchedule.show', compact('workScheduleDetail', 'workSchedule', 'time'));
         } catch (Throwable $th) {
             if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Kh@mail t®,m thocht không tồn tại'], 404);
+                return response(['message' => 'Not found'], 404);
             }
             return response(['message' => $th->getMessage()], 500);
         }
@@ -104,7 +104,7 @@ class WorkScheduleController extends Controller
             return view('admin.WorkSchedule.edit', compact('workSchedule', 'times', 'employee'));
         } catch (Throwable $th) {
             if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Không tìm thấy nhân viên'], 404);
+                return response(['message' => 'Not found employee'], 404);
             }
             return response(['message' => $th->getMessage()], 500);
         }
@@ -119,7 +119,7 @@ class WorkScheduleController extends Controller
             $workSchedule = WorkSchedule::findOrFail($id);
             $workSchedule->update($request->all());
             $workSchedule->times()->sync($request->times);
-            return to_route('admin.work-schedule.index', ['id' => $workSchedule->admin_id])->with('success', 'Lịch làm việc của nhân viên đã được cập nhật thành công');
+            return to_route('admin.work-schedule.index', ['id' => $workSchedule->admin_id])->with('success', 'Work schedule updated successfully');
         } catch (Throwable $th) {
             return response(['message' => $th->getMessage()], 500);
         }
@@ -134,8 +134,11 @@ class WorkScheduleController extends Controller
             $workSchedule = WorkSchedule::findOrFail($id);
             $workSchedule->times()->detach();
             $workSchedule->delete();
-            return response(['message' => 'Xóa lịch làm việc thành công', 'status' => 200], 200);
+            return response(['message' => 'Deleted successfully', 'status' => 200], 200);
         } catch (Throwable $th) {
+            if ($th instanceof ModelNotFoundException) {
+                return response(['message' => 'Not found'], 404);
+            }
             return response(['message' => $th->getMessage()], 500);
         }
     }
