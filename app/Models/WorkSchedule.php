@@ -25,5 +25,9 @@ class WorkSchedule extends Model
     {
         return $this->belongsToMany(Time::class, 'work_schedule_details', 'work_schedules_id', 'time_id')->withPivot('status');
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> develop
 }
