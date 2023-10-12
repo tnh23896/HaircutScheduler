@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\Bill\BillController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
+use App\Http\Controllers\Admin\ScheduleManagement\ScheduleDetailsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
@@ -76,4 +78,13 @@ Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update
     ->name('admin.scheduleManagement.update');
 Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
     ->name('admin.scheduleManagement.show');
+// Schedule Details
+Route::get('schedule-details/{id}', [ScheduleDetailsController::class, 'edit'])
+    ->name('admin.scheduleManagement.scheduleDetails');
+Route::put('schedule-details/{id}', [ScheduleDetailsController::class, 'update'])
+    ->name('admin.scheduleManagement.scheduleDetails.update');
+
+//Bill
+Route::get('bill-management', [BillController::class, 'index'])
+    ->name('admin.billManagement.index');
 

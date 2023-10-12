@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('bill_details', function (Blueprint $table) {
             $table->id();
+            $table->string('service_id');
             $table->string('name');
-            $table->string('user_id');
+            $table->string('price');
+            $table->string('bill_id');
             $table->string('admin_id');
-            $table->string('phone');
-            $table->string('promo_id')->nullable();
-            $table->enum('status',['pending','success','canceled'])->default('pending');
-            $table->string('total_price');
-            $table->string('email');
-            $table->date('day');
-            $table->time('time');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('bill_deatils');
     }
 };

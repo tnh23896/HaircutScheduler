@@ -54,4 +54,10 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(WorkSchedule::class);
     }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
+
 }

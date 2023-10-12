@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Booking_detail>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BillDetail>
  */
-class BookingDetailFactory extends Factory
+class BillDetailFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,8 +20,7 @@ class BookingDetailFactory extends Factory
             'service_id' => $this->faker->numberBetween(1, 5),
             'name' => $this->faker->name(),
             'price' => $this->faker->numberBetween(100, 200),
-            'booking_id' => $this->faker->numberBetween(1, 5),
-            'status' => $this->faker->randomElement(['cancel', 'success']),
+            'bill_id' => $this->faker->numberBetween(1, 5),
             'admin_id' => $this->faker->numberBetween(1, 5),
         ];
     }
