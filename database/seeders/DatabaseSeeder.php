@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
             BookingDetailSeeder::class,
             WorkScheduleDetailSeeder::class,
             BannerSeeder::class,
-            WorkScheduleSeeder::class
+            WorkScheduleSeeder::class,
+            BillSeeder::class,
+            BillDetailSeeder::class
         ]);
     }
 }

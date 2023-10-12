@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('service_id');
             $table->string('name');
-            $table->string('total_price');
+            $table->string('price');
             $table->string('booking_id');
+            $table->enum('status', ['cancel', 'success'])->default('cancel');
+            $table->string('admin_id');
             $table->timestamps();
             $table->softDeletes();
         });

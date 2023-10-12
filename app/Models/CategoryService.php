@@ -10,7 +10,7 @@ class CategoryService extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = 'category_services';
- 
+
     protected $fillable = [
         'name', 'image',
     ];
@@ -18,4 +18,6 @@ class CategoryService extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+
 }
