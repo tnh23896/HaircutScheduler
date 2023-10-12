@@ -11,7 +11,7 @@ class Booking extends Model
     use HasFactory,SoftDeletes;
     protected $table = 'bookings';
     protected $fillable = [
-        'name', 'user_id', 'admin_id', 'phone', 'promo_id', 'status', 'price', 'email', 'day', 'work_schedule_detail_id',
+        'name', 'user_id', 'admin_id', 'phone', 'promo_id', 'status', 'total_price', 'email', 'day', 'time',
     ];
     public function user()
     {
@@ -24,10 +24,6 @@ class Booking extends Model
     public function promotion()
     {
         return $this->belongsTo(Promotion::class);
-    }
-    public function work_schedule_detail()
-    {
-        return $this->belongsTo(WorkScheduleDetail::class);
     }
     public function booking_details()
     {

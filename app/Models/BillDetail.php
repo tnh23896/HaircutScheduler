@@ -4,23 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BookingDetail extends Model
+class BillDetail extends Model
 {
-    use HasFactory,SoftDeletes;
-    protected $table = 'booking_details';
+    use HasFactory;
     protected $fillable = [
         'service_id',
         'name',
         'price',
-        'booking_id',
-        'status',
+        'bill_id',
         'admin_id',
     ];
-    public function booking()
+    public function bill()
     {
-        return $this->belongsTo(Booking::class);
+        return $this->belongsTo(Bill::class);
     }
     public function service()
     {

@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section ('title','Schedule Management')
+@section ('title','Bill Management')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
@@ -53,10 +53,10 @@
                     </th>
                     <th class="whitespace-nowrap">CUSTOMER NAME</th>
                     <th class="text-center whitespace-nowrap">NAME STAFF</th>
-                    <th class="text-center whitespace-nowrap">PRICE</th>
+                    <th class="text-center whitespace-nowrap">PROMOTION</th>
+                    <th class="text-center whitespace-nowrap">TOTAL PRICE</th>
                     <th class="text-center whitespace-nowrap">SCHEDULE TIME</th>
                     <th class="text-center whitespace-nowrap">CREATE AT</th>
-                    <th class="text-center whitespace-nowrap">STATUS</th>
                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                 </tr>
                 </thead>
@@ -81,29 +81,17 @@
                         </td>
                         <td class="text-center"><a class="flex items-center justify-center underline decoration-dotted"
                                                    href="javascript:;">{{$item->admin->username}}</a></td>
+                        <td class="text-center">{{$item->promotion->discount}}</td>
                         <td class="text-center capitalize">{{number_format($item->total_price) }}</td>
                         <td class="w-40">
                             <div class="flex items-center justify-center">{{$item->time }}
                                 <br> {{$item->day}}</div>
                         </td>
                         <td class="text-center">{{$item->created_at}}</td>
-                        <td class="text-center">
-                            @if( $item->status == "pending")
-                                <span class="badge badge-warning">Pending</span>
-                            @elseif($item->status == "success")
-                                <span class="badge badge-info">Success</span>
-                            @elseif($item->status == "canceled")
-                                <span class="badge badge-success">Cancelled</span>
-                            @endif
-                        </td>
+
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                @if($item->status !== "success")
-                                <a class="flex items-center text-warning mr-3"
-                                   href="{{route('admin.scheduleManagement.edit', $item->id)}}"> <i
-                                        data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                @endif
-                                <a href="{{route('admin.scheduleManagement.scheduleDetails', $item->id)}}"
+                                <a  data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"
                                    class="flex items-center text-success cursor-pointer">
                                     <svg viewBox="0 0 24 24" class="w-6 h-6 mr-1" fill="#ffffff"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +104,7 @@
                                                   fill="#1C274C"></path>
                                         </g>
                                     </svg>
-                                    View schedule details </a>
+                                    View invoice details </a>
                             </div>
                         </td>
                     </tr>
@@ -125,6 +113,7 @@
                 @endforeach
             </table>
         </div>
+
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
@@ -138,15 +127,20 @@
                 <option>50</option>
             </select>
         </div>
+
         <!-- END: Pagination -->
     </div>
 
     {{-- Modal--}}
     <!-- BEGIN: Modal Toggle -->
     <!-- END: Modal Toggle --> <!-- BEGIN: Modal Content -->
-    @foreach($data as $item)
-        @include('admin.ScheduleManagement.modal')
-    @endforeach
+
+
+            @foreach($data as $item)
+                @include('admin.BillManagement.modal')
+            @endforeach
+
+
 
 @endsection
 
