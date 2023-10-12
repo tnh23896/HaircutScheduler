@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\EmployeeManagement;
 
+use Exception;
+use App\Models\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Employee\StoreRequest;
 use App\Http\Requests\Admin\Employee\UpdateRequest;
-use App\Models\Admin;
-use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EmployeeController extends Controller
 {
@@ -44,9 +45,9 @@ class EmployeeController extends Controller
                 $params['avatar'] = $name;
             }
             $employee = Admin::create($params);
-            return to_route('admin.employee.index')->with('success', 'Thêm mới thành công');
+            return to_route('admin.employee.index')->with('success', 'Created successfully');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }   
     }
 
@@ -67,7 +68,10 @@ class EmployeeController extends Controller
             $employee = Admin::findOrFail($id);
             return view('admin.employee.edit', compact('employee'));
         } catch (\Throwable $th) {
-            return response()->json($th);
+            if($th instanceof ModelNotFoundException) {
+                return response(['message' => 'Not found employee'], 404);
+            }
+            return response(['message' => $th->getMessage()], 500);
         }
     }
 
@@ -86,9 +90,12 @@ class EmployeeController extends Controller
                delete_file($employee->avatar);
             }
             $employee->update($params);
-            return to_route('admin.employee.index')->with('success', 'Cập nhật thành công');
+            return to_route('admin.employee.index')->with('success', 'Updated successfully');
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+            if($e instanceof ModelNotFoundException) {
+                return response(['message' => 'Not found employee'], 404);
+            }
+            return response(['message' => $e->getMessage()], 500);
         }   
     }
 
@@ -100,7 +107,7 @@ class EmployeeController extends Controller
         try {
             $employee = Admin::findOrFail($id);
             $employee->delete();
-            return response()->json(['status' => 'success', 'message' => 'Xoá thành công']);
+            return response()->json(['status' => 'success', 'message' => 'Deleted successfully']);
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()]);
         }

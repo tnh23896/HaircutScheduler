@@ -33,15 +33,5 @@ class UpdateRequest extends FormRequest
             'times' => 'required',
         ];
     }
-
-    public function messages(): array
-    {
-        return [
-            'day.required' => 'Vui lòng chọn ngày làm việc',
-            'day.unique' => 'Ngày làm việc đã tồn tại',
-            'day.after' => 'Ngày làm việc phải sau ngày hiện tại',
-            'times.required' => 'Vui lòng chọn thời gian làm việc',
-        ];
-    }
 }
 
