@@ -70,6 +70,12 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('admin.billManagement.index') }}" class="side-menu side-menu--active">
+                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
+                <div class="side-menu__title"> Bill Management </div>
+            </a>
+        </li>
+        <li>
             <a href="side-menu-dark-chat.html" class="side-menu">
                 <div class="side-menu__icon"> <i data-lucide="message-square"></i> </div>
                 <div class="side-menu__title"> Rating </div>
