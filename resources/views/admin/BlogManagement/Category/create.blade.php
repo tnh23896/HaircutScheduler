@@ -1,46 +1,36 @@
 @extends('admin.templates.app')
-@section('title', 'Create Category Services')
+@section('title', 'Create Category blogs')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Add New Category Service
+            Add New Category blog
         </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-12">
             <!-- BEGIN: Form Layout -->
-            <form id="ajaxForm" enctype="multipart/form-data">
+            <form id="ajaxForm" >
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Category Name</label>
-                        <input type="text" name="name" id="name" class="clearable form-control w-full"
-                            placeholder="Category Name">
-                    </div>
-
-                    <div class="mt-3">
-                        <label for="crud-form-3" class="form-label">Image</label>
-                        <div class="input-group">
-                            <input type="file" name="image" id="image" class="clearable form-control"
-                                placeholder="Image" aria-describedby="input-group-1">
-                        </div>
+                        <label for="crud-form-1" class="form-label">Category title</label>
+                        <input type="text" name="title" id="title" class="clearable form-control w-full"
+                            placeholder="Category title">
                     </div>
                     <div class="text-right mt-5">
-                        <a href="{{route('admin.serviceManagement.category.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">List</a>
+                        <a href="{{route('admin.blogManagement.category.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">List</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
                     </div>
                 </div>
             </form>
             <!-- END: Form Layout -->
-
         </div>
     </div>
     <script>
         $(function() {
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
-                var url = "{{ route('admin.serviceManagement.category.store') }}";
-
+                var url = "{{ route('admin.blogManagement.category.store') }}";
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         if (response.success) {
@@ -61,11 +51,8 @@
                             // Xử lý lỗi
                             var errorMessages = [];
 
-                            if (error.responseJSON.errors.name) {
-                                errorMessages.push(error.responseJSON.errors.name);
-                            }
-                            if (error.responseJSON.errors.image) {
-                                errorMessages.push(error.responseJSON.errors.image);
+                            if (error.responseJSON.errors.title) {
+                                errorMessages.push(error.responseJSON.errors.title);
                             }
 
                             if (errorMessages.length > 0) {
