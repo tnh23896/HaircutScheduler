@@ -34,6 +34,11 @@ Route::group(['middleware' => 'auth.admin'], function () {
 Route::group(['middleware' => 'auth.admin'], function () {
 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
+
+Route::get('404', function () {
+		return view('admin.errors.404');
+});
+
 //Category Service
 Route::get('category-service', [CategoryController::class, 'index'])
 	->name('admin.serviceManagement.category.index');
@@ -48,7 +53,6 @@ Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
 Route::delete('category-service/delete/{id}', [CategoryController::class, 'destroy'])
 	->name('admin.serviceManagement.category.delete');
 
-
 // Banner
 Route::get('banner', [BannerController::class, 'index'])
 	->name('admin.banners.index');
@@ -62,7 +66,6 @@ Route::post('banner/update/{id}', [BannerController::class, 'update'])
 	->name('admin.banners.update');
 Route::delete('banner/delete/{id}', [BannerController::class, 'delete'])
 	->name('admin.banners.delete');
-
 
 Route::name('admin.')->group(function () {
     //employee
@@ -103,7 +106,6 @@ Route::put('schedule-details/{id}', [ScheduleDetailsController::class, 'update']
 //Bill
 Route::get('bill-management', [BillController::class, 'index'])
     ->name('admin.billManagement.index');
-
 
 //Category Blog
 Route::get('category-blog', [BlogCategoryController::class, 'index'])->name('admin.blogManagement.category.index');
