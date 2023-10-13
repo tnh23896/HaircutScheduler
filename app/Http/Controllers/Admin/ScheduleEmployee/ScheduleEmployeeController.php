@@ -15,9 +15,9 @@ class ScheduleEmployeeController extends Controller
 {
     public function index()
     {
-        // $employeeId = Auth::id();
-        Session::put('id',2);
-        $employeeId = Session::get('id');
+        $employeeId = Auth::id();
+        // Session::put('id',2);
+        // $employeeId = Session::get('id');
         $employee = Admin::find($employeeId);
         $workSchedules = WorkSchedule::query()
         ->with('times')
