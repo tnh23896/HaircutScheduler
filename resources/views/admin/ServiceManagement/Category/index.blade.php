@@ -1,32 +1,14 @@
 @extends('admin.templates.app')
-@section ('title','Create Category Services')
+@section('title', 'Create Category Services')
 @section('content')
     <!-- END: Top Bar -->
-    <h2 class="intro-y text-lg font-medium mt-10">
-        Seller List
-    </h2>
+        <h2 class="intro-y text-lg font-medium mt-10">
+            Category Service List
+        </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <button class="btn btn-primary shadow-md mr-2">Add New Seller</button>
-            <div class="dropdown">
-                <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                    <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
-                </button>
-                <div class="dropdown-menu w-40">
-                    <ul class="dropdown-content">
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export to Excel </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export to PDF </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="hidden xl:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div>
+            <a href="{{ route('admin.serviceManagement.category.create') }}" class="btn btn-primary">Add Category</a>
+            <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <div class="w-56 relative text-slate-500">
                     <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
@@ -43,305 +25,106 @@
         <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
             <table class="table table-report -mt-2">
                 <thead>
-                <tr>
-                    <th class="whitespace-nowrap">
-                        <input class="form-check-input" type="checkbox">
-                    </th>
-                    <th class="whitespace-nowrap">SELLER</th>
-                    <th class="text-center whitespace-nowrap">STORE</th>
-                    <th class="text-center whitespace-nowrap">GENDER</th>
-                    <th class="text-center whitespace-nowrap">STATUS</th>
-                    <th class="text-center whitespace-nowrap">TOTAL PRODUCTS</th>
-                    <th class="text-center whitespace-nowrap">ACTIONS</th>
-                </tr>
+                    <tr>
+                        <th class="whitespace-nowrap">
+                            <input class="form-check-input" type="checkbox">
+                        </th>
+                        <th class="whitespace-nowrap">Image</th>
+                        <th class="text-center whitespace-nowrap">Name</th>
+                        <th class="text-center whitespace-nowrap">Action</th>
+                    </tr>
                 </thead>
-                <tbody>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-7.jpg" title="Uploaded at 29 May 2022">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Brad Pitt</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">bradpitt@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Themeforest</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                    </td>
-                    <td class="text-center">23 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-2.jpg" title="Uploaded at 11 April 2021">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Al Pacino</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">alpacino@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Graphicriver</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                    </td>
-                    <td class="text-center">48 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-13.jpg" title="Uploaded at 28 November 2020">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Johnny Depp</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">johnnydepp@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Codecanyon</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                    </td>
-                    <td class="text-center">159 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-9.jpg" title="Uploaded at 31 December 2020">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Angelina Jolie</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">angelinajolie@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Themeforest</a> </td>
-                    <td class="text-center capitalize">female</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                    </td>
-                    <td class="text-center">48 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-2.jpg" title="Uploaded at 9 October 2021">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Robert De Niro</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">robertdeniro@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Themeforest</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                    </td>
-                    <td class="text-center">22 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-6.jpg" title="Uploaded at 14 May 2022">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Robert De Niro</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">robertdeniro@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Themeforest</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                    </td>
-                    <td class="text-center">31 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-10.jpg" title="Uploaded at 11 September 2020">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Kevin Spacey</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">kevinspacey@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Themeforest</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                    </td>
-                    <td class="text-center">28 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-2.jpg" title="Uploaded at 30 July 2020">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Al Pacino</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">alpacino@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Themeforest</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                    </td>
-                    <td class="text-center">56 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="intro-x">
-                    <td class="w-10">
-                        <input class="form-check-input" type="checkbox">
-                    </td>
-                    <td class="!py-3.5">
-                        <div class="flex items-center">
-                            <div class="w-9 h-9 image-fit zoom-in">
-                                <img alt="Midone - HTML Admin Template" class="rounded-lg border-white shadow-md tooltip" src="dist/images/profile-7.jpg" title="Uploaded at 20 June 2022">
-                            </div>
-                            <div class="ml-4">
-                                <a href="#" class="font-medium whitespace-nowrap">Russell Crowe</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">russellcrowe@left4code.com</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="text-center"> <a class="flex items-center justify-center underline decoration-dotted" href="javascript:;">Codecanyon</a> </td>
-                    <td class="text-center capitalize">male</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                    </td>
-                    <td class="text-center">24 Items</td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
+                @foreach ($category_service as $category)
+                    <tbody>
+                        <tr class="intro-x">
+                            <td class="w-10">
+                                <input class="form-check-input" type="checkbox">
+                            </td>
+                            <td class="!py-3.5">
+                                    <img alt="Image Category" class="w-24 h-20 rounded"
+                                        src="{{ asset($category->image) }}" title="{{ $category->created_at }}">
+                            </td>
+                            <td class="text-center"><a class="flex items-center justify-center"
+                                    href="">{{ $category->name }}</a></td>
+                            <td class="table-report__action w-56">
+                                <div class="flex justify-center items-center">
+                                    <a class="flex items-center mr-3"
+                                        href="{{ route('admin.serviceManagement.category.edit', $category->id) }}">
+                                        <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
+                                        Edit </a>
+
+                                    <form class="delete-form"
+                                        action="{{ route('admin.serviceManagement.category.delete', $category->id) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
+                                            <button type="submit" class="flex items-center text-danger"
+                                                data-id="{{ $category->id }}">
+                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                            <td class=""></td>
+                            <td class="">
+                                <div class=""></div>
+                            </td>
+                            <td class=""></td>
+                        </tr>
+                    </tbody>
+                @endforeach
             </table>
         </div>
+        <script>
+            // Sử dụng hàm sendAjaxRequest để xác nhận và xoá phần tử
+            $('.delete-form').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var urlToDelete = form.attr('action');
+
+                // Hiển thị hộp thoại xác nhận
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Are you sure to delete this item?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'Cancel',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest
+                        sendAjaxRequest(urlToDelete, 'DELETE', {
+                            _method: 'DELETE'
+                        }, function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    title: 'Successfully',
+                                    text: response.success,
+                                    icon: 'success',
+                                }).then(() => {
+                                    // Xoá phần tử khỏi giao diện sau khi xoá thành công
+                                    form.closest('tr').remove();
+                                });
+                            }
+                        }, function(error) {
+                            alert('Error deleting item.');
+                        });
+                    }
+                });
+            });
+        </script>
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
             <nav class="w-full sm:w-auto sm:mr-auto">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-left"></i> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-left"></i> </a>
-                    </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                    <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                    <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-right"></i> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-right"></i> </a>
-                    </li>
-                </ul>
+                {{ $category_service->links('pagination::bootstrap-4') }}
             </nav>
-            <select class="w-20 form-select box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
         </div>
         <!-- END: Pagination -->
     </div>
+@endsection
+@section('js_footer_custom')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 @endsection
