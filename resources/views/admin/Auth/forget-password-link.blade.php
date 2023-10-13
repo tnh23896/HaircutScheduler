@@ -1,5 +1,5 @@
 @extends('admin.templates.login')
-@section('title', 'Login')
+@section('title', 'Reset Password')
 @section('content')
     <div class="container sm:px-10">
         <div class="block xl:grid grid-cols-2 gap-4">
@@ -55,17 +55,11 @@
                             <input type="text" class="intro-x login__input form-control py-3 px-4 block"
                                 placeholder="Email" value="{{ $email }}" name="email" >
 
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                            @endif
+                            
                             <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password" name="password" >
-                            @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
+                            
                             <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password Confirmation"  name="password_confirmation" >
-                            @if ($errors->has('password_confirmation'))
-                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
+                            
                         </div>
 
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">

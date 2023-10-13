@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->text('description')->nullable();
-            $table->string('token')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

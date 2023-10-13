@@ -16,7 +16,6 @@ class AuthenticateAdmin
             return $next($request);
         }
 
-        // Người dùng không đăng nhập bằng guard "admin", chuyển hướng hoặc xử lý lỗi ở đây
         return redirect('/admin/login'); // Chuyển hướng đến trang đăng nhập admin
     }
 }

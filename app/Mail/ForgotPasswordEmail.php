@@ -23,7 +23,6 @@ class ForgotPasswordEmail extends Mailable
     {
         $this->email = $email;
         $this->token = $token;
-
     }
 
     /**
@@ -32,7 +31,7 @@ class ForgotPasswordEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'My Email',
+            subject: 'Reset Password',
         );
     }
 
@@ -57,8 +56,6 @@ class ForgotPasswordEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [
-
-        ];
+        return [];
     }
 }

@@ -21,32 +21,22 @@
                         e-commerce accounts in one place</div>
                 </div>
             </div>
-            <!-- END: Login Info -->
-            <!-- BEGIN: Login Form -->
-
             <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
                 <div
-                    class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-sm bg-black bg-opacity-75 p-2 rounded-lg z-10 w-1/4
-    sm:w-full md:w-1/2 lg:w-auto">
-                    @if ($errors->any())
-                        <div class="alert alert-danger" role="alert">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    @if (Session::has('success'))
-                        <div class="alert alert-success " role="alert">
-                            <strong>{{ Session::get('success') }}</strong>
-                            <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                </div>
-
-
+                class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-sm bg-black bg-opacity-75 p-2 rounded-lg z-10 w-1/4
+sm:w-full md:w-1/2 lg:w-auto">
+                @if ($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                
+            </div>
                 <div
                     class="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
@@ -57,30 +47,25 @@
                     <form action="{{ route('admin.auth.login') }}" method="post">
                         @csrf
                         <div class="intro-x mt-8">
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 block"
+                            <input type="text" class="intro-x login__input form-control py-3 px-4 block "
                                 placeholder="Email" value="{{ old('email') }}" name="email">
+                            
                             <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4"
                                 placeholder="Password" name="password">
+                           
                         </div>
                         <div class="intro-x flex text-slate-600 dark:text-slate-500 text-xs sm:text-sm mt-4">
                             <div class="flex items-center mr-auto">
                                 <input id="remember" type="checkbox" name="remember" class="form-check-input border mr-2">
                                 <label class="cursor-pointer select-none" for="remember-me">Remember me</label>
                             </div>
-                            <a href="{{url('admin/forget-password')}}">Forgot Password?</a>
+                            <a href="{{ route('admin.auth.ForgetPassword') }}">Forgot Password?</a>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
                                 type="submit">Login</button>
-                            <button
-                                class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">Register</button>
                         </div>
                     </form>
-
-                    <div class="intro-x mt-10 xl:mt-24 text-slate-600 dark:text-slate-500 text-center xl:text-left"> By
-                        signin up, you agree to our <a class="text-primary dark:text-slate-200" href="#">Terms and
-                            Conditions</a> & <a class="text-primary dark:text-slate-200" href="#">Privacy
-                            Policy</a> </div>
                 </div>
             </div>
             <!-- END: Login Form -->
