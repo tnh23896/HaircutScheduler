@@ -38,6 +38,12 @@
                             <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
                         </div>
                     @endif
+                    @if (Session::has('success'))
+                        <div class="alert alert-success " role="alert">
+                            <strong>{{ Session::get('success') }}</strong>
+                            <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                 </div>
 
 

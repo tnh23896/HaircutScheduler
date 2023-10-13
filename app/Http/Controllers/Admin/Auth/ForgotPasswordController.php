@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Admin\Auth;
 
 use Carbon\Carbon;
+use App\Mail\ForgotPasswordEmail;
 use App\Models\Admin;
 use Illuminate\Support\Str;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendForgotPasswordEmail;
 use Illuminate\Support\Facades\Password;
 use App\Http\Requests\Admin\Auth\ForgotPasswordRequests;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
 {
@@ -33,25 +37,43 @@ class ForgotPasswordController extends Controller
             'email' => 'required|email|exists:admins',
         ]);
 
+        // $token = Str::random(64);
+        // DB::table('admin_password_resets')->insert([
+        //     'email' => $request->email,
+        //     'token' => $token,
+        //     'created_at' => Carbon::now()
+        // ]);
+
+
+        // Mail::send('admin.Auth.forget-password-email', ['token' => $token,'email'=>$request->email], function ($message) use ($request) {
+        //     $message->to($request->email);
+        //     $message->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
+        //     $message->subject('Reset Password');
+        // });
+
+        // return back()->with('success', 'We have emailed your password reset link!');
         $token = Str::random(64);
+        $email = $request->email;
+        // Lưu token vào cơ sở dữ liệu
         DB::table('admin_password_resets')->insert([
             'email' => $request->email,
             'token' => $token,
-            'created_at' => Carbon::now()
+            'created_at' => now(),
         ]);
 
-        Mail::send('admin.Auth.forget-password-email', ['token' => $token,'email'=>$request->email], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
-            $message->subject('Reset Password');
-        });
+        // Gửi email quên mật khẩu qua hàng đợi
+        // Mail::to($email)->send(new ForgotPasswordEmail($email,$token));
 
-        return back()->with('message', 'We have emailed your password reset link!');
+        SendForgotPasswordEmail::dispatch( $token, $email );
+        // dd($token,$request->email);
+
+        return back()->with('success', 'We have emailed your password reset link!');
     }
+
 
     public function ResetPassword(Request $request, $token, $email)
     {
-        return view('admin.Auth.forget-password-link', ['token' => $token,'email'=>$email]);
+        return view('admin.Auth.forget-password-link', ['token' => $token, 'email' => $email]);
     }
 
     public function ResetPasswordStore(Request $request)
