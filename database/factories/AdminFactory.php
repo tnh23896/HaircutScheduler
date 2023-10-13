@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,6 +25,7 @@ class AdminFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('12345678'),
             'description' => $this->faker->text(),
+            'remember_token' => Str::random(10),
         ];
     }
 }

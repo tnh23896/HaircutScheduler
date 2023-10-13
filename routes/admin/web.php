@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Bill\BillController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleDetailsController;
@@ -28,12 +30,24 @@ use App\Models\Service;
  * đây là route để hiển thị view admin
 */
 
-Route::group(['middleware' => 'auth.admin'], function () {
-	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
-Route::group(['middleware' => 'auth.admin'], function () {
-	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
+// Login Admin
+Route::get('login', [LoginController::class, 'showAdminLoginForm'])
+        ->name('admin.login');
+Route::post('login', [LoginController::class, 'adminLogin'])
+        ->name('admin.auth.login');
+Route::get('logout', [LoginController::class, 'logout'])
+        ->name('admin.auth.logout');
+
+// Route cho quên mật khẩu
+Route::get('forget-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('admin.auth.ForgetPassword');
+Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('admin.auth.ForgetPasswordPost');
+
+// Route cho đặt lại mật khẩu
+Route::get('reset-password/{token}/{email}', [ForgotPasswordController::class, 'ResetPassword'])->name('admin.auth.ResetPasswordGet');
+Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('admin.auth.ResetPasswordPost');
 
 Route::get('404', function () {
 		return view('admin.errors.404');
@@ -49,7 +63,7 @@ Route::post('category-service/create', [CategoryController::class, 'store'])
 Route::get('category-service/edit/{id}', [CategoryController::class, 'edit'])
 	->name('admin.serviceManagement.category.edit');
 Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
-	->name('admin.serviceManagement.category.update');
+    ->name('admin.serviceManagement.category.update');
 Route::delete('category-service/delete/{id}', [CategoryController::class, 'destroy'])
 	->name('admin.serviceManagement.category.delete');
 
