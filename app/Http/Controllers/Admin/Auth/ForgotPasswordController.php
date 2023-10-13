@@ -31,7 +31,6 @@ class ForgotPasswordController extends Controller
         AdminPasswordReset::create([
             'email' => $request->email,
             'token' => $token,
-            'created_at' => now(),
         ]);
 
         SendForgotPasswordEmail::dispatch( $token, $email );
