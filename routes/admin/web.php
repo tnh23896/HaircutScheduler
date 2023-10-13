@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
 use App\Http\Controllers\Admin\BannerManagement\BannerController;
+use App\Http\Controllers\Admin\ScheduleEmployee\ScheduleEmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\ServiceController;
 use App\Models\Service;
 /*
@@ -77,3 +78,6 @@ Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update
 Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
     ->name('admin.scheduleManagement.show');
 
+// Schedule Employee
+Route::get('schedule-employee', [ScheduleEmployeeController::class, 'index'])
+->name('admin.ScheduleEmployee.index');
