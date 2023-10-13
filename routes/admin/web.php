@@ -72,6 +72,7 @@ Route::name('admin.')->group(function () {
     Route::resource('employee', EmployeeController::class);
     //workschedule
     Route::resource('work-schedule', WorkScheduleController::class);
+		Route::post('work-schedule/{work_schedule}', [WorkScheduleController::class, 'update'])->name('admin.work-schedule.update');
 });
 
 //Service
