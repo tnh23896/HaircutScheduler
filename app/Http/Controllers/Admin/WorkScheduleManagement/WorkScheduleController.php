@@ -15,25 +15,26 @@ use Throwable;
 
 class WorkScheduleController extends Controller
 {
-public function index(Request $request)
-{
-    try {
-        $employeeId = $request->query('id');
-        $employee = Admin::findOrFail($employeeId);
+    public function index(Request $request)
+    {
+        try {
+            $employeeId = $request->query('id');
+            $employee = Admin::findOrFail($employeeId);
 
-        $workSchedules = WorkSchedule::with('times')
-            ->where('admin_id', $employeeId)
-            ->latest()
-            ->paginate(10);
-        $times = Time::all();
+            $workSchedules = WorkSchedule::with('times')
+                ->where('admin_id', $employeeId)
+                ->latest()
+                ->paginate(10);
 
-        return view('admin.WorkSchedule.index', compact('workSchedules', 'employee', 'times'));
-    } catch (ModelNotFoundException $exception) {
-        return response(['message' => 'Not found employee'], 404);
-    } catch (\Throwable $exception) {
-        return response(['message' => $exception->getMessage()], 500);
+            $times = Time::all();
+
+            return view('admin.WorkSchedule.index', compact('workSchedules', 'employee', 'times'));
+        } catch (ModelNotFoundException $exception) {
+            return response(['message' => 'Not found employee'], 404);
+        } catch (\Throwable $exception) {
+            return response(['message' => $exception->getMessage()], 500);
+        }
     }
-}
 
     /**
      * Show the form for creating a new resource.
@@ -61,10 +62,17 @@ public function index(Request $request)
         try {
             $workSchedule = WorkSchedule::create($request->all());
             $workSchedule->times()->sync($request->times);
-            $workSchedule  = WorkSchedule::with('times')->findOrFail($workSchedule->id);
-            return response(['message' => 'Work schedule created successfully', 'status' => 'success', 'workSchedule' => $workSchedule], 200);
+            $workSchedule = WorkSchedule::with('times')->findOrFail($workSchedule->id);
+
+            return response([
+                'message' => 'Work schedule created successfully',
+                'status' => 'success',
+                'workSchedule' => $workSchedule
+            ], 200);
         } catch (Throwable $th) {
-            return response(['message' => $th->getMessage()], 500);
+            return response([
+                'message' => $th->getMessage()
+            ], 500);
         }
     }
 
@@ -75,15 +83,16 @@ public function index(Request $request)
     {
         try {
             $timeId = $request->query('time_id');
-            $time = Time::query()->findOrFail($timeId);
-            $workSchedule = WorkSchedule::query()->findOrFail($id);
-            $workScheduleDetail = WorkScheduleDetail::where('work_schedules_id', $id)->where('time_id', $timeId)->first();
+            $time = Time::findOrFail($timeId);
+            $workSchedule = WorkSchedule::findOrFail($id);
+            $workScheduleDetail = WorkScheduleDetail::where('work_schedules_id', $id)
+                ->where('time_id', $timeId)
+                ->first();
             return view('admin.WorkSchedule.show', compact('workScheduleDetail', 'workSchedule', 'time'));
-        } catch (Throwable $th) {
-            if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Not found'], 404);
-            }
-            return response(['message' => $th->getMessage()], 500);
+        } catch (ModelNotFoundException $exception) {
+            return response(['message' => 'Not found'], 404);
+        } catch (Throwable $exception) {
+            return response(['message' => $exception->getMessage()], 500);
         }
     }
 
@@ -115,8 +124,12 @@ public function index(Request $request)
             $workSchedule = WorkSchedule::findOrFail($id);
             $workSchedule->update($request->all());
             $workSchedule->times()->sync($request->times);
-            $workSchedule  = WorkSchedule::with('times')->findOrFail($workSchedule->id);
-            return response(['message' => 'Work schedule updated successfully', 'status' => 'success', 'workSchedule' => $workSchedule], 200);
+            $updatedWorkSchedule = WorkSchedule::with('times')->findOrFail($workSchedule->id);
+            return response([
+                'message' => 'Work schedule updated successfully',
+                'status' => 'success',
+                'workSchedule' => $updatedWorkSchedule
+            ], 200);
         } catch (Throwable $th) {
             return response(['message' => $th->getMessage()], 500);
         }
@@ -132,11 +145,10 @@ public function index(Request $request)
             $workSchedule->times()->detach();
             $workSchedule->delete();
             return response(['message' => 'Deleted successfully', 'status' => 200], 200);
-        } catch (Throwable $th) {
-            if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Not found'], 404);
-            }
-            return response(['message' => $th->getMessage()], 500);
+        } catch (ModelNotFoundException $exception) {
+            return response(['message' => 'Not found'], 404);
+        } catch (Throwable $exception) {
+            return response(['message' => $exception->getMessage()], 500);
         }
     }
 }
