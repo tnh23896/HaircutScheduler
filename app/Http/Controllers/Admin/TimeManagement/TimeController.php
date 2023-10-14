@@ -14,7 +14,7 @@ class TimeController extends Controller
      */
     public function index()
     {
-        $data = Time::all();
+        $data = Time::orderBy('time', 'asc')->paginate(10);
         return view('admin.TimeManagement.time.index', compact('data'));
     }
 
