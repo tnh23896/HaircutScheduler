@@ -15,31 +15,25 @@ use Throwable;
 
 class WorkScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        try {
-            $employeeId = $request->query('id');
-            $employee = Admin::query()->findOrFail($employeeId);
+public function index(Request $request)
+{
+    try {
+        $employeeId = $request->query('id');
+        $employee = Admin::findOrFail($employeeId);
 
-            $workSchedules = WorkSchedule::query()
-                ->with('times')
-                ->where('admin_id', $employeeId)
-                ->latest()
-                ->paginate(10);
-                $times = Time::all();
+        $workSchedules = WorkSchedule::with('times')
+            ->where('admin_id', $employeeId)
+            ->latest()
+            ->paginate(10);
+        $times = Time::all();
 
-            return view('admin.WorkSchedule.index', compact('workSchedules', 'employee', 'times'));
-        } catch (\Throwable $th) {
-            if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Not found employee'], 404);
-            }
-
-            return response(['message' => $th->getMessage()], 500);
-        }
+        return view('admin.WorkSchedule.index', compact('workSchedules', 'employee', 'times'));
+    } catch (ModelNotFoundException $exception) {
+        return response(['message' => 'Not found employee'], 404);
+    } catch (\Throwable $exception) {
+        return response(['message' => $exception->getMessage()], 500);
     }
+}
 
     /**
      * Show the form for creating a new resource.
@@ -68,7 +62,7 @@ class WorkScheduleController extends Controller
             $workSchedule = WorkSchedule::create($request->all());
             $workSchedule->times()->sync($request->times);
             $workSchedule  = WorkSchedule::with('times')->findOrFail($workSchedule->id);
-            return response(['message' => 'Work schedule created successfully', 'status' => 'success','workSchedule' => $workSchedule], 200);  
+            return response(['message' => 'Work schedule created successfully', 'status' => 'success', 'workSchedule' => $workSchedule], 200);
         } catch (Throwable $th) {
             return response(['message' => $th->getMessage()], 500);
         }
@@ -122,7 +116,7 @@ class WorkScheduleController extends Controller
             $workSchedule->update($request->all());
             $workSchedule->times()->sync($request->times);
             $workSchedule  = WorkSchedule::with('times')->findOrFail($workSchedule->id);
-            return response(['message' => 'Work schedule updated successfully', 'status' => 'success','workSchedule' => $workSchedule], 200);
+            return response(['message' => 'Work schedule updated successfully', 'status' => 'success', 'workSchedule' => $workSchedule], 200);
         } catch (Throwable $th) {
             return response(['message' => $th->getMessage()], 500);
         }
