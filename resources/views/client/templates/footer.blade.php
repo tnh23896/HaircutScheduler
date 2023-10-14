@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="col-lg-4 text-lg-center text-center">
-                <img src="{{ asset('client/images/logo.png')}}" class="" alt="">
+                <img src="{{ asset('client/images/logo.png') }}" class="" alt="">
             </div>
             <div class="col-lg-4 text-lg-end text-center">
                 Copyright 2023 - Blaxcut by Designesia
@@ -23,6 +23,7 @@
     </div>
 </footer>
 <!-- footer close -->
+
 <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
     aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered " role="document">
