@@ -3,9 +3,6 @@
 
 use App\Http\Controllers\Admin\TimeManagement\TimeController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
-
-
-
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -42,32 +39,30 @@ Route::get('category-service/edit/{id}', [CategoryController::class, 'edit'])
     ->name('admin.serviceManagement.category.edit');
 Route::post('category-service/edit/{id}', [CategoryController::class, 'update'])
     ->name('admin.serviceManagement.category.update');
-
-// TIME
-Route::get('time', [TimeController::class, 'index'])
-    ->name('admin.TimeManagement.time.index');
-Route::get('time/create', [TimeController::class, 'create'])
-    ->name('admin.TimeManagement.time.create');
-Route::post('time/store', [TimeController::class, 'store'])
-    ->name('admin.TimeManagement.time.store');
-Route::get('time/edit/{id}', [TimeController::class, 'edit'])
-    ->name('admin.TimeManagement.time.edit');
-Route::post('time/update/{id}', [TimeController::class, 'update'])
-    ->name('admin.TimeManagement.time.update');
-Route::delete('time/delete/{id}', [TimeController::class, 'destroy'])
-    ->name('admin.TimeManagement.time.delete');
-//User
-Route::get('user', [UserController::class, 'index'])
-    ->name('admin.UserManagement.user.index');
-Route::get('user/edit/{id}', [UserController::class, 'edit'])
-    ->name('admin.UserManagement.user.edit');
-Route::post('user/update/{id}', [UserController::class, 'update'])
-    ->name('admin.UserManagement.user.update');
-
 Route::delete('category-service/delete/{id}', [CategoryController::class, 'destroy'])
     ->name('admin.serviceManagement.category.delete');
 
+// TIME
+Route::get('time', [TimeController::class, 'index'])
+    ->name('admin.TimeManagement.index');
+Route::get('time/create', [TimeController::class, 'create'])
+    ->name('admin.TimeManagement.create');
+Route::post('time/store', [TimeController::class, 'store'])
+    ->name('admin.TimeManagement.store');
+Route::get('time/edit/{id}', [TimeController::class, 'edit'])
+    ->name('admin.TimeManagement.edit');
+Route::post('time/update/{id}', [TimeController::class, 'update'])
+    ->name('admin.TimeManagement.update');
+Route::delete('time/delete/{id}', [TimeController::class, 'destroy'])
+    ->name('admin.TimeManagement.delete');
 
+//User
+Route::get('user', [UserController::class, 'index'])
+    ->name('admin.UserManagement.index');
+Route::get('user/edit/{id}', [UserController::class, 'edit'])
+    ->name('admin.UserManagement.edit');
+Route::post('user/update/{id}', [UserController::class, 'update'])
+    ->name('admin.UserManagement.update');
 
 // Banner
 Route::get('banner', [BannerController::class, 'index'])

@@ -15,7 +15,7 @@ class TimeController extends Controller
     public function index()
     {
         $data = Time::orderBy('time', 'asc')->paginate(10);
-        return view('admin.TimeManagement.time.index', compact('data'));
+        return view('admin.TimeManagement.index', compact('data'));
     }
 
     /**
@@ -23,7 +23,7 @@ class TimeController extends Controller
      */
     public function create()
     {
-        return view('admin.TimeManagement.time.create');
+        return view('admin.TimeManagement.create');
     }
 
     /**
@@ -32,7 +32,7 @@ class TimeController extends Controller
     public function store(StoreRequest $request)
     {
         try {
-          
+
             Time::create($request->validated());
             return response()->json([
                 "success" => "Created successfully ",
@@ -60,7 +60,7 @@ class TimeController extends Controller
     public function edit(string $id)
     {
         $data = Time::find($id);
-        return view('admin.TimeManagement.time.edit', compact('data'));
+        return view('admin.TimeManagement.edit', compact('data'));
     }
 
     /**
@@ -69,7 +69,7 @@ class TimeController extends Controller
     public function update(StoreRequest $request, string $id)
     {
         try {
-           
+
             Time::where('id', $id)->update($request->validated());
             return response()->json([
                 "success" => "Created successfully ",
@@ -81,7 +81,6 @@ class TimeController extends Controller
                 'error' => 'Cập nhật thất bại'
             ]);
         }
-
     }
 
     /**
@@ -101,6 +100,5 @@ class TimeController extends Controller
                 'error' => 'Cập nhật thất bại'
             ]);
         }
-
     }
 }

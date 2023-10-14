@@ -8,9 +8,7 @@
         </h2>
     </div>
     <form id="ajaxForm"  method="POST" >
-
     <div class="grid grid-cols-12 gap-6 mt-5">
-
         <div class="intro-y col-span-12 lg:col-span-12">
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
@@ -19,7 +17,7 @@
                     <input id="crud-form-1" name="time" type="time" class="form-control w-full" placeholder="Input time">
                 </div>
                 <div class="text-right mt-5">
-                   <a href="{{route('admin.TimeManagement.time.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</button></a>
+                   <a href="{{route('admin.TimeManagement.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">List</button></a>
                     <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
                 </div>
             </div>
@@ -31,7 +29,7 @@
     $(function() {
         $('#saveBtn').on('click', function() {
             var formData = new FormData($('#ajaxForm')[0]);
-            var url = "{{ route('admin.TimeManagement.time.store') }}";
+            var url = "{{ route('admin.TimeManagement.store') }}";
             sendAjaxRequest(url, 'POST', formData,
                 function(response) {
                     if (response.success) {
@@ -40,7 +38,7 @@
                             text: response.success,
                             icon: 'success',
                         }).then(() => {
-                            window.location.href = "{{ route('admin.TimeManagement.time.index') }}";
+                            window.location.href = "{{ route('admin.TimeManagement.index') }}";
                         });
                     }
                 },

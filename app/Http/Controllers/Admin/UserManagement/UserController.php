@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
        $data = User::orderBy('id', 'desc')->paginate(10);
-        return view('admin.UserManagement.user.index',compact('data'));
+        return view('admin.UserManagement.index',compact('data'));
     }
 
     /**
@@ -47,7 +47,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $data=User::find($id);
-        return view('admin.UserManagement.user.edit',compact('data'));
+        return view('admin.UserManagement.edit',compact('data'));
     }
 
     /**

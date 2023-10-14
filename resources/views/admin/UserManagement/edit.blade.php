@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section ('title','Create Category Services')
+@section ('title','Edit User')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
@@ -25,18 +25,15 @@
                             {{$data->black_status==1? 'selected' : ''}}>
                             Inactive
                         </option>
-
                     </select>
-
                 </div>
                 <div class="text-right mt-5">
-                   <a href="{{route('admin.UserManagement.user.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">Cancel</button></a>
+                   <a href="{{route('admin.UserManagement.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">List</button></a>
                     <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
                 </div>
             </div>
             <!-- END: Form Layout -->
         </div>
-
     </div>
 </form>
 
@@ -45,7 +42,7 @@
             var editId = {{$data->id}};
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
-                var url = "{{ route('admin.UserManagement.user.update', ['id' => ':editId']) }}";
+                var url = "{{ route('admin.UserManagement.update', ['id' => ':editId']) }}";
                 url = url.replace(':editId', editId);
 
                 sendAjaxRequest(url, 'POST', formData,
@@ -56,7 +53,7 @@
                                 text: response.success,
                                 icon: 'success',
                             }).then(() => {
-                                {{--window.location.href = "{{ route('admin.scheduleManagement.edit') }}";--}}
+                                window.location.href = "{{ route('admin.UserManagement.index') }}";
                             });
                         }
                     },
@@ -85,6 +82,5 @@
             });
         });
     </script>
-
 @endsection
 

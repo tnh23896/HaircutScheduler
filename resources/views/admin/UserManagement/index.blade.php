@@ -38,14 +38,12 @@
                             <td class="text-center capitalize">{{ $item->black_status == 0 ? 'Active' : 'Inactive' }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a href="{{ route('admin.UserManagement.user.edit', $item->id) }}"
+                                    <a href="{{ route('admin.UserManagement.edit', $item->id) }}"
                                         class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
                                             class="w-4 h-4 mr-1"></i> Edit </a>
-
                                 </div>
                             </td>
                         </tr>
-
                     </tbody>
                 @endforeach
             </table>
