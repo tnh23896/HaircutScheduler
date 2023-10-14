@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('phone');
             $table->string('promo_id')->nullable();
             $table->enum('status',['pending','success','canceled'])->default('pending');
-            $table->string('price');
+            $table->string('total_price');
             $table->string('email');
             $table->date('day');
-            $table->string('work_schedule_detail_id');
+            $table->time('time');
             $table->timestamps();
             $table->softDeletes();
         });

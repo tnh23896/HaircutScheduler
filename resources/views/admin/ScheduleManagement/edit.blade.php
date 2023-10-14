@@ -27,12 +27,12 @@
                 <div class="mt-3">
                     <label for="crud-form-1" class="form-label">Price</label>
                     <input id="price" type="text" class="form-control w-full" placeholder="Input text"
-                           value="{{$data->price}}" name="price" disabled>
+                           value="{{$data->total_price}}" name="price" disabled>
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-1" class="form-label">Schedule Time</label>
                     <input id="schedule_time" name="schedule_time" type="text" class="form-control w-full" placeholder="Input text"
-                           value="{{$data->work_schedule_detail->time->time }} {{$data->day}}" disabled>
+                           value="{{$data->time }} {{$data->day}}" disabled>
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-1" class="form-label">Created At</label>
@@ -41,16 +41,18 @@
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Status</label>
-                    <select data-placeholder="Select your favorite actors" name="status" class="tom-select w-full" id="crud-form-2">
-                        <option value="1" @if($data->status == "pending") selected @endif>Pending</option>
-                        <option value="2" @if($data->status == "success") selected @endif>Success</option>
-                        <option value="3" @if($data->status == "canceled") selected @endif>Canceled</option>
+                    <select data-placeholder="Select your favorite actors" name="status" class="tom-select w-full" id="crud-form-2" @if($data->status == "success") disabled @endif>
+                        <option value="pending" @if($data->status == "pending") selected @endif>Pending</option>
+                        <option value="success" @if($data->status == "success") selected @endif>Success</option>
+                        <option value="canceled" @if($data->status == "canceled") selected @endif>Canceled</option>
                     </select>
                 </div>
 
                 <div class="text-right mt-5">
                     <a href="{{route('admin.scheduleManagement.index')}}" class="btn btn-primary w-32 mr-1">List Schedule</a>
+                    @if($data->status !== "success")
                     <button type="button" id="saveBtn" class="btn btn-success w-24 text-white">Save</button>
+                    @endif
                 </div>
             </div>
             <!-- END: Form Layout -->

@@ -11,6 +11,12 @@
                 <div class="side-menu__title"> Dashboard </div>
             </a>
         </li>
+         <li>
+           <a href="{{ route('admin.employee.index') }}" class="side-menu">
+                <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
+                <div class="side-menu__title"> Employee </div>
+            </a>
+        </li>
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"><i data-lucide="align-justify" class="block mx-auto"></i> </div>
@@ -21,13 +27,13 @@
             </a>
             <ul class="">
                 <li>
-                    <a href="{{route('admin.serviceManagement.category.index')}}" class="side-menu">
+                    <a href="{{ route('admin.serviceManagement.category.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                         <div class="side-menu__title">Category</div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('admin.serviceManagement.service.index')}}" class="side-menu">
+                    <a href="{{ route('admin.serviceManagement.service.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                         <div class="side-menu__title">Service</div>
                     </a>
@@ -35,9 +41,38 @@
             </ul>
         </li>
         <li>
-            <a href="{{route('admin.scheduleManagement.index')}}" class="side-menu side-menu--active">
+            <a href="javascript:;" class="side-menu">
+                <div class="side-menu__icon"><i data-lucide="align-justify" class="block mx-auto"></i> </div>
+                <div class="side-menu__title">
+                    CategoryBlog and Blog
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>
+            <ul class="">
+                <li>
+                    <a href="{{ route('admin.blogManagement.category.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Category</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.blogManagement.blog.index') }}" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                        <div class="side-menu__title">Blog</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="{{ route('admin.scheduleManagement.index') }}" class="side-menu side-menu--active">
                 <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
                 <div class="side-menu__title"> Schedule Management </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.billManagement.index') }}" class="side-menu side-menu--active">
+                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
+                <div class="side-menu__title"> Bill Management </div>
             </a>
         </li>
         <li>
@@ -120,7 +155,8 @@
                                     src="{{ asset('dist/images/profile-9.jpg') }}">
                             </div>
                             <div class="ml-3">Will Smith</div>
-                            <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">willsmith@left4code.com
+                            <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">
+                                willsmith@left4code.com
                             </div>
                         </a>
                     </div>
@@ -203,7 +239,7 @@
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
                     <li>
-                        <a href="#" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right"
+                        <a href="{{route('admin.auth.logout')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right"
                                 class="w-4 h-4 mr-2"></i> Logout </a>
                     </li>
                 </ul>

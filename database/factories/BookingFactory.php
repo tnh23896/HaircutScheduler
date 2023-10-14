@@ -23,10 +23,10 @@ class BookingFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'promo_id' => $this->faker->numberBetween(1, 5),
             'status' => $this->faker->randomElement(['pending', 'success', 'canceled']),
-            'price' => $this->faker->numberBetween(100, 200),
+            'total_price' => $this->faker->numberBetween(100, 200),
             'email' => $this->faker->email(),
             'day' => $this->faker->date(),
-            'work_schedule_detail_id' => $this->faker->numberBetween(1, 5),
+            'time' => $this->faker->time(),
         ];
     }
 }
