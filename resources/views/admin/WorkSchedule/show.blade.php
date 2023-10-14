@@ -9,11 +9,9 @@
     <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
         <a href="{{ route('admin.work-schedule.index', ['id' => $workSchedule->admin->id ??'']) }}"
             class="btn btn-primary shadow-md mr-2">Trở về</a>
-        
     </div>
     <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible text-center">
-
         <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Nhân viên
             {{$workSchedule->admin->username ??''}}</h2>
         <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
@@ -41,8 +39,5 @@
         </ul>
     </div>
     <!-- END: Data List -->
-
 </div>
 @endsection
-
-

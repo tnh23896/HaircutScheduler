@@ -29,8 +29,9 @@ class WorkScheduleController extends Controller
                 ->where('admin_id', $employeeId)
                 ->latest()
                 ->paginate(10);
+                $times = Time::all();
 
-            return view('admin.WorkSchedule.index', compact('workSchedules', 'employee'));
+            return view('admin.WorkSchedule.index', compact('workSchedules', 'employee', 'times'));
         } catch (\Throwable $th) {
             if ($th instanceof ModelNotFoundException) {
                 return response(['message' => 'Not found employee'], 404);
@@ -43,20 +44,20 @@ class WorkScheduleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
-    {
-        try {
-            $times = Time::all();
-            $employeeId = $request->query('id');
-            $employee = Admin::findOrFail($employeeId);
-            return view('admin.WorkSchedule.create', compact('times', 'employee'));
-        } catch (Throwable $th) {
-            if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Not found employee'], 404);
-            }
-            return response(['message' => $th->getMessage()], 500);
-        }
-    }
+    // public function create(Request $request)
+    // {
+    //     try {
+    //         $times = Time::all();
+    //         $employeeId = $request->query('id');
+    //         $employee = Admin::findOrFail($employeeId);
+    //         return view('admin.WorkSchedule.create', compact('times', 'employee'));
+    //     } catch (Throwable $th) {
+    //         if ($th instanceof ModelNotFoundException) {
+    //             return response(['message' => 'Not found employee'], 404);
+    //         }
+    //         return response(['message' => $th->getMessage()], 500);
+    //     }
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -66,7 +67,8 @@ class WorkScheduleController extends Controller
         try {
             $workSchedule = WorkSchedule::create($request->all());
             $workSchedule->times()->sync($request->times);
-            return redirect()->route('admin.work-schedule.index',['id' => $workSchedule->admin_id])->with('success', 'Work schedule created successfully');
+            $workSchedule  = WorkSchedule::with('times')->findOrFail($workSchedule->id);
+            return response(['message' => 'Work schedule created successfully', 'status' => 'success','workSchedule' => $workSchedule], 200);  
         } catch (Throwable $th) {
             return response(['message' => $th->getMessage()], 500);
         }
@@ -94,21 +96,21 @@ class WorkScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, string $id)
-    {
-        try {
-            $workSchedule = WorkSchedule::with('times')->findOrFail($id);
-            $times = Time::all();
-            $employeeId = $request->query('id');
-            $employee = Admin::query()->findOrFail($employeeId);
-            return view('admin.WorkSchedule.edit', compact('workSchedule', 'times', 'employee'));
-        } catch (Throwable $th) {
-            if ($th instanceof ModelNotFoundException) {
-                return response(['message' => 'Not found employee'], 404);
-            }
-            return response(['message' => $th->getMessage()], 500);
-        }
-    }
+    // public function edit(Request $request, string $id)
+    // {
+    //     try {
+    //         $workSchedule = WorkSchedule::with('times')->findOrFail($id);
+    //         $times = Time::all();
+    //         $employeeId = $request->query('id');
+    //         $employee = Admin::query()->findOrFail($employeeId);
+    //         return view('admin.WorkSchedule.edit', compact('workSchedule', 'times', 'employee'));
+    //     } catch (Throwable $th) {
+    //         if ($th instanceof ModelNotFoundException) {
+    //             return response(['message' => 'Not found employee'], 404);
+    //         }
+    //         return response(['message' => $th->getMessage()], 500);
+    //     }
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -119,7 +121,8 @@ class WorkScheduleController extends Controller
             $workSchedule = WorkSchedule::findOrFail($id);
             $workSchedule->update($request->all());
             $workSchedule->times()->sync($request->times);
-            return to_route('admin.work-schedule.index', ['id' => $workSchedule->admin_id])->with('success', 'Work schedule updated successfully');
+            $workSchedule  = WorkSchedule::with('times')->findOrFail($workSchedule->id);
+            return response(['message' => 'Work schedule updated successfully', 'status' => 'success','workSchedule' => $workSchedule], 200);
         } catch (Throwable $th) {
             return response(['message' => $th->getMessage()], 500);
         }
