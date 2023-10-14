@@ -102,6 +102,4 @@
             });
         });
     </script>
-
-
 @endsection
