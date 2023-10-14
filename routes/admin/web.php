@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\Admin\TimeManagement\TimeController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
