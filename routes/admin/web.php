@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth.admin'], function () {
 });
 
 Route::get('404', function () {
-		return view('admin.errors.404');
+	return view('admin.errors.404');
 });
 
 //Category Service
@@ -68,11 +68,11 @@ Route::delete('banner/delete/{id}', [BannerController::class, 'delete'])
 	->name('admin.banners.delete');
 
 Route::name('admin.')->group(function () {
-    //employee
-    Route::resource('employee', EmployeeController::class);
-    //workschedule
-    Route::resource('work-schedule', WorkScheduleController::class);
-		Route::post('work-schedule/{work_schedule}', [WorkScheduleController::class, 'update'])->name('admin.work-schedule.update');
+	//employee
+	Route::resource('employee', EmployeeController::class);
+	//workschedule
+	Route::resource('work-schedule', WorkScheduleController::class);
+	Route::post('work-schedule/{work_schedule}', [WorkScheduleController::class, 'update'])->name('admin.work-schedule.update');
 });
 
 //Service
@@ -97,16 +97,16 @@ Route::get('schedule-management/edit/{id}', [ScheduleController::class, 'edit'])
 Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update'])
 	->name('admin.scheduleManagement.update');
 Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
-    ->name('admin.scheduleManagement.show');
+	->name('admin.scheduleManagement.show');
 // Schedule Details
 Route::get('schedule-details/{id}', [ScheduleDetailsController::class, 'edit'])
-    ->name('admin.scheduleManagement.scheduleDetails');
+	->name('admin.scheduleManagement.scheduleDetails');
 Route::put('schedule-details/{id}', [ScheduleDetailsController::class, 'update'])
-    ->name('admin.scheduleManagement.scheduleDetails.update');
+	->name('admin.scheduleManagement.scheduleDetails.update');
 
 //Bill
 Route::get('bill-management', [BillController::class, 'index'])
-    ->name('admin.billManagement.index');
+	->name('admin.billManagement.index');
 
 //Category Blog
 Route::get('category-blog', [BlogCategoryController::class, 'index'])->name('admin.blogManagement.category.index');
