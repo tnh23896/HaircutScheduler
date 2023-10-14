@@ -18,5 +18,5 @@ use App\Http\Controllers\Admin\DashboardController;
 // 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 // });
 Route::get('/', function () {
-	return view('welcome');
+	return view('client.home.index');
 });
