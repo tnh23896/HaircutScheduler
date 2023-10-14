@@ -134,9 +134,11 @@
         $(document).ready(function() {
             $('.delete-form').on('click', function(e) {
                 e.preventDefault();
-                var form = $(this);
-                var urlToDelete = "{{ route('admin.work-schedule.destroy', 'ID') }}";
-                urlToDelete = urlToDelete.replace('ID', $(this).data('id'));
+
+                var deleteForm = $(this);
+                var deleteUrl = "{{ route('admin.work-schedule.destroy', 'ID') }}";
+                deleteUrl = deleteUrl.replace('ID', $(this).data('id'));
+
                 Swal.fire({
                     title: 'Bạn chắc chắn muốn xoá?',
                     text: 'Chỉ khi nhân viên nghỉ làm rồi hãy xoá?',
@@ -146,16 +148,14 @@
                     cancelButtonText: 'Cancel',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        sendAjaxRequest(urlToDelete, 'DELETE', {
-                            _method: 'DELETE'
-                        }, function(response) {
+                        sendAjaxRequest(deleteUrl, 'DELETE', {}, function(response) {
                             if (response.status) {
                                 Swal.fire({
                                     title: 'Successfully',
                                     text: response.message,
                                     icon: response.status,
                                 }).then(() => {
-                                    form.closest('tr').remove();
+                                    deleteForm.closest('tr').remove();
                                 });
                             }
                         }, function(error) {
@@ -221,6 +221,8 @@
                                 // add  new row to first position
                                 var dataContainer = document.getElementById('dataContainer');
                                 dataContainer.innerHTML = newRow + dataContainer.innerHTML;
+                                var errorDiv = $('#errorDiv');
+                                errorDiv.hide();
                             })
                     }
                 }, function(error) {
