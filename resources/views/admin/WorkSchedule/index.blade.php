@@ -178,51 +178,7 @@
                                 icon: response.status,
                             })
                             .then(() => {
-                                const workSchedule_id = response.workSchedule.id;
-                                const employee_id =
-                                    "{{ $employee->id }}"; // Giả sử bạn có thể lấy giá trị employee_id từ PHP
-                                var timesHTML = response.workSchedule.times.map(element => {
-                                    let routeShow =
-                                        `{{ route('admin.work-schedule.show', ['work_schedule' => 'workSchedule_id', 'time_id' => 'time_data_id']) }}`;
-                                    routeShow = routeShow.replace('workSchedule_id',
-                                        workSchedule_id);
-                                    routeShow = routeShow.replace('time_data_id',
-                                        element.id);
-                                    var status = element.pivot.status == 'available' ?
-                                        'text-success' : 'text-danger';
-                                    var time = element.time;
-                                    if (time) {
-                                        return `
-                                            <td class="text-center"><a
-                                                href="${routeShow}" 
-                                                class="text-center ${status}">${time}</a>
-                                            </td>`;
-                                    }
-                                    return ''; // Trả về chuỗi rỗng nếu không có thời gian
-                                });
-                                var newRow = `
-                                        <tr class="intro-x">
-                                            <td class="text-center" style="border-right: 1px solid white">${response.workSchedule.day}</td>
-                                            ${timesHTML.join('')}
-                                            <td class="table-report__action w-56">
-                                                <div class="flex justify-center items-center">
-                                                    <a  data-tw-toggle="modal" data-tw-target="#modal${response.workSchedule.id}"
-                                           class="flex items-center text-success cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-square"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                                            edit </a>
-                                                    <button class="flex items-center text-danger delete-form"
-                                                        data-id="${response.workSchedule.id}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> Delete
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    `;
-                                // add  new row to first position
-                                var dataContainer = document.getElementById('dataContainer');
-                                dataContainer.innerHTML = newRow + dataContainer.innerHTML;
-                                var errorDiv = $('#errorDiv');
-                                errorDiv.hide();
+                                location.reload();
                             })
                     }
                 }, function(error) {
@@ -264,47 +220,7 @@
                                     icon: response.status,
                                 })
                                 .then(() => {
-                                    const workSchedule_id = response.workSchedule.id;
-                                    const employee_id =
-                                        "{{ $employee->id }}"; // Giả sử bạn có thể lấy giá trị employee_id từ PHP
-                                    var timesHTML = response.workSchedule.times.map(element => {
-                                        let routeShow =
-                                            `{{ route('admin.work-schedule.show', ['work_schedule' => 'workSchedule_id', 'time_id' => 'time_data_id']) }}`;
-                                        routeShow = routeShow.replace('workSchedule_id',
-                                            workSchedule_id);
-                                        routeShow = routeShow.replace('time_data_id',
-                                            element.id);
-                                        var status = element.pivot.status == 'available' ?
-                                            'text-success' : 'text-danger';
-                                        var time = element.time;
-                                        if (time) {
-                                            return `
-                                            <td class="text-center"><a
-                                                href="${routeShow}" 
-                                                class="text-center ${status}">${time}</a>
-                                            </td>`;
-                                        }
-                                        return ''; // Trả về chuỗi rỗng nếu không có thời gian
-                                    });
-                                    var newRow = `
-                                            <td class="text-center" style="border-right: 1px solid white">${response.workSchedule.day}</td>
-                                            ${timesHTML.join('')}
-                                            <td class="table-report__action w-56">
-                                                <div class="flex justify-center items-center">
-                                                    <a  data-tw-toggle="modal" data-tw-target="#modal${response.workSchedule.id}"
-                                           class="flex items-center text-success cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-square"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                                            edit </a>
-                                                    <button class="flex items-center text-danger delete-form"
-                                                        data-id="${response.workSchedule.id}">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> Delete
-                                                    </button>
-                                                </div>
-                                            </td>
-                                    `;
-                                    const tr = document.querySelector(
-                                        `tr[data-id="${response.workSchedule.id}"]`);
-                                    tr.innerHTML = newRow;
+                                    location.reload();
                                 })
                         }
                     },
