@@ -29,8 +29,8 @@
     <div id="de-loader"></div>
 
     <!-- page preloader begin -->
-    @yield('ajax')
     @include('client.templates.link_footer')
+    @yield('js_footer_custom')
 </body>
 
 <!-- Mirrored from rubick-html.vercel.app/side-menu-dark-accordion.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 Jun 2023 10:58:45 GMT -->
