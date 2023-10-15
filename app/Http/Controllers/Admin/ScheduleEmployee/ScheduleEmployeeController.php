@@ -15,20 +15,21 @@ class ScheduleEmployeeController extends Controller
 {
     public function index()
     {
-        $employeeId = Auth::id();
-        // Session::put('id',2);
-        // $employeeId = Session::get('id');
+        $employeeId = auth()->guard('admin')->id();
         $employee = Admin::find($employeeId);
-        $workSchedules = WorkSchedule::query()
-        ->with('times')
+        $workSchedules = WorkSchedule::with('times')
         ->where('admin_id', $employeeId)
-        ->latest()->paginate(10);
+        ->latest()
+        ->paginate(10);
 
-        $bookings = Booking::query()
-        ->with('times')
-        ->where('admin_id', $employeeId)
-        ->latest()->paginate(10);
-
+        $bookings = Booking::where('bookings.admin_id', $employeeId)
+        ->latest()
+        ->join('booking_details', 'bookings.id', '=', 'booking_details.booking_id')
+        ->join('services', 'booking_details.service_id', '=', 'services.id')
+        ->select('bookings.*', 'services.name as service_name')
+        ->get();
         return view('admin.ScheduleEmployee.index',  compact('workSchedules', 'employee', 'bookings'));
     }
+
+    
 }
