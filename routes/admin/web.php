@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\WorkScheduleManagement\WorkScheduleController;
 use App\Http\Controllers\Admin\BlogManagement\CategoryController as BlogCategoryController;
 use App\Http\Controllers\Admin\BlogManagement\BlogController as BlogController;
 use App\Http\Controllers\Admin\BannerManagement\BannerController;
+use App\Http\Controllers\Admin\ScheduleEmployee\ScheduleEmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\ServiceController;
 use App\Models\Service;
 
@@ -136,3 +137,7 @@ Route::post('blog/create', [BlogController::class, 'store'])->name('admin.blogMa
 Route::get('blog/edit/{id}', [BlogController::class, 'edit'])->name('admin.blogManagement.blog.edit');
 Route::post('blog/edit/{id}', [BlogController::class, 'update'])->name('admin.blogManagement.blog.update');
 Route::delete('blog/delete/{id}', [BlogController::class, 'destroy'])->name('admin.blogManagement.blog.delete');
+
+//ScheduleEmployee
+Route::get('schedule-employee', [ScheduleEmployeeController::class, 'index'])
+->name('admin.ScheduleEmployee.index');
