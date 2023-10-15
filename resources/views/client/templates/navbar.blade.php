@@ -8,8 +8,8 @@
                             <!-- logo begin -->
                             <div id="logo">
                                 <a href="index.html">
-                                    <img class="logo-main" src="{{ asset('client/images/logo.png') }}" alt="">
-                                    <img class="logo-mobile" src="{{ asset('client/images/logo-mobile.png') }}" alt="">
+                                    <img class="logo-main" src="{{ asset('client/images/logo.png')}}" alt="" >
+                                    <img class="logo-mobile" src="{{ asset('client/images/logo.png')}}" alt="" >
                                 </a>
                             </div>
                             <!-- logo close -->
@@ -46,10 +46,8 @@
                     </div>
                     <div class="de-flex-col">
                         <div class="menu_side_area">
-                            <!-- Modal trigger button -->
-                            <button type="button" class="btn-main" data-bs-toggle="modal" data-bs-target="#modalId">
-                                Đăng nhập
-                            </button>
+                            <a href="book.html" class="btn-main">Book Now</a>
+                            <span id="menu-btn"></span>
                         </div>
                     </div>
                 </div>

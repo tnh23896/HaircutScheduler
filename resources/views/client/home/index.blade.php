@@ -282,47 +282,51 @@
 
         <section aria-label="section" class="no-top">
             <div class="wow fadeInRight d-flex">
-                <div class="de-marquee-list wow">
-                    <div class="d-item">
-                        <span class="d-item-txt">Haircut</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Shave</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Faded</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Hair Dye</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Beard Trim</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Hair Color</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Facial</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Masage</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                        <span class="d-item-txt">Hair Wash</span>
-                        <span class="d-item-display">
-                            <i class="d-item-block"></i>
-                        </span>
-                    </div>
-                </div>
+              <div class="de-marquee-list wow">
+                <div class="d-item">
+                  <span class="d-item-txt">Haircut</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Shave</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Faded</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Hair Dye</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Beard Trim</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Hair Color</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Facial</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Masage</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                  <span class="d-item-txt">Hair Wash</span>
+                  <span class="d-item-display">
+                    <i class="d-item-block"></i>
+                  </span>
+                 </div>
+              </div>
             </div>
         </section>
     </div>
+
 @endsection
+ @section('js_footer_custom')
+ <script src="{{ asset('client/js/custom-marquee.js')}}"></script>
+ @endsection
