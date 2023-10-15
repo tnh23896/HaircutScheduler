@@ -15,12 +15,7 @@ class Admin extends Authenticatable
     protected $table = 'admins';
     protected $guarded = 'admin';
     protected $fillable = [
-        'username',
-        'avatar',
-        'phone',
-        'email',
-        'password',
-        'description',
+        'username', 'avatar', 'phone', 'email', 'password', 'description','remember_token','token',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -54,4 +49,10 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(WorkSchedule::class);
     }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
+
 }

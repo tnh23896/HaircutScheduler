@@ -81,9 +81,9 @@
                         </td>
                         <td class="text-center"><a class="flex items-center justify-center underline decoration-dotted"
                                                    href="javascript:;">{{$item->admin->username}}</a></td>
-                        <td class="text-center capitalize">{{number_format($item->price) }}</td>
+                        <td class="text-center capitalize">{{number_format($item->total_price) }}</td>
                         <td class="w-40">
-                            <div class="flex items-center justify-center">{{$item->work_schedule_detail->time->time }}
+                            <div class="flex items-center justify-center">{{$item->time }}
                                 <br> {{$item->day}}</div>
                         </td>
                         <td class="text-center">{{$item->created_at}}</td>
@@ -98,10 +98,12 @@
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
+                                @if($item->status !== "success")
                                 <a class="flex items-center text-warning mr-3"
                                    href="{{route('admin.scheduleManagement.edit', $item->id)}}"> <i
                                         data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                <a data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"
+                                @endif
+                                <a href="{{route('admin.scheduleManagement.scheduleDetails', $item->id)}}"
                                    class="flex items-center text-success cursor-pointer">
                                     <svg viewBox="0 0 24 24" class="w-6 h-6 mr-1" fill="#ffffff"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +116,7 @@
                                                   fill="#1C274C"></path>
                                         </g>
                                     </svg>
-                                    View invoice details </a>
+                                    View schedule details </a>
                             </div>
                         </td>
                     </tr>
@@ -127,25 +129,7 @@
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
             <nav class="w-full sm:w-auto sm:mr-auto">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-left"></i> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-left"></i> </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-right"></i> </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-right"></i> </a>
-                    </li>
-                </ul>
+                {{ $data->links('pagination::bootstrap-4') }}
             </nav>
             <select class="w-20 form-select box mt-3 sm:mt-0">
                 <option>10</option>

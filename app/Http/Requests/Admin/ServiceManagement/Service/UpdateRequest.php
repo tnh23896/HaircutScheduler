@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'description' => 'required|string|max:255',
             'percentage_discount' => 'nullable|numeric|min:0',
-             'category_services_id' => 'required',
+            'category_services_id' => 'required',
             'image' =>'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }

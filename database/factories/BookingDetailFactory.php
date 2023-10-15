@@ -19,8 +19,10 @@ class BookingDetailFactory extends Factory
         return [
             'service_id' => $this->faker->numberBetween(1, 5),
             'name' => $this->faker->name(),
-            'total_price' => $this->faker->numberBetween(100, 200),
+            'price' => $this->faker->numberBetween(100, 200),
             'booking_id' => $this->faker->numberBetween(1, 5),
+            'status' => $this->faker->randomElement(['cancel', 'success']),
+            'admin_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

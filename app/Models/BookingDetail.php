@@ -13,8 +13,10 @@ class BookingDetail extends Model
     protected $fillable = [
         'service_id',
         'name',
-        'total_price',
+        'price',
         'booking_id',
+        'status',
+        'admin_id',
     ];
     public function booking()
     {
@@ -24,5 +26,8 @@ class BookingDetail extends Model
     {
         return $this->belongsTo(Service::class);
     }
-    
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 }

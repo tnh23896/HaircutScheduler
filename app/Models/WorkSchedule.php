@@ -8,15 +8,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class WorkSchedule extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+
     protected $table = 'work_schedules';
     protected $fillable = [
-        'admin_id', 'day',
+        'admin_id',
+        'day',
     ];
+
     public function admin()
     {
         return $this->belongsTo(Admin::class);
     }
+
     public function work_schedule_details()
     {
         return $this->hasMany(WorkScheduleDetail::class);

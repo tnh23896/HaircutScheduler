@@ -17,4 +17,8 @@ class Promotion extends Model
     {
         return $this->hasMany(Booking::class);
     }
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
 }

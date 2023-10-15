@@ -61,7 +61,6 @@
                                         href="{{ route('admin.serviceManagement.service.edit', $service->id) }}">
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
                                         Edit </a>
-
                                     <form class="delete-form"
                                         action="{{ route('admin.serviceManagement.service.delete', $service->id) }}"
                                         method="POST">

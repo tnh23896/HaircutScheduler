@@ -44,8 +44,6 @@ class ServiceController extends Controller
     public function store(StoreRequest $request)
     {
         try {
-//            dd($request->all());
-
             $newService = $this->Servicemodel::create($request->validated());
 
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
