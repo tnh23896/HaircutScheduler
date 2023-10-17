@@ -1,0 +1,47 @@
+.nav-icon, strong{
+	color: #d9842f;
+}
+.about-us span,
+.featured-sub span{
+	color: #d9842f;
+}
+.barber-list-1 h4{
+	color: #d9842f;
+}
+.barber-description h2 span{
+	color: #d9842f;
+}
+.barber-description span{
+	color: #d9842f;
+}
+.register-now, .theme-btn-2{
+	background-color: #d9842f !important;
+}
+.bg-light-color{
+	background-color: #ededed;
+}
+.theme-black-color{
+	color: #332b23 !important;
+}
+.text-color,
+.user-content h3:hover,
+.wiget-hover a:hover,
+.barber-hipster h1 a:hover,
+.service-prices a:hover,
+.review-box:hover a,
+.order-info h4:hover a,
+.profile-info > a,
+.review-info-inner i{
+	color: #d9842f !important;
+}
+.bg-dark-color,
+.barber-fix:before,
+.barber-fig:hover .ryan-description,
+.theme-btn-2,
+.img-hover-2:before
+{
+	background-color: #d9842f !important;
+}
+.main-img{
+	border-color: #d9842f !important;
+}
