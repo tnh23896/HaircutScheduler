@@ -129,8 +129,8 @@
                                 alt="table-image">
                         </figure>
                         <div class="table-img-con text-center">
-                            <a class="bg-dark-color" href="{{ asset('client/assets/demo.html') }}" data-fancybox="gallery"><i
-                                    class="fas fa-play"></i></a>
+                            <a class="bg-dark-color" href="{{ asset('client/assets/demo.html') }}"
+                                data-fancybox="gallery"><i class="fas fa-play"></i></a>
                             <h2>Complimentry Cold Beverage & Hot Towels</h2>
                         </div>
                     </div>
@@ -288,7 +288,8 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="barber-fig" data-aos="fade-up" data-aos-delay="550">
                         <figure class="position-relative img-hover overflow-hidden mb-0 tilt">
-                            <img class="image-1 w-100 img-fluid" src="{{ asset('client/assets/images/img-38.webp') }}" alt="barber-image">
+                            <img class="image-1 w-100 img-fluid" src="{{ asset('client/assets/images/img-38.webp') }}"
+                                alt="barber-image">
                             <div class="ryan-description">
                                 <h3><a href="javascript:void(0)">RAYAN WILLIAMS</a></h3>
                                 <p>Barber-off Mon, Tues, Thurs</p>
@@ -305,7 +306,8 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="barber-fig" data-aos="fade-up" data-aos-delay="700">
                         <figure class="position-relative img-hover overflow-hidden mb-0 tilt">
-                            <img class="image-1 w-100 img-fluid" src="{{ asset('client/assets/images/img-39.webp') }}" alt="barber-image">
+                            <img class="image-1 w-100 img-fluid" src="{{ asset('client/assets/images/img-39.webp') }}"
+                                alt="barber-image">
                             <div class="ryan-description">
                                 <h3><a href="javascript:void(0)">JOHN SMITH</a></h3>
                                 <p>Owner - Barber - Off Tues & Weds</p>
@@ -353,14 +355,15 @@
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="barber-fix position-relative">
                         <figure>
-                            <img class="img-fluid" src="{{ asset('client/assets/images/image-extra.webp') }}" alt="barber-image">
+                            <img class="img-fluid" src="{{ asset('client/assets/images/image-extra.webp') }}"
+                                alt="barber-image">
                         </figure>
                         <div class="barber-chronicle">
                             <h3>Barber shop Chronicles </h3>
                             <span>BARBER SHOP, CHRONICLES</span>
                         </div>
-                        <a class="gallery-icon" href="{{ asset('client/assets/images/image-extra.webp') }}" data-fancybox="images"><i
-                                class="fas fa-search"></i></a>
+                        <a class="gallery-icon" href="{{ asset('client/assets/images/image-extra.webp') }}"
+                            data-fancybox="images"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -368,33 +371,36 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="barber-fix position-relative">
                                 <figure class="mb-0">
-                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-41.webp') }}" alt="barber-image">
+                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-41.webp') }}"
+                                        alt="barber-image">
                                 </figure>
                                 <div class="barber-chronicle">
                                     <h3>Barber shop Chronicles </h3>
                                     <span>BARBER SHOP, CHRONICLES</span>
                                 </div>
-                                <a class="gallery-icon" href="{{ asset('client/assets/images/img-41.webp') }}" data-fancybox="images"><i
-                                        class="fas fa-search"></i></a>
+                                <a class="gallery-icon" href="{{ asset('client/assets/images/img-41.webp') }}"
+                                    data-fancybox="images"><i class="fas fa-search"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="barber-fix position-relative">
                                 <figure>
-                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-42.webp') }}" alt="barber-image">
+                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-42.webp') }}"
+                                        alt="barber-image">
                                 </figure>
                                 <div class="barber-chronicle">
                                     <h3>Barber shop Chronicles </h3>
                                     <span>BARBER SHOP, CHRONICLES</span>
                                 </div>
-                                <a class="gallery-icon" href="{{ asset('client/assets/images/img-42.webp') }}" data-fancybox="images"><i
-                                        class="fas fa-search"></i></a>
+                                <a class="gallery-icon" href="{{ asset('client/assets/images/img-42.webp') }}"
+                                    data-fancybox="images"><i class="fas fa-search"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <div class="barber-fix position-relative">
                                 <figure class="mb-0">
-                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-43.webp') }}" alt="barber-image">
+                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-43.webp') }}"
+                                        alt="barber-image">
                                 </figure>
                                 <div class="barber-chronicle">
                                     <h3>Barber shop Chronicles </h3>
@@ -409,14 +415,15 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="barber-fix position-relative">
                                 <figure>
-                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-44.webp') }}" alt="barber-image">
+                                    <img class="img-fluid" src="{{ asset('client/assets/images/img-44.webp') }}"
+                                        alt="barber-image">
                                 </figure>
                                 <div class="barber-chronicle">
                                     <h3>Barber shop Chronicles </h3>
                                     <span>BARBER SHOP, CHRONICLES</span>
                                 </div>
-                                <a class="gallery-icon" href="{{ asset('client/assets/images/img-44.webp') }}" data-fancybox="images"><i
-                                        class="fas fa-search"></i></a>
+                                <a class="gallery-icon" href="{{ asset('client/assets/images/img-44.webp') }}"
+                                    data-fancybox="images"><i class="fas fa-search"></i></a>
                             </div>
                         </div>
                     </div>
@@ -425,14 +432,15 @@
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="barber-fix position-relative">
                         <figure>
-                            <img class="img-fluid" src="{{ asset('client/assets/images/img-40.webp') }}" alt="barber-image">
+                            <img class="img-fluid" src="{{ asset('client/assets/images/img-40.webp') }}"
+                                alt="barber-image">
                         </figure>
                         <div class="barber-chronicle">
                             <h3>Barber shop Chronicles </h3>
                             <span>BARBER SHOP, CHRONICLES</span>
                         </div>
-                        <a class="gallery-icon" href="{{ asset('client/assets/images/img-40.webp') }}" data-fancybox="images"><i
-                                class="fas fa-search"></i></a>
+                        <a class="gallery-icon" href="{{ asset('client/assets/images/img-40.webp') }}"
+                            data-fancybox="images"><i class="fas fa-search"></i></a>
                     </div>
                 </div>
             </div>
@@ -681,7 +689,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-7 col-md-6">
                                 <figure>
-                                    <img src="{{ asset('client/assets/images/img-29.webp')}}" alt="client-image">
+                                    <img src="{{ asset('client/assets/images/img-29.webp') }}" alt="client-image">
                                 </figure>
                                 <div class="barber-quote">
                                     <i class="fas fa-quote-left"></i>
@@ -701,7 +709,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-7 col-md-6">
                                 <figure>
-                                    <img src="{{ asset('client/assets/images/img-30.webp')}}" alt="client-image">
+                                    <img src="{{ asset('client/assets/images/img-30.webp') }}" alt="client-image">
                                 </figure>
                                 <div class="barber-quote">
                                     <i class="fas fa-quote-left"></i>
@@ -721,7 +729,8 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-7 col-md-6">
                                 <figure>
-                                    <img src="{{ asset('client/assets/images/testimonial-image.webp')}}" alt="client-image">
+                                    <img src="{{ asset('client/assets/images/testimonial-image.webp') }}"
+                                        alt="client-image">
                                 </figure>
                                 <div class="barber-quote">
                                     <i class="fas fa-quote-left"></i>

@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\BlogController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +21,5 @@ use App\Http\Controllers\Admin\DashboardController;
 // 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 // });
 Route::get('/', function () {
-	return view('client.home.index');
+	return view('client.index');
 });
