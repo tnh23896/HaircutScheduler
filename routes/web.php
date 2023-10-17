@@ -18,6 +18,5 @@ use App\Http\Controllers\Admin\DashboardController;
 // 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 // });
 Route::get('/', function () {
-	toastr()->error('An error has occurred please try again later.');
 	return view('client.home.index');
 });
