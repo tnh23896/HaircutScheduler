@@ -30,4 +30,8 @@ class Service extends Model
     {
         return $this->belongsTo(CategoryService::class);
     }
+    public function bill_details()
+    {
+        return $this->hasMany(BillDetail::class);
+    }
 }

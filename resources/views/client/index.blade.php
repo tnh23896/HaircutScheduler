@@ -1,5 +1,5 @@
 @extends('client.templates.app')
-@section('title', 'Bảng điều khiển')
+@section('title', 'Trang chủ')
 @section('content')
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
@@ -43,7 +43,7 @@
             </div>
         </section>
 
-        <section id="section-trending" class="pt80">
+        <section  class="pt80">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 text-center">
@@ -56,85 +56,20 @@
                     <div class="col-lg-12" data-jarallax-element="-20">
                         <div class="d-carousel wow fadeInRight">
                             <div id="item-carousel-big" class="owl-carousel no-hide owl-center" data-wow-delay="1s">
-                                <div class="c-item">
-                                    <a href="#">
-                                        <span class="c-item_info">
-                                            <span class="c-item_title">Slick Back</span>
-                                            <span class="c-item_wm">#1</span>
-                                        </span>
+                                @foreach ($trendingStyle as $key => $style)
+                                    <div class="c-item">
+                                        <a href="#">
+                                            <span class="c-item_info">
+                                                <span class="c-item_title">{{$style->name}}</span>
+                                                <span class="c-item_wm">#{{ $key + 1 }}</span>
+                                            </span>
 
-                                        <div class="c-item_wrap">
-                                            <img src="{{ asset('client/images/hairstyles/1.jpg')}}" class="lazy img-fluid" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="c-item">
-                                    <a href="#">
-                                        <span class="c-item_info">
-                                            <span class="c-item_title">Classic Quiff</span>
-                                            <span class="c-item_wm">#2</span>
-                                        </span>
-
-                                        <div class="c-item_wrap">
-                                            <img src="{{ asset('client/images/hairstyles/2.jpg')}}" class="lazy img-fluid" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="c-item">
-                                    <a href="#">
-                                        <span class="c-item_info">
-                                            <span class="c-item_title">Pompadour</span>
-                                            <span class="c-item_wm">#3</span>
-                                        </span>
-
-                                        <div class="c-item_wrap">
-                                            <img src="{{ asset('client/images/hairstyles/3.jpg')}}" class="lazy img-fluid" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="c-item">
-                                    <a href="#">
-                                        <span class="c-item_info">
-                                            <span class="c-item_title">Fringe</span>
-                                            <span class="c-item_wm">#4</span>
-                                        </span>
-
-                                        <div class="c-item_wrap">
-                                            <img src="{{ asset('client/images/hairstyles/4.jpg')}}" class="lazy img-fluid" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-
-                                <div class="c-item">
-                                    <a href="#">
-                                        <span class="c-item_info">
-                                            <span class="c-item_title">Curly Fade</span>
-                                            <span class="c-item_wm">#5</span>
-                                        </span>
-
-                                        <div class="c-item_wrap">
-                                            <img src="{{ asset('client/images/hairstyles/5.jpg')}}" class="lazy img-fluid" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="c-item">
-                                    <a href="#">
-                                        <span class="c-item_info">
-                                            <span class="c-item_title">Undercut</span>
-                                            <span class="c-item_wm">#6</span>
-                                        </span>
-
-                                        <div class="c-item_wrap">
-                                            <img src="{{ asset('client/images/hairstyles/6.jpg')}}" class="lazy img-fluid" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-
+                                            <div class="c-item_wrap">
+                                                <img src="{{ asset($style->image)}}" class="lazy img-fluid" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="d-arrow-left mod-a"><i class="fa fa-angle-left"></i></div>
                             <div class="d-arrow-right mod-a"><i class="fa fa-angle-right"></i></div>
@@ -149,20 +84,21 @@
             <div class="de-gradient-edge-top"></div>
             <img src="{{ asset('client/images/background/1.jpg')}}" class="jarallax-img" alt="">
             <div class="container relative z1000">
-                <div class="row align-items-center">
-                    <div class="col-lg-6" data-jarallax-element="-30">
-                        <img src="{{ asset('client/images/misc/man-2.png')}}" class="img-fluid wow fadeInRight" alt="">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <h2 class="wow fadeIn">BLOG</h2>
+                        <div class="de-separator"></div>
+                        <div class="spacer-single"></div>
                     </div>
-                    <div class="col-lg-6" data-jarallax-element="-60">
-                        <h2 class="wow fadeInRight" data-wow-delay=".3s">We’ll Crafting <span
-                                class="id-color">Confidence</span>
-                            Through Sharp Style</h2>
-                        <p class="wow fadeInRight" data-wow-delay=".4s">We take pride in providing top-notch grooming
-                            services
-                            that blend classic techniques with modern trends. Step into our warm and inviting space, where
-                            you'll
-                            find a team of skilled barbers dedicated to enhancing your style and confidence.</p>
-                        <a href="book.html" class="btn-main wow fadeInRight" data-wow-delay=".5s">Book Now</a>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-5" data-jarallax-element="-30">
+                       <a href=""><img src="{{ asset($latestBlog->image)}}" class="img-fluid wow fadeInRight" alt=""></a>
+                    </div>
+                    <div class="col-lg-7" data-jarallax-element="-60">
+                       <a href=""><h2 class="wow fadeInRight id-color" data-wow-delay=".3s" style="font-size:2rem">{{$latestBlog->title}}</h2></a>
+                        <p class="wow fadeInRight" data-wow-delay=".4s">{{$latestBlog->description}}</p>
+                        <a href="{{route('client.blog')}}" class="btn-main wow fadeInRight" data-wow-delay=".5s">See More</a>
                     </div>
                 </div>
             </div>
@@ -176,57 +112,23 @@
                         <h2 class="wow fadeIn">Our Services</h2>
                         <div class="de-separator"></div>
                     </div>
-                    <div class="col-lg-3 text-center" data-jarallax-element="-20">
-                        <div class="de-box-a">
-                            <div class="d-image">
-                                <img src="{{ asset('client/images/services/1.jpg')}}" alt="">
+                    @foreach ($categoryService as $category)
+                        <div class="col-lg-3 text-center" data-jarallax-element="-20">
+                            <div class="de-box-a">
+                                <div class="d-image">
+                                    <img src="{{ asset($category->image)}}" alt="">
+                                </div>
+                                <div class="d-deco-1"></div>
+                                <div class="d-deco-2"></div>
                             </div>
-                            <div class="d-deco-1"></div>
-                            <div class="d-deco-2"></div>
+                            <div class="spacer-20"></div>
+                            <h4>{{$category->name}}</h4>
                         </div>
-                        <div class="spacer-20"></div>
-                        <h4>Haircuts</h4>
-                    </div>
-
-                    <div class="col-lg-3 text-center" data-jarallax-element="-60">
-                        <div class="de-box-a">
-                            <div class="d-image">
-                                <img src="{{ asset('client/images/services/2.jpg')}}" alt="">
-                            </div>
-                            <div class="d-deco-1"></div>
-                            <div class="d-deco-2"></div>
-                        </div>
-                        <div class="spacer-20"></div>
-                        <h4>Beard</h4>
-                    </div>
-
-                    <div class="col-lg-3 text-center" data-jarallax-element="-40">
-                        <div class="de-box-a">
-                            <div class="d-image">
-                                <img src="{{ asset('client/images/services/3.jpg')}}" alt="">
-                            </div>
-                            <div class="d-deco-1"></div>
-                            <div class="d-deco-2"></div>
-                        </div>
-                        <div class="spacer-20"></div>
-                        <h4>Shaving</h4>
-                    </div>
-
-                    <div class="col-lg-3 text-center" data-jarallax-element="-10">
-                        <div class="de-box-a">
-                            <div class="d-image">
-                                <img src="{{ asset('client/images/services/4.jpg')}}" alt="">
-                            </div>
-                            <div class="d-deco-1"></div>
-                            <div class="d-deco-2"></div>
-                        </div>
-                        <div class="spacer-20"></div>
-                        <h4>Razor Blade</h4>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="spacer-single"></div>
                 <div class="text-center">
-                    <a href="services.html" class="btn-main">All Services &amp; Prices</a>
+                    <a href="{{route('client.service')}}" class="btn-main">All Services &amp; Prices</a>
                 </div>
             </div>
         </section>

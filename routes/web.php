@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\BlogController;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,6 @@ use App\Http\Controllers\Admin\DashboardController;
 // Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
 // 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 // });
-Route::get('/', function () {
-	toastr()->error('An error has occurred please try again later.');
-	return view('client.home.index');
-});
+Route::get('/',[HomeController::class,'index'])->name('client.index');
+Route::get('/blog',[BlogController::class,'list_blog'])->name('client.blog');
+Route::get('/service',[ServiceController::class,'list_service'])->name('client.service');
