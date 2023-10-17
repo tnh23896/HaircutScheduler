@@ -20,6 +20,6 @@ use App\Http\Controllers\Client\ServiceController;
 // Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
 // 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 // });
-Route::get('/',[HomeController::class,'index'])->name('client.index');
-Route::get('/blog',[BlogController::class,'list_blog'])->name('client.blog');
-Route::get('/service',[ServiceController::class,'list_service'])->name('client.service');
+Route::get('/', function () {
+	return view('client.index');
+});
