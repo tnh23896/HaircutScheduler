@@ -6,110 +6,112 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="/" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
+            <a href="{{ route('admin.dashboard') }}"
+                class="side-menu {{ request()->routeIs('admin.dashboard') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                 <div class="side-menu__title"> Dashboard </div>
             </a>
         </li>
-         <li>
-           <a href="{{ route('admin.employee.index') }}" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
-                <div class="side-menu__title"> Employee </div>
-            </a>
-        </li>
         <li>
-            <a href="javascript:;" class="side-menu">
+            <a href="javascript:;"
+                class="side-menu {{ request()->routeIs('admin.serviceManagement.*') ? 'side-menu--active' : '' }}">
                 <div class="side-menu__icon"><i data-lucide="align-justify" class="block mx-auto"></i> </div>
                 <div class="side-menu__title">
-                    Category and Service
+                    Quản lý dịch vụ
                     <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                 </div>
             </a>
             <ul class="">
                 <li>
-                    <a href="{{ route('admin.serviceManagement.category.index') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title">Category</div>
+                    <a href="{{ route('admin.serviceManagement.category.index') }}"
+                        class="side-menu {{ request()->routeIs('admin.serviceManagement.category*') ? 'side-menu--active' : '' }}">
+                        <div class="side-menu__icon"> <i data-lucide="list-ordered"></i> </div>
+                        <div class="side-menu__title">Danh mục</div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.serviceManagement.service.index') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title">Service</div>
+                    <a href="{{ route('admin.serviceManagement.service.index') }}"
+                        class="side-menu {{ request()->routeIs('admin.serviceManagement.service*') ? 'side-menu--active' : '' }}">
+                        <div class="side-menu__icon"> <i data-lucide="scissors"></i> </div>
+                        <div class="side-menu__title">Dịch vụ</div>
                     </a>
                 </li>
             </ul>
         </li>
         <li>
-            <a href="javascript:;" class="side-menu">
+            <a href="{{ route('admin.employee.index') }}"
+                class="side-menu {{ request()->routeIs('admin.employee*') ? 'side-menu--active' : '' }} {{ request()->routeIs('admin.work-schedule.*') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="contact"></i> </div>
+                <div class="side-menu__title">Quản lý nhân viên </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.scheduleManagement.index') }}"
+                class="side-menu {{ request()->routeIs('admin.scheduleManagement*') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
+                <div class="side-menu__title"> Quản lý Lịch đặt </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.billManagement.index') }}"
+                class="side-menu {{ request()->routeIs('admin.billManagement*') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="check-square"></i> </div>
+                <div class="side-menu__title"> Quản lý hoá đơn </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.banners.index') }}"
+                class="side-menu {{ request()->routeIs('admin.banners*') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="square"></i> </div>
+                <div class="side-menu__title"> Quản lý Banners </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.UserManagement.index') }}"
+                class="side-menu {{ request()->routeIs('admin.UserManagement*') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
+                <div class="side-menu__title"> Quản lý người dùng </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.TimeManagement.index') }}"
+                class="side-menu {{ request()->routeIs('admin.TimeManagement*') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="alarm-clock"></i> </div>
+                <div class="side-menu__title"> Quản lý thời gian làm việc </div>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.ScheduleEmployee.index') }}"
+                class="side-menu {{ request()->routeIs('admin.ScheduleEmployee*') ? 'side-menu--active' : '' }}">
+                <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
+                <div class="side-menu__title"> Xem lịch làm việc </div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;"
+                class="side-menu {{ request()->routeIs('admin.blogManagement.*') ? 'side-menu--active' : '' }}">
                 <div class="side-menu__icon"><i data-lucide="align-justify" class="block mx-auto"></i> </div>
                 <div class="side-menu__title">
-                    CategoryBlog and Blog
+                    Quản lý Blog
                     <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                 </div>
             </a>
             <ul class="">
                 <li>
-                    <a href="{{ route('admin.blogManagement.category.index') }}" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                        <div class="side-menu__title">Category</div>
+                    <a href="{{ route('admin.blogManagement.category.index') }}"
+                        class="side-menu {{ request()->routeIs('admin.blogManagement.category*') ? 'side-menu--active' : '' }}">
+                        <div class="side-menu__icon"> <i data-lucide="list-ordered"></i> </div>
+                        <div class="side-menu__title">Danh mục</div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.blogManagement.blog.index') }}" class="side-menu">
+                    <a href="{{ route('admin.blogManagement.blog.index') }}"
+                        class="side-menu {{ request()->routeIs('admin.blogManagement.blog*') ? 'side-menu--active' : '' }}">
                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                         <div class="side-menu__title">Blog</div>
                     </a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="{{ route('admin.scheduleManagement.index') }}" class="side-menu side-menu--active">
-                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
-                <div class="side-menu__title"> Schedule Management </div>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.billManagement.index') }}" class="side-menu side-menu--active">
-                <div class="side-menu__icon"> <i data-lucide="credit-card"></i> </div>
-                <div class="side-menu__title"> Bill Management </div>
-            </a>
-        </li>
-        <li>
-            <a href="side-menu-dark-chat.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="message-square"></i> </div>
-                <div class="side-menu__title"> Rating </div>
-            </a>
-        </li>
-        <li>
-            <a href="" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
-                <div class="side-menu__title"> Genre </div>
-            </a>
-        </li>
-        <li>
-            <a href="side-menu-dark-calendar.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                <div class="side-menu__title"> Invoice </div>
-            </a>
-        </li>
-        <li>
-            <a href="side-menu-dark-calendar.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                <div class="side-menu__title"> User </div>
-            </a>
-        </li>
-        <li>
-            <a href="side-menu-dark-calendar.html" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                <div class="side-menu__title"> Promotion </div>
-            </a>
-        </li>
-        <li>
-            <a href="" class="side-menu">
-                <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
-                <div class="side-menu__title"> Category </div>
-            </a>
         </li>
     </ul>
 </nav>
@@ -121,7 +123,6 @@
         <!-- BEGIN: Breadcrumb -->
         <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Application</a></li>
                 <li class="breadcrumb-item active" aria-current="page">@yield('title')</li>
             </ol>
         </nav>
@@ -239,8 +240,8 @@
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
                     <li>
-                        <a href="{{route('admin.auth.logout')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right"
-                                class="w-4 h-4 mr-2"></i> Logout </a>
+                        <a href="{{ route('admin.auth.logout') }}" class="dropdown-item hover:bg-white/5"> <i
+                                data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
                     </li>
                 </ul>
             </div>
