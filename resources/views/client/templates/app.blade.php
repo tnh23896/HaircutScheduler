@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from html.webinane.com/hair-cutter/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 17 Oct 2023 03:45:55 GMT -->
-
 <head>
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     @include('client.templates.link_header')
+    @yield('css_header_custom')
 </head>
 
 <body>
@@ -17,8 +16,7 @@
 		@include('client.templates.footer')
     </div>
   @include('client.templates.link_footer')
+  @yield('js_footer_custom')
 </body>
-
-<!-- Mirrored from html.webinane.com/hair-cutter/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 17 Oct 2023 03:46:51 GMT -->
 
 </html>
