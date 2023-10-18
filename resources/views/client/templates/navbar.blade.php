@@ -1,4 +1,3 @@
-
 <div class="preloader">
     <div class="loadbar"></div>
     <div class="psoload">
@@ -11,7 +10,7 @@
 <header class="w-100 nav-header page-2-nav" id="nav_nav">
     <nav class="navbar navbar-expand-lg">
         <a class="navbar-brand" href="javascript:void(0)">
-            <img src="{{ asset('client/assets/images/blacklogo.png') }}" style="width: 115px"  alt="nav-image">
+            <img src="{{ asset('client/assets/images/blacklogo.png') }}" style="width: 115px" alt="nav-image">
         </a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
@@ -49,13 +48,7 @@
                         <li><a href="gallery1.html"> Gallery Style 1</a></li>
                     </ul>
                 </li>
-                <li class="nav-item position-relative">
-                    <a class="nav-link " href="javascript:void(0)">Blog</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="ourblog.html"> Blog Listing Page</a></li>
-                        <li><a href="blog-detail.html"> Blog Detail Page</a></li>
-                    </ul>
-                </li>
+                <li class="nav-item position-relative"><a class="nav-link " href="{{ route('blog') }}">Blog</a></li>
                 <li class="nav-item position-relative"><a class="nav-link " href="contact.html">Contact</a></li>
                 <li class="nav-item position-relative"><a class="nav-link " href="aboutus.html">About</a></li>
             </ul>
