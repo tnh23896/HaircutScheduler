@@ -17,7 +17,6 @@ use App\Http\Controllers\Admin\BlogManagement\BlogController as BlogController;
 use App\Http\Controllers\Admin\BannerManagement\BannerController;
 use App\Http\Controllers\Admin\ScheduleEmployee\ScheduleEmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\ServiceController;
-use App\Models\Service;
 
 /*
 |--------------------------------------------------------------------------
