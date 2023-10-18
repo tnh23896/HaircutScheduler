@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Client\BillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Client\BlogController;
+use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ServiceController;
 
@@ -23,6 +25,14 @@ use App\Http\Controllers\Client\ServiceController;
 Route::get('/', function () {
 	return view('client.index');
 });
+
+//booking history
+Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
+Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
+Route::put('/booking-history/update/{id}', [BookingController::class, 'update'])->name('booking-history.update');
+
+//Bill Payment
+Route::get('bill-history/{id}', [BillController::class, 'index'])->name('bill');
 
 //Blog
 Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
