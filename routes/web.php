@@ -25,9 +25,18 @@ use App\Http\Controllers\Client\ServiceController;
 Route::get('/', function () {
 	return view('client.index');
 });
+
+//booking history
 Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
 Route::put('/booking-history/update/{id}', [BookingController::class, 'update'])->name('booking-history.update');
 
 //Bill Payment
 Route::get('bill-history/{id}', [BillController::class, 'index'])->name('bill');
+
+//Blog
+Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
+//Detail Blog
+Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
+//View Blog With Category
+Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
