@@ -22,4 +22,10 @@ class BlogController extends Controller
 
 		return view('client.blog_detail', compact('blog', 'listBlogs'));
 	}
+
+	public function list_blog_category($id)
+	{
+		$listBlogs = Blog::where('category_blog_id', $id)->latest()->paginate(5);
+		return view('client.blog', compact('listBlogs'));
+	}
 }

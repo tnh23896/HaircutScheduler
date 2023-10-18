@@ -48,7 +48,15 @@
                         <li><a href="gallery1.html"> Gallery Style 1</a></li>
                     </ul>
                 </li>
-                <li class="nav-item position-relative"><a class="nav-link " href="{{ route('blog') }}">Blog</a></li>
+                <li class="nav-item position-relative">
+                    <a class="nav-link" href="{{ route('blog') }}">Blog</a>
+                    <ul class="dropdown-menu">
+                        @foreach ($category_blog as $item)
+                            <li><a href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
                 <li class="nav-item position-relative"><a class="nav-link " href="contact.html">Contact</a></li>
                 <li class="nav-item position-relative"><a class="nav-link " href="aboutus.html">About</a></li>
             </ul>
