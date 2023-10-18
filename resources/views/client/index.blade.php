@@ -89,7 +89,7 @@
         </div>
     </section>
     <section class="gap overlay">
-        <video class="video-paralax" src="{{ asset('client/haircut.mp4') }}" autoplay loop playsinline muted></video>
+        <video class="video-paralax" src="" autoplay loop playsinline muted></video>
         <div class="barber-main">
             <div class="row no-gutters align-items-center">
                 <div class="col-lg-6 col-md-12 ">
@@ -171,7 +171,7 @@
     </section>
     <section>
         <div class="container">
-            <div class="table-img" style="background-image: url(assets/images/img-36.webp);">
+            <div class="table-img" style="background-image: url({{ asset('client/assets/images/img-36.webp') }});">
                 <div class="row">
                     <div class="col-lg-4 col-md-12">
                         <div class="d-flex bg-white table-img-descrip">
@@ -656,7 +656,7 @@
         </div>
     </section>
     <section>
-        <div class="bg-image-2 position-relative gap" style="background-image: url(assets/images/img-48.webp);">
+        <div class="bg-image-2 position-relative gap" style="background-image: url({{asset('client/assets/images/img-48.webp')}});">
             <div class="container">
                 <div class="heading-style-2 text-center">
                     <h2>ClIENT'S REWIE'S</h2>
