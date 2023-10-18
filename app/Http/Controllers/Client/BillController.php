@@ -14,7 +14,7 @@ class BillController extends Controller
     public function index()
     {
         // $id = auth()->user()->id;
-        $id = 1;
+        $id = 5;
         $list_bill = Bill::where('user_id', $id)->get();
         return view('client.bill_history.index', compact('list_bill'));
     }

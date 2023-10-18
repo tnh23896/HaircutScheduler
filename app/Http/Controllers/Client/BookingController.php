@@ -15,7 +15,7 @@ class BookingController extends Controller
     public function booking_history()
     {
 //        $id = auth()->user()->id;
-        $id = 1;
+        $id = 5;
         $list_booking = Booking::query()->where('user_id', $id)->get();
 //        dd($list_booking);
         return view('client.booking_history.index', compact('list_booking'));

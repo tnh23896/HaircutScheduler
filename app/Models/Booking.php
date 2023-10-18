@@ -23,7 +23,7 @@ class Booking extends Model
     }
     public function promotion()
     {
-        return $this->belongsTo(Promotion::class);
+        return $this->belongsTo(Promotion::class, 'promo_id', 'id');
     }
     public function booking_details()
     {
