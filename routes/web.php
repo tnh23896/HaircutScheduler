@@ -23,3 +23,10 @@ use App\Http\Controllers\Client\ServiceController;
 Route::get('/', function () {
 	return view('client.index');
 });
+
+//Blog
+Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
+//Detail Blog
+Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
+//View Blog With Category
+Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
