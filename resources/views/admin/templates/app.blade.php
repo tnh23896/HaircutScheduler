@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
 <head>
+    
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
