@@ -28,9 +28,10 @@ class ScheduleDetailsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        //
+        $item = Booking::query()->findOrFail($id);
+        return view('admin.scheduleManagement.CreateService', compact('item'));
     }
 
     /**
@@ -47,7 +48,7 @@ class ScheduleDetailsController extends Controller
     public function edit(string $id)
     {
         $item = Booking::query()->findOrFail($id);
-        return view('admin.scheduleManagement.scheduleDetails', compact('item'));
+        return view('admin.ScheduleManagement.scheduleDetails', compact('item'));
     }
 
     /**

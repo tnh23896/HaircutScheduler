@@ -52,7 +52,7 @@ Route::get('404', function () {
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-	
+
 	// Logout
 	Route::get('logout', [LoginController::class, 'logout'])
 	->name('admin.auth.logout');
@@ -107,6 +107,13 @@ Route::group(['middleware' => 'admin'], function () {
 		->name('admin.scheduleManagement.scheduleDetails');
 	Route::put('schedule-details/{id}', [ScheduleDetailsController::class, 'update'])
 		->name('admin.scheduleManagement.scheduleDetails.update');
+
+    Route::get('schedule-details/create/{id}', [ScheduleDetailsController::class, 'create'])
+        ->name('admin.scheduleManagement.scheduleDetails.create');
+    Route::put('schedule-details/create/{id}', [ScheduleDetailsController::class, 'store'])
+        ->name('admin.scheduleManagement.scheduleDetails.store');
+
+
 
 	//Bill
 	Route::get('bill-management', [BillController::class, 'index'])

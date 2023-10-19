@@ -43,4 +43,7 @@
             @endif
         </div>
     </form>
+    <div class="mb-4">
+        <a href="{{route('admin.scheduleManagement.scheduleDetails.create', $item->id)}}" ><button class="btn btn-primary">Thêm dịch vụ</button></a>
+    </div>
 @endsection
