@@ -15,12 +15,15 @@
         <div class="modal-body">
             <table class="table table-bordered">
                 <tr>
-                    <th class="text-xl font-bold">Name Service</th>
-                    <th class="text-xl font-bold">Price</th>
-                    <th class="text-xl font-bold">Service Uses</th>
+                    <th class="text-xl font-bold">ID Dịch vụ</th>
+                    <th class="text-xl font-bold">Tên dịch vụ</th>
+                    <th class="text-xl font-bold">Giá dịch vụ</th>
+                    <th class="text-xl font-bold">Dịch vụ sử dụng</th>
+                    <th class="text-xl font-bold">Tên nhân viên chỉnh sửa</th>
                 </tr>
-                @foreach($item->booking_details as $detail)
+                @foreach($item->booking_details->sortByDesc('created_at') as $detail)
                     <tr>
+                        <td>{{$detail->service_id}}</td>
                         <td>{{$detail->name}}</td>
                         <td>{{$detail->price}}</td>
                         <td>
@@ -31,6 +34,7 @@
                             @endif
                             >
                         </td>
+                        <td>{{$detail->admin->username}}</td>
                     </tr>
                 @endforeach
             </table>
@@ -43,7 +47,12 @@
             @endif
         </div>
     </form>
+    @if($item->status !== "success")
     <div class="mb-4">
-        <a href="{{route('admin.scheduleManagement.scheduleDetails.create', $item->id)}}" ><button class="btn btn-primary">Thêm dịch vụ</button></a>
+        <a data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"><button class="btn btn-primary">Thêm dịch vụ</button></a>
     </div>
+
+
+    @include('admin.ScheduleManagement.createService')
+    @endif
 @endsection

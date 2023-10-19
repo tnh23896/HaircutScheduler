@@ -107,10 +107,7 @@ Route::group(['middleware' => 'admin'], function () {
 		->name('admin.scheduleManagement.scheduleDetails');
 	Route::put('schedule-details/{id}', [ScheduleDetailsController::class, 'update'])
 		->name('admin.scheduleManagement.scheduleDetails.update');
-
-    Route::get('schedule-details/create/{id}', [ScheduleDetailsController::class, 'create'])
-        ->name('admin.scheduleManagement.scheduleDetails.create');
-    Route::put('schedule-details/create/{id}', [ScheduleDetailsController::class, 'store'])
+    Route::post('/schedule-details/{id}', [ScheduleDetailsController::class, 'store'])
         ->name('admin.scheduleManagement.scheduleDetails.store');
 
 
