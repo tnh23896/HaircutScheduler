@@ -22,9 +22,10 @@ class ServiceController extends Controller
 
             $listServices[] = [
                 'category' => $category->name,
+                'image' =>$category->image,
                 'services' => $services,
             ];
         }
-        return view('client.service', compact('categoryService','listServices'));
+        return view('client.service.service', compact('categoryService','listServices'));
     }
 }
