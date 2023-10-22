@@ -16,7 +16,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        toastr()->error('An error has occurred please try again later.');
 
         $trendingStyle = Service::select('name', 'image')
             ->withCount('bill_details as service_count')

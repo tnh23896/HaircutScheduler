@@ -1,6 +1,7 @@
 @extends('client.templates.app')
 @section('title', 'Trang chủ')
 @section('content')
+@include('client.templates.banner')
     <section class="gap resp-padd lg-no-top">
         <div class="container">
             <div class="row align-items-center">
