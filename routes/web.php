@@ -22,6 +22,9 @@ use App\Http\Controllers\Client\ServiceController;
 // Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
 // 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 // });
+Route::get('/test', function () {
+	return view('client.test');
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
