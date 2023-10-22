@@ -1,78 +1,76 @@
-@extends('client.templates.app')
-@section('title', 'Danh sách lịch')
+@extends('client.templates.layout_dashboard')
+@section('title', 'Booking History')
 @section('content')
 
-    <!-- content begin -->
-    <div class="no-bottom no-top" id="content" xmlns="http://www.w3.org/1999/html">
-        <div id="top"></div>
-
-        <section id="subheader" class="jarallax">
-            <img src="{{asset('client/images/background/2.jpg')}}" class="jarallax-img" alt="">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3 text-center">
-                        <h1>View Your Orders</h1>
-                        <div class="de-separator"></div>
-                    </div>
-                </div>
+    <div id="my-bookings">
+        <div class="tabs-wrp brd-rd5">
+            <div class="book-on">
+                <h4 itemprop="headline">MY APPOINTMENT</h4>
+                <!--  <div class="select-wrap-inner">
+                     <select class="form-control">
+                           <option>Default select</option>
+                      </select>
+                      <select class="form-control">
+                           <option>Default select</option>
+                      </select>
+                 </div> -->
             </div>
-            <div class="de-gradient-edge-bottom"></div>
-        </section>
-        <section id="section-pricing" aria-label="section">
-            <div class="container">
-                <table class="table table-striped" style="border: #CF814D;">
-                    <thead class="text-center text-black font-monospace h4">
+            <div class="booking-table">
+                <table>
+                    <thead>
                     <tr>
-                        <th>Thợ Cắt Tóc</th>
-                        <th>Giảm Giá</th>
-                        <th>Tổng Tiền</th>
-                        <th>Lịch Đặt</th>
-                        <th>Trạng Thái</th>
-                        <th>Hành Động</th>
+                        <th>Thợ cắt tóc</th>
+                        <th>Giảm giá</th>
+                        <th>Tổng tiền</th>
+                        <th>Lịch đặt</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($list_booking as $booking)
-                    <tr class="text-black text-center flex justify-center">
-                        <td>{{$booking->admin->username}}</td>
-                        <td>{{$booking->promotion->discount}}</td>
-                        <td>{{number_format($booking->total_price)}} vnd</td>
-                        <td>{{$booking->time}} {{$booking->day}}</td>
-                        <td>
-                            @if( $booking->status == "pending")
-                                <span class="text-warning">Pending</span>
-                            @elseif($booking->status == "success")
-                                <span class="text-success">Success</span>
-                            @elseif($booking->status == "canceled")
-                                <span class="text-danger">Cancelled</span>
-                            @endif
-                        </td>
-                        <td class="flex">
+                        <tr>
+                            <td>{{$booking->admin->username}}</td>
+                            <td>{{number_format($booking->promotion->discount)}}</td>
+                            <td><span>{{number_format($booking->total_price)}}</span> <a class="detail-link brd-rd50"
+                                                                                         href="javascript:void(0)"
+                                                                                         title=""
+                                                                                         itemprop="url"><i
+                                        class="fa fa-chain"></i></a></td>
+                            <td><span>{{$booking->time}} {{$booking->day}}</span> <a class="detail-link brd-rd50"
+                                                                                     href="javascript:void(0)" title=""
+                                                                                     itemprop="url"><i
+                                        class="fa fa-chain"></i></a></td>
+
+                            <td>
+                                @if( $booking->status == "pending")
+                                    <span class="text-warning">Pending</span>
+                                @elseif($booking->status == "success")
+                                    <span class="text-success">Success</span>
+                                @elseif($booking->status == "canceled")
+                                    <span class="text-danger">Cancelled</span>
+                                @endif
+                            </td>
+                            <td class="flex">
                                 <a href="{{route('booking-history.edit', $booking->id)}}">
-                                    <button class="btn btn-success  text-center" style="width: 130px;  height: 40px; ">
-                                    Xem chi tiết
+                                    <button class="text-center" style="width: 130px;  height: 40px; background-color: #D9842F; color: white; border: none; ">
+                                        Xem chi tiết
                                     </button>
                                 </a>
-                            @if($booking->status == "pending")
-                            <a href="">
-                                <button class="btn btn-danger  text-center" style="width: 130px;  height: 40px; ">
-                                Hủy lịch
-                                </button>
-                            </a>
-                            @endif
-                        </td>
-{{--                        <td data-toggle="modal" style="cursor: pointer;" data-target=".bd-example-modal-lg">Xem hóa đơn</td>--}}
-                    </tr>
+                                @if($booking->status == "pending")
+                                    <a href="">
+                                        <button class="btn btn-danger  text-center"
+                                                style="width: 130px;  height: 40px; ">
+                                            Hủy lịch
+                                        </button>
+                                    </a>
+                                @endif
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-
-
-            <!-- Modal -->
-    </section>
-
+        </div>
     </div>
-    <!-- content close -->
-
 @endsection

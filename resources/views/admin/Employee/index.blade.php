@@ -22,9 +22,10 @@
                 <thead>
                     <tr>
                         <th class="whitespace-nowrap">ID</th>
-                        <th class="whitespace-nowrap">Avatar</th>
+                        <th class="whitespace-nowrap">Ảnh đại diện</th>
                         <th class="text-center whitespace-nowrap">Tên</th>
                         <th class="text-center whitespace-nowrap">Số điện thoại</th>
+                        <th class="text-center whitespace-nowrap">Vai trò</th>
                         <th class="text-center whitespace-nowrap">Thời gian tạo</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
@@ -52,6 +53,13 @@
                                 </div>
                             </td>
                             <td class="text-center capitalize">{{ $item->phone }}</td>
+                            <td>
+                                @if(!empty($item->getRoleNames()))
+                                    @foreach($item->getRoleNames() as $v)
+                                        <label class="badge badge-success">{{ $v }}</label>
+                                    @endforeach
+                                @endif
+                            </td>
                             <td class="text-center">{{ $item->created_at }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
