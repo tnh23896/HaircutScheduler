@@ -56,7 +56,7 @@ Route::get('404', function () {
     return view('admin.errors.404');
 })->name('admin.404');
 
-Route::group(['middleware' => 'admin', CheckPermissionAdmin::class], function () {
+Route::group(['middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // Logout
