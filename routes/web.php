@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Client\BillController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\AuthController;
+use App\Http\Controllers\Client\BillController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\BookingController;
-use App\Http\Controllers\Client\HomeController;
-use App\Http\Controllers\Client\ServiceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +22,12 @@ use App\Http\Controllers\Client\ServiceController;
 // 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 // });
 Route::get('/', function () {
+	// dd(auth()->guard('web')->check());
 	return view('client.index');
 });
-
+// Check number 
+Route::post('/login-with-otp', [AuthController::class, 'login'])->name('loginOtp');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 //booking history
 Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
