@@ -3,44 +3,16 @@
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
-        Schedule List
+        Danh sách hóa đơn
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-
-            <button class="btn btn-primary shadow-md mr-2 hidden">Add New Seller</button>
-            <div class="dropdown">
-                <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                    <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
-                </button>
-                <div class="dropdown-menu w-40">
-                    <ul class="dropdown-content">
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
-                                Export to Excel </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
-                                Export to PDF </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="hidden xl:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div>
+            <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <div class="w-56 relative text-slate-500">
                     <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
                     <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
                 </div>
-                <select class="w-56 xl:w-auto form-select box ml-2">
-                    <option>Status</option>
-                    <option>Active</option>
-                    <option>Inactive</option>
-                </select>
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -51,13 +23,13 @@
                     <th class="whitespace-nowrap">
                         <input class="form-check-input" type="checkbox">
                     </th>
-                    <th class="whitespace-nowrap">CUSTOMER NAME</th>
-                    <th class="text-center whitespace-nowrap">NAME STAFF</th>
-                    <th class="text-center whitespace-nowrap">PROMOTION</th>
-                    <th class="text-center whitespace-nowrap">TOTAL PRICE</th>
-                    <th class="text-center whitespace-nowrap">SCHEDULE TIME</th>
-                    <th class="text-center whitespace-nowrap">CREATE AT</th>
-                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                    <th class="whitespace-nowrap">Tên khách hàng</th>
+                    <th class="text-center whitespace-nowrap">Tên nhân viên</th>
+                    <th class="text-center whitespace-nowrap">Giảm giá</th>
+                    <th class="text-center whitespace-nowrap">Tổng tiền</th>
+                    <th class="text-center whitespace-nowrap">Lịch đặt</th>
+                    <th class="text-center whitespace-nowrap">Thời gian tạo đơn</th>
+                    <th class="text-center whitespace-nowrap">Hành động</th>
                 </tr>
                 </thead>
                 @foreach($data as $item)
@@ -104,7 +76,7 @@
                                                   fill="#1C274C"></path>
                                         </g>
                                     </svg>
-                                    View invoice details </a>
+                                    Xem chi tiết </a>
                             </div>
                         </td>
                     </tr>

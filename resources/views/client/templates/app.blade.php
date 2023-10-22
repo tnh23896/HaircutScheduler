@@ -13,7 +13,7 @@
     @include('client.templates.navbar')
 		@yield('content')
 		@include('client.templates.footer')
-    </div>
+
   @include('client.templates.link_footer')
   @yield('js_footer_custom')
 </body>
