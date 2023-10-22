@@ -3,6 +3,7 @@
 use App\Http\Controllers\Client\BillController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Client\HomeController;
@@ -41,3 +42,5 @@ Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
 //View Blog With Category
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
+//About-us
+Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');
