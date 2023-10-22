@@ -15,11 +15,8 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item position-relative">
-                    <a class="nav-link" href="javascript:void(0)">Home
+                    <a class="nav-link" href="{{url('/')}}">Home
                     </a>
-                    <ul class="dropdown-menu">
-                        <li class="new-menu position-relative"><a href="index.html">Home Style 1</a></li>
-                    </ul>
                 </li>
                 <li class="nav-item position-relative">
                     <a class="nav-link" href="javascript:void(0)">Services</a>
