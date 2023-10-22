@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Blog;
 use App\Models\CategoryService;
 use App\Models\Service;
@@ -20,12 +21,35 @@ class HomeController extends Controller
         $trendingStyle = Service::select('name', 'image')
             ->withCount('bill_details as service_count')
             ->orderByDesc('service_count')
-            ->take(5)
+            ->take(6)
             ->get();
-        $latestBlog = Blog::latest()->first();
+            
+        $latestBlogs = Blog::select('title','image','description','created_at')->latest()->take(2)->get();
 
-        $categoryService = CategoryService::latest()->paginate(4);
+        $categoryService= CategoryService::select('id', 'name','image')->get();
 
-        return view('client.index', compact('trendingStyle', 'latestBlog', 'categoryService'));
+        $listServices = [];
+
+        foreach ($categoryService as $category) {
+            $services = Service::select('name','price')
+                ->where('category_services_id', $category->id)
+                ->get();
+
+            $listServices[] = [
+                'category' => $category->name,
+                'image' => $category->image,
+                'services' => $services,
+            ];
+        }
+
+        $personnels = Admin::take(6)->get();
+
+        return view('client.index', compact(
+            'trendingStyle',
+            'latestBlogs',
+            'categoryService',
+            'personnels',
+            'listServices'
+        ));
     }
 }
