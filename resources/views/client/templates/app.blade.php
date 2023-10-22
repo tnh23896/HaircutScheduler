@@ -11,10 +11,10 @@
 
 <body>
     @include('client.templates.navbar')
-		@include('client.templates.banner')
+    @include('client.templates.banner')
 		@yield('content')
 		@include('client.templates.footer')
-    </div>
+
   @include('client.templates.link_footer')
   @yield('js_footer_custom')
 </body>

@@ -19,8 +19,8 @@
         </div>
     </section>
     <section>
-        <div class="block less-spacing gap  gray-bg top-padd30">
-            <div class="container">
+        <div class="block less-spacing gap  gray-bg top-padding30">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-lg-12">
                         <div class="sec-box">

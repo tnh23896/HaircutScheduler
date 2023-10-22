@@ -2,11 +2,11 @@
 	Master Style Sheet
 
 Project: 		Hair-cutter (Barber Html5 template)
-Last changes: 	
+Last changes:
 Assign to: 		Hasnain Hasan
 
 ----------------------------------------------
-/*** 
+/***
 ====INDEX=====
 01- General Styling
 02- header
@@ -14,7 +14,7 @@ Assign to: 		Hasnain Hasan
 04- Service Area
 05- Table Area
 06- slider
-07- gallery 
+07- gallery
 08- our blog
 09- Error
 10- pagination
@@ -38,19 +38,19 @@ Assign to: 		Hasnain Hasan
 28- HAMBURGER NAGIVATION ACTIVE
 29- mobile menu
 30- PAGE LOADED
-31- PRELOADER 
+31- PRELOADER
 32- sidebar
 33- dropdown 2
 34- loader
-35- Model padding 
-36- Product Loader 
+35- Model padding
+36- Product Loader
 37- servise style 1
 38- Dashboard Page
 39- Profile Sidebar
 40- Dashboard Tab
 41- My Bookings Tab
 42- My Reviews Tab
-43- My Orders Tab 
+43- My Orders Tab
 44- Shortlists Tab
 45- Statement Tab
 46- Account Settings Tab
@@ -137,7 +137,7 @@ p{
 }
 html{
   -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%; 
+  -ms-text-size-adjust: 100%;
   overflow-y: auto;
 }
 body{
@@ -146,11 +146,11 @@ body{
 a,
 a:hover,
 a:focus,
-input, 
-button, 
-textarea, 
-input:focus, 
-button:focus, 
+input,
+button,
+textarea,
+input:focus,
+button:focus,
 textarea:focus  {
     text-decoration: none;
     outline: none;
@@ -244,7 +244,7 @@ section{
 	background-repeat: repeat;
 }
 .theme-btn-2:hover,
-.theme-btn-2:focus {	
+.theme-btn-2:focus {
   transition: ease-in-out .5s;
 }
 
@@ -306,7 +306,7 @@ section{
 .inner-img-1{
 	width: calc(50vw + 15%);
     float: right;
-    
+
 }
 .inner-img-1 img{
 	min-height: 551px;
@@ -357,10 +357,10 @@ section{
 	color: #fff;
 	background-color: #000;
 	font-size: 1rem;
-	border-radius: 50%; 
+	border-radius: 50%;
 }
 .theme-btn-2:hover{
-	color: #fff;	
+	color: #fff;
 }
 .heading-style h2{
 	font-size: 3.75rem;
@@ -445,7 +445,7 @@ padding: 20px;
 }
 .header-nav span{
 	color: #fff;
-	
+
 }
 
 .header-text{
@@ -649,7 +649,7 @@ padding: 20px;
  .appointment-main-2{
 	width: 75%;
     margin: auto;
-} 
+}
 .appointment-box .testing-2 a{
 	opacity: 0;
 	visibility:	hidden;
@@ -874,7 +874,7 @@ padding: 20px;
     width: 3.125rem;
     border: 0.062rem solid white;
     opacity: 1;
-} 
+}
 .slick-next{
 	right: -40px;
 }
@@ -933,7 +933,7 @@ padding: 20px;
     top: 50%;
     width: 3.125rem;
     border: 0.062rem solid white;
-    
+
 }
 
 .slider-item img{
@@ -1021,7 +1021,7 @@ padding: 20px;
 }
 
 .blog h3{
-	color:#d9842f; 
+	color:#d9842f;
 	font-size: 1.25rem;
 	padding-top: 0.312rem;
     padding-left: 0.312rem;
@@ -1043,7 +1043,7 @@ padding: 20px;
 	list-style: none;
 	padding-left: 0;
 	font-size: 1rem;
-	line-height: 39px;	
+	line-height: 39px;
 	margin-top: 1rem;
 	width: 100%;
 }
@@ -1114,7 +1114,7 @@ padding: 20px;
 }
 .footer-mail input{
 	padding: 1.25rem;
-	border:0; 
+	border:0;
 	width: 100%;
 }
 .footer-mail input:focus {
@@ -1403,7 +1403,7 @@ a.nav-link {
     position: absolute;
     bottom: -50px;
     width: 100%;
-    transition: ease-in-out 0.3s; 
+    transition: ease-in-out 0.3s;
 }
 .ryan-description ul{
 	margin-bottom: 0;
@@ -1751,7 +1751,7 @@ input:focus{
     padding: 17px 34px;
 }
 .page-link{
-	padding: 0.812rem 2rem; 
+	padding: 0.812rem 2rem;
 	font-size: 1.25rem;
 	color: black;
 	border: none;
@@ -1941,7 +1941,7 @@ input:focus{
 	padding-right: 3.6rem;
 }
 .navbar{
-	z-index: 1;	
+	z-index: 1;
 }
 .nav-item{
 	margin-right: 0.937rem;
@@ -1958,10 +1958,10 @@ input:focus{
 }
 .navbar-nav li{
 	font-size: 1.062rem;
-} 
+}
 .page-2-nav .navbar-nav a{
 	color: #fff;
-} 
+}
 .page-2-nav .hamburger-navigation .nav-menu{
 	opacity: 0;
 	visibility: hidden;
@@ -2401,7 +2401,7 @@ input:focus{
 .price-title p{
 	font-size: 1.125rem;
 	margin-bottom: 3.437rem;
-   
+
 }
 .price-inner{
 	margin-bottom: 1rem;
@@ -2484,7 +2484,7 @@ input:focus{
 .team-table-2 li{
 	font-size: 1.125rem;
     border: 1px solid #bbbbbb;
-    padding: 15px 20px; 
+    padding: 15px 20px;
 }
 .team-table h2{
 	font-size: 2.5rem;
@@ -2680,7 +2680,7 @@ ul.products li.product .star-rating {
     justify-content: space-between;
     -webkit-box-align: start;
     align-items: flex-start;
-    margin: 0 13px 29px 8px;  
+    margin: 0 13px 29px 8px;
     box-sizing: border-box;
 }
 .product-type-simple span{
@@ -2737,7 +2737,7 @@ ul.products li.product .star-rating {
 	color: #fff;
 }
 .woocommerce .product-type-simple img{
-	padding-right: 0.625rem; 
+	padding-right: 0.625rem;
 }
 .featured-area{
 	padding-top: 1.8rem;
@@ -2811,7 +2811,7 @@ ul.products li.product .star-rating {
 	display: flex;
 	width: 50%;
 	background: #ededed;
-} 
+}
 .woocommerce .entry-summary{
 	width: 50%;
 }
@@ -3138,7 +3138,7 @@ ul.products li.product .star-rating {
 .woocommerce .woocommerce-button{
 	padding-top: 1.25rem;
 	padding-bottom: 3.5rem;
-	
+
 }
 .woocommerce .woocommerce-button span{
 	font-family: 'Roboto', cursive;
@@ -3434,7 +3434,7 @@ margin-bottom: 3rem;
     color: #fff;
 }
 .service-style{
-	padding:40px 0px; 
+	padding:40px 0px;
 	transition:all 0.3s linear;
 	z-index: 1;
 }
@@ -3486,7 +3486,7 @@ margin-bottom: 3rem;
 	color: #fff;
 	transition: 2s linear;
 	position: relative;
-} 
+}
 .build-own h2{
 	font-size: 3.75rem;
 	line-height: 3.75rem;
@@ -3737,7 +3737,7 @@ ul.inner-dropdown.list-unstyled:before {
 }
 .barber-description-main li{
 	width: 50%;
-	
+
 }
 .barber-description:nth-child(odd):before {
     content: "";
@@ -3929,8 +3929,8 @@ ul.inner-dropdown.list-unstyled:before {
   clear: both;
 }
 .column{
-  opacity: 0.8; 
-  cursor: pointer; 
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .column:hover {
@@ -3951,7 +3951,7 @@ ul.inner-dropdown.list-unstyled:before {
     opacity: 0.77;
     width: 100%;
     height: 100%;
-} 
+}
 .cover{
 }
 .line3 {
@@ -4174,7 +4174,7 @@ ul.inner-dropdown.list-unstyled:before {
     z-index: 11;
 }
 /*====mobile menu====*/
-    
+
 .mobile-menu__toggler {
 	font-size: 18px;
     color: #212121;
@@ -4362,7 +4362,7 @@ li.home-drop svg {
     padding: 0;
     position: absolute;
     transition: .3s ease-in-out;
-    top: 60px; 
+    top: 60px;
 }
 .home-drop .home-page a{
 	font-size: 20px !important;
@@ -4606,6 +4606,7 @@ li.home-drop svg {
   animation: arrow-spin 0.85s cubic-bezier(0.2, 0.8, 0.9, 0.1) infinite reverse;
   -webkit-animation: arrow-spin 0.85s cubic-bezier(0.2, 0.8, 0.9, 0.1) infinite reverse;
 }
+
 
 .psoload .inner:before,
 .psoload .inner:after {
