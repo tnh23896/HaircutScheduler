@@ -1,10 +1,32 @@
 @extends('client.templates.app')
 @section('title', 'About Us')
 @section('content')
+@include('client.templates.banner')
+<section class="gap resp-padd lg-no-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <div class="parallax-content">
+                        <span>Since 2023</span>
+                        <h3>Giới thiệu</h3>
+                        <h4><i>DT Barber xin chào!</i></h4>
+                        <p>DT Barber là nơi tạo ra sự thay đổi đột phá cho mái tóc của bạn. Với đội ngũ các chuyên gia tạo
+                            kiểu tóc hàng đầu và một loạt các dịch vụ chăm sóc tóc chất lượng, chúng tôi cam kết mang đến
+                            cho bạn một trải nghiệm cắt tóc độc đáo và phong cách. </p>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-12">
+                    <figure class="parallax-img">
+                        <img class="img-fluid w-100" src="{{ asset('client/assets/images/img-98.jpg') }}" alt="parallax-image">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
 <section class="barber-con gap">
     <div class="container">
         <div class="heading-style text-center">
-            <h2>ĐỘI NGŨ NHÂN VIÊN</h2>
+            <h2>THÀNH VIÊN CỦA DT BARBER</h2>
             <span class="d-block text-uppercase text-color">trẻ trung và sáng tạo</span>
             <div class="scissor-border position-relative">
                 <span><svg fill="#332b23" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -34,11 +56,9 @@
                             <h3><a href="javascript:void(0)">{{$employee->username}}</a></h3>
                             <p>Email: {{$employee->email}} </br>
                                 Phone: {{$employee->phone}}</p>
-                            <ul class="ryan-icon d-flex list-unstyled">
-                                <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="javascript:void(0)"><i class="fab fa-google-plus-g"></i></a></li>
-                            </ul>
+                                <ul class="ryan-icon d-flex list-unstyled">
+									<li><div></div></li>
+								</ul>
                         </figcaption>
                     </figure>
                 </div>
@@ -47,47 +67,46 @@
         </div>
     </div>
 </section>
-
 <section class="bg-gray-2 gap">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-12 col-sm-12">
                 <div class="barber-item-2 about-item position-relative" data-aos="fade-up" data-aos-offset="400">
                     <h3 class="mb-0">Thời gian làm việc</h3>
                     <div class="barber-list-2">
                         <div class="d-flex w-100 justify-content-between">
-                            <span>Thứ hai</span>
-                            <span>08.00-19.00</span>
+                            <h5>Thứ hai</h5>
+                            <h5 class="text-color">08.00-19.00</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
-                            <span>Thứ ba</span>
-                            <span>08.00-19.00</span>
+                            <h5>Thứ ba</h5>
+                            <h5 class="text-color">08.00-19.00</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
-                            <span>Thứ tư</span>
-                            <span>08.00-19.00</span>
+                            <h5>Thứ tư</h5>
+                            <h5 class="text-color">08.00-19.00</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
-                            <span>Thứ năm</span>
-                            <span>08.00-19.00</span>
+                            <h5>Thứ năm</h5>
+                            <h5 class="text-color">08.00-19.00</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
-                            <span>Thứ sáu</span>
-                            <span>08.00-19.00</span>
+                            <h5>Thứ sáu</h5>
+                            <h5 class="text-color">08.00-19.00</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
-                            <span>Thứ bảy</span>
-                            <span>08.00-19.00</span>
+                            <h5>Thứ bảy</h5>
+                            <h5 class="text-color">08.00-19.00</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
-                            <span>Chủ nhật</span>
-                            <span>08.00-19.00</span>
+                            <h5>Chủ nhật</h5>
+                            <h5 class="text-color">08.00-19.00</h5>
                         </div>
                         <hr>
                     </div>
