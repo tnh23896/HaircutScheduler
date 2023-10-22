@@ -19,9 +19,9 @@
                     <table class="table table-bordered">
                         <tr>
                             <th class="text-xl font-bold">ID</th>
-                            <th class="text-xl font-bold">Name Service</th>
-                            <th class="text-xl font-bold">Price</th>
-                            <th class="text-xl font-bold">Service Uses</th>
+                            <th class="text-xl font-bold">Tên dịch vụ</th>
+                            <th class="text-xl font-bold">Giá tiền</th>
+                            <th class="text-xl font-bold">Dịch vụ sử dụng</th>
                         </tr>
                         @if(!$servicesNotInBooking->empty())
                         @foreach($servicesNotInBooking as $service)
