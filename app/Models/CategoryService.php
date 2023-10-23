@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryService extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     protected $table = 'category_services';
 
     protected $fillable = [
@@ -16,8 +16,6 @@ class CategoryService extends Model
     ];
     public function services()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Service::class, 'category_services_id', 'id');
     }
-
-
 }
