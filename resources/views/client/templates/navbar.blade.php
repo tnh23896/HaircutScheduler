@@ -154,8 +154,16 @@
                 <!-- end container -->
 
             </nav>
-            <a class="theme-btn-2 nav-btn" href="javascript:void(0)" data-toggle="modal"
-                data-target="#exampleModalCenter">APPPOINTMENT</a>
+            @if (auth()->guard('web')->check())
+                <a class="theme-btn-2 nav-btn " href="{{ route('logout') }}">Đăng xuất</a>
+                
+            @else
+                <a class="theme-btn-2 nav-btn " href="javascript:void(0)" data-toggle="modal"
+                    data-target="#exampleModalCenter">Đăng nhập</a>
+            @endif
+
+
+
         </div>
     </nav>
 </header>

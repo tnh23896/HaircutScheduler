@@ -1,4 +1,4 @@
-<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 <script type="text/javascript" src="{{ asset('client/assets/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('client/assets/js/owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('client/assets/js/jquery.fancybox.min.js') }}"></script>
@@ -7,6 +7,9 @@
 <script type="text/javascript" src="{{ asset('client/assets/js/aos.js') }}"></script>
 <script type="text/javascript" src="{{ asset('client/assets/js/tilt.jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('client/assets/js/script.js') }}"></script>
+
+
+
 <script>
     AOS.init({
         duration: 800,
