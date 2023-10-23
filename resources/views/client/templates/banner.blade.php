@@ -3,12 +3,11 @@
     <div class="container tilt">
         <div class="row align-items-center">
             <div class="second-page heading-style-3  m-auto text-center">
-                <h2 class="text-uppercase" data-aos="fade-up" data-aos-delay="200">Haircut & Shaves</h2>
-                <p data-aos="fade-up" data-aos-delay="350" data-aos-offset="0">Enjoy & relax in a luxury barber
-                    shop
-                    environment Top Cut Hair Style with Fancy Tradition</p>
+                <h2 class="text-uppercase" data-aos="fade-up" data-aos-delay="200">DT BARBER</h2>
+                <p data-aos="fade-up" data-aos-delay="350" data-aos-offset="0">Chúng tôi không chỉ tạo kiểu tóc, chúng tôi tạo nên tự tin.
+                    Sứ mệnh của chúng tôi: Tạo nên vẻ đẹp không giới hạn.</p>
                 <a class="theme-btn-2" href="javascript:void(0)" data-aos="fade-up" data-aos-delay="350"
-                    data-aos-offset="50" data-aos-offset="0">BOOK NOW</a>
+                    data-aos-offset="50" data-aos-offset="0">Đặt lịch ngay</a>
             </div>
         </div>
     </div>

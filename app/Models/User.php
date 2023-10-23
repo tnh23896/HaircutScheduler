@@ -24,7 +24,6 @@ class User extends Authenticatable
         'phone',
         'avatar',
         'email',
-        'password',
         'black_status',
     ];
 
@@ -34,7 +33,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
@@ -45,7 +43,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
     public function bookings()
     {
