@@ -46,8 +46,7 @@ class ProfileController extends Controller
      */
     public function edit(string $id)
     {
-        // $id = auth()->user()->id;
-        $id = 1;
+        $id = auth()->user()->id;
         $data = User::where('id', $id)->first();
         return view('client.profile.index',compact('data'));
     }
