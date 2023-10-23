@@ -12,7 +12,7 @@
 
             </div>
 
-            <form action="{{route('admin.scheduleManagement.scheduleDetails.store', $item->id)}}" method="post"
+            <form action="{{route('booking-details.store', $item->id)}}" method="post"
                   enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
@@ -24,17 +24,17 @@
                             <th class="text-xl font-bold">Dịch vụ sử dụng</th>
                         </tr>
                         @if($servicesNotInBooking->count() > 0)
-                        @foreach($servicesNotInBooking as $service)
-                            <tr>
-                                <td>{{$service->id}}</td>
-                                <td>{{$service->name}}</td>
-                                <td>{{$service->price}}</td>
-                                <td>
-                                    <input type="checkbox"
-                                           name="active[]" value="{{$service->id}}">
-                                </td>
-                            </tr>
-                        @endforeach
+                            @foreach($servicesNotInBooking as $service)
+                                <tr>
+                                    <td>{{$service->id}}</td>
+                                    <td>{{$service->name}}</td>
+                                    <td>{{$service->price}}</td>
+                                    <td>
+                                        <input style="width: 20px; height: 20px" type="checkbox"
+                                               name="active[]" value="{{$service->id}}">
+                                    </td>
+                                </tr>
+                            @endforeach
                         @elseif($servicesNotInBooking->count() == 0)
                             <tr>
                                 <td colspan="4" class="text-center">Không có dịch vụ nào</td>
@@ -44,10 +44,10 @@
                     </table>
                 </div>
                 @if($servicesNotInBooking->count() > 0)
-                <div class="text-right mt-5">
+                    <div class="text-right mt-5">
                         <button type="submit" id="saveBtn" class="btn btn-success w-24 text-white">
                             Save</button>
-                </div>
+                    </div>
                 @endif
             </form>
 

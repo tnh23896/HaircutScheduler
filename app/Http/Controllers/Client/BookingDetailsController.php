@@ -7,22 +7,16 @@ use App\Models\Booking;
 use App\Models\BookingDetail;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class BookingController extends Controller
+class BookingDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function booking_history()
-    {
-       $id = auth('web')->user()->id;
-        $list_booking = Booking::query()->where('user_id', $id)->get();
-        return view('client.booking_history.index', compact('list_booking'));
-    }
-
     public function index()
     {
-
+        //
     }
 
     /**
@@ -36,9 +30,25 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
-        //
+        try {
+            $booking = Booking::query()->findOrFail($id);
+            foreach ($request->active as $value) {
+                $service = Service::query()->findOrFail($value);
+                $bookingDetail = BookingDetail::create([
+                    'booking_id' => $id,
+                    'service_id' => $value,
+                    'status' => 'success',
+                    'name' => $service->name,
+                    'price' => $service->price,
+                ]);
+            }
+
+            return redirect()->back()->with('success', 'Cập nhật thành công');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
+        }
     }
 
     /**
@@ -46,7 +56,12 @@ class BookingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $item = Booking::query()->findOrFail($id);
+            return view('admin.ScheduleManagement.scheduleDetails', compact('item'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
+        }
     }
 
     /**
@@ -54,12 +69,7 @@ class BookingController extends Controller
      */
     public function edit(string $id)
     {
-        $id_user = auth('web')->user()->id;
-        $item = Booking::query()->findOrFail($id);
-        $servicesNotInBooking = Service::whereDoesntHave('booking_details', function ($query) use ($id) {
-            $query->where('booking_id', $id);
-        })->get();
-        return view('client.booking_history.edit', compact('item', 'id_user','servicesNotInBooking'));
+
     }
 
     /**
