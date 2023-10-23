@@ -20,12 +20,13 @@
         </section>
         <section id="section-pricing" aria-label="section">
             <div class="container">
-                <form action="{{route('booking-history.update', $item->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('booking-history.update', $item->id)}}" method="POST"
+                      enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <table class="table table-striped" style="border: #CF814D;">
                         <thead class="text-black font-weight-bold">
-                        <tr >
+                        <tr>
                             <td>Tên Dịch Vụ</td>
                             <td>Trạng Thái</td>
                             <td>Giá Tiền</td>
@@ -36,7 +37,7 @@
                             <tr class="text-black">
                                 <td>{{$detail->name}}</td>
                                 <td>
-                                    <input type="checkbox"
+                                    <input class="custom-checkbox" type="checkbox"
                                            name="status[]"
                                            @checked($detail->status == "success") value="{{$detail->id}}"
                                            @if($item->status == "success")
@@ -49,22 +50,24 @@
                         @endforeach
                         </tbody>
                     </table>
-                        @if($item->status !== "success")
-                    <div class="mt-4 float-right mb-2">
+                    @if($item->status !== "success")
+                        <div class="mt-4 float-right mb-2">
 
-                            <button type="submit" class="btn btn-success" style="width: 130px;  height: 40px; " >
+                            <button type="submit" class="btn"
+                                    style="width: 130px;  height: 40px; background-color: #D9842F; border-radius: unset !important; color: white">
                                 Lưu
                             </button>
 
-                    </div>
+                        </div>
                     @endif
                 </form>
                 <div class="mt-4 mr10 float-right mr-2 mb-2">
-                <a href="{{route('booking_history', $id_user)}}">
-                    <button class="btn btn-primary" style="width: 130px;  height: 40px; " >
-                        Quay Lại
-                    </button>
-                </a>
+                    <a href="{{route('booking_history', $id_user)}}">
+                        <button class="btn btn-dark"
+                                style="width: 130px;  height: 40px; border-radius: unset !important;">
+                            Quay Lại
+                        </button>
+                    </a>
                 </div>
             </div>
 

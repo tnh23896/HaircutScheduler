@@ -36,6 +36,16 @@
                     <label for="crud-form-8" class="form-label">Mô tả</label>
                     <textarea id="crud-form-8" name="description" value="{{ old('description') }}" class="form-control" placeholder="Mô tả"></textarea>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <label for="roles" class="form-label">Role:</label>
+                        <select name="roles[]" id="roles" class="form-control" multiple required>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role }}">{{ $role }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="text-right mt-5">
                     <a href="{{ route('admin.employee.index') }}" class="btn btn-outline-secondary w-24 mr-1">Huỷ bỏ</a>
                     <button  class="btn btn-primary w-24">Lưu</button>
