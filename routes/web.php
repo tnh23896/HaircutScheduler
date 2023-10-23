@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\ServiceController;
 
 /*
@@ -44,3 +45,8 @@ Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
 //View Blog With Category
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
+// Profile
+
+Route::get('/profile/{id}', [ProfileController::class,'edit'])->name('profile.edit');
+Route::post('/profile/update{id}', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('/profile/update_avatar{id}', [ProfileController::class, 'update_avatar'])->name('profile.update_avatar');
