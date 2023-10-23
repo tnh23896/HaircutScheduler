@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\Client\BillController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\AuthController;
+use App\Http\Controllers\Client\BillController;
 use App\Http\Controllers\Client\BlogController;
-use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Client\HomeController;
-use App\Http\Controllers\Client\ServiceController;
+use App\Http\Controllers\Client\AboutUsController;
+use App\Http\Controllers\Client\BookingController;
+use App\Http\Controllers\Admin\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +21,14 @@ use App\Http\Controllers\Client\ServiceController;
 |
 */
 
-// Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
-// 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-// });
-Route::get('/test', function () {
-	return view('client.test');
-});
 
-Route::get('/', function () {
-	return view('client.index');
-});
 
+// Login otp
+Route::post('/login-with-otp', [AuthController::class, 'login'])->name('loginOtp');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+// Home
+
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
 Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
@@ -48,3 +47,5 @@ Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])
 Route::get('/booking-service', [BookingController::class, 'index'])->name('booking-service.index');
 Route::post('/booking-service/getStaff', [BookingController::class, 'getStaff'])->name('booking-service.getStaff');
 Route::post('/booking-service/store', [BookingController::class, 'store'])->name('booking-service.store');
+//About-us
+Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');

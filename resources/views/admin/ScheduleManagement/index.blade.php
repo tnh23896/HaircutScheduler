@@ -3,44 +3,16 @@
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
-        Schedule List
+        Danh sách lịch đặt
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-
-            <button class="btn btn-primary shadow-md mr-2 hidden">Add New Seller</button>
-            <div class="dropdown">
-                <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                    <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
-                </button>
-                <div class="dropdown-menu w-40">
-                    <ul class="dropdown-content">
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i> Print
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
-                                Export to Excel </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i>
-                                Export to PDF </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="hidden xl:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div>
+            <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <div class="w-56 relative text-slate-500">
                     <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
                     <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
                 </div>
-                <select class="w-56 xl:w-auto form-select box ml-2">
-                    <option>Status</option>
-                    <option>Active</option>
-                    <option>Inactive</option>
-                </select>
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -51,13 +23,13 @@
                     <th class="whitespace-nowrap">
                         <input class="form-check-input" type="checkbox">
                     </th>
-                    <th class="whitespace-nowrap">CUSTOMER NAME</th>
-                    <th class="text-center whitespace-nowrap">NAME STAFF</th>
-                    <th class="text-center whitespace-nowrap">PRICE</th>
-                    <th class="text-center whitespace-nowrap">SCHEDULE TIME</th>
-                    <th class="text-center whitespace-nowrap">CREATE AT</th>
-                    <th class="text-center whitespace-nowrap">STATUS</th>
-                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                    <th class="whitespace-nowrap">Tên Khách Hàng</th>
+                    <th class="text-center whitespace-nowrap">Tên Nhân Viên</th>
+                    <th class="text-center whitespace-nowrap">Tổng Tiền</th>
+                    <th class="text-center whitespace-nowrap">Lịch Đặt</th>
+                    <th class="text-center whitespace-nowrap">Thời Gian Tạo Đơn</th>
+                    <th class="text-center whitespace-nowrap">Trạng Thái</th>
+                    <th class="text-center whitespace-nowrap">Hành Động</th>
                 </tr>
                 </thead>
                 @foreach($data as $item)
@@ -68,11 +40,6 @@
                         </td>
                         <td class="!py-3.5">
                             <div class="flex items-center">
-                                <div class="w-9 h-9 image-fit zoom-in">
-                                    <img alt="Midone - HTML Admin Template"
-                                         class="rounded-lg border-white shadow-md tooltip"
-                                         src="dist/images/profile-7.jpg" title="Uploaded at 29 May 2022">
-                                </div>
                                 <div class="ml-4">
                                     <a href="#" class="font-medium whitespace-nowrap">{{$item->name}}</a>
                                     <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{$item->phone}}</div>
@@ -101,7 +68,7 @@
                                 @if($item->status !== "success")
                                 <a class="flex items-center text-warning mr-3"
                                    href="{{route('admin.scheduleManagement.edit', $item->id)}}"> <i
-                                        data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
                                 @endif
                                 <a href="{{route('admin.scheduleManagement.scheduleDetails', $item->id)}}"
                                    class="flex items-center text-success cursor-pointer">
@@ -116,7 +83,7 @@
                                                   fill="#1C274C"></path>
                                         </g>
                                     </svg>
-                                    View schedule details </a>
+                                    Xem chi tiết </a>
                             </div>
                         </td>
                     </tr>

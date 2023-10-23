@@ -1,4 +1,3 @@
-
 <footer class="footer-area py-120 position-relative">
     <div class="container">
         <div class="wiget">
@@ -7,8 +6,8 @@
                     <div class="widget">
                         <div class="wiget-content">
                             <div>
-                                <a href="javascript:void(0)"><img
-                                        src="{{ asset('client/assets/images/blacklogo.png') }}" width="115px" alt="blog-image"></a>
+                                <a href="javascript:void(0)"><img src="{{ asset('client/assets/images/blacklogo.png') }}"
+                                        width="115px" alt="blog-image"></a>
                                 <P class="wiget-description mb-1">Etiam semper nibh orci, ac timcidunt mi
                                     consectetur a. In quis tortor ex. Morbi cursus sed neque quis dictum.</P>
                                 <form class="footer-mail d-flex">
@@ -103,71 +102,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="team-table text-center form-popup">
-                    <h2 class="text-color">Pick a Date &amp; Time</h2>
-                    <h3 class="pb-1">December 2020</h3>
-                    <ul class="d-flex list-unstyled justify-content-between bg-gray team-table-1">
-                        <li>MON</li>
-                        <li>TUE</li>
-                        <li>WED</li>
-                        <li>THU</li>
-                        <li>FRI</li>
-                        <li>SAT</li>
-                        <li>SUN</li>
-                    </ul>
-                    <ul class="list-unstyled d-flex justify-content-between team-shadow team-table-2">
-                        <li>15</li>
-                        <li>15</li>
-                        <li>15</li>
-                        <li>15</li>
-                        <li>15</li>
-                        <li>15</li>
-                        <li>15</li>
-                    </ul>
-                    <div class="d-flex team-inner justify-content-center">
-                        <ul class="team-btn list-unstyled">
-                            <li>
-                                <h3>MORNING</h3>
-                            </li>
-                            <li><button>09:00 AM</button></li>
-                            <li><button>09:00 AM</button></li>
-                            <li><button>09:00 AM</button></li>
-                            <li><button>09:00 AM</button></li>
-                        </ul>
-                        <ul class="list-unstyled">
-                            <li>
-                                <h3>AFTERNOON</h3>
-                            </li>
-                            <li><button>09:00 AM</button></li>
-                            <li><button>09:00 AM</button></li>
-                        </ul>
-                        <ul class="list-unstyled">
-                            <li>
-                                <h3>EVENING</h3>
-                            </li>
-                            <li><button>FULLY BOOKED</button></li>
-                        </ul>
-                    </div>
-                    <div class="d-flex justify-content-between team-end">
-                        <div class="team-end-1">
-                            <h3 class="text-left">WASH AND CUT</h3>
-                            <form>
-                                <select class="text-color">
-                                    <option>Add Staff Member</option>
-                                </select>
-
-                            </form>
-
-                            <h5 class="text-left"><span><i class="fas fa-plus"></i></span>Add another service</h5>
-                        </div>
-                        <div class="team-end-2">
-                            <h4 class="text-right">£ 16.00</h4>
-                            <p class="text-right">09:00 am - 09:45 am</p>
-                            <button class="theme-btn-2">CONFIRM</button>
-                        </div>
-                    </div>
-
+            <div class="modal-body" id="modal-body">
+                <div class="container" style="max-width: 550px">
+                    <div class="alert alert-danger" id="error" style="display: none;"></div>
+                    <h3>Đăng nhập</h3>
+                    <div class="alert alert-success" id="successAuth" style="display: none;"></div>
+                    <form>
+                        <label>Phone Number:</label>
+                        <input type="text" id="number"  class="form-control " placeholder="+84********">
+                        <div id="recaptcha-container" class="mt-3"></div>
+                        <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button>
+                    </form>
                 </div>
             </div>
         </div>

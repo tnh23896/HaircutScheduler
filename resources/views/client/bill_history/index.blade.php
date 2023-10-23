@@ -1,60 +1,37 @@
-@extends('client.templates.app')
+@extends('client.templates.layout_dashboard')
 @section('title', 'Bill History')
 @section('content')
-    <div class="no-bottom no-top" id="content" xmlns="http://www.w3.org/1999/html">
-        <div id="top"></div>
 
-        <section id="subheader" class="jarallax">
-            <img src="{{asset('client/images/background/2.jpg')}}" class="jarallax-img" alt="">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3 text-center">
-                        <h1>View Your Orders</h1>
-                        <div class="de-separator"></div>
+    <div id="my-orders">
+        <div class="tabs-wrp brd-rd5">
+            <h4 itemprop="headline">Danh Sách Hóa Đơn</h4>
+
+            <div class="order-list">
+                @foreach($list_bill as $bill)
+                    <div class="order-item brd-rd5">
+                        <div class="order-info">
+                            <span class="red-clr font-weight-bold mb-2">ID hóa đơn: #{{$bill->id}}</span>
+                            <span
+                                class="price font-weight-bold mb-2">Tổng tiền:  {{number_format($bill->total_price)}}</span>
+                            <div class="mt-2 mb-2">
+                                <span class="price font-weight-bold">Lịch đặt: {{$bill->time}} {{$bill->day}}</span>
+                            </div>
+                            <span class="price font-weight-bold">Thời gian tạo:  {{$bill->created_at}}</span>
+                            <a class="brd-rd2 theme-btn-2"
+                               data-toggle="modal" data-target=".modal{{$bill->id}}"
+                               href="javascript:void(0)" title="" itemprop="url">Order Detail</a>
+                        </div>
                     </div>
-                </div>
+                @endforeach
+
             </div>
-            <div class="de-gradient-edge-bottom"></div>
-        </section>
-        <section id="section-pricing" aria-label="section">
-            <div class="container">
-                <table class="table table-striped" style="border: #CF814D;">
-                    <thead class="text-center text-black font-monospace">
-                    <tr>
-                        <th>Thợ Cắt Tóc</th>
-                        <th>Giảm Giá</th>
-                        <th>Tổng Tiền</th>
-                        <th>Lịch Đặt</th>
-                        <th>Hành Động</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($list_bill as $bill)
-                        <tr class="text-black text-center flex justify-center">
-                            <td>{{$bill->admin->username}}</td>
-                            <td>{{$bill->promotion->discount}}</td>
-                            <td>{{number_format($bill->total_price)}} vnd</td>
-                            <td>{{$bill->time}} {{$bill->day}}</td>
-                            <td class="flex">
-                                <a data-toggle="modal" style="cursor: pointer;" data-target=".modal{{$bill->id}}" >
-                                    <button class="btn btn-success  text-center" style="width: 150px;  height: 40px; ">
-                                        Chi tiết hóa đơn
-                                    </button>
-                                </a>
-                            </td>
-                            {{--                        <td data-toggle="modal" style="cursor: pointer;" data-target=".bd-example-modal-lg">Xem hóa đơn</td>--}}
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-
-            <!-- Modal -->
-            @foreach($list_bill as $bill)
-                @include('client.bill_history.modal')
-             @endforeach
-        </section>
-
+        </div>
     </div>
+
+
+
+
+    @foreach($list_bill as $bill)
+        @include('client.bill_history.modal')
+    @endforeach
 @endsection
