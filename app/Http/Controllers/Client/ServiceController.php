@@ -11,7 +11,7 @@ class ServiceController extends Controller
 {
     public function list_service()
     {
-        $categoryService= CategoryService::select('id', 'name','image')->get();
+        $categoryService= CategoryService::select('id', 'name','image')->paginate(5);
 
         $listServices = [];
 
