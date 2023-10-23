@@ -22,17 +22,23 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'username'=>'required|max:255',
-            'email'=>'required|email|max:255',
+            'email' => [
+                'required',
+                Rule::unique('users', 'email')->ignore(auth('web')->user()->id),
+                'email'
+            ],
+            
         ];
     }
     public function messages(){
         return [
-            'username.required' => 'Bạn chưa nhập tên đăng nhập',
+            'username.required' => 'Bạn chưa nhập họ và tên',
             'email.required' => 'Bạn chưa nhập email',
             'email.email' => 'Email không đúng định dạng',
-            'email.max' => 'Không được nhập quá 255 ký tự',
+            'email.unique' => 'Email đã tồn tại',
             'username.max' => 'Không được nhập quá 255 ký tự',
         ];
     }

@@ -47,7 +47,7 @@ Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.b
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
 // Profile
 
-Route::get('/profile/{id}', [ProfileController::class,'edit'])->name('profile.edit');
-Route::post('/profile/update{id}', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //About-us
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');

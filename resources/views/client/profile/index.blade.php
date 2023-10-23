@@ -70,11 +70,11 @@
             var editId = {{ $data->id }};
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
-                var url = "{{ route('profile.update', ['id' => ':editId']) }}";
+                var url = "{{ route('profile.update') }}";
                 url = url.replace(':editId', editId);
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
-                        toastr.success('Cập nhật thành công .', 'Thông Báo !');
+                        toastr.success('Cập nhật thành công .' );
                     },
                     function showError(error) {
                         if (error.responseJSON && error.responseJSON.errors) {

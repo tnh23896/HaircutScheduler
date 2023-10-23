@@ -44,7 +44,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
         $id = auth()->user()->id;
         $data = User::where('id', $id)->first();
@@ -54,10 +54,10 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request, string $id)
+    public function update(UpdateRequest $request)
     {
         try {
-            $data = User::findOrFail($id);
+            $data = User::findOrFail(auth('web')->user()->id);
             $params = $request->validated();
             if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
                 $file = $request->file('avatar');
@@ -67,7 +67,7 @@ class ProfileController extends Controller
             }
             $data->update($params);
             return response()->json([
-                "success" => "Created successfully ",
+                "success" => "Cập nhật thành công ",
                 "status" => 200
             ]);
         }catch (\Exception $exception){
