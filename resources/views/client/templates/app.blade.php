@@ -38,7 +38,13 @@
         }
 
         function sendOTP() {
+
             var number = $("#number").val();
+            if (number.startsWith("0")) {
+                number = "+84" + number.substring(1);
+            }
+
+
             firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
@@ -85,8 +91,6 @@
                 $("#error").show();
             });
         }
-        
-        
     </script>
     @yield('js_footer_custom')
 </body>
