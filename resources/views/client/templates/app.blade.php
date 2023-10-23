@@ -22,8 +22,8 @@
             projectId: "laravel-otp-sms-7ee42",
             storageBucket: "laravel-otp-sms-7ee42.appspot.com",
             messagingSenderId: "130352275706",
-            appId: "1:130352275706:web:12f4f4a111394a14f92943",
-            measurementId: "G-Y9GJQRNXR1"
+            appId: "1:130352275706:web:c31ff8b390702074f92943",
+            measurementId: "G-RMDXJSV9QN"
         };
         firebase.initializeApp(firebaseConfig);
     </script>
@@ -80,7 +80,7 @@
                 const url = "{{ route('loginOtp') }}";
                 sendAjaxRequest(url, 'post', formData, function(response) {
                         console.log(response);
-                        $("#exampleModalCenter").hide();
+                        window.location.href = "{{ route('home.index') }}";
                     },
                     function(error) {
                         console.log(error);

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('admin_id');
             $table->string('phone');
             $table->string('promo_id')->nullable();
-            $table->enum('status',['pending','success','canceled'])->default('pending');
+            $table->enum('status',['pending','confirmed','waiting','success','canceled'])->default('pending');
             $table->string('total_price');
             $table->string('email');
             $table->date('day');

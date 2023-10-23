@@ -1,4 +1,4 @@
-@extends('client.templates.app')
+@extends('client.templates.layout_dashboard')
 @section('title', 'Chi tiết lịch đặt')
 @section('content')
 
@@ -20,7 +20,7 @@
         </section>
         <section id="section-pricing" aria-label="section">
             <div class="container">
-                <form action="{{route('booking-history.update', $item->id)}}" method="POST"
+                <form action="{{route('booking-details.update', $item->id)}}" method="POST"
                       enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -37,7 +37,7 @@
                             <tr class="text-black">
                                 <td>{{$detail->name}}</td>
                                 <td>
-                                    <input class="custom-checkbox" type="checkbox"
+                                    <input style="height: 15px; width: 15px" type="checkbox"
                                            name="status[]"
                                            @checked($detail->status == "success") value="{{$detail->id}}"
                                            @if($item->status == "success")
@@ -68,10 +68,26 @@
                             Quay Lại
                         </button>
                     </a>
+
                 </div>
+
             </div>
 
-            <!-- Modal -->
+
+            @if($item->status !== "success")
+                <div class="mb-4">
+                    <a data-toggle="modal" data-target="#modal{{$item->id}}">
+                        <button
+                            style="width: 130px;  height: 40px; background-color: #D9842F; border: unset!important; border-radius: unset !important; color: white">
+                            Thêm dịch vụ
+                        </button>
+                    </a>
+                </div>
+
+                <!-- Modal -->
+                @include('client.booking_history.create_service')
+
+            @endif
         </section>
 
 

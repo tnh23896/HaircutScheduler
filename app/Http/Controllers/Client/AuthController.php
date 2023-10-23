@@ -34,6 +34,6 @@ class AuthController extends Controller
     {
         Auth::guard('web')->logout();
         toastr()->success('Đăng xuất thành công');
-        return redirect()->route('loginOtp');
+        return redirect()->route('home.index');
     }
 }

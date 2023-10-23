@@ -7,8 +7,9 @@ use App\Models\Time;
 use App\Models\Admin;
 use App\Models\Booking;
 use App\Models\WorkSchedule;
-use Illuminate\Http\Request;
 use App\Models\BookingDetail;
+use App\Models\Service;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
 use Illuminate\Support\Facades\Log;
@@ -21,10 +22,8 @@ class BookingController extends Controller
      */
     public function booking_history()
     {
-        //        $id = auth()->user()->id;
-        $id = 5;
+       $id = auth('web')->user()->id;
         $list_booking = Booking::query()->where('user_id', $id)->get();
-        //        dd($list_booking);
         return view('client.booking_history.index', compact('list_booking'));
     }
 
@@ -102,9 +101,12 @@ class BookingController extends Controller
      */
     public function edit(string $id)
     {
-        $id_user = 1;
+        $id_user = auth('web')->user()->id;
         $item = Booking::query()->findOrFail($id);
-        return view('client.booking_history.edit', compact('item', 'id_user'));
+        $servicesNotInBooking = Service::whereDoesntHave('booking_details', function ($query) use ($id) {
+            $query->where('booking_id', $id);
+        })->get();
+        return view('client.booking_history.edit', compact('item', 'id_user','servicesNotInBooking'));
     }
 
     /**

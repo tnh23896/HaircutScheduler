@@ -42,9 +42,11 @@
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Trạng Thái</label>
                     <select data-placeholder="Select your favorite actors" name="status" class="tom-select w-full" id="crud-form-2" @if($data->status == "success") disabled @endif>
-                        <option value="pending" @if($data->status == "pending") selected @endif>Pending</option>
-                        <option value="success" @if($data->status == "success") selected @endif>Success</option>
-                        <option value="canceled" @if($data->status == "canceled") selected @endif>Canceled</option>
+                        <option value="pending" @if($data->status == "pending") selected @endif>Chưa xác nhận</option>
+                        <option value="confirmed" @if($data->status == "confirmed") selected @endif>Đã xác nhận</option>
+                        <option value="waiting" @if($data->status == "waiting") selected @endif>Đang chờ cắt</option>
+                        <option value="success" @if($data->status == "success") selected @endif>Đã hoàn thành</option>
+                        <option value="canceled" @if($data->status == "canceled") selected @endif>Đã hủy</option>
                     </select>
                 </div>
 

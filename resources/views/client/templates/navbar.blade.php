@@ -27,7 +27,7 @@
                 <li class="nav-item position-relative">
                     <a class="nav-link" href="javascript:void(0)">Pages</a>
                     <ul class="dropdown-menu">
-                        <li><a href="our%20product.html">Products Listing</a></li>
+                        <li><a href="#">Booking History</a></li>
                         <li><a href="product-detail.html">Product Detail 1</a></li>
                         <li><a href="product-details2.html">Product Detail 2</a></li>
                         <li><a href="pricepage.html">Price/Packages</a></li>
@@ -155,11 +155,12 @@
 
             </nav>
             @if (auth()->guard('web')->check())
-                <a class="theme-btn-2 nav-btn " href="{{ route('logout') }}">Đăng xuất</a>
-                
+            <a href="{{ route('logout') }}">
+                <button class="theme-btn-2 nav-btn " style="height: 50px;" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
+            </a>
             @else
-                <a class="theme-btn-2 nav-btn " href="javascript:void(0)" data-toggle="modal"
-                    data-target="#exampleModalCenter">Đăng nhập</a>
+                <a class="theme-btn-2 nav-btn " style="height: 50px;" href="javascript:void(0)" data-toggle="modal"
+                    data-target="#exampleModalCenter"><h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6></a>
             @endif
 
 
