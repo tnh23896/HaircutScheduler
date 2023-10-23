@@ -11,7 +11,6 @@
 
 <body>
     @include('client.templates.navbar')
-    @include('client.templates.banner')
     @yield('content')
     @include('client.templates.footer')
     @include('client.templates.link_footer')

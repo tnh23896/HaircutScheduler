@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\BillController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\BookingController;
 
@@ -18,16 +20,15 @@ use App\Http\Controllers\Client\BookingController;
 |
 */
 
-// Route::group(['prefix' => 'admin','middleware' => 'auth.admin'], function () {
-// 	Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
-// });
-Route::get('/', function () {
-	// dd(auth()->guard('web')->check());
-	return view('client.index');
-});
-// Check number 
+
+
+// Login otp
+
 Route::post('/login-with-otp', [AuthController::class, 'login'])->name('loginOtp');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+// Home
+
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
 Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
@@ -42,3 +43,5 @@ Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
 //View Blog With Category
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
+//About-us
+Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');
