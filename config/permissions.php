@@ -96,4 +96,7 @@ return [
     // Work Schedule
     'admin.work-schedule.index' => 'Danh sách lịch làm việc',
     'admin.work-schedule.store' => 'Lưu lịch làm việc',
+    'admin.work-schedule.show' => 'Chi tiết lịch làm việc',
+    'admin.work-schedule.update1' => 'Cập nhật lịch làm việc',
+    'admin.work-schedule.destroy' => 'Xóa lịch làm việc',
 ];
