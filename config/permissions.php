@@ -7,7 +7,7 @@ return [
     'admin.serviceManagement.category.index' => 'Danh sách danh mục dịch vụ',
     'admin.serviceManagement.category.create' => 'Thêm danh mục dịch vụ',
     'admin.serviceManagement.category.edit' => 'Chỉnh sửa danh mục dịch vụ',
-    'admin.serviceManagement.category.destroy' => 'Xóa danh mục dịch vụ',
+    'admin.serviceManagement.category.delete' => 'Xóa danh mục dịch vụ',
     'admin.serviceManagement.category.store' => 'Lưu danh mục dịch vụ',
     'admin.serviceManagement.category.update' => 'Câp nhật danh mục dịch vụ',
 
@@ -15,7 +15,7 @@ return [
     'admin.serviceManagement.service.index' => 'Danh sách dịch vụ',
     'admin.serviceManagement.service.create' => 'Thêm dịch vụ',
     'admin.serviceManagement.service.edit' => 'Chỉnh sửa dịch vụ',
-    'admin.serviceManagement.service.destroy' => 'Xóa dịch vụ',
+    'admin.serviceManagement.service.delete' => 'Xóa dịch vụ',
     'admin.serviceManagement.service.store' => 'Lưu dịch vụ',
     'admin.serviceManagement.service.update' => 'Câp nhật dịch vụ',
 

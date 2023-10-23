@@ -56,19 +56,23 @@
                         <td class="text-center">{{$item->created_at}}</td>
                         <td class="text-center">
                             @if( $item->status == "pending")
-                                <span class="badge badge-warning">Pending</span>
+                                <span class="badge badge-warning">Chưa xác nhận</span>
+                            @elseif($item->status == "confirmed")
+                                <span class="badge badge-info">Đã xác nhận</span>
+                            @elseif($item->status == "waiting")
+                                <span class="badge badge-info">Đang chờ cắt</span>
                             @elseif($item->status == "success")
-                                <span class="badge badge-info">Success</span>
+                                <span class="badge badge-info">Đã hoàn thành</span>
                             @elseif($item->status == "canceled")
-                                <span class="badge badge-success">Cancelled</span>
+                                <span class="badge badge-success">Đã hủy</span>
                             @endif
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 @if($item->status !== "success")
-                                <a class="flex items-center text-warning mr-3"
-                                   href="{{route('admin.scheduleManagement.edit', $item->id)}}"> <i
-                                        data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
+                                    <a class="flex items-center text-warning mr-3"
+                                       href="{{route('admin.scheduleManagement.edit', $item->id)}}"> <i
+                                            data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
                                 @endif
                                 <a href="{{route('admin.scheduleManagement.scheduleDetails', $item->id)}}"
                                    class="flex items-center text-success cursor-pointer">
