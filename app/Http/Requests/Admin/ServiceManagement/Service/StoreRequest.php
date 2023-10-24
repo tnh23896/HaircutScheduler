@@ -49,7 +49,7 @@ class StoreRequest extends FormRequest
 			'image.required' => 'Ảnh dịch vụ không được để trống',
 			'image.image' => 'Ảnh dịch vụ không đúng định dạng',
 			'image.mimes' => 'Ảnh dịch vụ phải có định dạng jpeg, png, jpg, gif',
-			'image.max' => 'Ảnh dịch vụ phải có tối đa 2048 kb',
+			'image.max' => 'Ảnh dịch vụ có kích thước tối đa 2048 kb',
 		];
 	}
 }
