@@ -6,6 +6,8 @@ use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\BillController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\ServiceController;
 use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -48,5 +50,9 @@ Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
 //View Blog With Category
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
+// Profile
+
+Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //About-us
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');
