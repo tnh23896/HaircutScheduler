@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
 		{
 			return [
 				'status.required' => 'Trạng thái không được để trống',
-				'status.in' => 'Trạng thái không đúng',
+				'status.in' => 'Trạng thái không đúng ',
 			];
 		}
 }
