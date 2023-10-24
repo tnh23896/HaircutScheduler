@@ -48,7 +48,7 @@ class ScheduleDetailsController extends Controller
 
             return redirect()->back()->with('success', 'Cập nhật chi tiết lịch đặt thành công');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Cập nhật chi tiết thất bại');
+            return redirect()->back()->with('error', 'Cập nhật chi tiết lịch đặt thất bại');
         }
     }
 

@@ -91,7 +91,7 @@ class CategoryController extends Controller
 
             $category_service->save();
 
-            return response()->json(['success' => 'Cập nhật danh mục dịch vụ']);
+            return response()->json(['success' => 'Cập nhật danh mục dịch vụ thành công']);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Cập nhật danh mục dịch vụ thất bại'], 500);
         }
@@ -108,7 +108,7 @@ class CategoryController extends Controller
             if ($category_service) {
                 delete_file($imgOld);
                 $category_service->delete();
-                return response()->json(['success' => 'Xóa danh mục dịch vụ']);
+                return response()->json(['success' => 'Xóa danh mục dịch vụ thành công']);
             }
         } catch (\Exception $e) {
             return response()->json(['error' => 'Xóa danh mục dịch vụ thất bại'], 500);

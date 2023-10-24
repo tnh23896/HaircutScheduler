@@ -91,13 +91,13 @@ class TimeController extends Controller
         try {
             Time::where('id', $id)->delete();
             return response()->json([
-                "success" => "Xóa thời gian thành công",
+                "success" => "Xóa thời gian làm việc thành công",
                 "status" => 200
             ]);
         }catch (\Exception $exception){
             return response()->json([
                 'status' => 500,
-                'error' => 'Xóa thời gian thất bài'
+                'error' => 'Xóa thời gian thất bại'
             ]);
         }
     }
