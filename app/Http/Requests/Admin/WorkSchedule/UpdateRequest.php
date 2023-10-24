@@ -39,6 +39,7 @@ class UpdateRequest extends FormRequest
 			'day.required' => 'Ngày không được để trống',
 			'after:today' => 'Phải đặt trước ngày hôm nay',
 			'times.required' => 'Thời gian không được để trống',
+			'day.unique' => 'Thời gian đã tồn tại',
 		];
 	}
 }
