@@ -15,15 +15,14 @@
     @include('client.templates.footer')
     @include('client.templates.link_footer')
     <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyDpy2TAIj9-BtVnZu_CWtolm3WowSDgwJk",
-            authDomain: "laravel-otp-sms-7ee42.firebaseapp.com",
-            databaseURL: "https://laravel-otp-sms-7ee42-default-rtdb.firebaseio.com",
-            projectId: "laravel-otp-sms-7ee42",
-            storageBucket: "laravel-otp-sms-7ee42.appspot.com",
-            messagingSenderId: "130352275706",
-            appId: "1:130352275706:web:c31ff8b390702074f92943",
-            measurementId: "G-RMDXJSV9QN"
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPZ866PDueBJ2lQtNclrC6Ek6qycU3low",
+            authDomain: "push-notification-9fc82.firebaseapp.com",
+            projectId: "push-notification-9fc82",
+            storageBucket: "push-notification-9fc82.appspot.com",
+            messagingSenderId: "880794073299",
+            appId: "1:880794073299:web:ad4d96a242f826d3113c26",
+            measurementId: "G-F1K4K9S19S"
         };
         firebase.initializeApp(firebaseConfig);
     </script>
@@ -36,59 +35,75 @@
             window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
             recaptchaVerifier.render();
         }
+        $('.formSendOtp').submit(function(e) {
+            e.preventDefault();
+            sendOTP(this);
 
-        function sendOTP() {
+        })
 
-            var number = $("#number").val();
+        function sendOTP(form) {
+            var number = $(form).find('input[name="phoneOtpNumberInput"]').val();
             if (number.startsWith("0")) {
                 number = "+84" + number.substring(1);
             }
-
+            const containForm = $(form).parent();
 
             firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier).then(function(confirmationResult) {
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
                 console.log(coderesult);
                 const html = `
-                <div class="mb-5 mt-5">
-                        <h3>Add verification code</h3>
-                        <div class="alert alert-success" id="successOtpAuth" style="display: none;"></div>
-                        <form>
-                            <input type="text" id="verification" class="form-control"
+                        <h3>Mã code xác minh</h3>
+                        <div class="alert alert-success successOtpAuth" id="" style="display: none;"></div>
+                        <div class="alert alert-danger error" id="" style="display: none;"></div>
+                        <form class="formVerifyOtp">
+                            <input type="text" name="verification" class="form-control"
                                 placeholder="Verification code">
-                            <button type="button" class="btn btn-danger mt-3" onclick="verify()">Verify code</button>
+                            <button type="submit" class="btn btn-danger mt-3">Xác minh</button>
                         </form>
-                    </div>
                 `
-                $("#modal-body").html(html);
-                $("#successAuth").show();
+                $(containForm).html(html);
+                $('.formVerifyOtp').submit(function(e) {
+                    e.preventDefault();
+                    verify(this);
+                })
+                $(containForm).find(".successAuth").show();
             }).catch(function(error) {
-                $("#error").text(error.message);
-                $("#error").show();
+                $(containForm).find(".error").text(error.message);
+                $(containForm).find(".error").show();
             });
         }
 
-        function verify() {
-            var code = $("#verification").val();
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+        function verify(form) {
+            var code = $(form).find('input[name="verification"]').val();
             coderesult.confirm(code).then(function(result) {
                 var user = result.user;
-                console.log(user);
-                console.log(user.phoneNumber);
                 const formData = new FormData();
                 formData.append('phone', user.phoneNumber);
                 const url = "{{ route('loginOtp') }}";
                 sendAjaxRequest(url, 'post', formData, function(response) {
                         console.log(response);
-                        window.location.href = "{{ route('home.index') }}";
+                        console.log($(form).closest('#modalAuth').eq(1));
+                        if ($(form).closest('#modalAuth').length) {
+                            toastr.success("Xác thực thành công");
+                            $('#modalAuth').modal('hide');
+                        } else {
+                            toastr.success("Xác thực thành công");
+                            const user = response.data;
+                            const html =
+                             `
+                                <div class="text-left">Số điện thoại: ${user.phone}</div>
+                            `;
+                            $(form).parent().html(html);
+                        }
                     },
                     function(error) {
                         console.log(error);
                     }
                 )
             }).catch(function(error) {
-                $("#error").text(error.message);
-                $("#error").show();
+                $(form).find(".error").text(error.message);
+                $(form).find(".error").show();
             });
         }
     </script>

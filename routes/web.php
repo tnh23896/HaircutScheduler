@@ -25,7 +25,6 @@ use App\Http\Controllers\Admin\DashboardController;
 */
 
 
-
 // Login otp
 Route::post('/login-with-otp', [AuthController::class, 'login'])->name('loginOtp');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -50,6 +49,10 @@ Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
 //View Blog With Category
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
+
+Route::get('/booking-service', [BookingController::class, 'index'])->name('booking-service.index');
+Route::post('/booking-service/getStaff', [BookingController::class, 'getStaff'])->name('booking-service.getStaff');
+Route::post('/booking-service/store', [BookingController::class, 'store'])->name('booking-service.store');
 // Profile
 
 Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');

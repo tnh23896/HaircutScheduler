@@ -205,7 +205,7 @@
                 e.preventDefault();
                 var form = $(this);
                 var url =
-                    "{{ route('admin.work-schedule.update', ['work_schedule' => 'workSchedule_id', 'id' => 'employee_id']) }}";
+                    "{{ route('admin.work-schedule.update1', ['work_schedule' => 'workSchedule_id', 'id' => 'employee_id']) }}";
                 url = url.replace('workSchedule_id', $(this).data('id'));
                 url = url.replace('employee_id', "{{ $employee->id }}");
                 var method = "POST";
