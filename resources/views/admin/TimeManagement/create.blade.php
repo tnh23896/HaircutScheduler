@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section ('title','Create Category Services')
+@section ('title','Thêm mới thời gian')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Create Time
+            Thêm mới thời gian
         </h2>
     </div>
     <form id="ajaxForm"  method="POST" >
@@ -13,12 +13,12 @@
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
                 <div>
-                    <label for="crud-form-1" class="form-label">Time</label>
-                    <input id="crud-form-1" name="time" type="time" class="form-control w-full" placeholder="Input time">
+                    <label for="crud-form-1" class="form-label">Thời gian</label>
+                    <input id="crud-form-1" name="time" type="time" class="form-control w-full" placeholder="Thời gian">
                 </div>
                 <div class="text-right mt-5">
-                   <a href="{{route('admin.TimeManagement.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">List</button></a>
-                    <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
+                   <a href="{{route('admin.TimeManagement.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">Liệt kê</button></a>
+                    <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                 </div>
             </div>
             <!-- END: Form Layout -->

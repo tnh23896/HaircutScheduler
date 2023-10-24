@@ -1,13 +1,13 @@
 @extends('admin.templates.app')
-@section('title', 'Services')
+@section('title', 'Danh sách dịch vụ')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
-        Service List
+        Danh mục dịch vụ
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <a href="{{ route('admin.serviceManagement.service.create') }}" class="btn btn-primary">Add Service</a>
+            <a href="{{ route('admin.serviceManagement.service.create') }}" class="btn btn-primary">Thêm mới dịch vụ</a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <div class="w-56 relative text-slate-500">
@@ -29,13 +29,13 @@
                         <th class="whitespace-nowrap">
                             <input class="form-check-input" type="checkbox">
                         </th>
-                        <th class="whitespace-nowrap">Image</th>
-                        <th class="text-center whitespace-nowrap">Name</th>
-                        <th class="text-center whitespace-nowrap">Price</th>
-                        <th class="text-center whitespace-nowrap">Description</th>
-                        <th class="text-center whitespace-nowrap">Category</th>
-                        <th class="text-center whitespace-nowrap">Percentage Discount</th>
-                        <th class="text-center whitespace-nowrap">Action</th>
+                        <th class="whitespace-nowrap">Hình ảnh</th>
+                        <th class="text-center whitespace-nowrap">Tên</th>
+                        <th class="text-center whitespace-nowrap">Giá</th>
+                        <th class="text-center whitespace-nowrap">Mô tả</th>
+                        <th class="text-center whitespace-nowrap">Danh mục</th>
+                        <th class="text-center whitespace-nowrap">Giảm giá</th>
+                        <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
                 </thead>
                 @foreach ($services as $service)
@@ -60,7 +60,7 @@
                                     <a class="flex items-center mr-3"
                                         href="{{ route('admin.serviceManagement.service.edit', $service->id) }}">
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
-                                        Edit </a>
+                                        Sửa </a>
                                     <form class="delete-form"
                                         action="{{ route('admin.serviceManagement.service.delete', $service->id) }}"
                                         method="POST">
@@ -69,7 +69,7 @@
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
                                             <button type="submit" class="flex items-center text-danger"
                                                 data-id="{{ $service->id }}">
-                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
                                             </button>
                                         </div>
                                     </form>

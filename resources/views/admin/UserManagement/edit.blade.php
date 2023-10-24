@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section ('title','Edit User')
+@section ('title','Chỉnh sửa người dùng')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Edit Time
+            Chỉnh sửa người dùng
         </h2>
     </div>
     <form id="ajaxForm" >
@@ -15,7 +15,7 @@
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
                 <div>
-                    <label for="crud-form-1" class="form-label">BLACK STATUS</label>
+                    <label for="crud-form-1" class="form-label">Trạng thái Blacklist</label>
                     <select class="form-select w-full" name="black_status">
                         <option value="0"
                             {{$data->black_status==0? 'selected' : ''}}>
@@ -28,8 +28,8 @@
                     </select>
                 </div>
                 <div class="text-right mt-5">
-                   <a href="{{route('admin.UserManagement.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">List</button></a>
-                    <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
+                   <a href="{{route('admin.UserManagement.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">Liệt kê</button></a>
+                    <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                 </div>
             </div>
             <!-- END: Form Layout -->

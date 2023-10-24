@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Create Category Services')
+@section('title', 'Danh sách nhân viên')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">

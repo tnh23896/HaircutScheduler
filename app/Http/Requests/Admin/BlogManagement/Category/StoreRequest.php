@@ -26,4 +26,12 @@ class StoreRequest extends FormRequest
 						'title' => 'required | min:2 | max:255',
         ];
     }
+		public function messages()
+		{
+			return [
+				'title.required' => 'Tiêu đề không được để trống',
+				'title.min' => 'Tiêu đề ít nhất 2 ký tự',
+				'title.max' => 'Tiêu đề nhiều nhất 255 ký tự',
+			];
+		}
 }
