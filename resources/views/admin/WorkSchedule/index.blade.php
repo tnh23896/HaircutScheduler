@@ -149,7 +149,7 @@
                         sendAjaxRequest(deleteUrl, 'DELETE', {}, function(response) {
                             if (response.status) {
                                 Swal.fire({
-                                    title: 'Successfully',
+                                    title: 'Thành công!!!',
                                     text: response.message,
                                     icon: response.status,
                                 }).then(() => {
@@ -171,7 +171,7 @@
                 sendAjaxRequest(url, "POST", formData, function(response) {
                     if (response.status) {
                         Swal.fire({
-                                title: 'Successfully',
+                                title: 'Thành công!!!',
                                 text: response.message,
                                 icon: response.status,
                             })

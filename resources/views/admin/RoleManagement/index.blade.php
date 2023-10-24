@@ -89,7 +89,7 @@
                         }, function(response) {
                             if (response.success) {
                                 Swal.fire({
-                                    title: 'Successfully',
+                                    title: 'Thành công!!!',
                                     text: response.success,
                                     icon: 'success',
                                 }).then(() => {
