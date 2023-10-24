@@ -62,7 +62,7 @@
                     @endif
                 </form>
                 <div class="mt-4 mr10 float-right mr-2 mb-2">
-                    <a href="{{route('booking_history', $id_user)}}">
+                    <a href="{{route('booking_history')}}">
                         <button class="btn btn-dark"
                                 style="width: 130px;  height: 40px; border-radius: unset !important;">
                             Quay Lại

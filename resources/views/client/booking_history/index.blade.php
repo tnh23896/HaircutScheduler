@@ -3,8 +3,8 @@
 @section('content')
 
     <div id="my-bookings">
-        <div class="tabs-wrp brd-rd5">
-            <div class="book-on">
+        <div class="">
+            <div class="">
                 <h4 itemprop="headline">MY APPOINTMENT</h4>
                 <!--  <div class="select-wrap-inner">
                      <select class="form-control">
@@ -53,7 +53,11 @@
                             </td>
                             <td class="flex">
                                 <a href="{{route('booking-history.edit', $booking->id)}}">
-                                    <button class="text-center" style="width: 130px;  height: 40px; background-color: #D9842F; color: white; border: none; ">
+                                    <button class="text-center mb-2" style="width: 130px;
+                                                                            height: 40px;
+                                                                            background-color: #D9842F;
+                                                                            color: white;
+                                                                            border: none; ">
                                         Xem chi tiết
                                     </button>
                                 </a>
@@ -73,4 +77,11 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 @endsection
