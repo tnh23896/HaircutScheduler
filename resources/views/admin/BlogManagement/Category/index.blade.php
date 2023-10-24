@@ -80,12 +80,12 @@
 
                 // Hiển thị hộp thoại xác nhận
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Are you sure to delete this item?',
+                    title: 'Bạn có muốn xóa?',
+                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Đúng!',
+                    cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest

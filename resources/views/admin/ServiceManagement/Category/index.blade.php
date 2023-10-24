@@ -2,9 +2,9 @@
 @section('title', 'Danh sách danh mục dịch vụ')
 @section('content')
     <!-- END: Top Bar -->
-        <h2 class="intro-y text-lg font-medium mt-10">
-            Danh sách danh mục dịch vụ
-        </h2>
+    <h2 class="intro-y text-lg font-medium mt-10">
+        Danh sách danh mục dịch vụ
+    </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
             <a href="{{ route('admin.serviceManagement.category.create') }}" class="btn btn-primary">Thêm danh mục dịch vụ</a>
@@ -41,8 +41,8 @@
                                 <input class="form-check-input" type="checkbox">
                             </td>
                             <td class="!py-3.5">
-                                    <img alt="Image Category" class="w-24 h-20 rounded"
-                                        src="{{ asset($category->image) }}" title="{{ $category->created_at }}">
+                                <img alt="Image Category" class="w-24 h-20 rounded" src="{{ asset($category->image) }}"
+                                    title="{{ $category->created_at }}">
                             </td>
                             <td class="text-center"><a class="flex items-center justify-center"
                                     href="">{{ $category->name }}</a></td>
@@ -86,12 +86,12 @@
 
                 // Hiển thị hộp thoại xác nhận
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Are you sure to delete this item?',
+                    title: 'Bạn có muốn xóa?',
+                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Đúng!',
+                    cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest

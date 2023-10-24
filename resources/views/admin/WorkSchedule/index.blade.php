@@ -142,8 +142,8 @@
                     text: 'Chỉ khi nhân viên nghỉ làm rồi hãy xoá?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Đúng!',
+                    cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         sendAjaxRequest(deleteUrl, 'DELETE', {}, function(response) {

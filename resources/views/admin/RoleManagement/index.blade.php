@@ -2,9 +2,9 @@
 @section('title', 'Role Management')
 @section('content')
     <!-- END: Top Bar -->
-        <h2 class="intro-y text-lg font-medium mt-10">
-            Danh sách vai trò quản trị viên
-        </h2>
+    <h2 class="intro-y text-lg font-medium mt-10">
+        Danh sách vai trò quản trị viên
+    </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
             <a href="{{ route('admin.RoleManagement.create') }}" class="btn btn-primary">Thêm mới</a>
@@ -48,8 +48,7 @@
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
                                         Edit </a>
 
-                                    <form class="delete-form"
-                                        action="{{ route('admin.RoleManagement.delete', $item->id) }}"
+                                    <form class="delete-form" action="{{ route('admin.RoleManagement.delete', $item->id) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -76,12 +75,12 @@
 
                 // Hiển thị hộp thoại xác nhận
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Are you sure to delete this item?',
+                    title: 'Bạn có muốn xóa?',
+                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Đúng!',
+                    cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest

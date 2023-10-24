@@ -7,7 +7,8 @@
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <a href="{{ route('admin.TimeManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm mới thời gian</button></a>
+            <a href="{{ route('admin.TimeManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm mới thời
+                    gian</button></a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <div class="w-56 relative text-slate-500">
@@ -36,8 +37,8 @@
                                     <a href="{{ route('admin.TimeManagement.edit', $item->id) }}"
                                         class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
                                             class="w-4 h-4 mr-1"></i> Sửa </a>
-                                    <form class="delete-form"
-                                        action="{{ route('admin.TimeManagement.delete', $item->id) }}" method="POST">
+                                    <form class="delete-form" action="{{ route('admin.TimeManagement.delete', $item->id) }}"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
@@ -72,12 +73,12 @@
 
             // Hiển thị hộp thoại xác nhận
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'Are you sure to delete this item?',
+                title: 'Bạn có muốn xóa?',
+                text: 'Nếu xóa sẽ mất vĩnh viễn?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Đúng!',
+                cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest
