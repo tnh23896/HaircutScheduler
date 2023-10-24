@@ -89,12 +89,12 @@ class ScheduleController extends Controller
            }
             return response()->json([
                 'status' => 200,
-                'success' => 'Cập nhật thành công'
+                'success' => 'Cập nhật lịch đặt thành công'
             ]);
         }catch (\Exception $exception){
             return response()->json([
                 'status' => 500,
-                'success' => 'Cập nhật thất bại'
+                'success' => 'Cập nhật lịch đặt thất bại'
             ]);
         }
 

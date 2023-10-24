@@ -41,9 +41,9 @@ class CategoryController extends Controller
 		try {
 			$newCategory = $this->model::create($request->validated());
 			$newCategory->save();
-			return response()->json(['success' => 'Successfully']);
+			return response()->json(['success' => 'Thêm danh mục tin tức thành công']);
 		} catch (\Exception $e) {
-			return response()->json(['error' => 'An error occurred while creating the category'], 500);
+			return response()->json(['error' => 'Thêm danh mục tin tức thất bại'], 500);
 		}
 	}
 
@@ -79,9 +79,9 @@ class CategoryController extends Controller
 
 			$category_service->save();
 
-			return response()->json(['success' => 'Successfully']);
+			return response()->json(['success' => 'Cập nhật danh mục tin tức']);
 		} catch (\Exception $e) {
-			return response()->json(['error' => 'An error occurred while creating the category'], 500);
+			return response()->json(['error' => 'Cập nhật danh mục tin tức thất bại'], 500);
 		}
 	}
 
@@ -95,10 +95,10 @@ class CategoryController extends Controller
 			$category_service = $this->model::findOrFail($id);
 			if ($category_service) {
 				$category_service->delete();
-				return response()->json(['success' => 'Successfully']);
+				return response()->json(['success' => 'Xóa danh mục tin tức thành công']);
 			}
 		} catch (\Exception $e) {
-			return response()->json(['error' => 'An error occurred while deleting the product'], 500);
+			return response()->json(['error' => 'Xóa danh mục tin tức thất bại'], 500);
 		}
 	}
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\BillController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\ServiceController;
 use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -21,7 +23,6 @@ use App\Http\Controllers\Admin\DashboardController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 
 // Login otp
@@ -52,5 +53,9 @@ Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])
 Route::get('/booking-service', [BookingController::class, 'index'])->name('booking-service.index');
 Route::post('/booking-service/getStaff', [BookingController::class, 'getStaff'])->name('booking-service.getStaff');
 Route::post('/booking-service/store', [BookingController::class, 'store'])->name('booking-service.store');
+// Profile
+
+Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //About-us
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');

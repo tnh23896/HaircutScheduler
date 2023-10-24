@@ -27,4 +27,14 @@ class StoreRequest extends FormRequest
             'permissions' => 'required',
         ];
     }
+		public function messages()
+		{
+			return [
+				'name.required' => 'Tên quyền không được để trống',
+				'name.unique' => 'Tên quyền đã tồn tại',
+				'guard_name.required' => 'Chức vụ không được để trống',
+				'guard_name.in' => 'Chức vụ không đúng',
+				'permissions.required' => 'Quyền không được để trống',
+			];
+		}
 }
