@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section ('title','Schedule Management')
+@section ('title','Danh sách lịch đặt')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">

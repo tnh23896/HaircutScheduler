@@ -52,7 +52,7 @@ class EmployeeController extends Controller
 
             $employee = Admin::create($requestData);
             $employee->assignRole($request->input('roles'));
-            return redirect()->route('admin.employee.index')->with('success', 'Created successfully');
+            return redirect()->route('admin.employee.index')->with('success', 'Thêm mới nhân viên thành công');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }

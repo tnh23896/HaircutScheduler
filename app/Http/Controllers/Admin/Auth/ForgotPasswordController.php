@@ -35,7 +35,7 @@ class ForgotPasswordController extends Controller
 
         SendForgotPasswordEmail::dispatch( $token, $email );
         
-        return back()->with('success', 'We have emailed your password reset link!');
+        return back()->with('success', 'Chúng tôi đã gửi email để đặt lại mật khẩu của bạn.');
     }
 
 

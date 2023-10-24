@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section ('title','Edit Schedule Management')
+@section ('title','Cập nhật lịch đặt')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">

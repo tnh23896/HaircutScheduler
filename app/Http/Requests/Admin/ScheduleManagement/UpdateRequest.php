@@ -25,4 +25,11 @@ class UpdateRequest extends FormRequest
             'status' => 'required|in:pending,success,canceled'
         ];
     }
+		public function messages()
+		{
+			return [
+				'status.required' => 'Trạng thái không được để trống',
+				'status.in' => 'Trạng thái không đúng ',
+			];
+		}
 }
