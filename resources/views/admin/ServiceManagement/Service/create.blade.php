@@ -25,10 +25,10 @@
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Danh mục</label>
                         <div class="mt-2">
-                            <select name="category_services_id" id="category_services_id" data-placeholder="Select your favorite actors"
-                                    class="tom-select w-full">
+                            <select name="category_services_id" id="category_services_id"
+                                data-placeholder="Select your favorite actors" class="tom-select w-full">
                                 @foreach ($category_service as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -42,15 +42,16 @@
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Mô tả</label>
-                       <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10"></textarea>
+                        <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10"></textarea>
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Giảm giá</label>
-                        <input type="text" name="percentage_discount" id="percentage_discount" class="clearable form-control w-full"
-                            placeholder="Percentage_discount">
+                        <input type="text" name="percentage_discount" id="percentage_discount"
+                            class="clearable form-control w-full" placeholder="Percentage_discount">
                     </div>
                     <div class="text-right mt-5">
-                        <a href="{{route('admin.serviceManagement.service.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">Liệt kê</a>
+                        <a href="{{ route('admin.serviceManagement.service.index') }}" type="button"
+                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>

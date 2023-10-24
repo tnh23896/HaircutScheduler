@@ -1,13 +1,13 @@
 @extends('admin.templates.app')
-@section('title', 'Danh mục thời gian')
+@section('title', 'Danh mục thời gian làm việc')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
-        Danh mục thời gian
+        Danh mục thời gian làm việc
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <a href="{{ route('admin.TimeManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm mới thời
+            <a href="{{ route('admin.TimeManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm mới thời làm việc
                     gian</button></a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">

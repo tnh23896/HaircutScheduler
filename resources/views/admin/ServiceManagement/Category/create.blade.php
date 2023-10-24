@@ -26,7 +26,8 @@
                         </div>
                     </div>
                     <div class="text-right mt-5">
-                        <a href="{{route('admin.serviceManagement.category.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">Liệt kê</a>
+                        <a href="{{ route('admin.serviceManagement.category.index') }}" type="button"
+                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
