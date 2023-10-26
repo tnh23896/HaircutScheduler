@@ -7,11 +7,10 @@ use App\Http\Controllers\Client\BillController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProfileController;
-use App\Http\Controllers\Client\ServiceController;
 use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
-
+use App\Http\Controllers\Client\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +48,8 @@ Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.blog');
 //View Blog With Category
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
+//Service
+Route::get('/service', [ServiceController::class, 'list_service'])->name('client.service');
 
 Route::get('/booking-service', [BookingController::class, 'index'])->name('booking-service.index');
 Route::post('/booking-service/getStaff', [BookingController::class, 'getStaff'])->name('booking-service.getStaff');
