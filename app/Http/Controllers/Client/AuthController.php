@@ -11,8 +11,6 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-
-
         try {
             $user = User::where('phone', $request->phone)->first();
             if ($user) {
@@ -34,6 +32,6 @@ class AuthController extends Controller
     {
         Auth::guard('web')->logout();
         toastr()->success('Đăng xuất thành công');
-        return redirect()->route('loginOtp');
+        return redirect()->route('home.index');
     }
 }

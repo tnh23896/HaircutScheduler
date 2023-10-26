@@ -26,4 +26,15 @@ class UpdateRequest extends FormRequest
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
+		public function messages()
+		{
+			return [
+				'name.required' => 'Tên danh mục không được để trống',
+				'name.min' => 'Tên danh mục không được nhỏ hơn 2 ký tự',
+				'name.max' => 'Tên danh mục không được lớn hơn 255 ký tự',
+				'image.image' => 'Ảnh không đúng định dạng',
+				'image.mimes' => 'Ảnh không đúng định dạng',
+				'image.max' => 'Ảnh không được lớn hơn 2MB',
+			];
+		}
 }

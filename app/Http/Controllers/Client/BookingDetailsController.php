@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\ScheduleManagement;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
@@ -9,14 +9,14 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ScheduleDetailsController extends Controller
+class BookingDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -42,13 +42,12 @@ class ScheduleDetailsController extends Controller
                     'status' => 'success',
                     'name' => $service->name,
                     'price' => $service->price,
-                    'admin_id' => Auth::guard('admin')->user()->id,
                 ]);
             }
 
-            return redirect()->back()->with('success', 'Cập nhật chi tiết lịch đặt thành công');
+            return redirect()->back()->with('success', 'Cập nhật thành công');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Cập nhật chi tiết lịch đặt thất bại');
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
         }
     }
 
@@ -61,20 +60,16 @@ class ScheduleDetailsController extends Controller
             $item = Booking::query()->findOrFail($id);
             return view('admin.ScheduleManagement.scheduleDetails', compact('item'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Cập nhật chi tiết lịch thất bại');
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
         }
     }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $item = Booking::query()->findOrFail($id);
-         $servicesNotInBooking = Service::whereDoesntHave('booking_details', function ($query) use ($id) {
-        $query->where('booking_id', $id);
-             })->get();
 
-        return view('admin.ScheduleManagement.scheduleDetails', compact('item', 'servicesNotInBooking'));
     }
 
     /**
@@ -89,18 +84,16 @@ class ScheduleDetailsController extends Controller
             foreach ($request->status as $value) {
                 $bookingDetail = BookingDetail::query()->findOrFail($value);
                 $bookingDetail->status = "success";
-                $bookingDetail->admin_id = Auth::guard('admin')->user()->id;
                 $bookingDetail->save();
             }
             foreach ($uncheckedIds as $value) {
                 $bookingDetail = BookingDetail::query()->findOrFail($value);
                 $bookingDetail->status = "cancel";
-                $bookingDetail->admin_id = Auth::guard('admin')->user()->id;
                 $bookingDetail->save();
             }
-            return redirect()->back()->with('success', 'Cập nhật chi tiết lịch đặt thành công');
+            return redirect()->back()->with('success', 'Cập nhật thành công');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Cập nhật chi tiết lịch đặt thất bại');
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
         }
     }
 

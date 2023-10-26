@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section('title', 'Create Category blogs')
+@section('title', 'Thêm mới danh mục tin tức')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Add New Category blog
+            Thêm mới danh mục tin tức
         </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -13,13 +13,13 @@
             <form id="ajaxForm" >
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Category title</label>
+                        <label for="crud-form-1" class="form-label">Tiêu đề</label>
                         <input type="text" name="title" id="title" class="clearable form-control w-full"
-                            placeholder="Category title">
+                            placeholder="Tiêu đề">
                     </div>
                     <div class="text-right mt-5">
-                        <a href="{{route('admin.blogManagement.category.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">List</a>
-                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
+                        <a href="{{route('admin.blogManagement.category.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Thêm</button>
                     </div>
                 </div>
             </form>

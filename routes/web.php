@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Client\BookingDetailsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\BillController;
 use App\Http\Controllers\Client\BlogController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -22,7 +24,6 @@ use App\Http\Controllers\Client\ServiceController;
 */
 
 
-
 // Login otp
 Route::post('/login-with-otp', [AuthController::class, 'login'])->name('loginOtp');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -32,7 +33,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
 Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
-Route::put('/booking-history/update/{id}', [BookingController::class, 'update'])->name('booking-history.update');
+
+//Booking Details
+Route::put('/booking-details/update/{id}', [BookingDetailsController::class, 'update'])->name('booking-details.update');
+Route::post('/booking-details/store/{id}', [BookingDetailsController::class, 'store'])->name('booking-details.store');
+
 
 //Bill Payment
 Route::get('bill-history/{id}', [BillController::class, 'index'])->name('bill');
@@ -45,5 +50,13 @@ Route::get('/blog/{id}', [BlogController::class, 'detail_blog'])->name('detail.b
 Route::get('/blog/category/{id}', [BlogController::class, 'list_blog_category'])->name('list.blog.category');
 //Service
 Route::get('/service', [ServiceController::class, 'list_service'])->name('client.service');
+
+Route::get('/booking-service', [BookingController::class, 'index'])->name('booking-service.index');
+Route::post('/booking-service/getStaff', [BookingController::class, 'getStaff'])->name('booking-service.getStaff');
+Route::post('/booking-service/store', [BookingController::class, 'store'])->name('booking-service.store');
+// Profile
+
+Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //About-us
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');

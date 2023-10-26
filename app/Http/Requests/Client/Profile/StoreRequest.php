@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Admin\ScheduleManagement;
+namespace App\Http\Requests\Client\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,14 +23,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:pending,success,canceled'
+          //
         ];
     }
-		public function messages()
-		{
-			return [
-				'status.required' => 'Trạng thái không được để trống',
-				'status.in' => 'Trạng thái không đúng ',
-			];
-		}
 }

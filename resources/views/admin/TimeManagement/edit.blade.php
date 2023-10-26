@@ -1,33 +1,35 @@
 @extends('admin.templates.app')
-@section ('title','Create Category Services')
+@section('title', 'Cập nhật thời gian làm việc')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Edit Time
+            Cập nhật thời gian làm việc
         </h2>
     </div>
-    <form id="ajaxForm"  >
-    <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="intro-y col-span-12 lg:col-span-12">
-            <!-- BEGIN: Form Layout -->
-            <div class="intro-y box p-5">
-                <div>
-                    <label for="crud-form-1" class="form-label">Time</label>
-                    <input id="crud-form-1" name="time" type="time" class="form-control w-full" placeholder="Input time" value="{{$data->time}}">
+    <form id="ajaxForm">
+        <div class="grid grid-cols-12 gap-6 mt-5">
+            <div class="intro-y col-span-12 lg:col-span-12">
+                <!-- BEGIN: Form Layout -->
+                <div class="intro-y box p-5">
+                    <div>
+                        <label for="crud-form-1" class="form-label">Thời gian làm việc</label>
+                        <input id="crud-form-1" name="time" type="time" class="form-control w-full"
+                            placeholder="Input time" value="{{ $data->time }}">
+                    </div>
+                    <div class="text-right mt-5">
+                        <a href="{{ route('admin.TimeManagement.index') }}"> <button type="button"
+                                class="btn btn-outline-secondary w-24 mr-1">Danh sách</button></a>
+                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
+                    </div>
                 </div>
-                <div class="text-right mt-5">
-                   <a href="{{route('admin.TimeManagement.index')}}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">List</button></a>
-                    <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
-                </div>
+                <!-- END: Form Layout -->
             </div>
-            <!-- END: Form Layout -->
         </div>
-    </div>
-</form>
+    </form>
     <script>
         $(function() {
-            var editId = {{$data->id}};
+            var editId = {{ $data->id }};
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
                 var url = "{{ route('admin.TimeManagement.update', ['id' => ':editId']) }}";
@@ -40,7 +42,8 @@
                                 text: response.success,
                                 icon: 'success',
                             }).then(() => {
-                                window.location.href = "{{ route('admin.TimeManagement.index') }}";
+                                window.location.href =
+                                    "{{ route('admin.TimeManagement.index') }}";
                             });
                         }
                     },
@@ -70,4 +73,3 @@
         });
     </script>
 @endsection
-

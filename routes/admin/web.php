@@ -97,7 +97,7 @@ Route::group(['middleware' => 'admin'], function () {
         //workschedule
         Route::resource('work-schedule', WorkScheduleController::class);
         Route::post('work-schedule/{work_schedule}',
-            [WorkScheduleController::class, 'update'])->name('work-schedule.update');
+            [WorkScheduleController::class, 'update'])->name('work-schedule.update1');
     });
 
     // Schedule Management
