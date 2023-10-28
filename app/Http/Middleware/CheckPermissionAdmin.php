@@ -34,10 +34,14 @@ class CheckPermissionAdmin
             if ($name === $value) {
                 return $next($request);
             }
-
+            
         }
-
-        if (\auth('admin')->user()->hasPermissionTo($name)) {
+        if(!Auth::guard('admin')->check()) {
+            return redirect()->route('admin.login');
+        }
+        /** @var \App\Models\Admin $admin **/
+        $admin = Auth::guard('admin')->user();
+        if ($admin->hasPermissionTo($name)) {
             return $next($request);
         }
 
