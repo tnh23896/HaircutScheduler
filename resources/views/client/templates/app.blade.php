@@ -79,14 +79,23 @@
             coderesult.confirm(code).then(function(result) {
                 var user = result.user;
                 const formData = new FormData();
+
                 formData.append('phone', user.phoneNumber);
+                
                 const url = "{{ route('loginOtp') }}";
                 sendAjaxRequest(url, 'post', formData, function(response) {
                         console.log(response);
+                       
                         console.log($(form).closest('#modalAuth').eq(1));
                         if ($(form).closest('#modalAuth').length) {
                             toastr.success("Xác thực thành công");
                             $('#modalAuth').modal('hide');
+                            const html1 = `
+                
+                                <a href="{{ route('logout') }}">
+                                <button class="theme-btn-2 nav-btn " id="logout" style="height: 50px;" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
+                                </a>`
+                            $('#modalNavAuth').html(html1);
                         } else {
                             toastr.success("Xác thực thành công");
                             const user = response.data;
