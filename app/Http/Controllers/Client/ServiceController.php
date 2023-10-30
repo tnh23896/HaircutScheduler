@@ -11,7 +11,7 @@ class ServiceController extends Controller
 {
     public function list_service()
     {
-        $categoryService= CategoryService::select('id', 'name','image')->get();
+        $categoryService= CategoryService::select('id', 'name','image')->paginate(5);
 
         $listServices = [];
 
@@ -22,9 +22,10 @@ class ServiceController extends Controller
 
             $listServices[] = [
                 'category' => $category->name,
+                'image' =>$category->image,
                 'services' => $services,
             ];
         }
-        return view('client.service', compact('categoryService','listServices'));
+        return view('client.service.service', compact('categoryService','listServices'));
     }
 }
