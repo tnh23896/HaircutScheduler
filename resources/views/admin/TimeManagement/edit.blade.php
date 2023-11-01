@@ -37,36 +37,14 @@
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                title: 'Successfully',
-                                text: response.success,
-                                icon: 'success',
-                            }).then(() => {
-                                window.location.href =
-                                    "{{ route('admin.TimeManagement.index') }}";
-                            });
+                            toastr.success(response.success);
+                            window.location.href =
+                                "{{ route('admin.TimeManagement.index') }}";
                         }
                     },
 
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-
-                            if (error.responseJSON.errors.time) {
-                                errorMessages.push(error.responseJSON.errors.time);
-                            }
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#errorDiv');
-                                errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                        showErrors(error);
                     }
                 );
             });

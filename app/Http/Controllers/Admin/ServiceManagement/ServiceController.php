@@ -50,10 +50,10 @@ class ServiceController extends Controller
                 $newService->image = upload_file('admin/Service', $request->file('image'));
                 $newService->save();
             }
-            return response()->json(['success' => 'Xóa dịch vụ thành công']);
+            return response()->json(['success' => 'Thêm dịch vụ thành công']);
         } catch (\Exception $e) {
             // Xử lý lỗi và thông báo cho người dùng
-            return response()->json(['error' => 'Xóa dữ liệu dịch vụ'], 500);
+            return response()->json(['error' => 'Thêm dịch vụ thất bại'], 500);
         }
     }
 

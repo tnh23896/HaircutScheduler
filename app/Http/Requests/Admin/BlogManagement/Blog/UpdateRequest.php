@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
 			'title' => 'required|min:2|max:255',
 			'description' => 'required',
 			'category_blog_id' => 'required',
-			'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+			'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
 		];
 	}
 	public function messages()

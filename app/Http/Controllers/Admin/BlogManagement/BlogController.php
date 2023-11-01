@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Cache\Store;
 use App\Http\Requests\Admin\BlogManagement\Blog\StoreRequest;
+use App\Http\Requests\Admin\BlogManagement\Blog\UpdateRequest;
 
 class BlogController extends Controller
 {
@@ -77,7 +78,7 @@ class BlogController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 */
-	public function update(Request $request, string $id)
+	public function update(UpdateRequest $request, string $id)
 	{
 		//
 		try {

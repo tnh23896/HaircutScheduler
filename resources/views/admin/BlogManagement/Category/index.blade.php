@@ -78,7 +78,6 @@
                 var form = $(this);
                 var urlToDelete = form.attr('action');
 
-                // Hiển thị hộp thoại xác nhận
                 Swal.fire({
                     title: 'Bạn có muốn xóa?',
                     text: 'Nếu xóa sẽ mất vĩnh viễn?',
@@ -93,17 +92,11 @@
                             _method: 'DELETE'
                         }, function(response) {
                             if (response.success) {
-                                Swal.fire({
-                                    title: 'Thành công!!!',
-                                    text: response.success,
-                                    icon: 'success',
-                                }).then(() => {
-                                    // Xoá phần tử khỏi giao diện sau khi xoá thành công
-                                    form.closest('tr').remove();
-                                });
+                                form.closest('tr').remove();
+                                toastr.success(response.success);
                             }
                         }, function(error) {
-                            alert('Error deleting item.');
+                            showErrors(error);
                         });
                     }
                 });

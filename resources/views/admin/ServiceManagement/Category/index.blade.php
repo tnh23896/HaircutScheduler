@@ -99,17 +99,12 @@
                             _method: 'DELETE'
                         }, function(response) {
                             if (response.success) {
-                                Swal.fire({
-                                    title: 'Thành công!!!',
-                                    text: response.success,
-                                    icon: 'success',
-                                }).then(() => {
-                                    // Xoá phần tử khỏi giao diện sau khi xoá thành công
-                                    form.closest('tr').remove();
-                                });
+                                toastr.success(response.success);
+                                form.closest('tr').remove();
+
                             }
                         }, function(error) {
-                            alert('Error deleting item.');
+                            showErrors(error);
                         });
                     }
                 });
