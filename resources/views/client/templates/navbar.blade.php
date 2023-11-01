@@ -152,7 +152,6 @@
                     <!-- end info-box -->
                 </div>
                 <!-- end container -->
-
             </nav>
             @if (auth()->guard('web')->check())
             <a href="{{ route('logout') }}">
@@ -160,7 +159,7 @@
             </a>
             @else
                 <a class="theme-btn-2 nav-btn " style="height: 50px;" href="javascript:void(0)" data-toggle="modal"
-                    data-target="#exampleModalCenter"><h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6></a>
+                    data-target="#modalAuth"><h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6></a>
             @endif
 
 

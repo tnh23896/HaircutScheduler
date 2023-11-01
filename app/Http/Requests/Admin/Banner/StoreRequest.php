@@ -25,4 +25,13 @@ class StoreRequest extends FormRequest
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
+		public function messages()
+		{
+			return [
+				'image.required' => 'Ảnh không được để trống',
+				'image.image' => 'Ảnh không đúng định dạng',
+				'image.mimes' => 'Ảnh không đúng định dạng',
+				'image.max' => 'Ảnh quá kích thước 2048kb',
+			];
+		}
 }

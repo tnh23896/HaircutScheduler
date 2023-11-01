@@ -33,4 +33,13 @@ class StoreRequest extends FormRequest
             'times' => 'required',
         ];
     }
+		public function messages()
+	{
+		return [
+			'day.required' => 'Ngày không được để trống',
+			'day.after' => 'Ngày phải lớn hơn hoặc bằng ngày hiện tại',
+			'times.required' => 'Thời gian không được để trống',
+			'day.unique' => 'Thời gian đã tồn tại',
+		];
+	}
 }

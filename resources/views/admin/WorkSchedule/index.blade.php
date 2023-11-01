@@ -142,22 +142,17 @@
                     text: 'Chỉ khi nhân viên nghỉ làm rồi hãy xoá?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Đúng!',
+                    cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         sendAjaxRequest(deleteUrl, 'DELETE', {}, function(response) {
-                            if (response.status) {
-                                Swal.fire({
-                                    title: 'Successfully',
-                                    text: response.message,
-                                    icon: response.status,
-                                }).then(() => {
+                            if (response.success) {
+                                toastr.success(response.success);
                                     deleteForm.closest('tr').remove();
-                                });
                             }
                         }, function(error) {
-                            alert('Error deleting item.');
+                            showErrors(error);
                         });
                     }
                 });
@@ -169,81 +164,31 @@
                 var method = "POST";
                 const formData = new FormData(this);
                 sendAjaxRequest(url, "POST", formData, function(response) {
-                    if (response.status) {
-                        Swal.fire({
-                                title: 'Successfully',
-                                text: response.message,
-                                icon: response.status,
-                            })
-                            .then(() => {
-                                location.reload();
-                            })
+                    if (response.success) {
+                        toastr.success(response.success);
+                        location.reload();
                     }
                 }, function(error) {
-                    if (error.responseJSON && error.responseJSON.errors) {
-                        var errorMessages = [];
-                        if (error.responseJSON.errors.day) {
-                            errorMessages.push(error.responseJSON.errors.day);
-                        }
-                        if (error.responseJSON.errors.times) {
-                            errorMessages.push(error.responseJSON.errors.times);
-                        }
-                        if (errorMessages.length > 0) {
-                            var errorDiv = $('#errorDiv');
-                            errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
-                            var errorList = errorDiv.find("ul");
-                            for (var i = 0; i < errorMessages.length; i++) {
-                                errorList.append("<li>" + " - " + errorMessages[i] +
-                                    "</li>");
-                            }
-                            errorDiv.show();
-                        }
-                    }
+                    showErrors(error);
                 })
             })
             $('#crud-form-edit').on('submit', function(e) {
                 e.preventDefault();
                 var form = $(this);
                 var url =
-                    "{{ route('admin.work-schedule.update', ['work_schedule' => 'workSchedule_id', 'id' => 'employee_id']) }}";
+                    "{{ route('admin.work-schedule.update1', ['work_schedule' => 'workSchedule_id', 'id' => 'employee_id']) }}";
                 url = url.replace('workSchedule_id', $(this).data('id'));
                 url = url.replace('employee_id', "{{ $employee->id }}");
                 var method = "POST";
                 const formData = new FormData(this);
                 sendAjaxRequest(url, method, formData, function(response) {
-                        if (response.status) {
-                            Swal.fire({
-                                    title: 'Successfully',
-                                    text: response.message,
-                                    icon: response.status,
-                                })
-                                .then(() => {
-                                    location.reload();
-                                })
+                        if (response.success) {
+                            toastr.success(response.success);
+                            location.reload();
                         }
                     },
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-
-                            if (error.responseJSON.errors.day) {
-                                errorMessages.push(error.responseJSON.errors.day);
-                            }
-                            if (error.responseJSON.errors.times) {
-                                errorMessages.push(error.responseJSON.errors.times);
-                            }
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#error-work-schedule-edit');
-                                errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                        showErrors(error, "error-work-schedule-edit");
                     })
             })
         });

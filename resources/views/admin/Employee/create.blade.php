@@ -14,7 +14,7 @@
                 @csrf
                 <div>
                     <label for="crud-form-1" class="form-label">Tên nhân viên</label>
-                    <input id="crud-form-1" name="username" value="{{ old('username') }}" type="text" class="form-control w-full" placeholder="Input text">
+                    <input id="crud-form-1" name="username" value="{{ old('username') }}" type="text" class="form-control w-full" placeholder="Tên nhân viên">
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-2" class="form-label">Ảnh đại diện</label>

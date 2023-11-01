@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section('title', 'Edit Category blogs')
+@section('title', 'Cập nhật danh mục tin tức')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Edit Category blog
+            Cập nhật danh mục tin tức
         </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -13,14 +13,14 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Category title</label>
+                        <label for="crud-form-1" class="form-label">Tiêu đề</label>
                         <input type="text" name="title" id="title" class="clearable form-control w-full"
-                            value="{{ $one_category_blog->title }}" placeholder="Category title">
+                            value="{{ $one_category_blog->title }}" placeholder="Tiêu đề">
                     </div>
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.blogManagement.category.index') }}" type="button"
-                            class="btn btn-outline-secondary w-24 mr-1">Back</a>
-                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
+                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
             </form>
@@ -37,37 +37,14 @@
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: response.success,
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(() => {
-                                window.location.href =
-                                    "{{ route('admin.blogManagement.category.index') }}";
-                            });
+                            toastr.success(response.success);
+                            window.location.href =
+                                "{{ route('admin.blogManagement.category.index') }}";
                         }
                     },
 
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-                            if (error.responseJSON.errors.title) {
-                                errorMessages.push(error.responseJSON.errors.title);
-                            }
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#errorDiv');
-                                errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                        showErrors(error);
                     }
                 );
             });

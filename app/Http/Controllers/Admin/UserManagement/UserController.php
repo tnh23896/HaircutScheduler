@@ -59,13 +59,13 @@ class UserController extends Controller
             $param = $request->except('_token');
             User::where('id', $id)->update($param);
             return response()->json([
-                "success" => "Created successfully ",
+                "success" => "Cập nhật người dùng thành công",
                 "status" => 200
             ]);
         }catch (\Exception $exception){
             return response()->json([
                 'status' => 500,
-                'error' => 'Cập nhật thất bại'
+                'error' => 'Cập nhật người dùng thất bại'
             ]);
         }
     }

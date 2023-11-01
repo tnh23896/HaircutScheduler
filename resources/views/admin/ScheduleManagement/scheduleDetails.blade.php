@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section ('title','Schedule Details')
+@section ('title','Chi tiết lịch đặt')
 @section('content')
     <form action="{{route('admin.scheduleManagement.scheduleDetails.update', $item->id)}}" method="post"
           enctype="multipart/form-data">
