@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\WorkScheduleManagement\WorkScheduleController;
 use App\Http\Controllers\Admin\BlogManagement\CategoryController as BlogCategoryController;
 use App\Http\Controllers\Admin\BlogManagement\BlogController as BlogController;
 use App\Http\Controllers\Admin\BannerManagement\BannerController;
+use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\ScheduleEmployee\ScheduleEmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\ServiceController;
 
@@ -97,7 +98,7 @@ Route::group(['middleware' => 'admin'], function () {
         //workschedule
         Route::resource('work-schedule', WorkScheduleController::class);
         Route::post('work-schedule/{work_schedule}',
-            [WorkScheduleController::class, 'update'])->name('work-schedule.update');
+            [WorkScheduleController::class, 'update'])->name('work-schedule.update1');
     });
 
     // Schedule Management
@@ -197,4 +198,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('role-management/delete/{id}', [RoleController::class, 'destroy'])
         ->name('admin.RoleManagement.delete');
 
+    //Profile
+    Route::get('/profile', [ProfileController::class,'edit'])->name('admin.profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
 });

@@ -35,9 +35,9 @@ class BannerController extends Controller
                 $banner->image = upload_file('admin/Banner', $request->file('image'));
             }
             $banner->save();
-            return response()->json(['success' => 'Banner created successfully']);
+            return response()->json(['success' => 'Thêm mới Banner thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Banner created false']);
+            return response()->json(['error' => 'Thêm mới Banner thất bại']);
         }
     }
 
@@ -59,9 +59,9 @@ class BannerController extends Controller
             }
             $banner->save();
 
-            return response()->json(['success' => 'Banner updated successfully']);
+            return response()->json(['success' => 'Cập nhật Banner thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Banner updated false']);
+            return response()->json(['error' => 'Cập nhật Banner thất bại']);
         }
     }
 
@@ -72,9 +72,9 @@ class BannerController extends Controller
         if ($banner) {
             delete_file($banner->image);
             $banner->delete();
-            return response()->json(['success' => 'Banner deleted successfully']);
+            return response()->json(['success' => 'Xóa Banner thành công']);
         } else {
-            return response()->json(['error' => 'Banner not found']);
+            return response()->json(['error' => 'Xóa Banner thất bại']);
         }
     }
 }

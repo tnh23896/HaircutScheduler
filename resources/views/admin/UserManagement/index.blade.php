@@ -1,9 +1,9 @@
 @extends('admin.templates.app')
-@section('title', ' User')
+@section('title', 'Danh sách người dùng')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
-        User List
+        Danh sách người dùng
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
@@ -20,18 +20,16 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap text-center">ID</th>
-                        <th class="whitespace-nowrap text-center">USER NAME</th>
-                        <th class="whitespace-nowrap text-center">PHONE</th>
-                        <th class="whitespace-nowrap text-center">EMAIL</th>
-                        <th class="whitespace-nowrap text-center">BLACK STATUS</th>
-                        <th class="text-center whitespace-nowrap ">ACTIONS</th>
+                        <th class="whitespace-nowrap text-center">Tên người dùng</th>
+                        <th class="whitespace-nowrap text-center">Điện thoại</th>
+                        <th class="whitespace-nowrap text-center">Email</th>
+                        <th class="whitespace-nowrap text-center">Blacklist</th>
+                        <th class="text-center whitespace-nowrap ">Hành động</th>
                     </tr>
                 </thead>
                 @foreach ($data as $key => $item)
                     <tbody>
                         <tr class="intro-x">
-                            <td class="text-center capitalize">{{ $item->id }}</td>
                             <td class="text-center capitalize">{{ $item->username }}</td>
                             <td class="text-center capitalize">{{ $item->phone }}</td>
                             <td class="text-center capitalize">{{ $item->email }}</td>
@@ -40,7 +38,7 @@
                                 <div class="flex justify-center items-center">
                                     <a href="{{ route('admin.UserManagement.edit', $item->id) }}"
                                         class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
-                                            class="w-4 h-4 mr-1"></i> Edit </a>
+                                            class="w-4 h-4 mr-1"></i> Sửa </a>
                                 </div>
                             </td>
                         </tr>

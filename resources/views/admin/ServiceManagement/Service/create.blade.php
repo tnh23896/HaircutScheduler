@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section('title', 'Create Service Services')
+@section('title', 'Thêm dịch vụ')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Add New Service
+            Thêm dịch vụ
         </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -13,45 +13,46 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Service Name</label>
+                        <label for="crud-form-1" class="form-label">Tên dịch vụ</label>
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
-                            placeholder="Service Name">
+                            placeholder="Tên dịch vụ">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Price</label>
+                        <label for="crud-form-1" class="form-label">Giá</label>
                         <input type="number" name="price" id="price" class="clearable form-control w-full"
-                            placeholder="Price">
+                            placeholder="Giá">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Category</label>
+                        <label for="crud-form-1" class="form-label">Danh mục</label>
                         <div class="mt-2">
-                            <select name="category_services_id" id="category_services_id" data-placeholder="Select your favorite actors"
-                                    class="tom-select w-full">
+                            <select name="category_services_id" id="category_services_id"
+                                data-placeholder="Select your favorite actors" class="tom-select w-full">
                                 @foreach ($category_service as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-3" class="form-label">Image</label>
+                        <label for="crud-form-3" class="form-label">Hình ảnh</label>
                         <div class="input-group">
                             <input type="file" name="image" id="image" class="clearable form-control"
                                 placeholder="Image" aria-describedby="input-group-1">
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Description</label>
-                       <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10"></textarea>
+                        <label for="crud-form-1" class="form-label">Mô tả</label>
+                        <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10"></textarea>
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Percentage_discount</label>
-                        <input type="text" name="percentage_discount" id="percentage_discount" class="clearable form-control w-full"
-                            placeholder="Percentage_discount">
+                        <label for="crud-form-1" class="form-label">Giảm giá</label>
+                        <input type="text" name="percentage_discount" id="percentage_discount"
+                            class="clearable form-control w-full" placeholder="Percentage_discount">
                     </div>
                     <div class="text-right mt-5">
-                        <a href="{{route('admin.serviceManagement.service.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">List</a>
-                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
+                        <a href="{{ route('admin.serviceManagement.service.index') }}" type="button"
+                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
             </form>

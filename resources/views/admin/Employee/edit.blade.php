@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section ('title','Đăng ký nhân viên')
+@section ('title','Cập nhật nhân viên')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Đăng ký nhân viên mới
+            Cập nhật nhân viên mới
         </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -16,7 +16,7 @@
                 <input type="hidden" name="id" value="{{ $employee->id }}">
                 <div>
                     <label for="crud-form-1" class="form-label">Tên nhân viên</label>
-                    <input id="crud-form-1" name="username" value="{{ $employee->username }}" type="text" class="form-control w-full" placeholder="Input text">
+                    <input id="crud-form-1" name="username" value="{{ $employee->username }}" type="text" class="form-control w-full" placeholder="Tên nhân viên">
                 </div>
                 <div class="mt-3">
                     <img src="{{ asset($employee->avatar) }}" width="100" alt="">

@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section ('title','Bill Management')
+@section ('title','Danh sách hóa đơn')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">

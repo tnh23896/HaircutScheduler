@@ -93,7 +93,7 @@
         </div>
     </div>
 </footer>
-<div class="modal fade popup-top" id="exampleModalCenter" tabindex="-1" role="dialog"
+<div class="modal fade popup-top" id="modalAuth" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -104,14 +104,14 @@
             </div>
             <div class="modal-body" id="modal-body">
                 <div class="container" style="max-width: 550px">
-                    <div class="alert alert-danger" id="error" style="display: none;"></div>
+                    <div class="alert alert-danger error" id="" style="display: none;"></div>
                     <h3>Đăng nhập</h3>
-                    <div class="alert alert-success" id="successAuth" style="display: none;"></div>
-                    <form>
+                    <div class="alert alert-success successAuth" id="" style="display: none;"></div>
+                    <form class="formSendOtp">
                         <label>Phone Number:</label>
-                        <input type="text" id="number"  class="form-control " placeholder="+84********">
+                        <input type="text" name="phoneOtpNumberInput"  class="form-control " placeholder="+84********">
                         <div id="recaptcha-container" class="mt-3"></div>
-                        <button type="button" class="btn btn-primary mt-3" onclick="sendOTP();">Send OTP</button>
+                        <button  class="btn btn-primary mt-3">Send OTP</button>
                     </form>
                 </div>
             </div>

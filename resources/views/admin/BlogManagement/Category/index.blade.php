@@ -1,13 +1,13 @@
 @extends('admin.templates.app')
-@section('title', 'Create Category Blog')
+@section('title', 'Dánh sách danh mục tin tức')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
-        Category BLog List
+        Danh sách danh mục tin tức
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <a href="{{ route('admin.blogManagement.category.create') }}" class="btn btn-primary">Add Category</a>
+            <a href="{{ route('admin.blogManagement.category.create') }}" class="btn btn-primary">Thêm mới danh mục</a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <div class="w-56 relative text-slate-500">
@@ -29,8 +29,8 @@
                         <th class="whitespace-nowrap">
                             <input class="form-check-input" type="checkbox">
                         </th>
-                        <th class="text-center whitespace-nowrap">Title</th>
-                        <th class="text-center whitespace-nowrap">Action</th>
+                        <th class="text-center whitespace-nowrap">Tiêu đề</th>
+                        <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
                 </thead>
                 @foreach ($list_blog_category as $category)
@@ -46,7 +46,7 @@
                                     <a class="flex items-center mr-3"
                                         href="{{ route('admin.blogManagement.category.edit', $category->id) }}">
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
-                                        Edit </a>
+                                        Sửa </a>
                                     <form class="delete-form"
                                         action="{{ route('admin.blogManagement.category.delete', $category->id) }}"
                                         method="POST">
@@ -55,7 +55,7 @@
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
                                             <button type="submit" class="flex items-center text-danger"
                                                 data-id="{{ $category->id }}">
-                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
                                             </button>
                                         </div>
                                     </form>
@@ -80,12 +80,12 @@
 
                 // Hiển thị hộp thoại xác nhận
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Are you sure to delete this item?',
+                    title: 'Bạn có muốn xóa?',
+                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Đúng!',
+                    cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest
@@ -94,7 +94,7 @@
                         }, function(response) {
                             if (response.success) {
                                 Swal.fire({
-                                    title: 'Successfully',
+                                    title: 'Thành công!!!',
                                     text: response.success,
                                     icon: 'success',
                                 }).then(() => {

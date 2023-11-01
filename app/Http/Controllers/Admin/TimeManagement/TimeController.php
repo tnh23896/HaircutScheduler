@@ -35,13 +35,13 @@ class TimeController extends Controller
 
             Time::create($request->validated());
             return response()->json([
-                "success" => "Created successfully ",
+                "success" => "Thêm mới thời gian thành công",
                 "status" => 200
             ]);
         }catch (\Exception $exception){
             return response()->json([
                 'status' => 500,
-                'error' => 'Cập nhật thất bại'
+                'error' => 'Thêm mới thời gian thất bại'
             ]);
         }
     }
@@ -72,13 +72,13 @@ class TimeController extends Controller
 
             Time::where('id', $id)->update($request->validated());
             return response()->json([
-                "success" => "Created successfully ",
+                "success" => "Cập nhật thời gian thành công",
                 "status" => 200
             ]);
         }catch (\Exception $exception){
             return response()->json([
                 'status' => 500,
-                'error' => 'Cập nhật thất bại'
+                'error' => 'Cập nhật thời gian thất bại'
             ]);
         }
     }
@@ -91,13 +91,13 @@ class TimeController extends Controller
         try {
             Time::where('id', $id)->delete();
             return response()->json([
-                "success" => "Created successfully ",
+                "success" => "Xóa thời gian làm việc thành công",
                 "status" => 200
             ]);
         }catch (\Exception $exception){
             return response()->json([
                 'status' => 500,
-                'error' => 'Cập nhật thất bại'
+                'error' => 'Xóa thời gian thất bại'
             ]);
         }
     }

@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Create Category Services')
+@section('title', 'Danh sách nhân viên')
 @section('content')
     <!-- END: Top Bar -->
     <h2 class="intro-y text-lg font-medium mt-10">
@@ -54,8 +54,8 @@
                             </td>
                             <td class="text-center capitalize">{{ $item->phone }}</td>
                             <td>
-                                @if(!empty($item->getRoleNames()))
-                                    @foreach($item->getRoleNames() as $v)
+                                @if (!empty($item->getRoleNames()))
+                                    @foreach ($item->getRoleNames() as $v)
                                         <label class="badge badge-success">{{ $v }}</label>
                                     @endforeach
                                 @endif
@@ -68,7 +68,8 @@
                                             data-lucide="calendar" class="w-4 h-4 mr-1"></i> Lịch </a>
                                     <a class="flex items-center mr-3" href="{{ route('admin.employee.edit', $item) }}"> <i
                                             data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <button class="flex items-center text-danger delete-form" data-id="{{ $item->id }}">
+                                    <button class="flex items-center text-danger delete-form"
+                                        data-id="{{ $item->id }}">
                                         <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </button>
                                 </div>
                             </td>
@@ -102,8 +103,8 @@
                 text: 'Chỉ khi nhân viên nghỉ làm rồi hãy xoá?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Đúng!',
+                cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest
