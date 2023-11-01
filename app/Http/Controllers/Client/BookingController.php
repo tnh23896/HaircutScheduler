@@ -25,7 +25,7 @@ class BookingController extends Controller
      */
     public function booking_history()
     {
-       $id = auth('web')->user()->id;
+        $id = auth('web')->user()->id;
         $list_booking = Booking::query()->where('user_id', $id)->get();
         return view('client.booking_history.index', compact('list_booking'));
     }
@@ -116,41 +116,41 @@ class BookingController extends Controller
     }
     public function store(StoreRequest $request)
     {
-     try {
-        $params = [
-            'name' => $request->name,
-            'user_id' => auth('web')->user()->id,
-            'admin_id' => $request->admin_id,
-            'phone' => $request->phone,
-            'total_price' => $request->total_price,
-            'email' => $request->email,
-            'day' => $request->day,
-            'time' => $request->time,
-        ];
-        if ($request->promo_code) {
-            $promo = Promotion::where('promocode', $request->promo_code)->first();
-            $params['promo_id'] = $promo->id;
+        try {
+            $params = [
+                'name' => $request->name,
+                'user_id' => auth('web')->user()->id,
+                'admin_id' => $request->admin_id,
+                'phone' => $request->phone,
+                'total_price' => $request->total_price,
+                'email' => $request->email,
+                'day' => $request->day,
+                'time' => $request->time,
+            ];
+            if ($request->promo_code) {
+                $promo = Promotion::where('promocode', $request->promo_code)->first();
+                $params['promo_id'] = $promo->id;
+            }
+            $booking = Booking::query()->create($params);
+            $idServicesBookingDetail = explode(',', $request->servicesId);
+            foreach ($idServicesBookingDetail as $id) {
+                $service = Service::query()->findOrFail($id);
+                BookingDetail::query()->create([
+                    'booking_id' => $booking->id,
+                    'service_id' => $id,
+                    'name' => $service->name,
+                    'price' => $service->price,
+                ]);
+            }
+            return response()->json([
+                'message' => 'Thêm lịch đặt thành công',
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error('Error in store: ' . $e->getMessage());
+            return response()->json([
+                'message' => 'Có lỗi xảy ra, vui lòng thử lai sau!'
+            ], 500);
         }
-        $booking = Booking::query()->create($params);
-        $idServicesBookingDetail = explode(',', $request->servicesId);
-        foreach ($idServicesBookingDetail as $id) {
-            $service = Service::query()->findOrFail($id);
-            BookingDetail::query()->create([
-                'booking_id' => $booking->id,
-                'service_id' => $id,
-                'name' => $service->name,
-                'price' => $service->price,
-            ]);
-        }
-        return response()->json([
-            'message' => 'Thêm lịch đặt thành công',
-        ], 200);
-     } catch (\Exception $e) {
-        Log::error('Error in store: ' . $e->getMessage());
-        return response()->json([
-            'message' => 'Có lỗi xảy ra, vui lòng thử lai sau!'
-        ], 500);
-     }
     }
 
     /**
@@ -210,8 +210,27 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $phone = $request->input('phone');
+        $booking = Booking::query()->findOrFail($id);
+
+        if ($booking->status === 'pending') {
+            $user = auth()->user();
+
+            if ($user->phone === $phone) {
+                $booking->status = 'canceled'; 
+                $booking->save();
+                toastr()->success('Hủy đơn thành công');
+                return redirect()->back();
+            } else {
+                toastr()->error('Hủy đơn không thành công');
+                return redirect()->back();
+            }
+        } else {
+            toastr()->error('Thao tác không khớp');
+                return redirect()->back();
+        }
     }
 }

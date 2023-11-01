@@ -8,13 +8,13 @@
             <div class="book-on">
                 <h4 itemprop="headline">MY APPOINTMENT</h4>
                 <!--  <div class="select-wrap-inner">
-                         <select class="form-control">
-                               <option>Default select</option>
-                          </select>
-                          <select class="form-control">
-                               <option>Default select</option>
-                          </select>
-                     </div> -->
+                                     <select class="form-control">
+                                           <option>Default select</option>
+                                      </select>
+                                      <select class="form-control">
+                                           <option>Default select</option>
+                                      </select>
+                                 </div> -->
             </div>
             <div class="booking-table">
                 <table>
@@ -57,12 +57,16 @@
                                         </button>
                                     </a>
                                     @if ($booking->status == 'pending')
-                                        <a href="">
-                                            <button class="btn btn-danger  text-center"
-                                                style="width: 130px;  height: 40px; ">
-                                                Hủy lịch
-                                            </button>
-                                        </a>
+                                        <div class="mb-4 mt-2">
+                                            <a data-toggle="modal" data-target="#modaldelete">
+                                                <button
+                                                    style="width: 130px;  height: 40px; background-color: #fa0000; border: unset!important; border-radius: unset !important; color: white">
+                                                    Hủy Đặt
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <!-- Modal -->
+                                        @include('client.booking_history.modalCancel')
                                     @endif
                                 </td>
                             </tr>

@@ -35,6 +35,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
 Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
+Route::post('/booking-history/destroy/{id}', [BookingController::class, 'destroy'])->name('booking-history.delete');
 
 //Booking Details
 Route::put('/booking-details/update/{id}', [BookingDetailsController::class, 'update'])->name('booking-details.update');
