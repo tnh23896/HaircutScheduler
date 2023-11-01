@@ -152,7 +152,6 @@
                     <!-- end info-box -->
                 </div>
                 <!-- end container -->
-
             </nav>
             <div id="modalNavAuth" >
                 @if (auth()->guard('web')->check())

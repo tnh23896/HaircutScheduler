@@ -26,7 +26,9 @@ class CheckPermissionAdmin
             'admin.auth.ResetPasswordPost',
             'admin.404',
             'admin.dashboard',
-            'admin.auth.logout'
+            'admin.auth.logout',
+            'admin.profile.edit',
+            'admin.profile.update'
         ];
 
         $name = Route::currentRouteName();

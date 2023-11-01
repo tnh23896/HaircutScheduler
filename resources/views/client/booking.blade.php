@@ -1,5 +1,5 @@
 @extends('client.templates.app')
-@section('title', 'Chi tiết bài viết')
+@section('title', 'Đặt lịch cắt tóc')
 @section('css_header_custom')
     <style>
         .top-50 {
@@ -9,6 +9,13 @@
 
         .right-0 {
             right: 0;
+        }
+
+        #phoneHeading,
+        #serviceHeading,
+        #staffHeading {
+            background-color: #d9842f;
+            color: #fff;
         }
 
         #employee_list {
@@ -24,21 +31,113 @@
         input[type="radio"]~label {
             padding: 5px 10px;
             cursor: pointer;
-            transition: box-shadow 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
-        input[type="radio"]:checked+label {
-            box-shadow: 0 0 10px #d49f35,
-                0 0 20px 10px #d49f35;
+        input[type="radio"]:checked+label>img {
+            border: 4px solid #d9842f;
+        }
+
+        input[type="radio"]:checked+label>h6 {
+            color: #d9842f;
+        }
+
+        .collapsible-link::before {
+            content: '';
+            width: 14px;
+            height: 2px;
+            background: #333;
+            position: absolute;
+            top: calc(50% - 1px);
+            right: 1rem;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        /* Vertical line */
+        .collapsible-link::after {
+            content: '';
+            width: 2px;
+            height: 14px;
+            background: #333;
+            position: absolute;
+            top: calc(50% - 7px);
+            right: calc(1rem + 6px);
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .collapsible-link[aria-expanded='true']::after {
+            transform: rotate(90deg) translateX(-1px);
+        }
+
+        .collapsible-link[aria-expanded='true']::before {
+            transform: rotate(180deg);
+        }
+
+        label.check {
+            cursor: pointer;
+        }
+
+        label.check input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        label.check span {
+            padding: 7px 14px;
+            border: 2px solid #d9842f;
+            display: inline-block;
+            color: #d9842f;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        label.check input:checked+span {
+            border-color: #d9842f;
+            background-color: #d9842f;
+            color: #fff;
+        }
+
+        label.check input:disabled+span {
+            border-color: #ccc;
+            background-color: #ccc;
+            color: #fff;
+            cursor: default;
+        }
+
+        label:not(.input-group-text) {
+            margin-top: 10px;
+        }
+
+        .my-select {
+            background-color: #d9842f;
+            color: #fff;
+            border: 0 none;
+            border-radius: 20px;
+            padding: 6px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .card span {
+                font-size: 15px;
+            }
+
         }
     </style>
 @endsection
 @section('content')
+    @include('client.templates.navbar2')
+
     <section class="my-5 p-0 barber-con gap no-bottom">
         <div class="heading-style text-center">
             <h2>Đặt lịch cắt tóc</h2>
             <div class="scissor-border position-relative">
-                <span class="mt-0"><svg fill="#332b23" height="20" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <span class="mt-0"><svg fill="#332b23" height="20" viewBox="0 0 64 64"
+                        xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <path d="m22.864 21.722 2.492-2.492-1.036-1.136-2.379 2.379z" />
                             <path d="m20.739 18.847 2.233-2.232-1.036-1.136-2.12 2.119z" />
@@ -59,95 +158,240 @@
             </div>
         </div>
         <div class="container">
-            <h2 class="text-center text-color">Tay nghề số một</h2>
-            <h3 class="pb-1 text-center">{{ now()->format("\T\h\á\\n\g m \\n\ă\m Y") }}</h3>
-            <form>
-                <div class="container mt-2">
-                    <div class="row">
-                        <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-12 text-center">
-                            <label for="date" class="h3 ">Chọn ngày hẹn cắt tóc:</label>
-                            <input class="form-control form-control-lg" type="date" id="date">
+            <div class="">
+                <div class="row">
+                    <div class="col-lg-12 mx-auto">
+                        <!-- Accordion -->
+                        <div id="booking" class="accordion shadow">
+                            @if (!auth('web')->check())
+                                <!-- begin phone card -->
+                                <div class="card">
+                                    <div id="phoneHeading" class="card-header shadow-sm border-0">
+                                        <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
+                                                data-target="#phoneContent" aria-expanded="true"
+                                                aria-controls="phoneContent"
+                                                class="d-block position-relative text-white text-uppercase collapsible-link py-2">#1
+                                                Xác thực số điện thoại </a></h6>
+                                    </div>
+                                    <div id="phoneContent" aria-labelledby="phoneHeading" data-parent="#booking"
+                                        class="collapse show">
+                                        <!-- form send otp -->
+                                        <div class="container my-3" style="max-width: 550px">
+                                            <div class="alert alert-danger error" id="" style="display: none;">
+                                            </div>
+                                            <h3>Xác thực số điện thoại</h3>
+                                            <div class="alert alert-success successAuth" id=""
+                                                style="display: none;">
+                                            </div>
+                                            <form class="formSendOtp">
+                                                <label>Số điện thoại:</label>
+                                                <input type="text" id="phoneOtpInput" name="phoneOtpNumberInput"
+                                                    class="form-control " placeholder="+84********">
+                                                <div id="recaptcha-container" class="mt-3"></div>
+                                                <button class="btn btn-primary mt-3">Gửi OTP</button>
+                                            </form>
+                                        </div>
+                                        <!-- end form send otp -->
+                                    </div>
+                                </div>
+                                <!-- end phone card -->
+                            @endif
+                            <!-- begin service card -->
+                            <div class="card">
+                                <div id="serviceHeading" class="card-header shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
+                                            data-target="#serviceContent" aria-expanded="false"
+                                            aria-controls="serviceContent"
+                                            class="d-block position-relative text-white text-uppercase collapsible-link py-2">{{ auth('web')->check() ? '#1' : '#2' }}
+                                            Chọn
+                                            dịch vụ</a></h6>
+                                </div>
+
+                                <div id="serviceContent" aria-labelledby="serviceHeading" data-parent="#booking"
+                                    class="collapse">
+                                    <!-- list dịch vụ -->
+                                    <div class="d-flex flex-wrap px-2 justify-content-between">
+                                        @foreach ($serviceCategories as $category)
+                                            @if (!$category->services->isEmpty())
+                                                <div class="row mt-4">
+
+                                                    <div class="col-12 px-3">
+                                                        <div>
+                                                            <h5 class="h3">{{ $category->name }}</h5>
+                                                        </div>
+                                                        <div class="row px-2">
+                                                            @foreach ($category->services as $service)
+                                                                <div class="col-md-3 col-6 mt-2 px-2">
+                                                                    <div class="card">
+                                                                        <div class="card-body p-0">
+                                                                            <div class="card-img-actions">
+                                                                                <img src="{{ asset($service->image) }}"
+                                                                                    class="card-img img-fluid"
+                                                                                    height="250" alt="">
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="card-body  text-center p-0 pt-2 ">
+                                                                            <div class="">
+                                                                                <h6 class="font-weight-semibold">
+                                                                                    <span href="#"
+                                                                                        class="text-default h4">{{ $service->name }}</span>
+                                                                                </h6>
+                                                                            </div>
+                                                                            <span
+                                                                                class="mb-0 font-weight-semibold d-block">{{ $service->price }}
+                                                                                VND
+                                                                            </span>
+
+                                                                            <label class="check mt-1">
+                                                                                <input type="checkbox"
+                                                                                    id="service_{{ $service->id }}"
+                                                                                    name="services[]"
+                                                                                    value="{{ $service->id }}"
+                                                                                    data-price="{{ $service->price }}">
+                                                                                <span type="button"
+                                                                                    class="btn ">Chọn</span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end service card -->
+                            <!-- begin staff card -->
+                            <div class="card">
+                                <div id="staffHeading" class="card-header shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse"
+                                            data-target="#staffContent" aria-expanded="false" aria-controls="staffContent"
+                                            class="d-block position-relative text-white text-uppercase collapsible-link py-2">{{ auth('web')->check() ? '#2' : '#3' }}
+                                            Chọn
+                                            nhân viên và thời gian</a></h6>
+                                </div>
+                                <div id="staffContent" aria-labelledby="staffHeading" data-parent="#booking"
+                                    class="collapse">
+                                    <div class="position-relative p-3" style="background-color: #f6f6f6">
+                                        <button class="position-absolute top-50 btn btn-white rounded-circle bg-white"
+                                            id="scroll-left"><svg width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="black" stroke-width="2" />
+                                            </svg></button>
+                                        <button
+                                            class="position-absolute top-50 right-0 btn btn-white rounded-circle bg-white"
+                                            id="scroll-right"><svg width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5 10H15M15 10L10 15M15 10L10 5" stroke="black"
+                                                    stroke-width="2" />
+                                            </svg></button>
+                                        <div id="employee_list" class="scrollable" style="white-space: nowrap;">
+                                            <h5 class="text-center mb-3">Chọn nhân viên</h5>
+                                            @foreach ($staffMembers as $staff)
+                                                <div class="d-inline-block">
+                                                    <div class="p-0">
+                                                        <input type="radio" name="admin_id"
+                                                            id="admin_{{ $staff->id }}" value="{{ $staff->id }}"
+                                                            hidden>
+                                                        <label for="admin_{{ $staff->id }}"
+                                                            class="d-flex flex-column">
+                                                            <img src="{{ $staff->avatar }}" class="rounded-circle"
+                                                                style="width: 100px;height: 100px" alt="">
+                                                            <h6 class="text-center">{{ $staff->username }}</h6>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+
+                                    <h5 class="text-center my-3">Chọn ngày</h5>
+                                    <div class="px-3">
+                                        <div class="row">
+                                            <div class="col-md-4 mx-auto">
+                                                <select class="custom-select my-select" name="day">
+                                                    @foreach ($availableDates as $date)
+                                                        <option
+                                                            value="{{ \Carbon\Carbon::parse($date)->format('Y-m-d') }}">
+                                                            {{ \Carbon\Carbon::parse($date)->format('\N\g\à\y\ d/m/Y') }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <h5 class="text-center mb-3">Chọn thời gian</h5>
+                                    <div class="d-flex flex-wrap justify-content-center" id="timeSelect">
+                                        @foreach ($timeSlots as $time)
+                                            <label class="check mx-1">
+                                                <input type="radio" id="time_{{ $time->id }}" name="time_id"
+                                                    value="{{ $time->id }}">
+                                                <span>{{ $time->time }}</span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- end staff card -->
+
                         </div>
                     </div>
                 </div>
-            </form>
-            <!-- list dịch vụ -->
-            <h3 class="s2 text-center mt-3">Chọn dịch vụ</h3>
-
-            <div class="row">
-                @foreach ($categoriesServices as $category)
-                    @if (!$category->services->isEmpty())
-                        <div class="col-xl-3 col-lg-6 col-md-6">
-                            <div class="sc-group">
-                                <h5 class="h3">{{ $category->name }}</h5>
-                                @foreach ($category->services as $service)
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input"
-                                            id="service_{{ $service->id }}">
-                                        <label class="custom-control-label"
-                                            for="service_{{ $service->id }}">{{ $service->name }}</label>
-                                    </div>
-                                @endforeach
+                @php
+                    if (auth('web')->check()) {
+                        $user = auth('web')->user();
+                    }
+                @endphp
+                <div id="info" class="mt-5">
+                    <form method="post">
+                        <h3>Thông tin liên hệ</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" name="infoUsername" class="form-control"
+                                        placeholder="Tên của bạn *" required value="{{ $user->username ?? '' }}" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" name="infoPhone" class="form-control"
+                                        placeholder="Số điện thoại *" value="{{ $user->phone ?? '' }}" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" name="infoEmail" class="form-control"
+                                        placeholder="Email của bạn *" value="{{ $user->email ?? '' }}" />
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Mã giảm giá</label>
+                                    <textarea class="form-control" name="promoCode" id="" rows="3"></textarea>
+                                </div>
                             </div>
                         </div>
-                    @endif
-                @endforeach
-
-            </div>
-
-
-
-            <h1 class="text-center">Danh sách nhân viên cắt tóc</h1>
-            <div class="position-relative">
-                <button class="position-absolute top-50 btn btn-white rounded-circle bg-white" id="scroll-left"><svg
-                        width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="black" stroke-width="2" />
-                    </svg></button>
-                <button class="position-absolute top-50 right-0 btn btn-white rounded-circle bg-white"
-                    id="scroll-right"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 10H15M15 10L10 15M15 10L10 5" stroke="black" stroke-width="2" />
-                    </svg></button>
-                <div id="employee_list" class="scrollable" style="white-space: nowrap;">
-                    @foreach ($staffs as $staff)
-                        <div class="d-inline-block" style="max-width: 200px;min-width: 150px">
-                            <div class="p-0">
-                                <input type="radio" name="admin_id" id="admin_{{ $staff->id }}"
-                                    value="{{ $staff->id }}" hidden>
-                                <label for="admin_{{ $staff->id }}" class="d-flex flex-column">
-                                    <img src="{{ $staff->avatar }}" class="img-fluid" alt="">
-                                    <h5 class="card-title text-center">{{ $staff->username }}</h5>
-                                </label>
-                            </div>
-                        </div>
-                    @endforeach
-
+                    </form>
                 </div>
             </div>
 
-
-
-            <h2 class="text-center mb-3">Chọn thời gian</h2>
-            <div class="d-flex flex-wrap justify-content-center team-inner">
-                <ul class="list-unstyled d-flex flex-wrap m-3" id="timeSelect">
-                    @foreach ($times as $time)
-                        <li><button class="time-button" data-time="{{ $time->id }}">{{ $time->time }}</button></li>
-                    @endforeach
-                </ul>
-            </div>
-
-
-
-
-            <div class="col-md-11 col-sm-12">
+            <div class="">
                 <div class="team-end-2  text-right">
-                    <h4>£ 16.00</h4>
-                    <p>09:00 am - 09:45 am</p>
-                    <button class="theme-btn-2">CONFIRM</button>
+                    <h4 class="h5">Tổng tiền dịch vụ: <span id="totalPrice">0</span>VND</h4>
+                    <button id="bookingConfirm" class="theme-btn-2 font-weight-bold">Đặt lịch</button>
                 </div>
-
             </div>
-
 
         </div>
     </section>
@@ -161,7 +405,6 @@
         });
 
         $('#scroll-right').click(function() {
-            console.log("test");
             $('.scrollable').animate({
                 scrollLeft: '+=300px'
             }, 300);
@@ -170,72 +413,127 @@
             $('input:radio[name="admin_id"]').change(function() {
                 performAjaxRequest();
             });
-            $('#date').change(function() {
+            $('#timeSelect').on('change', 'input:radio[name="time_id"]', function() {
+                const admin = $('input:radio[name="admin_id"]:checked').val();
+                if (!admin) {
+                    toastr.error('Vui lòng chọn nhân viên');
+                    $('input:radio[name="time_id"]').prop('checked', false);
+                }
+            });
+            $('select[name="day"]').change(function() {
                 performAjaxRequest();
             });
+            // Lắng nghe sự kiện change
+            $('input[name="services[]"]').on('change', function() {
+                // get data-price
+                // Lấy mảng các giá trị đã check
+                var checked = $('input[name="services[]"]:checked').map(function() {
+                    return $(this).data('price');
+                }).get();
+                var tottalPrice = checked.reduce(function(a, b) {
+                    return a + b;
+                });
+                $('#totalPrice').text(tottalPrice.toLocaleString());
 
+            });
 
-            function performAjaxRequest() {
-                var selectedValue = $('input:radio[name="admin_id"]:checked').val();
-                var selectedDate = $("#date").val();
+            function renderTimes(times) {
+                $('#timeSelect').empty();
+                times.forEach(function(time) {
+                    let checkAvailable = "";
+                    if (time.pivot) {
+                        checkAvailable = time.pivot.status === 'unavailable' ? 'disabled' : ''
+                    }
+                    const radioOption = `
+                                <label class="check mx-1">
+                                    <input type="radio" id="time_${time.id}" name="time_id"
+                                        value="${time.id}" ${checkAvailable}>
+                                    <span>${time.time}</span>
+                                </label>
+                    `;
+                    // Thêm radio button vào giao diện
+                    $('#timeSelect').append(radioOption);
 
-
-                if (selectedValue && selectedDate) {
-                    const url = "{{ route('booking-service.getStaff') }}";
-                    const data = new FormData();
-                    data.append('admin_id', selectedValue);
-                    data.append('day', selectedDate);
-
-
-                    sendAjaxRequest(url, 'post', data,
-                        function(response) {
-                            console.log(response);
-                            $('#timeSelect').empty();
-                            response.times.forEach(function(time) {
-                                var radioOption = `
-                                    <li><button class="time-button" data-time="${time.id}" ${time.pivot.status === 'unavailable' ? 'disabled' : ''}>${time.time}</button></li>
-                                `;
-
-
-                                // Thêm radio button vào giao diện
-                                $('#timeSelect').append(radioOption);
-                                $(".time-button").click(function() {
-
-                                    // Loại bỏ lựa chọn trước đó
-                                    $(".time-button").css("backgroundColor", "");
-
-                                    // Đánh dấu nút đã chọn
-                                    $(this).css("backgroundColor", "#d98430");
-
-                                    // Lưu thời gian đã chọn
-                                    var time = $(this).attr("data-time");
-                                    console.log("Đã chọn thời gian: " + time);
-
-                                });
-                            });
-                        },
-                        function(error) {
-                            console.log(error);
-                        }
-                    );
-                }
+                });
             }
 
-
-
-
-            $('form').on('submit', function(e) {
-                e.preventDefault();
-                const form = new FormData(this);
-                const url = "{{ route('booking-service.store') }}";
-                sendAjaxRequest(url, 'post', form,
+            function performAjaxRequest() {
+                const data = new FormData();
+                const url = "{{ route('booking-service.getStaff') }}";
+                const admin_id = $('input:radio[name="admin_id"]:checked').val();
+                const day = $('select[name="day"]').val();
+                if (admin_id && day) {
+                    data.append('admin_id', admin_id);
+                    data.append('day', day);
+                } else if (day) {
+                    data.append('day', day);
+                }
+                sendAjaxRequest(url, 'post', data,
                     function(response) {
                         console.log(response);
+                        renderTimes(response.times);
                     },
                     function(error) {
                         console.log(error);
+                        toastr.error(error.responseJSON.message);
                     }
                 );
+            }
+            $('#phoneOtpInput').on("input", function(e) {
+                const phone = $('input[name="infoPhone"]');
+                //set phone value = phoneOtpInput
+                phone.val($('#phoneOtpInput').val());
+
+            })
+            $('#bookingConfirm').click(function() {
+                // phoneOtpNumberInput
+                var otpInput = $('#phoneOtpInput').length == 0 ? false : true;
+                var verifyInput = $('input[name="verification"]').length == 0 ? false : true;
+                if (!otpInput && !verifyInput) {
+                    const form = new FormData();
+                    const selectedServices = $('input[name="services[]"]:checked');
+                    let totalPrice = $('#totalPrice').text();
+
+                    const name = $('input[name="infoUsername"]').val() ?? "";
+                    const adminId = $('input:radio[name="admin_id"]:checked').val() ?? "";
+                    const phone = $('input[name="infoPhone"]').val() ?? "";
+                    const promoCode = $('textarea[name="promoCode"]').val();
+                    totalPrice = totalPrice.replace(/,/g, '');
+                    const email = $('input[name="infoEmail"]').val() ?? "";
+                    const day = $('select[name="day"]').val() ?? "";
+                    const time = $('input[name="time_id"]:checked').val() ?? "";
+                    const servicesId = selectedServices.map(function() {
+                        return $(this).val();
+                    }).get();
+                    form.append('name', name);
+                    form.append('admin_id', adminId);
+                    form.append('phone', phone);
+                    promoCode ? form.append('promo_code', promoCode) : "";
+                    form.append('total_price', totalPrice);
+                    form.append('email', email);
+                    form.append('day', day);
+                    form.append('time', time);
+                    form.append('servicesId', servicesId);
+
+                    sendAjaxRequest("{{ route('booking-service.store') }}", 'post', form,
+                        response => {
+                            toastr.success(response.message);
+                            location.href = "{{ route('home.index') }}";
+                        },
+                        error => {
+                            console.log(error);
+                            const errors = error.responseJSON.errors;
+                            Object.keys(errors).forEach(key => {
+                                errors[key].forEach(errorMessage => {
+                                    toastr.error(errorMessage);
+                                });
+                            });
+                        }
+                    );
+                } else {
+                    toastr.error('Vui lòng xác thực số điện thoại');
+                }
+
             })
         })
     </script>

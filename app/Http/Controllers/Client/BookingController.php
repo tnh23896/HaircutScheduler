@@ -6,14 +6,17 @@ use Exception;
 use App\Models\Time;
 use App\Models\Admin;
 use App\Models\Booking;
-use App\Models\WorkSchedule;
-use App\Models\BookingDetail;
 use App\Models\Service;
+use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
+use App\Models\BookingDetail;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Booking\StoreRequest;
+use App\Models\Promotion;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BookingController extends Controller
 {
@@ -30,54 +33,124 @@ class BookingController extends Controller
     public function index()
     {
         try {
-            $categoriesServices = CategoryService::with('services')->get();
-            $startDay = Carbon::now()->startOfDay(); 
-            $endDay = $startDay->copy()->addDay(3)->endOfDay();
-            
-            $staffs = Admin::all();
+            // Lấy danh mục dịch vụ
+            $serviceCategories = CategoryService::with('services')->get();
 
-            $times = Time::all();
+            // Ngày bắt đầu
+            $startDate = Carbon::now()->startOfDay();
 
+            // Ngày kết thúc tính lịch làm việc
+            $endDateForWorkSchedule = $startDate->copy()->addDay(3)->endOfDay();
 
-            return view('client.booking', compact('categoriesServices', 'staffs', 'times'));
+            // Lấy danh sách ngày làm việc
+            $availableDates = WorkSchedule::whereBetween('day', [$startDate, $endDateForWorkSchedule])
+                ->groupBy('day')
+                ->pluck('day');
+
+            // Lấy danh sách nhân viên có lịch trong 3 ngày tới 
+            $staffMembers = Admin::with('work_schedules')
+                ->whereHas('work_schedules', function ($query) use ($startDate, $endDateForWorkSchedule) {
+                    $query->whereBetween('day', [$startDate, $endDateForWorkSchedule]);
+                })->get();
+
+            // Lấy danh sách khung giờ
+            $timeSlots = Time::whereHas('work_schedules', function ($query) use ($startDate) {
+                $query->where('day', $startDate);
+            })->whereHas('work_schedule_details', function ($query) {
+                $query->where('status', 'available');
+            })->get()->unique();
+            return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');
         }
     }
+
     public function getStaff(Request $request)
     {
         try {
-            $admin_id = $request->admin_id;
+            $adminId = $request->admin_id;
             $day = $request->day;
+            if ($adminId && $day) {
 
-            $workSchedule = WorkSchedule::with('times')->where('admin_id', $admin_id)->where('day', $day)->first();
+                $workSchedules = WorkSchedule::with('times')
+                    ->where('day', $day)
+                    ->where('admin_id', $adminId)
+                    ->firstOrFail();
+                $workScheduleDetails = $workSchedules->work_schedule_details;
 
-            if ($workSchedule) {
-                $times = $workSchedule->times;
+                $availableDetails = $workScheduleDetails->filter(function ($detail) {
+                    return $detail->status === 'unavailable';
+                });
+
+                if ($availableDetails->count() === $workScheduleDetails->count()) {
+                    return response()->json([
+                        'message' => "Nhân viên đang bận vào ngày $day , vui lòng chọn nhân viên hoặc ngày khác",
+                    ], 404);
+                }
+                return response()->json([
+                    'times' => $workSchedules->times,
+                ], 200);
+            } elseif ($day) {
+                $timeSlots = Time::with('work_schedules')->whereHas('work_schedules', function ($query) use ($day) {
+                    $query->where('day', $day);
+                })->whereHas('work_schedule_details', function ($query) {
+                    $query->where('status', 'available');
+                })->get()->unique();
 
                 return response()->json([
-                    'admin_id' => $admin_id,
-                    'day' => $day,
-                    'times' => $times
-                ]);
-            } else {
-                return response()->json([
-                    'message' => 'Work schedule not found'
-                ], 404);
+                    'times' => $timeSlots,
+                ], 200);
             }
-        } catch (\Exception $e) {
-            Log::error('Error in getAdminWorkSchedule: ' . $e->getMessage());
+        } catch (ModelNotFoundException $e) {
+            $day = Carbon::parse($day)->format('d-m-Y');
             return response()->json([
-                'message' => 'An error occurred'
+                'message' => "Nhân viên đang bận vào ngày $day , vui lòng chọn nhân viên hoặc ngày khác"
+            ], 404);
+        } catch (\Exception $e) {
+            Log::error('Error in getStaff: ' . $e->getMessage());
+            return response()->json([
+                'message' => 'Có lỗi xảy ra, vui lòng thử lai sau!'
             ], 500);
         }
     }
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
+     try {
+        $params = [
+            'name' => $request->name,
+            'user_id' => auth('web')->user()->id,
+            'admin_id' => $request->admin_id,
+            'phone' => $request->phone,
+            'total_price' => $request->total_price,
+            'email' => $request->email,
+            'day' => $request->day,
+            'time' => $request->time,
+        ];
+        if ($request->promo_code) {
+            $promo = Promotion::where('promocode', $request->promo_code)->first();
+            $params['promo_id'] = $promo->id;
+        }
+        $booking = Booking::query()->create($params);
+        $idServicesBookingDetail = explode(',', $request->servicesId);
+        foreach ($idServicesBookingDetail as $id) {
+            $service = Service::query()->findOrFail($id);
+            BookingDetail::query()->create([
+                'booking_id' => $booking->id,
+                'service_id' => $id,
+                'name' => $service->name,
+                'price' => $service->price,
+            ]);
+        }
         return response()->json([
-            'request' => $request->all()
-        ]);
+            'message' => 'Thêm lịch đặt thành công',
+        ], 200);
+     } catch (\Exception $e) {
+        Log::error('Error in store: ' . $e->getMessage());
+        return response()->json([
+            'message' => 'Có lỗi xảy ra, vui lòng thử lai sau!'
+        ], 500);
+     }
     }
 
     /**

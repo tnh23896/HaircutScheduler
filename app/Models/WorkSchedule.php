@@ -23,7 +23,7 @@ class WorkSchedule extends Model
 
     public function work_schedule_details()
     {
-        return $this->hasMany(WorkScheduleDetail::class);
+        return $this->hasMany(WorkScheduleDetail::class, 'work_schedules_id');
     }
 
     public function times()
