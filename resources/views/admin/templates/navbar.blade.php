@@ -271,7 +271,7 @@
                     </li>
                     <li>
                         <a href="#" class="dropdown-item hover:bg-white/5" data-tw-toggle="modal" data-tw-target="#modal"> <i data-lucide="lock"
-                                class="w-4 h-4 mr-2"  ></i> Reset Password
+                                class="w-4 h-4 mr-2"  ></i> Đổi mật khẩu
                         </a>
                         
                     </li>
