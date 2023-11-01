@@ -152,7 +152,6 @@
                     <!-- end info-box -->
                 </div>
                 <!-- end container -->
-
             </nav>
             @if (auth()->guard('web')->check())
             <a href="{{ route('logout') }}">
