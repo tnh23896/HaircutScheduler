@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    @include('client.templates.navbar')
     @yield('content')
     @include('client.templates.footer')
     @include('client.templates.link_footer')

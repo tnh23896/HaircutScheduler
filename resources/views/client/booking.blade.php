@@ -130,6 +130,8 @@
     </style>
 @endsection
 @section('content')
+    @include('client.templates.navbar2')
+
     <section class="my-5 p-0 barber-con gap no-bottom">
         <div class="heading-style text-center">
             <h2>Đặt lịch cắt tóc</h2>

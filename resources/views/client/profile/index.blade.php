@@ -2,6 +2,8 @@
 @section('title', 'Tài Khoản của tôi')
 @section('title_page', 'Dashboard')
 @section('content')
+    @include('client.templates.navbar2')
+
     <div class="tab-pane fade" id="account-settings">
         <div class="tabs-wrp account-settings brd-rd5">
             <h4 itemprop="headline">Cài đặt tài khoản</h4>
@@ -74,7 +76,7 @@
                 url = url.replace(':editId', editId);
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
-                        toastr.success('Cập nhật thành công .' );
+                        toastr.success('Cập nhật thành công .');
                     },
                     function showError(error) {
                         if (error.responseJSON && error.responseJSON.errors) {
