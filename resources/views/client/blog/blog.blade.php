@@ -1,6 +1,7 @@
 @extends('client.templates.app')
 @section('title', 'Trang tin tức')
 @section('content')
+    @include('client.templates.navbar2')
     <section class="position-relative footer-area">
         <div class="container bg-text-area">
             <h2>Tin Tức</h2>

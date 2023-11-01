@@ -1,5 +1,5 @@
-@extends('client.templates.layout_dashboard')
+@extends('client.templates.app')
 @section('title', 'Trang test')
-@section('title_page', 'Dashboard')
 @section('content')
+@include('client.templates.navbar2')
 @endsection

@@ -22,7 +22,9 @@ use App\Http\Controllers\Client\ServiceController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/test', function () {
+	return view('client.test');
+});
 
 // Login otp
 Route::post('/login-with-otp', [AuthController::class, 'login'])->name('loginOtp');
