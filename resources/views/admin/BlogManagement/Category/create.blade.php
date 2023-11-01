@@ -10,7 +10,7 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-12">
             <!-- BEGIN: Form Layout -->
-            <form id="ajaxForm" >
+            <form id="ajaxForm">
                 <div class="intro-y box p-5">
                     <div>
                         <label for="crud-form-1" class="form-label">Tiêu đề</label>
@@ -18,7 +18,8 @@
                             placeholder="Tiêu đề">
                     </div>
                     <div class="text-right mt-5">
-                        <a href="{{route('admin.blogManagement.category.index')}}" type="button" class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                        <a href="{{ route('admin.blogManagement.category.index') }}" type="button"
+                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Thêm</button>
                     </div>
                 </div>
@@ -34,38 +35,14 @@
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                title: 'Successfully',
-                                text: response.success,
-                                icon: 'success',
-                            }).then(() => {
-                                // Xoá thông tin trong form sau khi thêm mới
-                                $('.clearable').val('');
-                                $('#errorDiv').hide(); // ẩn thông báo lỗi
-                            });
+                            toastr.success(response.success);
+                            $('.clearable').val('');
+                            $('#errorDiv').hide(); // ẩn thông báo lỗi
                         }
                     },
 
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-
-                            if (error.responseJSON.errors.title) {
-                                errorMessages.push(error.responseJSON.errors.title);
-                            }
-
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#errorDiv');
-                                errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                        showErrors(error);
                     }
                 );
             });

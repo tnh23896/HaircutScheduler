@@ -119,9 +119,9 @@ class EmployeeController extends Controller
         try {
             $admin = Admin::findOrFail($id);
             $admin->delete();
-            return response()->json(['status' => 'success', 'message' => 'Deleted successfully']);
-        } catch (\Throwable $exception) {
-            return response()->json(['status' => 'error', 'message' => $exception->getMessage()]);
+            return response()->json(['success' => 'Xóa thành công']);
+        } catch (Exception $exception) {
+            return response()->json(['message' => $exception->getMessage()], 500);
         }
     }
 }
