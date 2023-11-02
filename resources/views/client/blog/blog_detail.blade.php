@@ -1,6 +1,7 @@
 @extends('client.templates.app')
 @section('title', 'Chi tiết bài viết')
 @section('content')
+    @include('client.templates.navbar2')
     @php
         // Chuỗi ngày tháng đầu vào
         $dateString = $blog->created_at;

@@ -7,7 +7,8 @@
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <a href="{{ route('admin.TimeManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm mới thời làm việc
+            <a href="{{ route('admin.TimeManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm mới thời
+                    làm việc
                     gian</button></a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
@@ -86,17 +87,11 @@
                         _method: 'DELETE'
                     }, function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                title: 'Thành công!!!',
-                                text: response.success,
-                                icon: 'success',
-                            }).then(() => {
-                                // Xoá phần tử khỏi giao diện sau khi xoá thành công
-                                form.closest('tr').remove();
-                            });
+                            toastr.success(response.success);
+                            form.closest('tr').remove();
                         }
                     }, function(error) {
-                        alert('Error deleting item.');
+                        showErrors(error);
                     });
                 }
             });

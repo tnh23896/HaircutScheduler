@@ -69,47 +69,14 @@
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                title: 'Successfully',
-                                text: response.success,
-                                icon: 'success',
-                            }).then(() => {
-                                // Xoá thông tin trong form sau khi thêm mới
-                                $('.clearable').val('');
-                                $('#errorDiv').hide(); // ẩn thông báo lỗi
-                            });
+                            toastr.success(response.success);
+                            $('.clearable').val('');
+                            $('#errorDiv').hide();
                         }
                     },
 
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-
-                            if (error.responseJSON.errors.name) {
-                                errorMessages.push(error.responseJSON.errors.name);
-                            }
-                            if (error.responseJSON.errors.image) {
-                                errorMessages.push(error.responseJSON.errors.image);
-                            }
-                            if (error.responseJSON.errors.price) {
-                                errorMessages.push(error.responseJSON.errors.price);
-                            }
-                            if (error.responseJSON.errors.description) {
-                                errorMessages.push(error.responseJSON.errors.description);
-                            }
-
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#errorDiv');
-                                errorDiv.html("<p>Error:</p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                        showErrors(error);
                     }
                 );
             });

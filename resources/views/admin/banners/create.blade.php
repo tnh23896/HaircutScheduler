@@ -7,7 +7,6 @@
             Thêm Banner
         </h2>
     </div>
-    <div id="errorDiv" class="alert alert-danger" style="display: none;"></div>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-12">
             <!-- BEGIN: Form Layout -->
@@ -53,40 +52,16 @@
                 sendAjaxRequest('/admin/banner/create', 'POST', formData,
                     function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                title: 'Successfully',
-                                text: response.success,
-                                icon: 'success',
-                            }).then(() => {
-                                // Xoá thông tin trong form sau khi thêm mới
-                                $('#crud-form-1').val(
-                                ''); // Xóa giá trị của trường input hình ảnh
-                                $('#crud-form-4').val('');
-                                $('#previewImage').attr('src', '');
-                                $('#errorDiv').hide(); // ẩn thông báo lỗi
-                            });
-                        }
+                        toastr.success(response.success);
+                        $('#crud-form-1').val('');
+                        $('#crud-form-4').val('');
+                        $('#previewImage').attr('src', '');
+                        $('#errorDiv').hide();
+                    }
                     },
 
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-                            if (error.responseJSON.errors.image) {
-                                errorMessages.push(error.responseJSON.errors.image);
-                            }
-
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#errorDiv');
-                                errorDiv.html("<p>Errors:</p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                        showErrors(error);
                     }
                 );
             });

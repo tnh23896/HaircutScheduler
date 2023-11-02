@@ -2,7 +2,7 @@
 @section('title', 'About Us')
 @section('content')
 @include('client.templates.banner')
-<section class="gap resp-padd lg-no-top">
+@include('client.templates.navbar2')
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 col-md-12 col-sm-12">

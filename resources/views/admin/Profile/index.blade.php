@@ -43,12 +43,12 @@
                                 <div class="profile-thumb brd-rd50">
                                     <label>Ảnh đại diện</label>
                                     <img id="previewImage" class="m-5" src="{{ asset($data->avatar) }}"
-                                        alt="{{ $data->username }}"  
+                                        alt="{{ $data->username }}"
                                         style="border-radius: 50%; width:200px; height:200px; object-fit:cover;">
                                 </div>
                                 <div class="profile-img-upload-btn">
                                     <label class="fileContainer brd-rd5 yellow-bg theme-btn-2">
-                                        <input id="crud-form-1" name="avatar" type="file"  class="form-control"/>
+                                        <input id="crud-form-1" name="avatar" type="file" class="form-control" />
                                     </label>
                                 </div>
                             </div>
@@ -116,29 +116,14 @@
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                title: 'Successfully',
-                                text: response.success,
-                                icon: 'success',
-                            }).then(() => {
-                                $('#usernameError').text('');
-                                $('#phoneError').text('');
-                            });
+                            toastr.success(response.success);
+                            $('#usernameError').text('');
+                            $('#phoneError').text('');
                         }
                     },
 
                     function(error) {
-                        console.log(error.responseJSON);
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-                            if (error.responseJSON.errors.phone) {
-                                $('#phoneError').text(error.responseJSON.errors.phone);
-                            }
-                            if (error.responseJSON.errors.username) {
-                                $('#usernameError').text(error.responseJSON.errors.username);
-                            }
-                        }
+                        showErrors(error);
                     }
                 );
             });

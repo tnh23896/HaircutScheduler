@@ -111,18 +111,12 @@
                     sendAjaxRequest(urlToDelete, 'DELETE', {
                         _method: 'DELETE'
                     }, function(response) {
-                        if (response.status) {
-                            Swal.fire({
-                                title: 'Successfully',
-                                text: response.message,
-                                icon: response.status,
-                            }).then(() => {
-                                // Xoá phần tử khỏi giao diện sau khi xoá thành công
-                                form.closest('tr').remove();
-                            });
+                        if (response.success) {
+                            toastr.success(response.success);
+                            form.closest('tr').remove();
                         }
                     }, function(error) {
-                        alert('Error deleting item.');
+                        showErrors(error);
                     });
                 }
             });
