@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    @include('client.templates.navbar')
-		@include('client.templates.banner')
+    @include('client.templates.navbar2')
     <section class="position-relative footer-area">
         <div class="container bg-text-area">
             <h2>@yield('title_page')</h2>

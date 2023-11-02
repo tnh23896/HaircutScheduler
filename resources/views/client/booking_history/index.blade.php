@@ -1,7 +1,6 @@
 @extends('client.templates.layout_dashboard')
 @section('title', 'Booking History')
 @section('content')
-    @include('client.templates.navbar2')
 
     <div id="my-bookings">
         <div class="">
@@ -40,30 +39,20 @@
                                         href="javascript:void(0)" title="" itemprop="url"><i
                                             class="fa fa-chain"></i></a></td>
 
-                            <td>
-                                @if( $booking->status == "pending")
-                                    <span class="text-warning">Pending</span>
-                                @elseif($booking->status == "success")
-                                    <span class="text-success">Success</span>
-                                @elseif($booking->status == "canceled")
-                                    <span class="text-danger">Cancelled</span>
-                                @endif
-                            </td>
-                            <td class="flex">
-                                <a href="{{route('booking-history.edit', $booking->id)}}">
-                                    <button class="text-center mb-2" style="width: 130px;
-                                                                            height: 40px;
-                                                                            background-color: #D9842F;
-                                                                            color: white;
-                                                                            border: none; ">
-                                        Xem chi tiết
-                                    </button>
-                                </a>
-                                @if($booking->status == "pending")
-                                    <a href="">
-                                        <button class="btn btn-danger  text-center"
-                                                style="width: 130px;  height: 40px; ">
-                                            Hủy lịch
+                                <td>
+                                    @if ($booking->status == 'pending')
+                                        <span class="text-warning">Pending</span>
+                                    @elseif($booking->status == 'success')
+                                        <span class="text-success">Success</span>
+                                    @elseif($booking->status == 'canceled')
+                                        <span class="text-danger">Cancelled</span>
+                                    @endif
+                                </td>
+                                <td class="flex">
+                                    <a href="{{ route('booking-history.edit', $booking->id) }}">
+                                        <button class="text-center"
+                                            style="width: 130px;  height: 40px; background-color: #D9842F; color: white; border: none; ">
+                                            Xem chi tiết
                                         </button>
                                     </a>
                                     @if ($booking->status == 'pending')

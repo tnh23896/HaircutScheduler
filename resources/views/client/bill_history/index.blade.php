@@ -1,7 +1,7 @@
 @extends('client.templates.layout_dashboard')
 @section('title', ' Trang hóa đơn')
 @section('content')
-    @include('client.templates.navbar2')
+   
 
     <div id="my-orders">
         <div class="tabs-wrp brd-rd5">

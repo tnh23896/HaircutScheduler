@@ -1,7 +1,6 @@
 @extends('client.templates.layout_dashboard')
 @section('title', 'Chi tiết lịch đặt')
 @section('content')
-    @include('client.templates.navbar2')
 
     <!-- content begin -->
     <div class="no-bottom no-top" id="content" xmlns="http://www.w3.org/1999/html">
