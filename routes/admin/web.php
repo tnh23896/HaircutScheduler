@@ -117,11 +117,17 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.scheduleDetails.update');
     Route::post('/schedule-details/{id}', [ScheduleDetailsController::class, 'store'])
         ->name('admin.scheduleManagement.scheduleDetails.store');
-
+    Route::get('search-schedule', [ScheduleController::class, 'search'])
+        ->name('admin.scheduleManagement.search');
+    Route::get('filter-schedule', [ScheduleController::class, 'filter'])
+        ->name('admin.scheduleManagement.filter');
 
     //Bill
     Route::get('bill-management', [BillController::class, 'index'])
         ->name('admin.billManagement.index');
+    Route::get('search-bill', [BillController::class, 'search'])
+        ->name('admin.billManagement.search');
+
 
     // Banner
     Route::get('banner', [BannerController::class, 'index'])

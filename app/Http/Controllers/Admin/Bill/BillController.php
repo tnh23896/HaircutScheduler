@@ -17,6 +17,17 @@ class BillController extends Controller
             return view('admin.BillManagement.index', compact('data'));
     }
 
+    public function search(Request $request){
+        $search = $request->input('search');
+        $data = Bill::where('name', 'like', '%' .$search. '%')
+            ->orwhere('phone', 'like', '%' .$search. '%')
+            ->latest()
+            ->paginate(5);
+        return view('admin.BillManagement.index', compact('data'));
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      */

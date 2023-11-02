@@ -20,6 +20,30 @@ class ScheduleController extends Controller
         return view('admin.scheduleManagement.index', compact('data'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $data = Booking::where('name', 'like', '%' . $search . '%')
+            ->orwhere('phone', 'like', '%' . $search . '%')
+            ->latest()
+            ->paginate(5);
+        return view('admin.scheduleManagement.index', compact('data'));
+    }
+
+    public function filter(Request $request)
+    {
+        $status = $request->input('filter');
+        if ($status == "") {
+            $data = Booking::latest()->paginate(5);
+        } else {
+            $data = Booking::where('status', $status)
+                ->latest()
+                ->paginate(5);
+        }
+        return view('admin.scheduleManagement.index', compact('data'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -61,18 +85,18 @@ class ScheduleController extends Controller
             $data = Booking::query()->findOrFail($id);
             $data->status = $request->status;
             $data->save();
-           if ($data->status == "success"){
-              $bill = Bill::create([
-                   'name' => $data->name,
-                   'user_id' => $data->user_id,
-                   'admin_id' => $data->admin_id,
-                   'phone' => $data->phone,
-                   'promo_id' => $data->promo_id,
-                   'total_price' => $data->total_price,
-                   'email' => $data->email,
-                   'day' => $data->day,
-                   'time' => $data->time,
-               ]);
+            if ($data->status == "success") {
+                $bill = Bill::create([
+                    'name' => $data->name,
+                    'user_id' => $data->user_id,
+                    'admin_id' => $data->admin_id,
+                    'phone' => $data->phone,
+                    'promo_id' => $data->promo_id,
+                    'total_price' => $data->total_price,
+                    'email' => $data->email,
+                    'day' => $data->day,
+                    'time' => $data->time,
+                ]);
 
                 foreach ($data->booking_details as $item) {
                     if ($item->status == "success") {
@@ -86,12 +110,12 @@ class ScheduleController extends Controller
                     }
                 }
 
-           }
+            }
             return response()->json([
                 'status' => 200,
                 'success' => 'Cập nhật lịch đặt thành công'
             ]);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response()->json([
                 'status' => 500,
                 'success' => 'Cập nhật lịch đặt thất bại'
