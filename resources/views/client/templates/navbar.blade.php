@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item position-relative">
-                    <a class="nav-link" href="{{url('/')}}">Home
+                    <a class="nav-link" href="{{ url('/') }}">Home
                     </a>
                 </li>
                 <li class="nav-item position-relative">
@@ -153,14 +153,20 @@
                 </div>
                 <!-- end container -->
             </nav>
-            @if (auth()->guard('web')->check())
-            <a href="{{ route('logout') }}">
-                <button class="theme-btn-2 nav-btn " style="height: 50px;" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
-            </a>
-            @else
-                <a class="theme-btn-2 nav-btn " style="height: 50px;" href="javascript:void(0)" data-toggle="modal"
-                    data-target="#modalAuth"><h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6></a>
-            @endif
+            <div id="modalNavAuth">
+                @if (auth()->guard('web')->check())
+                    <a href="{{ route('logout') }}">
+                        <button class="theme-btn-2 nav-btn " style="height: 50px;">
+                            <h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6>
+                        </button>
+                    </a>
+                @else
+                    <a class="theme-btn-2 nav-btn " style="height: 50px;" href="javascript:void(0)"
+                        data-toggle="modal" data-target="#modalAuth">
+                        <h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6>
+                    </a>
+                @endif
+            </div>
 
 
 
