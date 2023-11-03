@@ -5,7 +5,7 @@
     <div id="my-bookings">
         <div class="">
             <div class="">
-                <h4 itemprop="headline">MY APPOINTMENT</h4>
+                <h4 itemprop="headline">Danh Sách Lịch Đặt</h4>
                 <!--  <div class="select-wrap-inner">
                          <select class="form-control">
                                <option>Default select</option>

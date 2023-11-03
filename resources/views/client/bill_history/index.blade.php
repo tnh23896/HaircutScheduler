@@ -1,11 +1,11 @@
 @extends('client.templates.layout_dashboard')
 @section('title', ' Trang hóa đơn')
 @section('content')
-   
+
 
     <div id="my-orders">
         <div class="tabs-wrp brd-rd5">
-            <h4 itemprop="headline">MY ORDERS</h4>
+            <h4 itemprop="headline">Danh Sách Hóa Đơn</h4>
 
             <div class="order-list">
                 @foreach ($list_bill as $bill)

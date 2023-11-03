@@ -42,7 +42,7 @@ Route::post('/booking-details/store/{id}', [BookingDetailsController::class, 'st
 
 
 //Bill Payment
-Route::get('bill-history', [BillController::class, 'index'])->name('bill');
+Route::get('bill', [BillController::class, 'index'])->name('bill');
 
 //Blog
 Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
