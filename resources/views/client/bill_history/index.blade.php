@@ -1,13 +1,10 @@
 @extends('client.templates.layout_dashboard')
 @section('title', ' Trang hóa đơn')
 @section('content')
-
-
     <div id="my-orders">
         <div class="tabs-wrp brd-rd5">
             <h4 itemprop="headline">Danh Sách Hóa Đơn</h4>
-
-            <div class="order-list">
+                 <div class="order-list">
                 @foreach ($list_bill as $bill)
                     <div class="order-item brd-rd5">
                         <div class="order-info">
@@ -27,10 +24,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     @foreach ($list_bill as $bill)
         @include('client.bill_history.modal')
     @endforeach

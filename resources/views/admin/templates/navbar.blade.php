@@ -112,7 +112,7 @@
             <li>
                 <a href="{{ route('admin.RoleManagement.index') }}"
                    class="side-menu {{ request()->routeIs('admin.RoleManagement*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="calendar"></i></div>
+                    <div class="side-menu__icon"><i data-lucide="git-branch-plus"></i></div>
                     <div class="side-menu__title"> Quản lý vai trò</div>
                 </a>
             </li>
