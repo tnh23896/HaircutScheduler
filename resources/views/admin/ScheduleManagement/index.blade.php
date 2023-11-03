@@ -9,10 +9,26 @@
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-                <div class="w-56 relative text-slate-500">
-                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
-                </div>
+                <form action="{{route('admin.scheduleManagement.search')}}" method="GET">
+                    <div class="w-56 relative text-slate-500 flex items-center">
+                        <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                        <button type="submit">
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
+                               data-lucide="search"></i>
+                        </button>
+                    </div>
+                </form>
+                <form id="filterForm" action="{{ route('admin.scheduleManagement.filter') }}" method="GET">
+                    <select id="filterSelect" name="filter" class="w-56 xl:w-auto form-select box ml-2" onchange="submitForm()">
+                        <option value="">Tất cả</option>
+                        <option value="pending">Chưa xác nhận</option>
+                        <option value="confirmed">Đã xác nhận</option>
+                        <option value="waiting">Đang chờ cắt</option>
+                        <option value="success">Đã hoàn thành</option>
+                        <option value="canceled">Đã hủy</option>
+                    </select>
+                </form>
+
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -102,12 +118,6 @@
             <nav class="w-full sm:w-auto sm:mr-auto">
                 {{ $data->links('pagination::bootstrap-4') }}
             </nav>
-            <select class="w-20 form-select box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
         </div>
         <!-- END: Pagination -->
     </div>
@@ -118,6 +128,22 @@
     @foreach($data as $item)
         @include('admin.ScheduleManagement.modal')
     @endforeach
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var filterSelect = document.getElementById('filterSelect');
+            var urlParams = new URLSearchParams(window.location.search);
+            var filterValue = urlParams.get('filter');
+            var selectedValue = filterValue !== null ? filterValue : "";
+            filterSelect.value = selectedValue;
+        });
+
+
+        function submitForm() {
+            document.getElementById('filterForm').submit();
+        }
+    </script>
 
 @endsection
 

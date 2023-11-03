@@ -1,7 +1,6 @@
 @extends('client.templates.layout_dashboard')
 @section('title', 'Chi tiết lịch đặt')
 @section('content')
-    @include('client.templates.navbar2')
 
     <!-- content begin -->
     <div class="no-bottom no-top" id="content" xmlns="http://www.w3.org/1999/html">
@@ -61,8 +60,9 @@
                     @endif
                 </form>
                 <div class="mt-4 mr10 float-right mr-2 mb-2">
-                    <a href="{{ route('booking_history', $id_user) }}">
-                        <button class="btn btn-dark" style="width: 130px;  height: 40px; border-radius: unset !important;">
+                    <a href="{{route('booking_history')}}">
+                        <button class="btn btn-dark"
+                                style="width: 130px;  height: 40px; border-radius: unset !important;">
                             Quay Lại
                         </button>
                     </a>

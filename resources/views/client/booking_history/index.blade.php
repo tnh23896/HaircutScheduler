@@ -1,12 +1,11 @@
 @extends('client.templates.layout_dashboard')
 @section('title', 'Booking History')
 @section('content')
-    @include('client.templates.navbar2')
 
     <div id="my-bookings">
-        <div class="tabs-wrp brd-rd5">
-            <div class="book-on">
-                <h4 itemprop="headline">MY APPOINTMENT</h4>
+        <div class="">
+            <div class="">
+                <h4 itemprop="headline">Danh Sách Lịch Đặt</h4>
                 <!--  <div class="select-wrap-inner">
                          <select class="form-control">
                                <option>Default select</option>
@@ -72,4 +71,11 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 @endsection

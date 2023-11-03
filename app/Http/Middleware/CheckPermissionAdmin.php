@@ -28,7 +28,10 @@ class CheckPermissionAdmin
             'admin.dashboard',
             'admin.auth.logout',
             'admin.profile.edit',
-            'admin.profile.update'
+            'admin.profile.update',
+            'admin.billManagement.search',
+            'admin.scheduleManagement.search',
+            'admin.scheduleManagement.filter',
         ];
 
         $name = Route::currentRouteName();
@@ -36,7 +39,7 @@ class CheckPermissionAdmin
             if ($name === $value) {
                 return $next($request);
             }
-            
+
         }
         if(!Auth::guard('admin')->check()) {
             return redirect()->route('admin.login');

@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:pending,success,canceled'
+            'status' => 'required|in:pending,confirmed,waiting,success,canceled'
         ];
     }
 		public function messages()

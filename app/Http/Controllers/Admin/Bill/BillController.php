@@ -17,6 +17,20 @@ class BillController extends Controller
             return view('admin.BillManagement.index', compact('data'));
     }
 
+    public function search(Request $request){
+        $search = $request->input('search');
+
+        $fields = ['name', 'phone'];
+
+        $data = search(Bill::class, $search, $fields)
+            ->latest()
+            ->paginate(5)
+            ->withQueryString();
+        return view('admin.BillManagement.index', compact('data'));
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      */
