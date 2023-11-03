@@ -10,10 +10,8 @@
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <form action="{{route('admin.scheduleManagement.search')}}" method="GET">
-                    @csrf
-                    @method('GET')
                     <div class="w-56 relative text-slate-500 flex items-center">
-                        <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Search...">
+                        <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Tìm kiếm..." value="{{ request('search') }}">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
                                data-lucide="search"></i>
@@ -21,8 +19,6 @@
                     </div>
                 </form>
                 <form id="filterForm" action="{{ route('admin.scheduleManagement.filter') }}" method="GET">
-                    @csrf
-                    @method('GET')
                     <select id="filterSelect" name="filter" class="w-56 xl:w-auto form-select box ml-2" onchange="submitForm()">
                         <option value="">Tất cả</option>
                         <option value="pending">Chưa xác nhận</option>
@@ -122,12 +118,6 @@
             <nav class="w-full sm:w-auto sm:mr-auto">
                 {{ $data->links('pagination::bootstrap-4') }}
             </nav>
-            <select class="w-20 form-select box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
         </div>
         <!-- END: Pagination -->
     </div>

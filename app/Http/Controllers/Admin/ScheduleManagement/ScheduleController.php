@@ -20,19 +20,27 @@ class ScheduleController extends Controller
         return view('admin.scheduleManagement.index', compact('data'));
     }
 
+
     public function search(Request $request)
     {
         $search = $request->input('search');
-        $data = Booking::where('name', 'like', '%' . $search . '%')
-            ->orwhere('phone', 'like', '%' . $search . '%')
+
+        $fields = ['name', 'phone'];
+
+        $data = search(Booking::class, $search, $fields)
             ->latest()
-            ->paginate(5);
+            ->paginate(5)
+            ->withQueryString();
         return view('admin.scheduleManagement.index', compact('data'));
     }
+
+
 
     public function filter(Request $request)
     {
         $status = $request->input('filter');
+
+
         if ($status == "") {
             $data = Booking::latest()->paginate(5);
         } else {
