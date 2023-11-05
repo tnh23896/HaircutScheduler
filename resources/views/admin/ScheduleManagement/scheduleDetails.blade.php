@@ -29,9 +29,9 @@
                         <td>
                             <input type="checkbox"
                                    name="status[]" @checked($detail->status == "success") value="{{$detail->id}}"
-                            @if($item->status == "success")
-                                disabled
-                            @endif
+                                   @if($item->status == "success")
+                                       disabled
+                                @endif
                             >
                         </td>
                         <td>{{$detail->admin->username}}</td>
@@ -40,19 +40,21 @@
             </table>
         </div>
         <div class="text-right mt-5">
-            <a href="{{route('admin.scheduleManagement.index')}}" class="btn btn-outline-secondary w-36 mr-1">Trang danh sách</a>
+            <a href="{{route('admin.scheduleManagement.index')}}" class="btn btn-outline-secondary w-36 mr-1">Trang danh
+                sách</a>
             @if($item->status !== "success")
-            <button type="submit" id="saveBtn" class="btn btn-primary w-32 text-white">
-               Lưu thay đổi</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary w-32 text-white">
+                    Lưu thay đổi
+                </button>
             @endif
         </div>
     </form>
     @if($item->status !== "success")
-    <div class="mb-4">
-        <a data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"><button class="btn btn-primary w-32">Thêm dịch vụ</button></a>
-    </div>
-
-
-    @include('admin.ScheduleManagement.createService')
+        <div class="mb-4">
+            <a data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}">
+                <button class="btn btn-primary w-32">Thêm dịch vụ</button>
+            </a>
+        </div>
+        @include('admin.ScheduleManagement.createService')
     @endif
 @endsection

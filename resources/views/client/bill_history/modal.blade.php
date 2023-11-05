@@ -145,7 +145,6 @@
                             ID: #{{$bill->id}}
                         </small>
                     </h1>
-
                     <div class="page-tools">
                         <div class="action-buttons">
                             <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
@@ -159,7 +158,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="container px-0">
                     <div class="row mt-4">
                         <div class="col-12 col-lg-12">
@@ -183,10 +181,7 @@
                                         <span class="text-600 text-110 text-blue align-middle">{{$bill->name}}</span>
                                     </div>
                                     <div class="text-grey-m2">
-                                        <div class="my-1">
-                                            {{$bill->email}}
-                                        </div>
-
+                                        <div class="my-1">{{$bill->email}}</div>
                                         <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i>
                                             <b class="text-600">{{$bill->phone}}</b></div>
                                     </div>
@@ -199,34 +194,24 @@
                                         <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
                                             Invoice
                                         </div>
-
                                         <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
                                                 class="text-600 text-90">ID:</span> #{{$bill->id}}</div>
-
                                         <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
                                                 class="text-600 text-90">Issue Date:</span> {{$bill->created_at}}</div>
-
                                     </div>
                                 </div>
                                 <!-- /.col -->
                             </div>
-
                             <div class="mt-4">
                                 <div class="row text-600 text-white bgc-default-tp1 py-25">
                                     <div class="col-9 col-sm-5">Tên Dịch Vụ</div>
                                     <div class="d-none d-sm-block col-4 col-sm-2">Giá Tiền</div>
                                 </div>
-                                @php
-                                    $total_amount = 0;
-                                @endphp
                                 @foreach($bill->bill_details as $detail)
                                     <div class="text-95 text-secondary-d3">
                                         <div class="row mb-2 mb-sm-0 py-25">
                                             <div class="col-9 col-sm-5">{{$detail->name}}</div>
-                                            <div class="col-4 text-secondary-d2">{{$detail->price}}</div>
-                                            @php
-                                                $total_amount += $detail->price; // Cộng dồn giá trị vào biến tổng
-                                            @endphp
+                                            <div class="col-4 text-secondary-d2">{{$detail->price}} vnd</div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -264,40 +249,35 @@
                                     <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
                                         Extra note such as company or payment information...
                                     </div>
-
                                     <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
                                         <div class="row my-2">
                                             <div class="col-7 text-right">
                                                 Total Amount:
                                             </div>
                                             <div class="col-5">
-                                                <span class="text-120 text-secondary-d1"> {{$total_amount}}</span>
+                                                <span class="text-120 text-secondary-d1"> {{$bill->total_price}} vnd</span>
                                             </div>
                                         </div>
-
                                         <div class="row my-2">
                                             <div class="col-7 text-right">
                                                 Discount:
                                             </div>
                                             <div class="col-5">
-                                                <span class="text-110 text-secondary-d1">225</span>
+                                                <span class="text-110 text-secondary-d1">{{ $bill->promotion->discount ?? 0 }} vnd</span>
                                             </div>
                                         </div>
-
                                         <div class="row my-2 align-items-center bgc-primary-l3 p-2">
                                             <div class="col-7 text-right">
                                                 Payment Amount:
                                             </div>
                                             <div class="col-5">
                                                 <span
-                                                    class="text-150 text-success-d3 opacity-2">{{$bill->total_price}}</span>
+                                                    class="text-150 text-success-d3 opacity-2">{{($bill->total_price - ($bill->promotion->discount ?? 0))}} vnd</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <hr/>
-
                                 <div>
                                     <span class="text-secondary-d1 text-105">Thank you for your business</span>
                                     <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a>
