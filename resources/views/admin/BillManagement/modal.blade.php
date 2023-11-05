@@ -3,7 +3,6 @@
 
         <div class="content">
             <!-- BEGIN: Top Bar -->
-
             <!-- END: Top Bar -->
             <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
                 <h2 class="text-lg font-medium mr-auto">
@@ -13,15 +12,18 @@
                     <button class="btn btn-primary shadow-md mr-2">In hóa đơn</button>
                     <div class="dropdown ml-auto sm:ml-0">
                         <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                            <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
+                            <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4"
+                                                                                       data-lucide="plus"></i> </span>
                         </button>
                         <div class="dropdown-menu w-40">
                             <ul class="dropdown-content">
                                 <li>
-                                    <a href="#" class="dropdown-item"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Export Word </a>
+                                    <a href="#" class="dropdown-item"> <i data-lucide="file" class="w-4 h-4 mr-2"></i>
+                                        Export Word </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="dropdown-item"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Export PDF </a>
+                                    <a href="#" class="dropdown-item"> <i data-lucide="file" class="w-4 h-4 mr-2"></i>
+                                        Export PDF </a>
                                 </li>
                             </ul>
                         </div>
@@ -33,7 +35,7 @@
                 <div class="border-b border-slate-200/60 dark:border-darkmode-400 text-center sm:text-left">
                     <div class="px-5 py-10 sm:px-20 sm:py-20">
                         <div class="text-primary font-semibold text-3xl">Hóa đơn</div>
-                        <div class="mt-2"> số <span class="font-medium">#{{$item->id}}</span> </div>
+                        <div class="mt-2"> số <span class="font-medium">#{{$item->id}}</span></div>
                         <div class="mt-1">{{$item->created_at}}</div>
                     </div>
                     <div class="flex flex-col lg:flex-row px-5 sm:px-20 pt-10 pb-10 sm:pb-20">
@@ -55,23 +57,18 @@
                             <thead>
                             <tr>
                                 <th class="border-b-2 dark:border-darkmode-400 whitespace-nowrap">Tên dịch vụ</th>
-                                <th class="border-b-2 dark:border-darkmode-400 text-right whitespace-nowrap">Giá tiền</th>
+                                <th class="border-b-2 dark:border-darkmode-400 text-right whitespace-nowrap">Giá tiền
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $total_amount = 0;
-                            @endphp
                             @foreach($item->bill_details as $detail)
-                            <tr>
-                                <td class="border-b dark:border-darkmode-400">
-                                    <div class="font-medium whitespace-nowrap">{{$detail->name}}</div>
-                                </td>
-                                <td class="text-right border-b dark:border-darkmode-400 w-32 font-medium">{{$detail->price}}</td>
-                                @php
-                                    $total_amount += $detail->price; // Cộng dồn giá trị vào biến tổng
-                                @endphp
-                           </tr>
+                                <tr>
+                                    <td class="border-b dark:border-darkmode-400">
+                                        <div class="font-medium whitespace-nowrap">{{$detail->name}}</div>
+                                    </td>
+                                    <td class="text-right border-b dark:border-darkmode-400 w-32 font-medium">{{$detail->price}} vnd</td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -85,17 +82,16 @@
                         <div class="mt-1">Mã code : LFT133243</div>
                     </div>
                     <div class="text-center sm:text-left sm:ml-auto">
-                        <div class="text-base text-slate-500">Tổng tiền: {{$total_amount}}</div>
-                        <div class="text-base text-warning">Giảm giá: 500000</div>
+                        <div class="text-base text-slate-500">Tổng tiền: {{$item->total_price}} vnd</div>
+                        <div class="text-base text-warning">Giảm giá: {{ $item->promotion->discount ?? 0 }} vnd</div>
                         <hr>
-                        <div class="text-base text-success">Số tiền phải thanh toán: {{$item->total_price}}</div>
+                        <div class="text-base text-success">Số tiền phải thanh toán: {{$item->total_price - ($item->promotion->discount ?? 0)}} vnd</div>
                         <div class="mt-1">Đã bao gồm thuế VAT(10%)</div>
                     </div>
                 </div>
             </div>
             <!-- END: Invoice -->
         </div>
-
     </div>
 </div>
 

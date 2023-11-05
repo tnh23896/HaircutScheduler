@@ -110,6 +110,12 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.update');
     Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
         ->name('admin.scheduleManagement.show');
+    Route::get('search-schedule', [ScheduleController::class, 'search'])
+        ->name('admin.scheduleManagement.search');
+    Route::get('filter-schedule', [ScheduleController::class, 'filter'])
+        ->name('admin.scheduleManagement.filter');
+    Route::get('search-datetime-schedule', [ScheduleController::class, 'searchByDateandTime'])
+        ->name('admin.scheduleManagement.searchDateTime');
     // Schedule Details
     Route::get('schedule-details/{id}', [ScheduleDetailsController::class, 'edit'])
         ->name('admin.scheduleManagement.scheduleDetails');
@@ -117,16 +123,15 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.scheduleDetails.update');
     Route::post('/schedule-details/{id}', [ScheduleDetailsController::class, 'store'])
         ->name('admin.scheduleManagement.scheduleDetails.store');
-    Route::get('search-schedule', [ScheduleController::class, 'search'])
-        ->name('admin.scheduleManagement.search');
-    Route::get('filter-schedule', [ScheduleController::class, 'filter'])
-        ->name('admin.scheduleManagement.filter');
+
 
     //Bill
     Route::get('bill-management', [BillController::class, 'index'])
         ->name('admin.billManagement.index');
     Route::get('search-bill', [BillController::class, 'search'])
         ->name('admin.billManagement.search');
+    Route::get('search-datetime-bill', [BillController::class, 'searchByDateandTime'])
+        ->name('admin.billManagement.searchDateTime');
 
 
     // Banner
