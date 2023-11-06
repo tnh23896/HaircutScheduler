@@ -156,14 +156,14 @@
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Blog
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark"
-                                        aria-labelledby="navbarDarkDropdownMenuLink">
-                                        @foreach ($category_blog as $item)
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+{{--                                    <ul class="dropdown-menu dropdown-menu-dark"--}}
+{{--                                        aria-labelledby="navbarDarkDropdownMenuLink">--}}
+{{--                                        @foreach ($category_blog as $item)--}}
+{{--                                            <li><a class="dropdown-item"--}}
+{{--                                                    href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>--}}
+{{--                                            </li>--}}
+{{--                                        @endforeach--}}
+{{--                                    </ul>--}}
                                 </li>
                             </ul>
                         </li>
@@ -180,12 +180,12 @@
                     <div class="position-relative">
                         @if (auth()->guard('web')->check())
                             <a href="{{ route('logout') }}">
-                                <button class="theme-btn-2 nav-btn " style="height: 50px;">
+                                <button class="theme-btn-2" style="padding: 20px 15px;height: 10px">
                                     <h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6>
                                 </button>
                             </a>
                         @else
-                            <a class="theme-btn-2 nav-btn " style="height: 50px;" href="javascript:void(0)"
+                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px" href="javascript:void(0)"
                                 data-toggle="modal" data-target="#modalAuth">
                                 <h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6>
                             </a>

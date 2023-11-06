@@ -1,81 +1,59 @@
 @extends('client.templates.layout_dashboard')
 @section('title', 'Booking History')
 @section('content')
-
-    <div id="my-bookings">
-        <div class="">
-            <div class="">
-                <h4 itemprop="headline">Danh Sách Lịch Đặt</h4>
-                <!--  <div class="select-wrap-inner">
-                         <select class="form-control">
-                               <option>Default select</option>
-                          </select>
-                          <select class="form-control">
-                               <option>Default select</option>
-                          </select>
-                     </div> -->
-            </div>
-            <div class="booking-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Thợ cắt tóc</th>
-                            <th>Giảm giá</th>
-                            <th>Tổng tiền</th>
-                            <th>Lịch đặt</th>
-                            <th>Trạng thái</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($list_booking as $booking)
-                            <tr>
-                                <td>{{ $booking->admin->username }}</td>
-                                <td>{{ number_format($booking->promotion->discount) }}</td>
-                                <td><span>{{ number_format($booking->total_price) }}</span> <a class="detail-link brd-rd50"
-                                        href="javascript:void(0)" title="" itemprop="url"><i
-                                            class="fa fa-chain"></i></a></td>
-                                <td><span>{{ $booking->time }} {{ $booking->day }}</span> <a class="detail-link brd-rd50"
-                                        href="javascript:void(0)" title="" itemprop="url"><i
-                                            class="fa fa-chain"></i></a></td>
-
-                                <td>
-                                    @if ($booking->status == 'pending')
-                                        <span class="text-warning">Pending</span>
-                                    @elseif($booking->status == 'success')
-                                        <span class="text-success">Success</span>
-                                    @elseif($booking->status == 'canceled')
-                                        <span class="text-danger">Cancelled</span>
-                                    @endif
-                                </td>
-                                <td class="flex">
-                                    <a href="{{ route('booking-history.edit', $booking->id) }}">
-                                        <button class="text-center"
-                                            style="width: 130px;  height: 40px; background-color: #D9842F; color: white; border: none; ">
-                                            Xem chi tiết
-                                        </button>
-                                    </a>
-                                    @if ($booking->status == 'pending')
-                                        <a href="">
-                                            <button class="btn btn-danger  text-center"
-                                                style="width: 130px;  height: 40px; ">
-                                                Hủy lịch
-                                            </button>
-                                        </a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div id="data-wrapper">
+        <h4 itemprop="headline">Danh Sách Lịch Đặt</h4>
+        @include('client.booking_history.list_booking')
+    </div>
+    <div>
+        {{$list_booking->links('custom.pagination')}}
     </div>
 
+    <script type="text/javascript">
+        $(window).on('hashchange', function () {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else {
+                    getData(page);
+                }
+            }
+        });
+        $(document).ready(function () {
+            $(document).on('click', '.pagination a', function (event) {
+                $('li').removeClass('active');
+                $(this).parent('li').addClass('active');
+                event.preventDefault();
 
+                var myurl = $(this).attr('href');
+                var page = $(this).attr('href').split('page=')[1];
 
+                // Kiểm tra giá trị `page` trước khi cập nhật URL
+                if (page === undefined || page === null) {
+                    page = 1; // Giá trị mặc định khi `page` không xác định
+                }
 
+                // Sử dụng History API để thay đổi URL mà không tải lại trang
+                history.replaceState(null, null, '?page=' + page);
 
+                getData(page);
+            });
+        });
 
-
+        function getData(page) {
+            $.ajax({
+                url: '?page=' + page,
+                type: "get",
+                datatype: "html",
+            })
+                .done(function (data) {
+                    $("#data-wrapper").empty().html("<div class ='container'>" + data + "</div>");
+                    // location.hash = page;
+                })
+                .fail(function (jqXHR, ajaxOptions, thrownError) {
+                    alert('No response from server');
+                });
+        }
+    </script>
 @endsection
