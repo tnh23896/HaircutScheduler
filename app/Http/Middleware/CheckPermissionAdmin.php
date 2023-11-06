@@ -32,6 +32,9 @@ class CheckPermissionAdmin
             'admin.billManagement.search',
             'admin.scheduleManagement.search',
             'admin.scheduleManagement.filter',
+            'admin.serviceManagement.service.search',
+            'admin.serviceManagement.service.filter'
+
         ];
 
         $name = Route::currentRouteName();
