@@ -7,15 +7,16 @@ use App\Models\Time;
 use App\Models\Admin;
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\Promotion;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use App\Models\BookingDetail;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Booking\StoreRequest;
-use App\Models\Promotion;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BookingController extends Controller
@@ -28,8 +29,8 @@ class BookingController extends Controller
         try {
             $id = auth('web')->user()->id;
             $list_booking = Booking::query()
-                            ->where('user_id', $id)
-                            ->paginate(10);
+                ->where('user_id', $id)
+                ->paginate(10);
             if ($request->ajax()) {
                 return view('client.booking_history.list_booking', compact('list_booking'));
             }
@@ -128,20 +129,25 @@ class BookingController extends Controller
     public function store(StoreRequest $request)
     {
         try {
+            $admin_id = $request->admin_id;
+            $day = $request->day;
             $params = [
                 'name' => $request->name,
                 'user_id' => auth('web')->user()->id,
-                'admin_id' => $request->admin_id,
+                'admin_id' => $admin_id,
                 'phone' => $request->phone,
                 'total_price' => $request->total_price,
                 'email' => $request->email,
-                'day' => $request->day,
-                'time' => $request->time,
+                'day' => $day,
             ];
+            $time_id = $request->time;
+            $time = Time::query()->findOrFail($time_id);
+            $params['time'] = $time->time;
             if ($request->promo_code) {
                 $promo = Promotion::where('promocode', $request->promo_code)->first();
                 $params['promo_id'] = $promo->id;
             }
+
             $booking = Booking::query()->create($params);
             $idServicesBookingDetail = explode(',', $request->servicesId);
             foreach ($idServicesBookingDetail as $id) {
@@ -153,11 +159,26 @@ class BookingController extends Controller
                     'price' => $service->price,
                 ]);
             }
+            $workSchedule = WorkSchedule::query()->where('admin_id', $admin_id)->where('day', $day)->first();
+
+            $findWorkScheduleDetail = DB::table('work_schedule_details')
+                ->where('work_schedule_details.time_id', $time->id)
+                ->where('work_schedule_details.work_schedules_id', $workSchedule->id);
+            if ($findWorkScheduleDetail->first()->status == 'unavailable') {
+                throw new Exception('Lịch đã được đặt rồi', 400);
+            }
+            $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
+
             return response()->json([
                 'message' => 'Thêm lịch đặt thành công',
             ], 200);
         } catch (\Exception $e) {
             Log::error('Error in store: ' . $e->getMessage());
+            if ($e->getCode() === 400) {
+                return response()->json([
+                    'message' => $e->getMessage()
+                ], 400);
+            }
             return response()->json([
                 'message' => 'Có lỗi xảy ra, vui lòng thử lai sau!'
             ], 500);
