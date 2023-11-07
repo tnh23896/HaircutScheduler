@@ -21,25 +21,8 @@
                 <li class="nav-item position-relative">
                     <a class="nav-link" href="{{ route('client.service') }}">Dịch vụ</a>
                 </li>
-                {{-- <li class="nav-item position-relative">
-                    <a class="nav-link" href="javascript:void(0)">Features</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="team.html">Our Team</a></li>
-                        <li><a href="apppointement.html">Apppointement</a></li>
-                        <li><a href="Error%20page.html">Error page</a></li>
-                        <li><a href="hairstyle.html">Hairstyle</a></li>
-                        <li><a href="treatment.html">Treatment Detail Page</a></li>
-                        <li><a href="gallery1.html"> Gallery Style 1</a></li>
-                    </ul>
-                </li> --}}
                 <li class="nav-item position-relative">
                     <a class="nav-link" href="{{ route('blog') }}">Tin tức</a>
-                    <ul class="dropdown-menu">
-                        @foreach ($category_blog as $item)
-                            <li><a href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
                 </li>
                 <li class="nav-item position-relative"><a class="nav-link " href="contact.html">Liên hệ</a></li>
                 <li class="nav-item position-relative"><a class="nav-link " href="{{ route('client.aboutus') }}">Giới
@@ -47,7 +30,7 @@
             </ul>
             <div class="main-logo">
                 <div class="hamburger-menu" style="transform: matrix(1, 0, 0, 1, 0, 0);  ">
-                    <button class="menu">
+                    <button class="menu" >
                         <svg width="45" height="45" viewBox="0 0 100 100">
                             <path class="line line1"
                                 d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058">
@@ -67,23 +50,12 @@
                 <!-- end layer -->
                 <div class="container">
                     <ul class="nav-menu" style="transition-delay: 1.5s;">
-                        <li class="nav-new-css"><a href="{{ url('/') }}">Trang chủ</a>
+                        <li><a href="{{ url('/') }}">Trang chủ</a>
                         </li>
-                        <li class="nav-new-css"><a href="{{ route('client.service') }}">Dịch vụ</a>
+                        <li><a href="{{ route('client.service') }}">Dịch vụ</a>
                         </li>
-                        <li class="home-drop"><a href="{{ route('blog') }}">Tin tức<svg fill="#fff" height="15"
-                                    viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;"
-                                    xml:space="preserve">
-                                    <path id="XMLID_225_"
-                                        d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                                </svg>
+                        <li class="home-drop"><a href="{{ route('blog') }}">Tin tức
                             </a>
-                            <ul class="home-page">
-                                @foreach ($category_blog as $item)
-                                    <li><a href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
                         </li>
                         <li><a href="contact.html">Liên hệ</a></li>
                         <li><a href="{{ route('client.aboutus') }}">Giới thiệu</a></li>

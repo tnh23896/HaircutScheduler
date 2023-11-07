@@ -1,12 +1,3 @@
-<div class="preloader">
-    <div class="loadbar"></div>
-    <div class="psoload">
-        <div class="straight"></div>
-        <div class="curve"></div>
-        <div class="center"></div>
-        <div class="inner"></div>
-    </div>
-</div>
 <header class="about-head">
     <div class="nav-top" id="nav_nav">
         <div class="container">
@@ -33,20 +24,7 @@
                                             class="home-click">Dịch vụ</a>
                                     </li>
                                     <li class="home-drop" onclick="submenu(2)"><a href="{{ route('blog') }}"
-                                            class="home-click">Tin tức<svg fill="#fff" height="15"
-                                                viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;"
-                                                xml:space="preserve">
-                                                <path id="XMLID_225_"
-                                                    d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                                            </svg></a>
-
-                                        <ul class="home-page-2 togglesubmenu">
-                                            @foreach ($category_blog as $item)
-                                                <li><a
-                                                        href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
+                                            class="home-click">Tin tức</a>
                                     </li>
                                     <li class="home-drop"><a href="">Liên hệ</a></li>
                                     <li class="home-drop"><a href="{{ route('client.aboutus') }}">Giới thiệu</a></li>
@@ -58,7 +36,8 @@
                 <div class="col-md-8">
                     <ul class="nav justify-content-center list-style-none">
                         <li class="nav-1">
-                            <a class="nav-link" href="{{ url('/') }}" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link {{ request()->routeIs('home.index') ? 'navbar-togglerss' : '' }}"
+                                href="{{ url('/') }}" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Trang chủ
                             </a>
@@ -73,14 +52,6 @@
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Tin Tức
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark"
-                                        aria-labelledby="navbarDarkDropdownMenuLink">
-                                        @foreach ($category_blog as $item)
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
                                 </li>
                             </ul>
                         </li>
