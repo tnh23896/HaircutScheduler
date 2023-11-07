@@ -8,15 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Promotion extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+
     protected $table = 'promotions';
     protected $fillable = [
-        'promocode', 'description', 'discount', 'expire_date',
+        'promocode',
+        'description',
+        'discount',
+        'expire_date',
     ];
+
     public function bookings()
     {
         return $this->hasMany(Booking::class);
     }
+
     public function bills()
     {
         return $this->hasMany(Bill::class);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PromotionManagement\PromotionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TimeManagement\TimeController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
@@ -110,6 +111,12 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.update');
     Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
         ->name('admin.scheduleManagement.show');
+    Route::get('search-schedule', [ScheduleController::class, 'search'])
+        ->name('admin.scheduleManagement.search');
+    Route::get('filter-schedule', [ScheduleController::class, 'filter'])
+        ->name('admin.scheduleManagement.filter');
+    Route::get('search-datetime-schedule', [ScheduleController::class, 'searchByDateandTime'])
+        ->name('admin.scheduleManagement.searchDateTime');
     // Schedule Details
     Route::get('schedule-details/{id}', [ScheduleDetailsController::class, 'edit'])
         ->name('admin.scheduleManagement.scheduleDetails');
@@ -117,16 +124,15 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.scheduleDetails.update');
     Route::post('/schedule-details/{id}', [ScheduleDetailsController::class, 'store'])
         ->name('admin.scheduleManagement.scheduleDetails.store');
-    Route::get('search-schedule', [ScheduleController::class, 'search'])
-        ->name('admin.scheduleManagement.search');
-    Route::get('filter-schedule', [ScheduleController::class, 'filter'])
-        ->name('admin.scheduleManagement.filter');
+
 
     //Bill
     Route::get('bill-management', [BillController::class, 'index'])
         ->name('admin.billManagement.index');
     Route::get('search-bill', [BillController::class, 'search'])
         ->name('admin.billManagement.search');
+    Route::get('search-datetime-bill', [BillController::class, 'searchByDateandTime'])
+        ->name('admin.billManagement.searchDateTime');
 
 
     // Banner
@@ -207,4 +213,20 @@ Route::group(['middleware' => 'admin'], function () {
     //Profile
     Route::get('/profile', [ProfileController::class,'edit'])->name('admin.profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
+
+    //Promotion Management
+    Route::get('promotion-management', [PromotionController::class, 'index'])
+        ->name('admin.PromotionManagement.index');
+    Route::get('promotion-management/create', [PromotionController::class, 'create'])
+        ->name('admin.PromotionManagement.create');
+    Route::post('promotion-management/create', [PromotionController::class, 'store'])
+        ->name('admin.PromotionManagement.store');
+    Route::get('promotion-management/edit/{id}', [PromotionController::class, 'edit'])
+        ->name('admin.PromotionManagement.edit');
+    Route::post('promotion-management/edit/{id}', [PromotionController::class, 'update'])
+        ->name('admin.PromotionManagement.update');
+    Route::delete('promotion-management/delete/{id}', [PromotionController::class, 'destroy'])
+        ->name('admin.PromotionManagement.delete');
+    Route::get('promotion-management/filter', [PromotionController::class, 'filter'])
+        ->name('admin.PromotionManagement.filter');
 });
