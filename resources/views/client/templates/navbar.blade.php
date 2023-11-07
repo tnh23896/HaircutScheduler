@@ -47,12 +47,12 @@
                 </li>
                 <li class="nav-item position-relative">
                     <a class="nav-link" href="{{ route('blog') }}">Blog</a>
-                    <ul class="dropdown-menu">
-                        @foreach ($category_blog as $item)
-                            <li><a href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>
-                            </li>
-                        @endforeach
-                    </ul>
+{{--                    <ul class="dropdown-menu">--}}
+{{--                        @foreach ($category_blog as $item)--}}
+{{--                            <li><a href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    </ul>--}}
                 </li>
                 <li class="nav-item position-relative"><a class="nav-link " href="contact.html">Contact</a></li>
                 <li class="nav-item position-relative"><a class="nav-link " href="aboutus.html">About</a></li>
@@ -155,15 +155,12 @@
             </nav>
             @if (auth()->guard('web')->check())
             <a href="{{ route('logout') }}">
-                <button class="theme-btn-2 nav-btn " style="height: 50px;" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
+                <button class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
             </a>
             @else
-                <a class="theme-btn-2 nav-btn " style="height: 50px;" href="javascript:void(0)" data-toggle="modal"
+                <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px" href="javascript:void(0)" data-toggle="modal"
                     data-target="#modalAuth"><h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6></a>
             @endif
-
-
-
         </div>
     </nav>
 </header>

@@ -521,13 +521,7 @@
                             location.href = "{{ route('home.index') }}";
                         },
                         error => {
-                            console.log(error);
-                            const errors = error.responseJSON.errors;
-                            Object.keys(errors).forEach(key => {
-                                errors[key].forEach(errorMessage => {
-                                    toastr.error(errorMessage);
-                                });
-                            });
+                            showErrorsWithToastr(error);
                         }
                     );
                 } else {

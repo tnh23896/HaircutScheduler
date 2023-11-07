@@ -1,10 +1,10 @@
 <nav aria-label="Pagination">
     <ul class="pagination justify-content-center align-items-center">
         @if ($paginator->onFirstPage())
-            <li class="page-item  "><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
+            <li class="page-item  "><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Trang trước</a>
             </li>
         @else
-            <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">Prev</a>
+            <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev">Trang trước</a>
             </li>
         @endif
 
@@ -32,10 +32,10 @@
 
         <!-- Hiển thị các liên kết trang trước và sau -->
         @if ($paginator->hasMorePages())
-            <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">Next</a>
+            <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}" rel="next">Trang sau</a>
             </li>
         @else
-            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item disabled"><a class="page-link" href="#">Trang sau</a></li>
         @endif
     </ul>
 </nav>

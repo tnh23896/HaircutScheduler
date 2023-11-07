@@ -11,11 +11,18 @@ class BillController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $id = auth('web')->user()->id;
-        $list_bill = Bill::where('user_id', $id)->get();
-        return view('client.bill_history.index', compact('list_bill'));
+        try {
+            $id = auth('web')->user()->id;
+            $list_bill = Bill::where('user_id', $id)->paginate(4);
+            if ($request->ajax()) {
+                return view('client.bill_history.list_bill', compact('list_bill'));
+            }
+            return view('client.bill_history.index', compact('list_bill'));
+        } catch (\Exception $e) {
+            abort(404);
+        }
     }
 
     /**

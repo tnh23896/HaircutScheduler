@@ -1729,14 +1729,15 @@ input:focus{
 }
 /*====pagination====*/
 .pagination li a{
-	margin-right: 0.937rem;
+	margin-right: 5px;
 	color: black;
 	font-size: 22px;
+    padding:5px 10px;
 }
 .pagination li:first-child a{
 	color: white;
 	background: #d9842f;
-	padding: 17px 34px;
+	padding: 5px 5px;
 }
 .pagination li:hover a{
 	background: #d9842f;
@@ -1748,7 +1749,7 @@ input:focus{
 .pagination li:last-child a{
 	color: white;
 	background: #000;
-    padding: 17px 34px;
+    padding: 5px 5px;
 }
 .page-link{
 	padding: 0.812rem 2rem;
@@ -4742,7 +4743,8 @@ li.home-drop svg {
 .profile-sidebar {
   float: left;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
+  margin-bottom: 5px;
   background-color: #f7f7f7;
 }
 a{
@@ -4942,11 +4944,11 @@ a{
 .view-menu-liks > a:hover,
 .view-menu-liks > a:focus {color: #fff;}
 /*===== My Bookings Tab =====*/
-.tabs-wrp {
-  float: left;
-  width: 100%;
-  padding: 50px;
-}
+/*.tabs-wrp {*/
+/*  float: left;*/
+/*  width: 100%;*/
+/*  padding: 50px;*/
+/*}*/
 .tabs-wrp > h4 {
   font-size: 32px;
   color: #3c3838;
@@ -4970,11 +4972,11 @@ a{
   font-size: 10.8px;
 }
 .booking-table {
-  float: left;
+  /*float: left;*/
   width: 100%;
 }
 .booking-table > table {
-  float: left;
+  /*float: left;*/
   width: 100%;
   -webkit-box-shadow: 0 0 30px rgba(0,0,0,0.04);
   -ms-box-shadow: 0 0 30px rgba(0,0,0,0.04);
@@ -4990,7 +4992,7 @@ a{
   box-shadow: 0 0 30px rgba(0,0,0,.04);
 }
 .booking-table > table thead th {
-  padding: 21px 40px;
+  padding: 12px 5px;
   font-size: 16px;
   font-weight: 700;
   text-align: center;
@@ -5001,7 +5003,7 @@ a{
 .booking-table > table thead th:first-child,
 .booking-table > table tbody td:first-child {text-align: left;}
 .booking-table > table tbody td {
-  padding: 25px 25px;
+  padding: 12px 5px;
   font-size: 16px;
   color: #444;
   position: relative;
@@ -5092,11 +5094,11 @@ i.off {color: #d7d7d7;}
 .review-info-inner > i {font-size: 12px;}
 /*===== My Orders Tab =====*/
 .order-list {
-  float: left;
+  /*float: left;*/
   width: 100%;
 }
 .order-item {
-  float: left;
+  /*float: left;*/
   width: 100%;
   background-color: #fff;
   padding: 30px;

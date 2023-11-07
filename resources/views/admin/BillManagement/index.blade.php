@@ -8,28 +8,24 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
             <div class="hidden xl:block mx-auto text-slate-500"></div>
-            <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-{{--                Form tìm kiếm theo ngày và giờ --}}
-                <form action="{{route('admin.billManagement.searchDateTime')}}" method="GET">
-                    <div class="w-72 relative text-slate-500 flex items-center mr-3">
-                        <input type="date" name="day" class="form-control box w-72 mr-2"
-                               value="{{ request('day') }}">
-                        <input type="time" name="time" class="form-control w-56 box pr-10"
-                               value="{{ request('time') }}">
+            <div class="w-full xl:w-auto flex flex-wrap items-center mt-3 xl:mt-0">
+                {{-- Form tìm kiếm theo ngày và giờ --}}
+                <form action="{{route('admin.billManagement.searchDateTime')}}" method="GET" class="mr-3">
+                    <div class="w-full relative text-slate-500 flex items-center">
+                        <input type="date" name="day" class="form-control box w-40 sm:w-auto mr-2" value="{{ request('day') }}">
+                        <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10" value="{{ request('time') }}">
                         <button type="submit">
-                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
-                               data-lucide="search"></i>
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
                     </div>
                 </form>
-{{--                Form tìm kiếm theo tên và số điện thoại--}}
-                <form action="{{route('admin.billManagement.search')}}" method="GET">
-                    <div class="w-56 relative text-slate-500 flex items-center mr-3">
-                        <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Tìm kiếm..."
+                {{-- Form tìm kiếm theo tên và số điện thoại --}}
+                <form action="{{route('admin.billManagement.search')}}" method="GET" class="mr-3">
+                    <div class="w-full relative text-slate-500 flex items-center">
+                        <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10" placeholder="Tìm kiếm..."
                                value="{{ request('search') }}">
                         <button type="submit">
-                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
-                               data-lucide="search"></i>
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
                     </div>
                 </form>
