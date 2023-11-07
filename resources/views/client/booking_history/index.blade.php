@@ -63,16 +63,18 @@
                                 @endif
                             </td>
                             <td class="flex text-nowrap">
-                                {{-- <a href="{{ route('booking-history.edit', $booking->id) }}">
+                                 <a data-toggle="modal" data-target=".modal{{ $booking->id }}"
+                                    href="javascript:void(0)" title="" itemprop="url">
                                     <button class="text-center"
                                             style="width: 130px;  height: 40px; background-color: #D9842F; color: white; border: none; ">
                                         Xem chi tiết
                                     </button>
-                                </a> --}}
+                                </a>
+                                <br>
                                 @if ($booking->status == 'pending')
                                     <a href="">
-                                        <button class="btn btn-danger  text-center"
-                                                style="width: 130px;  height: 40px; ">
+                                        <button class="text-center"
+                                                style="width: 130px; height: 40px; border: none; background-color: red; color: white">
                                             Hủy lịch
                                         </button>
                                     </a>
@@ -85,5 +87,7 @@
             </div>
         </div>
     </div>
-
+    @foreach($list_booking as $booking)
+        @include('client.booking_history.modal')
+    @endforeach
 @endsection

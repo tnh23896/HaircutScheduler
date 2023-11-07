@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Edit Category Services')
+@section('title', 'Chỉnh sửa vai trò')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
@@ -43,8 +43,8 @@
                     </div>
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.RoleManagement.index') }}" type="button"
-                           class="btn btn-outline-secondary w-24 mr-1">Back</a>
-                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
+                           class="btn btn-outline-secondary w-24 mr-1">Quay Lại</a>
+                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
             </form>

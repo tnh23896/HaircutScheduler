@@ -1,4 +1,4 @@
-<div class="mobile-menu-bar">
+    <div class="mobile-menu-bar">
     <a href="#" class="flex mr-auto">
         <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('dist/images/logonew2.png')}}">
     </a>
@@ -107,6 +107,14 @@
                 <a href="{{ route('admin.RoleManagement.index') }}" class="menu">
                     <div class="menu__icon"><i data-lucide="git-branch-plus"></i></div>
                     <div class="menu__title"> Quản lý vai trò</div>
+                </a>
+            </li>
+        @endif
+        @if(auth('admin')->user()->can('admin.PromotionManagement.index'))
+            <li>
+                <a href="{{ route('admin.PromotionManagement.index') }}" class="menu">
+                    <div class="menu__icon"><i data-lucide="ticket"></i></div>
+                    <div class="menu__title"> Quản lý mã giảm giá</div>
                 </a>
             </li>
         @endif

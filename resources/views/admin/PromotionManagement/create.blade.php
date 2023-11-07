@@ -1,10 +1,10 @@
 @extends('admin.templates.app')
-@section('title', 'Thêm mới vai trò')
+@section('title', 'Thêm mới mã giảm giá')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">
-            Thêm vai trò mới
+            Thêm mã giảm giá mới
         </h2>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -13,35 +13,28 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div class="mb-4">
-                        <label for="crud-form-1" class="form-label">Tên vai trò</label>
-                        <input type="text" name="name" id="name" class="clearable form-control w-full"
-                            placeholder="Tên vai trò">
-                    </div>
-                    <div class="mb-4">
-                        <label for="crud-form-1" class="form-label">Phân quyền cho</label>
-                        <select name="guard_name" id="guard_name" class="clearable form-control w-full">
-                            <option value="admin">Admin</option>
-                            <option value="web">User</option>
-                        </select>
+                        <label for="crud-form-1" class="form-label">Mã giảm giá</label>
+                        <input type="text" name="promocode" id="promocode" class="clearable form-control w-full"
+                               placeholder="Mã giảm giá">
                     </div>
 
                     <div class="mb-4">
-                        <label for="crud-form-1" class="form-label">Quyền</label>
-                        <br>
-                        <div class="grid grid-cols-4 gap-4 sm:grid">
-                            @foreach (config('permissions') as $key => $value)
-                                <div>
-                                    <input type="checkbox" name="permissions[]" value="{{ $key }}"
-                                        id="{{ $key }}">
-                                    <label for="{{ $key }}">{{ $value }}</label>
-                                </div>
-                            @endforeach
-                        </div>
+                        <label for="crud-form-1" class="form-label">Số tiền giảm giá</label>
+                        <input type="text" name="discount" id="discount" class="clearable form-control w-full"
+                               placeholder="Số tiền giảm">
                     </div>
-
+                    <div class="mt-3">
+                        <label for="crud-form-1" class="form-label">Mô tả</label>
+                        <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="crud-form-1" class="form-label">Ngày kết thúc</label>
+                        <input type="date" name="expire_date" id="expire_date" class="clearable form-control w-full"
+                               placeholder="Ngày kết thúc">
+                    </div>
                     <div class="text-right mt-5">
-                        <a href="{{ route('admin.RoleManagement.index') }}" type="button"
-                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                        <a href="{{ route('admin.PromotionManagement.index') }}" type="button"
+                           class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
@@ -54,7 +47,7 @@
         $(function() {
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
-                var url = "{{ route('admin.RoleManagement.store') }}";
+                var url = "{{ route('admin.PromotionManagement.store') }}";
 
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
@@ -63,6 +56,7 @@
                             $('.clearable').val('');
                             $('#errorDiv').hide();
                         }
+                        {{--window.location.href = "{{ route('admin.RoleManagement.index') }}";--}}
                     },
 
                     function(error) {
@@ -76,3 +70,4 @@
 @section('js_footer_custom')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 @endsection
+

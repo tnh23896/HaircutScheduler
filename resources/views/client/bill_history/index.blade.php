@@ -15,7 +15,7 @@
                             </div>
                             <span class="price font-weight-bold">Thời gian tạo: {{ $bill->created_at }}</span>
                             <a class="brd-rd2 theme-btn-2" data-toggle="modal" data-target=".modal{{ $bill->id }}"
-                               href="javascript:void(0)" title="" itemprop="url">Order Detail</a>
+                               href="javascript:void(0)" title="" itemprop="url">Chi tiết hóa đơn</a>
                         </div>
                     </div>
                 @endforeach

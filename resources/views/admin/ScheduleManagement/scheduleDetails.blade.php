@@ -34,7 +34,7 @@
                                 @endif
                             >
                         </td>
-                        <td>{{$detail->admin->username}}</td>
+                        <td>{{$detail->admin->username ?? ''}}</td>
                     </tr>
                 @endforeach
             </table>
