@@ -117,6 +117,15 @@
                 </a>
             </li>
         @endif
+        @if(auth('admin')->user()->can('admin.PromotionManagement.index'))
+            <li>
+                <a href="{{route('admin.PromotionManagement.index')}}"
+                   class="side-menu {{ request()->routeIs('admin.PromotionManagement*') ? 'side-menu--active' : '' }}">
+                    <div class="side-menu__icon"><i data-lucide="ticket"></i></div>
+                    <div class="side-menu__title"> Quản lý mã giảm giá</div>
+                </a>
+            </li>
+        @endif
         @if(auth('admin')->user()->can('admin.blogManagement.category.index') || auth('admin')->user()->can('admin.blogManagement.blog.index'))
             <li>
                 <a href="javascript:;"
