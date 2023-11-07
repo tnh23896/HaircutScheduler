@@ -21,7 +21,7 @@
                         <label for="crud-form-1" class="form-label">Phân quyền cho</label>
                         <select name="guard_name" id="guard_name" class="clearable form-control w-full">
                             <option value="admin">Quản trị viên</option>
-                            <option value="web">Khách hàng</option>
+                            {{-- <option value="web">Khách hàng</option> --}}
                         </select>
                     </div>
 

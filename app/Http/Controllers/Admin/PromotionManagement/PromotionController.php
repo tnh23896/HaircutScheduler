@@ -101,7 +101,7 @@ class PromotionController extends Controller
             $promotion->save();
             return response()->json(['success' => 'Cập nhật thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Cập nhật không thành công'], 200);
+            return response()->json(['error' => 'Cập nhật không thành công'], 500);
         }
     }
 

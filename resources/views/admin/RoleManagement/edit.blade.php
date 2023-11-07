@@ -17,11 +17,14 @@
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
                                value="{{ $role->name }}" placeholder="Tên vai trò">
                     </div>
-
-                    <div>
+                    <div class="mb-4">
                         <label for="crud-form-1" class="form-label">Phân quyền cho</label>
-                        <input type="text" name="guard_name" id="name" class="clearable form-control w-full"
-                               value="{{ $role->guard_name }}" placeholder="Tên guard">
+                        <select name="guard_name" id="guard_name" class="clearable form-control w-full" value="{{ $role->guard_name }}">
+                            <option value="admin" @if ($role->guard_name == 'admin')
+                                selected
+                            @endif >Quản trị viên</option>
+                            {{-- <option value="web">Khách hàng</option> --}}
+                        </select>
                     </div>
 
 
