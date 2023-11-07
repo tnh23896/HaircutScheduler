@@ -99,4 +99,12 @@ return [
     'admin.work-schedule.show' => 'Chi tiết lịch làm việc',
     'admin.work-schedule.update1' => 'Cập nhật lịch làm việc',
     'admin.work-schedule.destroy' => 'Xóa lịch làm việc',
+
+    //Promotion Management
+    'admin.PromotionManagement.index' => 'Danh sách khuyến mãi',
+    'admin.PromotionManagement.create' => 'Thêm khuyến mãi',
+    'admin.PromotionManagement.store' => 'Lưu khuyến mãi',
+    'admin.PromotionManagement.edit' => 'Chỉnh sửa khuyến mãi',
+    'admin.PromotionManagement.update' => 'Cập nhật khuyến mãi',
+    'admin.PromotionManagement.delete' => 'Xóa khuyến mãi',
 ];

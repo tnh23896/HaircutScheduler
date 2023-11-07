@@ -5085,10 +5085,10 @@ a {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.04);
 }
 .booking-table > table thead th {
-    padding: 21px 40px;
-    font-size: 16px;
-    font-weight: 700;
-    text-align: center;
+  padding: 21px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
 }
 .booking-table tbody tr {
     background-color: #fff;

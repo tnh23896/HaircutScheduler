@@ -24,9 +24,7 @@ class ScheduleController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
-
         $fields = ['name', 'phone'];
-
         $data = search(Booking::class, $search, $fields)
             ->latest()
             ->paginate(5)
@@ -34,13 +32,59 @@ class ScheduleController extends Controller
         return view('admin.scheduleManagement.index', compact('data'));
     }
 
+    public function searchByDateandTime(Request $request)
+    {
+
+        $day = $request->input('day');
+        $time = $request->input('time');
+        $ampm = $request->input('ampm'); // SA, CH, AM, PM
+
+        $hour = $minute = null;
+
+        if ($time) {
+            list($hour, $minute) = explode(':', $time);
+            $hour = (int)$hour;
+            $minute = (int)$minute;
+        }
+
+        // Kiểm tra kiểu thời gian và điều chỉnh giờ dựa trên giá trị của $ampm
+        if ($ampm === 'SA' && $hour >= 12) {
+            $hour -= 12;
+        } elseif ($ampm === 'CH' && $hour < 12) {
+            $hour += 12;
+        } elseif ($ampm === 'AM' && $hour == 12) {
+            $hour = 0;
+        } elseif ($ampm === 'PM' && $hour != 12) {
+            $hour += 12;
+        }
+
+        if ($hour !== null && $minute !== null) {
+            $time = sprintf('%02d:%02d', $hour, $minute);
+        }
+
+        $query = Booking::latest();
+
+        if (!empty($day)) {
+            $query->whereRaw('DATE(day) = ?', [$day]);
+        }
+
+        if (!empty($time)) {
+            $query->whereRaw('TIME(time) LIKE ?', ["$time%"]);
+        }
+
+        $bookingsByDateAndTime = $query->paginate(5)->withQueryString();
+
+        if ($bookingsByDateAndTime->isEmpty()) {
+            return redirect()->route('admin.scheduleManagement.index');
+        }
+
+        return view('admin.scheduleManagement.index', ['data' => $bookingsByDateAndTime]);
+    }
 
 
     public function filter(Request $request)
     {
         $status = $request->input('filter');
-
-
         if ($status == "") {
             $data = Booking::latest()->paginate(5);
         } else {
@@ -105,7 +149,6 @@ class ScheduleController extends Controller
                     'day' => $data->day,
                     'time' => $data->time,
                 ]);
-
                 foreach ($data->booking_details as $item) {
                     if ($item->status == "success") {
                         $bill->bill_details()->create([
@@ -117,7 +160,6 @@ class ScheduleController extends Controller
                         ]);
                     }
                 }
-
             }
             return response()->json([
                 'status' => 200,
