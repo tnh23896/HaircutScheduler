@@ -10,12 +10,9 @@ use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
-
-
-
     public function index()
     {
-        $banners = Banner::latest()->paginate(10);
+        $banners = Banner::orderBy('status', 'desc')->latest()->paginate(10);
         return view('admin.Banners.index', compact('banners'));
     }
 
