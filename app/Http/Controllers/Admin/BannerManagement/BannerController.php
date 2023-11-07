@@ -53,6 +53,12 @@ class BannerController extends Controller
             $banner = Banner::query()->findOrFail($id);
             $imgOld = $banner->image;
             $banner->fill($request->all());
+            if ($request->status === 'active') {
+                $activeBanner = Banner::where('status', 'active')->first();
+                if ($activeBanner) {
+                    $activeBanner->update(['status' => 'inactive']);
+                }
+            }
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $banner->image = upload_file('admin/Banner', $request->file('image'));
                 delete_file($imgOld);
