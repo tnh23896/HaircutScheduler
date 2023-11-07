@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(window).on('hashchange', function () {
+    $(window).on('hashchange', function() {
         if (window.location.hash) {
             var page = window.location.hash.replace('#', '');
             if (page == Number.NaN || page <= 0) {
@@ -9,8 +9,8 @@
             }
         }
     });
-    $(document).ready(function () {
-        $(document).on('click', '.pagination a', function (event) {
+    $(document).ready(function() {
+        $(document).on('click', '.pagination a', function(event) {
             $('li').removeClass('active');
             $(this).parent('li').addClass('active');
             event.preventDefault();
@@ -25,22 +25,28 @@
 
             // Sử dụng History API để thay đổi URL mà không tải lại trang
             history.replaceState(null, null, '?page=' + page);
-
+            $('html, body').animate({
+                scrollTop: $("body").offset().top
+            },700);
             getData(page);
         });
     });
 
     function getData(page) {
         $.ajax({
-            url: '?page=' + page,
-            type: "get",
-            datatype: "html",
-        })
-            .done(function (data) {
-                $("#data-wrapper").empty().html("<div class ='container'>" + data + "</div>");
-                // location.hash = page;
+                url: '?page=' + page,
+                type: "get",
+                datatype: "html",
             })
-            .fail(function (jqXHR, ajaxOptions, thrownError) {
+            .done(function(data) {
+                $("#data-wrapper").empty().html("<div class =''>" + data + "</div>");
+                // location.hash = page;
+                // Cuộn lên đầu trang sau khi tải dữ liệu mới
+                // $("#data-wrapper").animate({
+                //     scrollTop: 0
+                // }, "slow");
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
                 alert('No response from server');
             });
     }
