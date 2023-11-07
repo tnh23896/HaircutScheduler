@@ -1762,9 +1762,9 @@ input:focus{
 .page-link-3{
     color: black;
 }
-/*.pagination-btn{*/
-/*	background-color: #090c0d;*/
-/*}*/
+.pagination-btn{
+	background-color: #090c0d;
+}
 .page-link-2 {
     padding: 0.937rem 1.562rem;
     display: block;
