@@ -47,7 +47,7 @@
                         <select data-placeholder="Select your favorite actors" name="status" class="tom-select w-full"
                                 id="crud-form-2" @if($data->status == "success") disabled @endif>
                             @if($data->status == "pending")
-                            <option
+                                <option
                                     value="pending"
                                     @if($data->status == "pending") selected
                                     @endif>
@@ -62,27 +62,24 @@
                                     Đã xác nhận
                                 </option>
                             @endif
-
-
-
                             @if($data->status == "confirmed" || $data->status == "waiting")
                                 <option
-                                value="waiting"
+                                    value="waiting"
                                     @if($data->status == "waiting") selected
                                     @endif>
-                                Đang chờ cắt
+                                    Đang chờ cắt
                                 </option>
                             @endif
                             @if($data->status == "waiting" || $data->status == "success")
                                 <option value="success"
-                                    @if($data->status == "success") selected
+                                        @if($data->status == "success") selected
                                     @endif>
-                                Đã hoàn thành
+                                    Đã hoàn thành
                                 </option>
                             @endif
                             @if($data->status == "pending" || $data->status == "confirmed")
                                 <option
-                                value="canceled"
+                                    value="canceled"
                                     @if($data->status == "canceled") selected
                                     @endif>
                                     Đã hủy
@@ -90,7 +87,6 @@
                             @endif
                         </select>
                     </div>
-
                     <div class="text-right mt-5">
                         <a href="{{route('admin.scheduleManagement.index')}}"
                            class="btn btn-outline-secondary w-32 mr-1">Quay Lại</a>
@@ -103,7 +99,6 @@
                 <!-- END: Form Layout -->
             </form>
         </div>
-
     </div>
 
     <script>
@@ -111,20 +106,20 @@
         $('#saveBtn').on('click', function () {
             var formData = new FormData($('#ajaxForm')[0]);
             var url = "{{ route('admin.scheduleManagement.update', ['id' => ':editId']) }}";
-                url = url.replace(':editId', editId);
+            url = url.replace(':editId', editId);
 
-                sendAjaxRequest(url, 'POST', formData,
-                    function(response) {
-                        if (response.success) {
-                            toastr.success(response.success);
-                        }
-                    },
-
-                    function(error) {
-                        showErrors(error);
+            sendAjaxRequest(url, 'POST', formData,
+                function (response) {
+                    if (response.success) {
+                        toastr.success(response.success);
                     }
-                );
-            });
+                },
+
+                function (error) {
+                    showErrors(error);
+                }
+            );
+        });
 
     </script>
 

@@ -155,10 +155,10 @@
             </nav>
             @if (auth()->guard('web')->check())
             <a href="{{ route('logout') }}">
-                <button class="theme-btn-2" style="padding: 20px 15px;height: 10px" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
+                <button class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
             </a>
             @else
-                <a class="theme-btn-2" style="padding: 20px 15px;height: 10px" href="javascript:void(0)" data-toggle="modal"
+                <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px" href="javascript:void(0)" data-toggle="modal"
                     data-target="#modalAuth"><h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6></a>
             @endif
         </div>

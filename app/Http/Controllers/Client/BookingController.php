@@ -29,7 +29,7 @@ class BookingController extends Controller
             $id = auth('web')->user()->id;
             $list_booking = Booking::query()
                             ->where('user_id', $id)
-                            ->paginate(10);
+                            ->paginate(4);
             if ($request->ajax()) {
                 return view('client.booking_history.list_booking', compact('list_booking'));
             }

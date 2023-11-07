@@ -4743,7 +4743,8 @@ li.home-drop svg {
 .profile-sidebar {
   float: left;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
+  margin-bottom: 5px;
   background-color: #f7f7f7;
 }
 a{
