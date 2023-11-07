@@ -14,3 +14,9 @@ function showErrors(error, errorDivId = "errorDiv") {
   errorDiv.show();
 }
 
+function showErrorsWithToastr(error) {
+  const errorData = error.responseJSON.errors || error.responseJSON;
+  Object.values(errorData).forEach(errorMessage => {
+    toastr.error(errorMessage);
+  });
+}
