@@ -15,51 +15,22 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item position-relative">
-                    <a class="nav-link" href="{{url('/')}}">Home
+                    <a class="nav-link " href="{{ url('/') }}">Trang chủ
                     </a>
                 </li>
                 <li class="nav-item position-relative">
-                    <a class="nav-link" href="javascript:void(0)">Services</a>
-                    <ul class="dropdown-menu .menu-links">
-                        <li><a href="service-style-2.html">Service Style 2</a></li>
-                    </ul>
+                    <a class="nav-link" href="{{ route('client.service') }}">Dịch vụ</a>
                 </li>
                 <li class="nav-item position-relative">
-                    <a class="nav-link" href="javascript:void(0)">Pages</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Booking History</a></li>
-                        <li><a href="product-detail.html">Product Detail 1</a></li>
-                        <li><a href="product-details2.html">Product Detail 2</a></li>
-                        <li><a href="pricepage.html">Price/Packages</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                    </ul>
+                    <a class="nav-link" href="{{ route('blog') }}">Tin tức</a>
                 </li>
-                <li class="nav-item position-relative">
-                    <a class="nav-link" href="javascript:void(0)">Features</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="team.html">Our Team</a></li>
-                        <li><a href="apppointement.html">Apppointement</a></li>
-                        <li><a href="Error%20page.html">Error page</a></li>
-                        <li><a href="hairstyle.html">Hairstyle</a></li>
-                        <li><a href="treatment.html">Treatment Detail Page</a></li>
-                        <li><a href="gallery1.html"> Gallery Style 1</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item position-relative">
-                    <a class="nav-link" href="{{ route('blog') }}">Blog</a>
-{{--                    <ul class="dropdown-menu">--}}
-{{--                        @foreach ($category_blog as $item)--}}
-{{--                            <li><a href="{{ route('list.blog.category', $item->id) }}">{{ $item->title }}</a>--}}
-{{--                            </li>--}}
-{{--                        @endforeach--}}
-{{--                    </ul>--}}
-                </li>
-                <li class="nav-item position-relative"><a class="nav-link " href="contact.html">Contact</a></li>
-                <li class="nav-item position-relative"><a class="nav-link " href="aboutus.html">About</a></li>
+                <li class="nav-item position-relative"><a class="nav-link " href="contact.html">Liên hệ</a></li>
+                <li class="nav-item position-relative"><a class="nav-link " href="{{ route('client.aboutus') }}">Giới
+                        thiệu</a></li>
             </ul>
             <div class="main-logo">
                 <div class="hamburger-menu" style="transform: matrix(1, 0, 0, 1, 0, 0);  ">
-                    <button class="menu">
+                    <button class="menu" >
                         <svg width="45" height="45" viewBox="0 0 100 100">
                             <path class="line line1"
                                 d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058">
@@ -79,87 +50,31 @@
                 <!-- end layer -->
                 <div class="container">
                     <ul class="nav-menu" style="transition-delay: 1.5s;">
-                        <li class="home-drop"><a href="javascript:void(0)">Home<svg fill="#fff" height="15"
-                                    viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;"
-                                    xml:space="preserve">
-                                    <path id="XMLID_225_"
-                                        d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                                </svg></a>
-                            <ul class="home-page">
-                                <li><a href="index.html">Home Style 1</a></li>
-                                <li><a href="index-2.html">Home Style 2</a></li>
-                                <li><a href="index-3.html">Home Style 3</li>
-                            </ul>
+                        <li><a href="{{ url('/') }}">Trang chủ</a>
                         </li>
-                        <li class="home-drop"><a href="javascript:void(0)">Services<svg fill="#fff" height="15"
-                                    viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;"
-                                    xml:space="preserve">
-                                    <path id="XMLID_225_"
-                                        d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                                </svg></a>
-                            <ul class="home-page">
-                                <li><a href="service-style-3.html">Service Style 1</a></li>
-                                <li><a href="service-style-4.html">Service Style 2</a></li>
-                                <li><a href="service-style-5.html">Service Style 3</a></li>
-                            </ul>
+                        <li><a href="{{ route('client.service') }}">Dịch vụ</a>
                         </li>
-                        <li class="home-drop"><a href="javascript:void(0)">Pages<svg fill="#fff" height="15"
-                                    viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;"
-                                    xml:space="preserve">
-                                    <path id="XMLID_225_"
-                                        d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                                </svg></a>
-                            <ul class="home-page">
-                                <li><a href="our%20product.html">Products Listing</a></li>
-                                <li><a href="product-detail.html">Product Detail 1</a></li>
-                                <li><a href="product-details2.html">Product Detail 2</a></li>
-                                <li><a href="pricepage.html">Price/Packages</a></li>
-                                <li><a href="gallery1.html"> Gallery Style 1</a></li>
-                                <li><a href="dashboard.html">Dashboard</a></li>
-                            </ul>
-                        </li>
-                        <li class="home-drop"><a href="javascript:void(0)">Features<svg fill="#fff"
-                                    height="15" viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;"
-                                    xml:space="preserve">
-                                    <path id="XMLID_225_"
-                                        d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                                </svg>
+                        <li class="home-drop"><a href="{{ route('blog') }}">Tin tức
                             </a>
-                            <ul class="home-page">
-                                <li><a href="team.html">Our Team</a></li>
-                                <li><a href="apppointement.html">Apppointement</a></li>
-                                <li><a href="Error%20page.html">Error page</a></li>
-                                <li><a href="hairstyle.html">Hairstyle</a></li>
-                                <li><a href="treatment.html">Treatment Detail Page</a></li>
-
-                            </ul>
                         </li>
-                        <li class="home-drop"><a href="javascript:void(0)">Blog<svg fill="#fff" height="15"
-                                    viewBox="0 0 330 330" style="enable-background:new 0 0 330 330;"
-                                    xml:space="preserve">
-                                    <path id="XMLID_225_"
-                                        d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
-                                </svg>
-                            </a>
-                            <ul class="home-page">
-                                <li><a href="ourblog.html"> Blog Listing Page</a></li>
-                                <li><a href="blog-detail.html"> Blog Detail Page</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="aboutus.html">About us</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="{{ route('client.aboutus') }}">Giới thiệu</a></li>
                     </ul>
                     <!-- end info-box -->
                 </div>
                 <!-- end container -->
             </nav>
-            @if (auth()->guard('web')->check())
-            <a href="{{ route('logout') }}">
-                <button class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px" ><h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6></button>
-            </a>
+            @if (Auth::check())
+                <a href="{{ route('logout') }}">
+                    <button class="theme-btn-2 nav-btn " style="height: 50px;">
+                        <h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6>
+                    </button>
+                </a>
             @else
-                <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px" href="javascript:void(0)" data-toggle="modal"
-                    data-target="#modalAuth"><h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6></a>
+                <a class="theme-btn-2 nav-btn " style="height: 50px;" href="javascript:void(0)" data-toggle="modal"
+                    data-target="#modalAuth">
+                    <h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6>
+                </a>
             @endif
         </div>
     </nav>
