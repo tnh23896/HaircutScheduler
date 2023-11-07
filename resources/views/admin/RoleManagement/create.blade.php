@@ -20,8 +20,8 @@
                     <div class="mb-4">
                         <label for="crud-form-1" class="form-label">Phân quyền cho</label>
                         <select name="guard_name" id="guard_name" class="clearable form-control w-full">
-                            <option value="admin">Admin</option>
-                            <option value="web">User</option>
+                            <option value="admin">Quản trị viên</option>
+                            <option value="web">Khách hàng</option>
                         </select>
                     </div>
 
@@ -73,6 +73,4 @@
         });
     </script>
 @endsection
-@section('js_footer_custom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-@endsection
+

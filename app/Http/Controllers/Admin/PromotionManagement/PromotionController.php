@@ -21,29 +21,33 @@ class PromotionController extends Controller
 
     public function filter(Request $request)
     {
-        $today = (\Carbon\Carbon::today());
+        try {
+            $today = (\Carbon\Carbon::today());
 
-        $filter = $request->input('filter');
-        switch ($filter) {
-            case 'active':
-                $data = Promotion::query()
-                    ->where('expire_date', '>=', $today )
-                    ->latest()
-                    ->paginate(5)
-                    ->withQueryString();
-                break;
-            case 'inactive':
-                $data = Promotion::query()
-                    ->where('expire_date', '<', $today)
-                    ->latest()
-                    ->paginate(5)
-                    ->withQueryString();
-                break;
-            default:
-                $data = Promotion::query()->latest()->paginate(5);
-                break;
+            $filter = $request->input('filter');
+            switch ($filter) {
+                case 'active':
+                    $data = Promotion::query()
+                        ->where('expire_date', '>=', $today)
+                        ->latest()
+                        ->paginate(5)
+                        ->withQueryString();
+                    break;
+                case 'inactive':
+                    $data = Promotion::query()
+                        ->where('expire_date', '<', $today)
+                        ->latest()
+                        ->paginate(5)
+                        ->withQueryString();
+                    break;
+                default:
+                    $data = Promotion::query()->latest()->paginate(5);
+                    break;
+            }
+            return view('admin.PromotionManagement.index', compact('data'));
+        } catch (\Exception $exception) {
+            return response()->json(['error' => 'Thêm mới không thành công'], 500);
         }
-        return view('admin.PromotionManagement.index', compact('data'));
     }
 
     /**
@@ -65,7 +69,7 @@ class PromotionController extends Controller
             $promotion->save();
             return response()->json(['success' => 'Thêm mới thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Thêm mới không thành công']);
+            return response()->json(['error' => 'Thêm mới không thành công'], 500);
         }
     }
 
@@ -97,7 +101,7 @@ class PromotionController extends Controller
             $promotion->save();
             return response()->json(['success' => 'Cập nhật thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Cập nhật không thành công']);
+            return response()->json(['error' => 'Cập nhật không thành công'], 200);
         }
     }
 
@@ -111,7 +115,7 @@ class PromotionController extends Controller
             $promotion->delete();
             return response()->json(['success' => 'Xóa thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Xóa không thành công']);
+            return response()->json(['error' => 'Xóa không thành công'], 500);
         }
     }
 }

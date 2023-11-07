@@ -56,7 +56,6 @@
                             $('.clearable').val('');
                             $('#errorDiv').hide();
                         }
-                        {{--window.location.href = "{{ route('admin.RoleManagement.index') }}";--}}
                     },
 
                     function(error) {
@@ -67,7 +66,5 @@
         });
     </script>
 @endsection
-@section('js_footer_custom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-@endsection
+
 
