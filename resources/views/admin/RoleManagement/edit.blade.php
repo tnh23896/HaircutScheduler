@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Edit Category Services')
+@section('title', 'Chỉnh sửa vai trò')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
@@ -17,11 +17,14 @@
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
                                value="{{ $role->name }}" placeholder="Tên vai trò">
                     </div>
-
-                    <div>
+                    <div class="mb-4">
                         <label for="crud-form-1" class="form-label">Phân quyền cho</label>
-                        <input type="text" name="guard_name" id="name" class="clearable form-control w-full"
-                               value="{{ $role->guard_name }}" placeholder="Tên guard">
+                        <select name="guard_name" id="guard_name" class="clearable form-control w-full" value="{{ $role->guard_name }}">
+                            <option value="admin" @if ($role->guard_name == 'admin')
+                                selected
+                            @endif >Quản trị viên</option>
+                            {{-- <option value="web">Khách hàng</option> --}}
+                        </select>
                     </div>
 
 
@@ -43,8 +46,8 @@
                     </div>
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.RoleManagement.index') }}" type="button"
-                           class="btn btn-outline-secondary w-24 mr-1">Back</a>
-                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Save</button>
+                           class="btn btn-outline-secondary w-24 mr-1">Quay Lại</a>
+                        <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
             </form>
@@ -75,6 +78,4 @@
     </script>
 
 @endsection
-@section('js_footer_custom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-@endsection
+

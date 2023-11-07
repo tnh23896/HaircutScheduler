@@ -5,7 +5,8 @@
         @include('client.booking_history.list_booking')
     </div>
     <div>
-        {{$list_booking->links('custom.pagination')}}
+        {{ $list_booking->links('custom.pagination') }}
     </div>
     @include('client.templates.pagination')
 @endsection
+

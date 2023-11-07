@@ -49,25 +49,28 @@
                             <span class="text-danger">Đã hủy</span>
                         @endif
                     </td>
-                    <td class="d-flex">
-                        <a href="{{ route('booking-history.edit', $booking->id) }}">
-                            <button class="text-center text-uppercase mx-2"
-                                style="width: 100px;
-                                       height: 30px;
-                                       background-color: #D9842F;
-                                       color: white;
-                                       border: none;
-                                       font-size: 13px">
+                    <td class="">
+                        <a data-toggle="modal" data-target=".modal{{ $booking->id }}" href="javascript:void(0)"
+                            title="" itemprop="url">
+                            <button class="text-center"
+                            style="width: 100px;
+                            height: 30px;
+                            color: white;
+                            background-color: #d9842f;
+                            border: none;
+                            font-size: 13px;">
                                 Xem chi tiết
                             </button>
                         </a>
+                        <br>
                         @if ($booking->status == 'pending')
                             <a href="">
-                                <button class="btn btn-danger text-center text-uppercase"
+                                <button class="text-center mt-2"
                                     style="width: 100px;
                                            height: 30px;
                                            color: white;
-                                           border: none;
+                                           border:none;
+                                           background-color: rgb(185, 49, 49);
                                            font-size: 13px;">
                                     Hủy lịch
                                 </button>
@@ -79,3 +82,6 @@
         </tbody>
     </table>
 </div>
+@foreach ($list_booking as $booking)
+    @include('client.booking_history.modal')
+@endforeach
