@@ -7,6 +7,7 @@
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
+            <a href="{{ route('admin.scheduleManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm lịch đặt</button></a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex flex-wrap items-center mt-3 xl:mt-0">
                 {{-- Form tìm kiếm theo ngày và giờ --}}

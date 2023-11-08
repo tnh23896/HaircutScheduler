@@ -58,6 +58,9 @@ return [
     'admin.scheduleManagement.index' => 'Danh sách lịch đặt',
     'admin.scheduleManagement.edit' => 'Chỉnh sửa lịch đặt',
     'admin.scheduleManagement.update' => 'Cập nhật lịch đặt',
+    'admin.scheduleManagement.create' => 'Thêm lịch đặt',
+    'admin.scheduleManagement.store' => 'Lưu lịch đặt',
+    'admin.scheduleManagement.getStaff' => 'Hiển thị thông tin',
 
     //Schedule Details
     'admin.scheduleManagement.scheduleDetails' => 'Chi tiết lịch đặt',

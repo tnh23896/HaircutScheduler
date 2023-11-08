@@ -109,8 +109,14 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.edit');
     Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update'])
         ->name('admin.scheduleManagement.update');
-    Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
-        ->name('admin.scheduleManagement.show');
+    Route::get('schedule-management/create', [ScheduleController::class, 'create'])
+        ->name('admin.scheduleManagement.create');
+    Route::post('schedule-management/store', [ScheduleController::class, 'store'])
+        ->name('admin.scheduleManagement.store');
+    Route::post('schedule-management/getStaff', [ScheduleController::class, 'getStaff'])
+        ->name('admin.scheduleManagement.getStaff');
+    // Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
+    //     ->name('admin.scheduleManagement.show');
     Route::get('search-schedule', [ScheduleController::class, 'search'])
         ->name('admin.scheduleManagement.search');
     Route::get('filter-schedule', [ScheduleController::class, 'filter'])
