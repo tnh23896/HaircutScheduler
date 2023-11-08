@@ -11,94 +11,112 @@ use App\Http\Requests\Admin\BlogManagement\Category\StoreRequest;
 
 class CategoryController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 */
-	public function __construct(
-		private CategoryBlog $model,
-	) {
-	}
-	public function index()
-	{
-		$list_blog_category = $this->model->latest()->paginate(5);
-		return view('admin.blogManagement.category.index', compact('list_blog_category'));
-	}
+    /**
+     * Display a listing of the resource.
+     */
+    public function __construct(
+        private CategoryBlog $model,
+    ) {
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 */
-	public function create()
-	{
-		//\
-		return view('admin.blogManagement.category.create');
-	}
+    public function index()
+    {
+        $list_blog_category = $this->model->latest()->paginate(5);
+        return view('admin.blogManagement.category.index', compact('list_blog_category'));
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 */
-	public function store(StoreRequest $request)
-	{
-		try {
-			$newCategory = $this->model::create($request->validated());
-			$newCategory->save();
-			return response()->json(['success' => 'Thêm danh mục tin tức thành công']);
-		} catch (\Exception $e) {
-			return response()->json(['error' => 'Thêm danh mục tin tức thất bại'], 500);
-		}
-	}
+    public function search(Request $request)
+    {
+        try {
+            $search = $request->input('search');
+            $fields = ['title'];
+            $list_blog_category = search($this->model::class, $search, $fields)
+                ->latest()
+                ->paginate(10)
+                ->withQueryString();
+            return view('admin.blogManagement.category.index', compact('list_blog_category'));
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => 'Tìm kiếm thất bại'
+            ], 500);
+        }
+    }
 
-	/**
-	 * Display the specified resource.
-	 */
-	public function show(string $id)
-	{
-		//
-	}
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //\
+        return view('admin.blogManagement.category.create');
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 */
-	public function edit(string $id)
-	{
-		//
-		$one_category_blog = $this->model::find($id);
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreRequest $request)
+    {
+        try {
+            $newCategory = $this->model::create($request->validated());
+            $newCategory->save();
+            return response()->json(['success' => 'Thêm danh mục tin tức thành công']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Thêm danh mục tin tức thất bại'], 500);
+        }
+    }
 
-		return view('admin.blogManagement.category.edit', compact('one_category_blog'));
-	}
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 */
-	public function update(UpdateRequest $request, string $id)
-	{
-		//
-		try {
-			$category_service = $this->model::query()->findOrFail($id);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+        $one_category_blog = $this->model::find($id);
 
-			$category_service->fill($request->all());
+        return view('admin.blogManagement.category.edit', compact('one_category_blog'));
+    }
 
-			$category_service->save();
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateRequest $request, string $id)
+    {
+        //
+        try {
+            $category_service = $this->model::query()->findOrFail($id);
 
-			return response()->json(['success' => 'Cập nhật danh mục tin tức']);
-		} catch (\Exception $e) {
-			return response()->json(['error' => 'Cập nhật danh mục tin tức thất bại'], 500);
-		}
-	}
+            $category_service->fill($request->all());
 
-	/**
-	 * Remove the specified resource from storage.
-	 */
-	public function destroy(string $id)
-	{
-		//
-		try {
-			$category_service = $this->model::findOrFail($id);
-			if ($category_service) {
-				$category_service->delete();
-				return response()->json(['success' => 'Xóa danh mục tin tức thành công']);
-			}
-		} catch (\Exception $e) {
-			return response()->json(['error' => 'Xóa danh mục tin tức thất bại'], 500);
-		}
-	}
+            $category_service->save();
+
+            return response()->json(['success' => 'Cập nhật danh mục tin tức']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Cập nhật danh mục tin tức thất bại'], 500);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+        try {
+            $category_service = $this->model::findOrFail($id);
+            if ($category_service) {
+                $category_service->delete();
+                return response()->json(['success' => 'Xóa danh mục tin tức thành công']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Xóa danh mục tin tức thất bại'], 500);
+        }
+    }
 }

@@ -1260,7 +1260,7 @@
         $(function() {
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
-                var url = "{{ route('admin.filterByMonthAndYear') }}";
+                var url = "{{ route('admin.dashboard.filterBooking') }}";
 
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
