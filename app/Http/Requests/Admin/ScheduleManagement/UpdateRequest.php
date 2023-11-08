@@ -22,14 +22,29 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:pending,success,canceled'
+            'name' => 'required',
+            'admin_id' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'day' => 'required',
+            'time' => 'required',
+            'servicesId' => 'required',
+
+         
         ];
     }
-		public function messages()
-		{
-			return [
-				'status.required' => 'Trạng thái không được để trống',
-				'status.in' => 'Trạng thái không đúng ',
-			];
-		}
+    public function messages()
+    {
+        return [
+            'name.required' => 'Bạn chưa nhập tên',
+            'admin_id.required' => 'Bạn chưa chọn nhân viên',
+            'email.required' => 'Bạn chưa nhập email',
+            'phone.required' => 'Bạn chưa nhập số điện thoại',
+            'day.required' => 'Bạn chưa chọn ngày hẹn cắt tóc',
+            'time.required' => 'Bạn chưa chọn thời gian hẹn',
+            'servicesId.required' => 'Bạn chưa chọn dịch vụ',
+            'status.required' => 'Trạng thái không được để trống',
+            'status.in' => 'Trạng thái không đúng ',
+        ];
+    }
 }

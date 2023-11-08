@@ -42,16 +42,24 @@ Route::post('login', [LoginController::class, 'adminLogin'])
     ->name('admin.auth.login');
 
 // Route cho quên mật khẩu
-Route::get('forget-password',
-    [ForgotPasswordController::class, 'showLinkRequestForm'])->name('admin.auth.ForgetPassword');
-Route::post('forget-password',
-    [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('admin.auth.ForgetPasswordPost');
+Route::get(
+    'forget-password',
+    [ForgotPasswordController::class, 'showLinkRequestForm']
+)->name('admin.auth.ForgetPassword');
+Route::post(
+    'forget-password',
+    [ForgotPasswordController::class, 'ForgetPasswordStore']
+)->name('admin.auth.ForgetPasswordPost');
 
 // Route cho đặt lại mật khẩu
-Route::get('reset-password/{token}/{email}',
-    [ForgotPasswordController::class, 'ResetPassword'])->name('admin.auth.ResetPasswordGet');
-Route::post('reset-password',
-    [ForgotPasswordController::class, 'ResetPasswordStore'])->name('admin.auth.ResetPasswordPost');
+Route::get(
+    'reset-password/{token}/{email}',
+    [ForgotPasswordController::class, 'ResetPassword']
+)->name('admin.auth.ResetPasswordGet');
+Route::post(
+    'reset-password',
+    [ForgotPasswordController::class, 'ResetPasswordStore']
+)->name('admin.auth.ResetPasswordPost');
 
 Route::get('404', function () {
     return view('admin.errors.404');
@@ -97,8 +105,10 @@ Route::group(['middleware' => 'admin'], function () {
         Route::resource('employee', EmployeeController::class);
         //workschedule
         Route::resource('work-schedule', WorkScheduleController::class);
-        Route::post('work-schedule/{work_schedule}',
-            [WorkScheduleController::class, 'update'])->name('work-schedule.update1');
+        Route::post(
+            'work-schedule/{work_schedule}',
+            [WorkScheduleController::class, 'update']
+        )->name('work-schedule.update1');
     });
 
     // Schedule Management
@@ -108,6 +118,9 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.edit');
     Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update'])
         ->name('admin.scheduleManagement.update');
+    Route::post('schedule-management/updateStatus/{id}', [ScheduleController::class, 'updateStatus'])
+        ->name('admin.scheduleManagement.updateStatus');
+    Route::post('schedule-management/getStaff', [ScheduleController::class, 'getStaff'])->name('admin.scheduleManagement.getStaff');
     Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
         ->name('admin.scheduleManagement.show');
     // Schedule Details
@@ -161,16 +174,26 @@ Route::group(['middleware' => 'admin'], function () {
 
     //Category Blog
     Route::get('category-blog', [BlogCategoryController::class, 'index'])->name('admin.blogManagement.category.index');
-    Route::get('category-blog/create',
-        [BlogCategoryController::class, 'create'])->name('admin.blogManagement.category.create');
-    Route::post('category-blog/create',
-        [BlogCategoryController::class, 'store'])->name('admin.blogManagement.category.store');
-    Route::get('category-blog/edit/{id}',
-        [BlogCategoryController::class, 'edit'])->name('admin.blogManagement.category.edit');
-    Route::post('category-blog/edit/{id}',
-        [BlogCategoryController::class, 'update'])->name('admin.blogManagement.category.update');
-    Route::delete('category-blog/delete/{id}',
-        [BlogCategoryController::class, 'destroy'])->name('admin.blogManagement.category.delete');
+    Route::get(
+        'category-blog/create',
+        [BlogCategoryController::class, 'create']
+    )->name('admin.blogManagement.category.create');
+    Route::post(
+        'category-blog/create',
+        [BlogCategoryController::class, 'store']
+    )->name('admin.blogManagement.category.store');
+    Route::get(
+        'category-blog/edit/{id}',
+        [BlogCategoryController::class, 'edit']
+    )->name('admin.blogManagement.category.edit');
+    Route::post(
+        'category-blog/edit/{id}',
+        [BlogCategoryController::class, 'update']
+    )->name('admin.blogManagement.category.update');
+    Route::delete(
+        'category-blog/delete/{id}',
+        [BlogCategoryController::class, 'destroy']
+    )->name('admin.blogManagement.category.delete');
 
     //Blog
     Route::get('blog', [BlogController::class, 'index'])->name('admin.blogManagement.blog.index');
