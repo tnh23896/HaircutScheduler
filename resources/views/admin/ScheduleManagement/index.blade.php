@@ -7,19 +7,32 @@
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
+            <a href="{{ route('admin.scheduleManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm lịch đặt</button></a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
-            <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-                <form action="{{route('admin.scheduleManagement.search')}}" method="GET">
-                    <div class="w-56 relative text-slate-500 flex items-center">
-                        <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Tìm kiếm..." value="{{ request('search') }}">
+            <div class="w-full xl:w-auto flex flex-wrap items-center mt-3 xl:mt-0">
+                {{-- Form tìm kiếm theo ngày và giờ --}}
+                <form action="{{route('admin.scheduleManagement.searchDateTime')}}" method="GET" class="mr-3">
+                    <div class="w-full relative text-slate-500 flex items-center">
+                        <input type="date" name="day" class="form-control box w-40 sm:w-auto mr-2" value="{{ request('day') }}">
+                        <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10" value="{{ request('time') }}">
                         <button type="submit">
-                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
-                               data-lucide="search"></i>
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
                     </div>
                 </form>
+                {{-- Form tìm kiếm theo tên và số điện thoại --}}
+                <form action="{{route('admin.scheduleManagement.search')}}" method="GET" class="mr-2">
+                    <div class="w-full relative text-slate-500 flex items-center">
+                        <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10" placeholder="Tìm kiếm..."
+                               value="{{ request('search') }}">
+                        <button type="submit">
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
+                        </button>
+                    </div>
+                </form>
+                {{-- Form lọc theo trạng thái --}}
                 <form id="filterForm" action="{{ route('admin.scheduleManagement.filter') }}" method="GET">
-                    <select id="filterSelect" name="filter" class="w-56 xl:w-auto form-select box ml-2" onchange="submitForm()">
+                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
                         <option value="">Tất cả</option>
                         <option value="pending">Chưa xác nhận</option>
                         <option value="confirmed">Đã xác nhận</option>
@@ -28,7 +41,6 @@
                         <option value="canceled">Đã hủy</option>
                     </select>
                 </form>
-
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -36,40 +48,43 @@
             <table class="table table-report -mt-2">
                 <thead>
                 <tr>
-                    <th class="whitespace-nowrap">
-                        <input class="form-check-input" type="checkbox">
-                    </th>
-                    <th class="whitespace-nowrap">Tên Khách Hàng</th>
-                    <th class="text-center whitespace-nowrap">Tên Nhân Viên</th>
-                    <th class="text-center whitespace-nowrap">Tổng Tiền</th>
-                    <th class="text-center whitespace-nowrap">Lịch Đặt</th>
-                    <th class="text-center whitespace-nowrap">Thời Gian Tạo Đơn</th>
-                    <th class="text-center whitespace-nowrap">Trạng Thái</th>
-                    <th class="text-center whitespace-nowrap">Hành Động</th>
+                    <th class="whitespace-nowrap">Khách hàng</th>
+                    <th class="text-center whitespace-nowrap">Tên nhân viên</th>
+                    <th class="text-center whitespace-nowrap">Giá gốc</th>
+                    <th class="text-center whitespace-nowrap">Số tiền thanh toán</th>
+                    <th class="text-center whitespace-nowrap">Lịch đặt</th>
+                    <th class="text-center whitespace-nowrap">Thời gian tạo đơn</th>
+                    <th class="text-center whitespace-nowrap">Trạng thái</th>
+                    <th class="text-center whitespace-nowrap">Hành động</th>
                 </tr>
                 </thead>
                 @foreach($data as $item)
                     <tbody>
                     <tr class="intro-x">
-                        <td class="w-10">
-                            <input class="form-check-input" type="checkbox">
-                        </td>
                         <td class="!py-3.5">
                             <div class="flex items-center">
-                                <div class="ml-4">
+                                <div class="">
                                     <a href="#" class="font-medium whitespace-nowrap">{{$item->name}}</a>
                                     <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{$item->phone}}</div>
                                 </div>
                             </div>
                         </td>
-                        <td class="text-center"><a class="flex items-center justify-center underline decoration-dotted"
-                                                   href="javascript:;">{{$item->admin->username}}</a></td>
-                        <td class="text-center capitalize">{{number_format($item->total_price) }}</td>
+                        <td class="text-center"><a class="flex items-center justify-center"
+                                                   href="javascript:;">{{$item->admin->username ?? ''}}</a></td>
+                        <td class="text-center whitespace-nowrap">{{number_format($item->total_price) }} vnd</td>
+                        <td class="text-center whitespace-nowrap">{{number_format($item->total_price - ($item->promotion->discount ?? 0)) }} vnd</td>
                         <td class="w-40">
-                            <div class="flex items-center justify-center">{{$item->time }}
-                                <br> {{$item->day}}</div>
+                            <div class="flex items-center justify-center text-center">
+                                {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}
+                                <br>
+                                {{ \Carbon\Carbon::parse($item->day)->format('d/m/Y') }}
+                            </div>
                         </td>
-                        <td class="text-center">{{$item->created_at}}</td>
+                        <td class="text-center">
+                             {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}
+                             <br>
+                             {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
+                            </td>
                         <td class="text-center">
                             @if( $item->status == "pending")
                                 <span class="badge badge-warning">Chưa xác nhận</span>
@@ -131,14 +146,13 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var filterSelect = document.getElementById('filterSelect');
             var urlParams = new URLSearchParams(window.location.search);
             var filterValue = urlParams.get('filter');
             var selectedValue = filterValue !== null ? filterValue : "";
             filterSelect.value = selectedValue;
         });
-
 
         function submitForm() {
             document.getElementById('filterForm').submit();

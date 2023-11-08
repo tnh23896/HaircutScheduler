@@ -1,7 +1,7 @@
 <nav class="side-nav">
     <a href="#" class="intro-x flex items-center pl-5 pt-4">
-        <img alt="Midone - HTML Admin Template" class="w-6" src="{{ asset('dist/images/logo.svg') }}">
-        <span class="hidden xl:block text-white text-lg ml-3"> BookStore </span>
+        <img alt="Midone - HTML Admin Template" class="w-10" src="{{ asset('dist/images/logonew2.png') }}">
+        <span class="hidden xl:block text-white text-lg ml-3"> DT BARBER </span>
     </a>
     <div class="side-nav__devider my-6"></div>
     <ul>
@@ -114,6 +114,15 @@
                    class="side-menu {{ request()->routeIs('admin.RoleManagement*') ? 'side-menu--active' : '' }}">
                     <div class="side-menu__icon"><i data-lucide="git-branch-plus"></i></div>
                     <div class="side-menu__title"> Quản lý vai trò</div>
+                </a>
+            </li>
+        @endif
+        @if(auth('admin')->user()->can('admin.PromotionManagement.index'))
+            <li>
+                <a href="{{route('admin.PromotionManagement.index')}}"
+                   class="side-menu {{ request()->routeIs('admin.PromotionManagement*') ? 'side-menu--active' : '' }}">
+                    <div class="side-menu__icon"><i data-lucide="ticket"></i></div>
+                    <div class="side-menu__title"> Quản lý mã giảm giá</div>
                 </a>
             </li>
         @endif

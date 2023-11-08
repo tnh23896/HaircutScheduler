@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-	public function list_blog()
+	public function list_blog(Request $request)
 	{
 		$listBlogs = Blog::latest()->paginate(5);
 
+        if ($request->ajax()) {
+            return view('client.blog.list_blog', compact('listBlogs'));
+        }
 		return view('client.blog.blog', compact('listBlogs'));
 	}
 
