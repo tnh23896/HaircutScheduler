@@ -14,7 +14,7 @@ class TimeController extends Controller
      */
     public function index()
     {
-        $data = Time::latest()->paginate(10);
+        $data = Time::orderBy('time', 'asc')->paginate(10);
         return view('admin.TimeManagement.index', compact('data'));
     }
 
@@ -47,7 +47,7 @@ class TimeController extends Controller
                 $time = sprintf('%02d:%02d', $hour, $minute);
             }
 
-            $query = Time::latest();
+            $query = Time::orderBy('time', 'asc');
 
             if (!empty($time)) {
                 $query->whereRaw('TIME(time) LIKE ?', ["$time%"]);
