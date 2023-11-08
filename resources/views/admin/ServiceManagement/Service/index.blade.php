@@ -22,9 +22,9 @@
                 </form>
                 <form id="categoryFilter" action="{{ route('admin.serviceManagement.service.filter') }}" method="GET">
                     <select id="filterCategorySelect" name="filter" class="tom-select w-56 xl:w-auto box ml-2" style="width: 150px" onchange="submitForm()">
-                        <option selected>Danh mục</option>
+                        <option value="0" {{ request('filter') == '' ? 'selected' : '' }}>Danh mục</option>
                         @foreach($categoryService as $service)
-                            <option value="{{$service->id}}">{{$service->name}}</option>
+                            <option value="{{$service->id}}" {{ request('filter') == $service->id ? 'selected' : '' }} >{{$service->name}}</option>
                         @endforeach
                     </select>
                 </form>

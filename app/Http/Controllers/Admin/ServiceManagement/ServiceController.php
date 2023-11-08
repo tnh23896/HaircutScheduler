@@ -84,11 +84,12 @@ class ServiceController extends Controller
         $category = $request->input('filter');
         $categoryService = $this->Categorymodel::get(['id','name']);
         if ($category == "") {
-            $services = $this->Servicemodel::latest()->paginate(5);
+            $services = $this->Servicemodel::latest()->paginate(5)->withQueryString();
         } else {
             $services = $this->Servicemodel::where('category_services_id',$category)
                 ->latest()
-                ->paginate(5);
+                ->paginate(5)
+                ->withQueryString();
         }
         return view('admin.serviceManagement.service.index', compact('services','categoryService'));
     }
