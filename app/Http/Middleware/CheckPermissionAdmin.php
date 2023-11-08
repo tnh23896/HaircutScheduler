@@ -35,6 +35,13 @@ class CheckPermissionAdmin
             'admin.scheduleManagement.searchDateTime',
             'admin.billManagement.searchDateTime',
             'admin.PromotionManagement.filter',
+            'admin.employee.search',
+            'admin.UserManagement.search',
+            'admin.UserManagement.filter',
+            'admin.TimeManagement.search',
+            'admin.blogManagement.category.search',
+            'admin.blogManagement.blog.search',
+            'admin.blogManagement.blog.filter',
         ];
 
         $name = Route::currentRouteName();
@@ -44,10 +51,10 @@ class CheckPermissionAdmin
             }
 
         }
-        if(!Auth::guard('admin')->check()) {
+        if (!Auth::guard('admin')->check()) {
             return redirect()->route('admin.login');
         }
-        /** @var \App\Models\Admin $admin **/
+        /** @var \App\Models\Admin $admin * */
         $admin = Auth::guard('admin')->user();
         if ($admin->hasPermissionTo($name)) {
             return $next($request);

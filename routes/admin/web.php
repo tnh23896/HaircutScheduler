@@ -96,6 +96,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::name('admin.')->group(function () {
         //employee
         Route::resource('employee', EmployeeController::class);
+        //search
+        Route::get('search-employee', [EmployeeController::class, 'search'])
+            ->name('employee.search');
         //workschedule
         Route::resource('work-schedule', WorkScheduleController::class);
         Route::post('work-schedule/{work_schedule}',
@@ -162,6 +165,10 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.UserManagement.edit');
     Route::post('user/update/{id}', [UserController::class, 'update'])
         ->name('admin.UserManagement.update');
+    Route::get('search-user', [UserController::class, 'search'])
+        ->name('admin.UserManagement.search');
+    Route::get('filter-user', [UserController::class, 'filter'])
+        ->name('admin.UserManagement.filter');
 
     // TIME
     Route::get('time', [TimeController::class, 'index'])
@@ -176,6 +183,8 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.TimeManagement.update');
     Route::delete('time/delete/{id}', [TimeController::class, 'destroy'])
         ->name('admin.TimeManagement.delete');
+    Route::get('search-time', [TimeController::class, 'search'])
+        ->name('admin.TimeManagement.search');
 
     //Category Blog
     Route::get('category-blog', [BlogCategoryController::class, 'index'])->name('admin.blogManagement.category.index');
@@ -189,6 +198,8 @@ Route::group(['middleware' => 'admin'], function () {
         [BlogCategoryController::class, 'update'])->name('admin.blogManagement.category.update');
     Route::delete('category-blog/delete/{id}',
         [BlogCategoryController::class, 'destroy'])->name('admin.blogManagement.category.delete');
+    Route::get('category-blog/search', [BlogCategoryController::class, 'search'])
+        ->name('admin.blogManagement.category.search');
 
     //Blog
     Route::get('blog', [BlogController::class, 'index'])->name('admin.blogManagement.blog.index');
@@ -197,6 +208,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('blog/edit/{id}', [BlogController::class, 'edit'])->name('admin.blogManagement.blog.edit');
     Route::post('blog/edit/{id}', [BlogController::class, 'update'])->name('admin.blogManagement.blog.update');
     Route::delete('blog/delete/{id}', [BlogController::class, 'destroy'])->name('admin.blogManagement.blog.delete');
+    Route::get('blog/search', [BlogController::class, 'search'])->name('admin.blogManagement.blog.search');
+    Route::get('blog/filter', [BlogController::class, 'filter'])->name('admin.blogManagement.blog.filter');
 
     //ScheduleEmployee
     Route::get('schedule-employee', [ScheduleEmployeeController::class, 'index'])
