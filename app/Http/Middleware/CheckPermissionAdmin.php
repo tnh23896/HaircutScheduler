@@ -35,6 +35,7 @@ class CheckPermissionAdmin
             'admin.scheduleManagement.searchDateTime',
             'admin.billManagement.searchDateTime',
             'admin.PromotionManagement.filter',
+            'admin.filterByMonthAndYear',
         ];
 
         $name = Route::currentRouteName();

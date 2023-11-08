@@ -1,6 +1,9 @@
 @extends('admin.templates.app')
 @section('title', 'Bảng điều khiển')
 @section('content')
+    <style>
+
+    </style>
     <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 2xl:col-span-9">
             <div class="grid grid-cols-12 gap-6">
@@ -60,8 +63,8 @@
                                             stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card"
                                             data-lucide="credit-card"
                                             class="lucide lucide-credit-card report-box__icon text-pending">
-                                            <rect x="1" y="4" width="22" height="16" rx="2"
-                                                ry="2"></rect>
+                                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2">
+                                            </rect>
                                             <line x1="1" y1="10" x2="23" y2="10"></line>
                                         </svg>
                                         <div class="ml-auto">
@@ -89,8 +92,8 @@
                                             stroke-linecap="round" stroke-linejoin="round" icon-name="monitor"
                                             data-lucide="monitor"
                                             class="lucide lucide-monitor report-box__icon text-warning">
-                                            <rect x="2" y="3" width="20" height="14"
-                                                rx="2" ry="2"></rect>
+                                            <rect x="2" y="3" width="20" height="14" rx="2"
+                                                ry="2"></rect>
                                             <line x1="8" y1="21" x2="16" y2="21"></line>
                                             <line x1="12" y1="17" x2="12" y2="21"></line>
                                         </svg>
@@ -144,62 +147,60 @@
                 <div class="col-span-12 lg:col-span-6 mt-8">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Sales Report
+                            Top khách hàng đặt lịch nhiều nhất
                         </h2>
-                        <div class="sm:ml-auto mt-3 sm:mt-0 relative text-slate-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" icon-name="calendar" data-lucide="calendar"
-                                class="lucide lucide-calendar w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
-                                <rect x="3" y="4" width="18" height="18" rx="2"
-                                    ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                            <input type="text" class="datepicker form-control sm:w-56 box pl-10">
-                        </div>
                     </div>
-                    <div class="intro-y box p-5 mt-12 sm:mt-5">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <div class="flex">
-                                <div>
-                                    <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">$15,000
-                                    </div>
-                                    <div class="mt-0.5 text-slate-500">This Month</div>
-                                </div>
-                                <div
-                                    class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5">
-                                </div>
-                                <div>
-                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">$10,000</div>
-                                    <div class="mt-0.5 text-slate-500">Last Month</div>
-                                </div>
-                            </div>
-                            <div class="dropdown md:ml-auto mt-5 md:mt-0">
-                                <button class="dropdown-toggle btn btn-outline-secondary font-normal"
-                                    aria-expanded="false" data-tw-toggle="dropdown"> Filter by Category <svg
+                    <div class="box p-2 mt-12 sm:mt-5">
+                        <form id="ajaxForm" method="POST">
+                            @csrf
+                            <div class="flex flex-col md:flex-row md:items-center">
+                                <label for="">Tháng</label>
+                                <select name="month" id="month" class="form-control tom-select mx-3">
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option value="{{ $i }}">Tháng {{ $i }}</option>
+                                    @endfor
+                                </select>
+                                <label for="">Năm</label>
+                                <select name="year" id="year" class="form-control tom-select mx-3">
+                                    @for ($year = 1990; $year <= 2030; $year++)
+                                        <option value="{{ $year }}">Năm {{ $year }}</option>
+                                    @endfor
+                                </select>
+                                <button type="button" id="saveBtn" class="btn btn-secondary mr-1 mb-2"> <svg
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-down"
-                                        data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 ml-2">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg> </button>
-                                <div class="dropdown-menu w-40">
-                                    <ul class="dropdown-content overflow-y-auto h-32">
-                                        <li><a href="#" class="dropdown-item">PC &amp; Laptop</a></li>
-                                        <li><a href="#" class="dropdown-item">Smartphone</a></li>
-                                        <li><a href="#" class="dropdown-item">Electronic</a></li>
-                                        <li><a href="#" class="dropdown-item">Photography</a></li>
-                                        <li><a href="#" class="dropdown-item">Sport</a></li>
-                                    </ul>
-                                </div>
+                                        stroke-linecap="round" stroke-linejoin="round" icon-name="filter"
+                                        data-lucide="filter" class="lucide lucide-filter block mx-auto">
+                                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                    </svg>
+                                </button>
                             </div>
-                        </div>
-                        <div class="report-chart">
-                            <div class="h-[275px]">
-                                <canvas id="report-line-chart" class="mt-6 -mb-6" width="486" height="343"
-                                    style="display: block; box-sizing: border-box; height: 274.4px; width: 388.8px;"></canvas>
+                        </form>
+                        <div class="p-5">
+                            <div class="preview">
+                                <div class="overflow-x-auto">
+                                    @php $count = 1 @endphp
+                                    <table class="table table-striped" id="listBooking">
+                                        <thead>
+                                            <tr>
+                                                <th class="whitespace-nowrap">#</th>
+                                                <th class="whitespace-nowrap">Name</th>
+                                                <th class="whitespace-nowrap">Lượt đặt</th>
+                                                <th class="whitespace-nowrap">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($topBookers as $booker)
+                                                <tr>
+                                                    <td>{{ $count++ }}</td>
+                                                    <td>{{ $booker->username }}</td>
+                                                    <td>{{ $booker->total_bookings }}</td>
+                                                    <td>{{ number_format($booker->total_price) }} vnd</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -279,238 +280,61 @@
                 <div class="col-span-12 xl:col-span-8 mt-6">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Official Store
+                            Sales Report
                         </h2>
                         <div class="sm:ml-auto mt-3 sm:mt-0 relative text-slate-500">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" icon-name="map-pin" data-lucide="map-pin"
-                                class="lucide lucide-map-pin w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
+                                stroke-linejoin="round" icon-name="calendar" data-lucide="calendar"
+                                class="lucide lucide-calendar w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
-                            <input type="text" class="form-control sm:w-56 box pl-10" placeholder="Filter by city">
+                            <input type="text" class="datepicker form-control sm:w-56 box pl-10">
                         </div>
                     </div>
                     <div class="intro-y box p-5 mt-12 sm:mt-5">
-                        <div>250 Official stores in 21 countries, click the marker to see location details.</div>
-                        <div class="report-maps mt-5 bg-slate-200 rounded-md leaflet [&amp;_.leaflet-tile-pane]:grayscale [&amp;_.leaflet-tile-pane]:invert [&amp;_.leaflet-tile-pane]:brightness-90 [&amp;_.leaflet-tile-pane]:hue-rotate-15 leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
-                            data-center="-6.2425342, 106.8626478" data-sources="/dist/json/location.json" tabindex="0"
-                            style="position: relative;">
-                            <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
-                                <div class="leaflet-pane leaflet-tile-pane">
-                                    <div class="leaflet-layer " style="z-index: 1; opacity: 1;">
-                                        <div class="leaflet-tile-container leaflet-zoom-animated"
-                                            style="z-index: 18; transform: translate3d(0px, 0px, 0px) scale(1);"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/407/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(18px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/408/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(274px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/407/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(18px, 182px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/408/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(274px, 182px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/406/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(-238px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/409/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(530px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/406/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(-238px, 182px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/409/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(530px, 182px, 0px); opacity: 1;">
-                                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center">
+                            <div class="flex">
+                                <div>
+                                    <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">$15,000
                                     </div>
+                                    <div class="mt-0.5 text-slate-500">This Month</div>
                                 </div>
-                                <div class="leaflet-pane leaflet-overlay-pane"></div>
-                                <div class="leaflet-pane leaflet-shadow-pane"></div>
-                                <div class="leaflet-pane leaflet-marker-pane"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 15" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(495px, 216px, 0px); z-index: 216;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 16" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(352px, 166px, 0px); z-index: 166;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 52" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(264px, 313px, 0px); z-index: 313;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 55" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(880px, 332px, 0px); z-index: 332;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 56" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(-13px, 79px, 0px); z-index: 79;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 58" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(767px, 550px, 0px); z-index: 550;">
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(216px, 184px, 0px); z-index: 184;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 91" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(314px, 172px, 0px); z-index: 172;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 97" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(5px, 105px, 0px); z-index: 105;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 110" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(643px, 501px, 0px); z-index: 501;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 131" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(258px, 213px, 0px); z-index: 213;">
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(270px, 247px, 0px); z-index: 247;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(411px, 166px, 0px); z-index: 166;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(285px, 125px, 0px); z-index: 125;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                5</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(541px, 410px, 0px); z-index: 410;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(209px, 124px, 0px); z-index: 124;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                4</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 147" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(272px, 175px, 0px); z-index: 175;">
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(618px, 421px, 0px); z-index: 421;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(493px, 374px, 0px); z-index: 374;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(148px, 144px, 0px); z-index: 144;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
+                                <div
+                                    class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5">
                                 </div>
-                                <div class="leaflet-pane leaflet-tooltip-pane"></div>
-                                <div class="leaflet-pane leaflet-popup-pane"></div>
-                                <div class="leaflet-proxy leaflet-zoom-animated"></div>
+                                <div>
+                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">$10,000</div>
+                                    <div class="mt-0.5 text-slate-500">Last Month</div>
+                                </div>
                             </div>
-                            <div class="leaflet-control-container">
-                                <div class="leaflet-top leaflet-left">
-                                    <div class="leaflet-control-zoom leaflet-bar leaflet-control"><a
-                                            class="leaflet-control-zoom-in" href="#" title="Zoom in"
-                                            role="button" aria-label="Zoom in" aria-disabled="false"><span
-                                                aria-hidden="true">+</span></a><a class="leaflet-control-zoom-out"
-                                            href="#" title="Zoom out" role="button" aria-label="Zoom out"
-                                            aria-disabled="false"><span aria-hidden="true">−</span></a></div>
+                            <div class="dropdown md:ml-auto mt-5 md:mt-0">
+                                <button class="dropdown-toggle btn btn-outline-secondary font-normal"
+                                    aria-expanded="false" data-tw-toggle="dropdown"> Filter by Category <svg
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-down"
+                                        data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 ml-2">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg> </button>
+                                <div class="dropdown-menu w-40">
+                                    <ul class="dropdown-content overflow-y-auto h-32">
+                                        <li><a href="#" class="dropdown-item">PC &amp; Laptop</a></li>
+                                        <li><a href="#" class="dropdown-item">Smartphone</a></li>
+                                        <li><a href="#" class="dropdown-item">Electronic</a></li>
+                                        <li><a href="#" class="dropdown-item">Photography</a></li>
+                                        <li><a href="#" class="dropdown-item">Sport</a></li>
+                                    </ul>
                                 </div>
-                                <div class="leaflet-top leaflet-right"></div>
-                                <div class="leaflet-bottom leaflet-left"></div>
-                                <div class="leaflet-bottom leaflet-right">
-                                    <div class="leaflet-control-attribution leaflet-control"><a
-                                            href="https://leafletjs.com"
-                                            title="A JavaScript library for interactive maps"><svg aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="12" height="8"
-                                                viewBox="0 0 12 8" class="leaflet-attribution-flag">
-                                                <path fill="#4C7BE1" d="M0 0h12v4H0z"></path>
-                                                <path fill="#FFD500" d="M0 4h12v3H0z"></path>
-                                                <path fill="#E0BC00" d="M0 7h12v1H0z"></path>
-                                            </svg> Leaflet</a> <span aria-hidden="true">|</span> Map data © OpenStreetMap
-                                        contributors, Tiles © Thunderforest</div>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="report-chart">
+                            <div class="h-[275px]">
+                                <canvas id="report-line-chart" class="mt-6 -mb-6" width="486" height="343"
+                                    style="display: block; box-sizing: border-box; height: 274.4px; width: 388.8px;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -947,10 +771,10 @@
                                                     <path
                                                         d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2">
                                                     </path>
-                                                    <line x1="10" y1="11" x2="10"
-                                                        y2="17"></line>
-                                                    <line x1="14" y1="11" x2="14"
-                                                        y2="17"></line>
+                                                    <line x1="10" y1="11" x2="10" y2="17">
+                                                    </line>
+                                                    <line x1="14" y1="11" x2="14" y2="17">
+                                                    </line>
                                                 </svg> Delete </a>
                                         </div>
                                     </td>
@@ -1419,4 +1243,69 @@
             </div>
         </div>
     </div>
+    <script>
+        function formatCurrency(amount) {
+            const formattedAmount = amount.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+                minimumFractionDigits: 0,
+            });
+
+            const currencySymbol = "vnd";
+            const replacedSymbol = formattedAmount.replace(/\./g, ',').replace("₫", currencySymbol);
+
+            return replacedSymbol;
+        }
+
+        $(function() {
+            $('#saveBtn').on('click', function() {
+                var formData = new FormData($('#ajaxForm')[0]);
+                var url = "{{ route('admin.filterByMonthAndYear') }}";
+
+                sendAjaxRequest(url, 'POST', formData,
+                    function(response) {
+                        $('#listBooking').html('');
+
+                        var bookingArray = Object.values(response.filterData);
+
+                        if (bookingArray.length > 0) {
+                            var bookingItemHtml = `
+                            <div class="preview">
+                                <div class="overflow-x-auto">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="whitespace-nowrap">#</th>
+                                                <th class="whitespace-nowrap">Name</th>
+                                                <th class="whitespace-nowrap">Lượt đặt</th>
+                                                <th class="whitespace-nowrap">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${bookingArray.map((booking, index) => `
+                                                        <tr>
+                                                            <td>${index + 1}</td>
+                                                            <td>${booking.username}</td>
+                                                            <td>${booking.totalBookings}</td>
+                                                            <td>${ formatCurrency(booking.total_price)} </td>
+                                                        </tr>
+                                                    `).join('')}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        `;
+                            $('#listBooking').html(bookingItemHtml);
+                        } else {
+                            $('#listBooking').html('<p>Không có dữ liệu.</p>');
+                        }
+                    },
+
+                    function(error) {
+                        alert('Error')
+                    }
+                );
+            });
+        });
+    </script>
 @endsection

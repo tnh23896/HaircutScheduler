@@ -60,6 +60,7 @@ Route::get('404', function () {
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('/filter', [DashboardController::class, 'filterByMonthAndYear'])->name('admin.filterByMonthAndYear');
 
     // Logout
     Route::get('logout', [LoginController::class, 'logout'])
