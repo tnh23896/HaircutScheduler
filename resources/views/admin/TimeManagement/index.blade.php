@@ -12,10 +12,16 @@
                     gian</button></a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-                <div class="w-56 relative text-slate-500">
-                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
-                </div>
+                <form action="{{route('admin.TimeManagement.search')}}" method="GET" class="mr-3">
+                    <div class="w-full relative text-slate-500 flex items-center">
+                        <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10"
+                               placeholder="Tìm kiếm..."
+                               value="{{ request('time') }}">
+                        <button type="submit">
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -32,7 +38,7 @@
                     <tbody>
                         <tr class="intro-x">
                             <td class="text-center capitalize">{{ $item->id }}</td>
-                            <td class="text-center capitalize">{{ $item->time }}</td>
+                            <td class="text-center capitalize"> {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a href="{{ route('admin.TimeManagement.edit', $item->id) }}"

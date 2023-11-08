@@ -14,9 +14,60 @@ class TimeController extends Controller
      */
     public function index()
     {
-        $data = Time::orderBy('time', 'asc')->paginate(10);
+        $data = Time::latest()->paginate(10);
         return view('admin.TimeManagement.index', compact('data'));
     }
+
+    public function search(Request $request)
+    {
+        try {
+            $time = $request->input('time');
+            $ampm = $request->input('ampm'); // SA, CH, AM, PM
+
+            $hour = $minute = null;
+
+            if ($time) {
+                list($hour, $minute) = explode(':', $time);
+                $hour = (int)$hour;
+                $minute = (int)$minute;
+            }
+
+            // Kiểm tra kiểu thời gian và điều chỉnh giờ dựa trên giá trị của $ampm
+            if ($ampm === 'SA' && $hour >= 12) {
+                $hour -= 12;
+            } elseif ($ampm === 'CH' && $hour < 12) {
+                $hour += 12;
+            } elseif ($ampm === 'AM' && $hour == 12) {
+                $hour = 0;
+            } elseif ($ampm === 'PM' && $hour != 12) {
+                $hour += 12;
+            }
+
+            if ($hour !== null && $minute !== null) {
+                $time = sprintf('%02d:%02d', $hour, $minute);
+            }
+
+            $query = Time::latest();
+
+            if (!empty($time)) {
+                $query->whereRaw('TIME(time) LIKE ?', ["$time%"]);
+            }
+
+            $search_time = $query->paginate(10)->withQueryString();
+
+            if (empty($search_time)) {
+                return view('admin.TimeManagement.index', ['data' => $search_time]);
+            } else {
+                $search_time->count() > 0;
+                return view('admin.TimeManagement.index', ['data' => $search_time]);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'success' => 'Tìm kiếm thất bại'
+            ], 500);
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -38,7 +89,7 @@ class TimeController extends Controller
                 "success" => "Thêm mới thời gian thành công",
                 "status" => 200
             ]);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response()->json([
                 'status' => 500,
                 'error' => 'Thêm mới thời gian thất bại'
@@ -75,7 +126,7 @@ class TimeController extends Controller
                 "success" => "Cập nhật thời gian thành công",
                 "status" => 200
             ]);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response()->json([
                 'status' => 500,
                 'error' => 'Cập nhật thời gian thất bại'
@@ -94,7 +145,7 @@ class TimeController extends Controller
                 "success" => "Xóa thời gian làm việc thành công",
                 "status" => 200
             ]);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response()->json([
                 'status' => 500,
                 'error' => 'Xóa thời gian thất bại'
