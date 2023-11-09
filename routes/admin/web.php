@@ -43,16 +43,24 @@ Route::post('login', [LoginController::class, 'adminLogin'])
     ->name('admin.auth.login');
 
 // Route cho quên mật khẩu
-Route::get('forget-password',
-    [ForgotPasswordController::class, 'showLinkRequestForm'])->name('admin.auth.ForgetPassword');
-Route::post('forget-password',
-    [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('admin.auth.ForgetPasswordPost');
+Route::get(
+    'forget-password',
+    [ForgotPasswordController::class, 'showLinkRequestForm']
+)->name('admin.auth.ForgetPassword');
+Route::post(
+    'forget-password',
+    [ForgotPasswordController::class, 'ForgetPasswordStore']
+)->name('admin.auth.ForgetPasswordPost');
 
 // Route cho đặt lại mật khẩu
-Route::get('reset-password/{token}/{email}',
-    [ForgotPasswordController::class, 'ResetPassword'])->name('admin.auth.ResetPasswordGet');
-Route::post('reset-password',
-    [ForgotPasswordController::class, 'ResetPasswordStore'])->name('admin.auth.ResetPasswordPost');
+Route::get(
+    'reset-password/{token}/{email}',
+    [ForgotPasswordController::class, 'ResetPassword']
+)->name('admin.auth.ResetPasswordGet');
+Route::post(
+    'reset-password',
+    [ForgotPasswordController::class, 'ResetPasswordStore']
+)->name('admin.auth.ResetPasswordPost');
 
 Route::get('404', function () {
     return view('admin.errors.404');
@@ -101,8 +109,10 @@ Route::group(['middleware' => 'admin'], function () {
             ->name('employee.search');
         //workschedule
         Route::resource('work-schedule', WorkScheduleController::class);
-        Route::post('work-schedule/{work_schedule}',
-            [WorkScheduleController::class, 'update'])->name('work-schedule.update1');
+        Route::post(
+            'work-schedule/{work_schedule}',
+            [WorkScheduleController::class, 'update']
+        )->name('work-schedule.update1');
     });
 
     // Schedule Management
@@ -112,14 +122,15 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.scheduleManagement.edit');
     Route::post('schedule-management/edit/{id}', [ScheduleController::class, 'update'])
         ->name('admin.scheduleManagement.update');
-    Route::get('schedule-management/create', [ScheduleController::class, 'create'])
-        ->name('admin.scheduleManagement.create');
-    Route::post('schedule-management/store', [ScheduleController::class, 'store'])
-        ->name('admin.scheduleManagement.store');
-    Route::post('schedule-management/getStaff', [ScheduleController::class, 'getStaff'])
-        ->name('admin.scheduleManagement.getStaff');
+    Route::post('schedule-management/updateStatus/{id}', [ScheduleController::class, 'updateStatus'])
+        ->name('admin.scheduleManagement.updateStatus');
+    Route::post('schedule-management/getStaff', [ScheduleController::class, 'getStaff'])->name('admin.scheduleManagement.getStaff');
     // Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
     //     ->name('admin.scheduleManagement.show');
+    Route::get('schedule-management/create', [ScheduleController::class, 'create'])
+        ->name('admin.scheduleManagement.create');
+    Route::post('schedule-management/store', [ScheduleController::class, 'store'])->name('admin.scheduleManagement.store');
+
     Route::get('search-schedule', [ScheduleController::class, 'search'])
         ->name('admin.scheduleManagement.search');
     Route::get('filter-schedule', [ScheduleController::class, 'filter'])

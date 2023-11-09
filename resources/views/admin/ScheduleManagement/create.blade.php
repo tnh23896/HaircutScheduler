@@ -280,7 +280,7 @@
             </form>
             <div class="mt-3">
                 <div class="text-left mt-3">
-                    <a href=""> <button type="button" class="btn btn-outline-secondary w-24 mr-1">Danh
+                    <a href="{{ route('admin.scheduleManagement.index') }}"> <button type="button" class="btn btn-outline-secondary w-24 mr-1">Danh
                             sách</button></a>
                     <button type="button" id="bookingConfirm" class="btn btn-primary w-24">Lưu</button>
                 </div>
