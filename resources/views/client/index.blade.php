@@ -105,42 +105,42 @@
                 </div>
                 <div class="col-lg-5 col-md-12 pl-0 pr-md-0 pr-sm-0">
                     <div class="barber-item-2 position-relative" data-aos="fade-up" data-aos-offset="400">
-                        <p class="text-color">Gọi ngay- (0678-999-999)</p>
+                        <p class="text-color">Gọi ngay- (0358609355)</p>
                         <h3 class="mb-0">Giờ làm việc</h3>
                         <div class="barber-list-2">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 2</h5>
-                                <h5 class="text-color">7h a.m - 22h p.m</h5>
+                                <h5 class="text-color">7 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 3</h5>
-                                <h5 class="text-color p-0 m-0">7h a.m - 20h p.m</h5>
+                                <h5 class="text-color p-0 m-0">7 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 4</h5>
-                                <h5 class="text-color">7h a.m - 20h p.m</h5>
+                                <h5 class="text-color">7 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 5</h5>
-                                <h5 class="text-color">7h a.m - 20h p.m</h5>
+                                <h5 class="text-color">7 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 6</h5>
-                                <h5 class="text-color">7h a.m - 20h p.m</h5>
+                                <h5 class="text-color">7 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 7</h5>
-                                <h5 class="text-color">7h a.m - 20h p.m</h5>
+                                <h5 class="text-color">7 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Chủ nhật</h5>
-                                <h5 class="text-color">7h a.m - 20h p.m</h5>
+                                <h5 class="text-color">7 giờ - 20 giờ</h5>
                             </div>
                         </div>
                     </div>
@@ -373,7 +373,7 @@
                                 </div>
                                 <h1><a href="" class="theme-black-color">{{ $post->title }}</a>
                                 </h1>
-                                <a href="{{ route('detail.blog', $post->id) }}" class="theme-btn-2">READ MORE</a>
+                                <a href="{{ route('detail.blog', $post->id) }}" class="theme-btn-2">Xem thêm</a>
                             </div>
                         </div>
                     </div>
@@ -397,7 +397,7 @@
                                 </div>
                                 <h1><a href="" class="theme-black-color">{{ $post->title }}</a>
                                 </h1>
-                                <a href="{{ route('detail.blog', $post->id) }}" class="theme-btn-2">READ MORE</a>
+                                <a href="{{ route('detail.blog', $post->id) }}" class="theme-btn-2">Xem thêm</a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-12">
