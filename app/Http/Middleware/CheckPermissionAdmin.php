@@ -31,6 +31,7 @@ class CheckPermissionAdmin
             'admin.profile.update',
             'admin.billManagement.search',
             'admin.scheduleManagement.search',
+            'admin.serviceManagement.category.search',
             'admin.scheduleManagement.filter',
             'admin.serviceManagement.service.search',
             'admin.serviceManagement.service.filter',

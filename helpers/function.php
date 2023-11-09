@@ -31,6 +31,5 @@ function search($model, $searchTerm, $fields)
         $query->orWhere($field, 'like', '%' . $searchTerm . '%');
     }
 
-    // return $query->get();
     return $query;
 }

@@ -86,6 +86,8 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.serviceManagement.category.update');
     Route::delete('category-service/delete/{id}', [CategoryController::class, 'destroy'])
         ->name('admin.serviceManagement.category.delete');
+    Route::get('search-category-service', [CategoryController::class, 'search'])
+        ->name('admin.serviceManagement.category.search');
 
     //Service
     Route::get('service', [ServiceController::class, 'index'])
