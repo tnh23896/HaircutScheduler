@@ -588,75 +588,51 @@
                 <!-- END: Weekly Best Sellers -->
                 <!-- BEGIN: General Report -->
                 <div class="col-span-12 grid grid-cols-12 gap-6 mt-8">
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex items-center">
-                                <div class="w-2/4 flex-none">
-                                    <div class="text-lg font-medium truncate">Target Sales</div>
-                                    <div class="text-slate-500 mt-1">300 Sales</div>
-                                </div>
-                                <div class="flex-none ml-auto relative">
-                                    <div class="w-[90px] h-[90px]">
-                                        <canvas id="report-donut-chart-1" width="112" height="112"
-                                            style="display: block; box-sizing: border-box; height: 89.6px; width: 89.6px;"></canvas>
+                    <div class="col-span-12 lg:col-span-6">
+                        <!-- BEGIN: Vertical Bar Chart -->
+                        <div class="intro-y box">
+                            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                                <h2 class="font-medium text-base mr-auto">
+                                    Thống kê số lượng đơn theo thời gian
+                                </h2>
+                            </div>
+                            <div id="vertical-bar-chart" class="p-5">
+                                <div class="preview">
+                                    <div class="h-[400px]">
+                                        <canvas id="vertical-bar-chart-widget"></canvas>
                                     </div>
-                                    <div
-                                        class="font-medium absolute w-full h-full flex items-center justify-center top-0 left-0">
-                                        20%</div>
                                 </div>
                             </div>
                         </div>
+                        <!-- END: Vertical Bar Chart -->
                     </div>
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex">
-                                <div class="text-lg font-medium truncate mr-3">Social Media</div>
-                                <div
-                                    class="py-1 px-2 flex items-center rounded-full text-xs bg-slate-100 dark:bg-darkmode-400 text-slate-500 cursor-pointer ml-auto truncate">
-                                    320 Followers</div>
-                            </div>
-                            <div class="mt-1">
-                                <div class="h-[58px]">
-                                    <canvas class="simple-line-chart-1 -ml-1" width="208" height="72"
-                                        style="display: block; box-sizing: border-box; height: 57.6px; width: 166.4px;"></canvas>
+                    <div class="col-span-12 lg:col-span-6">
+                        <!-- BEGIN: Stacked Bar Chart -->
+                        <div class="intro-y box">
+                            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                                <h2 class="font-medium text-base mr-auto">
+                                    Stacked Bar Chart
+                                </h2>
+                                <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
+                                    <label class="form-check-label ml-0" for="show-example-4">Show example code</label>
+                                    <input id="show-example-4" data-target="#stacked-bar-chart" class="show-code form-check-input mr-0 ml-3" type="checkbox">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex items-center">
-                                <div class="w-2/4 flex-none">
-                                    <div class="text-lg font-medium truncate">New Products</div>
-                                    <div class="text-slate-500 mt-1">1450 Products</div>
-                                </div>
-                                <div class="flex-none ml-auto relative">
-                                    <div class="w-[90px] h-[90px]">
-                                        <canvas id="report-donut-chart-2" width="112" height="112"
-                                            style="display: block; box-sizing: border-box; height: 89.6px; width: 89.6px;"></canvas>
+                            <div id="stacked-bar-chart" class="p-5">
+                                <div class="preview">
+                                    <div class="h-[400px]">
+                                        <canvas id="stacked-bar-chart-widget"></canvas>
                                     </div>
-                                    <div
-                                        class="font-medium absolute w-full h-full flex items-center justify-center top-0 left-0">
-                                        45%</div>
+                                </div>
+                                <div class="source-code hidden">
+                                    <button data-target="#copy-stacked-bar-chart" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
+                                    <div class="overflow-y-auto mt-3 rounded-md">
+                                        <pre id="copy-stacked-bar-chart" class="source-preview"> <code class="html"> HTMLOpenTagdiv class=&quot;h-[400px]&quot;HTMLCloseTag HTMLOpenTagcanvas id=&quot;stacked-bar-chart-widget&quot;HTMLCloseTagHTMLOpenTag/canvasHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex">
-                                <div class="text-lg font-medium truncate mr-3">Posted Ads</div>
-                                <div
-                                    class="py-1 px-2 flex items-center rounded-full text-xs bg-slate-100 dark:bg-darkmode-400 text-slate-500 cursor-pointer ml-auto truncate">
-                                    180 Campaign</div>
-                            </div>
-                            <div class="mt-1">
-                                <div class="h-[58px]">
-                                    <canvas class="simple-line-chart-1 -ml-1" width="208" height="72"
-                                        style="display: block; box-sizing: border-box; height: 57.6px; width: 166.4px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- END: Stacked Bar Chart -->
                     </div>
                 </div>
                 <!-- END: General Report -->

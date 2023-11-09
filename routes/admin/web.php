@@ -68,6 +68,7 @@ Route::get('404', function () {
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/filter-order', [DashboardController::class, 'filterOrder'])->name('admin.filterOrder');
 
     // Logout
     Route::get('logout', [LoginController::class, 'logout'])

@@ -45,6 +45,7 @@ class CheckPermissionAdmin
             'admin.blogManagement.category.search',
             'admin.blogManagement.blog.search',
             'admin.blogManagement.blog.filter',
+            'admin.filterOrder',
         ];
 
         $name = Route::currentRouteName();
