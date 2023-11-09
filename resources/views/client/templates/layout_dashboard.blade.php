@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    @include('client.templates.navbar')
-		@include('client.templates.banner')
+    @include('client.templates.navbar2')
     <section class="position-relative footer-area">
         <div class="container bg-text-area">
             <h2>@yield('title_page')</h2>
@@ -26,12 +25,12 @@
                         <div class="sec-box">
                             <div class="dashboard-tabs-wrapper">
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-lg-4">
+                                    <div class="col-md-12 col-sm-12 col-lg-3">
                                         <div class="profile-sidebar brd-rd5 wow fadeIn" data-wow-delay="0.2s">
                                             @include('client.templates.sidebar')
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-lg-8">
+                                    <div class="col-md-12 col-sm-12 col-lg-9">
                                         <div class="tab-content">
                                             @yield('content')
                                         </div>

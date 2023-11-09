@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\ScheduleManagement;
 
+use App\Rules\ValidPromotionCode;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -29,6 +30,7 @@ class UpdateRequest extends FormRequest
             'day' => 'required',
             'time' => 'required',
             'servicesId' => 'required',
+            'promo_code' => [new ValidPromotionCode]
 
          
         ];

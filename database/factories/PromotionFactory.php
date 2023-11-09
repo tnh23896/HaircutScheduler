@@ -16,7 +16,7 @@ class PromotionFactory extends Factory
      */
     public function definition(): array
     {
-        
+
         return [
             'promocode' =>  $this->faker->name(10),
             'description' => $this->faker->text(),

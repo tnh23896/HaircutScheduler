@@ -118,11 +118,12 @@
             cursor: default;
         }
 
-        .cursor-pointer {
-            background-color: #d9842f;
+        .cursor-pointer1 {
+            background-color: #3885f0;
             height: 30px;
             align-items: center;
             display: flex
+            
         }
 
         /* //ảnh// */
@@ -206,7 +207,7 @@
                             value="{{ $data->email }}">
                     </div>
                     <div class="mt-3 card">
-                        <h2 id="toggleCollapse" class="cursor-pointer">Danh sách dịch vụ</h2>
+                        <h2 id="toggleCollapse" class="cursor-pointer1">Danh sách dịch vụ</h2>
                         <div id="myCollapse" class="hidden transition-transform transform scale-0">
                             <div class="d-flex flex-wrap px-2 justify-content-between">
                                 @foreach ($serviceCategories as $category)
@@ -254,7 +255,7 @@
                         </div>
                     </div>
                     <div class="mt-3">
-                        <h2 id="toggleEmployeeCollapse" class="cursor-pointer">Danh sách nhân viên</h2>
+                        <h2 id="toggleEmployeeCollapse" class="cursor-pointer1">Danh sách nhân viên</h2>
                         <div id="employeeCollapse" class="hidden transition-transform transform scale-0">
                             <div class="flex flex-wrap mt-3">
                                 @foreach ($staffMembers as $staff)
@@ -291,19 +292,15 @@
                             <div class="mt-3 flex flex-col items-center ">
                                 <h5 class="text-center text-lg mb-3">Chọn thời gian</h5>
                                 <div class="d-flex flex-wrap justify-content-center" id="timeSelect">
-                                  
-                                    @foreach ($timeSlots as $time)
-                                    <label class="check mx-1">
-                                        <input type="radio" id="time_{{ $time->id }}" name="time_id"
-                                            value="{{ $time->id }}"
-                                            {{$time->pivot->status === 'unavailable' ? 'disabled' : ''}}
-                                            @if ($timeSelected->id == $time->id) checked 
-                                                
-                                            @endif
 
-                                            >
-                                        <span>{{ $time->time }}</span>
-                                    </label>
+                                    @foreach ($timeSlots as $time)
+                                        <label class="check mx-1">
+                                            <input type="radio" id="time_{{ $time->id }}" name="time_id"
+                                                value="{{ $time->id }}"
+                                                {{ $time->pivot->status === 'unavailable' ? 'disabled' : '' }}
+                                                @if ($timeSelected->id == $time->id) checked @endif>
+                                            <span>{{ $time->time }}</span>
+                                        </label>
                                     @endforeach
                                 </div>
                             </div>
@@ -443,10 +440,11 @@
                     response => {
                         toastr.success('Thêm đơn thành công .');
                         console.log(response);
-                        // location.href = "{{ route('admin.scheduleManagement.index') }}";
+                        location.href = "{{ route('admin.scheduleManagement.index') }}";
 
                     },
-                    error => {
+
+                    function(error) {
                         showErrors(error);
                     }
                 );
@@ -457,7 +455,6 @@
         function toggleCollapse(toggleId, collapseId) {
             const toggleElement = document.getElementById(toggleId);
             const collapseElement = document.getElementById(collapseId);
-
             toggleElement.addEventListener('click', function() {
                 if (collapseElement.classList.contains('hidden')) {
                     collapseElement.classList.remove('hidden');
@@ -471,7 +468,6 @@
                 }
             });
         }
-
         // Sử dụng hàm để điều khiển cả danh sách dịch vụ và danh sách nhân viên
         toggleCollapse('toggleCollapse', 'myCollapse');
         toggleCollapse('toggleEmployeeCollapse', 'employeeCollapse');

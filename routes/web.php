@@ -33,16 +33,10 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
-Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
-Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
-
-//Booking Details
-Route::put('/booking-details/update/{id}', [BookingDetailsController::class, 'update'])->name('booking-details.update');
-Route::post('/booking-details/store/{id}', [BookingDetailsController::class, 'store'])->name('booking-details.store');
-
+Route::get('booking-history', [BookingController::class, 'booking_history'])->name('booking_history');
 
 //Bill Payment
-Route::get('bill-history/{id}', [BillController::class, 'index'])->name('bill');
+Route::get('bill', [BillController::class, 'index'])->name('bill');
 
 //Blog
 Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');

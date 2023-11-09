@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Create Role')
+@section('title', 'Thêm mới vai trò')
 @section('content')
     <!-- END: Top Bar -->
     <div class="intro-y flex items-center mt-8">
@@ -17,12 +17,12 @@
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
                             placeholder="Tên vai trò">
                     </div>
-
-
                     <div class="mb-4">
                         <label for="crud-form-1" class="form-label">Phân quyền cho</label>
-                        <input type="text" name="guard_name" id="guard_name" class="clearable form-control w-full"
-                            placeholder="Tên guard">
+                        <select name="guard_name" id="guard_name" class="clearable form-control w-full">
+                            <option value="admin">Quản trị viên</option>
+                            {{-- <option value="web">Khách hàng</option> --}}
+                        </select>
                     </div>
 
                     <div class="mb-4">
@@ -73,6 +73,4 @@
         });
     </script>
 @endsection
-@section('js_footer_custom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-@endsection
+

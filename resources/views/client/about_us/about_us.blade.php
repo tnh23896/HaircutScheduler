@@ -1,8 +1,8 @@
 @extends('client.templates.app')
 @section('title', 'About Us')
 @section('content')
-@include('client.templates.banner')
 @include('client.templates.navbar2')
+@include('client.templates.banner')
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 col-md-12 col-sm-12">

@@ -45,7 +45,6 @@ class ScheduleDetailsController extends Controller
                     'admin_id' => Auth::guard('admin')->user()->id,
                 ]);
             }
-
             return redirect()->back()->with('success', 'Cập nhật chi tiết lịch đặt thành công');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Cập nhật chi tiết lịch đặt thất bại');
@@ -64,15 +63,16 @@ class ScheduleDetailsController extends Controller
             return redirect()->back()->with('error', 'Cập nhật chi tiết lịch thất bại');
         }
     }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
         $item = Booking::query()->findOrFail($id);
-         $servicesNotInBooking = Service::whereDoesntHave('booking_details', function ($query) use ($id) {
-        $query->where('booking_id', $id);
-             })->get();
+        $servicesNotInBooking = Service::whereDoesntHave('booking_details', function ($query) use ($id) {
+            $query->where('booking_id', $id);
+        })->get();
 
         return view('admin.ScheduleManagement.scheduleDetails', compact('item', 'servicesNotInBooking'));
     }

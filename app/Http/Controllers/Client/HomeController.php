@@ -22,7 +22,7 @@ class HomeController extends Controller
             ->orderByDesc('service_count')
             ->take(6)
             ->get();
-            
+
         $latestBlogs = Blog::select('title','image','description','created_at')->latest()->take(2)->get();
 
         $categoryService= CategoryService::select('id', 'name','image')->get();

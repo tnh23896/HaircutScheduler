@@ -13,8 +13,44 @@ class UserController extends Controller
      */
     public function index()
     {
-       $data = User::orderBy('id', 'desc')->paginate(10);
-        return view('admin.UserManagement.index',compact('data'));
+        $data = User::latest()->paginate(10);
+        return view('admin.UserManagement.index', compact('data'));
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $search = $request->input('search');
+            $fields = ['username', 'email', 'phone'];
+            $data = search(User::class, $search, $fields)
+                ->latest()
+                ->paginate(10)
+                ->withQueryString();
+            return view('admin.UserManagement.index', compact('data'));
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => 'Tìm kiếm thất bại'
+            ], 500);
+        }
+    }
+
+    public function filter(Request $request)
+    {
+        try {
+            $status = $request->input('filter');
+            if ($status == "") {
+                $data = User::latest()->paginate(10);
+            } else {
+                $data = User::where('black_status', $status)
+                    ->latest()
+                    ->paginate(10);
+            }
+            return view('admin.UserManagement.index', compact('data'));
+        } catch (\Exception $exception) {
+            return response()->json([
+                'success' => 'Tìm kiếm thất bại'
+            ], 500);
+        }
     }
 
     /**
@@ -46,8 +82,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $data=User::find($id);
-        return view('admin.UserManagement.edit',compact('data'));
+        $data = User::find($id);
+        return view('admin.UserManagement.edit', compact('data'));
     }
 
     /**
@@ -62,7 +98,7 @@ class UserController extends Controller
                 "success" => "Cập nhật người dùng thành công",
                 "status" => 200
             ]);
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response()->json([
                 'status' => 500,
                 'error' => 'Cập nhật người dùng thất bại'

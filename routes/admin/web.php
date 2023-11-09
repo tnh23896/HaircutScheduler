@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PromotionManagement\PromotionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TimeManagement\TimeController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
@@ -103,6 +104,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::name('admin.')->group(function () {
         //employee
         Route::resource('employee', EmployeeController::class);
+        //search
+        Route::get('search-employee', [EmployeeController::class, 'search'])
+            ->name('employee.search');
         //workschedule
         Route::resource('work-schedule', WorkScheduleController::class);
         Route::post(
@@ -121,8 +125,18 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('schedule-management/updateStatus/{id}', [ScheduleController::class, 'updateStatus'])
         ->name('admin.scheduleManagement.updateStatus');
     Route::post('schedule-management/getStaff', [ScheduleController::class, 'getStaff'])->name('admin.scheduleManagement.getStaff');
-    Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
-        ->name('admin.scheduleManagement.show');
+    // Route::get('schedule-management/{id}', [ScheduleController::class, 'show'])
+    //     ->name('admin.scheduleManagement.show');
+    Route::get('schedule-management/create', [ScheduleController::class, 'create'])
+        ->name('admin.scheduleManagement.create');
+    Route::post('schedule-management/store', [ScheduleController::class, 'store'])->name('admin.scheduleManagement.store');
+
+    Route::get('search-schedule', [ScheduleController::class, 'search'])
+        ->name('admin.scheduleManagement.search');
+    Route::get('filter-schedule', [ScheduleController::class, 'filter'])
+        ->name('admin.scheduleManagement.filter');
+    Route::get('search-datetime-schedule', [ScheduleController::class, 'searchByDateandTime'])
+        ->name('admin.scheduleManagement.searchDateTime');
     // Schedule Details
     Route::get('schedule-details/{id}', [ScheduleDetailsController::class, 'edit'])
         ->name('admin.scheduleManagement.scheduleDetails');
@@ -135,6 +149,11 @@ Route::group(['middleware' => 'admin'], function () {
     //Bill
     Route::get('bill-management', [BillController::class, 'index'])
         ->name('admin.billManagement.index');
+    Route::get('search-bill', [BillController::class, 'search'])
+        ->name('admin.billManagement.search');
+    Route::get('search-datetime-bill', [BillController::class, 'searchByDateandTime'])
+        ->name('admin.billManagement.searchDateTime');
+
 
     // Banner
     Route::get('banner', [BannerController::class, 'index'])
@@ -157,6 +176,10 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.UserManagement.edit');
     Route::post('user/update/{id}', [UserController::class, 'update'])
         ->name('admin.UserManagement.update');
+    Route::get('search-user', [UserController::class, 'search'])
+        ->name('admin.UserManagement.search');
+    Route::get('filter-user', [UserController::class, 'filter'])
+        ->name('admin.UserManagement.filter');
 
     // TIME
     Route::get('time', [TimeController::class, 'index'])
@@ -171,29 +194,23 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.TimeManagement.update');
     Route::delete('time/delete/{id}', [TimeController::class, 'destroy'])
         ->name('admin.TimeManagement.delete');
+    Route::get('search-time', [TimeController::class, 'search'])
+        ->name('admin.TimeManagement.search');
 
     //Category Blog
     Route::get('category-blog', [BlogCategoryController::class, 'index'])->name('admin.blogManagement.category.index');
-    Route::get(
-        'category-blog/create',
-        [BlogCategoryController::class, 'create']
-    )->name('admin.blogManagement.category.create');
-    Route::post(
-        'category-blog/create',
-        [BlogCategoryController::class, 'store']
-    )->name('admin.blogManagement.category.store');
-    Route::get(
-        'category-blog/edit/{id}',
-        [BlogCategoryController::class, 'edit']
-    )->name('admin.blogManagement.category.edit');
-    Route::post(
-        'category-blog/edit/{id}',
-        [BlogCategoryController::class, 'update']
-    )->name('admin.blogManagement.category.update');
-    Route::delete(
-        'category-blog/delete/{id}',
-        [BlogCategoryController::class, 'destroy']
-    )->name('admin.blogManagement.category.delete');
+    Route::get('category-blog/create',
+        [BlogCategoryController::class, 'create'])->name('admin.blogManagement.category.create');
+    Route::post('category-blog/create',
+        [BlogCategoryController::class, 'store'])->name('admin.blogManagement.category.store');
+    Route::get('category-blog/edit/{id}',
+        [BlogCategoryController::class, 'edit'])->name('admin.blogManagement.category.edit');
+    Route::post('category-blog/edit/{id}',
+        [BlogCategoryController::class, 'update'])->name('admin.blogManagement.category.update');
+    Route::delete('category-blog/delete/{id}',
+        [BlogCategoryController::class, 'destroy'])->name('admin.blogManagement.category.delete');
+    Route::get('category-blog/search', [BlogCategoryController::class, 'search'])
+        ->name('admin.blogManagement.category.search');
 
     //Blog
     Route::get('blog', [BlogController::class, 'index'])->name('admin.blogManagement.blog.index');
@@ -202,6 +219,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('blog/edit/{id}', [BlogController::class, 'edit'])->name('admin.blogManagement.blog.edit');
     Route::post('blog/edit/{id}', [BlogController::class, 'update'])->name('admin.blogManagement.blog.update');
     Route::delete('blog/delete/{id}', [BlogController::class, 'destroy'])->name('admin.blogManagement.blog.delete');
+    Route::get('blog/search', [BlogController::class, 'search'])->name('admin.blogManagement.blog.search');
+    Route::get('blog/filter', [BlogController::class, 'filter'])->name('admin.blogManagement.blog.filter');
 
     //ScheduleEmployee
     Route::get('schedule-employee', [ScheduleEmployeeController::class, 'index'])
@@ -224,4 +243,20 @@ Route::group(['middleware' => 'admin'], function () {
     //Profile
     Route::get('/profile', [ProfileController::class,'edit'])->name('admin.profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
+
+    //Promotion Management
+    Route::get('promotion-management', [PromotionController::class, 'index'])
+        ->name('admin.PromotionManagement.index');
+    Route::get('promotion-management/create', [PromotionController::class, 'create'])
+        ->name('admin.PromotionManagement.create');
+    Route::post('promotion-management/create', [PromotionController::class, 'store'])
+        ->name('admin.PromotionManagement.store');
+    Route::get('promotion-management/edit/{id}', [PromotionController::class, 'edit'])
+        ->name('admin.PromotionManagement.edit');
+    Route::post('promotion-management/edit/{id}', [PromotionController::class, 'update'])
+        ->name('admin.PromotionManagement.update');
+    Route::delete('promotion-management/delete/{id}', [PromotionController::class, 'destroy'])
+        ->name('admin.PromotionManagement.delete');
+    Route::get('promotion-management/filter', [PromotionController::class, 'filter'])
+        ->name('admin.PromotionManagement.filter');
 });
