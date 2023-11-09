@@ -141,12 +141,7 @@
                     <div class="page-tools">
                         <div class="action-buttons">
                             <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
-                                <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
-                                Print
-                            </a>
-                            <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                                <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                                Export
+                                Tải về
                             </a>
                         </div>
                     </div>
@@ -158,7 +153,7 @@
                     <h1 class="page-title text-secondary-d1 font-weight-bold">
                         Hóa đơn
                     </h1>
-                    <small>Số hóa đơn: {{$bill->id}} / Ngày lập: {{$bill->created_at}}</small>
+                    <small>Mã hóa đơn: {{$bill->id}} / Ngày lập: {{$bill->created_at}}</small>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12 col-lg-12">
@@ -215,7 +210,6 @@
                                     <div class="text-base">Giảm giá: {{ $bill->promotion->discount ?? 0 }} vnd</div>
                                     <div class="text-lg">Số tiền phải thanh toán:
                                         {{ $bill->total_price - ($bill->promotion->discount ?? 0) }} vnd</div>
-                                    <div class="mt-1">Đã bao gồm thuế VAT(10%)</div>
                                 </div>
                                 <hr/>
                                 <div class="row">
@@ -239,7 +233,6 @@
                                 <hr>
                                 <div>
                                     <span class="text-secondary-d1 text-105">Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi</span>
-                                    <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a>
                                 </div>
                             </div>
 
