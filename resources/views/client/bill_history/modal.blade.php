@@ -1,7 +1,7 @@
 <style>
 
     .text-secondary-d1 {
-        color: #728299 !important;
+        color: #354a1d !important;
     }
 
     .page-header {
@@ -76,7 +76,7 @@
     }
 
     .bgc-default-tp1 {
-        background-color: rgba(121, 169, 197, .92) !important;
+        background-color:#354a1d  !important;
     }
 
     .bgc-default-l4, .bgc-h-default-l4:hover {
@@ -135,30 +135,26 @@
 <div class="modal fade modal{{$bill->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content bg-white text-black ">
+        <div class="modal-content bg-white text-black">
             <div class="page-content container">
-                <div class="page-header text-blue-d2">
-                    <h1 class="page-title text-secondary-d1">
-                        Invoice
-                        <small class="page-info">
-                            <i class="fa fa-angle-double-right text-80"></i>
-                            ID: #{{$bill->id}}
-                        </small>
-                    </h1>
+                <div class="page-header text-blue-d2 justify-content-end">
                     <div class="page-tools">
                         <div class="action-buttons">
                             <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
-                                <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
-                                Print
-                            </a>
-                            <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                                <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                                Export
+                                Tải về
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="container px-0">
+                <div class="container px-5 pb-5">
+                    <h1 class="text-center text-5xl pt-16 text-secondary-d1">DT BARBER</h1>
+                    <p class="text-center pt-2 text-secondary-d1">HÂN HẠNH ĐƯỢC PHỤC VỤ.</p>
+                    <div class="text-center">
+                    <h1 class="page-title text-secondary-d1 font-weight-bold">
+                        Hóa đơn
+                    </h1>
+                    <small>Mã hóa đơn: {{$bill->id}} / Ngày lập: {{$bill->created_at}}</small>
+                    </div>
                     <div class="row mt-4">
                         <div class="col-12 col-lg-12">
                             <div class="row">
@@ -171,13 +167,10 @@
                                 </div>
                             </div>
                             <!-- .row -->
-
-                            <hr class="row brc-default-l1 mx-n1 mb-4"/>
-
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div>
-                                        <span class="text-sm text-grey-m2 align-middle">To:</span>
+                                        <span class="text-sm text-grey-m2 align-middle">Khách hàng:</span>
                                         <span class="text-600 text-110 text-blue align-middle">{{$bill->name}}</span>
                                     </div>
                                     <div class="text-grey-m2">
@@ -186,103 +179,63 @@
                                             <b class="text-600">{{$bill->phone}}</b></div>
                                     </div>
                                 </div>
-                                <!-- /.col -->
-
                                 <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
                                     <hr class="d-sm-none"/>
-                                    <div class="text-grey-m2">
+                                    <div class="text-grey-m2 text-right">
                                         <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                                            Invoice
+                                            Thanh toán tới
                                         </div>
-                                        <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
-                                                class="text-600 text-90">ID:</span> #{{$bill->id}}</div>
-                                        <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
-                                                class="text-600 text-90">Issue Date:</span> {{$bill->created_at}}</div>
+                                        <div class="my-1">DT BARBER</div>
+                                        <div class="my-1">dtbarber@gmail.com</div>
                                     </div>
                                 </div>
-                                <!-- /.col -->
                             </div>
                             <div class="mt-4">
-                                <div class="row text-600 text-white bgc-default-tp1 py-25">
-                                    <div class="col-9 col-sm-5">Tên Dịch Vụ</div>
-                                    <div class="d-none d-sm-block col-4 col-sm-2">Giá Tiền</div>
+                                <div class="row border-bottom py-25 text-secondary-d1">
+                                    <div class="col-9 col-sm-8">Tên Dịch Vụ</div>
+                                    <div class="d-none d-sm-block col-4 col-sm-4 text-right">Giá Tiền</div>
                                 </div>
                                 @foreach($bill->bill_details as $detail)
                                     <div class="text-95 text-secondary-d3">
                                         <div class="row mb-2 mb-sm-0 py-25">
-                                            <div class="col-9 col-sm-5">{{$detail->name}}</div>
-                                            <div class="col-4 text-secondary-d2">{{$detail->price}} vnd</div>
+                                            <div class="col-9 col-sm-8">{{$detail->name}}</div>
+                                            <div class="col-4 text-secondary-d2 text-right">{{$detail->price}} vnd</div>
                                         </div>
                                     </div>
                                 @endforeach
                                 <div class="row border-b-2 brc-default-l2"></div>
-
-                                <!-- or use a table instead -->
-                                <!--
-                        <div class="table-responsive">
-                            <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
-                                <thead class="bg-none bgc-default-tp1">
-                                    <tr class="text-white">
-                                        <th class="opacity-2">#</th>
-                                        <th>Description</th>
-                                        <th>Qty</th>
-                                        <th>Unit Price</th>
-                                        <th width="140">Amount</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody class="text-95 text-secondary-d3">
-                                    <tr></tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Domain registration</td>
-                                        <td>2</td>
-                                        <td class="text-95">$10</td>
-                                        <td class="text-secondary-d2">$20</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        -->
-
-                                <div class="row mt-3">
-                                    <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
-                                        Extra note such as company or payment information...
-                                    </div>
-                                    <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last">
-                                        <div class="row my-2">
-                                            <div class="col-7 text-right">
-                                                Total Amount:
-                                            </div>
-                                            <div class="col-5">
-                                                <span class="text-120 text-secondary-d1"> {{$bill->total_price}} vnd</span>
-                                            </div>
-                                        </div>
-                                        <div class="row my-2">
-                                            <div class="col-7 text-right">
-                                                Discount:
-                                            </div>
-                                            <div class="col-5">
-                                                <span class="text-110 text-secondary-d1">{{ $bill->promotion->discount ?? 0 }} vnd</span>
-                                            </div>
-                                        </div>
-                                        <div class="row my-2 align-items-center bgc-primary-l3 p-2">
-                                            <div class="col-7 text-right">
-                                                Payment Amount:
-                                            </div>
-                                            <div class="col-5">
-                                                <span
-                                                    class="text-150 text-success-d3 opacity-2">{{($bill->total_price - ($bill->promotion->discount ?? 0))}} vnd</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <hr/>   
+                                <div class="sm:text-left sm:ml-auto" style="text-align: right">
+                                    <div class="text-base">Tổng tiền: {{ $bill->total_price }} vnd</div>
+                                    <div class="text-base">Giảm giá: {{ $bill->promotion->discount ?? 0 }} vnd</div>
+                                    <div class="text-lg">Số tiền phải thanh toán:
+                                        {{ $bill->total_price - ($bill->promotion->discount ?? 0) }} vnd</div>
                                 </div>
                                 <hr/>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="sm:text-left mt-10 sm:mt-0">
+                                            <div class="text-base">Thông tin ngân hàng</div>
+                                            <div class="text-lg font-medium mt-2 text-secondary-d1">Ngân hàng Vietcombank</div>
+                                            <div class="mt-1">Tên tài khoản : DT Barber</div>
+                                            <div class="mt-1">Số tài khoản : 0123 456 789</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
+                                        <div class="sm:text-left sm:ml-auto" style="text-align: right">
+                                            <div class="text-base">Liên hệ</div>
+                                            <div class="text-base mt-2">dtbarber.vn@gmail.com</div>
+                                            <div class="text-base mt-1">(+84) 123 456 789</div>
+                                            <div class="text-base mt-1">Cao đẳng FPT Polytechnic Hà Nội</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                                 <div>
-                                    <span class="text-secondary-d1 text-105">Thank you for your business</span>
-                                    <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a>
+                                    <span class="text-secondary-d1 text-105">Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi</span>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
