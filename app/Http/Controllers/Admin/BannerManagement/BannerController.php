@@ -51,9 +51,11 @@ class BannerController extends Controller
             $imgOld = $banner->image;
             $banner->fill($request->all());
             if ($request->status === 'active') {
-                $activeBanner = Banner::where('status', 'active')->first();
-                if ($activeBanner) {
-                    $activeBanner->update(['status' => 'inactive']);
+                if ($banner->status !== 'active') {
+                    $activeBanner = Banner::where('status', 'active')->first();
+                    if ($activeBanner) {
+                        $activeBanner->update(['status' => 'inactive']);
+                    }
                 }
             }
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
