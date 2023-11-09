@@ -12,7 +12,8 @@ class DashboardController extends Controller
 	{
 		$topBookers = Booking::select('users.username')
 		 	->selectRaw('count(bookings.id) as total_bookings')
-			->selectRaw('MAX(bookings.total_price) as total_price')
+			->selectRaw('SUM(bookings.total_price) as total_price')
+			->where('bookings.status','success')
 			->join('users', 'bookings.user_id', '=', 'users.id')
 			->groupBy('users.username')
 			->orderBy('total_bookings', 'desc')
@@ -28,8 +29,9 @@ class DashboardController extends Controller
 
 		$query = Booking::join('users', 'users.id', '=', 'bookings.user_id')
 			->select('users.username', 'bookings.user_id')
-			->selectRaw('MAX(bookings.total_price) as total_price')
+			->selectRaw('SUM(bookings.total_price) as total_price')
 			->selectRaw('COUNT(*) as totalBookings')
+			->where('bookings.status','success')
 			->groupBy('bookings.user_id', 'users.username')
 			->orderByDesc('totalBookings');
 		if ($month) {
