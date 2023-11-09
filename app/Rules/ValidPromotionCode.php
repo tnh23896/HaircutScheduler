@@ -5,6 +5,7 @@ namespace App\Rules;
 use Closure;
 use App\Models\Promotion;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Carbon;
 
 class ValidPromotionCode implements ValidationRule
 {
@@ -16,7 +17,7 @@ class ValidPromotionCode implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $promotion = Promotion::where('promocode', $value)
-            ->where('expire_date', '>', now())
+            ->where('expire_date', '>=', Carbon::today())
             ->first();
 
         if (!$promotion) {
