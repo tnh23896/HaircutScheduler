@@ -2,8 +2,21 @@
 @section('title', 'Trang chủ')
 @section('content')
     @include('client.templates.navbar2')
-    @include('client.templates.banner')
-    {{-- <section class="gap resp-padd lg-no-top">
+    <section class="position-relative overlay bg-text">
+        <div class="bg-image" style="background-image: url({{ asset($activeBanners->image) }})"></div>
+        <div class="container tilt">
+            <div class="row align-items-center">
+                <div class="second-page heading-style-3  m-auto text-center">
+                    <h2 class="text-uppercase" data-aos="fade-up" data-aos-delay="200">DT BARBER</h2>
+                    <p data-aos="fade-up" data-aos-delay="350" data-aos-offset="0">Chúng tôi không chỉ tạo kiểu tóc, chúng tôi tạo nên tự tin.
+                        Sứ mệnh của chúng tôi: Tạo nên vẻ đẹp không giới hạn.</p>
+                    <a class="theme-btn-2" href="{{route('booking-service.index')}}" data-aos="fade-up" data-aos-delay="350"
+                        data-aos-offset="50" data-aos-offset="0">Đặt lịch ngay</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="gap resp-padd lg-no-top">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 col-md-12 col-sm-12">
@@ -23,7 +36,7 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
     <section class="bg-gray gap position-relative lg-no-bottom md-no-bottom sm-no-bottom">
         <div class="service-img">
             <img src="{{ asset('client/assets/images/img-32.webp') }}" style="width: 200px;height: auto;margin-top: 6rem"

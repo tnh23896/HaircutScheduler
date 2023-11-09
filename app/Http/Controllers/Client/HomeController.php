@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\CategoryService;
 use App\Models\Service;
@@ -16,7 +17,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        $activeBanners = Banner::where('status', 'active')->first();
+        // dd($activeBanners);
         $trendingStyle = Service::select('name', 'image')
             ->withCount('bill_details as service_count')
             ->orderByDesc('service_count')
@@ -48,7 +50,8 @@ class HomeController extends Controller
             'latestBlogs',
             'categoryService',
             'personnels',
-            'listServices'
+            'listServices',
+            'activeBanners'
         ));
     }
 }
