@@ -16,7 +16,7 @@ class ServiceController extends Controller
      */
 
     public function __construct(
-        private Service $Servicemodel,
+        private Service         $Servicemodel,
         private CategoryService $Categorymodel,
     )
     {
@@ -25,8 +25,9 @@ class ServiceController extends Controller
     public function index()
     {
         $services = $this->Servicemodel->latest()->paginate(10);
-
-        return view('admin.serviceManagement.service.index', compact('services'));
+        $categoryService = $this->Categorymodel::get(['id','name']);
+        return view('admin.serviceManagement.service.index',
+            compact('services', 'categoryService'));
     }
 
     /**
@@ -35,7 +36,7 @@ class ServiceController extends Controller
     public function create()
     {
         $category_service = $this->Categorymodel::all();
-        return view('admin.serviceManagement.service.create',compact('category_service'));
+        return view('admin.serviceManagement.service.create', compact('category_service'));
     }
 
     /**
@@ -65,6 +66,34 @@ class ServiceController extends Controller
         //
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $categoryService = $this->Categorymodel::get(['id','name']);
+        $fields = ['name'];
+
+        $services = search($this->Servicemodel::class, $search, $fields)
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+        return view('admin.serviceManagement.service.index', compact('services','categoryService'));
+    }
+
+    public function filter(Request $request)
+    {
+        $category = $request->input('filter');
+        $categoryService = $this->Categorymodel::get(['id','name']);
+        if ($category == "") {
+            $services = $this->Servicemodel::latest()->paginate(5)->withQueryString();
+        } else {
+            $services = $this->Servicemodel::where('category_services_id',$category)
+                ->latest()
+                ->paginate(5)
+                ->withQueryString();
+        }
+        return view('admin.serviceManagement.service.index', compact('services','categoryService'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -72,7 +101,7 @@ class ServiceController extends Controller
     {
         $one_service = $this->Servicemodel::find($id);
         $category_service = $this->Categorymodel::all();
-        return view('admin.serviceManagement.service.edit', compact('one_service','category_service'));
+        return view('admin.serviceManagement.service.edit', compact('one_service', 'category_service'));
     }
 
     /**
@@ -82,7 +111,7 @@ class ServiceController extends Controller
     {
         try {
 
-            $category_service =  $this->Servicemodel::query()->findOrFail($id);
+            $category_service = $this->Servicemodel::query()->findOrFail($id);
 
             $imgOld = $category_service->image;
 
@@ -108,7 +137,7 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         try {
-            $category_service =  $this->Servicemodel::findOrFail($id);
+            $category_service = $this->Servicemodel::findOrFail($id);
             $imgOld = $category_service->image;
             if ($category_service) {
                 delete_file($imgOld);

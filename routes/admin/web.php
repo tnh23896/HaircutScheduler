@@ -100,6 +100,10 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.serviceManagement.service.update');
     Route::delete('service/delete/{id}', [ServiceController::class, 'destroy'])
         ->name('admin.serviceManagement.service.delete');
+    Route::get('search-service', [ServiceController::class, 'search'])
+        ->name('admin.serviceManagement.service.search');
+    Route::get('filter-category-service', [ServiceController::class, 'filter'])
+        ->name('admin.serviceManagement.service.filter');
 
     Route::name('admin.')->group(function () {
         //employee

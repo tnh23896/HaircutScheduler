@@ -32,6 +32,8 @@ class CheckPermissionAdmin
             'admin.billManagement.search',
             'admin.scheduleManagement.search',
             'admin.scheduleManagement.filter',
+            'admin.serviceManagement.service.search',
+            'admin.serviceManagement.service.filter',
             'admin.scheduleManagement.searchDateTime',
             'admin.billManagement.searchDateTime',
             'admin.PromotionManagement.filter',
