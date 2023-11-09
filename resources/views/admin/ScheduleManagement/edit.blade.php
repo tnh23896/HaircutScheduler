@@ -182,13 +182,10 @@
             Sửa lịch đặt
         </h2>
     </div>
-
-
     <div id="booking" class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-12">
             <!-- BEGIN: Form Layout -->
             <form>
-
                 <div class="intro-y box p-5">
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Họ và tên</label>

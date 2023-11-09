@@ -300,8 +300,6 @@ class ScheduleController extends Controller
             // Lấy danh mục dịch vụ
             $serviceCategories = CategoryService::with('services')->get();
             $service = Service::all();
-            // $bookedServices = $data->booking_details();
-            // dd($bookedServices);
             // Ngày bắt đầu
             $startDate = Carbon::now()->startOfDay();
 
@@ -461,7 +459,7 @@ class ScheduleController extends Controller
             }
             return response()->json([
                 'status' => 200,
-                'success' => 'Cập nhật trạng thái lịch đặt lịch thành công',
+                'success' => 'Cập nhật trạng thái đặt lịch thành công',
             ]);
         } catch (\Exception $exception) {
             return response()->json([
