@@ -33,7 +33,7 @@
 
 <nav class="side-nav">
     <a href="#" class="intro-x flex items-center pl-5 pt-4">
-        <img alt="Midone - HTML Admin Template" class="w-10" src="{{ asset('dist/images/logonew2.png') }}">
+        <img alt="Midone - HTML Admin Template" class="w-10" src="{{ asset('dist/images/LOGO.png') }}">
         <span class="hidden xl:block text-white text-lg ml-3"> DT BARBER </span>
     </a>
     <div class="side-nav__devider my-6"></div>
@@ -281,7 +281,7 @@
         <div class="intro-x dropdown w-8 h-8">
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in"
                 role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                <img alt="Midone - HTML Admin Template" src="{{ asset('dist/images/profile-9.jpg') }}">
+                <img alt="Midone - HTML Admin Template" src="{{ auth('admin')->user()->avatar }}">
             </div>
             <div class="dropdown-menu w-56">
                 <ul class="dropdown-content bg-primary text-white">
