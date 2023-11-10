@@ -17,7 +17,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $activeBanners = Banner::where('status', 'active')->first();
         // dd($activeBanners);
         $trendingStyle = Service::select('name', 'image')
             ->withCount('bill_details as service_count')
@@ -51,7 +50,6 @@ class HomeController extends Controller
             'categoryService',
             'personnels',
             'listServices',
-            'activeBanners'
         ));
     }
 }
