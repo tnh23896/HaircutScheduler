@@ -60,8 +60,8 @@
                                             stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card"
                                             data-lucide="credit-card"
                                             class="lucide lucide-credit-card report-box__icon text-pending">
-                                            <rect x="1" y="4" width="22" height="16" rx="2"
-                                                ry="2"></rect>
+                                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2">
+                                            </rect>
                                             <line x1="1" y1="10" x2="23" y2="10"></line>
                                         </svg>
                                         <div class="ml-auto">
@@ -89,8 +89,8 @@
                                             stroke-linecap="round" stroke-linejoin="round" icon-name="monitor"
                                             data-lucide="monitor"
                                             class="lucide lucide-monitor report-box__icon text-warning">
-                                            <rect x="2" y="3" width="20" height="14"
-                                                rx="2" ry="2"></rect>
+                                            <rect x="2" y="3" width="20" height="14" rx="2"
+                                                ry="2"></rect>
                                             <line x1="8" y1="21" x2="16" y2="21"></line>
                                             <line x1="12" y1="17" x2="12" y2="21"></line>
                                         </svg>
@@ -151,8 +151,7 @@
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" icon-name="calendar" data-lucide="calendar"
                                 class="lucide lucide-calendar w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
-                                <rect x="3" y="4" width="18" height="18" rx="2"
-                                    ry="2"></rect>
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                 <line x1="16" y1="2" x2="16" y2="6"></line>
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
@@ -588,34 +587,64 @@
                 <!-- END: Weekly Best Sellers -->
                 <!-- BEGIN: General Report -->
                 <div class="col-span-12 grid grid-cols-12 gap-6 mt-8">
-                    <div class="col-span-12 lg:col-span-6">
+                    <div class="col-span-12 lg:col-span-12">
                         <!-- BEGIN: Vertical Bar Chart -->
-                        <div class="intro-y box">
-                            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-                                <h2 class="font-medium text-base mr-auto">
-                                    Thống kê số lượng đơn theo thời gian
-                                </h2>
+                        <h2 class="text-lg font-medium truncate mr-5">
+                            Thống kê đơn theo thời gian
+                        </h2>
+                        <div class="intro-y box p-5 mt-12 sm:mt-5">
+                            <div class="">
+                                <form id="filterForm" method="POST">
+                                    @csrf
+                                    <div class="flex justify-between">
+                                        <select name="month" id="month" class="tom-select w-full tomselected mx-3">
+                                            <option value="0" selected="true">Chọn tháng</option>
+                                            @for ($i = 1; $i <= 12; $i++)
+                                                <option value="{{ $i }}">Tháng {{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                        <select name="year" id="year" class="tom-select w-full tomselected mx-3">
+                                            <option value="0" selected="true">Chọn năm</option>
+                                            @for ($year = 1990; $year <= 2030; $year++)
+                                                <option value="{{ $year }}">Năm {{ $year }}</option>
+                                            @endfor
+                                        </select>
+                                        <button type="button" id="saveBtn" class="btn btn-secondary mr-1 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                icon-name="filter" data-lucide="filter"
+                                                class="lucide lucide-filter block mx-auto">
+                                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                             <div id="vertical-bar-chart" class="p-5">
                                 <div class="preview">
                                     <div class="h-[400px]">
-                                        <canvas id="vertical-bar-chart-widget"></canvas>
+                                        <canvas id="vertical-bar-chart-widget"
+                                            data-filtered-data="{{ json_encode($data) }}">
+                                        </canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- END: Vertical Bar Chart -->
                     </div>
-                    <div class="col-span-12 lg:col-span-6">
+                    {{-- <div class="col-span-12 lg:col-span-6">
                         <!-- BEGIN: Stacked Bar Chart -->
                         <div class="intro-y box">
-                            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                            <div
+                                class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
                                 <h2 class="font-medium text-base mr-auto">
                                     Stacked Bar Chart
                                 </h2>
                                 <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
                                     <label class="form-check-label ml-0" for="show-example-4">Show example code</label>
-                                    <input id="show-example-4" data-target="#stacked-bar-chart" class="show-code form-check-input mr-0 ml-3" type="checkbox">
+                                    <input id="show-example-4" data-target="#stacked-bar-chart"
+                                        class="show-code form-check-input mr-0 ml-3" type="checkbox">
                                 </div>
                             </div>
                             <div id="stacked-bar-chart" class="p-5">
@@ -625,7 +654,9 @@
                                     </div>
                                 </div>
                                 <div class="source-code hidden">
-                                    <button data-target="#copy-stacked-bar-chart" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
+                                    <button data-target="#copy-stacked-bar-chart"
+                                        class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-lucide="file"
+                                            class="w-4 h-4 mr-2"></i> Copy example code </button>
                                     <div class="overflow-y-auto mt-3 rounded-md">
                                         <pre id="copy-stacked-bar-chart" class="source-preview"> <code class="html"> HTMLOpenTagdiv class=&quot;h-[400px]&quot;HTMLCloseTag HTMLOpenTagcanvas id=&quot;stacked-bar-chart-widget&quot;HTMLCloseTagHTMLOpenTag/canvasHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
                                     </div>
@@ -633,7 +664,7 @@
                             </div>
                         </div>
                         <!-- END: Stacked Bar Chart -->
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- END: General Report -->
                 <!-- BEGIN: Weekly Top Products -->
