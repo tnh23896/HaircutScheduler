@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="logo">
-                        <a href="javascript:void(0)"><img src="{{ asset('client/assets/images/logo.png') }}""
+                        <a href="{{ url('/') }}"><img class="w-75" src="{{ asset('dist/images/logonew2.png') }}"
                                 alt="header-image"></a>
                         <div class="navbar-toggler active">
                             <span></span><span></span><span></span>
@@ -73,8 +73,8 @@
                                 </button>
                             </a>
                         @else
-                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px" href="javascript:void(0)"
-                                data-toggle="modal" data-target="#modalAuth">
+                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px"
+                                href="javascript:void(0)" data-toggle="modal" data-target="#modalAuth">
                                 <h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6>
                             </a>
                         @endif
