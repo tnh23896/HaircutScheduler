@@ -633,38 +633,6 @@
                         </div>
                         <!-- END: Vertical Bar Chart -->
                     </div>
-                    {{-- <div class="col-span-12 lg:col-span-6">
-                        <!-- BEGIN: Stacked Bar Chart -->
-                        <div class="intro-y box">
-                            <div
-                                class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
-                                <h2 class="font-medium text-base mr-auto">
-                                    Stacked Bar Chart
-                                </h2>
-                                <div class="form-check form-switch w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0">
-                                    <label class="form-check-label ml-0" for="show-example-4">Show example code</label>
-                                    <input id="show-example-4" data-target="#stacked-bar-chart"
-                                        class="show-code form-check-input mr-0 ml-3" type="checkbox">
-                                </div>
-                            </div>
-                            <div id="stacked-bar-chart" class="p-5">
-                                <div class="preview">
-                                    <div class="h-[400px]">
-                                        <canvas id="stacked-bar-chart-widget"></canvas>
-                                    </div>
-                                </div>
-                                <div class="source-code hidden">
-                                    <button data-target="#copy-stacked-bar-chart"
-                                        class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-lucide="file"
-                                            class="w-4 h-4 mr-2"></i> Copy example code </button>
-                                    <div class="overflow-y-auto mt-3 rounded-md">
-                                        <pre id="copy-stacked-bar-chart" class="source-preview"> <code class="html"> HTMLOpenTagdiv class=&quot;h-[400px]&quot;HTMLCloseTag HTMLOpenTagcanvas id=&quot;stacked-bar-chart-widget&quot;HTMLCloseTagHTMLOpenTag/canvasHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END: Stacked Bar Chart -->
-                    </div> --}}
                 </div>
                 <!-- END: General Report -->
                 <!-- BEGIN: Weekly Top Products -->

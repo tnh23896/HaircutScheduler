@@ -16,17 +16,45 @@ class DashboardController extends Controller
 
 	public function ScheduleSetbyTime(Request $request)
 	{
-		$data = $this->baseScheduleSetbyTime($request);
-
+		$data = $this->baScheduleSetbyTime($request);
 		return response()->json(['data' => $data]);
 	}
+	// Tổng hợp dữ liệu của tất cả
+	private function baseScheduleSetbyTime()
+	{
+		$query = Booking::selectRaw('MONTH(day) as month, COUNT(*) as totalBookings')
+			->selectRaw('SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings')
+			->selectRaw('SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings')
+			->groupBy('month')
+			->orderBy('month', 'asc');
 
-	private function baseScheduleSetbyTime(Request $request)
+		$filteredData = $query->get();
+
+		$data = [];
+		foreach ($filteredData as $item) {
+			$month = $item->month;
+
+			$data[$month] = [
+				'totalBookings' => $item->totalBookings,
+				'successfulBookings' => $item->successfulBookings,
+				'cancelledBookings' => $item->cancelledBookings,
+			];
+		}
+
+		return $data;
+	}
+	// Lọc theo tháng và năm
+	private function baScheduleSetbyTime(Request $request)
 	{
 		$month = $request->month;
 		$year = $request->year;
 
-		$query = Booking::selectRaw('MONTH(day) as month, COUNT(*) as totalBookings')
+		$query = Booking::selectRaw('
+            MONTH(day) as month,
+            COUNT(*) as totalBookings,
+            SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings,
+            SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings
+        ')
 			->when($month, function ($query, $month) {
 				return $query->whereMonth('day', $month);
 			})
@@ -36,12 +64,26 @@ class DashboardController extends Controller
 			->groupBy('month')
 			->orderBy('month');
 
-		$filteredData = $query->pluck('totalBookings', 'month')->toArray();
+		$result = $query->get();
+
+		$data = [];
+		foreach ($result as $row) {
+			$data[$row->month] = [
+				'totalBookings' => $row->totalBookings,
+				'successfulBookings' => $row->successfulBookings,
+				'cancelledBookings' => $row->cancelledBookings,
+			];
+		}
 
 		$allMonths = range(1, 12);
-		$data = [];
 		foreach ($allMonths as $month) {
-			$data[$month] = $filteredData[$month] ?? 0;
+			if (!isset($data[$month])) {
+				$data[$month] = [
+					'totalBookings' => 0,
+					'successfulBookings' => 0,
+					'cancelledBookings' => 0,
+				];
+			}
 		}
 
 		return $data;
