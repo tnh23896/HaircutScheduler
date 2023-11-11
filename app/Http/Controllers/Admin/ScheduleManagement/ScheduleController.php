@@ -437,7 +437,7 @@ class ScheduleController extends Controller
                     'time' => $data->time,
                 ]);
                 foreach ($data->booking_details as $item) {
-                    if ($item->status == "cancel" && $item->deleted_at === null) {
+                    if ($item->status == "success" && $item->deleted_at === null) {
                         $bill->bill_details()->create([
                             'service_id' => $item->service_id,
                             'name' => $item->name,
