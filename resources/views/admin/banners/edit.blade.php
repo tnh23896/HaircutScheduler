@@ -27,6 +27,13 @@
                                 value="{{ $one_banner->link }}">
                         </div>
                     </div>
+                    <div class="mt-3">
+                        <label for="crud-form-5" class="form-label">Trạng thái</label>
+                        <select id="crud-form-5" name="status" class="form-select">
+                            <option value="active" {{ $one_banner->status === 'active' ? 'selected' : '' }}>Hoạt động</option>
+                            <option value="inactive" {{ $one_banner->status === 'inactive' ? 'selected' : '' }}>Không hoạt động</option>
+                        </select>
+                    </div>
                     <div class="text-right mt-5">
                         <button type="button" class="btn btn-primary w-24" id="saveBtn">Cập nhật</button>
                         <a href="{{ route('admin.banners.index') }}" class="btn btn-outline-secondary w-24 mr-1">Danh

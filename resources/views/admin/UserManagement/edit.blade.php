@@ -18,10 +18,10 @@
                         <label for="crud-form-1" class="form-label">Danh sách đen</label>
                         <select class="form-select w-full" name="black_status">
                             <option value="0" {{ $data->black_status == 0 ? 'selected' : '' }}>
-                                Active
+                                Kích hoạt
                             </option>
                             <option value="1" {{ $data->black_status == 1 ? 'selected' : '' }}>
-                                Inactive
+                                Không kích hoạt
                             </option>
                         </select>
                     </div>

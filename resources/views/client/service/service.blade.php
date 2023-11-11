@@ -1,9 +1,12 @@
 @extends('client.templates.app')
 @section('title', 'Dịch vụ')
 @section('content')
-    @include('client.templates.navbar')
-
-    @include('client.templates.banner')
+    @include('client.templates.navbar2')
+    <section class="position-relative footer-area">
+        <div class="container bg-text-area">
+            <h2>Dịch vụ</h2>
+        </div>
+    </section>
     <section class="bg-gray gap position-relative no-bottom lg-no-bottom md-no-bottom sm-no-bottom">
         <div class="container">
             <div class="heading-style text-center">

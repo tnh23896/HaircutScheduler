@@ -58,12 +58,16 @@ return [
     'admin.scheduleManagement.index' => 'Danh sách lịch đặt',
     'admin.scheduleManagement.edit' => 'Chỉnh sửa lịch đặt',
     'admin.scheduleManagement.update' => 'Cập nhật lịch đặt',
+    'admin.scheduleManagement.create' => 'Thêm lịch đặt',
+    'admin.scheduleManagement.store' => 'Lưu lịch đặt',
+    'admin.scheduleManagement.getStaff' => 'Hiển thị thông tin',
 
     //Schedule Details
     'admin.scheduleManagement.scheduleDetails' => 'Chi tiết lịch đặt',
     'admin.scheduleManagement.scheduleDetails.update' => 'Cập nhật dịch vụ lịch đặt',
+    'admin.scheduleManagement.updateStatus' => 'Cấp nhật trảng thái lịch đặt',
     'admin.scheduleManagement.scheduleDetails.store' => 'Thêm mới dịch vụ lịch đặt',
-
+    'admin.scheduleManagement.getStaff' => 'getStaff',
 
     //Bill Management
     'admin.billManagement.index' => 'Danh sách hóa đơn',
@@ -99,4 +103,15 @@ return [
     'admin.work-schedule.show' => 'Chi tiết lịch làm việc',
     'admin.work-schedule.update1' => 'Cập nhật lịch làm việc',
     'admin.work-schedule.destroy' => 'Xóa lịch làm việc',
+
+    //Promotion Management
+    'admin.PromotionManagement.index' => 'Danh sách khuyến mãi',
+    'admin.PromotionManagement.create' => 'Thêm khuyến mãi',
+    'admin.PromotionManagement.store' => 'Lưu khuyến mãi',
+    'admin.PromotionManagement.edit' => 'Chỉnh sửa khuyến mãi',
+    'admin.PromotionManagement.update' => 'Cập nhật khuyến mãi',
+    'admin.PromotionManagement.delete' => 'Xóa khuyến mãi',
+
+    //Profile
+    'admin.auth.ResetPasswordPost1' => 'Thay đổi mật khẩu'
 ];

@@ -16,4 +16,4 @@
 <script src="{{asset('js/helper-ajax.js')}}"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+<script src="{{asset('js/show-errors-notification.js')}}"></script>

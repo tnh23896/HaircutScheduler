@@ -15,7 +15,7 @@
                     </h2>
     
                 </div>
-                <form action="{{ route('admin.auth.ResetPasswordPost') }}" method="post">
+                <form action="{{ route('admin.auth.ResetPasswordPost1') }}" method="post">
                     @csrf
                     <div>
                         <label for="change-password-form-1" class="form-label">Mật khẩu cũ</label>
