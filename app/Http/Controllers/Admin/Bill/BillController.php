@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Bill;
 
-use App\Http\Controllers\Controller;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Bill;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class BillController extends Controller
 {
@@ -88,6 +92,21 @@ class BillController extends Controller
                 'success' => 'Tìm kiếm thất bại'
             ], 500);
         }
+    }
+   
+    public function printBill($id)
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Dejavu Sans'); 
+       
+      
+
+        $dompdf = new Dompdf($options);
+        $item = Bill::find($id);
+        $pdf = PDF::loadView('admin.BillManagement.modal',compact('item'));
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->download('bill.pdf');  
     }
 
 

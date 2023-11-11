@@ -70,6 +70,8 @@ return [
 
     //Bill Management
     'admin.billManagement.index' => 'Danh sách hóa đơn',
+    'admin.billManagement.printBill' => 'In hoa đơn',
+    
 
 
     //Banner

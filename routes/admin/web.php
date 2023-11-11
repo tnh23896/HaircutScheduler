@@ -142,6 +142,9 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.billManagement.search');
     Route::get('search-datetime-bill', [BillController::class, 'searchByDateandTime'])
         ->name('admin.billManagement.searchDateTime');
+    Route::get('print-bill/{id}', [BillController::class, 'printBill'])
+        ->name('admin.billManagement.printBill');
+    
 
 
     // Banner
