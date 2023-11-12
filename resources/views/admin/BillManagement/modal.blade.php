@@ -227,7 +227,7 @@
                                         </td>
                                         <td class="custom-text-right custom-table-cell custom-border-bottom custom-font-medium custom-w-32"
                                             style="border-bottom: 1px solid #333 ">
-                                            {{ $detail->price }} vnd
+                                            {{ $detail->price }} VND
                                         </td>
                                     </tr>
                                 @endforeach
@@ -235,12 +235,11 @@
                         </table>
                     </div>
                     <div class="sm:text-left sm:ml-auto py-5 price" style="text-align: right">
-                        <div class="text-base">Tổng tiền: {{ $item->total_price }} vnd</div>
-                        <div class="text-base">Giảm giá: {{ $item->promotion->discount ?? 0 }} vnd</div>
+                        <div class="text-base">Tổng tiền: {{ $item->total_price }} VND</div>
+                        <div class="text-base">Giảm giá: {{ $item->promotion->discount ?? 0 }} VND</div>
                         <hr>
                         <div class="text-lg	">Số tiền phải thanh toán:
-                            {{ $item->total_price - ($item->promotion->discount ?? 0) }} vnd</div>
-                        <div class="mt-1">Đã bao gồm thuế VAT(10%)</div>
+                            {{ $item->total_price - ($item->promotion->discount ?? 0) }} VND</div>
                     </div>
                 </div>
                 <div class="custom-container">

@@ -51,17 +51,13 @@ class BannerController extends Controller
             $imgOld = $banner->image;
             $banner->fill($request->all());
             if ($request->status === 'active') {
-                $activeBanner = Banner::where('status', 'active')->first();
-                if ($activeBanner) {
-                    $activeBanner->update(['status' => 'inactive']);
-                }
+                Banner::where('status', 'active')->where('id', '!=', $banner->id)->update(['status' => 'inactive']);
             }
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $banner->image = upload_file('admin/Banner', $request->file('image'));
                 delete_file($imgOld);
             }
             $banner->save();
-
             return response()->json(['success' => 'Cập nhật Banner thành công']);
         } catch (\Exception $exception) {
             return response()->json(['error' => 'Cập nhật Banner thất bại']);

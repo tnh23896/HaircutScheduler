@@ -65,8 +65,9 @@ return [
     //Schedule Details
     'admin.scheduleManagement.scheduleDetails' => 'Chi tiết lịch đặt',
     'admin.scheduleManagement.scheduleDetails.update' => 'Cập nhật dịch vụ lịch đặt',
+    'admin.scheduleManagement.updateStatus' => 'Cấp nhật trảng thái lịch đặt',
     'admin.scheduleManagement.scheduleDetails.store' => 'Thêm mới dịch vụ lịch đặt',
-
+    'admin.scheduleManagement.getStaff' => 'getStaff',
 
     //Bill Management
     'admin.billManagement.index' => 'Danh sách hóa đơn',

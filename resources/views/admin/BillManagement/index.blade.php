@@ -166,19 +166,18 @@
                                                 <div class="font-medium whitespace-nowrap">{{ $detail->name }}</div>
                                             </td>
                                             <td class="text-right border-b dark:border-darkmode-400 w-32 font-medium">
-                                                {{ $detail->price }} vnd</td>
+                                                {{ $detail->price }} VND</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <div class="sm:text-left sm:ml-auto py-5" style="text-align: right">
-                            <div class="text-base">Tổng tiền: {{ $item->total_price }} vnd</div>
-                            <div class="text-base">Giảm giá: {{ $item->promotion->discount ?? 0 }} vnd</div>
+                            <div class="text-base">Tổng tiền: {{ $item->total_price }} VND</div>
+                            <div class="text-base">Giảm giá: {{ $item->promotion->discount ?? 0 }} VND</div>
                             <hr>
                             <div class="text-lg	">Số tiền phải thanh toán:
-                                {{ $item->total_price - ($item->promotion->discount ?? 0) }} vnd</div>
-                            <div class="mt-1">Đã bao gồm thuế VAT(10%)</div>
+                                {{ $item->total_price - ($item->promotion->discount ?? 0) }} VND</div>
                         </div>
                     </div>
                     <div class="px-5 sm:px-20 pb-10 sm:pb-20 flex flex-col-reverse sm:flex-row">

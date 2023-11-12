@@ -168,7 +168,13 @@ class BookingController extends Controller
                 throw new Exception('Lịch đã được đặt rồi', 400);
             }
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
-
+            event(new \App\Events\AdminNotifications([
+                'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
+                'message' => 'Lịch đặt mới',
+                'id' => 'Hóa đơn số'. ' '. $booking->id,
+                'day' => Carbon::parse($request->day)->format('d-m-Y') ,
+                'time' => Carbon::parse($time->time)->format('H:i') ,
+            ]));
             return response()->json([
                 'message' => 'Thêm lịch đặt thành công',
             ], 200);

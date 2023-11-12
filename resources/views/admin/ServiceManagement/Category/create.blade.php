@@ -21,7 +21,7 @@
                     <div class="mt-3">
                         <label for="crud-form-3" class="form-label">Hình ảnh</label>
                         <div class="input-group">
-                            <input type="file" name="image" id="image" class="clearable form-control"
+                            <input type="file" name="image" id="image" class="clearable form-control p-3"
                                 placeholder="Image" aria-describedby="input-group-1">
                         </div>
                     </div>

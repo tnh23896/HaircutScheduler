@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
                 'regex:/^[0-9]{10}$/',
                 Rule::unique('admins', 'phone')->ignore(auth()->guard('admin')->user()->id),
             ],
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
     public function messages(){
@@ -38,6 +39,9 @@ class UpdateRequest extends FormRequest
             'phone.required' => 'Bạn chưa nhập số điện thoại',
             'phone.regex' => 'Số điện thoại không đúng định dạng',
             'phone.unique' => 'Số điện thoại đã tồn tại',
+            'avatar.image' => 'Ảnh đại diện phải là 1 file ảnh',
+            'avatar.mimes' => 'Ảnh đại diện phải có đuôi là jpeg, png, jpg, gif, svg',
+            'avatar.max' => 'Ảnh đại diện phải có kích thước nhỏ hơn 2MB',
         ];
     }
 }
