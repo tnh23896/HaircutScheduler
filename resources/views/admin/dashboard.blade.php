@@ -363,358 +363,139 @@
                 <div class="col-span-12 mt-6">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Weekly Top Products
+                            Top 5 khách hàng đặt lịch nhiều nhất
                         </h2>
-                        <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
-                            <button class="btn box flex items-center text-slate-600 dark:text-slate-300"> <svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" icon-name="file-text" data-lucide="file-text"
-                                    class="lucide lucide-file-text hidden sm:block w-4 h-4 mr-2">
-                                    <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
-                                    <polyline points="14 2 14 8 20 8"></polyline>
-                                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                                    <line x1="10" y1="9" x2="8" y2="9"></line>
-                                </svg> Export to Excel </button>
-                            <button class="ml-3 btn box flex items-center text-slate-600 dark:text-slate-300"> <svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" icon-name="file-text" data-lucide="file-text"
-                                    class="lucide lucide-file-text hidden sm:block w-4 h-4 mr-2">
-                                    <path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"></path>
-                                    <polyline points="14 2 14 8 20 8"></polyline>
-                                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                                    <line x1="10" y1="9" x2="8" y2="9"></line>
-                                </svg> Export to PDF </button>
-                        </div>
                     </div>
-                    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
+                    <form id="filterBookerForm" method="POST">
+                        @csrf
+                        <div class="flex justify-end">
+                            <select name="month" id="month" class="tom-select w-96 tomselected mx-3" style="width: 150px">
+                                <option value="0" selected="true">Chọn tháng</option>
+                                @for ($i = 1; $i <= 12; $i++)
+                                    <option value="{{ $i }}">Tháng {{ $i }}</option>
+                                @endfor
+                            </select>
+                            <select name="year" id="year" class="tom-select w-96 tomselected mx-3" style="width: 150px">
+                                <option value="0" selected="true">Chọn năm</option>
+                                @for ($year = 1990; $year <= 2030; $year++)
+                                    <option value="{{ $year }}">Năm {{ $year }}</option>
+                                @endfor
+                            </select>
+                            <button type="button" id="saveFilterBooker" class="btn btn-secondary mr-1 mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    icon-name="filter" data-lucide="filter"
+                                    class="lucide lucide-filter block mx-auto">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0" id="listBooker">
                         <table class="table table-report sm:mt-2">
                             <thead>
                                 <tr>
-                                    <th class="whitespace-nowrap">IMAGES</th>
-                                    <th class="whitespace-nowrap">PRODUCT NAME</th>
-                                    <th class="text-center whitespace-nowrap">STOCK</th>
-                                    <th class="text-center whitespace-nowrap">STATUS</th>
-                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                                    <th class="whitespace-nowrap">#</th>
+                                    <th class="whitespace-nowrap">Ảnh</th>
+                                    <th class="text-center whitespace-nowrap">Tên khách hàng</th>
+                                    <th class="text-center whitespace-nowrap">Lượt đặt</th>
+                                    <th class="text-center whitespace-nowrap">Tổng tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="intro-x">
-                                    <td class="w-40">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-7.jpg">
+                                @php $count = 1 @endphp
+                                @foreach ($topBooker as $booker)
+                                    <tr class="intro-x">
+                                        <td>{{$count++}}</td>
+                                        <td class="w-40">
+                                            <div class="text-center flex">
+                                                <div class="w-16 h-16 image-fit zoom-in">
+                                                    <img alt="ảnh" class="tooltip rounded-full" src="{{asset($booker->avatar)}}">
+                                                </div>
                                             </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-3.jpg">
-                                            </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-13.jpg">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="font-medium whitespace-nowrap">Nike Air Max 270</a>
-                                        <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Sport &amp; Outdoor
-                                        </div>
-                                    </td>
-                                    <td class="text-center">60</td>
-                                    <td class="w-40">
-                                        <div class="flex items-center justify-center text-success"> <svg
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                icon-name="check-square" data-lucide="check-square"
-                                                class="lucide lucide-check-square w-4 h-4 mr-2">
-                                                <polyline points="9 11 12 14 22 4"></polyline>
-                                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                            </svg> Active </div>
-                                    </td>
-                                    <td class="table-report__action w-56">
-                                        <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="check-square" data-lucide="check-square"
-                                                    class="lucide lucide-check-square w-4 h-4 mr-1">
-                                                    <polyline points="9 11 12 14 22 4"></polyline>
-                                                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                                </svg> Edit </a>
-                                            <a class="flex items-center text-danger" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="trash-2" data-lucide="trash-2"
-                                                    class="lucide lucide-trash-2 w-4 h-4 mr-1">
-                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                    <path
-                                                        d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2">
-                                                    </path>
-                                                    <line x1="10" y1="11" x2="10" y2="17">
-                                                    </line>
-                                                    <line x1="14" y1="11" x2="14" y2="17">
-                                                    </line>
-                                                </svg> Delete </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="intro-x">
-                                    <td class="w-40">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-12.jpg">
-                                            </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-13.jpg">
-                                            </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-8.jpg">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="font-medium whitespace-nowrap">Samsung Galaxy S20
-                                            Ultra</a>
-                                        <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Smartphone &amp;
-                                            Tablet</div>
-                                    </td>
-                                    <td class="text-center">50</td>
-                                    <td class="w-40">
-                                        <div class="flex items-center justify-center text-success"> <svg
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                icon-name="check-square" data-lucide="check-square"
-                                                class="lucide lucide-check-square w-4 h-4 mr-2">
-                                                <polyline points="9 11 12 14 22 4"></polyline>
-                                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                            </svg> Active </div>
-                                    </td>
-                                    <td class="table-report__action w-56">
-                                        <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="check-square" data-lucide="check-square"
-                                                    class="lucide lucide-check-square w-4 h-4 mr-1">
-                                                    <polyline points="9 11 12 14 22 4"></polyline>
-                                                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                                </svg> Edit </a>
-                                            <a class="flex items-center text-danger" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="trash-2" data-lucide="trash-2"
-                                                    class="lucide lucide-trash-2 w-4 h-4 mr-1">
-                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                    <path
-                                                        d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2">
-                                                    </path>
-                                                    <line x1="10" y1="11" x2="10" y2="17">
-                                                    </line>
-                                                    <line x1="14" y1="11" x2="14" y2="17">
-                                                    </line>
-                                                </svg> Delete </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="intro-x">
-                                    <td class="w-40">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-13.jpg">
-                                            </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-4.jpg">
-                                            </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-5.jpg">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="font-medium whitespace-nowrap">Apple MacBook Pro 13</a>
-                                        <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">PC &amp; Laptop</div>
-                                    </td>
-                                    <td class="text-center">163</td>
-                                    <td class="w-40">
-                                        <div class="flex items-center justify-center text-success"> <svg
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                icon-name="check-square" data-lucide="check-square"
-                                                class="lucide lucide-check-square w-4 h-4 mr-2">
-                                                <polyline points="9 11 12 14 22 4"></polyline>
-                                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                            </svg> Active </div>
-                                    </td>
-                                    <td class="table-report__action w-56">
-                                        <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="check-square" data-lucide="check-square"
-                                                    class="lucide lucide-check-square w-4 h-4 mr-1">
-                                                    <polyline points="9 11 12 14 22 4"></polyline>
-                                                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                                </svg> Edit </a>
-                                            <a class="flex items-center text-danger" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="trash-2" data-lucide="trash-2"
-                                                    class="lucide lucide-trash-2 w-4 h-4 mr-1">
-                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                    <path
-                                                        d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2">
-                                                    </path>
-                                                    <line x1="10" y1="11" x2="10" y2="17">
-                                                    </line>
-                                                    <line x1="14" y1="11" x2="14" y2="17">
-                                                    </line>
-                                                </svg> Delete </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="intro-x">
-                                    <td class="w-40">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-5.jpg">
-                                            </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-1.jpg">
-                                            </div>
-                                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                                <img alt="Midone - HTML Admin Template" class="tooltip rounded-full"
-                                                    src="dist/images/preview-3.jpg">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="font-medium whitespace-nowrap">Samsung Q90 QLED TV</a>
-                                        <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Electronic</div>
-                                    </td>
-                                    <td class="text-center">132</td>
-                                    <td class="w-40">
-                                        <div class="flex items-center justify-center text-success"> <svg
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                icon-name="check-square" data-lucide="check-square"
-                                                class="lucide lucide-check-square w-4 h-4 mr-2">
-                                                <polyline points="9 11 12 14 22 4"></polyline>
-                                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                                            </svg> Active </div>
-                                    </td>
-                                    <td class="table-report__action w-56">
-                                        <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="check-square" data-lucide="check-square"
-                                                    class="lucide lucide-check-square w-4 h-4 mr-1">
-                                                    <polyline points="9 11 12 14 22 4"></polyline>
-                                                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11">
-                                                    </path>
-                                                </svg> Edit </a>
-                                            <a class="flex items-center text-danger" href="#"> <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                    icon-name="trash-2" data-lucide="trash-2"
-                                                    class="lucide lucide-trash-2 w-4 h-4 mr-1">
-                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                    <path
-                                                        d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2">
-                                                    </path>
-                                                    <line x1="10" y1="11" x2="10"
-                                                        y2="17"></line>
-                                                    <line x1="14" y1="11" x2="14"
-                                                        y2="17"></line>
-                                                </svg> Delete </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td class="text-center whitespace-nowrap">
+                                            <a href="#" class="text-center font-medium whitespace-nowrap">{{$booker->username}}</a>
+                                        </td>
+                                        <td class=" text-center">{{$booker->totalBookings}}</td>
+                                        <td class="text-center">{{number_format($booker->totalPrice)}} vnd</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="intro-y flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-3">
-                        <nav class="w-full sm:w-auto sm:mr-auto">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" icon-name="chevrons-left"
-                                            class="lucide lucide-chevrons-left w-4 h-4" data-lucide="chevrons-left">
-                                            <polyline points="11 17 6 12 11 7"></polyline>
-                                            <polyline points="18 17 13 12 18 7"></polyline>
-                                        </svg> </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" icon-name="chevron-left"
-                                            class="lucide lucide-chevron-left w-4 h-4" data-lucide="chevron-left">
-                                            <polyline points="15 18 9 12 15 6"></polyline>
-                                        </svg> </a>
-                                </li>
-                                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                                <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" icon-name="chevron-right"
-                                            class="lucide lucide-chevron-right w-4 h-4" data-lucide="chevron-right">
-                                            <polyline points="9 18 15 12 9 6"></polyline>
-                                        </svg> </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" icon-name="chevrons-right"
-                                            class="lucide lucide-chevrons-right w-4 h-4" data-lucide="chevrons-right">
-                                            <polyline points="13 17 18 12 13 7"></polyline>
-                                            <polyline points="6 17 11 12 6 7"></polyline>
-                                        </svg> </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <select class="w-20 form-select box mt-3 sm:mt-0">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
-                        </select>
                     </div>
                 </div>
                 <!-- END: Weekly Top Products -->
             </div>
         </div>
     </div>
+    <script>
+        function formatCurrency(amount) {
+            const formattedAmount = amount.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+                minimumFractionDigits: 0,
+            });
+
+            const currencySymbol = "vnd";
+            const replacedSymbol = formattedAmount.replace(/\./g, ',').replace("₫", currencySymbol);
+
+            return replacedSymbol;
+        }
+
+        $(function() {
+            $('#saveFilterBooker').on('click', function() {
+                var formData = new FormData($('#filterBookerForm')[0]);
+                var url = "{{ route('admin.topBooker') }}";
+
+                sendAjaxRequest(url, 'POST', formData,
+                    function(response) {
+                        $('#listbooker').html('');
+
+                        var bookerArray = Object.values(response.bookerData);
+
+                        if (bookerArray.length > 0) {
+                            var bookerItemHtml = `
+                                    <table class="table table-report sm:mt-2">
+                                        <thead>
+                                            <tr>
+                                                <th class="whitespace-nowrap">#</th>
+                                                <th class="whitespace-nowrap">Ảnh</th>
+                                                <th class="text-center whitespace-nowrap">Tên khách hàng</th>
+                                                <th class="text-center whitespace-nowrap">Lượt đặt</th>
+                                                <th class="text-center whitespace-nowrap">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${bookerArray.map((booker, index) => `
+                                                <tr class="intro-x">
+                                                    <td>${index + 1}</td>
+                                                    <td class="w-40">
+                                                        <div class="text-center flex">
+                                                            <div class="w-16 h-16 image-fit zoom-in">
+                                                                <img alt="ảnh" class="tooltip rounded-full" src="${booker.avatar}">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center whitespace-nowrap">
+                                                        <a href="#" class="text-center font-medium whitespace-nowrap">${booker.username}</a>
+                                                    </td>
+                                                    <td class=" text-center">${booker.totalBookings}</td>
+                                                    <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
+                                                </tr> `).join('')}
+                                        </tbody>
+                                    </table>`;
+                            $('#listBooker').html(bookerItemHtml);
+                        } else {
+                            $('#listBooker').html('<p>Không có dữ liệu.</p>');
+                        }
+                    },
+                    function(error) {
+                        alert('Error')
+                    }
+                );
+            });
+        });
+    </script>
 @endsection
