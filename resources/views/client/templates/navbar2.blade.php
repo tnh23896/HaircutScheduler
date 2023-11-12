@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="logo">
-                        <a href="{{ url('/') }}"><img class="w-75" src="{{ asset('dist/images/logonew2.png') }}"
+                        <a href="{{ url('/') }}"><img src="{{ asset('dist/images/logonew2.png') }}"
                                 alt="header-image"></a>
                         <div class="navbar-toggler active">
                             <span></span><span></span><span></span>
