@@ -37,6 +37,7 @@ Route::get('booking-history', [BookingController::class, 'booking_history'])->na
 
 //Bill Payment
 Route::get('bill', [BillController::class, 'index'])->name('bill');
+Route::get('bill_print/{id}', [BillController::class, 'printBill'])->name('print.bill');
 
 //Blog
 Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');

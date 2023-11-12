@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Models\Bill;
+use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use App\Http\Controllers\Controller;
 
 class BillController extends Controller
 {
@@ -23,6 +27,16 @@ class BillController extends Controller
         } catch (\Exception $e) {
             abort(404);
         }
+    }
+    public function printBill($id)
+    {
+        $options = new Options();
+        $options->set('defaultFont', 'Dejavu Sans');
+        $dompdf = new Dompdf($options);
+        $item = Bill::find($id);
+        $pdf = PDF::loadView('client.bill_history.printBill', compact('item'));
+        $pdf->setPaper('A4', 'portrait');
+        return $pdf->download('bill.pdf');
     }
 
     /**
