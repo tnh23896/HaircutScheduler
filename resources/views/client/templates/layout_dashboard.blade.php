@@ -11,7 +11,7 @@
 
 <body>
     @include('client.templates.navbar')
-		@include('client.templates.banner')
+    @include('client.templates.banner')
     <section class="position-relative footer-area">
         <div class="container bg-text-area">
             <h2>@yield('title_page')</h2>
@@ -74,6 +74,7 @@
         })
 
         function sendOTP(form) {
+            const id = $(form).data("id");
             var number = $(form).find('input[name="phoneOtpNumberInput"]').val();
             if (number.startsWith("0")) {
                 number = "+84" + number.substring(1);
@@ -88,7 +89,8 @@
                         <h3>Mã code xác minh</h3>
                         <div class="alert alert-success successOtpAuth" id="" style="display: none;"></div>
                         <div class="alert alert-danger error" id="" style="display: none;"></div>
-                        <form class="formVerifyOtp">
+                        <form class="formVerifyOtp" data-id="${id}">
+
                             <input type="text" name="verification" class="form-control"
                                 placeholder="Verification code">
                             <button type="submit" class="btn btn-danger mt-3">Xác minh</button>
@@ -105,23 +107,23 @@
                 $(containForm).find(".error").show();
             });
         }
-
         function verify(form) {
+            const id = $(form).data("id");
             var code = $(form).find('input[name="verification"]').val();
             coderesult.confirm(code).then(function(result) {
                 var user = result.user;
                 const formData = new FormData();
-                formData.append('id', {{ $booking->id }}); // Chuyển id của booking
-        formData.append('phone', user.phoneNumber); // Chuyển số điện thoại người dùng
-                const url = "{{ route('booking-history.delete', ['id' => $booking->id]) }}";
+                formData.append('phone', user.phoneNumber);
+                let url = "{{ route('booking-history.delete', ['id' => ':id']) }}";
+                url = url.replace(':id', id);
+                console.log(user);
                 sendAjaxRequest(url, 'post', formData, function(response) {
                         console.log(response);
-                        console.log($(form).closest('#modaldelete').eq(1));
-                        if ($(form).closest('#modaldelete').length) {
+                        if ($(form).closest(`#modaldelete${id}`).length) {
                             toastr.success("Xác thực thành công");
-                            $('#modaldelete').modal('hide');
+                            $(`#modaldelete${id}`).modal('hide');
                             location.reload();
-                        } 
+                        }
                     },
                     function(error) {
                         console.log(error);

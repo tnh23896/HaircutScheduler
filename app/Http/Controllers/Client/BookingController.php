@@ -7,15 +7,16 @@ use App\Models\Time;
 use App\Models\Admin;
 use App\Models\Booking;
 use App\Models\Service;
+use App\Models\Promotion;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use App\Models\BookingDetail;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Booking\StoreRequest;
-use App\Models\Promotion;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BookingController extends Controller
@@ -26,7 +27,7 @@ class BookingController extends Controller
     public function booking_history()
     {
         $id = auth('web')->user()->id;
-        $list_booking = Booking::query()->where('user_id', $id)->get();
+        $list_booking = Booking::where('user_id', $id)->get();
         return view('client.booking_history.index', compact('list_booking'));
     }
 
@@ -179,7 +180,7 @@ class BookingController extends Controller
         $servicesNotInBooking = Service::whereDoesntHave('booking_details', function ($query) use ($id) {
             $query->where('booking_id', $id);
         })->get();
-        return view('client.booking_history.edit', compact('item', 'id_user','servicesNotInBooking'));
+        return view('client.booking_history.edit', compact('item', 'id_user', 'servicesNotInBooking'));
     }
 
     /**
@@ -210,27 +211,34 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, string $id)
     {
-        $id = $request->input('id');
         $phone = $request->input('phone');
         $booking = Booking::query()->findOrFail($id);
-
         if ($booking->status === 'pending') {
             $user = auth()->user();
 
             if ($user->phone === $phone) {
-                $booking->status = 'canceled'; 
+                $booking->status = 'canceled';
                 $booking->save();
                 toastr()->success('Hủy đơn thành công');
-                return redirect()->back();
+                return response()->json(['success' => true]);
             } else {
                 toastr()->error('Hủy đơn không thành công');
-                return redirect()->back();
+                return response()->json(['success' => false]);
+
+            }
+            $bookingOld = Booking::query()->findOrFail($id);
+            if ($bookingOld->status == "canceled") {
+                $timeSelected = Time::where('time', $bookingOld->time)->first();
+                $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
+                $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
+                    ->where('work_schedule_details.time_id', $timeSelected->id)
+                    ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
             }
         } else {
             toastr()->error('Thao tác không khớp');
-                return redirect()->back();
+            return response()->json(['success' => false]);
         }
     }
 }

@@ -8,13 +8,13 @@
             <div class="book-on">
                 <h4 itemprop="headline">MY APPOINTMENT</h4>
                 <!--  <div class="select-wrap-inner">
-                                     <select class="form-control">
-                                           <option>Default select</option>
-                                      </select>
-                                      <select class="form-control">
-                                           <option>Default select</option>
-                                      </select>
-                                 </div> -->
+                                         <select class="form-control">
+                                               <option>Default select</option>
+                                          </select>
+                                          <select class="form-control">
+                                               <option>Default select</option>
+                                          </select>
+                                     </div> -->
             </div>
             <div class="booking-table">
                 <table>
@@ -32,7 +32,7 @@
                         @foreach ($list_booking as $booking)
                             <tr>
                                 <td>{{ $booking->admin->username }}</td>
-                                <td>{{ number_format($booking->promotion->discount) }}</td>
+                                <td>{{ $booking->promotion->discount ?? '' }}</td>
                                 <td><span>{{ number_format($booking->total_price) }}</span> <a class="detail-link brd-rd50"
                                         href="javascript:void(0)" title="" itemprop="url"><i
                                             class="fa fa-chain"></i></a></td>
@@ -58,22 +58,23 @@
                                     </a>
                                     @if ($booking->status == 'pending')
                                         <div class="mb-4 mt-2">
-                                            <a data-toggle="modal" data-target="#modaldelete">
+                                            <a data-toggle="modal" data-target="#modaldelete{{$booking->id}}"
+                                                >
                                                 <button
                                                     style="width: 130px;  height: 40px; background-color: #fa0000; border: unset!important; border-radius: unset !important; color: white">
                                                     Hủy Đặt
                                                 </button>
                                             </a>
                                         </div>
-                                        <!-- Modal -->
                                         @include('client.booking_history.modalCancel')
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            
 @endsection
