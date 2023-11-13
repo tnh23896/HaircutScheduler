@@ -53,7 +53,7 @@
                         <a data-toggle="modal" data-target=".modal{{ $booking->id }}" href="javascript:void(0)"
                             title="" itemprop="url">
                             <button class="text-center"
-                            style="width: 100px;
+                                style="width: 100px;
                             height: 30px;
                             color: white;
                             background-color: #d9842f;
@@ -64,17 +64,43 @@
                         </a>
                         <br>
                         @if ($booking->status == 'pending')
-                            <a href="">
-                                <button class="text-center mt-2"
-                                    style="width: 100px;
-                                           height: 30px;
-                                           color: white;
-                                           border:none;
-                                           background-color: rgb(185, 49, 49);
-                                           font-size: 13px;">
-                                    Hủy lịch
-                                </button>
-                            </a>
+                            @if ($booking)
+                                @php
+                                    $ngay = \Carbon\Carbon::parse($booking->day)->format('Y-m-d');
+                                    $gio = \Carbon\Carbon::parse($booking->time)->format('H:i');
+
+                                    // Gộp ngày và giờ thành một chuỗi datetime
+                                    $ngayGioHopNhat = $ngay . ' ' . $gio;
+
+                                    // Tạo đối tượng Carbon từ chuỗi datetime
+                                    $ngayGioCarbon = \Carbon\Carbon::parse($ngayGioHopNhat);
+
+                                    // Lấy ngày hiện tại
+                                    $ngayHienTai = \Carbon\Carbon::now();
+
+                                    // Tính thời gian giữa thời điểm đặt lịch và thời gian hiện tại trong đơn vị phút
+                                    $thoiGianDenHienTai = $ngayGioCarbon->diffInHours($ngayHienTai);
+                                    $ngayDatLichLonHonNgayHienTai = $ngayGioCarbon->gt($ngayHienTai);
+                                @endphp
+                                {{-- @dd($thoiGianDenHienTai); --}}
+                                @if ($thoiGianDenHienTai >=24 && $ngayDatLichLonHonNgayHienTai)
+                                    {{-- Hiển thị nút hủy --}}
+                                    <a data-toggle="modal" data-target="#modaldelete{{ $booking->id }}">
+                                        <button class="text-center mt-2"
+                                            style="width: 100px;
+                                               height: 30px;
+                                               color: white;
+                                               border:none;
+                                               background-color: rgb(185, 49, 49);
+                                               font-size: 13px;">
+                                            Hủy lịch
+                                        </button>
+                                    </a>
+                                    @include('client.booking_history.modalCancel')
+                                @else
+                                    <p>Không thể hủy lịch do đã qua thời gian cho phép.</p>
+                                @endif
+                            @endif
                         @endif
                     </td>
                 </tr>
