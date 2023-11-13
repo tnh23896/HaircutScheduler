@@ -7,9 +7,12 @@ use App\Models\Bill;
 use App\Models\Time;
 use App\Models\User;
 use App\Models\Admin;
+use App\Mail\Mail_bill;
 use App\Models\Booking;
 use App\Models\Service;
 use App\Models\Promotion;
+use App\Jobs\SendMailBill;
+use App\Models\BillDetail;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use App\Models\BookingDetail;
@@ -18,6 +21,7 @@ use App\Models\CategoryService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\Admin\ScheduleManagement\StoreRequest;
 use App\Http\Requests\Admin\ScheduleManagement\UpdateRequest;
@@ -311,7 +315,7 @@ class ScheduleController extends Controller
                 ->groupBy('day')
                 ->pluck('day');
 
-            // Lấy danh sách nhân viên có lịch trong 3 ngày tới 
+            // Lấy danh sách nhân viên có lịch trong 3 ngày tới
             $staffMembers = Admin::with('work_schedules')
                 ->whereHas('work_schedules', function ($query) use ($startDate, $endDateForWorkSchedule) {
                     $query->whereBetween('day', [$startDate, $endDateForWorkSchedule]);
@@ -436,18 +440,20 @@ class ScheduleController extends Controller
                     'day' => $data->day,
                     'time' => $data->time,
                 ]);
+              
                 foreach ($data->booking_details as $item) {
-                    if ($item->status == "cancel" && $item->deleted_at === null) {
-                        $bill->bill_details()->create([
+                    if ($item->status == "success" ) {
+                        $bill_detail = $bill->bill_details()->create([
                             'service_id' => $item->service_id,
                             'name' => $item->name,
                             'price' => $item->price,
                             'admin_id' => $item->admin_id,
                             'bill_id' => $bill->id,
-                            
-                        ]);
+                        ]);  
                     }
                 }
+                $bill_detail = BillDetail::where('bill_id',$bill->id )->get();
+                SendMailBill::dispatch($bill, $bill_detail );
             }
             $dataOld = Booking::query()->findOrFail($id);
             if ($dataOld->status == "canceled") {
@@ -457,15 +463,14 @@ class ScheduleController extends Controller
                     ->where('work_schedule_details.time_id', $timeSelected->id)
                     ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
             }
-            return response()->json([
-                'status' => 200,
+            return response()->json([       
                 'success' => 'Cập nhật trạng thái đặt lịch thành công',
             ]);
         } catch (\Exception $exception) {
             return response()->json([
-                'status' => 500,
-                'success' => 'Cập nhật trạng thái lịch đặt thất bại'
-            ]);
+                'error' => 'Cập nhật trạng thái lịch đặt thất bại',
+                'message' => $exception->getMessage()
+            ], 500);
         }
     }
 

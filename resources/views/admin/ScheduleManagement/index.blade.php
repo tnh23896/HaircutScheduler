@@ -216,11 +216,13 @@
                             if (response.success) {
                                 toastr.success(response.success);
                                 location.reload();
+                                console.log(response);
                             }
                         },
 
                         function(error) {
                             showErrors(error);
+                            console.log(error);
                         }
                     );
                 } else {

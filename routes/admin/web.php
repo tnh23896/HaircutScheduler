@@ -68,7 +68,15 @@ Route::get('404', function () {
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('/schedule-set-by-time', [DashboardController::class, 'scheduleSetbyTime'])->name('admin.scheduleSetbyTime');
+    Route::post('/top-booker', [DashboardController::class, 'topBooker'])->name('admin.topBooker');
 
+	  // Thông kê lịch đặt
+    Route::post('/schedule-set-by-time', [DashboardController::class, 'scheduleSetbyTime'])->name('admin.scheduleSetbyTime'); 
+
+	  // Thông kê doanh thu
+		Route::post('/revenue-set-by-time', [DashboardController::class, 'revenueSetbyTime'])->name('admin.revenueSetbyTime');
+		
     // Logout
     Route::get('logout', [LoginController::class, 'logout'])
         ->name('admin.auth.logout');
@@ -159,6 +167,9 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.billManagement.search');
     Route::get('search-datetime-bill', [BillController::class, 'searchByDateandTime'])
         ->name('admin.billManagement.searchDateTime');
+    Route::get('print-bill/{id}', [BillController::class, 'printBill'])
+        ->name('admin.billManagement.printBill');
+    
 
 
     // Banner

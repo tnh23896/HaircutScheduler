@@ -140,7 +140,7 @@
                 <div class="page-header text-blue-d2 justify-content-end">
                     <div class="page-tools">
                         <div class="action-buttons">
-                            <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
+                            <a class="btn bg-white btn-light mx-1px text-95" href="{{ route('print.bill', $bill->id) }}" data-title="Print">
                                 Tải về
                             </a>
                         </div>
