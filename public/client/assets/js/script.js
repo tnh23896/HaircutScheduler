@@ -72,7 +72,7 @@ $(document).ready(function(){
               dots: false
             }
           },
-           
+
           {
             breakpoint: 600,
             settings: {
@@ -97,7 +97,7 @@ $(document).ready(function(){
       slidesToShow: 5,
       slidesToScroll: 1,
       arrows: true,
-      
+
       centerPadding: '70px',
       autoplay: false,
       autoplayspeed:2000,
@@ -142,7 +142,7 @@ $(document).ready(function(){
       slidesToShow: 5,
       slidesToScroll: 1,
       arrows: true,
-      
+
       centerPadding: '70px',
       autoplay: false,
       autoplayspeed:2000,
@@ -223,7 +223,7 @@ $(document).ready(function(){
           delay: 10,
         });
 
-    // responsive menu 
+    // responsive menu
 
     $(".navbar-toggler").click(function(){
       $(".nav-top .nav-menu").css({"width" : "300px" });
@@ -233,7 +233,7 @@ $(document).ready(function(){
     });
 
     //popups
-    
+
        $("#popups").click(function(){
       $(".popup-items").css({"transform" : "translateX(0%)" });
     });
@@ -263,5 +263,4 @@ $(document).ready(function(){
         left: 0,
         behavior: 'smooth'
         });
-        })  
-    
+        })

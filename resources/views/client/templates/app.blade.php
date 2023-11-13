@@ -85,7 +85,8 @@
                         console.log($(form).closest('#modalAuth').eq(1));
                         if ($(form).closest('#modalAuth').length) {
                             toastr.success("Xác thực thành công");
-                            $('#modalAuth').modal('hide');
+                            location.reload();  
+                            
                         } else {
                             toastr.success("Xác thực thành công");
                             const user = response.data;

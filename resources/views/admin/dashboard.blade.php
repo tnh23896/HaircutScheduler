@@ -60,8 +60,8 @@
                                             stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card"
                                             data-lucide="credit-card"
                                             class="lucide lucide-credit-card report-box__icon text-pending">
-                                            <rect x="1" y="4" width="22" height="16" rx="2"
-                                                ry="2"></rect>
+                                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2">
+                                            </rect>
                                             <line x1="1" y1="10" x2="23" y2="10"></line>
                                         </svg>
                                         <div class="ml-auto">
@@ -89,8 +89,8 @@
                                             stroke-linecap="round" stroke-linejoin="round" icon-name="monitor"
                                             data-lucide="monitor"
                                             class="lucide lucide-monitor report-box__icon text-warning">
-                                            <rect x="2" y="3" width="20" height="14"
-                                                rx="2" ry="2"></rect>
+                                            <rect x="2" y="3" width="20" height="14" rx="2"
+                                                ry="2"></rect>
                                             <line x1="8" y1="21" x2="16" y2="21"></line>
                                             <line x1="12" y1="17" x2="12" y2="21"></line>
                                         </svg>
@@ -151,8 +151,7 @@
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" icon-name="calendar" data-lucide="calendar"
                                 class="lucide lucide-calendar w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
-                                <rect x="3" y="4" width="18" height="18" rx="2"
-                                    ry="2"></rect>
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                 <line x1="16" y1="2" x2="16" y2="6"></line>
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
@@ -206,7 +205,7 @@
                 </div>
                 <!-- END: Sales Report -->
                 <!-- BEGIN: Weekly Top Seller -->
-                <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
+                <div class="col-span-12 sm:col-span-6 lg:col-span-6 mt-8">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
                             Weekly Top Seller
@@ -240,279 +239,53 @@
                     </div>
                 </div>
                 <!-- END: Weekly Top Seller -->
-                <!-- BEGIN: Sales Report -->
-                <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
-                    <div class="intro-y flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5">
-                            Sales Report
-                        </h2>
-                        <a href="#" class="ml-auto text-primary truncate">Show More</a>
-                    </div>
-                    <div class="intro-y box p-5 mt-5">
-                        <div class="mt-3">
-                            <div class="h-[213px]">
-                                <canvas id="report-donut-chart" width="203" height="266"
-                                    style="display: block; box-sizing: border-box; height: 212.8px; width: 162.4px;"></canvas>
-                            </div>
-                        </div>
-                        <div class="w-52 sm:w-auto mx-auto mt-8">
-                            <div class="flex items-center">
-                                <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                <span class="truncate">17 - 30 Years old</span> <span
-                                    class="font-medium ml-auto">62%</span>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <div class="w-2 h-2 bg-pending rounded-full mr-3"></div>
-                                <span class="truncate">31 - 50 Years old</span> <span
-                                    class="font-medium ml-auto">33%</span>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <div class="w-2 h-2 bg-warning rounded-full mr-3"></div>
-                                <span class="truncate">&gt;= 50 Years old</span> <span
-                                    class="font-medium ml-auto">10%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Sales Report -->
                 <!-- BEGIN: Official Store -->
                 <div class="col-span-12 xl:col-span-8 mt-6">
-                    <div class="intro-y block sm:flex items-center h-10">
+                    <div class="col-span-12 lg:col-span-6">
+                        <!-- BEGIN: Vertical Bar Chart -->
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Official Store
+                            Thống kê lịch đặt
                         </h2>
-                        <div class="sm:ml-auto mt-3 sm:mt-0 relative text-slate-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" icon-name="map-pin" data-lucide="map-pin"
-                                class="lucide lucide-map-pin w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <input type="text" class="form-control sm:w-56 box pl-10" placeholder="Filter by city">
-                        </div>
-                    </div>
-                    <div class="intro-y box p-5 mt-12 sm:mt-5">
-                        <div>250 Official stores in 21 countries, click the marker to see location details.</div>
-                        <div class="report-maps mt-5 bg-slate-200 rounded-md leaflet [&amp;_.leaflet-tile-pane]:grayscale [&amp;_.leaflet-tile-pane]:invert [&amp;_.leaflet-tile-pane]:brightness-90 [&amp;_.leaflet-tile-pane]:hue-rotate-15 leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
-                            data-center="-6.2425342, 106.8626478" data-sources="/dist/json/location.json" tabindex="0"
-                            style="position: relative;">
-                            <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
-                                <div class="leaflet-pane leaflet-tile-pane">
-                                    <div class="leaflet-layer " style="z-index: 1; opacity: 1;">
-                                        <div class="leaflet-tile-container leaflet-zoom-animated"
-                                            style="z-index: 18; transform: translate3d(0px, 0px, 0px) scale(1);"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/407/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(18px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/408/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(274px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/407/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(18px, 182px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/408/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(274px, 182px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/406/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(-238px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/409/264@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(530px, -74px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/406/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(-238px, 182px, 0px); opacity: 1;"><img
-                                                alt=""
-                                                src="https://tile.thunderforest.com/atlas/9/409/265@2x.png?apikey=1e86fd5a7f60486a8e899411776f60d5"
-                                                class="leaflet-tile leaflet-tile-loaded"
-                                                style="width: 256px; height: 256px; transform: translate3d(530px, 182px, 0px); opacity: 1;">
-                                        </div>
+                        <div class="intro-y box p-5 mt-12 sm:mt-5">
+                            <div class="">
+                                <form id="filterForm" method="POST">
+                                    @csrf
+                                    <div class="flex justify-end">
+                                        <select name="month" id="month" class="tom-select w-full tomselected mx-3">
+                                            <option value="0" selected="true" class="w-96">Chọn tháng</option>
+                                            @for ($i = 1; $i <= 12; $i++)
+                                                <option value="{{ $i }}">Tháng {{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                        <select name="year" id="year" class="tom-select w-full tomselected mx-3">
+                                            <option value="0" selected="true" class="w-96">Chọn năm</option>
+                                            @for ($year = 1990; $year <= 2030; $year++)
+                                                <option value="{{ $year }}">Năm {{ $year }}</option>
+                                            @endfor
+                                        </select>
+                                        <button type="button" id="saveFilter" class="btn btn-secondary mr-1 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                icon-name="filter" data-lucide="filter"
+                                                class="lucide lucide-filter block mx-auto">
+                                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                            </svg>
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="leaflet-pane leaflet-overlay-pane"></div>
-                                <div class="leaflet-pane leaflet-shadow-pane"></div>
-                                <div class="leaflet-pane leaflet-marker-pane"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 15" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(495px, 216px, 0px); z-index: 216;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 16" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(352px, 166px, 0px); z-index: 166;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 52" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(264px, 313px, 0px); z-index: 313;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 55" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(880px, 332px, 0px); z-index: 332;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 56" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(-13px, 79px, 0px); z-index: 79;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 58" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(767px, 550px, 0px); z-index: 550;">
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(216px, 184px, 0px); z-index: 184;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 91" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(314px, 172px, 0px); z-index: 172;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 97" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(5px, 105px, 0px); z-index: 105;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 110" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(643px, 501px, 0px); z-index: 501;"><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 131" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(258px, 213px, 0px); z-index: 213;">
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(270px, 247px, 0px); z-index: 247;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(411px, 166px, 0px); z-index: 166;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(285px, 125px, 0px); z-index: 125;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                5</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(541px, 410px, 0px); z-index: 410;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(209px, 124px, 0px); z-index: 124;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                4</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div><img
-                                        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMS4wNjMiIHZpZXdCb3g9IjAgMCAyMCAzMS4wNjMiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTYiIGRhdGEtbmFtZT0iR3JvdXAgMTYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00MDggLTE1MC4wMDEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IlN1YnRyYWN0aW9uXzIxIiBkYXRhLW5hbWU9IlN1YnRyYWN0aW9uIDIxIiBkPSJNMTAsMzEuMDY0aDBMMS40NjIsMTUuMjA4QTEwLDEwLDAsMSwxLDIwLDEwYTkuOSw5LjksMCwwLDEtMS4wNzgsNC41MjJsLS4wNTYuMTA4Yy0uMDM3LjA3MS0uMDc3LjE0Ni0uMTIxLjIyM0wxMCwzMS4wNjJaTTEwLDJhOCw4LDAsMSwwLDgsOCw4LDgsMCwwLDAtOC04WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDA4IDE1MCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJFbGxpcHNlXzI2IiBkYXRhLW5hbWU9IkVsbGlwc2UgMjYiIGN4PSI2IiBjeT0iNiIgcj0iNiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDEyIDE1NCkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAxKSIvPgogICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAg"
-                                        class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        title="Official Store 147" alt="Marker" tabindex="0" role="button"
-                                        style="margin-left: -10px; margin-top: -35px; transform: translate3d(272px, 175px, 0px); z-index: 175;">
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(618px, 421px, 0px); z-index: 421;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(493px, 374px, 0px); z-index: 374;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                    <div class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive"
-                                        tabindex="0" role="button"
-                                        style="margin-left: -20px; margin-top: -45px; width: 42px; height: 42px; transform: translate3d(148px, 144px, 0px); z-index: 144;">
-                                        <div class="relative w-full h-full">
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center ml-1.5 mb-0.5 font-medium text-white">
-                                                2</div>
-                                            <img class="w-full h-full"
-                                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NS4wNjYiIGhlaWdodD0iNDcuNjkxIiB2aWV3Qm94PSIwIDAgNTUuMDY2IDQ3LjY5MSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTUiIGRhdGEtbmFtZT0iR3JvdXAgMTUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTkuNDY3IC04My45OTEpIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTQiIGRhdGEtbmFtZT0iR3JvdXAgMTQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGlkPSJJbnRlcnNlY3Rpb25fNCIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82IiBkYXRhLW5hbWU9IkludGVyc2VjdGlvbiA2IiBkPSJNNy45ODIsMTAuN2EyMi45NzgsMjIuOTc4LDAsMCwxLDMwLjMxMywwbC0yLDIuNjc5YTE5LjY1MiwxOS42NTIsMCwwLDAtMjYuMzE2LDBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjMuODYxIDc4Ljk5OSkiIGZpbGw9InJnYig3NCA5MCAxMjEgLyAwLjYpIiBvcGFjaXR5PSIwLjQ1MyIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZyBpZD0iR3JvdXBfMTMiIGRhdGEtbmFtZT0iR3JvdXAgMTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQyNy44MDYgNDYxLjA2MSkgcm90YXRlKC0xMjApIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzQtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNCIgZD0iTTEyLjc4OSwxNy4xNDNhMTUsMTUsMCwwLDEsMjAuNywwbC0xLjYsMi4xNDEtLjAxOC0uMDE4YTEyLjM1MiwxMi4zNTIsMCwwLDAtMTcuNDY5LDBsLS4wMTguMDE4WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC44NDUiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzUtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNSIgZD0iTTEwLjM4NCwxMy45MTlhMTksMTksMCwwLDEsMjUuNTExLDBsLTIuMDE2LDIuN2ExNS42NDcsMTUuNjQ3LDAsMCwwLTIxLjQ3OSwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC42NTIiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBpZD0iSW50ZXJzZWN0aW9uXzYtMiIgZGF0YS1uYW1lPSJJbnRlcnNlY3Rpb24gNiIgZD0iTTcuOTgyLDEwLjdhMjIuOTc4LDIyLjk3OCwwLDAsMSwzMC4zMTMsMGwtMiwyLjY3OWExOS42NTIsMTkuNjUyLDAsMCwwLTI2LjMxNiwwWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIzLjg2MSA3OC45OTkpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIgb3BhY2l0eT0iMC40NTMiLz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iRWxsaXBzZV85IiBkYXRhLW5hbWU9IkVsbGlwc2UgOSIgY3g9IjExIiBjeT0iMTEiIHI9IjExIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMzYgOTYpIiBmaWxsPSJyZ2IoNzQgOTAgMTIxIC8gMC42KSIvPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxnIGlkPSJHcm91cF8xMiIgZGF0YS1uYW1lPSJHcm91cCAxMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjEzLjE5NCAtMTM5Ljk2KSByb3RhdGUoMTIwKSI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl80LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDQiIGQ9Ik0xMi43ODksMTcuMTQzYTE1LDE1LDAsMCwxLDIwLjcsMGwtMS42LDIuMTQxLS4wMTgtLjAxOGExMi4zNTIsMTIuMzUyLDAsMCwwLTE3LjQ2OSwwbC0uMDE4LjAxOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuODQ1Ii8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl81LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDUiIGQ9Ik0xMC4zODQsMTMuOTE5YTE5LDE5LDAsMCwxLDI1LjUxMSwwbC0yLjAxNiwyLjdhMTUuNjQ3LDE1LjY0NywwLDAsMC0yMS40NzksMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNjUyIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggaWQ9IkludGVyc2VjdGlvbl82LTMiIGRhdGEtbmFtZT0iSW50ZXJzZWN0aW9uIDYiIGQ9Ik03Ljk4MiwxMC43YTIyLjk3OCwyMi45NzgsMCwwLDEsMzAuMzEzLDBsLTIsMi42NzlhMTkuNjUyLDE5LjY1MiwwLDAsMC0yNi4zMTYsMFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyMy44NjEgNzguOTk5KSIgZmlsbD0icmdiKDc0IDkwIDEyMSAvIDAuNikiIG9wYWNpdHk9IjAuNDUzIi8+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgIA==">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="leaflet-pane leaflet-tooltip-pane"></div>
-                                <div class="leaflet-pane leaflet-popup-pane"></div>
-                                <div class="leaflet-proxy leaflet-zoom-animated"></div>
+                                </form>
                             </div>
-                            <div class="leaflet-control-container">
-                                <div class="leaflet-top leaflet-left">
-                                    <div class="leaflet-control-zoom leaflet-bar leaflet-control"><a
-                                            class="leaflet-control-zoom-in" href="#" title="Zoom in"
-                                            role="button" aria-label="Zoom in" aria-disabled="false"><span
-                                                aria-hidden="true">+</span></a><a class="leaflet-control-zoom-out"
-                                            href="#" title="Zoom out" role="button" aria-label="Zoom out"
-                                            aria-disabled="false"><span aria-hidden="true">−</span></a></div>
-                                </div>
-                                <div class="leaflet-top leaflet-right"></div>
-                                <div class="leaflet-bottom leaflet-left"></div>
-                                <div class="leaflet-bottom leaflet-right">
-                                    <div class="leaflet-control-attribution leaflet-control"><a
-                                            href="https://leafletjs.com"
-                                            title="A JavaScript library for interactive maps"><svg aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="12" height="8"
-                                                viewBox="0 0 12 8" class="leaflet-attribution-flag">
-                                                <path fill="#4C7BE1" d="M0 0h12v4H0z"></path>
-                                                <path fill="#FFD500" d="M0 4h12v3H0z"></path>
-                                                <path fill="#E0BC00" d="M0 7h12v1H0z"></path>
-                                            </svg> Leaflet</a> <span aria-hidden="true">|</span> Map data © OpenStreetMap
-                                        contributors, Tiles © Thunderforest</div>
+                            <div id="vertical-bar-chart" class="p-5">
+                                <div class="preview">
+                                    <div class="h-[400px]">
+                                        <canvas id="vertical-bar-chart-widget"
+                                            data-filtered-data="{{ json_encode($data) }}">
+                                        </canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- END: Vertical Bar Chart -->
                     </div>
                 </div>
                 <!-- END: Official Store -->
@@ -586,80 +359,6 @@
                     </div>
                 </div>
                 <!-- END: Weekly Best Sellers -->
-                <!-- BEGIN: General Report -->
-                <div class="col-span-12 grid grid-cols-12 gap-6 mt-8">
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex items-center">
-                                <div class="w-2/4 flex-none">
-                                    <div class="text-lg font-medium truncate">Target Sales</div>
-                                    <div class="text-slate-500 mt-1">300 Sales</div>
-                                </div>
-                                <div class="flex-none ml-auto relative">
-                                    <div class="w-[90px] h-[90px]">
-                                        <canvas id="report-donut-chart-1" width="112" height="112"
-                                            style="display: block; box-sizing: border-box; height: 89.6px; width: 89.6px;"></canvas>
-                                    </div>
-                                    <div
-                                        class="font-medium absolute w-full h-full flex items-center justify-center top-0 left-0">
-                                        20%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex">
-                                <div class="text-lg font-medium truncate mr-3">Social Media</div>
-                                <div
-                                    class="py-1 px-2 flex items-center rounded-full text-xs bg-slate-100 dark:bg-darkmode-400 text-slate-500 cursor-pointer ml-auto truncate">
-                                    320 Followers</div>
-                            </div>
-                            <div class="mt-1">
-                                <div class="h-[58px]">
-                                    <canvas class="simple-line-chart-1 -ml-1" width="208" height="72"
-                                        style="display: block; box-sizing: border-box; height: 57.6px; width: 166.4px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex items-center">
-                                <div class="w-2/4 flex-none">
-                                    <div class="text-lg font-medium truncate">New Products</div>
-                                    <div class="text-slate-500 mt-1">1450 Products</div>
-                                </div>
-                                <div class="flex-none ml-auto relative">
-                                    <div class="w-[90px] h-[90px]">
-                                        <canvas id="report-donut-chart-2" width="112" height="112"
-                                            style="display: block; box-sizing: border-box; height: 89.6px; width: 89.6px;"></canvas>
-                                    </div>
-                                    <div
-                                        class="font-medium absolute w-full h-full flex items-center justify-center top-0 left-0">
-                                        45%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
-                        <div class="box p-5 zoom-in">
-                            <div class="flex">
-                                <div class="text-lg font-medium truncate mr-3">Posted Ads</div>
-                                <div
-                                    class="py-1 px-2 flex items-center rounded-full text-xs bg-slate-100 dark:bg-darkmode-400 text-slate-500 cursor-pointer ml-auto truncate">
-                                    180 Campaign</div>
-                            </div>
-                            <div class="mt-1">
-                                <div class="h-[58px]">
-                                    <canvas class="simple-line-chart-1 -ml-1" width="208" height="72"
-                                        style="display: block; box-sizing: border-box; height: 57.6px; width: 166.4px;"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: General Report -->
                 <!-- BEGIN: Weekly Top Products -->
                 <div class="col-span-12 mt-6">
                     <div class="intro-y block sm:flex items-center h-10">
@@ -1015,407 +714,6 @@
                     </div>
                 </div>
                 <!-- END: Weekly Top Products -->
-            </div>
-        </div>
-        <div class="col-span-12 2xl:col-span-3">
-            <div class="2xl:border-l -mb-10 pb-10">
-                <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
-                    <!-- BEGIN: Transactions -->
-                    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3 2xl:mt-8">
-                        <div class="intro-x flex items-center h-10">
-                            <h2 class="text-lg font-medium truncate mr-5">
-                                Transactions
-                            </h2>
-                        </div>
-                        <div class="mt-5">
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-9.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Kevin Spacey</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">27 June 2020</div>
-                                    </div>
-                                    <div class="text-success">+$30</div>
-                                </div>
-                            </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-5.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Angelina Jolie</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">28 June 2020</div>
-                                    </div>
-                                    <div class="text-success">+$50</div>
-                                </div>
-                            </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-8.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Angelina Jolie</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">17 December 2022</div>
-                                    </div>
-                                    <div class="text-success">+$28</div>
-                                </div>
-                            </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-2.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Al Pacino</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">16 July 2021</div>
-                                    </div>
-                                    <div class="text-success">+$156</div>
-                                </div>
-                            </div>
-                            <div class="intro-x">
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-11.jpg">
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">Robert De Niro</div>
-                                        <div class="text-slate-500 text-xs mt-0.5">9 February 2021</div>
-                                    </div>
-                                    <div class="text-success">+$33</div>
-                                </div>
-                            </div>
-                            <a href="#"
-                                class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View
-                                More</a>
-                        </div>
-                    </div>
-                    <!-- END: Transactions -->
-                    <!-- BEGIN: Recent Activities -->
-                    <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3">
-                        <div class="intro-x flex items-center h-10">
-                            <h2 class="text-lg font-medium truncate mr-5">
-                                Recent Activities
-                            </h2>
-                            <a href="#" class="ml-auto text-primary truncate">Show More</a>
-                        </div>
-                        <div
-                            class="mt-5 relative before:block before:absolute before:w-px before:h-[85%] before:bg-slate-200 before:dark:bg-darkmode-400 before:ml-5 before:mt-5">
-                            <div class="intro-x relative flex items-center mb-3">
-                                <div
-                                    class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-5.jpg">
-                                    </div>
-                                </div>
-                                <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Morgan Freeman</div>
-                                        <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
-                                    </div>
-                                    <div class="text-slate-500 mt-1">Has joined the team</div>
-                                </div>
-                            </div>
-                            <div class="intro-x relative flex items-center mb-3">
-                                <div
-                                    class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-12.jpg">
-                                    </div>
-                                </div>
-                                <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Denzel Washington</div>
-                                        <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
-                                    </div>
-                                    <div class="text-slate-500">
-                                        <div class="mt-1">Added 3 new photos</div>
-                                        <div class="flex mt-2">
-                                            <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in">
-                                                <img alt="Midone - HTML Admin Template"
-                                                    class="rounded-md border border-white"
-                                                    src="dist/images/preview-1.jpg">
-                                            </div>
-                                            <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in">
-                                                <img alt="Midone - HTML Admin Template"
-                                                    class="rounded-md border border-white"
-                                                    src="dist/images/preview-2.jpg">
-                                            </div>
-                                            <div class="tooltip w-8 h-8 image-fit mr-1 zoom-in">
-                                                <img alt="Midone - HTML Admin Template"
-                                                    class="rounded-md border border-white"
-                                                    src="dist/images/preview-3.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="intro-x text-slate-500 text-xs text-center my-4">12 November</div>
-                            <div class="intro-x relative flex items-center mb-3">
-                                <div
-                                    class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-7.jpg">
-                                    </div>
-                                </div>
-                                <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Kate Winslet</div>
-                                        <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
-                                    </div>
-                                    <div class="text-slate-500 mt-1">Has changed <a class="text-primary"
-                                            href="#">Nike Tanjun</a> price and description</div>
-                                </div>
-                            </div>
-                            <div class="intro-x relative flex items-center mb-3">
-                                <div
-                                    class="before:block before:absolute before:w-20 before:h-px before:bg-slate-200 before:dark:bg-darkmode-400 before:mt-5 before:ml-5">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden">
-                                        <img alt="Midone - HTML Admin Template" src="dist/images/profile-13.jpg">
-                                    </div>
-                                </div>
-                                <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                    <div class="flex items-center">
-                                        <div class="font-medium">Morgan Freeman</div>
-                                        <div class="text-xs text-slate-500 ml-auto">07:00 PM</div>
-                                    </div>
-                                    <div class="text-slate-500 mt-1">Has changed <a class="text-primary"
-                                            href="#">Nike Tanjun</a> description</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END: Recent Activities -->
-                    <!-- BEGIN: Important Notes -->
-                    <div
-                        class="col-span-12 md:col-span-6 xl:col-span-12 xl:col-start-1 xl:row-start-1 2xl:col-start-auto 2xl:row-start-auto mt-3">
-                        <div class="intro-x flex items-center h-10">
-                            <h2 class="text-lg font-medium truncate mr-auto">
-                                Important Notes
-                            </h2>
-                            <button data-carousel="important-notes" data-target="prev"
-                                class="tiny-slider-navigator btn px-2 border-slate-300 text-slate-600 dark:text-slate-300 mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-left"
-                                    data-lucide="chevron-left" class="lucide lucide-chevron-left w-4 h-4">
-                                    <polyline points="15 18 9 12 15 6"></polyline>
-                                </svg> </button>
-                            <button data-carousel="important-notes" data-target="next"
-                                class="tiny-slider-navigator btn px-2 border-slate-300 text-slate-600 dark:text-slate-300 mr-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-right"
-                                    data-lucide="chevron-right" class="lucide lucide-chevron-right w-4 h-4">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg> </button>
-                        </div>
-                        <div class="mt-5 intro-x">
-                            <div class="box zoom-in">
-                                <div class="tns-outer" id="important-notes-ow"><button type="button"
-                                        data-action="stop"><span class="tns-visually-hidden">stop
-                                            animation</span>stop</button>
-                                    <div class="tns-liveregion tns-visually-hidden" aria-live="polite"
-                                        aria-atomic="true">slide <span class="current">3</span> of 3</div>
-                                    <div id="important-notes-mw" class="tns-ovh">
-                                        <div class="tns-inner" id="important-notes-iw">
-                                            <div class="tiny-slider  tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal"
-                                                id="important-notes" style="transform: translate3d(-40%, 0px, 0px);">
-                                                <div class="p-5 tns-item tns-slide-cloned" aria-hidden="true"
-                                                    tabindex="-1">
-                                                    <div class="text-base font-medium truncate">Lorem Ipsum is simply
-                                                        dummy text</div>
-                                                    <div class="text-slate-400 mt-1">20 Hours ago</div>
-                                                    <div class="text-slate-500 text-justify mt-1">Lorem Ipsum is simply
-                                                        dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                                        been the industry's standard dummy text ever since the 1500s.</div>
-                                                    <div class="font-medium flex mt-5">
-                                                        <button type="button" class="btn btn-secondary py-1 px-2">View
-                                                            Notes</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary py-1 px-2 ml-auto ml-auto">Dismiss</button>
-                                                    </div>
-                                                </div>
-                                                <div class="p-5 tns-item" id="important-notes-item0"
-                                                    aria-hidden="true" tabindex="-1">
-                                                    <div class="text-base font-medium truncate">Lorem Ipsum is simply
-                                                        dummy text</div>
-                                                    <div class="text-slate-400 mt-1">20 Hours ago</div>
-                                                    <div class="text-slate-500 text-justify mt-1">Lorem Ipsum is simply
-                                                        dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                                        been the industry's standard dummy text ever since the 1500s.</div>
-                                                    <div class="font-medium flex mt-5">
-                                                        <button type="button" class="btn btn-secondary py-1 px-2">View
-                                                            Notes</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary py-1 px-2 ml-auto ml-auto">Dismiss</button>
-                                                    </div>
-                                                </div>
-                                                <div class="p-5 tns-item tns-slide-active" id="important-notes-item1">
-                                                    <div class="text-base font-medium truncate">Lorem Ipsum is simply
-                                                        dummy text</div>
-                                                    <div class="text-slate-400 mt-1">20 Hours ago</div>
-                                                    <div class="text-slate-500 text-justify mt-1">Lorem Ipsum is simply
-                                                        dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                                        been the industry's standard dummy text ever since the 1500s.</div>
-                                                    <div class="font-medium flex mt-5">
-                                                        <button type="button" class="btn btn-secondary py-1 px-2">View
-                                                            Notes</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary py-1 px-2 ml-auto ml-auto">Dismiss</button>
-                                                    </div>
-                                                </div>
-                                                <div class="p-5 tns-item" id="important-notes-item2"
-                                                    aria-hidden="true" tabindex="-1">
-                                                    <div class="text-base font-medium truncate">Lorem Ipsum is simply
-                                                        dummy text</div>
-                                                    <div class="text-slate-400 mt-1">20 Hours ago</div>
-                                                    <div class="text-slate-500 text-justify mt-1">Lorem Ipsum is simply
-                                                        dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                                        been the industry's standard dummy text ever since the 1500s.</div>
-                                                    <div class="font-medium flex mt-5">
-                                                        <button type="button" class="btn btn-secondary py-1 px-2">View
-                                                            Notes</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary py-1 px-2 ml-auto ml-auto">Dismiss</button>
-                                                    </div>
-                                                </div>
-                                                <div class="p-5 tns-item tns-slide-cloned" aria-hidden="true"
-                                                    tabindex="-1">
-                                                    <div class="text-base font-medium truncate">Lorem Ipsum is simply
-                                                        dummy text</div>
-                                                    <div class="text-slate-400 mt-1">20 Hours ago</div>
-                                                    <div class="text-slate-500 text-justify mt-1">Lorem Ipsum is simply
-                                                        dummy text of the printing and typesetting industry. Lorem Ipsum has
-                                                        been the industry's standard dummy text ever since the 1500s.</div>
-                                                    <div class="font-medium flex mt-5">
-                                                        <button type="button" class="btn btn-secondary py-1 px-2">View
-                                                            Notes</button>
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary py-1 px-2 ml-auto ml-auto">Dismiss</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END: Important Notes -->
-                    <!-- BEGIN: Schedules -->
-                    <div
-                        class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 xl:col-start-1 xl:row-start-2 2xl:col-start-auto 2xl:row-start-auto mt-3">
-                        <div class="intro-x flex items-center h-10">
-                            <h2 class="text-lg font-medium truncate mr-5">
-                                Schedules
-                            </h2>
-                            <a href="#" class="ml-auto text-primary truncate flex items-center"> <svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" icon-name="plus"
-                                    data-lucide="plus" class="lucide lucide-plus w-4 h-4 mr-1">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg> Add New Schedules </a>
-                        </div>
-                        <div class="mt-5">
-                            <div class="intro-x box">
-                                <div class="p-5">
-                                    <div class="flex">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            icon-name="chevron-left" data-lucide="chevron-left"
-                                            class="lucide lucide-chevron-left w-5 h-5 text-slate-500">
-                                            <polyline points="15 18 9 12 15 6"></polyline>
-                                        </svg>
-                                        <div class="font-medium text-base mx-auto">April</div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            icon-name="chevron-right" data-lucide="chevron-right"
-                                            class="lucide lucide-chevron-right w-5 h-5 text-slate-500">
-                                            <polyline points="9 18 15 12 9 6"></polyline>
-                                        </svg>
-                                    </div>
-                                    <div class="grid grid-cols-7 gap-4 mt-5 text-center">
-                                        <div class="font-medium">Su</div>
-                                        <div class="font-medium">Mo</div>
-                                        <div class="font-medium">Tu</div>
-                                        <div class="font-medium">We</div>
-                                        <div class="font-medium">Th</div>
-                                        <div class="font-medium">Fr</div>
-                                        <div class="font-medium">Sa</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">29</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">30</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">31</div>
-                                        <div class="py-0.5 rounded relative">1</div>
-                                        <div class="py-0.5 rounded relative">2</div>
-                                        <div class="py-0.5 rounded relative">3</div>
-                                        <div class="py-0.5 rounded relative">4</div>
-                                        <div class="py-0.5 rounded relative">5</div>
-                                        <div class="py-0.5 bg-success/20 dark:bg-success/30 rounded relative">6</div>
-                                        <div class="py-0.5 rounded relative">7</div>
-                                        <div class="py-0.5 bg-primary text-white rounded relative">8</div>
-                                        <div class="py-0.5 rounded relative">9</div>
-                                        <div class="py-0.5 rounded relative">10</div>
-                                        <div class="py-0.5 rounded relative">11</div>
-                                        <div class="py-0.5 rounded relative">12</div>
-                                        <div class="py-0.5 rounded relative">13</div>
-                                        <div class="py-0.5 rounded relative">14</div>
-                                        <div class="py-0.5 rounded relative">15</div>
-                                        <div class="py-0.5 rounded relative">16</div>
-                                        <div class="py-0.5 rounded relative">17</div>
-                                        <div class="py-0.5 rounded relative">18</div>
-                                        <div class="py-0.5 rounded relative">19</div>
-                                        <div class="py-0.5 rounded relative">20</div>
-                                        <div class="py-0.5 rounded relative">21</div>
-                                        <div class="py-0.5 rounded relative">22</div>
-                                        <div class="py-0.5 bg-pending/20 dark:bg-pending/30 rounded relative">23</div>
-                                        <div class="py-0.5 rounded relative">24</div>
-                                        <div class="py-0.5 rounded relative">25</div>
-                                        <div class="py-0.5 rounded relative">26</div>
-                                        <div class="py-0.5 bg-primary/10 dark:bg-primary/50 rounded relative">27</div>
-                                        <div class="py-0.5 rounded relative">28</div>
-                                        <div class="py-0.5 rounded relative">29</div>
-                                        <div class="py-0.5 rounded relative">30</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">1</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">2</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">3</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">4</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">5</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">6</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">7</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">8</div>
-                                        <div class="py-0.5 rounded relative text-slate-500">9</div>
-                                    </div>
-                                </div>
-                                <div class="border-t border-slate-200/60 p-5">
-                                    <div class="flex items-center">
-                                        <div class="w-2 h-2 bg-pending rounded-full mr-3"></div>
-                                        <span class="truncate">UI/UX Workshop</span> <span
-                                            class="font-medium xl:ml-auto">23th</span>
-                                    </div>
-                                    <div class="flex items-center mt-4">
-                                        <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                        <span class="truncate">VueJs Frontend Development</span> <span
-                                            class="font-medium xl:ml-auto">10th</span>
-                                    </div>
-                                    <div class="flex items-center mt-4">
-                                        <div class="w-2 h-2 bg-warning rounded-full mr-3"></div>
-                                        <span class="truncate">Laravel Rest API</span> <span
-                                            class="font-medium xl:ml-auto">31th</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END: Schedules -->
-                </div>
             </div>
         </div>
     </div>

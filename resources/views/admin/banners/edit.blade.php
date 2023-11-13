@@ -27,6 +27,13 @@
                                 value="{{ $one_banner->link }}">
                         </div>
                     </div>
+                    <div class="mt-3">
+                        <label for="crud-form-5" class="form-label">Trạng thái</label>
+                        <select id="crud-form-5" name="status" class="form-select">
+                            <option value="active" {{ $one_banner->status === 'active' ? 'selected' : '' }}>Hoạt động</option>
+                            <option value="inactive" {{ $one_banner->status === 'inactive' ? 'selected' : '' }}>Không hoạt động</option>
+                        </select>
+                    </div>
                     <div class="text-right mt-5">
                         <button type="button" class="btn btn-primary w-24" id="saveBtn">Cập nhật</button>
                         <a href="{{ route('admin.banners.index') }}" class="btn btn-outline-secondary w-24 mr-1">Danh
@@ -55,34 +62,12 @@
                 sendAjaxRequest('/admin/banner/update/{{ $one_banner->id }}', 'POST', formData,
                     function(response) {
                         if (response.success) {
-                            Swal.fire({
-                                title: 'Successfully',
-                                text: response.success,
-                                icon: 'success',
-                            }).then(() => {
-                                $('#errorDiv').hide(); // ẩn thông báo lỗi
-                            });
+                            toastr.success(response.success);
                         }
                     },
 
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-                            if (error.responseJSON.errors.name) {
-                                errorMessages.push(error.responseJSON.errors.image);
-                            }
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#errorDiv');
-                                errorDiv.html("<p>Errors: </p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                       showErrors(error);
                     }
                 );
             });

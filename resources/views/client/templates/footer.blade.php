@@ -6,14 +6,10 @@
                     <div class="widget">
                         <div class="wiget-content">
                             <div>
-                                <a href="javascript:void(0)"><img src="{{ asset('client/assets/images/blacklogo.png') }}"
-                                        width="115px" alt="blog-image"></a>
-                                <P class="wiget-description mb-1">Etiam semper nibh orci, ac timcidunt mi
-                                    consectetur a. In quis tortor ex. Morbi cursus sed neque quis dictum.</P>
-                                <form class="footer-mail d-flex">
-                                    <input type="text" name="email" placeholder="Enter Your Email address">
-                                    <button class="bg-dark-color"><i class="far fa-paper-plane"></i></button>
-                                </form>
+                                <a href="javascript:void(0)"><img src="{{ asset('dist/images/logo.png') }}" width="115px"
+                                        alt="blog-image"></a>
+                                <P class="wiget-description mb-1">Trải nghiệm đặt lịch nhanh chóng và nhiều tiện ích
+                                    khác với ứng dụng DTBarber.</P>
                             </div>
                         </div>
                     </div>
@@ -21,29 +17,21 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 pl-3">
                     <div class="widget">
                         <div class="text-white wiget-title">
-                            USEFUL LINKS
+                            Hỗ trợ
                         </div>
                         <div>
 
                             <ul class="text-white wiget-link wiget-hover">
-                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Help</a>
+                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Giúp
+                                        đỡ</a>
                                 </li>
-                                <li><a href="javascript:void(0)"><span><i
-                                                class="fas fa-angle-right"></i></span>Information</a></li>
-                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Privacy
-                                        Policy</a></li>
-                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Shipping
-                                        Details</a></li>
-                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>About
-                                        Us</a></li>
-                                <li><a href="javascript:void(0)"><span><i
-                                                class="fas fa-angle-right"></i></span>Careers</a></li>
-                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Refunds
-                                        & Returns</a></li>
-                                <li><a href="javascript:void(0)"><span><i
-                                                class="fas fa-angle-right"></i></span>Deliveries</a></li>
-                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Help
-                                        & Faq's</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Giới
+                                        thiệu</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Chính
+                                        sách</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Chi
+                                        tiết</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fas fa-angle-right"></i></span>Liên hệ</a></li>
                             </ul>
 
                         </div>
@@ -52,19 +40,19 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                     <div class="widget">
                         <div class="wiget-title text-white">
-                            CONTACT US
+                            Liên hệ với chúng tôi
                         </div>
                         <div class="wiget-contact d-flex">
                             <ul class="list-unstyled">
-                                <li><span class="text-color">Phone:</span>+010 234 789234</li>
-                                <li><span class="text-color">Fax:</span>+010 435 5798982</li>
+                                <li><span class="text-color">SĐT:</span>0123456789</li>
+                                <li><span class="text-color">Hỗ trợ:</span>0123456789</li>
                                 <li><span class="text-color">Email:</span><a
                                         href="https://html.webinane.com/cdn-cgi/l/email-protection" class="__cf_email__"
-                                        data-cfemail="254c4b434a654850565144464d40440b464a48">[email&#160;protected]</a>
+                                        data-cfemail="254c4b434a654850565144464d40440b464a48">Email@fpt.edu.vn</a>
                                 </li>
                             </ul>
                         </div>
-                        <p class="c-gray">1394 Argonne Street, New Castle, USA</p>
+                        <p class="c-gray">© 2023 DTBarber</p>
                         <button id="scrollTop" class="scrollTopStick"><svg viewBox="0 0 490.523 490.523" fill="#fff"
                                 height="15">
                                 <path style="fill:#FFC107;"
@@ -93,8 +81,8 @@
         </div>
     </div>
 </footer>
-<div class="modal fade popup-top" id="modalAuth" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade popup-top" id="modalAuth" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -109,9 +97,10 @@
                     <div class="alert alert-success successAuth" id="" style="display: none;"></div>
                     <form class="formSendOtp">
                         <label>Phone Number:</label>
-                        <input type="text" name="phoneOtpNumberInput"  class="form-control " placeholder="+84********">
+                        <input type="text" name="phoneOtpNumberInput" class="form-control "
+                            placeholder="+84********">
                         <div id="recaptcha-container" class="mt-3"></div>
-                        <button  class="btn btn-primary mt-3">Send OTP</button>
+                        <button class="btn btn-primary mt-3">Send OTP</button>
                     </form>
                 </div>
             </div>

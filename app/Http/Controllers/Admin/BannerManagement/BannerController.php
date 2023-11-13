@@ -10,12 +10,9 @@ use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
-
-
-
     public function index()
     {
-        $banners = Banner::latest()->paginate(10);
+        $banners = Banner::orderBy('status', 'desc')->latest()->paginate(10);
         return view('admin.Banners.index', compact('banners'));
     }
 
@@ -53,12 +50,14 @@ class BannerController extends Controller
             $banner = Banner::query()->findOrFail($id);
             $imgOld = $banner->image;
             $banner->fill($request->all());
+            if ($request->status === 'active') {
+                Banner::where('status', 'active')->where('id', '!=', $banner->id)->update(['status' => 'inactive']);
+            }
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $banner->image = upload_file('admin/Banner', $request->file('image'));
                 delete_file($imgOld);
             }
             $banner->save();
-
             return response()->json(['success' => 'Cập nhật Banner thành công']);
         } catch (\Exception $exception) {
             return response()->json(['error' => 'Cập nhật Banner thất bại']);

@@ -8,11 +8,27 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
             <div class="hidden xl:block mx-auto text-slate-500"></div>
-            <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-                <div class="w-56 relative text-slate-500">
-                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
-                </div>
+            <div class="w-full xl:w-auto flex flex-wrap items-center mt-3 xl:mt-0">
+                {{-- Form tìm kiếm theo ngày và giờ --}}
+                <form action="{{route('admin.billManagement.searchDateTime')}}" method="GET" class="mr-3">
+                    <div class="w-full relative text-slate-500 flex items-center">
+                        <input type="date" name="day" class="form-control box w-40 sm:w-auto mr-2" value="{{ request('day') }}">
+                        <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10" value="{{ request('time') }}">
+                        <button type="submit">
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
+                        </button>
+                    </div>
+                </form>
+                {{-- Form tìm kiếm theo tên và số điện thoại --}}
+                <form action="{{route('admin.billManagement.search')}}" method="GET" class="mr-3">
+                    <div class="w-full relative text-slate-500 flex items-center">
+                        <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10" placeholder="Tìm kiếm..."
+                               value="{{ request('search') }}">
+                        <button type="submit">
+                            <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -20,13 +36,11 @@
             <table class="table table-report -mt-2">
                 <thead>
                 <tr>
-                    <th class="whitespace-nowrap">
-                        <input class="form-check-input" type="checkbox">
-                    </th>
-                    <th class="whitespace-nowrap">Tên khách hàng</th>
+                    <th class="whitespace-nowrap">Khách hàng</th>
                     <th class="text-center whitespace-nowrap">Tên nhân viên</th>
+                    <th class="text-center whitespace-nowrap">Giá gốc</th>
                     <th class="text-center whitespace-nowrap">Giảm giá</th>
-                    <th class="text-center whitespace-nowrap">Tổng tiền</th>
+                    <th class="text-center whitespace-nowrap">Số tiền thanh toán</th>
                     <th class="text-center whitespace-nowrap">Lịch đặt</th>
                     <th class="text-center whitespace-nowrap">Thời gian tạo đơn</th>
                     <th class="text-center whitespace-nowrap">Hành động</th>
@@ -35,35 +49,34 @@
                 @foreach($data as $item)
                     <tbody>
                     <tr class="intro-x">
-                        <td class="w-10">
-                            <input class="form-check-input" type="checkbox">
-                        </td>
                         <td class="!py-3.5">
                             <div class="flex items-center">
-                                <div class="w-9 h-9 image-fit zoom-in">
-                                    <img alt="Midone - HTML Admin Template"
-                                         class="rounded-lg border-white shadow-md tooltip"
-                                         src="dist/images/profile-7.jpg" title="Uploaded at 29 May 2022">
-                                </div>
-                                <div class="ml-4">
+                                <div class="">
                                     <a href="#" class="font-medium whitespace-nowrap">{{$item->name}}</a>
                                     <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{{$item->phone}}</div>
                                 </div>
                             </div>
                         </td>
-                        <td class="text-center"><a class="flex items-center justify-center underline decoration-dotted"
-                                                   href="javascript:;">{{$item->admin->username}}</a></td>
-                        <td class="text-center">{{$item->promotion->discount}}</td>
-                        <td class="text-center capitalize">{{number_format($item->total_price) }}</td>
+                        <td class="text-center"><a class="flex items-center justify-center"
+                                                   href="javascript:;">{{$item->admin->username ?? ''}}</a></td>
+                        <td class="text-center">{{number_format($item->total_price) }} vnd</td>
+                        <td class="text-center">{{ $item->promotion->discount ?? 0 }} vnd</td>
+                        <td class="text-center">{{number_format($item->total_price - ($item->promotion->discount ?? 0)) }} vnd</td>
                         <td class="w-40">
-                            <div class="flex items-center justify-center">{{$item->time }}
-                                <br> {{$item->day}}</div>
+                            <div class="flex items-center justify-center text-center">
+                                {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}
+                                <br>
+                                {{ \Carbon\Carbon::parse($item->day)->format('d/m/Y') }}
+                            </div>
                         </td>
-                        <td class="text-center">{{$item->created_at}}</td>
-
+                        <td class="text-center">
+                            {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}
+                            <br>
+                            {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
+                        </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a  data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"
+                                <a data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"
                                    class="flex items-center text-success cursor-pointer">
                                     <svg viewBox="0 0 24 24" class="w-6 h-6 mr-1" fill="#ffffff"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -81,38 +94,113 @@
                         </td>
                     </tr>
                     </tbody>
-
                 @endforeach
             </table>
         </div>
-
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
             <nav class="w-full sm:w-auto sm:mr-auto">
                 {{ $data->links('pagination::bootstrap-4') }}
             </nav>
-            <select class="w-20 form-select box mt-3 sm:mt-0">
-                <option>10</option>
-                <option>25</option>
-                <option>35</option>
-                <option>50</option>
-            </select>
         </div>
-
         <!-- END: Pagination -->
     </div>
-
     {{-- Modal--}}
     <!-- BEGIN: Modal Toggle -->
     <!-- END: Modal Toggle --> <!-- BEGIN: Modal Content -->
-
-
-            @foreach($data as $item)
-                @include('admin.BillManagement.modal')
-            @endforeach
-
-
-
+    @foreach($data as $item)
+    <div id="modal{{ $item->id }}" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-content" style="background-color: #cfd1c9">
+    
+            <div class="content" style="background-color: #cfd1c9">
+                <!-- BEGIN: Top Bar -->
+                <!-- END: Top Bar -->
+                <div class="intro-y flex flex-col sm:flex-row items-center mt-8 ">
+                    <h2 class="text-lg font-medium mr-auto" style="color:#354a1d">
+                        Trang chi tiết hóa đơn
+                    </h2>
+                    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+                        <a href="{{ route('admin.billManagement.printBill', $item->id) }}"><button
+                                class="btn btn-primary ">In hóa đơn</button></a>
+                    </div>
+                </div>
+                <!-- BEGIN: Invoice -->
+                <div class="intro-y box overflow-hidden mt-5" style="background-color: #fefefe; color:#354a1d">
+                    <div class="text-center sm:text-left">
+                        <h1 class="text-center text-5xl pt-16" style="color: #354a1d">DT BARBER</h1>
+                        <p class="text-center pt-2" style="color: #354a1d">HÂN HẠNH ĐƯỢC PHỤC VỤ.</p>
+                        <div class="px-5 sm:px-20 py-8 text-center">
+                            <div class="font-semibold text-3xl">Hóa đơn</div>
+                            <div class="mt-2"> số <span class="font-medium">#{{ $item->id }}</span></div>
+                            <div class="mt-1">Ngày lập: {{ $item->created_at }}</div>
+                        </div>
+                        <div class="flex flex-col lg:flex-row px-5 sm:px-20">
+                            <div>
+                                <div class="text-base">Tên khách hàng</div>
+                                <div class="text-lg font-medium text-primary mt-2">{{ $item->name }}</div>
+                                <div class="mt-1">{{ $item->email }}</div>
+                            </div>
+                            <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
+                                <div class="text-base">Thanh toán tới</div>
+                                <div class="text-lg font-medium text-primary mt-2">DT BARBER</div>
+                                <div class="mt-1">dtbarber.vn@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-5 sm:px-16 sm:py-20">
+                        <div class="overflow-x-auto">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-b-2 dark:border-darkmode-400 whitespace-nowrap">Tên dịch vụ</th>
+                                        <th class="border-b-2 dark:border-darkmode-400 text-right whitespace-nowrap">Giá
+                                            tiền
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($item->bill_details as $detail)
+                                        <tr>
+                                            <td class="border-b dark:border-darkmode-400">
+                                                <div class="font-medium whitespace-nowrap">{{ $detail->name }}</div>
+                                            </td>
+                                            <td class="text-right border-b dark:border-darkmode-400 w-32 font-medium">
+                                                {{ $detail->price }} VND</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="sm:text-left sm:ml-auto py-5" style="text-align: right">
+                            <div class="text-base">Tổng tiền: {{ $item->total_price }} VND</div>
+                            <div class="text-base">Giảm giá: {{ $item->promotion->discount ?? 0 }} VND</div>
+                            <hr>
+                            <div class="text-lg	">Số tiền phải thanh toán:
+                                {{ $item->total_price - ($item->promotion->discount ?? 0) }} VND</div>
+                        </div>
+                    </div>
+                    <div class="px-5 sm:px-20 pb-10 sm:pb-20 flex flex-col-reverse sm:flex-row">
+                        <div class="sm:text-left mt-10 sm:mt-0">
+                            <div class="text-base">Thông tin ngân hàng</div>
+                            <div class="text-lg font-medium mt-2">Ngân hàng Vietcombank</div>
+                            <div class="mt-1">Tên tài khoản : DT Barber</div>
+                            <div class="mt-1">Số tài khoản : 0123 456 789</div>
+                        </div>
+                        <div class="sm:text-left sm:ml-auto" style="text-align: right">
+                            <div class="text-base">Liên hệ</div>
+                            <div class="text-base mt-2">dtbarber.vn@gmail.com</div>
+                            <div class="text-base mt-1">(+84) 123 456 789</div>
+                            <div class="text-base mt-1">Cao đẳng FPT Polytechnic Hà Nội</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Invoice -->
+            </div>
+        </div>
+    </div>
+        {{-- @include('admin.BillManagement.modal') --}}
+    @endforeach
 @endsection
+
 

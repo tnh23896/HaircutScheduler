@@ -2,19 +2,8 @@
 @section('title', 'Lịch làm việc của nhân viên')
 @section('content')
     <!-- END: Top Bar -->
-    <h2 class="intro-y text-lg font-medium mt-10">
-        Danh sách
-    </h2>
+
     <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <div class="hidden xl:block mx-auto text-slate-500"></div>
-            <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-                <div class="w-56 relative text-slate-500">
-                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
-                </div>
-            </div>
-        </div>
         {{-- BEGIN: form create --}}
         <div class="intro-y col-span-12 lg:col-span-12">
             <h2 class="intro-y text-lg font-medium mt-10 mb-5">Thêm lịch làm việc cho nhân viên</h2>
@@ -147,17 +136,12 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         sendAjaxRequest(deleteUrl, 'DELETE', {}, function(response) {
-                            if (response.status) {
-                                Swal.fire({
-                                    title: 'Thành công!!!',
-                                    text: response.message,
-                                    icon: response.status,
-                                }).then(() => {
+                            if (response.success) {
+                                toastr.success(response.success);
                                     deleteForm.closest('tr').remove();
-                                });
                             }
                         }, function(error) {
-                            alert('Error deleting item.');
+                            showErrors(error);
                         });
                     }
                 });
@@ -169,36 +153,12 @@
                 var method = "POST";
                 const formData = new FormData(this);
                 sendAjaxRequest(url, "POST", formData, function(response) {
-                    if (response.status) {
-                        Swal.fire({
-                                title: 'Thành công!!!',
-                                text: response.message,
-                                icon: response.status,
-                            })
-                            .then(() => {
-                                location.reload();
-                            })
+                    if (response.success) {
+                        toastr.success(response.success);
+                        location.reload();
                     }
                 }, function(error) {
-                    if (error.responseJSON && error.responseJSON.errors) {
-                        var errorMessages = [];
-                        if (error.responseJSON.errors.day) {
-                            errorMessages.push(error.responseJSON.errors.day);
-                        }
-                        if (error.responseJSON.errors.times) {
-                            errorMessages.push(error.responseJSON.errors.times);
-                        }
-                        if (errorMessages.length > 0) {
-                            var errorDiv = $('#errorDiv');
-                            errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
-                            var errorList = errorDiv.find("ul");
-                            for (var i = 0; i < errorMessages.length; i++) {
-                                errorList.append("<li>" + " - " + errorMessages[i] +
-                                    "</li>");
-                            }
-                            errorDiv.show();
-                        }
-                    }
+                    showErrors(error);
                 })
             })
             $('#crud-form-edit').on('submit', function(e) {
@@ -211,39 +171,13 @@
                 var method = "POST";
                 const formData = new FormData(this);
                 sendAjaxRequest(url, method, formData, function(response) {
-                        if (response.status) {
-                            Swal.fire({
-                                    title: 'Successfully',
-                                    text: response.message,
-                                    icon: response.status,
-                                })
-                                .then(() => {
-                                    location.reload();
-                                })
+                        if (response.success) {
+                            toastr.success(response.success);
+                            location.reload();
                         }
                     },
                     function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Xử lý lỗi
-                            var errorMessages = [];
-
-                            if (error.responseJSON.errors.day) {
-                                errorMessages.push(error.responseJSON.errors.day);
-                            }
-                            if (error.responseJSON.errors.times) {
-                                errorMessages.push(error.responseJSON.errors.times);
-                            }
-                            if (errorMessages.length > 0) {
-                                var errorDiv = $('#error-work-schedule-edit');
-                                errorDiv.html("<p>Có lỗi xảy ra:</p><ul>");
-                                var errorList = errorDiv.find("ul");
-                                for (var i = 0; i < errorMessages.length; i++) {
-                                    errorList.append("<li>" + " - " + errorMessages[i] +
-                                        "</li>");
-                                }
-                                errorDiv.show();
-                            }
-                        }
+                        showErrors(error, "error-work-schedule-edit");
                     })
             })
         });

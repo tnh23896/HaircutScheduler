@@ -17,7 +17,8 @@ class CategoryController extends Controller
 
     public function __construct(
         private CategoryService $model,
-    ) {
+    )
+    {
     }
 
     public function index()
@@ -54,8 +55,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Search category service.
      */
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $fields = ['name'];
+
+        $category_service = search(CategoryService::class, $search, $fields)
+            ->latest()
+            ->paginate(5)
+            ->withQueryString();
+        return view('admin.serviceManagement.category.index', compact('category_service'));
+    }
+
     public function show(string $id)
     {
         //

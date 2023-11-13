@@ -9,17 +9,15 @@
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
             <a href="{{ route('admin.serviceManagement.category.create') }}" class="btn btn-primary">Thêm danh mục dịch vụ</a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
-            <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-                <div class="w-56 relative text-slate-500">
-                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+            <form action="{{route('admin.serviceManagement.category.search')}}" method="GET">
+                <div class="w-56 relative text-slate-500 flex items-center">
+                    <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                    <button type="submit">
+                        <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
+                           data-lucide="search"></i>
+                    </button>
                 </div>
-                <select class="w-56 xl:w-auto form-select box ml-2">
-                    <option>Status</option>
-                    <option>Active</option>
-                    <option>Inactive</option>
-                </select>
-            </div>
+            </form>
         </div>
         <!-- BEGIN: Data List -->
         <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
@@ -30,7 +28,7 @@
                             <input class="form-check-input" type="checkbox">
                         </th>
                         <th class="whitespace-nowrap">Hình ảnh</th>
-                        <th class="text-center whitespace-nowrap">Tên</th>
+                        <th class="whitespace-nowrap">Tên</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
                 </thead>
@@ -44,34 +42,30 @@
                                 <img alt="Image Category" class="w-24 h-20 rounded" src="{{ asset($category->image) }}"
                                     title="{{ $category->created_at }}">
                             </td>
-                            <td class="text-center"><a class="flex items-center justify-center"
+                            <td class=""><a class=""
                                     href="">{{ $category->name }}</a></td>
+
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3"
-                                        href="{{ route('admin.serviceManagement.category.edit', $category->id) }}">
+                                       href="{{ route('admin.serviceManagement.category.edit', $category->id) }}">
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
                                         Sửa </a>
 
                                     <form class="delete-form"
-                                        action="{{ route('admin.serviceManagement.category.delete', $category->id) }}"
-                                        method="POST">
+                                          action="{{ route('admin.serviceManagement.category.delete', $category->id) }}"
+                                          method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
                                             <button type="submit" class="flex items-center text-danger"
-                                                data-id="{{ $category->id }}">
+                                                    data-id="{{ $category->id }}">
                                                 <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
                                             </button>
                                         </div>
                                     </form>
                                 </div>
                             </td>
-                            <td class=""></td>
-                            <td class="">
-                                <div class=""></div>
-                            </td>
-                            <td class=""></td>
                         </tr>
                     </tbody>
                 @endforeach
@@ -99,17 +93,12 @@
                             _method: 'DELETE'
                         }, function(response) {
                             if (response.success) {
-                                Swal.fire({
-                                    title: 'Thành công!!!',
-                                    text: response.success,
-                                    icon: 'success',
-                                }).then(() => {
-                                    // Xoá phần tử khỏi giao diện sau khi xoá thành công
-                                    form.closest('tr').remove();
-                                });
+                                toastr.success(response.success);
+                                form.closest('tr').remove();
+
                             }
                         }, function(error) {
-                            alert('Error deleting item.');
+                            showErrors(error);
                         });
                     }
                 });

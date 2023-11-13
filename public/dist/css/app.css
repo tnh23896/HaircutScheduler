@@ -596,6 +596,7 @@ select{
         max-width: 1536px;
     }
 }
+
 .form-input,.form-textarea,.form-select,.form-multiselect{
     -webkit-appearance: none;
        -moz-appearance: none;

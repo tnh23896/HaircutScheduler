@@ -1,101 +1,264 @@
-<div id="modal{{$item->id}}" class="modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-content">
+<div class="container__bill">
+    <style>
+        .container__bill--text {
+            text-align: center;
+            font-size: 40px;
+            font-weight: lighter;
+            font-weight: bolder;
+        }
 
+        .container__bill--title {
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .container__title--bill {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+
+
+        }
+
+        .container__title--number {
+            font-size: 16px;
+            text-align: center;
+
+        }
+
+        .container__title--date {
+            font-size: 16px;
+            text-align: center;
+
+        }
+
+        .my-custom-box {
+            padding: 1rem;
+            overflow: hidden;
+            margin-top: 1.25rem;
+        }
+
+        .container__box--table {
+            margin-top: 30px;
+        }
+
+        .custom-table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .custom-table-header {
+            border-bottom: 2px solid #333;
+            white-space: nowrap;
+        }
+
+        .custom-text-right {
+            text-align: right;
+        }
+
+        .custom-text-left {
+            text-align: left;
+        }
+
+        .custom-table-cell {
+            white-space: nowrap;
+        }
+
+        .custom-font-medium {
+            font-size: 16px;
+        }
+
+        .custom-overflow-x-auto {
+            overflow-x: auto;
+        }
+
+        .custom-whitespace-nowrap {
+            white-space: nowrap;
+        }
+
+        .custom-w-32 {
+            width: 8rem;
+            /* Tính theo 1rem = 4px của Tailwind */
+        }
+
+        .custom-table-cell-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .custom-table-cell-content div {
+            margin-right: 8px;
+            /* Điều chỉnh khoảng cách giữa tên dịch vụ và đường kẻ dưới */
+        }
+
+        .custom-table-cell {
+            padding: 5px 0 5px 0;
+
+        }
+
+        .custom-container-box-Information {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .custom-container-box-Information-left {
+            float: left;
+            width: 40%;
+            margin-left: 30px;
+            /* Lề giữa hai div */
+        }
+
+        .custom-container-box-Information-right {
+            float: right;
+            text-align: right;
+            width: 40%;
+            margin-right: 30px;
+            /* Lề giữa hai div */
+        }
+
+        .custom-text-base {
+            font-size: 1rem;
+        }
+
+        .custom-mt-1 {
+            margin-top: 0.625rem;
+        }
+
+        .custom-container {
+            padding: 0 1rem 2.5rem 1rem;
+            /* px-5 sm:px-20 pb-10 sm:pb-20 */
+        }
+
+        .custom-info {
+            float: left;
+            width: 40%;
+            margin-left: 20px;
+        }
+
+        .custom-contact {
+            float: right;
+            text-align: right;
+            width: 45%;
+            margin-right: 28px;
+        }
+
+        .custom-text-bill {
+            font-weight: normal;
+        }
+
+        .custom-text-base,
+        .custom-text-lg {
+            font-weight: normal;
+        }
+
+        .custom-mt-1 {
+            margin-top: 0.625rem;
+        }
+
+        .custom-mt-2 {
+            margin-top: 1.25rem;
+        }
+
+        .custom-clear {
+            clear: both;
+        }
+
+        .price {
+            padding-right: 37px;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+    <div class="modal-dialog modal-xl modal-content" style="background-color: #cfd1c9">
         <div class="content">
             <!-- BEGIN: Top Bar -->
-
             <!-- END: Top Bar -->
-            <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-                <h2 class="text-lg font-medium mr-auto">
-                    Trang chi tiết hóa đơn
-                </h2>
-                <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                    <button class="btn btn-primary shadow-md mr-2">In hóa đơn</button>
-                    <div class="dropdown ml-auto sm:ml-0">
-                        <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                            <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i> </span>
-                        </button>
-                        <div class="dropdown-menu w-40">
-                            <ul class="dropdown-content">
-                                <li>
-                                    <a href="#" class="dropdown-item"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Export Word </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown-item"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Export PDF </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <!-- BEGIN: Invoice -->
-            <div class="intro-y box overflow-hidden mt-5">
-                <div class="border-b border-slate-200/60 dark:border-darkmode-400 text-center sm:text-left">
-                    <div class="px-5 py-10 sm:px-20 sm:py-20">
-                        <div class="text-primary font-semibold text-3xl">Hóa đơn</div>
-                        <div class="mt-2"> số <span class="font-medium">#{{$item->id}}</span> </div>
-                        <div class="mt-1">{{$item->created_at}}</div>
+            <div class="my-custom-box " style="background-color: #fefefe; color:#354a1d">
+                <div class="text-center sm:text-left">
+                    <h1 class="container__bill--text" style="color: #354a1d">DT BARBER</h1>
+                    <p class="container__bill--title" style="color: #354a1d">HÂN HẠNH ĐƯỢC PHỤC VỤ.</p>
+                    <div class="container__box--title">
+                        <div class="container__title--bill custom-text-bill ">Hóa Đơn</div>
+                        <div class="container__title--number"> số <span class="font-medium">#{{ $item->id }}</span>
+                        </div>
+                        <div class="container__title--date">Ngày lập: {{ $item->created_at }}</div>
                     </div>
-                    <div class="flex flex-col lg:flex-row px-5 sm:px-20 pt-10 pb-10 sm:pb-20">
-                        <div>
-                            <div class="text-base text-slate-500">Tên khách hàng</div>
-                            <div class="text-lg font-medium text-primary mt-2">{{$item->name}}</div>
-                            <div class="mt-1">{{$item->email}}</div>
+                    <div class="custom-container-box-Information">
+                        <div class="custom-container-box-Information-left">
+                            <div class="custom-text-base">Tên khách hàng</div>
+                            <div class="custom-text-lg custom-font-medium custom-text-primary custom-mt-2">
+                                {{ $item->name }}
+                            </div>
+                            <div class="custom-mt-1">{{ $item->email }}</div>
                         </div>
-                        <div class="lg:text-right mt-10 lg:mt-0 lg:ml-auto">
-                            <div class="text-base text-slate-500">Thanh toán tới</div>
-                            <div class="text-lg font-medium text-primary mt-2">BLAXCUT</div>
-                            <div class="mt-1">blaxcut.vn@gmail.com</div>
+                        <div class="custom-container-box-Information-right">
+                            <div class="custom-text-base">Thanh toán tới</div>
+                            <div class="custom-text-lg custom-font-medium custom-text-primary custom-mt-2">DT BARBER
+                            </div>
+                            <div class="custom-mt-1">dtbarber.vn@gmail.com</div>
                         </div>
+                        <div style="clear: both;"></div>
                     </div>
                 </div>
-                <div class="px-5 sm:px-16 py-10 sm:py-20">
-                    <div class="overflow-x-auto">
-                        <table class="table">
+                <div class="container__box--table">
+                    <div class="custom-overflow-x-auto">
+                        <table class="custom-table">
                             <thead>
-                            <tr>
-                                <th class="border-b-2 dark:border-darkmode-400 whitespace-nowrap">Tên dịch vụ</th>
-                                <th class="border-b-2 dark:border-darkmode-400 text-right whitespace-nowrap">Giá tiền</th>
-                            </tr>
+                                <tr>
+                                    <th class="custom-table-header custom-text-left">Tên dịch vụ</th>
+                                    <th class="custom-table-header custom-text-right">Giá tiền</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $total_amount = 0;
-                            @endphp
-                            @foreach($item->bill_details as $detail)
-                            <tr>
-                                <td class="border-b dark:border-darkmode-400">
-                                    <div class="font-medium whitespace-nowrap">{{$detail->name}}</div>
-                                </td>
-                                <td class="text-right border-b dark:border-darkmode-400 w-32 font-medium">{{$detail->price}}</td>
-                                @php
-                                    $total_amount += $detail->price; // Cộng dồn giá trị vào biến tổng
-                                @endphp
-                           </tr>
-                            @endforeach
+                                @foreach ($item->bill_details as $detail)
+                                    <tr>
+                                        <td class="custom-table-cell custom-border-bottom"
+                                            style="border-bottom: 1px solid #333 ">
+                                            <div class="custom-table-cell-content">
+                                                <div class="custom-font-medium custom-whitespace-nowrap">
+                                                    {{ $detail->name }}</div>
+                                            </div>
+                                        </td>
+                                        <td class="custom-text-right custom-table-cell custom-border-bottom custom-font-medium custom-w-32"
+                                            style="border-bottom: 1px solid #333 ">
+                                            {{ $detail->price }} VND
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="px-5 sm:px-20 pb-10 sm:pb-20 flex flex-col-reverse sm:flex-row">
-                    <div class="text-center sm:text-left mt-10 sm:mt-0">
-                        <div class="text-base text-slate-500">Tên người nhận</div>
-                        <div class="text-lg text-primary font-medium mt-2">Elon Musk</div>
-                        <div class="mt-1">Số tài khoản : 098347234832</div>
-                        <div class="mt-1">Mã code : LFT133243</div>
-                    </div>
-                    <div class="text-center sm:text-left sm:ml-auto">
-                        <div class="text-base text-slate-500">Tổng tiền: {{$total_amount}}</div>
-                        <div class="text-base text-warning">Giảm giá: 500000</div>
+                    <div class="sm:text-left sm:ml-auto py-5 price" style="text-align: right">
+                        <div class="text-base">Tổng tiền: {{ $item->total_price }} VND</div>
+                        <div class="text-base">Giảm giá: {{ $item->promotion->discount ?? 0 }} VND</div>
                         <hr>
-                        <div class="text-base text-success">Số tiền phải thanh toán: {{$item->total_price}}</div>
-                        <div class="mt-1">Đã bao gồm thuế VAT(10%)</div>
+                        <div class="text-lg	">Số tiền phải thanh toán:
+                            {{ $item->total_price - ($item->promotion->discount ?? 0) }} VND</div>
                     </div>
+                </div>
+                <div class="custom-container">
+                    <div class="custom-info">
+                        <div class="custom-text-base custom-mt-2">Thông tin ngân hàng</div>
+                        <div class="custom-mt-1 ">Ngân hàng Vietcombank</div>
+                        <div class="custom-mt-1">Tên tài khoản : DT Barber</div>
+                        <div class="custom-mt-1">Số tài khoản : 0123 456 789</div>
+                    </div>
+                    <div class="custom-contact">
+                        <div class="custom-text-base custom-mt-2">Liên hệ</div>
+                        <div class="custom-mt-1">dtbarber.vn@gmail.com</div>
+                        <div class="custom-mt-1">(+84) 123 456 789</div>
+                        <div class="custom-mt-1">Cao đẳng FPT Polytechnic Hà Nội</div>
+                    </div>
+                    <div class="custom-clear"></div>
                 </div>
             </div>
             <!-- END: Invoice -->
         </div>
-
     </div>
 </div>
-

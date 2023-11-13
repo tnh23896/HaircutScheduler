@@ -36,14 +36,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
 Route::post('/booking-history/destroy/{id}', [BookingController::class, 'destroy'])->name('booking-history.delete');
-
 //Booking Details
 Route::put('/booking-details/update/{id}', [BookingDetailsController::class, 'update'])->name('booking-details.update');
 Route::post('/booking-details/store/{id}', [BookingDetailsController::class, 'store'])->name('booking-details.store');
-
-
 //Bill Payment
-Route::get('bill-history/{id}', [BillController::class, 'index'])->name('bill');
+Route::get('bill', [BillController::class, 'index'])->name('bill');
+Route::get('bill_print/{id}', [BillController::class, 'printBill'])->name('print.bill');
 
 //Blog
 Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');

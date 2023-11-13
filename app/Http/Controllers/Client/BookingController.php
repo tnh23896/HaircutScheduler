@@ -24,11 +24,22 @@ class BookingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function booking_history()
+    public function booking_history(Request $request)
     {
-        $id = auth('web')->user()->id;
-        $list_booking = Booking::where('user_id', $id)->get();
-        return view('client.booking_history.index', compact('list_booking'));
+        try {
+            $id = auth('web')->user()->id;
+            $list_booking = Booking::query()
+                ->where('user_id', $id)
+                ->paginate(10);
+                
+            if ($request->ajax()) {
+                return view('client.booking_history.list_booking', compact('list_booking'));
+            }
+
+            return view('client.booking_history.index', compact('list_booking'));
+        } catch (\Exception $e) {
+            abort(404);
+        }
     }
 
     public function index()
@@ -39,7 +50,7 @@ class BookingController extends Controller
 
             // Ngày bắt đầu
             $startDate = Carbon::now()->startOfDay();
-
+            
             // Ngày kết thúc tính lịch làm việc
             $endDateForWorkSchedule = $startDate->copy()->addDay(3)->endOfDay();
 
@@ -48,7 +59,7 @@ class BookingController extends Controller
                 ->groupBy('day')
                 ->pluck('day');
 
-            // Lấy danh sách nhân viên có lịch trong 3 ngày tới 
+            // Lấy danh sách nhân viên có lịch trong 3 ngày tới
             $staffMembers = Admin::with('work_schedules')
                 ->whereHas('work_schedules', function ($query) use ($startDate, $endDateForWorkSchedule) {
                     $query->whereBetween('day', [$startDate, $endDateForWorkSchedule]);
@@ -115,19 +126,25 @@ class BookingController extends Controller
             ], 500);
         }
     }
+
     public function store(StoreRequest $request)
     {
         try {
+
+            $admin_id = $request->admin_id;
+            $day = $request->day;
             $params = [
                 'name' => $request->name,
                 'user_id' => auth('web')->user()->id,
-                'admin_id' => $request->admin_id,
+                'admin_id' => $admin_id,
                 'phone' => $request->phone,
                 'total_price' => $request->total_price,
                 'email' => $request->email,
-                'day' => $request->day,
-                'time' => $request->time,
+                'day' => $day,
             ];
+            $time_id = $request->time;
+            $time = Time::query()->findOrFail($time_id);
+            $params['time'] = $time->time;
             if ($request->promo_code) {
                 $promo = Promotion::where('promocode', $request->promo_code)->first();
                 $params['promo_id'] = $promo->id;
@@ -143,11 +160,32 @@ class BookingController extends Controller
                     'price' => $service->price,
                 ]);
             }
+            $workSchedule = WorkSchedule::query()->where('admin_id', $admin_id)->where('day', $day)->first();
+
+            $findWorkScheduleDetail = DB::table('work_schedule_details')
+                ->where('work_schedule_details.time_id', $time->id)
+                ->where('work_schedule_details.work_schedules_id', $workSchedule->id);
+            if ($findWorkScheduleDetail->first()->status == 'unavailable') {
+                throw new Exception('Lịch đã được đặt rồi', 400);
+            }
+            $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
+            event(new \App\Events\AdminNotifications([
+                'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
+                'message' => 'Lịch đặt mới',
+                'id' => 'Hóa đơn số' . ' ' . $booking->id,
+                'day' => Carbon::parse($request->day)->format('d-m-Y'),
+                'time' => Carbon::parse($time->time)->format('H:i'),
+            ]));
             return response()->json([
                 'message' => 'Thêm lịch đặt thành công',
             ], 200);
         } catch (\Exception $e) {
             Log::error('Error in store: ' . $e->getMessage());
+            if ($e->getCode() === 400) {
+                return response()->json([
+                    'message' => $e->getMessage()
+                ], 400);
+            }
             return response()->json([
                 'message' => 'Có lỗi xảy ra, vui lòng thử lai sau!'
             ], 500);
@@ -217,24 +255,22 @@ class BookingController extends Controller
         $booking = Booking::query()->findOrFail($id);
         if ($booking->status === 'pending') {
             $user = auth()->user();
-
             if ($user->phone === $phone) {
                 $booking->status = 'canceled';
                 $booking->save();
+                $bookingOld = Booking::query()->findOrFail($id);
+                if ($bookingOld->status == "canceled") {
+                    $timeSelected = Time::where('time', $bookingOld->time)->first();
+                    $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
+                    $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
+                        ->where('work_schedule_details.time_id', $timeSelected->id)
+                        ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
+                }
                 toastr()->success('Hủy đơn thành công');
                 return response()->json(['success' => true]);
             } else {
                 toastr()->error('Hủy đơn không thành công');
                 return response()->json(['success' => false]);
-
-            }
-            $bookingOld = Booking::query()->findOrFail($id);
-            if ($bookingOld->status == "canceled") {
-                $timeSelected = Time::where('time', $bookingOld->time)->first();
-                $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
-                $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
-                    ->where('work_schedule_details.time_id', $timeSelected->id)
-                    ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
             }
         } else {
             toastr()->error('Thao tác không khớp');
