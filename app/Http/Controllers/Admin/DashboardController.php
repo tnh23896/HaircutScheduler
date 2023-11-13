@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
 	public function index(Request $request)
 	{
+		$topservice= $this->getServiceUsageStatistics();
 		$data = $this->baseScheduleSetbyTime($request);
-		return view('admin.dashboard', compact('data'));
+
+		return view('admin.dashboard', compact('data', 'topservice'));
 	}
 
 	public function ScheduleSetbyTime(Request $request)
@@ -19,6 +22,35 @@ class DashboardController extends Controller
 		$data = $this->baScheduleSetbyTime($request);
 		return response()->json(['data' => $data]);
 	}
+	public function top_used_service(){
+		$topservice = $this->getServiceUsageStatistics();
+		return response()->json(['topservice' => $topservice]);
+	}
+    private function getServiceUsageStatistics()
+    {
+        // Tổng số lần sử dụng mỗi dịch vụ
+        $statistics =  DB::table('bill_details')
+            ->join('services', 'bill_details.service_id', '=', 'services.id')
+            ->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
+            ->groupBy('bill_details.service_id', 'services.name')
+            ->having('count', '>', 1) // Chỉ lấy những giá trị có count lớn hơn 1 (tức là trùng nhau)
+            ->get();
+
+        // Định dạng dữ liệu để trả về
+        $topservice = [];
+        foreach ($statistics as $item) {
+            $serviceId = $item->service_id;
+            $name = $item->name;
+
+            $topservice[$serviceId] = [
+                'name' => $name,
+                'count' => $item->count,
+            ];
+        }
+
+        return $topservice;
+    }
+
 	// Tổng hợp dữ liệu của tất cả
 	private function baseScheduleSetbyTime()
 	{
