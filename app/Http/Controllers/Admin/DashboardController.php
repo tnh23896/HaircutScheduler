@@ -13,11 +13,9 @@ class DashboardController extends Controller
 	{
 		$topBooker = $this->basetopBooker();
 		$data = $this->baseScheduleSetbyTime($request);
-
-		$topEmployeesData = $this->getTopEmployees($request);
+		$topEmployeesData = $this->baseTopEmployees($request);
 		$totalRevenue = $this->calculateBillRevenue($request);
 		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topEmployeesData'));
-
 	}
 
 	public function revenueSetbyTime(Request $request)
@@ -166,35 +164,69 @@ class DashboardController extends Controller
 
 		return $data;
 	}
-	private function getTopEmployees()
+
+	// Top 5 nhân viên nhiều lịch đặt 
+	public function topEmployee(Request $request)
 	{
-		$data = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
+		$topEmployeesData = $this->basefilterTopEmployee($request);
+		return response()->json(['topEmployeesData' => $topEmployeesData]);
+	}
+	private function baseTopEmployees(Request $request)
+	{
+		$query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
 			->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
 			->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
 			->join('admins', 'admins.id', '=', 'bookings.admin_id')
 			->leftJoin('reviews', function ($join) {
 				$join->on('admins.id', '=', 'reviews.admin_id');
 			})
-			->groupBy('admins.id')
-			->orderByDesc('totalBookings')
-			->limit(5)
-			->get()
-			->toArray();
+			->groupBy('admins.id');
+		$data = $query->orderByDesc('totalBookings')
+			->take(5)
+			->get();
 		return $data;
 	}
-	
-	private function basetopBooker(){
-		$query = Booking::select('users.username','users.avatar')
-		 	->selectRaw('count(bookings.id) as totalBookings')
+
+	private function basefilterTopEmployee(Request $request)
+	{
+		$month = $request->month;
+		$year = $request->year;
+
+		$query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
+			->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
+			->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
+			->join('admins', 'admins.id', '=', 'bookings.admin_id')
+			->leftJoin('reviews', function ($join) {
+				$join->on('admins.id', '=', 'reviews.admin_id');
+			})
+			->groupBy('admins.id');
+
+		if ($month) {
+			$query->whereMonth('bookings.day', $month);
+		}
+
+		if ($year) {
+			$query->whereYear('bookings.day', $year);
+		}
+
+		$topEmployeesData = $query->orderByDesc('totalBookings')->take(5)->get();
+		return $topEmployeesData;
+	}
+
+	//
+	private function basetopBooker()
+	{
+		$query = Booking::select('users.username', 'users.avatar')
+			->selectRaw('count(bookings.id) as totalBookings')
 			->selectRaw('SUM(bookings.total_price) as totalPrice')
-			->where('bookings.status','success')
+			->where('bookings.status', 'success')
 			->join('users', 'bookings.user_id', '=', 'users.id')
-			->groupBy('users.username','users.avatar')
+			->groupBy('users.username', 'users.avatar')
 			->orderBy('totalBookings', 'desc')
 			->take(5)
 			->get();
 
-		return $query;	
+		return $query;
 	}
 
 	private function basefilterTopBooker(Request $request)
@@ -203,11 +235,11 @@ class DashboardController extends Controller
 		$year = $request->year;
 
 		$query = Booking::join('users', 'users.id', '=', 'bookings.user_id')
-			->select('users.username','users.avatar','bookings.user_id')
+			->select('users.username', 'users.avatar', 'bookings.user_id')
 			->selectRaw('SUM(bookings.total_price) as totalPrice')
 			->selectRaw('COUNT(*) as totalBookings')
-			->where('bookings.status','success')
-			->groupBy('bookings.user_id', 'users.username','users.avatar')
+			->where('bookings.status', 'success')
+			->groupBy('bookings.user_id', 'users.username', 'users.avatar')
 			->orderByDesc('totalBookings');
 		if ($month) {
 			$query->whereMonth('day', $month);
@@ -218,7 +250,6 @@ class DashboardController extends Controller
 		}
 
 		$bookerData = $query->get();
-
 		return $bookerData;
 	}
 }
