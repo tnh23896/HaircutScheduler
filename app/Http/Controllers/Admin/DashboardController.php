@@ -11,9 +11,10 @@ class DashboardController extends Controller
 {
 	public function index(Request $request)
 	{
+		$topBooker = $this->basetopBooker();
 		$data = $this->baseScheduleSetbyTime($request);
 		$totalRevenue = $this->calculateBillRevenue($request);
-		return view('admin.dashboard', compact('data', 'totalRevenue'));
+		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker'));
 	}
 
 	public function revenueSetbyTime(Request $request)
@@ -21,7 +22,11 @@ class DashboardController extends Controller
 		$totalRevenue = $this->baRevenueSetbyTime($request);
 		return response()->json(['totalRevenue' => $totalRevenue]);
 	}
-
+	public function topBooker(Request $request)
+	{
+		$bookerData = $this->basefilterTopBooker($request);
+		return response()->json(['bookerData' => $bookerData]);
+	}
 	public function ScheduleSetbyTime(Request $request)
 	{
 		$data = $this->baScheduleSetbyTime($request);
@@ -157,5 +162,43 @@ class DashboardController extends Controller
 		}
 
 		return $data;
+	}
+	private function basetopBooker(){
+		$query = Booking::select('users.username','users.avatar')
+		 	->selectRaw('count(bookings.id) as totalBookings')
+			->selectRaw('SUM(bookings.total_price) as totalPrice')
+			->where('bookings.status','success')
+			->join('users', 'bookings.user_id', '=', 'users.id')
+			->groupBy('users.username','users.avatar')
+			->orderBy('totalBookings', 'desc')
+			->take(5)
+			->get();
+
+		return $query;	
+	}
+
+	private function basefilterTopBooker(Request $request)
+	{
+		$month = $request->month;
+		$year = $request->year;
+
+		$query = Booking::join('users', 'users.id', '=', 'bookings.user_id')
+			->select('users.username','users.avatar','bookings.user_id')
+			->selectRaw('SUM(bookings.total_price) as totalPrice')
+			->selectRaw('COUNT(*) as totalBookings')
+			->where('bookings.status','success')
+			->groupBy('bookings.user_id', 'users.username','users.avatar')
+			->orderByDesc('totalBookings');
+		if ($month) {
+			$query->whereMonth('day', $month);
+		}
+
+		if ($year) {
+			$query->whereYear('day', $year);
+		}
+
+		$bookerData = $query->get();
+
+		return $bookerData;
 	}
 }

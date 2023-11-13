@@ -23,25 +23,15 @@
                             <option value="admin" @if ($role->guard_name == 'admin')
                                 selected
                             @endif >Quản trị viên</option>
-                            {{-- <option value="web">Khách hàng</option> --}}
                         </select>
                     </div>
-
-
-                    <div>
-                        <label for="crud-form-1" class="form-label">Quyền</label>
-                        <br>
-                        <div class="grid grid-cols-4 gap-4 sm:grid">
-                        @foreach(config('permissions') as $key => $value)
-                            <div>
-                            <input type="checkbox"
-                                   name="permissions[]"
-                                   value="{{ $key }}"
-                                   @if(in_array($key, $permissions)) checked @endif
-                                   id="{{ $key }}">
-                            <label for="{{ $key }}">{{ $value }}</label>
-                            </div>
-                        @endforeach
+                    <div id="header">
+                        <div class="preview">
+                            <select data-placeholder="Quyền" name="permissions[]" class="tom-select w-full" multiple>
+                                @foreach (config('permissions') as $key => $value)
+                                    <option value="{{ $key }}" @if(in_array($key, $permissions)) selected @endif>{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="text-right mt-5">
