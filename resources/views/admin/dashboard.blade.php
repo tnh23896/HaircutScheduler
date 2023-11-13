@@ -189,9 +189,9 @@
                 <div class="col-span-12 sm:col-span-6 lg:col-span-6 mt-8">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Weekly Top Seller
+                           Thống kê dịch vụ sử dụng 
                         </h2>
-                        <a href="#" class="ml-auto text-primary truncate">Show More</a>
+                        
                     </div>
                     <div class="intro-y box p-5 mt-5">
                         <form id="topservice" method="POST">
