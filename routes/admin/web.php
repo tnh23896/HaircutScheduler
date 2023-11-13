@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TimeManagement\TimeController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\RessetPasswordController;
 use App\Http\Controllers\Admin\Bill\BillController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleDetailsController;
@@ -53,14 +54,13 @@ Route::post(
 )->name('admin.auth.ForgetPasswordPost');
 
 // Route cho đặt lại mật khẩu
-Route::get(
-    'reset-password/{token}/{email}',
-    [ForgotPasswordController::class, 'ResetPassword']
-)->name('admin.auth.ResetPasswordGet');
-Route::post(
-    'reset-password',
-    [ForgotPasswordController::class, 'ResetPasswordStore']
-)->name('admin.auth.ResetPasswordPost');
+Route::get('reset-password/{token}/{email}',
+    [ForgotPasswordController::class, 'ResetPassword'])->name('admin.auth.ResetPasswordGet');
+Route::post('reset-password',
+    [ForgotPasswordController::class, 'ResetPasswordStore'])->name('admin.auth.ResetPasswordPost');
+// Route Reset Password
+Route::post('reset-password',[RessetPasswordController::class,'resetPassword'])->name('admin.auth.ResetPasswordPost1');
+
 
 Route::get('404', function () {
     return view('admin.errors.404');

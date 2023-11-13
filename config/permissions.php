@@ -113,4 +113,7 @@ return [
     'admin.PromotionManagement.edit' => 'Chỉnh sửa khuyến mãi',
     'admin.PromotionManagement.update' => 'Cập nhật khuyến mãi',
     'admin.PromotionManagement.delete' => 'Xóa khuyến mãi',
+
+    //Profile
+    'admin.auth.ResetPasswordPost1' => 'Thay đổi mật khẩu'
 ];

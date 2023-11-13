@@ -24,6 +24,7 @@ class CheckPermissionAdmin
             'admin.auth.ForgetPasswordPost',
             'admin.auth.ResetPasswordGet',
             'admin.auth.ResetPasswordPost',
+            'admin.auth.ResetPasswordPost1',
             'admin.404',
             'admin.dashboard',
             'admin.auth.logout',
