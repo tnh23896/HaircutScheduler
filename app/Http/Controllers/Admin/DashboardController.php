@@ -11,7 +11,8 @@ class DashboardController extends Controller
 	public function index(Request $request)
 	{
 		$data = $this->baseScheduleSetbyTime($request);
-		return view('admin.dashboard', compact('data'));
+		$topEmployeesData = $this->getTopEmployees($request);
+		return view('admin.dashboard', compact('data', 'topEmployeesData'));
 	}
 
 	public function ScheduleSetbyTime(Request $request)
@@ -88,4 +89,21 @@ class DashboardController extends Controller
 
 		return $data;
 	}
+	private function getTopEmployees()
+	{
+		$data = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
+			->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
+			->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
+			->join('admins', 'admins.id', '=', 'bookings.admin_id')
+			->leftJoin('reviews', function ($join) {
+				$join->on('admins.id', '=', 'reviews.admin_id');
+			})
+			->groupBy('admins.id')
+			->orderByDesc('totalBookings')
+			->limit(5)
+			->get()
+			->toArray();
+		return $data;
+	}
+	
 }

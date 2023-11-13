@@ -290,72 +290,41 @@
                 </div>
                 <!-- END: Official Store -->
                 <!-- BEGIN: Weekly Best Sellers -->
+                <!-- Display Top Employees -->
                 <div class="col-span-12 xl:col-span-4 mt-6">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Weekly Best Sellers
+                            Top 5 nhân viên nhiều lịch đặt
                         </h2>
                     </div>
                     <div class="mt-5">
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-9.jpg">
+                        {{-- Display Top Employees --}}
+                        <div id="topEmployeesContent">
+                            @foreach ($topEmployeesData as $employee)
+                                <div class="intro-y">
+                                    <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                        {{-- Display employee information --}}
+                                        <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
+                                            <img alt="Employee Avatar" src="{{ $employee['avatar'] }}">
+                                        </div>
+                                        <div class="ml-4 mr-auto">
+                                            <div class="font-medium">{{ $employee['username'] }}</div>
+                                            <div class="text-slate-500 text-xs mt-0.5">
+                                                @if ($employee['avgRating'] > 0)
+                                                    Đánh giá: {{ number_format($employee['avgRating'], 1) }} &#9733
+                                                @else
+                                                    Chưa có đánh giá
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                            {{ $employee['totalBookings'] }} Đơn đặt
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Kevin Spacey</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">27 June 2020</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
-                            </div>
+                            @endforeach
                         </div>
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-5.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Angelina Jolie</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">28 June 2020</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
-                            </div>
-                        </div>
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-8.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Angelina Jolie</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">17 December 2022</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
-                            </div>
-                        </div>
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-2.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Al Pacino</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">16 July 2021</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
-                            </div>
-                        </div>
-                        <a href="#"
-                            class="intro-y w-full block text-center rounded-md py-4 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View
-                            More</a>
                     </div>
                 </div>
                 <!-- END: Weekly Best Sellers -->
@@ -646,10 +615,10 @@
                                                     <path
                                                         d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2">
                                                     </path>
-                                                    <line x1="10" y1="11" x2="10"
-                                                        y2="17"></line>
-                                                    <line x1="14" y1="11" x2="14"
-                                                        y2="17"></line>
+                                                    <line x1="10" y1="11" x2="10" y2="17">
+                                                    </line>
+                                                    <line x1="14" y1="11" x2="14" y2="17">
+                                                    </line>
                                                 </svg> Delete </a>
                                         </div>
                                     </td>
