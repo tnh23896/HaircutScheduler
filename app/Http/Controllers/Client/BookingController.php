@@ -56,7 +56,8 @@ class BookingController extends Controller
             // Lấy danh sách ngày làm việc
             $availableDates = WorkSchedule::whereBetween('day', [$startDate, $endDateForWorkSchedule])
                 ->groupBy('day')
-                ->pluck('day');
+                ->pluck('day')
+                ->sort();
 
             // Lấy danh sách nhân viên có lịch trong 3 ngày tới
             $staffMembers = Admin::with('work_schedules')
@@ -69,7 +70,7 @@ class BookingController extends Controller
                 $query->where('day', $startDate);
             })->whereHas('work_schedule_details', function ($query) {
                 $query->where('status', 'available');
-            })->get()->unique();
+            })->orderBy('time')->get()->unique();
             return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
@@ -84,12 +85,14 @@ class BookingController extends Controller
             $day = $request->day;
             if ($adminId && $day) {
 
-                $workSchedules = WorkSchedule::with('times')
-                    ->where('day', $day)
-                    ->where('admin_id', $adminId)
-                    ->firstOrFail();
+                $workSchedules = WorkSchedule::with(['times' => function($query) {
+                    $query->orderBy('time');
+                }])
+                ->where('day', $day)
+                ->where('admin_id', $adminId)
+                ->firstOrFail();
                 $workScheduleDetails = $workSchedules->work_schedule_details;
-
+               
                 $availableDetails = $workScheduleDetails->filter(function ($detail) {
                     return $detail->status === 'unavailable';
                 });
@@ -103,11 +106,16 @@ class BookingController extends Controller
                     'times' => $workSchedules->times,
                 ], 200);
             } elseif ($day) {
-                $timeSlots = Time::with('work_schedules')->whereHas('work_schedules', function ($query) use ($day) {
+                $timeSlots = Time::with('work_schedules')->orderBy('time')
+                ->whereHas('work_schedules', function ($query) use ($day) {
                     $query->where('day', $day);
-                })->whereHas('work_schedule_details', function ($query) {
+                })
+                ->whereHas('work_schedule_details', function ($query) {
                     $query->where('status', 'available');
-                })->get()->unique();
+                })
+                ->get();
+                
+            
 
                 return response()->json([
                     'times' => $timeSlots,
