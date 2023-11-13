@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Auth\RessetPasswordRequests;
 use Illuminate\Http\Request;
 
 class RessetPasswordController extends Controller
@@ -51,7 +52,7 @@ class RessetPasswordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function resetPassword(Request $request)
+    public function resetPassword(RessetPasswordRequests $request)
     {
         // Lấy người dùng hiện tại thông qua Guard 'admin'
         $user = Auth::guard('admin')->user();

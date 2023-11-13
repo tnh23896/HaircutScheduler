@@ -299,16 +299,6 @@
                                                                                class="w-4 h-4 mr-2"></i> Thông tin cá nhân </a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-item hover:bg-white/5" data-tw-toggle="modal" data-tw-target="#modal"> <i data-lucide="lock"
-                                class="w-4 h-4 mr-2"  ></i> Đổi mật khẩu
-                        </a>
-                        
-                    </li>
-                    <li>
-                        <a href="#" class="dropdown-item hover:bg-white/5"> <i data-lucide="help-circle"
-                                class="w-4 h-4 mr-2"></i> Help </a>
-                    </li>
-                    <li>
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
                     <li>
