@@ -144,61 +144,42 @@
                 <div class="col-span-12 lg:col-span-6 mt-8">
                     <div class="intro-y block sm:flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Sales Report
+                            Thông kê doanh thu
                         </h2>
-                        <div class="sm:ml-auto mt-3 sm:mt-0 relative text-slate-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" icon-name="calendar" data-lucide="calendar"
-                                class="lucide lucide-calendar w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                            <input type="text" class="datepicker form-control sm:w-56 box pl-10">
-                        </div>
                     </div>
                     <div class="intro-y box p-5 mt-12 sm:mt-5">
-                        <div class="flex flex-col md:flex-row md:items-center">
-                            <div class="flex">
-                                <div>
-                                    <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">$15,000
-                                    </div>
-                                    <div class="mt-0.5 text-slate-500">This Month</div>
+                        <div class="">
+                            <form id="filterRevenueform" method="POST">
+                                @csrf
+                                <div class="flex justify-end">
+                                    <select name="month" id="month" class="tom-select w-full tomselected mx-3">
+                                        <option value="0" selected="true" class="w-96">Chọn tháng</option>
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            <option value="{{ $i }}">Tháng {{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <select name="year" id="year" class="tom-select w-full tomselected mx-3">
+                                        <option value="0" selected="true" class="w-96">Chọn năm</option>
+                                        @for ($year = 1990; $year <= 2030; $year++)
+                                            <option value="{{ $year }}">Năm {{ $year }}</option>
+                                        @endfor
+                                    </select>
+                                    <button type="button" id="saveFilterRevenue" class="btn btn-secondary mr-1 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" icon-name="filter"
+                                            data-lucide="filter" class="lucide lucide-filter block mx-auto">
+                                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3">
+                                            </polygon>
+                                        </svg>
+                                    </button>
                                 </div>
-                                <div
-                                    class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5">
-                                </div>
-                                <div>
-                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">$10,000</div>
-                                    <div class="mt-0.5 text-slate-500">Last Month</div>
-                                </div>
-                            </div>
-                            <div class="dropdown md:ml-auto mt-5 md:mt-0">
-                                <button class="dropdown-toggle btn btn-outline-secondary font-normal"
-                                    aria-expanded="false" data-tw-toggle="dropdown"> Filter by Category <svg
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" icon-name="chevron-down"
-                                        data-lucide="chevron-down" class="lucide lucide-chevron-down w-4 h-4 ml-2">
-                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                    </svg> </button>
-                                <div class="dropdown-menu w-40">
-                                    <ul class="dropdown-content overflow-y-auto h-32">
-                                        <li><a href="#" class="dropdown-item">PC &amp; Laptop</a></li>
-                                        <li><a href="#" class="dropdown-item">Smartphone</a></li>
-                                        <li><a href="#" class="dropdown-item">Electronic</a></li>
-                                        <li><a href="#" class="dropdown-item">Photography</a></li>
-                                        <li><a href="#" class="dropdown-item">Sport</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                         <div class="report-chart">
                             <div class="h-[275px]">
-                                <canvas id="report-line-chart" class="mt-6 -mb-6" width="486" height="343"
-                                    style="display: block; box-sizing: border-box; height: 274.4px; width: 388.8px;"></canvas>
+                                <canvas id="report-line-chart" data-filtered-data="{{ json_encode($totalRevenue) }}"
+                                    class="mt-6 -mb-6" width="486" height="343"></canvas>
                             </div>
                         </div>
                     </div>
@@ -369,13 +350,15 @@
                     <form id="filterBookerForm" method="POST">
                         @csrf
                         <div class="flex justify-end">
-                            <select name="month" id="month" class="tom-select w-96 tomselected mx-3" style="width: 150px">
+                            <select name="month" id="month" class="tom-select w-96 tomselected mx-3"
+                                style="width: 150px">
                                 <option value="0" selected="true">Chọn tháng</option>
                                 @for ($i = 1; $i <= 12; $i++)
                                     <option value="{{ $i }}">Tháng {{ $i }}</option>
                                 @endfor
                             </select>
-                            <select name="year" id="year" class="tom-select w-96 tomselected mx-3" style="width: 150px">
+                            <select name="year" id="year" class="tom-select w-96 tomselected mx-3"
+                                style="width: 150px">
                                 <option value="0" selected="true">Chọn năm</option>
                                 @for ($year = 1990; $year <= 2030; $year++)
                                     <option value="{{ $year }}">Năm {{ $year }}</option>
@@ -383,10 +366,9 @@
                             </select>
                             <button type="button" id="saveFilterBooker" class="btn btn-secondary mr-1 mb-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                    icon-name="filter" data-lucide="filter"
-                                    class="lucide lucide-filter block mx-auto">
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" icon-name="filter"
+                                    data-lucide="filter" class="lucide lucide-filter block mx-auto">
                                     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                                 </svg>
                             </button>
@@ -407,19 +389,21 @@
                                 @php $count = 1 @endphp
                                 @foreach ($topBooker as $booker)
                                     <tr class="intro-x">
-                                        <td>{{$count++}}</td>
+                                        <td>{{ $count++ }}</td>
                                         <td class="w-40">
                                             <div class="text-center flex">
                                                 <div class="w-16 h-16 image-fit zoom-in">
-                                                    <img alt="ảnh" class="tooltip rounded-full" src="{{asset($booker->avatar)}}">
+                                                    <img alt="ảnh" class="tooltip rounded-full"
+                                                        src="{{ asset($booker->avatar) }}">
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="text-center whitespace-nowrap">
-                                            <a href="#" class="text-center font-medium whitespace-nowrap">{{$booker->username}}</a>
+                                            <a href="#"
+                                                class="text-center font-medium whitespace-nowrap">{{ $booker->username }}</a>
                                         </td>
-                                        <td class=" text-center">{{$booker->totalBookings}}</td>
-                                        <td class="text-center">{{number_format($booker->totalPrice)}} vnd</td>
+                                        <td class=" text-center">{{ $booker->totalBookings }}</td>
+                                        <td class="text-center">{{ number_format($booker->totalPrice) }} vnd</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -469,21 +453,21 @@
                                         </thead>
                                         <tbody>
                                             ${bookerArray.map((booker, index) => `
-                                                <tr class="intro-x">
-                                                    <td>${index + 1}</td>
-                                                    <td class="w-40">
-                                                        <div class="text-center flex">
-                                                            <div class="w-16 h-16 image-fit zoom-in">
-                                                                <img alt="ảnh" class="tooltip rounded-full" src="${booker.avatar}">
+                                                    <tr class="intro-x">
+                                                        <td>${index + 1}</td>
+                                                        <td class="w-40">
+                                                            <div class="text-center flex">
+                                                                <div class="w-16 h-16 image-fit zoom-in">
+                                                                    <img alt="ảnh" class="tooltip rounded-full" src="${booker.avatar}">
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center whitespace-nowrap">
-                                                        <a href="#" class="text-center font-medium whitespace-nowrap">${booker.username}</a>
-                                                    </td>
-                                                    <td class=" text-center">${booker.totalBookings}</td>
-                                                    <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
-                                                </tr> `).join('')}
+                                                        </td>
+                                                        <td class="text-center whitespace-nowrap">
+                                                            <a href="#" class="text-center font-medium whitespace-nowrap">${booker.username}</a>
+                                                        </td>
+                                                        <td class=" text-center">${booker.totalBookings}</td>
+                                                        <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
+                                                    </tr> `).join('')}
                                         </tbody>
                                     </table>`;
                             $('#listBooker').html(bookerItemHtml);
