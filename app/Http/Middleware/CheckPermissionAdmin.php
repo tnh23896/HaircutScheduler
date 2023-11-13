@@ -46,6 +46,8 @@ class CheckPermissionAdmin
             'admin.blogManagement.blog.search',
             'admin.blogManagement.blog.filter',
             'admin.scheduleSetbyTime',
+						'admin.revenueSetbyTime',
+            'admin.topBooker',
         ];
 
         $name = Route::currentRouteName();

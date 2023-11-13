@@ -21,24 +21,18 @@
                         <label for="crud-form-1" class="form-label">Phân quyền cho</label>
                         <select name="guard_name" id="guard_name" class="clearable form-control w-full">
                             <option value="admin">Quản trị viên</option>
-                            {{-- <option value="web">Khách hàng</option> --}}
                         </select>
                     </div>
-
-                    <div class="mb-4">
-                        <label for="crud-form-1" class="form-label">Quyền</label>
-                        <br>
-                        <div class="grid grid-cols-4 gap-4 sm:grid">
-                            @foreach (config('permissions') as $key => $value)
-                                <div>
-                                    <input type="checkbox" name="permissions[]" value="{{ $key }}"
-                                        id="{{ $key }}">
-                                    <label for="{{ $key }}">{{ $value }}</label>
-                                </div>
-                            @endforeach
+                    <label for="crud-form-1" class="form-label">Quyền</label>
+                    <div id="header">
+                        <div class="preview">
+                            <select data-placeholder="Quyền" name="permissions[]" class="tom-select w-full" multiple>
+                                @foreach (config('permissions') as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
-
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.RoleManagement.index') }}" type="button"
                             class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
@@ -73,4 +67,3 @@
         });
     </script>
 @endsection
-
