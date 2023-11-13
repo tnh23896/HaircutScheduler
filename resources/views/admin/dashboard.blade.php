@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="w-52 sm:w-auto mx-auto mt-8" id="your-chart-container">
-
+                              {{-- //sử dụng js để in // --}}
                             </div>
 
                     </div>
