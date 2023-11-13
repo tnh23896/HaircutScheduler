@@ -46,7 +46,8 @@ class CheckPermissionAdmin
             'admin.blogManagement.blog.search',
             'admin.blogManagement.blog.filter',
             'admin.scheduleSetbyTime',
-						'admin.revenueSetbyTime',
+            'admin.serviceSetbyTime',
+			'admin.revenueSetbyTime',
             'admin.topBooker',
         ];
 

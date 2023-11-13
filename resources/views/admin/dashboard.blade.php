@@ -2,7 +2,7 @@
 @section('title', 'Bảng điều khiển')
 @section('content')
     <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-12 2xl:col-span-9">
+        <div class="col-span-12 2xl:col-span-12">
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: General Report -->
                 <div class="col-span-12 mt-8">
@@ -189,34 +189,47 @@
                 <div class="col-span-12 sm:col-span-6 lg:col-span-6 mt-8">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Weekly Top Seller
+                           Thống kê dịch vụ sử dụng 
                         </h2>
-                        <a href="#" class="ml-auto text-primary truncate">Show More</a>
+                        
                     </div>
                     <div class="intro-y box p-5 mt-5">
-                        <div class="mt-3">
-                            <div class="h-[213px]">
-                                <canvas id="report-pie-chart" width="203" height="266"
-                                    style="display: block; box-sizing: border-box; height: 212.8px; width: 162.4px;"></canvas>
+                        <form id="topservice" method="POST">
+                            @csrf
+                            <div class="flex justify-end">
+                                <select name="month" id="month" class="tom-select w-full tomselected mx-3">
+                                    <option value="0" selected="true" class="w-96">Chọn tháng</option>
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option value="{{ $i }}">Tháng {{ $i }}</option>
+                                    @endfor
+                                </select>
+                                <select name="year" id="year" class="tom-select w-full tomselected mx-3">
+                                    <option value="0" selected="true" class="w-96">Chọn năm</option>
+                                    @for ($year = 1990; $year <= 2030; $year++)
+                                        <option value="{{ $year }}">Năm {{ $year }}</option>
+                                    @endfor
+                                </select>
+                                <button type="button" id="saveservice" class="btn btn-secondary mr-1 mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                         icon-name="filter" data-lucide="filter"
+                                         class="lucide lucide-filter block mx-auto">
+                                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                    </svg>
+                                </button>
                             </div>
-                        </div>
-                        <div class="w-52 sm:w-auto mx-auto mt-8">
-                            <div class="flex items-center">
-                                <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                <span class="truncate">17 - 30 Years old</span> <span
-                                    class="font-medium ml-auto">62%</span>
+                        </form>
+                            <div class="mt-3">
+                                <div class="h-[213px]">
+                                    <canvas id="report-pie-chart" width="203" height="266" data-topservice-data="{{ json_encode($topservice) }}"
+                                        style="display: block; box-sizing: border-box; height: 212.8px; width: 162.4px;"></canvas>
+                                </div>
                             </div>
-                            <div class="flex items-center mt-4">
-                                <div class="w-2 h-2 bg-pending rounded-full mr-3"></div>
-                                <span class="truncate">31 - 50 Years old</span> <span
-                                    class="font-medium ml-auto">33%</span>
+                            <div class="w-52 sm:w-auto mx-auto mt-8" id="your-chart-container">
+                              {{-- //sử dụng js để in // --}}
                             </div>
-                            <div class="flex items-center mt-4">
-                                <div class="w-2 h-2 bg-warning rounded-full mr-3"></div>
-                                <span class="truncate">&gt;= 50 Years old</span> <span
-                                    class="font-medium ml-auto">10%</span>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <!-- END: Weekly Top Seller -->
