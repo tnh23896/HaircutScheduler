@@ -50,6 +50,7 @@ class CheckPermissionAdmin
             'admin.serviceSetbyTime',
 			'admin.revenueSetbyTime',
             'admin.topBooker',
+            'admin.topEmployee'
         ];
 
         $name = Route::currentRouteName();
