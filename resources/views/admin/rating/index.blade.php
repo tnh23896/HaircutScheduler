@@ -30,6 +30,7 @@
                         <th class="text-center whitespace-nowrap">Số sao</th>
                         <th class="text-center whitespace-nowrap">Nội dung</th>
                         <th class="text-center whitespace-nowrap">Nhân viên</th>
+                        <th class="text-center whitespace-nowrap">Mã hóa đơn</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
                 </thead>
@@ -68,6 +69,7 @@
                             <td class=""><a class="flex items-center justify-center"
                                     href="">{{ $rating->comment }}</a></td>
                             <td class="text-center capitalize">{{ $rating->admin_name }}</td>
+                            <td class="text-center capitalize">{{ $rating->bill_id }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <form class="delete-form" action="{{ route('admin.rating.delete', $rating->id) }}"
