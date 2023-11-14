@@ -56,8 +56,7 @@ class EmployeeController extends Controller
         /**
          * Store a newly created resource in storage.
          */
-        public
-        function store(StoreRequest $request)
+        public function store(StoreRequest $request)
         {
             try {
                 $requestData = $request->all();
@@ -70,7 +69,8 @@ class EmployeeController extends Controller
 
                 $employee = Admin::create($requestData);
                 $employee->assignRole($request->input('roles'));
-                return redirect()->route('admin.employee.index')->with('success', 'Thêm mới nhân viên thành công');
+                // return redirect()->route('admin.employee.index')->with('success', 'Thêm mới nhân viên thành công');
+                return response()->json(['success' => 'Thêm mới nhân viên thành công']);
             } catch (Exception $e) {
                 return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
             }
@@ -88,8 +88,7 @@ class EmployeeController extends Controller
         /**
          * Show the form for editing the specified resource.
          */
-        public
-        function edit(string $id)
+        public function edit(string $id)
         {
             try {
                 $employee = Admin::findOrFail($id);
@@ -106,8 +105,7 @@ class EmployeeController extends Controller
         /**
          * Update the specified resource in storage.
          */
-        public
-        function update(UpdateRequest $request, string $id)
+        public function update(UpdateRequest $request, string $id)
         {
             try {
                 $employee = Admin::findOrFail($id);
@@ -124,7 +122,7 @@ class EmployeeController extends Controller
                 DB::table('model_has_roles')->where('model_id', $id)->delete();
                 $employee->assignRole($request->input('roles'));
 
-                return redirect()->route('admin.employee.index')->with('success', 'Updated successfully');
+                return response()->json(['success' => 'Cập nhật nhân viên thành công']);
             } catch (ModelNotFoundException $e) {
                 return response(['message' => 'Not found employee'], 404);
             } catch (Exception $e) {
@@ -135,8 +133,7 @@ class EmployeeController extends Controller
         /**
          * Remove the specified resource from storage.
          */
-        public
-        function destroy(string $id)
+        public function destroy(string $id)
         {
             try {
                 $admin = Admin::findOrFail($id);
