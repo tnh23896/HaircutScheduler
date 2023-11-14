@@ -18,10 +18,9 @@ class ReviewFactory extends Factory
     {
         return [
             'star' => $this->faker->numberBetween(1, 5),
-            'content' => $this->faker->text(),
+            'comment' => $this->faker->text(),
             'user_id' => $this->faker->numberBetween(1, 5),
             'admin_id' => $this->faker->numberBetween(1, 5),
-            'service_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

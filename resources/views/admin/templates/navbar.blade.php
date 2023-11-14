@@ -151,6 +151,15 @@
                 </a>
             </li>
         @endif
+				@if (auth('admin')->user()->can('admin.rating.index'))
+				<li>
+						<a href="{{ route('admin.rating.index') }}"
+								class="side-menu {{ request()->routeIs('admin.rating.index') ? 'side-menu--active' : '' }}">
+								<div class="side-menu__icon"><i data-lucide="star"></i></div>
+								<div class="side-menu__title"> Quản lý đánh giá</div>
+						</a>
+				</li>
+		@endif
         @if (auth('admin')->user()->can('admin.PromotionManagement.index'))
             <li>
                 <a href="{{ route('admin.PromotionManagement.index') }}"
