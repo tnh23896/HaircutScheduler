@@ -428,6 +428,19 @@ class ScheduleController extends Controller
             $data = Booking::query()->findOrFail($id);
             $data->status = $request->status;
             $data->save();
+            $sum_price = 0;
+            foreach ($data->booking_details as $item) {
+                if ($item->status == "success") {
+                    $sum_price += $item->price;
+                }
+            }
+            $promo = Promotion::where('id', $data->promo_id)->first();
+            if ($promo) {
+                
+                $sum_price_end = $sum_price - $promo->value;
+            }else{
+                $sum_price_end = $sum_price;
+            }
             if ($data->status == "success") {
                 $bill = Bill::create([
                     'name' => $data->name,
@@ -435,25 +448,25 @@ class ScheduleController extends Controller
                     'admin_id' => $data->admin_id,
                     'phone' => $data->phone,
                     'promo_id' => $data->promo_id,
-                    'total_price' => $data->total_price,
+                    'total_price' => $sum_price_end,
                     'email' => $data->email,
                     'day' => $data->day,
                     'time' => $data->time,
                 ]);
-              
+
                 foreach ($data->booking_details as $item) {
-                    if ($item->status == "success" ) {
+                    if ($item->status == "success") {
                         $bill_detail = $bill->bill_details()->create([
                             'service_id' => $item->service_id,
                             'name' => $item->name,
                             'price' => $item->price,
                             'admin_id' => $item->admin_id,
                             'bill_id' => $bill->id,
-                        ]);  
+                        ]);
                     }
                 }
-                $bill_detail = BillDetail::where('bill_id',$bill->id )->get();
-                SendMailBill::dispatch($bill, $bill_detail );
+                $bill_detail = BillDetail::where('bill_id', $bill->id)->get();
+                SendMailBill::dispatch($bill, $bill_detail);
             }
             $dataOld = Booking::query()->findOrFail($id);
             if ($dataOld->status == "canceled") {
@@ -463,7 +476,7 @@ class ScheduleController extends Controller
                     ->where('work_schedule_details.time_id', $timeSelected->id)
                     ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
             }
-            return response()->json([       
+            return response()->json([
                 'success' => 'Cập nhật trạng thái đặt lịch thành công',
             ]);
         } catch (\Exception $exception) {
