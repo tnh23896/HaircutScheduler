@@ -33,9 +33,13 @@ class StoreRequest extends FormRequest
 	public function messages()
 	{
 		return [
+            'username.required' => 'Tên không được để trống',
 			'email.required' => 'Email không được để trống',
 			'password.required' => 'Mật khẩu không được để trống',
+            'email.required' => 'Email không được để trống',
 			'email.email' => 'Email không đúng định dạng',
+            'email.unique' =>'Email đã được sử dụng',
+            'avatar.required' =>'Ảnh không được để trống',
 			'avatar.image' => 'Ảnh không đúng định dạng',
 			'avatar.mimes' => 'Ảnh không đúng định dạng',
 			'avatar.max' => 'Ảnh quá kích thức 2048kb',
