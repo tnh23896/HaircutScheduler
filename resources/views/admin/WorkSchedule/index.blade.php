@@ -1,3 +1,25 @@
+<style>
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+</style>
 @extends('admin.templates.app')
 @section('title', 'Lịch làm việc của nhân viên')
 @section('content')
@@ -17,10 +39,10 @@
                 <ul class="text-sm text-gray-600">
                     @foreach ($times as $time)
                         <li
-                            class=" mr-6 p-4 border-info inline-block relative pr-8 last:pr-0 last-of-type:before:hidden before:absolute before:top-1/2 before:right-3 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600">
+                            class="mb-2 mr-6 p-4 border-info inline-block relative pr-8 last:pr-0 last-of-type:before:hidden before:absolute before:top-1/2 before:right-3 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full dark:text-gray-400 dark:before:bg-gray-600">
                             <input type="checkbox" class="form-check-input w-6 h-6" name="times[]"
                                 value="{{ $time->id }}">
-                            <span class="">{{ $time->time }}</span>
+                            <span class="">{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</span>
                         </li>
                     @endforeach
                 </ul>
@@ -52,26 +74,26 @@
                     <div class="w-20 bg-danger text-white text-center border-0">Bận</div>
                 </div>
             </div>
+            <div style="overflow-x: auto">
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
                         <th class="text-center whitespace-nowrap">Ngày làm việc</th>
-                        <th colspan="888" class="text-center whitespace-nowrap">Các khoảng thời gian làm
-                            việc</th>
+                        <th colspan="888" class="whitespace-nowrap" style="padding-left: 350px">Các khoảng thời gian làm việc</th>
                     </tr>
                 </thead>
                 <tbody id="dataContainer">
                     @foreach ($workSchedules as $item)
                         <tr class="intro-x" data-id="{{ $item->id }}">
-                            <td class="text-center" style="border-right: 1px solid white">{{ $item->day }}
+                            <td class="text-center border-r">{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y') }}
                             </td>
                             @foreach ($item->times as $detail)
                                 <td class="text-center"><a
                                         href="{{ route('admin.work-schedule.show', ['work_schedule' => $item->id, 'time_id' => $detail->id]) }}"
                                         class="text-center {{ $detail->pivot->status == 'available' ? 'text-success' : 'text-danger' }}">
-                                        {{ $detail->time }} </a>
+                                        {{ \Carbon\Carbon::parse($detail->time)->format('H:i') }} </a>
                                 </td>
-                            @endforEach
+                            @endforeach
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center gap-2">
                                     <div class="flex justify-center items-center">
@@ -84,7 +106,7 @@
                                                 <polyline points="9 11 12 14 22 4" />
                                                 <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                                             </svg>
-                                            edit </a>
+                                            Sửa </a>
                                     </div>
                                     <button class="flex items-center text-danger delete-form"
                                         data-id="{{ $item->id }}"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -97,11 +119,11 @@
                                             <line x1="10" x2="10" y1="11" y2="17" />
                                             <line x1="14" x2="14" y1="11" y2="17" />
                                         </svg>
-                                        Delete </button>
+                                        Xóa </button>
                                 </div>
                             </td>
                         </tr>
-                    @endforEach
+                    @endforeach
                 </tbody>
             </table>
         </div>
