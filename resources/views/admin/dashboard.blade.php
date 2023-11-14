@@ -301,7 +301,7 @@
                 <div class="col-span-12 xl:col-span-4 mt-6">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Top 5 nhân viên nhiều lịch đặt
+                            Top 5 nhân viên 
                         </h2>
                     </div>
                     <div class="mt-5">

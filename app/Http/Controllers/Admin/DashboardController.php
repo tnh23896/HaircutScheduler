@@ -20,7 +20,7 @@ class DashboardController extends Controller
 		$totalRevenue = $this->calculateBillRevenue();
 		$lastMonthrevenue = $this->revenue();
 		$revenue = $this->currntMonthrevenue();
-		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topservice', 'revenue', 'lastMonthrevenue'));
+		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topservice', 'revenue', 'lastMonthrevenue' ,'topEmployeesData'));
 	}
 
 	private function revenue()
