@@ -15,6 +15,7 @@ class DashboardController extends Controller
 	{
 		$topservice = $this->baseServiceSetbyTime();
 		$topBooker = $this->basetopBooker();
+		$topEmployeesData = $this->baseTopEmployees();
 		$data = $this->baseScheduleSetbyTime();
 		$totalRevenue = $this->calculateBillRevenue();
 		$lastMonthrevenue = $this->revenue();
@@ -294,6 +295,56 @@ class DashboardController extends Controller
 
 		return $data;
 	}
+
+	// Top 5 nhân viên nhiều lịch đặt 
+	public function topEmployee(Request $request)
+	{
+		$topEmployeesData = $this->basefilterTopEmployee($request);
+		return response()->json(['topEmployeesData' => $topEmployeesData]);
+	}
+	private function baseTopEmployees()
+	{
+		$query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
+			->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
+			->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
+			->join('admins', 'admins.id', '=', 'bookings.admin_id')
+			->leftJoin('reviews', function ($join) {
+				$join->on('admins.id', '=', 'reviews.admin_id');
+			})
+			->groupBy('admins.id');
+		$data = $query->orderByDesc('totalBookings')
+			->take(5)
+			->get();
+		return $data;
+	}
+
+	private function basefilterTopEmployee(Request $request)
+	{
+		$month = $request->month;
+		$year = $request->year;
+
+		$query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
+			->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
+			->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
+			->join('admins', 'admins.id', '=', 'bookings.admin_id')
+			->leftJoin('reviews', function ($join) {
+				$join->on('admins.id', '=', 'reviews.admin_id');
+			})
+			->groupBy('admins.id');
+
+		if ($month) {
+			$query->whereMonth('bookings.day', $month);
+		}
+
+		if ($year) {
+			$query->whereYear('bookings.day', $year);
+		}
+
+		$topEmployeesData = $query->orderByDesc('totalBookings')->take(5)->get();
+		return $topEmployeesData;
+	}
+
+	//
 	private function basetopBooker()
 	{
 		$query = Booking::select('users.username', 'users.avatar')
@@ -330,7 +381,6 @@ class DashboardController extends Controller
 		}
 
 		$bookerData = $query->get();
-
 		return $bookerData;
 	}
 }

@@ -301,69 +301,64 @@
                 <div class="col-span-12 xl:col-span-4 mt-6">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Weekly Best Sellers
+                            Top 5 nhân viên nhiều lịch đặt
                         </h2>
                     </div>
                     <div class="mt-5">
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-9.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Kevin Spacey</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">27 June 2020</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
+                        <form id="filterTopEmployee" method="POST">
+                            @csrf
+                            <div class="flex justify-end">
+                                <select name="month" id="month" class="tom-select w-96 tomselected mx-3"
+                                    style="width: 150px">
+                                    <option value="0" selected="true">Tháng</option>
+                                    @for ($m = 1; $m <= 12; $m++)
+                                        <option value="{{ $m }}">Tháng {{ $m }}</option>
+                                    @endfor
+                                </select>
+                                <select name="year" id="year" class="tom-select w-96 tomselected mx-3"
+                                    style="width: 150px">
+                                    <option value="0" selected="true">Năm</option>
+                                    @for ($year = 1990; $year <= 2030; $year++)
+                                        <option value="{{ $year }}">Năm {{ $year }}</option>
+                                    @endfor
+                                </select>
+                                <button type="button" id="saveFilterTopEmployee" class="btn btn-secondary mr-1 mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" icon-name="filter"
+                                        data-lucide="filter" class="lucide lucide-filter block mx-auto">
+                                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                    </svg>
+                                </button>
                             </div>
+                        </form>
+                        {{-- Display Top Employees --}}
+                        <div id="topEmployeesContent">
+                            @foreach ($topEmployeesData as $employee)
+                                <div class="intro-y">
+                                    <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                        {{-- Display employee information --}}
+                                        <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
+                                            <img alt="Employee Avatar" src="{{ $employee['avatar'] }}">
+                                        </div>
+                                        <div class="ml-4 mr-auto">
+                                            <div class="font-medium">{{ $employee['username'] }}</div>
+                                            <div class="text-slate-500 text-xs mt-0.5">
+                                                @if ($employee['avgRating'] > 0)
+                                                    Đánh giá: {{ number_format($employee['avgRating'], 1) }} &#9733
+                                                @else
+                                                    Chưa có đánh giá
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                            {{ $employee['totalBookings'] }} Đơn đặt
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-5.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Angelina Jolie</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">28 June 2020</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
-                            </div>
-                        </div>
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-8.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Angelina Jolie</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">17 December 2022</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
-                            </div>
-                        </div>
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Midone - HTML Admin Template" src="dist/images/profile-2.jpg">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">Al Pacino</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">16 July 2021</div>
-                                </div>
-                                <div
-                                    class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    137 Sales</div>
-                            </div>
-                        </div>
-                        <a href="#"
-                            class="intro-y w-full block text-center rounded-md py-4 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View
-                            More</a>
                     </div>
                 </div>
                 <!-- END: Weekly Best Sellers -->
@@ -480,21 +475,21 @@
                                         </thead>
                                         <tbody>
                                             ${bookerArray.map((booker, index) => `
-                                                                    <tr class="intro-x">
-                                                                        <td>${index + 1}</td>
-                                                                        <td class="w-40">
-                                                                            <div class="text-center flex">
-                                                                                <div class="w-16 h-16 image-fit zoom-in">
-                                                                                    <img alt="ảnh" class="tooltip rounded-full" src="${booker.avatar}">
-                                                                                </div>
+                                                                <tr class="intro-x">
+                                                                    <td>${index + 1}</td>
+                                                                    <td class="w-40">
+                                                                        <div class="text-center flex">
+                                                                            <div class="w-16 h-16 image-fit zoom-in">
+                                                                                <img alt="ảnh" class="tooltip rounded-full" src="${booker.avatar}">
                                                                             </div>
-                                                                        </td>
-                                                                        <td class="text-center whitespace-nowrap">
-                                                                            <a href="#" class="text-center font-medium whitespace-nowrap">${booker.username}</a>
-                                                                        </td>
-                                                                        <td class=" text-center">${booker.totalBookings}</td>
-                                                                        <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
-                                                                    </tr> `).join('')}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="text-center whitespace-nowrap">
+                                                                        <a href="#" class="text-center font-medium whitespace-nowrap">${booker.username}</a>
+                                                                    </td>
+                                                                    <td class=" text-center">${booker.totalBookings}</td>
+                                                                    <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
+                                                                </tr> `).join('')}
                                         </tbody>
                                     </table>`;
                             $('#listBooker').html(bookerItemHtml);
@@ -507,6 +502,53 @@
                     }
                 );
             });
+        });
+
+        $(function() {
+            $('#saveFilterTopEmployee').on('click', function() {
+                var formData = new FormData($('#filterTopEmployee')[0]);
+                var url = "{{ route('admin.topEmployee') }}";
+
+                sendAjaxRequest(url, 'POST', formData,
+                    function(response) {
+                        console.log(response);
+                        var employeesArray = Object.values(response.topEmployeesData);
+                        var employeeItemHtml = '';
+
+                        if (employeesArray.length > 0) {
+                            employeeItemHtml = employeesArray.map((employee, index) => `
+                        <div class="intro-y">
+                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
+                                    <img alt="Employee Avatar" src="${employee.avatar}">
+                                </div>
+                                <div class="ml-4 mr-auto">
+                                    <div class="font-medium">${employee.username}</div>
+                                    <div class="text-slate-500 text-xs mt-0.5">
+                                        ${formatRating(employee.avgRating)}
+                                    </div>
+                                </div>
+                                <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                    ${employee.totalBookings} Đơn đặt
+                                </div>
+                            </div>
+                        </div>`).join('');
+                        } else {
+                            employeeItemHtml = '<p>Không có dữ liệu.</p>';
+                        }
+
+                        $('#topEmployeesContent').html(employeeItemHtml);
+                    },
+                    function(error) {
+                        alert('Error');
+                    }
+                );
+            });
+            // Định dạng đánh giá
+            function formatRating(avgRating) {
+                return avgRating !== null && avgRating !== undefined ?
+                    `Đánh giá: ${parseFloat(avgRating).toFixed(1)} &#9733` : 'Chưa có đánh giá';
+            }
         });
     </script>
 @endsection

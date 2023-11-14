@@ -79,6 +79,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 		// Thống kê khách hàng
     Route::post('/top-booker', [DashboardController::class, 'topBooker'])->name('admin.topBooker');
+    Route::post('/top-employee', [DashboardController::class, 'topEmployee'])->name('admin.topEmployee');
 
 	  // Thông kê lịch đặt
     Route::post('/schedule-set-by-time', [DashboardController::class, 'scheduleSetbyTime'])->name('admin.scheduleSetbyTime'); 

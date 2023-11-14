@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AdminNotifications implements ShouldBroadcast
+class CancelShcheduleNotifications implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -24,14 +24,13 @@ class AdminNotifications implements ShouldBroadcast
         $this->message = $message;
     }
 
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
-        return ['order'];
-
+        return ['cancel'];
     }
 
     public function broadcastAs()
     {
-        return 'order-handle';
+        return 'cancel-handle';
     }
 }
