@@ -115,5 +115,9 @@ return [
     'admin.PromotionManagement.delete' => 'Xóa khuyến mãi',
 
     //Profile
-    'admin.auth.ResetPasswordPost1' => 'Thay đổi mật khẩu'
+    'admin.auth.ResetPasswordPost1' => 'Thay đổi mật khẩu',
+
+		//Rating
+		'admin.rating.index' => 'Danh sách đánh giá',
+		'admin.rating.delete' => 'Xóa đánh giá',
 ];

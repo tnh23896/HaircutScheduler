@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Bill;
 use App\Models\Booking;
 use Illuminate\Http\Request;
@@ -12,15 +13,76 @@ class DashboardController extends Controller
 {
 	public function index()
 	{
-		$topservice= $this->baseServiceSetbyTime();
+		$topservice = $this->baseServiceSetbyTime();
 		$topBooker = $this->basetopBooker();
 		$topEmployeesData = $this->baseTopEmployees();
 		$data = $this->baseScheduleSetbyTime();
 		$totalRevenue = $this->calculateBillRevenue();
-		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker','topservice', 'topEmployeesData'));
-
+		$lastMonthrevenue = $this->revenue();
+		$revenue = $this->currntMonthrevenue();
+		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topservice', 'revenue', 'lastMonthrevenue' ,'topEmployeesData'));
 	}
 
+	private function revenue()
+	{
+		// Lấy ngày hiện tại
+		$today = Carbon::now();
+
+		// Lấy ngày đầu tiên của tháng trước
+		$firstDayOfLastMonth = $today->subMonth()->firstOfMonth();
+
+		// Lấy tháng và năm của tháng trước
+		$lastMonth = $firstDayOfLastMonth->format('n');
+
+		$currentYear = $firstDayOfLastMonth->format('Y');
+
+		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
+			->selectRaw('SUM(CASE WHEN promo_id IS NOT NULL THEN total_price - promotions.discount ELSE total_price END) as totalRevenues')
+			->join('promotions', 'bills.promo_id', '=', 'promotions.id')
+			->when($lastMonth, function ($query, $month) {
+				return $query->whereMonth('day', $month);
+			})
+			->when($currentYear, function ($query, $year) {
+				return $query->whereYear('day', $year);
+			})
+			->groupBy('month')
+			->orderBy('month')
+			->get();
+
+		$data = $query[0]->totalRevenues;
+		return $data;
+	}
+
+	private function currntMonthrevenue()
+	{
+		// Lấy ngày hiện tại
+		$today = Carbon::now();
+
+		// Lấy ngày đầu tiên của tháng trước
+		$firstDayOfLastMonth = $today->subMonth()->firstOfMonth();
+
+		$currentMonth = $today->format('n') + 1;
+		// Lấy tháng và năm của tháng trước
+
+		$currentYear = $firstDayOfLastMonth->format('Y');
+
+		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
+			->selectRaw('SUM(CASE WHEN promo_id IS NOT NULL THEN total_price - promotions.discount ELSE total_price END) as totalRevenues')
+			->join('promotions', 'bills.promo_id', '=', 'promotions.id')
+			->when($currentMonth, function ($query, $month) {
+				return $query->whereMonth('day', $month);
+			})
+			->when($currentYear, function ($query, $year) {
+				return $query->whereYear('day', $year);
+			})
+			->groupBy('month')
+			->orderBy('month')
+			->get();
+
+		$data = $query[0]->totalRevenues;
+		
+		return $data;
+	}
 	public function revenueSetbyTime(Request $request)
 	{
 		$totalRevenue = $this->baRevenueSetbyTime($request);
@@ -36,69 +98,71 @@ class DashboardController extends Controller
 		$data = $this->baScheduleSetbyTime($request);
 		return response()->json(['data' => $data]);
 	}
-	public function ServiceSetbyTime(Request $request){
+	public function ServiceSetbyTime(Request $request)
+	{
 		$topservice = $this->baServiceSetbyTime($request);
 		return response()->json(['topservice' => $topservice]);
 	}
-    private function baseServiceSetbyTime()
-    {
-        // Tổng số lần sử dụng mỗi dịch vụ
-        $statistics =  DB::table('bill_details')
-            ->join('services', 'bill_details.service_id', '=', 'services.id')
-            ->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
-            ->groupBy('bill_details.service_id', 'services.name')
-            ->having('count', '>=', 0) // Chỉ lấy những giá trị có count lớn hơn 1 (tức là trùng nhau)
-            ->orderByDesc('count') // Sắp xếp theo count giảm dần
-            ->get();
+	private function baseServiceSetbyTime()
+	{
+		// Tổng số lần sử dụng mỗi dịch vụ
+		$statistics =  DB::table('bill_details')
+			->join('services', 'bill_details.service_id', '=', 'services.id')
+			->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
+			->groupBy('bill_details.service_id', 'services.name')
+			->having('count', '>=', 0) // Chỉ lấy những giá trị có count lớn hơn 1 (tức là trùng nhau)
+			->orderByDesc('count') // Sắp xếp theo count giảm dần
+			->get();
 
-        // Định dạng dữ liệu để trả về
-        $topservice = [];
-        foreach ($statistics as $item) {
-            $serviceId = $item->service_id;
-            $name = $item->name;
+		// Định dạng dữ liệu để trả về
+		$topservice = [];
+		foreach ($statistics as $item) {
+			$serviceId = $item->service_id;
+			$name = $item->name;
 
-            $topservice[$serviceId] = [
-                'name' => $name,
-                'count' => $item->count,
-            ];
-        }
-
-        return $topservice;
-    }
-    private function baServiceSetbyTime(Request $request){
-        $month = $request->month;
-        $year = $request->year;
-        $statistics = DB::table('bill_details')
-    ->join('services', 'bill_details.service_id', '=', 'services.id')
-    ->join('bills', 'bill_details.bill_id', '=', 'bills.id') // Join với bảng bill
-    ->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
-    ->groupBy('bill_details.service_id', 'services.name')
-    ->having('count', '>=', 0)
-    ->when($month, function ($query, $month) {
-        return $query->whereMonth('bills.day', $month); // Sử dụng cột day từ bảng bill
-    })
-    ->when($year, function ($query, $year) {
-        return $query->whereYear('bills.day', $year); // Sử dụng cột day từ bảng bill
-    })
-    ->orderByDesc('count')
-    ->get();
-        $topservice = [];
-        foreach ($statistics as $item) {
-            $serviceId = $item->service_id;
-            $name = $item->name;
-            $topservice[$serviceId] = [
-                'name' => $name,
-                'count' => $item->count,
-            ];
-        }
-        if (empty($topservice)) {
-			$topservice[] = [
-				 'name' => "Không có dữ liệu",
-				 'count' => 0,
+			$topservice[$serviceId] = [
+				'name' => $name,
+				'count' => $item->count,
 			];
-	  }
-        return $topservice;
-    }
+		}
+
+		return $topservice;
+	}
+	private function baServiceSetbyTime(Request $request)
+	{
+		$month = $request->month;
+		$year = $request->year;
+		$statistics = DB::table('bill_details')
+			->join('services', 'bill_details.service_id', '=', 'services.id')
+			->join('bills', 'bill_details.bill_id', '=', 'bills.id') // Join với bảng bill
+			->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
+			->groupBy('bill_details.service_id', 'services.name')
+			->having('count', '>=', 0)
+			->when($month, function ($query, $month) {
+				return $query->whereMonth('bills.day', $month); // Sử dụng cột day từ bảng bill
+			})
+			->when($year, function ($query, $year) {
+				return $query->whereYear('bills.day', $year); // Sử dụng cột day từ bảng bill
+			})
+			->orderByDesc('count')
+			->get();
+		$topservice = [];
+		foreach ($statistics as $item) {
+			$serviceId = $item->service_id;
+			$name = $item->name;
+			$topservice[$serviceId] = [
+				'name' => $name,
+				'count' => $item->count,
+			];
+		}
+		if (empty($topservice)) {
+			$topservice[] = [
+				'name' => "Không có dữ liệu",
+				'count' => 0,
+			];
+		}
+		return $topservice;
+	}
 
 	// Tổng hợp dữ liệu của doanh thu của bill
 	private function calculateBillRevenue()

@@ -1,27 +1,28 @@
 <?php
 
-use App\Http\Controllers\Admin\PromotionManagement\PromotionController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CheckPermissionAdmin;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\Bill\BillController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Rating\RatingController;
+use App\Http\Controllers\Admin\Profile\ProfileController;
+use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Auth\RessetPasswordController;
 use App\Http\Controllers\Admin\TimeManagement\TimeController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
-use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
-use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\Auth\RessetPasswordController;
-use App\Http\Controllers\Admin\Bill\BillController;
-use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
-use App\Http\Controllers\Admin\ScheduleManagement\ScheduleDetailsController;
-use App\Http\Middleware\CheckPermissionAdmin;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\EmployeeManagement\EmployeeController;
-use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
-use App\Http\Controllers\Admin\WorkScheduleManagement\WorkScheduleController;
-use App\Http\Controllers\Admin\BlogManagement\CategoryController as BlogCategoryController;
-use App\Http\Controllers\Admin\BlogManagement\BlogController as BlogController;
 use App\Http\Controllers\Admin\BannerManagement\BannerController;
-use App\Http\Controllers\Admin\Profile\ProfileController;
-use App\Http\Controllers\Admin\ScheduleEmployee\ScheduleEmployeeController;
 use App\Http\Controllers\Admin\ServiceManagement\ServiceController;
+use App\Http\Controllers\Admin\ServiceManagement\CategoryController;
+use App\Http\Controllers\Admin\EmployeeManagement\EmployeeController;
+use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
+use App\Http\Controllers\Admin\PromotionManagement\PromotionController;
+use App\Http\Controllers\Admin\ScheduleEmployee\ScheduleEmployeeController;
+use App\Http\Controllers\Admin\ScheduleManagement\ScheduleDetailsController;
+use App\Http\Controllers\Admin\WorkScheduleManagement\WorkScheduleController;
+use App\Http\Controllers\Admin\BlogManagement\BlogController as BlogController;
+use App\Http\Controllers\Admin\BlogManagement\CategoryController as BlogCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +68,16 @@ Route::get('404', function () {
 })->name('admin.404');
 
 Route::group(['middleware' => 'admin'], function () {
+		// Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+		
+		// Thống kê lịch đặt
     Route::post('/schedule-set-by-time', [DashboardController::class, 'scheduleSetbyTime'])->name('admin.scheduleSetbyTime');
+
+		// Thống kê dịch vụ
     Route::post('/service-set-by-time', [DashboardController::class, 'ServiceSetbyTime'])->name('admin.serviceSetbyTime');
+
+		// Thống kê khách hàng
     Route::post('/top-booker', [DashboardController::class, 'topBooker'])->name('admin.topBooker');
     Route::post('/top-employee', [DashboardController::class, 'topEmployee'])->name('admin.topEmployee');
 
@@ -82,6 +90,11 @@ Route::group(['middleware' => 'admin'], function () {
     // Logout
     Route::get('logout', [LoginController::class, 'logout'])
         ->name('admin.auth.logout');
+		
+		// Rating
+		Route::get('rating', [RatingController::class, 'index'])->name('admin.rating.index');
+		Route::get('rating/search', [RatingController::class, 'search'])->name('admin.rating.search');
+		Route::delete('rating/delete/{id}', [RatingController::class, 'destroy'])->name('admin.rating.delete');
 
     //Category Service
     Route::get('category-service', [CategoryController::class, 'index'])

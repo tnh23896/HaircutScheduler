@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->integer('star');
-            $table->text('content');
+            $table->text('comment')->nullable();
             $table->string('user_id');
             $table->string('admin_id');
-            $table->string('service_id');
             $table->timestamps();
             $table->softDeletes();
         });
