@@ -331,6 +331,16 @@
             updateAdminNotifications(data);
         });
 
+        var cancel = pusher.subscribe('cancel');
+        cancel.bind('cancel-handle', function(data) {
+            const existingData = JSON.parse(localStorage.getItem('newBooking')) || [];
+            var notificationDot = document.getElementById("notification-dot");
+            notificationDot.classList.add("active");
+            existingData.push(data);
+            localStorage.setItem('newBooking', JSON.stringify(existingData));
+            updateAdminNotifications(data);
+        });
+
         //Cập nhật thông báo mới
         function updateAdminNotifications(data) {
             var adminNotifications = document.querySelector('#admin-notifications');
