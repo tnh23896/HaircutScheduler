@@ -4,6 +4,7 @@
 <head>
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{asset('dist/images/logonew2.png')}}" rel="shortcut icon">
     <meta charset="utf-8">
     @include('client.templates.link_header')
     @yield('css_header_custom')

@@ -28,19 +28,44 @@
                                     </li>
                                     <li class="home-drop"><a href="">Liên hệ</a></li>
                                     <li class="home-drop"><a href="{{ route('client.aboutus') }}">Giới thiệu</a></li>
+                                    <div class="home-drop">
+
+                                        @if (Auth::check())
+                                            <ul class="navbar-nav">
+                                                <li class="nav-item dropdown">
+                                                    <a class="dropdown-toggle" href="javascript:void(0)"
+                                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                        style="background-color: #d9842f !important; color: white; size: 30px">
+                                                        Xin chào : <span>{{ Auth::user()->phone }}</span>
+                                                    </a>
+            
+                                                    <ul class="dropdown-menu" style="top: 30px;background-color: #d9842f;"
+                                                    aria-labelledby="navbarDarkDropdownMenuLink">
+                                                        <li ><a class="dropdown-item" href="{{ route('client.profile') }}">Thông tin cá nhân</a></li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
+                                                        </li>
+                                                    </ul>   
+                                                </li>
+                                            </ul>
+                                            
+                                        @else
+                                            <a class="theme-btn-2" style="padding: 20px 1px;height: 20px;margin-bottom: 5px; margin-top: 10px"
+                                                href="javascript:void(0)" data-toggle="modal" data-target="#modalAuth">
+                                                <span style="color: white; transform: translateY(-13px) ">Đăng nhập</span>
+                                            </a>
+                                        @endif
+                                    </div>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+
+                <div class="col-md-8 ">
                     <ul class="nav justify-content-center list-style-none">
                         <li class="nav-1">
-                            <a class="nav-link {{ request()->routeIs('home.index') ? 'navbar-togglerss' : '' }}"
-                                href="{{ url('/') }}" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Trang chủ
-                            </a>
+                            <a class="nav-link" href="{{ route('home.index') }}">Trang chủ</a>
                         </li>
                         <li class="nav-1">
                             <a class="nav-link" href="{{ route('client.service') }}">Dịch vụ</a>
@@ -64,22 +89,36 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-2">
-                    <div class="position-relative">
+                <div class="col-md-2" style="margin-top:18px ;">
+                    <div class="nav-login">
+
                         @if (Auth::check())
-                            <a href="{{ route('logout') }}">
-                                <button class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px">
-                                    <h6 style="color: white; transform: translateY(-13px)">Đăng xuất</h6>
-                                </button>
-                            </a>
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown ">
+                                    <a class="btn btn-secondary dropdown-toggle border-0" href="javascript:void(0)"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                        style="background-color: #d9842f !important; color: white;">
+                                        Xin chào : <span>{{ Auth::user()->phone }}</span>
+                                    </a>
+
+                                    <ul class="dropdown-menu dropdown-menu-dark"
+                                        aria-labelledby="navbarDarkDropdownMenuLink">
+                                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá nhân</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         @else
-                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px"
+                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px ; margin-top: 10px"
                                 href="javascript:void(0)" data-toggle="modal" data-target="#modalAuth">
-                                <h6 style="color: white; transform: translateY(-13px)">Đăng nhập</h6>
+                                <h6 style="color: white; transform: translateY(-10px)">Đăng nhập</h6>
                             </a>
                         @endif
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
