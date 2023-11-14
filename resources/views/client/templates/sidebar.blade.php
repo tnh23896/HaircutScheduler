@@ -10,7 +10,7 @@
 			</div>
 			<ul class="nav nav-tabs">
 					<li><a href="#dashboard" data-toggle="tab" class="active"><i class="fas fa-tachometer-alt"></i> DASHBOARD</a></li>
-					<li><a href="{{ route('booking_history') }}" ><i class="far fa-file-alt"></i>Lịch sử đặt lịch</a></li>
+					<li><a href="{{ route('booking_history', Auth::user()->id) }}" ><i class="far fa-file-alt"></i>Lịch sử đặt lịch</a></li>
 					<li><a href="#my-reviews" data-toggle="tab"><i class="fa fa-comments"></i> MY REVIEWS</a></li>
                     <li><a href="{{ route('bill') }}"><i class="fa fa-shopping-basket"></i>Trang hóa đơn</a></li>
 					<li><a href="#shortlists" data-toggle="tab"><i class="fa fa-heart"></i> SHORTLISTS</a></li>

@@ -31,6 +31,7 @@ class BookingController extends Controller
             $list_booking = Booking::query()
                 ->where('user_id', $id)
                 ->paginate(10);
+                
             if ($request->ajax()) {
                 return view('client.booking_history.list_booking', compact('list_booking'));
             }
@@ -49,14 +50,15 @@ class BookingController extends Controller
 
             // Ngày bắt đầu
             $startDate = Carbon::now()->startOfDay();
-
+            
             // Ngày kết thúc tính lịch làm việc
             $endDateForWorkSchedule = $startDate->copy()->addDay(3)->endOfDay();
 
             // Lấy danh sách ngày làm việc
             $availableDates = WorkSchedule::whereBetween('day', [$startDate, $endDateForWorkSchedule])
                 ->groupBy('day')
-                ->pluck('day');
+                ->pluck('day')
+                ->sort();
 
             // Lấy danh sách nhân viên có lịch trong 3 ngày tới
             $staffMembers = Admin::with('work_schedules')
@@ -69,7 +71,7 @@ class BookingController extends Controller
                 $query->where('day', $startDate);
             })->whereHas('work_schedule_details', function ($query) {
                 $query->where('status', 'available');
-            })->get()->unique();
+            })->orderBy('time')->get()->unique();
             return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
@@ -84,12 +86,14 @@ class BookingController extends Controller
             $day = $request->day;
             if ($adminId && $day) {
 
-                $workSchedules = WorkSchedule::with('times')
-                    ->where('day', $day)
-                    ->where('admin_id', $adminId)
-                    ->firstOrFail();
+                $workSchedules = WorkSchedule::with(['times' => function($query) {
+                    $query->orderBy('time');
+                }])
+                ->where('day', $day)
+                ->where('admin_id', $adminId)
+                ->firstOrFail();
                 $workScheduleDetails = $workSchedules->work_schedule_details;
-
+               
                 $availableDetails = $workScheduleDetails->filter(function ($detail) {
                     return $detail->status === 'unavailable';
                 });
@@ -103,11 +107,16 @@ class BookingController extends Controller
                     'times' => $workSchedules->times,
                 ], 200);
             } elseif ($day) {
-                $timeSlots = Time::with('work_schedules')->whereHas('work_schedules', function ($query) use ($day) {
+                $timeSlots = Time::with('work_schedules')->orderBy('time')
+                ->whereHas('work_schedules', function ($query) use ($day) {
                     $query->where('day', $day);
-                })->whereHas('work_schedule_details', function ($query) {
+                })
+                ->whereHas('work_schedule_details', function ($query) {
                     $query->where('status', 'available');
-                })->get()->unique();
+                })
+                ->get();
+                
+            
 
                 return response()->json([
                     'times' => $timeSlots,
@@ -129,6 +138,7 @@ class BookingController extends Controller
     public function store(StoreRequest $request)
     {
         try {
+
             $admin_id = $request->admin_id;
             $day = $request->day;
             $params = [
@@ -147,7 +157,6 @@ class BookingController extends Controller
                 $promo = Promotion::where('promocode', $request->promo_code)->first();
                 $params['promo_id'] = $promo->id;
             }
-
             $booking = Booking::query()->create($params);
             $idServicesBookingDetail = explode(',', $request->servicesId);
             foreach ($idServicesBookingDetail as $id) {
@@ -171,9 +180,9 @@ class BookingController extends Controller
             event(new \App\Events\AdminNotifications([
                 'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
                 'message' => 'Lịch đặt mới',
-                'id' => 'Hóa đơn số'. ' '. $booking->id,
-                'day' => Carbon::parse($request->day)->format('d-m-Y') ,
-                'time' => Carbon::parse($time->time)->format('H:i') ,
+                'id' => 'Hóa đơn số' . ' ' . $booking->id,
+                'day' => Carbon::parse($request->day)->format('d-m-Y'),
+                'time' => Carbon::parse($time->time)->format('H:i'),
             ]));
             return response()->json([
                 'message' => 'Thêm lịch đặt thành công',
@@ -248,8 +257,32 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $phone = $request->input('phone');
+        $booking = Booking::query()->findOrFail($id);
+        if ($booking->status === 'pending') {
+            $user = auth()->user();
+            if ($user->phone === $phone) {
+                $booking->status = 'canceled';
+                $booking->save();
+                $bookingOld = Booking::query()->findOrFail($id);
+                if ($bookingOld->status == "canceled") {
+                    $timeSelected = Time::where('time', $bookingOld->time)->first();
+                    $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
+                    $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
+                        ->where('work_schedule_details.time_id', $timeSelected->id)
+                        ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
+                }
+                toastr()->success('Hủy đơn thành công');
+                return response()->json(['success' => true]);
+            } else {
+                toastr()->error('Hủy đơn không thành công');
+                return response()->json(['success' => false]);
+            }
+        } else {
+            toastr()->error('Thao tác không khớp');
+            return response()->json(['success' => false]);
+        }
     }
 }

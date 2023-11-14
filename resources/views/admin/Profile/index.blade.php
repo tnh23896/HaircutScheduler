@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400">
-                        <a class="flex items-center p-3 hover:bg-white/5 rounded hover:rounded-3xl"  href="#"> <i data-lucide="lock" class="w-4 h-4 mr-2"></i>
+                        <a class="flex items-center p-3 hover:bg-white/5 rounded hover:rounded-3xl"  href="#" data-tw-toggle="modal" data-tw-target="#modal"> <i data-lucide="lock" class="w-4 h-4 mr-2"></i>
                             Thay đổi mật khẩu </a>
                         <a class="flex items-center mt-5 p-3 hover:bg-white/5 rounded hover:rounded-3xl" href="{{ route('admin.ScheduleEmployee.index') }}"> <i
                                 data-lucide="calendar" class="w-4 h-4 mr-2"></i> Xem lịch làm việc </a>

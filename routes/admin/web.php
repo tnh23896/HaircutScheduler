@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TimeManagement\TimeController;
 use App\Http\Controllers\Admin\UserManagement\UserController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\RessetPasswordController;
 use App\Http\Controllers\Admin\Bill\BillController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleController;
 use App\Http\Controllers\Admin\ScheduleManagement\ScheduleDetailsController;
@@ -53,14 +54,13 @@ Route::post(
 )->name('admin.auth.ForgetPasswordPost');
 
 // Route cho đặt lại mật khẩu
-Route::get(
-    'reset-password/{token}/{email}',
-    [ForgotPasswordController::class, 'ResetPassword']
-)->name('admin.auth.ResetPasswordGet');
-Route::post(
-    'reset-password',
-    [ForgotPasswordController::class, 'ResetPasswordStore']
-)->name('admin.auth.ResetPasswordPost');
+Route::get('reset-password/{token}/{email}',
+    [ForgotPasswordController::class, 'ResetPassword'])->name('admin.auth.ResetPasswordGet');
+Route::post('reset-password',
+    [ForgotPasswordController::class, 'ResetPasswordStore'])->name('admin.auth.ResetPasswordPost');
+// Route Reset Password
+Route::post('reset-password',[RessetPasswordController::class,'resetPassword'])->name('admin.auth.ResetPasswordPost1');
+
 
 Route::get('404', function () {
     return view('admin.errors.404');
@@ -69,6 +69,7 @@ Route::get('404', function () {
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('/schedule-set-by-time', [DashboardController::class, 'scheduleSetbyTime'])->name('admin.scheduleSetbyTime');
+    Route::post('/service-set-by-time', [DashboardController::class, 'ServiceSetbyTime'])->name('admin.serviceSetbyTime');
     Route::post('/top-booker', [DashboardController::class, 'topBooker'])->name('admin.topBooker');
     Route::post('/top-employee', [DashboardController::class, 'topEmployee'])->name('admin.topEmployee');
 
@@ -170,7 +171,7 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.billManagement.searchDateTime');
     Route::get('print-bill/{id}', [BillController::class, 'printBill'])
         ->name('admin.billManagement.printBill');
-    
+
 
 
     // Banner

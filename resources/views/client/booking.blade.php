@@ -475,6 +475,7 @@
                     },
                     function(error) {
                         console.log(error);
+                        renderTimes([]);
                         toastr.error(error.responseJSON.message);
                     }
                 );

@@ -9,4 +9,3 @@
     </div>
     @include('client.templates.pagination')
 @endsection
-

@@ -281,7 +281,7 @@
         <div class="intro-x dropdown w-8 h-8">
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in"
                 role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                <img alt="Midone - HTML Admin Template" src="{{ auth('admin')->user()->avatar }}">
+                <img alt="Midone - HTML Admin Template" src="{{ asset(auth('admin')->user()->avatar) }}">
             </div>
             <div class="dropdown-menu w-56">
                 <ul class="dropdown-content bg-primary text-white">
@@ -295,8 +295,8 @@
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
                     <li>
-                        <a href="{{ route('admin.profile.edit') }}" class="dropdown-item hover:bg-white/5"> <i
-                                data-lucide="user" class="w-4 h-4 mr-2"></i> Thông tin cá nhân </a>
+                        <a href="{{route('admin.profile.edit')}}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user"
+                                                                               class="w-4 h-4 mr-2"></i> Thông tin cá nhân </a>
                     </li>
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
@@ -310,7 +310,7 @@
         </div>
         <!-- END: Account Menu -->
     </div>
-
+    @include('admin.Auth.resetPassword')
     <!-- END: Top Bar -->
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
