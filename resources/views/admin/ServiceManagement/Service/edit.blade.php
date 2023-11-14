@@ -82,6 +82,7 @@
                     function(response) {
                         if (response.success) {
                             toastr.success(response.success);
+                            $("#errorDiv").hide();
                             window.location.href =
                                 "{{ route('admin.serviceManagement.service.index') }}";
                         }

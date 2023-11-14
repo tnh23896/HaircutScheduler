@@ -10,7 +10,7 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-12">
             <!-- BEGIN: Form Layout -->
-            <form id="crud-form" action="{{ route('admin.employee.update', $employee->id) }}" method="POST" enctype="multipart/form-data" class="intro-y box p-5">
+            <form id="crud-form" action="" method="POST" enctype="multipart/form-data" class="intro-y box p-5">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" value="{{ $employee->id }}">
@@ -41,23 +41,54 @@
                     <label for="crud-form-8" class="form-label">Mô tả</label>
                     <textarea id="crud-form-8" name="description" class="form-control" placeholder="Mô tả">{{ $employee->description }}</textarea>
                 </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <label for="roles">Role:</label>
-                        <select name="roles[]" id="roles" class="form-control" multiple>
-                            @foreach ($roles as $roleId => $roleName)
-                                <option value="{{ $roleId }}" {{ in_array($roleId, $employeeRole) ? 'selected' : '' }}>{{ $roleName }}</option>
-                            @endforeach
-                        </select>
+                <div id="basic-select">
+                    <div class="preview">
+                        <!-- BEGIN: Basic Select -->
+                        <div>
+                            <label>Vai trò</label>
+                            <div class="mt-2">
+                                <select name="roles[]" id="roles" data-placeholder="Tìm kiếm" class="tom-select w-full">
+                                    <option value="0">Chọn vai trò</option>
+                                    @foreach ($roles as $roleId => $roleName)
+                                    <option value="{{ $roleId }}" {{ in_array($roleId, $employeeRole) ? 'selected' : '' }}>{{ $roleName }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <!-- END: Basic Select -->
                     </div>
                 </div>
                 <div class="text-right mt-5">
-                    <a href="{{ route('admin.employee.index') }}" class="btn btn-outline-secondary w-24 mr-1">Huỷ bỏ</a>
-                    <button  class="btn btn-primary w-24">Lưu</button>
+                    <a href="{{ route('admin.employee.index') }}" class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                    <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                 </div>
             </form>
             <!-- END: Form Layout -->
         </div>
     </div>
+    <script>
+        $(function() {
+            var employeeId = {{ $employee->id }};
+            console.log(employeeId);
+            $('#saveBtn').on('click', function() {
+                var formData = new FormData($('#crud-form')[0]);
+                var url = "{{ route('admin.employee.update', ['employee' => ':employeeId']) }}";
+                url = url.replace(':employeeId', employeeId);
+
+                sendAjaxRequest(url, 'POST', formData,
+                    function(response) {
+                        if (response.success) {
+                            toastr.success(response.success);
+                            $("#errorDiv").hide();
+                            window.location.href ="{{ route('admin.employee.index') }}";
+                        }
+                    },
+
+                    function(error) {
+                        showErrors(error);
+                    }
+                );
+            });
+        });
+    </script>
 @endsection

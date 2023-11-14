@@ -27,6 +27,7 @@ class UpdateRequest extends FormRequest
 			"avatar" => "image|mimes:jpeg,png,jpg,gif,svg|max:2048",
 			"phone" => "required",
 			'email' => [
+                'email',
 				'required',
 				Rule::unique('admins', 'email')->ignore($this->employee),
 			],
@@ -37,13 +38,13 @@ class UpdateRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'username.required' => 'Username không được để trống',
+			'username.required' => 'Tên không được để trống',
 			'avatar.image' => 'Ảnh không đúng định dạng',
 			'avatar.mimes' => 'Ảnh không đúng định dạng',
 			'avatar.max' => 'Ảnh quá kích thức 2048kb',
 			'phone.required' => 'Số điện thoại không được để trống',
 			'description.required' => 'Mô tả không được để trống',
-			'email.unique' => 'Email đã tồn tại',
+			'email.unique' => 'Email đã sử dụng',
 			'password.required' => 'Mật khẩu không được để trống',
 			'email.email' => 'Email không đúng định dạng',
 			'email.required' => 'Email không được để trống',
