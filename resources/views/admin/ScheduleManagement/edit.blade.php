@@ -123,7 +123,7 @@
             height: 30px;
             align-items: center;
             display: flex
-            
+
         }
 
         /* //ảnh// */
@@ -203,112 +203,154 @@
                         <input id="email" name="email" type="text" class="form-control w-full" placeholder="Email"
                             value="{{ $data->email }}">
                     </div>
-                    <div class="mt-3 card">
-                        <h2 id="toggleCollapse" class="cursor-pointer1">Danh sách dịch vụ</h2>
-                        <div id="myCollapse" class="hidden transition-transform transform scale-0">
-                            <div class="d-flex flex-wrap px-2 justify-content-between">
-                                @foreach ($serviceCategories as $category)
-                                    <h2 class="text-lg font-medium">{{ $category->name }}</h2>
-                                    <div class=" grid grid-cols-12 gap-5 mt-5 pt-5 border-t">
-                                        @foreach ($category->services as $service)
-                                            <div class="intro-y col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
-                                                <div class="box">
-                                                    <div class="p-5">
+                    <div class="intro-y box lg:mt-5">
+                        <div class=" p-3 items-center pb-5 border-b border-slate-200/60 dark:border-darkmode-400">
+                            <details>
+                                <summary>
+                                    <h2 class="font-medium text-base mr-auto">Danh sách dịch vụ</h2>
+                                </summary>
+                                <div class="grid grid-cols-12 mt-5">
+                                    @foreach ($serviceCategories as $category)
+                                        <div class="intro-y col-span-12 md:col-span-6 lg:col-span-6">
+                                            <div id="faq-accordion-1" class="accordion accordion-boxed p-5 ">
+                                                <div class="accordion-item ">
+                                                    <div id="faq-accordion-content-2" class="accordion-header w-full ">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                            data-tw-toggle="collapse"
+                                                            data-tw-target="#faq-accordion-collapse-2" aria-expanded="false"
+                                                            aria-controls="faq-accordion-collapse-2">
+                                                            <h2 class="font-medium text-base">{{ $category->name }}</h2>
+                                                        </button>
+                                                    </div>
+
+                                                    <div id="faq-category-{{ $category->id }}"
+                                                        class="accordion-collapse collapse"
+                                                        aria-labelledby="faq-category-{{ $category->id }}"
+                                                        data-tw-parent="#faq-accordion-1">
                                                         <div
-                                                            class="h-40 2xl:h-56 image-fit rounded-md overflow-hidden before:block before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-10 before:bg-gradient-to-t before:from-black before:to-black/10">
-                                                            <img alt="Midone - HTML Admin Template" class="rounded-md"
-                                                                src="{{ asset($service->image) }}">
-                                                        </div>
-                                                        <div class="text-slate-600 dark:text-slate-500 mt-5">
-                                                            <div class="flex items-center"> <i data-lucide="link"
-                                                                    class="w-4 h-4 mr-2"></i> Giá: {{ $service->price }} VND
+                                                            class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
+                                                            <div class="grid grid-cols-12 gap-6 mt-5">
+                                                                <!-- BEGIN: Users Layout -->
+                                                                @foreach ($category->services as $service)
+                                                                    <div
+                                                                        class="intro-y col-span-12 md:col-span-6 lg:col-span-6">
+                                                                        <div class="box">
+                                                                            <div class="p-5">
+                                                                                <div class="h-40 2xl:h-56 image-fit rounded-md overflow-hidden before:block before:absolute before:w-full before:h-full before:top-0 before:left-0 before:z-10 before:bg-gradient-to-t before:from-black before:to-black/10"
+                                                                                    style="width: 180px;">
+                                                                                    <img alt="ảnh" class="rounded-md"
+                                                                                        src="{{ asset($service->image) }}">
+                                                                                    <div
+                                                                                        class="absolute bottom-0 text-white px-5 pb-6 z-10">
+                                                                                        <a href="#"
+                                                                                            class="block font-medium text-base">{{ $service->name }}</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="text-slate-600 dark:text-slate-500 mt-5">
+                                                                                    <div class="flex items-center"> <i
+                                                                                            data-lucide="link"
+                                                                                            class="w-4 h-4 mr-2"></i>Giá:
+                                                                                        {{ number_format($service->price) }}
+                                                                                        vnd</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div
+                                                                                class="flex justify-center lg:justify-end items-center p-5 border-t border-slate-200/60 dark:border-darkmode-400">
+                                                                                @php
+                                                                                    $bookedServices = $data->booking_details->pluck('service_id')->toArray();
+                                                                                @endphp
+                                                                                <label class="check">
+                                                                                    <input type="checkbox"
+                                                                                        id="service_{{ $service->id }}"
+                                                                                        name="services[]"
+                                                                                        value="{{ $service->id }}"
+                                                                                        data-price="{{ $service->price }}"
+                                                                                        @if (in_array($service->id, $bookedServices)) checked @endif>
+                                                                                    <span type="button"
+                                                                                        class="btn">Chọn</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                                <!-- END: Users Layout -->
                                                             </div>
-                                                            <div class="flex items-center mt-2"> <i data-lucide="layers"
-                                                                    class="w-4 h-4 mr-2"></i> {{ $service->name }} </div>
                                                         </div>
-                                                        <div
-                                                            class="flex justify-center lg:justify-center items-center p-5 border-t border-slate-200/60 dark:border-darkmode-400">
-                                                            @php
-                                                                $bookedServices = $data->booking_details->pluck('service_id')->toArray();
-                                                            @endphp
-                                                            <label class="check mt-1">
-                                                                <input type="checkbox" id="service_{{ $service->id }}"
-                                                                    name="services[]" value="{{ $service->id }}"
-                                                                    data-price="{{ $service->price }}"
-                                                                    @if (in_array($service->id, $bookedServices)) checked @endif>
-
-                                                                <span type="button" class="btn ">Chọn</span>
-                                                            </label>
-
-                                                        </div>
-
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <h2 id="toggleEmployeeCollapse" class="cursor-pointer1">Danh sách nhân viên</h2>
-                        <div id="employeeCollapse" class="hidden transition-transform transform scale-0">
-                            <div class="flex flex-wrap mt-3">
-                                @foreach ($staffMembers as $staff)
-                                    <label class="radio-button-with-image text-center mx-2">
-                                        <input type="radio" name="admin_id" id="admin_{{ $staff->id }}"
-                                            value="{{ $staff->id }}" @if ($data->admin_id == $staff->id) checked @endif
-                                            hidden>
-                                        <div class="image-container">
-                                            <img src="{{ $staff->avatar }}" alt="{{ $staff->username }}">
                                         </div>
-                                        <div class="text-center">{{ $staff->username }}</div>
-                                    </label>
-                                @endforeach
-                            </div>
-                            <div class="mt-3 flex flex-col items-center">
-                                <label for="crud-form-1" class="form-label text-lg mb-2">Ngày đặt lịch</label>
-                                <div class="px-3">
-                                    <div class="row">
-                                        <div class="col-md-4 mx-auto">
-                                            <select class="custom-select my-select" name="day">
-                                                @foreach ($availableDates as $date)
-                                                    <option value="{{ \Carbon\Carbon::parse($date)->format('Y-m-d') }}"
-                                                        @if ($data->day == \Carbon\Carbon::parse($date)->format('Y-m-d')) selected @endif>
-
-                                                        {{ \Carbon\Carbon::parse($date)->format('\N\g\à\y\ d/m/Y') }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3 flex flex-col items-center ">
-                                <h5 class="text-center text-lg mb-3">Chọn thời gian</h5>
-                                <div class="d-flex flex-wrap justify-content-center" id="timeSelect">
-
-                                    @foreach ($timeSlots as $time)
-                                        <label class="check mx-1">
-                                            <input type="radio" id="time_{{ $time->id }}" name="time_id"
-                                                value="{{ $time->id }}"
-                                                {{ $time->pivot->status === 'unavailable' ? 'disabled' : '' }}
-                                                @if ($timeSelected->id == $time->id) checked @endif>
-                                            <span>{{ $time->time }}</span>
-                                        </label>
                                     @endforeach
                                 </div>
                             </div>
+                        </details>
+                    </div>
+                    <div class="intro-y box lg:mt-5">
+                        <div class="p-3 border-b border-slate-200/60 dark:border-darkmode-400">
+                            <details>
+                                <summary>
+                                    <h2 class="font-medium text-base mr-auto">Danh sách nhân viên</h2>
+                                </summary>
+                                <div id="faq-accordion-1" class="transition-transform transform scale-0">
+                                    <div class="flex flex-wrap mt-3">
+                                        @foreach ($staffMembers as $staff)
+                                            <label class="radio-button-with-image text-center mx-2">
+                                                <input type="radio" name="admin_id" id="admin_{{ $staff->id }}"
+                                                    value="{{ $staff->id }}" @if ($data->admin_id == $staff->id) checked @endif
+                                                    hidden>
+                                                <div class="image-container">
+                                                    <img src="{{ $staff->avatar }}" alt="{{ $staff->username }}">
+                                                </div>
+                                                <div class="text-center">{{ $staff->username }}</div>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                    <div class="mt-3 flex flex-col items-center">
+                                        <label for="crud-form-1" class="form-label text-lg mb-2">Ngày đặt lịch</label>
+                                        <div class="px-3">
+                                            <div class="row">
+                                                <div class="col-md-4 mx-auto">
+                                                    <select class="custom-select my-select" name="day">
+                                                        @foreach ($availableDates as $date)
+                                                            <option value="{{ \Carbon\Carbon::parse($date)->format('Y-m-d') }}"
+                                                                @if ($data->day == \Carbon\Carbon::parse($date)->format('Y-m-d')) selected @endif>
+
+                                                                {{ \Carbon\Carbon::parse($date)->format('\N\g\à\y\ d/m/Y') }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 flex flex-col items-center ">
+                                        <h5 class="text-center text-lg mb-3">Chọn thời gian</h5>
+                                        <div class="d-flex flex-wrap justify-content-center" id="timeSelect">
+
+                                            @foreach ($timeSlots as $time)
+                                                <label class="check mx-1">
+                                                    <input type="radio" id="time_{{ $time->id }}" name="time_id"
+                                                        value="{{ $time->id }}"
+                                                        {{ $time->pivot->status === 'unavailable' ? 'disabled' : '' }}
+                                                        @if ($timeSelected->id == $time->id) checked @endif>
+                                                    <span>{{ $time->time }}</span>
+                                                </label>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
                         </div>
-                        <div class="mt-3">
-                            <label for="crud-form-1" class="form-label">Mã giảm giá</label>
-                            <input name="promoCode" type="text" class="form-control w-full" placeholder="Mã giả giá">
-                        </div>
-                        <div class="mt-5">
-                            <h3>Tổng tiền dịch vụ: <span id="totalPrice"> {{ $data->total_price }} </span> VND</h3>
-                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label for="crud-form-1" class="form-label">Mã giảm giá</label>
+                        <input name="promoCode" type="text" class="form-control w-full" placeholder="Mã giảm giá">
+                    </div>
+                    <div class="mt-5">
+                        <h3 class="font-medium text-base">Tổng tiền dịch vụ: <span id="totalPrice"> {{ number_format($data->total_price) }}
+                            </span> vnd</h3>
                     </div>
             </form>
 
@@ -349,7 +391,7 @@
                     totalPrice += price;
                 });
 
-                $('#totalPrice').text(totalPrice.toLocaleString());
+                $('#totalPrice').text(totalPrice);
             });
 
             function performAjaxRequest() {

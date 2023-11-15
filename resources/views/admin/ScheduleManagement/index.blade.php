@@ -95,7 +95,7 @@
                                     <input id="name" name="name" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->name }}" disabled hidden>
                                     <input id="name_staff" type="text" name="name_staff" class="form-control w-full"
-                                        placeholder="Input text" value="{{ $item->admin->username }}" disabled hidden>
+                                        placeholder="Input text" value="{{ $item->admin->username ?? '' }}" disabled hidden>
                                     <input type="text" name="user_id" class="form-control w-full"
                                         value="{{ $item->user_id }}" hidden>
                                     <input type="text" name="admin_id" class="form-control w-full"

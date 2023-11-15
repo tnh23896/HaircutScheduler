@@ -300,7 +300,7 @@ class ScheduleController extends Controller
     {
         try {
             $data = Booking::query()->findOrFail($id);
-
+            // dd($data);
             // Lấy danh mục dịch vụ
             $serviceCategories = CategoryService::with('services')->get();
             $service = Service::all();
@@ -436,7 +436,7 @@ class ScheduleController extends Controller
             }
             $promo = Promotion::where('id', $data->promo_id)->first();
             if ($promo) {
-                
+
                 $sum_price_end = $sum_price - $promo->value;
             }else{
                 $sum_price_end = $sum_price;
