@@ -26,7 +26,7 @@
                                     <li class="home-drop" onclick="submenu(2)"><a href="{{ route('blog') }}"
                                             class="home-click">Tin tức</a>
                                     </li>
-                                    <li class="home-drop"><a href="">Liên hệ</a></li>
+                                    <li class="home-drop"><a href="{{route('client.contact')}}">Liên hệ</a></li>
                                     <li class="home-drop"><a href="{{ route('client.aboutus') }}">Giới thiệu</a></li>
                                     <div class="home-drop">
 
@@ -82,7 +82,7 @@
                         </li>
 
                         <li class="nav-1">
-                            <a class="nav-link" href="contact.html">Liên hệ</a>
+                            <a class="nav-link" href="{{route('client.contact')}}">Liên hệ</a>
                         </li>
                         <li class="nav-1">
                             <a class="nav-link" href="{{ route('client.aboutus') }}">Giới thiệu</a>

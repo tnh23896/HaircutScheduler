@@ -37,16 +37,6 @@
     </div>
     <script>
         $(function() {
-            $('#crud-form-1').on('change', function(e) {
-                var input = e.target;
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#previewImage').attr('src', e.target.result);
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-            });
             $('#saveBtn').on('click', function() {
                 var formData = new FormData($('#ajaxForm')[0]);
                 sendAjaxRequest('/admin/banner/create', 'POST', formData,

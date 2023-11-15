@@ -300,7 +300,7 @@ class ScheduleController extends Controller
     {
         try {
             $data = Booking::query()->findOrFail($id);
-
+            // dd($data);
             // Lấy danh mục dịch vụ
             $serviceCategories = CategoryService::with('services')->get();
             $service = Service::all();

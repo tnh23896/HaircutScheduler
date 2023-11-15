@@ -24,9 +24,6 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap">
-                            <input class="form-check-input" type="checkbox">
-                        </th>
                         <th class="whitespace-nowrap">Hình ảnh</th>
                         <th class="whitespace-nowrap">Tên</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
@@ -35,9 +32,6 @@
                 @foreach ($category_service as $category)
                     <tbody>
                         <tr class="intro-x">
-                            <td class="w-10">
-                                <input class="form-check-input" type="checkbox">
-                            </td>
                             <td class="!py-3.5">
                                 <img alt="Image Category" class="w-24 h-20 rounded" src="{{ asset($category->image) }}"
                                     title="{{ $category->created_at }}">
@@ -80,11 +74,11 @@
 
                 // Hiển thị hộp thoại xác nhận
                 Swal.fire({
-                    title: 'Bạn có muốn xóa?',
-                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
+                    title: 'Xoá?',
+                    text: 'Bạn chắc chắn muốn xoá?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Đúng!',
+                    confirmButtonText: 'Đồng ý',
                     cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -113,7 +107,4 @@
         </div>
         <!-- END: Pagination -->
     </div>
-@endsection
-@section('js_footer_custom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 @endsection

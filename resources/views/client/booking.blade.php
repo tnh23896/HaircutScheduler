@@ -239,7 +239,7 @@
                                                                                 </h6>
                                                                             </div>
                                                                             <span
-                                                                                class="mb-0 font-weight-semibold d-block">{{ $service->price }}
+                                                                                class="mb-0 font-weight-semibold d-block">{{ number_format($service->price) }}
                                                                                 VND
                                                                             </span>
 
@@ -433,7 +433,8 @@
                 var tottalPrice = checked.reduce(function(a, b) {
                     return a + b;
                 });
-                $('#totalPrice').text(tottalPrice.toLocaleString());
+                $('#totalPrice').text(tottalPrice);
+
 
             });
 

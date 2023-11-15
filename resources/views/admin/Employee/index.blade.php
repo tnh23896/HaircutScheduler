@@ -27,7 +27,7 @@
             <table class="table table-report -mt-2">
                 <thead>
                 <tr>
-                    <th class="whitespace-nowrap">ID</th>
+                    <th class="whitespace-nowrap">#</th>
                     <th class="whitespace-nowrap">Ảnh đại diện</th>
                     <th class="text-center whitespace-nowrap">Tên</th>
                     <th class="text-center whitespace-nowrap">Số điện thoại</th>
@@ -37,17 +37,18 @@
                 </tr>
                 </thead>
                 <tbody id="dataContainer">
+                    @php $count = 1 @endphp
                 @foreach ($employees as $item)
                     <tr class="intro-x">
                         <td class="w-10">
-                            <div class="text-center">{{ $item->id }}</div>
+                            <div class="text-center">{{ $count ++ }}</div>
                         </td>
                         <td class="!py-3.5">
                             <div class="flex items-center">
-                                <div class="w-9 h-9 image-fit zoom-in">
-                                    <img alt="Midone - HTML Admin Template"
-                                         class="rounded-lg border-white shadow-md tooltip"
-                                         src="{{ asset($item->avatar) }}" title="Uploaded at 29 May 2022">
+                                <div class="w-24 h-24 image-fit zoom-in">
+                                    <img alt="ảnh"
+                                         class="rounded-lg border-white shadow-md"
+                                         src="{{ asset($item->avatar) }}">
                                 </div>
                             </div>
                         </td>
@@ -73,10 +74,10 @@
                                    href="{{ route('admin.work-schedule.index', ['id' => $item->id]) }}"> <i
                                         data-lucide="calendar" class="w-4 h-4 mr-1"></i> Lịch </a>
                                 <a class="flex items-center mr-3" href="{{ route('admin.employee.edit', $item) }}"> <i
-                                        data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                        data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
                                 <button class="flex items-center text-danger delete-form"
                                         data-id="{{ $item->id }}">
-                                    <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                    <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xoá
                                 </button>
                             </div>
                         </td>
@@ -106,11 +107,11 @@
 
             // Hiển thị hộp thoại xác nhận
             Swal.fire({
-                title: 'Bạn chắc chắn muốn xoá?',
-                text: 'Chỉ khi nhân viên nghỉ làm rồi hãy xoá?',
+                title: 'Xoá?',
+                text: 'Bạn chắc chắn muốn xoá?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Đúng!',
+                confirmButtonText: 'Đồng ý',
                 cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {

@@ -149,11 +149,11 @@
                 deleteUrl = deleteUrl.replace('ID', $(this).data('id'));
 
                 Swal.fire({
-                    title: 'Bạn chắc chắn muốn xoá?',
-                    text: 'Chỉ khi nhân viên nghỉ làm rồi hãy xoá?',
+                    title: 'Xóa?',
+                    text: 'Bạn chắc chắc muốn xoá?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Đúng!',
+                    confirmButtonText: 'Đồng ý',
                     cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
