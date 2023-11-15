@@ -23,15 +23,10 @@ use App\Http\Controllers\Client\ServiceController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/test', function () {
-	return view('client.test');
-});
-
 // Login otp
 Route::post('/login-with-otp', [AuthController::class, 'login'])->name('loginOtp');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Home
-
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
 Route::get('booking-history', [BookingController::class, 'booking_history'])->name('booking_history');

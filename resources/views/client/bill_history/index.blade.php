@@ -1,5 +1,6 @@
 @extends('client.templates.layout_dashboard')
 @section('title', ' Trang hóa đơn')
+@section('title_page', 'Chi tiết hóa đơn')
 @section('content')
     <div id="my-orders">
         <div class="tabs-wrp brd-rd5">
