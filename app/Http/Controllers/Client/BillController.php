@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Review;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\Bill;
+use Illuminate\Support\Facades\Validator;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -23,11 +25,13 @@ class BillController extends Controller
             if ($request->ajax()) {
                 return view('client.bill_history.list_bill', compact('list_bill'));
             }
-            return view('client.bill_history.index', compact('list_bill'));
+            $reviews = Review::all();
+            return view('client.bill_history.index', compact('list_bill', 'reviews'));
         } catch (\Exception $e) {
             abort(404);
         }
     }
+
     public function printBill($id)
     {
         $options = new Options();
@@ -37,6 +41,25 @@ class BillController extends Controller
         $pdf = PDF::loadView('client.bill_history.printBill', compact('item'));
         $pdf->setPaper('A4', 'portrait');
         return $pdf->download('bill.pdf');
+    }
+
+    public function storeReview(Request $request)
+    {
+        try {
+        $validator = Validator::make($request->all(), [
+            'star' => 'required',
+            'comment' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return toastr()->error('Không được để trống đánh giá');
+        }
+         $data = new Review();
+        $data->fill($request->all());
+        $data->save();
+        return redirect()->route('bill')->with('success', 'Đánh giá thành công')->with('toast', true);
+        } catch (\Exception $e) {
+            abort(404);
+        }
     }
 
     /**
