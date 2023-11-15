@@ -321,6 +321,9 @@
 }
 
 @media (max-width: 1030px) {
+    .nav-login {
+        display: none;
+    }
     .barber-shop {
         width: 95%;
         padding-left: 1.562rem;
@@ -1031,6 +1034,7 @@
     }
 }
 @media (max-width: 768px) {
+    
     p {
         font-size: 1rem;
     }
@@ -1913,6 +1917,10 @@
     }
 }
 @media (max-width: 480px) {
+    .nav-right {
+        display: none;
+
+    }
     .hamburger-navigation .nav-menu li a {
         font-size: 30px;
     }
