@@ -430,13 +430,13 @@ class ScheduleController extends Controller
             $data->save();
             $sum_price = 0;
             foreach ($data->booking_details as $item) {
-                if ($item->status == "success") {
+                 if ($item->status == "success") {
                     $sum_price += $item->price;
                 }
             }
             $promo = Promotion::where('id', $data->promo_id)->first();
             if ($promo) {
-                
+
                 $sum_price_end = $sum_price - $promo->value;
             }else{
                 $sum_price_end = $sum_price;

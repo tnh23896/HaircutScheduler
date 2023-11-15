@@ -8,3 +8,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
 <script src="{{ asset('js/show-errors-notification.js') }}"></script>
+

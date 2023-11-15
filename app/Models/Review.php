@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Review extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $table = 'reviews';   
+    protected $table = 'reviews';
     protected $fillable = [
-        'star', 'content', 'user_id', 'admin_id', 'service_id',
+        'star', 'comment', 'user_id', 'admin_id', 'bill_id',
     ];
     public function user()
     {

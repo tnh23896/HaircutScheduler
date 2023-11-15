@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\Review;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Models\Bill;
+use Illuminate\Support\Facades\Validator;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -19,15 +21,17 @@ class BillController extends Controller
     {
         try {
             $id = auth('web')->user()->id;
-            $list_bill = Bill::where('user_id', $id)->paginate(4);
+            $list_bill = Bill::where('user_id', $id)->latest()->paginate(4);
             if ($request->ajax()) {
                 return view('client.bill_history.list_bill', compact('list_bill'));
             }
-            return view('client.bill_history.index', compact('list_bill'));
+            $reviews = Review::all();
+            return view('client.bill_history.index', compact('list_bill', 'reviews'));
         } catch (\Exception $e) {
             abort(404);
         }
     }
+
     public function printBill($id)
     {
         $options = new Options();
