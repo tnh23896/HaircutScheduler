@@ -21,7 +21,7 @@ class BillController extends Controller
     {
         try {
             $id = auth('web')->user()->id;
-            $list_bill = Bill::where('user_id', $id)->paginate(4);
+            $list_bill = Bill::where('user_id', $id)->latest()->paginate(4);
             if ($request->ajax()) {
                 return view('client.bill_history.list_bill', compact('list_bill'));
             }
@@ -41,25 +41,6 @@ class BillController extends Controller
         $pdf = PDF::loadView('client.bill_history.printBill', compact('item'));
         $pdf->setPaper('A4', 'portrait');
         return $pdf->download('bill.pdf');
-    }
-
-    public function storeReview(Request $request)
-    {
-        try {
-        $validator = Validator::make($request->all(), [
-            'star' => 'required',
-            'comment' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return toastr()->error('Không được để trống đánh giá');
-        }
-         $data = new Review();
-        $data->fill($request->all());
-        $data->save();
-        return redirect()->route('bill')->with('success', 'Đánh giá thành công')->with('toast', true);
-        } catch (\Exception $e) {
-            abort(404);
-        }
     }
 
     /**

@@ -23,10 +23,10 @@
                     @endif
                 @endforeach
                 @if (!$hideReviewButton)
-                    <a class="mr-1" data-toggle="modal" data-target=".modal_reviews{{ $bill->id }}" href=""
+                    <a class="theme-btn-2 mr-1" data-toggle="modal" data-target=".modal_reviews{{ $bill->id }}" href=""
                        title="" itemprop="url"
-                       style="width: 150px;height: 40px;color: white;border: none;padding: 0px;text-align: center;font-size: 13px;border-radius: 3px">
-                        Đánh giá</a>
+                       style="width: 150px;height: 40px; background-color: black !important; color: white;border: none;padding: 0px;text-align: center;font-size: 13px;border-radius: 3px">
+                        ĐÁNH GIÁ</a>
                 @endif
             </div>
         </div>

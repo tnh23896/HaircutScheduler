@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Client\BookingDetailsController;
+use App\Http\Controllers\Client\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\BillController;
@@ -63,4 +64,6 @@ Route::post('/profile/update', [ProfileController::class, 'update'])->name('prof
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');
 
 //Reviews
-Route::post('/reviews/store', [BillController::class, 'storeReview'])->name('reviews.store');
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+

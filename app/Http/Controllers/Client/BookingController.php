@@ -32,6 +32,7 @@ class BookingController extends Controller
             $id = auth('web')->user()->id;
             $list_booking = Booking::query()
                 ->where('user_id', $id)
+                ->latest()
                 ->paginate(10);
 
             if ($request->ajax()) {
