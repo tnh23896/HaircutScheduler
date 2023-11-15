@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Client\BookingDetailsController;
+use App\Http\Controllers\Client\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\AuthController;
 use App\Http\Controllers\Client\BillController;
@@ -33,7 +34,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
-Route::get('booking-history/{id}', [BookingController::class, 'booking_history'])->name('booking_history');
+Route::get('booking-history', [BookingController::class, 'booking_history'])->name('booking_history');
 Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
 Route::post('/booking-history/destroy/{id}', [BookingController::class, 'destroy'])->name('booking-history.delete');
 //Booking Details
@@ -61,3 +62,8 @@ Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //About-us
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');
+
+//Reviews
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+
