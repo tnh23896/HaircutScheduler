@@ -87,11 +87,11 @@
 
                 // Hiển thị hộp thoại xác nhận
                 Swal.fire({
-                    title: 'Bạn có muốn xóa?',
-                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
+                    title: 'Xóa?',
+                    text: 'Bạn chắc chắc muốn xoá?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Đúng!',
+                    confirmButtonText: 'Đồng ý',
                     cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
