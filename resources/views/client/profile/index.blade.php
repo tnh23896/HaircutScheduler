@@ -2,9 +2,7 @@
 @section('title', 'Tài Khoản của tôi')
 @section('title_page', 'Dashboard')
 @section('content')
-    @include('client.templates.navbar2')
-
-    <div class="tab-pane fade" id="account-settings">
+    <div >
         <div class="tabs-wrp account-settings brd-rd5">
             <h4 itemprop="headline">Cài đặt tài khoản</h4>
             <div class="account-settings-inner">
