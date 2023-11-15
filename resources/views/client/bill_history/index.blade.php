@@ -14,6 +14,7 @@
     </div>
     @foreach ($list_bill as $bill)
         @include('client.bill_history.modal')
+        @include('client.bill_history.modal_reviews')
     @endforeach
     @include('client.templates.pagination')
 @endsection
