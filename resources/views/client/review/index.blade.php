@@ -1,5 +1,6 @@
 @extends('client.templates.layout_dashboard')
 @section('title', 'Lịch sử đánh giá')
+@section('title_page', 'Lịch sử đánh giá')
 @section('content')
     <h4 itemprop="headline">Lịch sử đánh giá</h4>
     <div class="booking-table">

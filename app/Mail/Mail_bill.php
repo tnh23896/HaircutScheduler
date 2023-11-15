@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Mail;
-use App\Mail\Mail_bill;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -30,7 +29,7 @@ class Mail_bill extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Mail Bill',
+            subject: 'Hóa đơn thanh toán',
         );
     }
   

@@ -6,10 +6,12 @@ namespace App\Http\Controllers\Admin\Auth;
 use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\ForgotPasswordEmail;
+use App\Models\AdminPasswordReset;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Jobs\SendForgotPasswordEmail;
-use App\Models\AdminPasswordReset;
 
 class ForgotPasswordController extends Controller
 {
@@ -32,7 +34,6 @@ class ForgotPasswordController extends Controller
             'email' => $request->email,
             'token' => $token,
         ]);
-
         SendForgotPasswordEmail::dispatch( $token, $email );
         
         return back()->with('success', 'Chúng tôi đã gửi email để đặt lại mật khẩu của bạn.');
