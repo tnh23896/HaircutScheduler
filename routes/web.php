@@ -11,6 +11,7 @@ use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\ServiceController;
 
 /*
@@ -61,4 +62,8 @@ Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('clie
 //Reviews
 Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+
+//Contact
+Route::get('/contact', [ContactController::class, 'index'])->name('client.contact');
+Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.sendEmail');
 
