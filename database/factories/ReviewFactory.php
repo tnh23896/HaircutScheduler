@@ -21,6 +21,7 @@ class ReviewFactory extends Factory
             'comment' => $this->faker->text(),
             'user_id' => $this->faker->numberBetween(1, 5),
             'admin_id' => $this->faker->numberBetween(1, 5),
+						'bill_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('price');
             $table->string('booking_id');
-            $table->enum('status', ['cancel', 'success'])->default('cancel');
+            $table->enum('status', ['cancel', 'success'])->default('success');
             $table->string('admin_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
