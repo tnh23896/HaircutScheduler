@@ -9,11 +9,10 @@
 					</div>
 			</div>
 			<ul class="nav nav-tabs">
-					<li><a href="#dashboard" data-toggle="tab" class="active"><i class="fas fa-tachometer-alt"></i> Trang chủ</a></li>
-					<li><a href="{{ route('booking_history', Auth::user()->id) }}" ><i class="far fa-file-alt"></i>Lịch sử đặt lịch</a></li>
-					<li><a href="#my-reviews" data-toggle="tab"><i class="fa fa-comments"></i> MY REVIEWS</a></li>
-                    <li><a href="{{ route('bill') }}"><i class="fa fa-shopping-basket"></i>Trang hóa đơn</a></li>	
-					<li><a href="{{ route('profile.edit') }}" ><i class="fa fa-cog"></i> THÔNG TIN CÁ NHÂN </a></li>
+				<li><a href="{{ route('profile.edit') }}" ><i class="fa fa-cog"></i> THÔNG TIN CÁ NHÂN </a></li>
+					<li><a href="{{ route('booking_history') }}" ><i class="far fa-file-alt"></i>LỊCH SỬ ĐẶT LỊCH</a></li>
+					<li><a href="{{route('reviews.index')}}" ><i class="fa fa-comments"></i>LỊCH SỬ ĐÁNH GIÁ</a></li>
+                    <li><a href="{{ route('bill') }}"><i class="fa fa-shopping-basket"></i>TRANG CHI TIẾT HÓA ĐƠN</a></li>	
 			</ul>
 	</div>
 </div>

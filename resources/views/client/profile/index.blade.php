@@ -1,6 +1,6 @@
 @extends('client.templates.layout_dashboard')
 @section('title', 'Tài Khoản của tôi')
-@section('title_page', 'Dashboard')
+@section('title_page', 'Thông tin tài khoản')
 @section('content')
     <div >
         <div class="tabs-wrp account-settings brd-rd5">
@@ -16,7 +16,7 @@
                                         alt="profile-img1.jpg" itemprop="image">
                                 </div>
                                 <div class="profile-img-upload-btn">
-                                    <label class="fileContainer brd-rd5 yellow-bg theme-btn-2">
+                                    <label class="fileContainer brd-rd5 yellow-bg theme-btn-2 rounded">
                                         Tải hình ảnh lên
                                         <input id="crud-form-1" name="avatar" type="file" />
                                     </label>
@@ -26,23 +26,23 @@
                         <div class="col-md-8 col-sm-8 col-lg-8">
                             <div class="profile-info-form-wrap">
                                 <div class="col-md-12 col-sm-12 col-lg-12">
-                                    <label>Họ và Tên <sup>*</sup></label>
+                                    <label>Họ và Tên <sup class="text-danger">*</sup></label>
                                     <input class="brd-rd3" type="text " name="username" placeholder="Họ và tên ..."
                                         value="{{ $data->username }}">
                                     <label id="username-error" class="text-danger"></label>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-lg-12">
-                                    <label>Email <sup>*</sup></label>
+                                    <label>Email <sup class="text-danger">*</sup></label>
                                     <input class="brd-rd3" type="email" name="email" placeholder="Email ..."
                                         value="{{ $data->email }}">
                                     <label id="email-error" class="text-danger "></label>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-lg-12">
-                                    <label>Số Điện Thoại <sup>*</sup></label>
+                                    <label>Số Điện Thoại <sup class="text-danger">*</sup></label>
                                     <input class="brd-rd3" type="text" value="{{ $data->phone }}" disabled>
                                 </div>
                                 <button type="button" id="saveBtn"
-                                    class="fileContainer brd-rd5 yellow-bg theme-btn-2">Lưu Thông Tin</button>
+                                    class="fileContainer brd-rd5 yellow-bg theme-btn-2 ml-3 mt-2 rounded">Lưu Thông Tin</button>
                             </div>
                         </div>
                     </div>

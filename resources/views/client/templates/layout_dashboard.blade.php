@@ -14,7 +14,6 @@
     <section class="position-relative footer-area">
         <div class="container bg-text-area">
             <h2>@yield('title_page')</h2>
-            <span>Free Shave Towel with orders $30 or more</span>
         </div>
     </section>
     <section>
