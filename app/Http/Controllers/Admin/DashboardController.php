@@ -13,6 +13,10 @@ class DashboardController extends Controller
 {
 	public function index()
 	{
+		$getuser = $this->getuser();
+		$getservice = $this->getservice();
+		$getadmin = $this->getadmin();
+		$getbill = $this->getbill();
 		$topservice = $this->baseServiceSetbyTime();
 		$topBooker = $this->basetopBooker();
 		$topEmployeesData = $this->baseTopEmployees();
@@ -20,7 +24,25 @@ class DashboardController extends Controller
 		$totalRevenue = $this->calculateBillRevenue();
 		$lastMonthrevenue = $this->revenue();
 		$revenue = $this->currntMonthrevenue();
-		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topservice', 'revenue', 'lastMonthrevenue' ,'topEmployeesData'));
+	
+		
+		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topservice', 'revenue', 'lastMonthrevenue' ,'topEmployeesData','getbill','getadmin','getservice','getuser'));
+	}
+	public function getbill(){
+		$getbill = DB::table('bills')->count();
+		return $getbill;
+	}
+	public function getadmin(){
+		$getadmin = DB::table('admins')->count();
+		return $getadmin;
+	}
+	public function getservice(){
+		$getservice = DB::table('services')->count();
+		return $getservice;
+	}
+	public function getuser(){
+		$getuser = DB::table('users')->count();
+		return $getuser;
 	}
 
 	private function revenue()
