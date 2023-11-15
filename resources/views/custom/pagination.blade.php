@@ -15,8 +15,8 @@
         border-radius: 4px;
         margin: 0 5px;
         display: inline-block;
-        transition: background-color 0.3s, color 0.3s; 
-        min-width: 40px; 
+        transition: background-color 0.3s, color 0.3s;
+        min-width: 40px;
         text-align: center;
     }
 
@@ -29,7 +29,14 @@
 
     .custom-pagination .custom-first,
     .custom-pagination .custom-last {
-        min-width: auto; 
+        min-width: auto;
+    }
+
+    .custom-pagination .custom-page-item.disabled .custom-page-link,
+    .custom-pagination .custom-page-item.disabled .custom-page-link:hover {
+        background-color: #ddd !important;
+        color: #999 !important;
+        pointer-events: none !important;
     }
 
     .custom-pagination li {
@@ -41,8 +48,8 @@
     <nav aria-label="Pagination">
         <ul class="custom-pagination justify-content-center align-items-center">
             @php
-                $showPageNumbers = true; // Chỉnh giá trị này tùy thuộc vào logic của bạn
-                $visiblePageRange = 5; // Số trang hiển thị trực tiếp, điều này có thể thay đổi tùy ý
+                $showPageNumbers = true; 
+                $visiblePageRange = 4; 
                 $totalPages = $paginator->lastPage();
                 $currentPage = $paginator->currentPage();
             @endphp
