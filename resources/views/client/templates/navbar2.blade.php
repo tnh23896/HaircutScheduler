@@ -41,7 +41,7 @@
             
                                                     <ul class="dropdown-menu" style="top: 30px;background-color: #d9842f;"
                                                     aria-labelledby="navbarDarkDropdownMenuLink">
-                                                        <li ><a class="dropdown-item" href="{{ route('client.profile') }}">Thông tin cá nhân</a></li>
+                                                        <li ><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá nhân</a></li>
                                                         <li>
                                                             <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
                                                         </li>
