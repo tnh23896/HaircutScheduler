@@ -20,51 +20,42 @@
             </form>
         </div>
         <!-- BEGIN: Data List -->
-        <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
-            <table class="table table-report -mt-2">
-                <thead>
-                    <tr>
-                        <th class="whitespace-nowrap">Hình ảnh</th>
-                        <th class="whitespace-nowrap">Tên</th>
-                        <th class="text-center whitespace-nowrap">Hành động</th>
-                    </tr>
-                </thead>
-                @foreach ($category_service as $category)
-                    <tbody>
-                        <tr class="intro-x">
-                            <td class="!py-3.5">
-                                <img alt="Image Category" class="w-24 h-20 rounded" src="{{ asset($category->image) }}"
-                                    title="{{ $category->created_at }}">
-                            </td>
-                            <td class=""><a class=""
-                                    href="">{{ $category->name }}</a></td>
+        @foreach ($category_service as $category)
+        <div class="intro-y col-span-12 md:col-span-6">
+            <div class="box">
+                <div class="flex flex-col lg:flex-row items-center p-5">
+                    <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
+                        <img alt="{{ $category->name }}" class="rounded-full" src="{{ asset($category->image) }}">
+                    </div>
+                    <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
+                        <a href="#" class="font-medium">{{ $category->name }}</a> 
+                        {{-- <div class="text-slate-500 text-xs mt-0.5">DevOps Engineer</div> --}}
+                    </div>
+                    <div class="flex mt-4 lg:mt-0">
+                        <div class="flex justify-center items-center">
+                            <a class="flex items-center mr-3"
+                               href="{{ route('admin.serviceManagement.category.edit', $category->id) }}">
+                                <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
+                                Sửa </a>
 
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3"
-                                       href="{{ route('admin.serviceManagement.category.edit', $category->id) }}">
-                                        <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
-                                        Sửa </a>
-
-                                    <form class="delete-form"
-                                          action="{{ route('admin.serviceManagement.category.delete', $category->id) }}"
-                                          method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
-                                            <button type="submit" class="flex items-center text-danger"
-                                                    data-id="{{ $category->id }}">
-                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
-                                            </button>
-                                        </div>
-                                    </form>
+                            <form class="delete-form"
+                                  action="{{ route('admin.serviceManagement.category.delete', $category->id) }}"
+                                  method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
+                                    <button type="submit" class="flex items-center text-danger"
+                                            data-id="{{ $category->id }}">
+                                        <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
+                                    </button>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                @endforeach
-            </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        @endforeach
         <script>
             // Sử dụng hàm sendAjaxRequest để xác nhận và xoá phần tử
             $('.delete-form').on('submit', function(e) {

@@ -23,7 +23,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category_service = $this->model->latest()->paginate(5);
+        $category_service = $this->model->latest()->paginate(10);
 
         return view('admin.serviceManagement.category.index', compact('category_service'));
     }
@@ -65,7 +65,7 @@ class CategoryController extends Controller
 
         $category_service = search(CategoryService::class, $search, $fields)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
         return view('admin.serviceManagement.category.index', compact('category_service'));
     }

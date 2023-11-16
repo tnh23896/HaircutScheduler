@@ -24,7 +24,7 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $blogs = $this->blogmodel->latest()->paginate(10);
+        $blogs = $this->blogmodel->latest()->paginate(9);
         $categoryBlog = $this->Categorymodel::get(['id', 'title']);
         return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
     }
@@ -37,7 +37,7 @@ class BlogController extends Controller
             $fields = ['title'];
             $blogs = search($this->blogmodel::class, $search, $fields)
                 ->latest()
-                ->paginate(10)
+                ->paginate(9)
                 ->withQueryString();
             return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
         } catch (\Exception $exception) {
@@ -52,7 +52,7 @@ class BlogController extends Controller
         $filter = $request->input('filter');
         $categoryBlog = $this->Categorymodel::get(['id', 'title']);
         if ($filter == "") {
-            $blogs = $this->blogmodel::latest()->paginate(10)->withQueryString();
+            $blogs = $this->blogmodel::latest()->paginate(9)->withQueryString();
         } else {
             $blogs = $this->blogmodel::where('category_blog_id', $filter)
                 ->latest()
