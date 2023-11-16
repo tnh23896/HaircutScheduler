@@ -109,10 +109,10 @@
         }
 
         .cursor-pointer {
-            background-color: #d9842f;
-            height: 30px;
-            align-items: center;
-            display: flex
+            /* background-color: #d9842f; */
+            /* height: 30px; */
+            /* align-items: center; */
+            /* display: flex */
         }
 
         /* //ảnh// */
@@ -128,10 +128,11 @@
         }
 
         .radio-button-with-image .image-container {
-            width: 100px;
-            height: 100px;
+            width: 180px;
+            height: 180px;
             overflow: hidden;
             border-radius: 50%;
+            object-fit: cover;
             margin-bottom: 0.5rem;
         }
 
@@ -314,6 +315,50 @@
                             </details>
                         </div>
                     </div>
+                    <!-- BEGIN: Multiple Item -->
+                    <div class="intro-y box mt-5">
+                        <div id="multiple-item-slider" class="p-5">
+                            <div class="preview">
+                                <div class="mx-6">
+                                    <div class="multiple-items">
+                                       @foreach ($staffMembers as $staff)
+                                            <label class="radio-button-with-image text-center mx-2">
+                                                <input type="radio" name="admin_id" id="admin_{{ $staff->id }}"
+                                                    value="{{ $staff->id }}" hidden>
+                                                <div class="image-container">
+                                                    <img src="{{ asset($staff->avatar) }}" alt="{{ $staff->username }}">
+                                                </div>
+                                                <div class="mx-auto" style="">{{ $staff->username }}</div>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex flex-col items-center justify-content-center">
+                                        <label for="crud-form-1" class="form-label text-lg mb-2">Ngày đặt lịch</label>
+                                        <div class="px-3">
+                                            <div class="row">
+                                                <div class="col-md-4 mx-auto">
+                                                    <select class="tom-select" name="day" style="width: 200px;height: 15px;">
+                                                        @foreach ($availableDates as $date)
+                                                            <option class="w-full font-medium"
+                                                                value="{{ \Carbon\Carbon::parse($date)->format('Y-m-d') }}">
+                                                                {{ \Carbon\Carbon::parse($date)->format('\N\g\à\y\ d/m/Y') }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 flex flex-col items-center">
+                                        <h5 class="text-center text-lg mb-3">Chọn thời gian</h5>
+                                        <div class="d-flex flex-wrap justify-content-center" id="timeSelect">
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                    <!-- END: Multiple Item -->
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Mã giảm giá</label>
                         <input name="promoCode" type="text" class="form-control w-full" placeholder="Mã giảm giá">
