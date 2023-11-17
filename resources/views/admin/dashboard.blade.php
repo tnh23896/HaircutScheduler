@@ -113,7 +113,7 @@
                         </div>
                         <div class="report-chart">
                             <div class="h-[275px]">
-                                <canvas id="report-line-chart" data-filtered-data="{{ json_encode($totalRevenue) }}"
+                                <canvas id="report-line-chart" data-filter-data="{{ json_encode($totalRevenue) }}"
                                     class="mt-6 -mb-6" width="486" height="343"></canvas>
                             </div>
                         </div>

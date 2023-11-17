@@ -25,7 +25,6 @@ class DashboardController extends Controller
 		$lastMonthrevenue = $this->revenue();
 		$revenue = $this->currentMonthRevenue();
 
-
 		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topservice', 'revenue', 'lastMonthrevenue', 'topEmployeesData', 'getbill', 'getadmin', 'getservice', 'getuser'));
 	}
 	public function getbill()
@@ -261,20 +260,29 @@ class DashboardController extends Controller
 			->groupBy('month')
 			->orderBy('month', 'asc');
 
-		$filteredData = $query->get();
+            $result = $query->get();
 
-		$data = [];
-		foreach ($filteredData as $item) {
-			$month = $item->month;
+            $data = [];
+            foreach ($result as $row) {
+                $data[$row->month] = [
+                    'totalBookings' => $row->totalBookings,
+                    'successfulBookings' => $row->successfulBookings,
+                    'cancelledBookings' => $row->cancelledBookings,
+                ];
+            }
 
-			$data[$month] = [
-				'totalBookings' => $item->totalBookings,
-				'successfulBookings' => $item->successfulBookings,
-				'cancelledBookings' => $item->cancelledBookings,
-			];
-		}
+            $allMonths = range(1, 12);
+            foreach ($allMonths as $month) {
+                if (!isset($data[$month])) {
+                    $data[$month] = [
+                        'totalBookings' => 0,
+                        'successfulBookings' => 0,
+                        'cancelledBookings' => 0,
+                    ];
+                }
+            }
 
-		return $data;
+        return $data;
 	}
 	// Lọc theo tháng và năm
 	private function baScheduleSetbyTime(Request $request)
@@ -373,11 +381,10 @@ class DashboardController extends Controller
 	//
 	private function basetopBooker()
 	{
-		$query = Booking::select('users.username', 'users.avatar')
-			->selectRaw('count(bookings.id) as totalBookings')
-			->selectRaw('SUM(bookings.total_price) as totalPrice')
-			->where('bookings.status', 'success')
-			->join('users', 'bookings.user_id', '=', 'users.id')
+		$query = Bill::select('users.username', 'users.avatar')
+			->selectRaw('count(bills.id) as totalBookings')
+			->selectRaw('SUM(bills.total_price) as totalPrice')
+			->join('users', 'bills.user_id', '=', 'users.id')
 			->groupBy('users.username', 'users.avatar')
 			->orderBy('totalBookings', 'desc')
 			->take(5)
