@@ -22,12 +22,12 @@
                 </div>
                 <div class="text-center">
                     <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white mr-2">Chú thích:</h3>
-                    <div class="mt-3 flex w-60 mx-auto">
-                        <div class="w-20 bg-success text-white text-center border-0 py-2">Trống lịch</div>
-                        <div class="w-20 bg-danger text-white text-center border-0 py-2">Đã được đặt</div>
-                        <div class="w-20 bg-warning text-white text-center border-0 py-2">Đã hoàn thành</div>
+                    <div class="mt-3 flex md:mx-auto justify-center">
+                        <div class="legend-item mx-2 md:mx-0 md:ml-2" style="flex-grow: 1; max-width: 200px; box-sizing: border-box; background-color: #28a745; color: #fff; text-center: border-0; py-2;">Trống lịch</div>
+                        <div class="legend-item mx-2 md:mx-0 md:ml-2" style="flex-grow: 1; max-width: 200px; box-sizing: border-box; background-color: #dc3545; color: #fff; text-center: border-0; py-2;">Đã được đặt</div>
+                        <div class="legend-item mx-2 md:mx-0 md:ml-2" style="flex-grow: 1; max-width: 200px; box-sizing: border-box; background-color: #ffc107; color: #fff; text-center: border-0; py-2;">Đã hoàn thành</div>
                     </div>
-                </div>
+                </div>               
                 <thead>
                     <tr>
                         <th class="text-center whitespace-nowrap">Ngày làm việc</th>
