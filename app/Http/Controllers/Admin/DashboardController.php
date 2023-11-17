@@ -381,15 +381,14 @@ class DashboardController extends Controller
 	//
 	private function basetopBooker()
 	{
-		$query = Bill::select('users.username', 'users.avatar')
+		$query = Bill::select('bills.name', 'users.avatar')
 			->selectRaw('count(bills.id) as totalBookings')
 			->selectRaw('SUM(bills.total_price) as totalPrice')
 			->join('users', 'bills.user_id', '=', 'users.id')
-			->groupBy('users.username', 'users.avatar')
+			->groupBy('bills.name', 'users.avatar')
 			->orderBy('totalBookings', 'desc')
 			->take(5)
 			->get();
-
 		return $query;
 	}
 
@@ -399,10 +398,10 @@ class DashboardController extends Controller
 		$year = $request->year;
 
 		$query = Bill::join('users', 'users.id', '=', 'bills.user_id')
-			->select('users.username', 'users.avatar', 'bills.user_id')
+			->select('bills.name', 'users.avatar', 'bills.user_id')
 			->selectRaw('SUM(bills.total_price) as totalPrice')
 			->selectRaw('COUNT(*) as totalBookings')
-			->groupBy('bills.user_id', 'users.username', 'users.avatar')
+			->groupBy('bills.user_id', 'bills.name', 'users.avatar')
 			->orderByDesc('totalBookings');
 		if ($month) {
 			$query->whereMonth('day', $month);
