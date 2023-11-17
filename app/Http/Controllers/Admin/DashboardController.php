@@ -398,12 +398,11 @@ class DashboardController extends Controller
 		$month = $request->month;
 		$year = $request->year;
 
-		$query = Booking::join('users', 'users.id', '=', 'bookings.user_id')
-			->select('users.username', 'users.avatar', 'bookings.user_id')
-			->selectRaw('SUM(bookings.total_price) as totalPrice')
+		$query = Bill::join('users', 'users.id', '=', 'bills.user_id')
+			->select('users.username', 'users.avatar', 'bills.user_id')
+			->selectRaw('SUM(bills.total_price) as totalPrice')
 			->selectRaw('COUNT(*) as totalBookings')
-			->where('bookings.status', 'success')
-			->groupBy('bookings.user_id', 'users.username', 'users.avatar')
+			->groupBy('bills.user_id', 'users.username', 'users.avatar')
 			->orderByDesc('totalBookings');
 		if ($month) {
 			$query->whereMonth('day', $month);
