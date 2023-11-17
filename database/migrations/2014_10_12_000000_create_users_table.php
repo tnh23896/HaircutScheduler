@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('username', 255)->nullable();
             $table->string('phone');
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('default.jpg');
             $table->string('email')->unique()->nullable();
             $table->boolean('black_status')->default(false);
             $table->timestamp('email_verified_at')->nullable();
