@@ -47,7 +47,13 @@
                         <td class="text-center capitalize">{{ $item->username }}</td>
                         <td class="text-center capitalize">{{ $item->phone }}</td>
                         <td class="text-center capitalize">{{ $item->email }}</td>
-                        <td class="text-center capitalize {{ $item->black_status == 0 ? 'text-success' : 'text-danger' }}"> {{ $item->black_status == 0 ? 'Kích hoạt' : 'Không kích hoạt' }}</td>
+                        <td class="text-center capitalize">
+                            @if($item->black_status == 0)
+                                <div class="flex items-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>Kích hoạt</div>
+                            @else
+                                <div class="flex items-center text-danger"><i data-lucide="x-circle" class="mr-2 w-4 h-4 mr-2 text-red-500"></i> Không kích hoạt </div>
+                            @endif
+                        </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a href="{{ route('admin.UserManagement.edit', $item->id) }}"
