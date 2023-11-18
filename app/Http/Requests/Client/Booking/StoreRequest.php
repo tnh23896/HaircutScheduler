@@ -25,7 +25,6 @@ class StoreRequest extends FormRequest
         // admin_id : "33" day : "2023-10-27" email : "hoang212185@gmail.com" name : "thanh" phone : "+84343112464" promo_code : "4" servicesId : "1,6" time : "3" total_price : "4562"
         return [
             'name' => 'required',
-            'admin_id' => 'required',
             'email' => 'required',
             'phone' => 'required',
             'day' => 'required',
@@ -38,7 +37,6 @@ class StoreRequest extends FormRequest
     {
         return [
             'name.required' => 'Bạn chưa nhập tên',
-            'admin_id.required' => 'Bạn chưa chọn nhân viên',
             'email.required' => 'Bạn chưa nhập email',
             'phone.required' => 'Bạn chưa nhập số điện thoại',
             'day.required' => 'Bạn chưa chọn ngày hẹn cắt tóc',
