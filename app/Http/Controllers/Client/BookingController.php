@@ -182,7 +182,7 @@ class BookingController extends Controller
             $time_id = $request->time;
             $time = Time::query()->findOrFail($time_id);
             if($admin_id == "random"){
-            $params['admin_id'] = DB::table('work_schedule_details')
+            $admin_id = DB::table('work_schedule_details')
                 ->join('times', 'work_schedule_details.time_id', '=', 'times.id')
                 ->join('work_schedules', 'work_schedule_details.work_schedules_id', '=', 'work_schedules.id')
                 ->where('times.id', $time_id)
@@ -190,9 +190,9 @@ class BookingController extends Controller
                 ->inRandomOrder() // Lấy ngẫu nhiên
                 ->value('work_schedules.admin_id');
             }else{
-                $params['admin_id'] = $admin_id;
+                $admin_id = $admin_id;
             }
-      
+            $params['admin_id'] = $admin_id;
             $params['time'] = $time->time;
             if ($request->promo_code) {
                 $promo = Promotion::where('promocode', $request->promo_code)->first();
@@ -210,7 +210,7 @@ class BookingController extends Controller
                 ]);
             }
           
-            $workSchedule = WorkSchedule::query()->where('admin_id', $params['admin_id'])->where('day', $day)->first();
+            $workSchedule = WorkSchedule::query()->where('admin_id', $admin_id)->where('day', $day)->first();
 
             $findWorkScheduleDetail = DB::table('work_schedule_details')
                 ->where('work_schedule_details.time_id', $time->id)
