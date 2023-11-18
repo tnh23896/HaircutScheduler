@@ -122,7 +122,7 @@
                     </h2>
                     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                         <a href="{{ route('admin.billManagement.printBill', $item->id) }}"><button
-                                class="btn btn-primary ">In hóa đơn</button></a>
+                                class="btn btn-primary ">Tải hóa đơn</button></a>
                     </div>
                 </div>
                 <!-- BEGIN: Invoice -->
