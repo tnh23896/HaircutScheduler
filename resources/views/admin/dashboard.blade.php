@@ -113,7 +113,7 @@
                         </div>
                         <div class="report-chart">
                             <div class="h-[275px]">
-                                <canvas id="report-line-chart" data-filtered-data="{{ json_encode($totalRevenue) }}"
+                                <canvas id="report-line-chart" data-filter-data="{{ json_encode($totalRevenue) }}"
                                     class="mt-6 -mb-6" width="486" height="343"></canvas>
                             </div>
                         </div>
@@ -343,7 +343,7 @@
                                         </td>
                                         <td class="text-center whitespace-nowrap">
                                             <a href="#"
-                                                class="text-center font-medium whitespace-nowrap">{{ $booker->username }}</a>
+                                                class="text-center font-medium whitespace-nowrap">{{ $booker->name }}</a>
                                         </td>
                                         <td class=" text-center">{{ $booker->totalBookings }}</td>
                                         <td class="text-center">{{ number_format($booker->totalPrice) }} vnd</td>
@@ -406,7 +406,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td class="text-center whitespace-nowrap">
-                                                                                <a href="#" class="text-center font-medium whitespace-nowrap">${booker.username}</a>
+                                                                                <a href="#" class="text-center font-medium whitespace-nowrap">${booker.name}</a>
                                                                             </td>
                                                                             <td class=" text-center">${booker.totalBookings}</td>
                                                                             <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
