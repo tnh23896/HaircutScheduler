@@ -82,8 +82,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $data = User::find($id);
-        return view('admin.UserManagement.edit', compact('data'));
+       
     }
 
     /**
