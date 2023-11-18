@@ -38,7 +38,7 @@
                     <th class="whitespace-nowrap text-center">Điện thoại</th>
                     <th class="whitespace-nowrap text-center">Email</th>
                     <th class="whitespace-nowrap text-center">Trạng thái tài khoản</th>
-                    <th class="text-center whitespace-nowrap ">Hành động</th>
+
                 </tr>
                 </thead>
                 @foreach ($data as $key => $item)
@@ -48,20 +48,24 @@
                         <td class="text-center capitalize">{{ $item->phone }}</td>
                         <td class="text-center capitalize">{{ $item->email }}</td>
                         <td class="text-center capitalize">
-                            @if($item->black_status == 0)
-                                <div class="flex items-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>Kích hoạt</div>
-                            @else
-                                <div class="flex items-center text-danger"><i data-lucide="x-circle" class="mr-2 w-4 h-4 mr-2 text-red-500"></i> Không kích hoạt </div>
-                            @endif
+                            <select class="statusSelect form-select w-full text-center w-40 sm:w-auto" data-id="{{ $item->id }}"
+                                data-current-status="{{ $item->black_status }}">
+                                <option value="0" {{ $item->black_status == 0 ? 'selected' : '' }}>
+                                    Kích hoạt
+                                </option>
+                                <option value="1" {{ $item->black_status == 1 ? 'selected' : '' }}>
+                                    Không kích hoạt
+                                </option>
+                            </select>
                         </td>
-                        <td class="table-report__action w-56">
+                        {{-- <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a href="{{ route('admin.UserManagement.edit', $item->id) }}"
                                    class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
                                                                                           class="w-4 h-4 mr-1"></i> Sửa
                                 </a>
                             </div>
-                        </td>
+                        </td> --}}
                     </tr>
                     </tbody>
                 @endforeach
@@ -76,6 +80,80 @@
         </div>
         <!-- END: Pagination -->
     </div>
+    <script>
+        $(document).ready(function() {
+            $(".statusSelect").on("change", function() {
+                var selectElement = $(this);
+                var newStatus = selectElement.val();
+                var editId = selectElement.data("id");
+                Swal.fire({
+                    title: 'Chuyển trạng thái?',
+                    text: `Bạn có chắc muốn chuyển trạng thái thành ${getStatusNameInVietnamese(newStatus)}?`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Hủy',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData();
+                        formData.append("black_status", newStatus);
+                        var url =
+                            "{{ route('admin.UserManagement.update', ':editId') }}";
+                            url = url.replace(':editId', editId);
+
+                        sendAjaxRequest(url, 'POST', formData,
+                            function(response) {
+                                if (response.success) {
+                                    toastr.success(response.success);
+                                    // Cập nhật trạng thái hiện tại của select box
+                                    selectElement.data("current-status", newStatus);
+                                    // Thực hiện logic cập nhật trạng thái dựa trên kết quả trả về
+                                    updateSelectOptions(selectElement, newStatus);
+                                    console.log(response);
+                                }
+                            },
+                            function(error) {
+                                showErrors(error);
+                                console.log(error);
+                            }
+                        );
+                    } else {
+                        var currentStatus = selectElement.data("current-status");
+                        selectElement.val(currentStatus);
+                    }
+                });
+            });
+
+            // Hàm cập nhật tùy chọn của select box dựa trên trạng thái mới
+            function updateSelectOptions(selectElement, newStatus) {
+                switch (newStatus) {
+                    case '0':
+                        selectElement.html('<option value="0">Kích hoạt</option>' +
+                            '<option value="1">Không kích hoạt</option>' );
+                        break;
+                    case '1':
+                        selectElement.html('<option value="1" selected>Không kích hoạt</option>' +
+                            '<option value="0">Kích hoạt</option>');
+                        break;
+                    default:
+                        // Thêm logic xử lý cho trường hợp khác nếu cần
+                        break;
+                }
+            }
+
+            // Hàm để lấy tên trạng thái bằng tiếng Việt
+            function getStatusNameInVietnamese(status) {
+                switch (status) {
+                    case '0':
+                        return 'Kích hoạt';
+                    case '1':
+                        return 'Không kích hoạt';
+                    default:
+                        return status; // Trả về trạng thái nguyên thủy nếu không khớp với các trường hợp trên
+                }
+            }
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
