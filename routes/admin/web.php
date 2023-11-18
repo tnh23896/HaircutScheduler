@@ -204,8 +204,6 @@ Route::group(['middleware' => 'admin'], function () {
     //User
     Route::get('user', [UserController::class, 'index'])
         ->name('admin.UserManagement.index');
-    Route::get('user/edit/{id}', [UserController::class, 'edit'])
-        ->name('admin.UserManagement.edit');
     Route::post('user/update/{id}', [UserController::class, 'update'])
         ->name('admin.UserManagement.update');
     Route::get('search-user', [UserController::class, 'search'])
