@@ -85,7 +85,6 @@ return [
 
     //User Management
     'admin.UserManagement.index' => 'Danh sách người dùng',
-    'admin.UserManagement.edit' => 'Chỉnh sửa người dùng',
     'admin.UserManagement.update' => 'Cập nhật người dùng',
 
     // Time Management
