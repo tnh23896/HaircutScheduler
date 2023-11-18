@@ -39,7 +39,7 @@
                         <tr class="intro-x">
                             <td class="text-center capitalize">{{ $key + 1 }}</td>
 
-                            <td class="text-center capitalize">{{ $rating->bill->name }}</td>
+                            <td class="text-center capitalize">{{ $rating->user_name }}</td>
                             <td class="text-center">
                                 <div class="flex items-center">
                                     @for ($i = 0; $i < $rating->star; $i++)
