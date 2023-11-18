@@ -92,7 +92,30 @@ class BookingController extends Controller
         try {
             $adminId = $request->admin_id;
             $day = $request->day;
-            if ($adminId && $day) {
+           if($adminId == "random"){
+            if($day){
+                $timeSlots = Time::with('work_schedules')->orderBy('time')
+                    ->whereHas('work_schedules', function ($query) use ($day) {
+                        $query->where('day', $day);
+                    })
+                    ->whereHas('work_schedule_details', function ($query) {
+                        $query->where('status', 'available');
+                    })
+                    ->get();
+                    return response()->json([
+                        'times' => $timeSlots,
+                    ], 200);
+            } else{
+                $timeSlots = Time::with('work_schedules')->orderBy('time')
+                ->whereHas('work_schedule_details', function ($query) {
+                    $query->where('status', 'available');
+                })
+                ->get();
+                return response()->json([
+                    'times' => $timeSlots,
+                ], 200);
+            }
+           }else if ($adminId && $day) {
 
                 $workSchedules = WorkSchedule::with(['times' => function ($query) {
                     $query->orderBy('time');
