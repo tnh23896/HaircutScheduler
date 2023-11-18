@@ -292,6 +292,19 @@
                                             </svg></button>
                                         <div id="employee_list" class="scrollable" style="white-space: nowrap;">
                                             <h5 class="text-center mb-3">Chọn nhân viên</h5>
+                                            <div class="d-inline-block">
+                                                <div class="p-0">
+                                                    <input type="radio" name="admin_id"
+                                                        id="admin_" value="random" checked
+                                                        hidden>
+                                                    <label for="admin_"
+                                                        class="d-flex flex-column">
+                                                        <img src="https://th.bing.com/th/id/OIP.6RVGli51bKOZip7wxOomSAHaJ4?w=202&h=270&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="rounded-circle"
+                                                            style="width: 100px;height: 100px" alt="">
+                                                        <h6 class="text-center">123141241</h6>
+                                                    </label>
+                                                </div>
+                                            </div>
                                             @foreach ($staffMembers as $staff)
                                                 <div class="d-inline-block">
                                                     <div class="p-0">
@@ -413,13 +426,7 @@
             $('input:radio[name="admin_id"]').change(function() {
                 performAjaxRequest();
             });
-            $('#timeSelect').on('change', 'input:radio[name="time_id"]', function() {
-                const admin = $('input:radio[name="admin_id"]:checked').val();
-                if (!admin) {
-                    toastr.error('Vui lòng chọn nhân viên');
-                    $('input:radio[name="time_id"]').prop('checked', false);
-                }
-            });
+        
             $('select[name="day"]').change(function() {
                 performAjaxRequest();
             });
@@ -519,7 +526,9 @@
 
                     sendAjaxRequest("{{ route('booking-service.store') }}", 'post', form,
                         response => {
+                            console.log(response);
                             toastr.success(response.message);
+
                             location.href = "{{ route('home.index') }}";
                         },
                         error => {

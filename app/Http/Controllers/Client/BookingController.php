@@ -56,7 +56,6 @@ class BookingController extends Controller
 
             // Ngày kết thúc tính lịch làm việc
             $endDateForWorkSchedule = $startDate->copy()->addDay(3)->endOfDay();
-
             // Lấy danh sách ngày làm việc
             $availableDates = WorkSchedule::whereBetween('day', [$startDate, $endDateForWorkSchedule])
                 ->groupBy('day')
@@ -70,11 +69,17 @@ class BookingController extends Controller
                 })->get();
 
             // Lấy danh sách khung giờ
-            $timeSlots = Time::whereHas('work_schedules', function ($query) use ($startDate) {
-                $query->where('day', $startDate);
-            })->whereHas('work_schedule_details', function ($query) {
-                $query->where('status', 'available');
-            })->orderBy('time')->get()->unique();
+
+            $timeSlots = Time::with('work_schedules')->orderBy('time')
+                ->whereHas('work_schedules', function ($query) use ($startDate) {
+                    $query->where('day', $startDate);
+                })
+                ->whereHas('work_schedule_details', function ($query) {
+                    $query->where('status', 'available');
+                })
+                ->get();
+
+
             return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
@@ -89,12 +94,12 @@ class BookingController extends Controller
             $day = $request->day;
             if ($adminId && $day) {
 
-                $workSchedules = WorkSchedule::with(['times' => function($query) {
+                $workSchedules = WorkSchedule::with(['times' => function ($query) {
                     $query->orderBy('time');
                 }])
-                ->where('day', $day)
-                ->where('admin_id', $adminId)
-                ->firstOrFail();
+                    ->where('day', $day)
+                    ->where('admin_id', $adminId)
+                    ->firstOrFail();
                 $workScheduleDetails = $workSchedules->work_schedule_details;
 
                 $availableDetails = $workScheduleDetails->filter(function ($detail) {
@@ -111,14 +116,13 @@ class BookingController extends Controller
                 ], 200);
             } elseif ($day) {
                 $timeSlots = Time::with('work_schedules')->orderBy('time')
-                ->whereHas('work_schedules', function ($query) use ($day) {
-                    $query->where('day', $day);
-                })
-                ->whereHas('work_schedule_details', function ($query) {
-                    $query->where('status', 'available');
-                })
-                ->get();
-
+                    ->whereHas('work_schedules', function ($query) use ($day) {
+                        $query->where('day', $day);
+                    })
+                    ->whereHas('work_schedule_details', function ($query) {
+                        $query->where('status', 'available');
+                    })
+                    ->get();
 
 
                 return response()->json([
@@ -147,7 +151,6 @@ class BookingController extends Controller
             $params = [
                 'name' => $request->name,
                 'user_id' => auth('web')->user()->id,
-                'admin_id' => $admin_id,
                 'phone' => $request->phone,
                 'total_price' => $request->total_price,
                 'email' => $request->email,
@@ -155,6 +158,18 @@ class BookingController extends Controller
             ];
             $time_id = $request->time;
             $time = Time::query()->findOrFail($time_id);
+            if($admin_id == "random"){
+            $params['admin_id'] = DB::table('work_schedule_details')
+                ->join('times', 'work_schedule_details.time_id', '=', 'times.id')
+                ->join('work_schedules', 'work_schedule_details.work_schedules_id', '=', 'work_schedules.id')
+                ->where('times.id', $time_id)
+                ->where('work_schedule_details.status', 'available')
+                ->inRandomOrder() // Lấy ngẫu nhiên
+                ->value('work_schedules.admin_id');
+            }else{
+                $params['admin_id'] = $admin_id;
+            }
+      
             $params['time'] = $time->time;
             if ($request->promo_code) {
                 $promo = Promotion::where('promocode', $request->promo_code)->first();
@@ -171,7 +186,8 @@ class BookingController extends Controller
                     'price' => $service->price,
                 ]);
             }
-            $workSchedule = WorkSchedule::query()->where('admin_id', $admin_id)->where('day', $day)->first();
+          
+            $workSchedule = WorkSchedule::query()->where('admin_id', $params['admin_id'])->where('day', $day)->first();
 
             $findWorkScheduleDetail = DB::table('work_schedule_details')
                 ->where('work_schedule_details.time_id', $time->id)
