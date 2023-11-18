@@ -38,7 +38,7 @@
                     <th class="whitespace-nowrap text-center">Điện thoại</th>
                     <th class="whitespace-nowrap text-center">Email</th>
                     <th class="whitespace-nowrap text-center">Trạng thái tài khoản</th>
-                   
+
                 </tr>
                 </thead>
                 @foreach ($data as $key => $item)
@@ -47,7 +47,7 @@
                         <td class="text-center capitalize">{{ $item->username }}</td>
                         <td class="text-center capitalize">{{ $item->phone }}</td>
                         <td class="text-center capitalize">{{ $item->email }}</td>
-                        <td class="text-center capitalize"> 
+                        <td class="text-center capitalize">
                             <select class="statusSelect form-select w-full text-center w-40 sm:w-auto" data-id="{{ $item->id }}"
                                 data-current-status="{{ $item->black_status }}">
                                 <option value="0" {{ $item->black_status == 0 ? 'selected' : '' }}>
@@ -94,7 +94,7 @@
                     confirmButtonText: 'Đồng ý',
                     cancelButtonText: 'Hủy',
                 }).then((result) => {
-                    if (result.isConfirmed) { 
+                    if (result.isConfirmed) {
                         var formData = new FormData();
                         formData.append("black_status", newStatus);
                         var url =
@@ -134,7 +134,7 @@
                     case '1':
                         selectElement.html('<option value="1" selected>Không kích hoạt</option>' +
                             '<option value="0">Kích hoạt</option>');
-                        break; 
+                        break;
                     default:
                         // Thêm logic xử lý cho trường hợp khác nếu cần
                         break;

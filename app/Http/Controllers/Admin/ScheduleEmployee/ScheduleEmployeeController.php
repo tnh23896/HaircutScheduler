@@ -31,5 +31,5 @@ class ScheduleEmployeeController extends Controller
         return view('admin.ScheduleEmployee.index',  compact('workSchedules', 'employee', 'bookings'));
     }
 
-    
+
 }
