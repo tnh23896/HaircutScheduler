@@ -29,7 +29,7 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap text-center">ID</th>
+                        <th class="whitespace-nowrap text-center">#</th>
                         <th class="whitespace-nowrap text-center">Thời gian</th>
                         <th class="text-center whitespace-nowrap ">Hành động</th>
                     </tr>
@@ -37,7 +37,7 @@
                 @foreach ($data as $key => $item)
                     <tbody>
                         <tr class="intro-x">
-                            <td class="text-center capitalize">{{ $item->id }}</td>
+                            <td class="text-center capitalize">{{ $loop->iteration }}</td>
                             <td class="text-center capitalize"> {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">

@@ -13,7 +13,7 @@
                     <div class="relative flex items-center p-5">
                         <div class="w-12 h-12 image-fit">
                             <img id="profileImage" alt="{{ $data->username }}" class="rounded-full"
-                                src="{{ asset($data->avatar) }}">
+                            src="{{ $data->avatar ? asset($data->avatar) : asset('dist/images/default.jpg') }}" >
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="font-medium text-base">{{ $data->username }}</div>
@@ -38,7 +38,7 @@
                             <div class="profile-info text-center">
                                 <div class="profile-thumb brd-rd50">
                                     <label>Ảnh đại diện</label>
-                                    <img id="previewImage" class="m-5" src="{{ asset($data->avatar) }}"
+                                    <img id="previewImage" class="m-5" src="{{ $data->avatar ? asset($data->avatar) : asset('dist/images/default.jpg') }}"
                                         style="border-radius: 50%; width:200px; height:200px; object-fit:cover;">
                                 </div>
                                 <div class="profile-img-upload-btn">

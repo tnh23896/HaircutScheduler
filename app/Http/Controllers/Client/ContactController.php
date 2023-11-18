@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendContactEmail;
 use App\Mail\ContactMail;
 use App\Models\Admin;
 use Illuminate\Http\Request;
@@ -42,12 +43,8 @@ class ContactController extends Controller
         if ($sendCount >= $limit) {
             return response()->json(['error' => 'Exceeded email sending limit.']);
         }
-        // Gửi email
-        Mail::to('dtbarber@gmail.com')->send(new ContactMail($email, $message, $phone));
-        // Tăng số lần gửi lên
+        SendContactEmail::dispatch($email, $message, $phone)->onQueue('emails');
         Session::put($key, $sendCount + 1);
-    
-        // Thiết lập thời gian hết hạn cho session để reset số lần gửi sau một khoảng thời gian
         Session::put($key . '_expires', time() + $timeFrame);
     
         return response()->json(['success' => true]);
