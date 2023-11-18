@@ -77,11 +77,11 @@
             var urlToDelete = form.attr('action');
 
             Swal.fire({
-                title: 'Bạn có muốn xóa?',
-                text: 'Nếu xóa sẽ mất vĩnh viễn?',
+                title: 'Xoá?',
+                text: 'Bạn chắc chắn muốn xoá?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonText: 'Đúng!',
+                confirmButtonText: 'Đồng ý',
                 cancelButtonText: 'Hủy',
             }).then((result) => {
                 if (result.isConfirmed) {

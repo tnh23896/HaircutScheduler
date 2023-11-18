@@ -70,6 +70,6 @@
     </section>
 
     <div class="text-center mt-5 gap no-top">
-        <a class="theme-btn-2" href="javascript:void(0)">Đặt dịch vụ ngay bây giờ</a>
+        <a class="theme-btn-2" href="{{route('booking-service.index')}}">Đặt dịch vụ ngay bây giờ</a>
     </div>
 @endsection

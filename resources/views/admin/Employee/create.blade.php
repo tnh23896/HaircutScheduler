@@ -16,9 +16,18 @@
                     <label for="crud-form-1" class="form-label">Tên nhân viên</label>
                     <input id="crud-form-1" name="username" value="{{ old('username') }}" type="text" class="form-control clearable w-full" placeholder="Tên nhân viên">
                 </div>
-                <div class="mt-3">
-                    <label for="crud-form-2" class="form-label">Ảnh đại diện</label>
-                    <input id="crud-form-2" name="avatar" type="file" class="form-control clearable" accept=".jpg, .jpeg, .png, .gif">
+                <label for="crud-form-3" class="form-label mt-3">Ảnh đại diện</label>
+                <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4" style="width: 300px">
+                    <div class="grid grid-cols-10 gap-5 pl-4 pr-5">
+                        <div class="col-span-5 md:col-span-2 h-auto relative cursor-pointer zoom-in" style="width: 200px">
+                            <img class="rounded-md" id="previewImage">
+                        </div>
+                    </div>
+                    <div class="px-4 pb-4 mt-5 flex items-center justify-center cursor-pointer relative">
+                            <i data-lucide="image" class="w-4 h-4 mr-2"></i> <span class="text-primary mr-1">
+                                Tải ảnh lên
+                        <input id="crud-form-1" type="file" name="avatar" class="w-full h-full top-0 left-0 absolute opacity-0" accept=".jpg, .jpeg, .png, .gif">
+                    </div>
                 </div>
                 <div class="mt-3">
                     <label for="crud-form-5" class="form-label">Số điện thoại</label>

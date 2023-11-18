@@ -16,7 +16,7 @@
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="shopping-cart" data-lucide="shopping-cart" class="lucide lucide-shopping-cart report-box__icon text-primary"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                                        <i data-lucide="shopping-cart" ></i> 
                                     </div>
                                     <div class="text-3xl font-medium leading-8 mt-6">{{ $getbill }}</div>
                                     <div class="text-base text-slate-500 mt-1">Đơn Thành công</div>
@@ -27,7 +27,7 @@
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="user" data-lucide="user" class="lucide lucide-user report-box__icon text-success"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                        <i data-lucide="user"></i>
                                     </div>
                                     <div class="text-3xl font-medium leading-8 mt-6">{{ $getadmin }}</div>
                                     <div class="text-base text-slate-500 mt-1">Nhân viên</div>
@@ -38,7 +38,7 @@
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card" data-lucide="credit-card" class="lucide lucide-credit-card report-box__icon text-warning"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                        <i data-lucide="credit-card"></i>
                                     </div>
                                     <div class="text-3xl font-medium leading-8 mt-6">{{ $getservice }}</div>
                                     <div class="text-base text-slate-500 mt-1">Dịch vụ</div>
@@ -49,7 +49,7 @@
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
                                     <div class="flex">
-																			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card" data-lucide="users" class="lucide lucide-credit-card report-box__icon text-pending"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                        <i data-lucide="users"></i>
                                     </div>
                                     <div class="text-3xl font-medium leading-8 mt-6">{{ $getuser }}</div>
                                     <div class="text-base text-slate-500 mt-1">Khách hàng</div>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="report-chart">
                             <div class="h-[275px]">
-                                <canvas id="report-line-chart" data-filtered-data="{{ json_encode($totalRevenue) }}"
+                                <canvas id="report-line-chart" data-filter-data="{{ json_encode($totalRevenue) }}"
                                     class="mt-6 -mb-6" width="486" height="343"></canvas>
                             </div>
                         </div>
@@ -260,7 +260,7 @@
                                     <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                         {{-- Display employee information --}}
                                         <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                            <img alt="Employee Avatar" src="{{ $employee['avatar'] }}">
+                                            <img alt="Employee Avatar" src="{{asset($employee['avatar'] ?? 'default.jpg')}}">
                                         </div>
                                         <div class="ml-4 mr-auto">
                                             <div class="font-medium">{{ $employee['username'] }}</div>
@@ -337,13 +337,13 @@
                                             <div class="text-center flex">
                                                 <div class="w-16 h-16 image-fit zoom-in">
                                                     <img alt="ảnh" class="tooltip rounded-full"
-                                                        src="{{ asset($booker->avatar) }}">
+                                                        src="{{ asset($booker->avatar ?? 'default.jpg')  }}">
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="text-center whitespace-nowrap">
                                             <a href="#"
-                                                class="text-center font-medium whitespace-nowrap">{{ $booker->username }}</a>
+                                                class="text-center font-medium whitespace-nowrap">{{ $booker->name }}</a>
                                         </td>
                                         <td class=" text-center">{{ $booker->totalBookings }}</td>
                                         <td class="text-center">{{ number_format($booker->totalPrice) }} vnd</td>
@@ -406,7 +406,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td class="text-center whitespace-nowrap">
-                                                                                <a href="#" class="text-center font-medium whitespace-nowrap">${booker.username}</a>
+                                                                                <a href="#" class="text-center font-medium whitespace-nowrap">${booker.name}</a>
                                                                             </td>
                                                                             <td class=" text-center">${booker.totalBookings}</td>
                                                                             <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>

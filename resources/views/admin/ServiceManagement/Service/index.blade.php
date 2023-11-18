@@ -35,11 +35,8 @@
             <table class="table table-report -mt-2">
                 <thead>
                 <tr>
-                    <th class="whitespace-nowrap">
-                        <input class="form-check-input" type="checkbox">
-                    </th>
                     <th class="whitespace-nowrap">Hình ảnh</th>
-                    <th class="text-center whitespace-nowrap">Tên</th>
+                    <th class="text-center whitespace-nowrap">Tên dịch vụ</th>
                     <th class="text-center whitespace-nowrap">Giá</th>
                     <th class="text-center whitespace-nowrap">Mô tả</th>
                     <th class="text-center whitespace-nowrap">Danh mục</th>
@@ -50,20 +47,20 @@
                 @foreach ($services as $service)
                     <tbody>
                     <tr class="intro-x">
-                        <td class="w-10">
-                            <input class="form-check-input" type="checkbox">
-                        </td>
                         <td class="!py-3.5">
-                            <img alt="Image service" class="w-20 h-auto rounded" src="{{ asset($service->image) }}"
-                                 title="{{ $service->created_at }}">
+                            <div class="w-24 h-24 image-fit zoom-in">
+                                <img alt="ảnh"
+                                     class="rounded-lg border-white shadow-md"
+                                     src="{{ asset($service->image) }}">
+                            </div>
                         </td>
-                        <td class="text-center">
+                        <td class="text-center whitespace-nowrap">
                             <a class="flex items-center justify-center" href="">{{ $service->name }}</a>
                         </td>
-                        <td class="text-center capitalize">{{ $service->price }}</td>
-                        <td class="text-center capitalize">{{ $service->description }}</td>
-                        <td class="text-center capitalize">{{ $service->category_services->name ?? '' }}</td>
-                        <td class="text-center capitalize">{{ $service->percentage_discount }}</td>
+                        <td class="text-center whitespace-nowrap ">{{ number_format($service->price) }} vnd</td>
+                        <td class="text-center">{{ $service->description }}</td>
+                        <td class="text-center whitespace-nowrap">{{ $service->category_services->name ?? '' }}</td>
+                        <td class="text-center whitespace-nowrap">{{ number_format($service->percentage_discount) }} vnd</td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a class="flex items-center mr-3"
@@ -98,11 +95,11 @@
 
                 // Hiển thị hộp thoại xác nhận
                 Swal.fire({
-                    title: 'Bạn có muốn xóa?',
-                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
+                    title: 'Xoá?',
+                    text: 'Bạn chắc chắn muốn xoá?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Đúng!',
+                    confirmButtonText: 'Đồng ý',
                     cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -144,7 +141,4 @@
         </div>
         <!-- END: Pagination -->
     </div>
-@endsection
-@section('js_footer_custom')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 @endsection

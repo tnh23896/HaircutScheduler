@@ -39,7 +39,7 @@
                         <tr class="intro-x">
                             <td class="text-center capitalize">{{ $key + 1 }}</td>
 
-                            <td class="text-center capitalize">{{ $rating->user_name }}</td>
+                            <td class="text-center capitalize">{{ $rating->bill->name }}</td>
                             <td class="text-center">
                                 <div class="flex items-center">
                                     @for ($i = 0; $i < $rating->star; $i++)
@@ -99,11 +99,11 @@
                 var urlToDelete = form.attr('action');
 
                 Swal.fire({
-                    title: 'Bạn có muốn xóa?',
-                    text: 'Nếu xóa sẽ mất vĩnh viễn?',
+                    title: 'Xóa?',
+                    text: 'Bạn chắc chắc muốn xoá?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Đúng!',
+                    confirmButtonText: 'Đồng ý',
                     cancelButtonText: 'Hủy',
                 }).then((result) => {
                     if (result.isConfirmed) {

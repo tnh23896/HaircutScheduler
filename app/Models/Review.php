@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Bill;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Review extends Model
 {
@@ -24,5 +25,9 @@ class Review extends Model
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+		public function bill()
+    {
+        return $this->belongsTo(Bill::class);
     }
 }

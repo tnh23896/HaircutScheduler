@@ -91,11 +91,12 @@
                                 {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
                             </td>
                             <td class="text-center">
-                                <form id="ajaxForm" enctype="multipart/form-data">
-                                    <input id="name" name="name" type="text" class="form-control w-full"
+                                <form class="ajaxForm{{ $item->id }}" enctype="multipart/form-data">
+                                    <input  name="name" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->name }}" disabled hidden>
-                                    <input id="name_staff" type="text" name="name_staff" class="form-control w-full"
-                                        placeholder="Input text" value="{{ $item->admin->username }}" disabled hidden>
+                                    <input id="" type="text" name="name_staff" class="name_staff form-control w-full"
+                                        placeholder="Input text" value="{{ $item->admin->username ?? '' }}" disabled
+                                        hidden>
                                     <input type="text" name="user_id" class="form-control w-full"
                                         value="{{ $item->user_id }}" hidden>
                                     <input type="text" name="admin_id" class="form-control w-full"
@@ -106,13 +107,13 @@
                                         value="{{ $item->promo_id }}" hidden>
                                     <input type="text" name="email" class="form-control w-full"
                                         value="{{ $item->email }}" hidden>
-                                    <input id="price" type="text" class="form-control w-full"
+                                    <input  type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->total_price }}" name="price"
                                         disabled hidden>
-                                    <input id="schedule_time" name="schedule_time" type="text"
+                                    <input name="schedule_time" type="text"
                                         class="form-control w-full" placeholder="Input text"
                                         value="{{ $item->time }} {{ $item->day }}" disabled hidden>
-                                    <input id="created_at" name="created_at" type="text" class="form-control w-full"
+                                    <input name="created_at" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->created_at }}" disabled hidden>
                                     <select class="statusSelect form-select w-full" data-id="{{ $item->id }}"
                                         data-current-status="{{ $item->status }}">
@@ -152,7 +153,7 @@
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     @if ($item->status !== 'success' && $item->status !== 'canceled')
-                                        <a class="flex items-center text-warning mr-3"
+                                        <a class="flex items-center text-warning mr-3" id="editBtn{{ $item->id }}"
                                             href="{{ route('admin.scheduleManagement.edit', $item->id) }}"> <i
                                                 data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
                                     @endif
@@ -191,45 +192,115 @@
     <script>
         $(document).ready(function() {
             $(".statusSelect").on("change", function() {
-                var newStatus = $(this).val();
-                var editId = $(this).data("id");
-                var confirmed = confirm(`Bạn có chắc muốn chuyển trạng thái thành ${newStatus}?`);
-                if (confirmed) {
-                    var formData = new FormData();
-                    formData.append("status", newStatus);
-                    formData.append('name', $('#name').val());
-                    formData.append('name_staff', $('#name_staff').val());
-                    formData.append('user_id', $('input[name="user_id"]').val());
-                    formData.append('admin_id', $('input[name="admin_id"]').val());
-                    formData.append('phone', $('input[name="phone"]').val());
-                    formData.append('promo_id', $('input[name="promo_id"]').val());
-                    formData.append('email', $('input[name="email"]').val());
-                    formData.append('price', $('#price').val());
-                    formData.append('schedule_time', $('#schedule_time').val());
-                    formData.append('created_at', $('#created_at').val());
+                var selectElement = $(this);
+                var newStatus = selectElement.val();
+                var editId = selectElement.data("id");
+                var checkid =$(this).closest('form');
+                const hideEdit = $(this).closest('td').next().find('a').first();
+                Swal.fire({
+                    title: 'Chuyển trạng thái?',
+                    text: `Bạn có chắc muốn chuyển trạng thái thành ${getStatusNameInVietnamese(newStatus)}?`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Hủy',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var formData = new FormData();
+                        formData.append("status", newStatus);
+                        formData.append('name', checkid.find('input[name="name"]').val());
+                        formData.append('name_staff', checkid.find('input[name="name_staff"]').val());
+                        formData.append('user_id', checkid.find('input[name="user_id"]').val());
+                        formData.append('admin_id', checkid.find('input[name="admin_id"]').val());
+                        formData.append('phone', checkid.find('input[name="phone"]').val());
+                        formData.append('promo_id', checkid.find('input[name="promo_id"]').val());
+                        formData.append('email', checkid.find('input[name="email"]').val());
+                        formData.append('price', checkid.find('input[name="price"]').val());
+                        formData.append('schedule_time', checkid.find('input[name="schedule_time"]').val());
+                        formData.append('created_at', checkid.find('input[name="created_at"]').val());
 
-                    var url = "{{ route('admin.scheduleManagement.updateStatus', ':editId') }}";
-                    url = url.replace(':editId', editId);
+                        var url =
+                            "{{ route('admin.scheduleManagement.updateStatus', ':editId') }}";
+                        url = url.replace(':editId', editId);
 
-                    sendAjaxRequest(url, 'POST', formData,
-                        function(response) {
-                            if (response.success) {
-                                toastr.success(response.success);
-                                location.reload();
-                                console.log(response);
+                        sendAjaxRequest(url, 'POST', formData,
+                            function(response) {
+                                if (response.success) {
+                                    toastr.success(response.success);
+
+                                    // Cập nhật trạng thái hiện tại của select box
+                                    selectElement.data("current-status", newStatus);
+
+                                    // Thực hiện logic cập nhật trạng thái dựa trên kết quả trả về
+                                    updateSelectOptions(selectElement, newStatus, hideEdit);
+
+                                    console.log(response);
+                                }
+                            },
+                            function(error) {
+                                showErrors(error);
+                                console.log(error);
                             }
-                        },
-
-                        function(error) {
-                            showErrors(error);
-                            console.log(error);
-                        }
-                    );
-                } else {
-                    var currentStatus = $(this).data("current-status");
-                    $(this).val(currentStatus);
-                }
+                        );
+                    } else {
+                        var currentStatus = selectElement.data("current-status");
+                        selectElement.val(currentStatus);
+                    }
+                });
             });
+
+            // Hàm cập nhật tùy chọn của select box dựa trên trạng thái mới
+            function updateSelectOptions(selectElement, newStatus, hideEdit) {
+                switch (newStatus) {
+                    case 'pending':
+                        selectElement.html('<option value="confirmed">Đã xác nhận</option>' +
+                            '<option value="canceled">Đã hủy</option>' +
+                            '<option value="pending" selected>Chưa xác nhận</option>');
+                        break;
+                    case 'confirmed':
+                        selectElement.html('<option value="confirmed" selected>Đã xác nhận</option>' +
+                            '<option value="waiting">Đang chờ cắt</option>');
+                        break;
+                    case 'waiting':
+                        selectElement.html('<option value="waiting" selected>Đang chờ cắt</option>' +
+                            '<option value="success">Đã hoàn thành</option>' +
+                            '<option value="canceled">Đã hủy</option>');
+                        break;
+                    case 'canceled':
+                        selectElement.html('<option value="canceled" selected>Đã hủy</option>');
+                        hideEdit.hide();
+                        break;
+                    case 'success':
+                        selectElement.html('<option value="success" selected>Đã hoàn thành</option>');
+                        hideEdit.hide();
+                        break;
+                    default:
+                        // Thêm logic xử lý cho trường hợp khác nếu cần
+                        break;
+                }
+            }
+
+            // Hàm để lấy tên trạng thái bằng tiếng Việt
+            function getStatusNameInVietnamese(status) {
+                switch (status) {
+                    case 'pending':
+                        return 'Chưa xác nhận';
+                    case 'confirmed':
+                        return 'Đã xác nhận';
+                    case 'waiting':
+                        return 'Đang chờ cắt';
+                    case 'canceled':
+                        return 'Đã hủy';
+                    case 'success':
+                        return 'Đã hoàn thành';
+                    default:
+                        return status; // Trả về trạng thái nguyên thủy nếu không khớp với các trường hợp trên
+                }
+            }
+
+
+
+
         });
     </script>
 
