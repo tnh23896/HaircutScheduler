@@ -299,9 +299,10 @@
                                                         hidden>
                                                     <label for="admin_"
                                                         class="d-flex flex-column">
-                                                        <img src="https://th.bing.com/th/id/OIP.6RVGli51bKOZip7wxOomSAHaJ4?w=202&h=270&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="rounded-circle"
+                                                        <img src="{{asset('dist/images/default.jpg')
+                                                    }}" class="rounded-circle"
                                                             style="width: 100px;height: 100px" alt="">
-                                                        <h6 class="text-center">123141241</h6>
+                                                        <h6 class="text-center">Chọn hộ</h6>
                                                     </label>
                                                 </div>
                                             </div>
