@@ -34,10 +34,13 @@
                                 {{ $banner->link }}
                             </td>
                             <td class="!py-3.5 status-text" data-banner-id="{{ $banner->id }}"
-                                data-status="{{ $banner->status === 'active' ? 'inactive' : 'active' }}"
-                                style="color: {{ $banner->status === 'active' ? 'green' : 'white' }}">
-                                {{ $banner->status === 'active' ? 'Hoạt động' : 'Không hoạt động' }}
-                             </td>
+                                data-status="{{ $banner->status === 'active' ? 'inactive' : 'active' }}">
+                                @if($banner->status === 'active')
+                                    <div class="flex items-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Hoạt động </div>
+                                @else
+                                    <div class="flex items-center text-danger"><i data-lucide="x-circle" class="mr-2 w-4 h-4 mr-2 text-red-500"></i> Không hoạt động </div>
+                                @endif
+                            </td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3" href="{{ route('admin.banners.edit', $banner->id) }}">

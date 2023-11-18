@@ -13,8 +13,8 @@ class RatingController extends Controller
 	//
 	public function index()
 	{
-		$data = Review::select('reviews.*', 'users.username as user_name', 'admins.username as admin_name')
-			->leftJoin('users', 'reviews.user_id', '=', 'users.id')
+		$data = Review::select('reviews.*', 'bills.name as user_name', 'admins.username as admin_name')
+			->leftJoin('bills', 'reviews.bill_id', '=', 'bills.id')
 			->leftJoin('admins', 'reviews.admin_id', '=', 'admins.id')->latest()->paginate(10);
 		return view('admin.rating.index', compact('data'));
 	}
@@ -25,11 +25,11 @@ class RatingController extends Controller
 			$search = $request->input('search');
 			$fields = ['user_name', 'admin_name'];
 
-			$data = Review::select('reviews.*', 'users.username as user_name', 'admins.username as admin_name')
-				->leftJoin('users', 'reviews.user_id', '=', 'users.id')
+			$data = Review::select('reviews.*', 'bills.name as user_name', 'admins.username as admin_name')
+				->leftJoin('bills', 'reviews.bill_id', '=', 'bills.id')
 				->leftJoin('admins', 'reviews.admin_id', '=', 'admins.id')
 				->where(function ($query) use ($search) {
-					$query->where('users.username', 'like', '%' . $search . '%')
+					$query->where('bills.name', 'like', '%' . $search . '%')
 						->orWhere('admins.username', 'like', '%' . $search . '%');
 				})
 				->latest()
