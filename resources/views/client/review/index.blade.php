@@ -14,7 +14,7 @@
             <tbody>
                 @foreach($list_reviews as $review)
                     <tr>
-                        <td class="text-nowrap text-center">{{ $review->bill_id }}</td>
+                        <td class="text-nowrap text-center">{{ $review->booking_id }}</td>
                         <td class="text-nowrap text-center">{{$review->admin->username}}</td>
                         <td class="text-center">
                                     @for ($i = 1; $i <= 5; $i++)
