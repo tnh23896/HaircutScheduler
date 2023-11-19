@@ -24,9 +24,9 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $blogs = $this->blogmodel->latest()->paginate(10);
+        $blogs = $this->blogmodel->latest()->paginate(9);
         $categoryBlog = $this->Categorymodel::get(['id', 'title']);
-        return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
+        return view('admin.BlogManagement.Blog.index', compact('blogs', 'categoryBlog'));
     }
 
     public function search(Request $request)
@@ -37,9 +37,9 @@ class BlogController extends Controller
             $fields = ['title'];
             $blogs = search($this->blogmodel::class, $search, $fields)
                 ->latest()
-                ->paginate(10)
+                ->paginate(9)
                 ->withQueryString();
-            return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
+            return view('admin.BlogManagement.Blog.index', compact('blogs', 'categoryBlog'));
         } catch (\Exception $exception) {
             return response()->json([
                 'error' => 'Tìm kiếm thất bại'
@@ -52,14 +52,14 @@ class BlogController extends Controller
         $filter = $request->input('filter');
         $categoryBlog = $this->Categorymodel::get(['id', 'title']);
         if ($filter == "") {
-            $blogs = $this->blogmodel::latest()->paginate(10)->withQueryString();
+            $blogs = $this->blogmodel::latest()->paginate(9)->withQueryString();
         } else {
             $blogs = $this->blogmodel::where('category_blog_id', $filter)
                 ->latest()
                 ->paginate(10)
                 ->withQueryString();
         }
-        return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
+        return view('admin.BlogManagement.Blog.index', compact('blogs', 'categoryBlog'));
     }
 
 
@@ -70,7 +70,7 @@ class BlogController extends Controller
     {
         //
         $category_blog = $this->Categorymodel::all();
-        return view('admin.blogManagement.blog.create', compact('category_blog'));
+        return view('admin.BlogManagement.Blog.create', compact('category_blog'));
     }
 
     /**
@@ -107,7 +107,7 @@ class BlogController extends Controller
         //
         $one_blog = $this->blogmodel::find($id);
         $category_blog = $this->Categorymodel::all();
-        return view('admin.blogManagement.blog.edit', compact('one_blog', 'category_blog'));
+        return view('admin.BlogManagement.Blog.edit', compact('one_blog', 'category_blog'));
     }
 
     /**

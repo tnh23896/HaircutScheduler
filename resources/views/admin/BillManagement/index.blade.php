@@ -76,7 +76,7 @@
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"
+                                {{-- <a data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}"
                                    class="flex items-center text-success cursor-pointer">
                                     <svg viewBox="0 0 24 24" class="w-6 h-6 mr-1" fill="#ffffff"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +89,11 @@
                                                   fill="#1C274C"></path>
                                         </g>
                                     </svg>
-                                    Xem chi tiết </a>
+                                    Xem chi tiết </a> --}}
+                                    <a class="flex items-center text-white mr-auto cursor-pointer" data-tw-toggle="modal" data-tw-target="#modal{{$item->id}}">
+                                        <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
+                                        Xem chi tiết
+                                    </a>
                             </div>
                         </td>
                     </tr>
@@ -112,7 +116,7 @@
     @foreach($data as $item)
     <div id="modal{{ $item->id }}" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-content" style="background-color: #cfd1c9">
-    
+
             <div class="content" style="background-color: #cfd1c9">
                 <!-- BEGIN: Top Bar -->
                 <!-- END: Top Bar -->
@@ -122,7 +126,7 @@
                     </h2>
                     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                         <a href="{{ route('admin.billManagement.printBill', $item->id) }}"><button
-                                class="btn btn-primary ">In hóa đơn</button></a>
+                                class="btn btn-primary ">Tải hóa đơn</button></a>
                     </div>
                 </div>
                 <!-- BEGIN: Invoice -->
@@ -132,7 +136,7 @@
                         <p class="text-center pt-2" style="color: #354a1d">HÂN HẠNH ĐƯỢC PHỤC VỤ.</p>
                         <div class="px-5 sm:px-20 py-8 text-center">
                             <div class="font-semibold text-3xl">Hóa đơn</div>
-                            <div class="mt-2"> số <span class="font-medium">#{{ $item->id }}</span></div>
+                            <div class="mt-2">Số<span class="font-medium">#{{ $item->id }}</span></div>
                             <div class="mt-1">Ngày lập: {{ $item->created_at }}</div>
                         </div>
                         <div class="flex flex-col lg:flex-row px-5 sm:px-20">

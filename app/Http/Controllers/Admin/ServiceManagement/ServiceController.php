@@ -26,7 +26,7 @@ class ServiceController extends Controller
     {
         $services = $this->Servicemodel->latest()->paginate(10);
         $categoryService = $this->Categorymodel::get(['id','name']);
-        return view('admin.serviceManagement.service.index',
+        return view('admin.ServiceManagement.Service.index',
             compact('services', 'categoryService'));
     }
 
@@ -36,7 +36,7 @@ class ServiceController extends Controller
     public function create()
     {
         $category_service = $this->Categorymodel::all();
-        return view('admin.serviceManagement.service.create', compact('category_service'));
+        return view('admin.ServiceManagement.Service.create', compact('category_service'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ServiceController extends Controller
             ->latest()
             ->paginate(10)
             ->withQueryString();
-        return view('admin.serviceManagement.service.index', compact('services','categoryService'));
+        return view('admin.ServiceManagement.Service.index', compact('services','categoryService'));
     }
 
     public function filter(Request $request)
@@ -91,7 +91,7 @@ class ServiceController extends Controller
                 ->paginate(5)
                 ->withQueryString();
         }
-        return view('admin.serviceManagement.service.index', compact('services','categoryService'));
+        return view('admin.ServiceManagement.Service.index', compact('services','categoryService'));
     }
 
     /**
@@ -101,7 +101,7 @@ class ServiceController extends Controller
     {
         $one_service = $this->Servicemodel::find($id);
         $category_service = $this->Categorymodel::all();
-        return view('admin.serviceManagement.service.edit', compact('one_service', 'category_service'));
+        return view('admin.ServiceManagement.Service.edit', compact('one_service', 'category_service'));
     }
 
     /**

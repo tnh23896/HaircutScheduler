@@ -35,8 +35,9 @@
                 </form>
                 {{-- Form lọc theo trạng thái --}}
                 <form id="filterForm" action="{{ route('admin.scheduleManagement.filter') }}" method="GET">
-                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
-                        <option value="">Tất cả</option>
+                    <select id="filterSelect" name="filter" class="tom-select w-56 xl:w-auto box ml-2" style="width: 150px"
+                        onchange="submitForm()">
+                        <option value="0">Tất cả</option>
                         <option value="pending">Chưa xác nhận</option>
                         <option value="confirmed">Đã xác nhận</option>
                         <option value="waiting">Đang chờ cắt</option>
@@ -92,11 +93,11 @@
                             </td>
                             <td class="text-center">
                                 <form class="ajaxForm{{ $item->id }}" enctype="multipart/form-data">
-                                    <input  name="name" type="text" class="form-control w-full"
+                                    <input name="name" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->name }}" disabled hidden>
-                                    <input id="" type="text" name="name_staff" class="name_staff form-control w-full"
-                                        placeholder="Input text" value="{{ $item->admin->username ?? '' }}" disabled
-                                        hidden>
+                                    <input id="" type="text" name="name_staff"
+                                        class="name_staff form-control w-full" placeholder="Input text"
+                                        value="{{ $item->admin->username ?? '' }}" disabled hidden>
                                     <input type="text" name="user_id" class="form-control w-full"
                                         value="{{ $item->user_id }}" hidden>
                                     <input type="text" name="admin_id" class="form-control w-full"
@@ -107,12 +108,11 @@
                                         value="{{ $item->promo_id }}" hidden>
                                     <input type="text" name="email" class="form-control w-full"
                                         value="{{ $item->email }}" hidden>
-                                    <input  type="text" class="form-control w-full"
-                                        placeholder="Input text" value="{{ $item->total_price }}" name="price"
+                                    <input type="text" class="form-control w-full" placeholder="Input text"
+                                        value="{{ $item->total_price }}" name="price" disabled hidden>
+                                    <input name="schedule_time" type="text" class="form-control w-full"
+                                        placeholder="Input text" value="{{ $item->time }} {{ $item->day }}"
                                         disabled hidden>
-                                    <input name="schedule_time" type="text"
-                                        class="form-control w-full" placeholder="Input text"
-                                        value="{{ $item->time }} {{ $item->day }}" disabled hidden>
                                     <input name="created_at" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->created_at }}" disabled hidden>
                                     <select class="statusSelect form-select w-full" data-id="{{ $item->id }}"
@@ -150,28 +150,17 @@
                                     </select>
                                 </form>
                             </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    @if ($item->status !== 'success' && $item->status !== 'canceled')
-                                        <a class="flex items-center text-warning mr-3" id="editBtn{{ $item->id }}"
-                                            href="{{ route('admin.scheduleManagement.edit', $item->id) }}"> <i
-                                                data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
-                                    @endif
-                                    <a href="{{ route('admin.scheduleManagement.scheduleDetails', $item->id) }}"
-                                        class="flex items-center text-success cursor-pointer">
-                                        <svg viewBox="0 0 24 24" class="w-6 h-6 mr-1" fill="#ffffff"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                            </g>
-                                            <g id="SVGRepo_iconCarrier">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M8.12673 3.56055C7.76931 3.24284 7.23069 3.24284 6.87327 3.56055C5.98775 4.34768 4.67284 4.38188 3.75 3.66317V20.337C4.67284 19.6183 5.98775 19.6525 6.87327 20.4396C7.23069 20.7573 7.76931 20.7573 8.12673 20.4396C9.05248 19.6167 10.4475 19.6167 11.3733 20.4396C11.7307 20.7573 12.2693 20.7573 12.6267 20.4396C13.5525 19.6167 14.9475 19.6167 15.8733 20.4396C16.2307 20.7573 16.7693 20.7573 17.1267 20.4396C18.0122 19.6525 19.3272 19.6183 20.25 20.337V3.66317C19.3272 4.38188 18.0122 4.34768 17.1267 3.56055C16.7693 3.24284 16.2307 3.24284 15.8733 3.56055C14.9475 4.38344 13.5525 4.38344 12.6267 3.56055C12.2693 3.24284 11.7307 3.24284 11.3733 3.56055C10.4475 4.38344 9.05248 4.38344 8.12673 3.56055ZM5.87673 2.43943C6.80248 1.61654 8.19752 1.61654 9.12327 2.43943C9.48069 2.75714 10.0193 2.75714 10.3767 2.43943C11.3025 1.61654 12.6975 1.61654 13.6233 2.43943C13.9807 2.75714 14.5193 2.75714 14.8767 2.43943C15.8025 1.61654 17.1975 1.61654 18.1233 2.43943C18.4807 2.75714 19.0193 2.75714 19.3767 2.43943C20.2963 1.62202 21.75 2.27482 21.75 3.50519V20.495C21.75 21.7253 20.2963 22.3781 19.3767 21.5607C19.0193 21.243 18.4807 21.243 18.1233 21.5607C17.1975 22.3836 15.8025 22.3836 14.8767 21.5607C14.5193 21.243 13.9807 21.243 13.6233 21.5607C12.6975 22.3836 11.3025 22.3836 10.3767 21.5607C10.0193 21.243 9.48069 21.243 9.12327 21.5607C8.19752 22.3836 6.80248 22.3836 5.87673 21.5607C5.51931 21.243 4.98069 21.243 4.62327 21.5607C3.70369 22.3781 2.25 21.7253 2.25 20.495V3.50519C2.25 2.27482 3.70369 1.62202 4.62327 2.43943C4.98069 2.75714 5.51931 2.75714 5.87673 2.43943ZM6.75 8.50017C6.75 8.08595 7.08579 7.75017 7.5 7.75017H16.5C16.9142 7.75017 17.25 8.08595 17.25 8.50017C17.25 8.91438 16.9142 9.25017 16.5 9.25017H7.5C7.08579 9.25017 6.75 8.91438 6.75 8.50017ZM6.75 12.0002C6.75 11.586 7.08579 11.2502 7.5 11.2502H16.5C16.9142 11.2502 17.25 11.586 17.25 12.0002C17.25 12.4144 16.9142 12.7502 16.5 12.7502H7.5C7.08579 12.7502 6.75 12.4144 6.75 12.0002ZM6.75 15.5002C6.75 15.086 7.08579 14.7502 7.5 14.7502H16.5C16.9142 14.7502 17.25 15.086 17.25 15.5002C17.25 15.9144 16.9142 16.2502 16.5 16.2502H7.5C7.08579 16.2502 6.75 15.9144 6.75 15.5002Z"
-                                                    fill="#1C274C"></path>
-                                            </g>
-                                        </svg>
-                                        Xem chi tiết </a>
-                                </div>
+                            <td class="text-center">
+                                @if ($item->status !== 'success' && $item->status !== 'canceled')
+                                    <a class="flex items-center text-warning mr-3" id="editBtn{{ $item->id }}"
+                                        href="{{ route('admin.scheduleManagement.edit', $item->id) }}"> <i
+                                            data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
+                                @endif
+                                <a class="flex items-center text-white mr-auto mt-3 text-lime-500
+                                "
+                                    href="{{ route('admin.scheduleManagement.scheduleDetails', $item->id) }}">
+                                    <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
+                                    Xem chi tiết</a>
                             </td>
                         </tr>
                     </tbody>
@@ -195,7 +184,7 @@
                 var selectElement = $(this);
                 var newStatus = selectElement.val();
                 var editId = selectElement.data("id");
-                var checkid =$(this).closest('form');
+                var checkid = $(this).closest('form');
                 const hideEdit = $(this).closest('td').next().find('a').first();
                 Swal.fire({
                     title: 'Chuyển trạng thái?',
@@ -209,15 +198,18 @@
                         var formData = new FormData();
                         formData.append("status", newStatus);
                         formData.append('name', checkid.find('input[name="name"]').val());
-                        formData.append('name_staff', checkid.find('input[name="name_staff"]').val());
+                        formData.append('name_staff', checkid.find('input[name="name_staff"]')
+                        .val());
                         formData.append('user_id', checkid.find('input[name="user_id"]').val());
                         formData.append('admin_id', checkid.find('input[name="admin_id"]').val());
                         formData.append('phone', checkid.find('input[name="phone"]').val());
                         formData.append('promo_id', checkid.find('input[name="promo_id"]').val());
                         formData.append('email', checkid.find('input[name="email"]').val());
                         formData.append('price', checkid.find('input[name="price"]').val());
-                        formData.append('schedule_time', checkid.find('input[name="schedule_time"]').val());
-                        formData.append('created_at', checkid.find('input[name="created_at"]').val());
+                        formData.append('schedule_time', checkid.find('input[name="schedule_time"]')
+                            .val());
+                        formData.append('created_at', checkid.find('input[name="created_at"]')
+                        .val());
 
                         var url =
                             "{{ route('admin.scheduleManagement.updateStatus', ':editId') }}";

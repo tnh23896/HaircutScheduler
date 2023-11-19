@@ -113,23 +113,5 @@
         });
     })
 
-    function toggleCollapse(toggleId, collapseId) {
-        const toggleElement = document.getElementById(toggleId);
-        const collapseElement = document.getElementById(collapseId);
-        toggleElement.addEventListener('click', function() {
-            if (collapseElement.classList.contains('hidden')) {
-                collapseElement.classList.remove('hidden');
-                collapseElement.classList.add('scale-100');
-            } else {
-                collapseElement.classList.remove('scale-100');
-                collapseElement.classList.add('scale-0');
-                setTimeout(() => {
-                    collapseElement.classList.add('hidden');
-                }, 300); // Thời gian hoàn thành transition
-            }
-        });
-    }
-    // Sử dụng hàm để điều khiển cả danh sách dịch vụ và danh sách nhân viên
-    toggleCollapse('toggleCollapse', 'myCollapse');
-    toggleCollapse('toggleEmployeeCollapse', 'employeeCollapse');
+   
 </script>
