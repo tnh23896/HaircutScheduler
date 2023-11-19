@@ -95,6 +95,8 @@ Route::group(['middleware' => 'admin'], function () {
 		Route::get('rating', [RatingController::class, 'index'])->name('admin.rating.index');
 		Route::get('rating/search', [RatingController::class, 'search'])->name('admin.rating.search');
 		Route::delete('rating/delete/{id}', [RatingController::class, 'destroy'])->name('admin.rating.delete');
+		Route::get('filter-rating', [RatingController::class, 'filter'])
+		->name('admin.rating.filter');
 
     //Category Service
     Route::get('category-service', [CategoryController::class, 'index'])

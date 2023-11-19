@@ -12,7 +12,7 @@ class Review extends Model
     use HasFactory,SoftDeletes;
     protected $table = 'reviews';
     protected $fillable = [
-        'star', 'comment', 'user_id', 'admin_id', 'bill_id',
+        'star', 'comment', 'user_id', 'admin_id', 'booking_id',
     ];
     public function user()
     {
@@ -26,8 +26,7 @@ class Review extends Model
     {
         return $this->belongsTo(Service::class);
     }
-		public function bill()
-    {
-        return $this->belongsTo(Bill::class);
-    }
+		public function booking() {
+			return $this->belongsTo(Booking::class);
+		}
 }

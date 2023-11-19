@@ -40,6 +40,33 @@
                         @endif
                     </td>
                     <td class="">
+                        @php
+                            $hideReviewButton = false;
+                        @endphp
+                        @foreach ($reviews as $review)
+                            @if ($review->booking_id == $booking->id)
+                                @php
+                                    $hideReviewButton = true;
+                                @endphp
+                            @endif
+                        @endforeach
+                        @if (!$hideReviewButton)
+                            <a data-toggle="modal" data-target=".modal_reviews{{ $booking->id }}"
+                                href="javascript:void(0)" title="" itemprop="url">
+                                <button class="text-center"
+                                    style="width: 100px;
+													height: 30px;
+													color: white;
+													background-color: black;
+													border: none;
+													font-size: 13px;">
+                                    Đánh giá
+                                </button>
+                            </a>
+                        @endif
+                        @if ($booking->status == 'success')
+                            @include('client.booking_history.modal_reviews')
+                        @endif
                         <a data-toggle="modal" data-target=".modal{{ $booking->id }}" href="javascript:void(0)"
                             title="" itemprop="url">
                             <button class="text-center"
@@ -73,7 +100,7 @@
                                     $ngayDatLichLonHonNgayHienTai = $ngayGioCarbon->gt($ngayHienTai);
                                 @endphp
                                 {{-- @dd($thoiGianDenHienTai); --}}
-                                @if ($thoiGianDenHienTai >=24 && $ngayDatLichLonHonNgayHienTai)
+                                @if ($thoiGianDenHienTai >= 24 && $ngayDatLichLonHonNgayHienTai)
                                     {{-- Hiển thị nút hủy --}}
                                     <a data-toggle="modal" data-target="#modaldelete{{ $booking->id }}">
                                         <button class="text-center mt-2"

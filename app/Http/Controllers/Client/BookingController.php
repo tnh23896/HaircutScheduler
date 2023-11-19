@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Events\AdminNotifications;
-use App\Events\CancelShcheduleNotifications;
 use Exception;
 use App\Models\Time;
 use App\Models\Admin;
+use App\Models\Review;
 use App\Models\Booking;
 use App\Models\Service;
 use App\Models\Promotion;
@@ -15,9 +14,11 @@ use Illuminate\Http\Request;
 use App\Models\BookingDetail;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
+use App\Events\AdminNotifications;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Events\CancelShcheduleNotifications;
 use App\Http\Requests\Client\Booking\StoreRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -34,12 +35,12 @@ class BookingController extends Controller
                 ->where('user_id', $id)
                 ->latest()
                 ->paginate(10);
-
+								$reviews = Review::all();
             if ($request->ajax()) {
-                return view('client.booking_history.list_booking', compact('list_booking'));
+                return view('client.booking_history.list_booking', compact('list_booking', 'reviews'));
             }
 
-            return view('client.booking_history.index', compact('list_booking'));
+            return view('client.booking_history.index', compact('list_booking','reviews'));
         } catch (\Exception $e) {
             abort(404);
         }

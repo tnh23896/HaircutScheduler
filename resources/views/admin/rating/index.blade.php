@@ -19,7 +19,21 @@
                     </div>
                 </form>
             </div>
+            <form id="filterForm" action="{{ route('admin.rating.filter') }}" method="GET">
+                <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
+                    <option value="">Tất cả</option>
+                    @foreach ($category as $item)
+                        <option value="{{ $item->id }}" class="flex items-center">
+                            <a href="#" class="font-medium whitespace-nowrap">{{ $item->username }} </a>
+                            <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">
+                                -- {{ $item->id < 10 ? 'NV-0' . $item->id : 'NV-' . $item->id }}
+                            </div>
+                        </option>
+                    @endforeach
+                </select>
+            </form>
         </div>
+
         <!-- BEGIN: Data List -->
         <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
             <table class="table table-report -mt-2">
@@ -69,7 +83,7 @@
                             <td class=""><a class="flex items-center justify-center"
                                     href="">{{ $rating->comment }}</a></td>
                             <td class="text-center capitalize">{{ $rating->admin_name }}</td>
-                            <td class="text-center capitalize">{{ $rating->bill_id }}</td>
+                            <td class="text-center capitalize">{{ $rating->booking_id }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <form class="delete-form" action="{{ route('admin.rating.delete', $rating->id) }}"
@@ -121,6 +135,17 @@
                     }
                 });
             });
+            document.addEventListener('DOMContentLoaded', function() {
+                var filterSelect = document.getElementById('filterSelect');
+                var urlParams = new URLSearchParams(window.location.search);
+                var filterValue = urlParams.get('filter');
+                var selectedValue = filterValue !== null ? filterValue : "";
+                filterSelect.value = selectedValue;
+            });
+
+            function submitForm() {
+                document.getElementById('filterForm').submit();
+            }
         </script>
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
