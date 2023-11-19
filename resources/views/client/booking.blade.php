@@ -445,9 +445,12 @@
 
 
             });
-
+   
             function renderTimes(times) {
                 $('#timeSelect').empty();
+                
+                times= Array.isArray(times) ? times : Object.values(times);
+
                 times.forEach(function(time) {
                     let checkAvailable = "";
                     if (time.pivot) {

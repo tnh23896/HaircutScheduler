@@ -101,7 +101,7 @@
                                         Xin chào : <span>{{ Auth::user()->phone }}</span>
                                     </a>
 
-                                    <ul class="dropdown-menu dropdown-menu-dark"
+                                    <ul class="dropdown-menu dropdown-menu-dark" style="top: 45px;"
                                         aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá nhân</a></li>
                                         <li>

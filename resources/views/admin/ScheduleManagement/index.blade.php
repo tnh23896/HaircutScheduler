@@ -35,7 +35,8 @@
                 </form>
                 {{-- Form lọc theo trạng thái --}}
                 <form id="filterForm" action="{{ route('admin.scheduleManagement.filter') }}" method="GET">
-                    <select id="filterSelect" name="filter" class="tom-select w-56 xl:w-auto box ml-2" style="width: 150px" onchange="submitForm()">
+                    <select id="filterSelect" name="filter" class="tom-select w-56 xl:w-auto box ml-2" style="width: 150px"
+                        onchange="submitForm()">
                         <option value="0">Tất cả</option>
                         <option value="pending">Chưa xác nhận</option>
                         <option value="confirmed">Đã xác nhận</option>
@@ -92,11 +93,11 @@
                             </td>
                             <td class="text-center">
                                 <form class="ajaxForm{{ $item->id }}" enctype="multipart/form-data">
-                                    <input  name="name" type="text" class="form-control w-full"
+                                    <input name="name" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->name }}" disabled hidden>
-                                    <input id="" type="text" name="name_staff" class="name_staff form-control w-full"
-                                        placeholder="Input text" value="{{ $item->admin->username ?? '' }}" disabled
-                                        hidden>
+                                    <input id="" type="text" name="name_staff"
+                                        class="name_staff form-control w-full" placeholder="Input text"
+                                        value="{{ $item->admin->username ?? '' }}" disabled hidden>
                                     <input type="text" name="user_id" class="form-control w-full"
                                         value="{{ $item->user_id }}" hidden>
                                     <input type="text" name="admin_id" class="form-control w-full"
@@ -107,12 +108,11 @@
                                         value="{{ $item->promo_id }}" hidden>
                                     <input type="text" name="email" class="form-control w-full"
                                         value="{{ $item->email }}" hidden>
-                                    <input  type="text" class="form-control w-full"
-                                        placeholder="Input text" value="{{ $item->total_price }}" name="price"
+                                    <input type="text" class="form-control w-full" placeholder="Input text"
+                                        value="{{ $item->total_price }}" name="price" disabled hidden>
+                                    <input name="schedule_time" type="text" class="form-control w-full"
+                                        placeholder="Input text" value="{{ $item->time }} {{ $item->day }}"
                                         disabled hidden>
-                                    <input name="schedule_time" type="text"
-                                        class="form-control w-full" placeholder="Input text"
-                                        value="{{ $item->time }} {{ $item->day }}" disabled hidden>
                                     <input name="created_at" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->created_at }}" disabled hidden>
                                     <select class="statusSelect form-select w-full" data-id="{{ $item->id }}"
@@ -150,17 +150,17 @@
                                     </select>
                                 </form>
                             </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    @if ($item->status !== 'success' && $item->status !== 'canceled')
-                                        <a class="flex items-center text-warning mr-3" id="editBtn{{ $item->id }}"
-                                            href="{{ route('admin.scheduleManagement.edit', $item->id) }}"> <i
-                                                data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
-                                    @endif
-                                    <a class="flex items-center text-white mr-auto" href="{{ route('admin.scheduleManagement.scheduleDetails', $item->id) }}">
-                                         <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
+                            <td class="text-center">
+                                @if ($item->status !== 'success' && $item->status !== 'canceled')
+                                    <a class="flex items-center text-warning mr-3" id="editBtn{{ $item->id }}"
+                                        href="{{ route('admin.scheduleManagement.edit', $item->id) }}"> <i
+                                            data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
+                                @endif
+                                <a class="flex items-center text-white mr-auto mt-3 text-lime-500
+                                "
+                                    href="{{ route('admin.scheduleManagement.scheduleDetails', $item->id) }}">
+                                    <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
                                     Xem chi tiết</a>
-                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -184,7 +184,7 @@
                 var selectElement = $(this);
                 var newStatus = selectElement.val();
                 var editId = selectElement.data("id");
-                var checkid =$(this).closest('form');
+                var checkid = $(this).closest('form');
                 const hideEdit = $(this).closest('td').next().find('a').first();
                 Swal.fire({
                     title: 'Chuyển trạng thái?',
@@ -198,15 +198,18 @@
                         var formData = new FormData();
                         formData.append("status", newStatus);
                         formData.append('name', checkid.find('input[name="name"]').val());
-                        formData.append('name_staff', checkid.find('input[name="name_staff"]').val());
+                        formData.append('name_staff', checkid.find('input[name="name_staff"]')
+                        .val());
                         formData.append('user_id', checkid.find('input[name="user_id"]').val());
                         formData.append('admin_id', checkid.find('input[name="admin_id"]').val());
                         formData.append('phone', checkid.find('input[name="phone"]').val());
                         formData.append('promo_id', checkid.find('input[name="promo_id"]').val());
                         formData.append('email', checkid.find('input[name="email"]').val());
                         formData.append('price', checkid.find('input[name="price"]').val());
-                        formData.append('schedule_time', checkid.find('input[name="schedule_time"]').val());
-                        formData.append('created_at', checkid.find('input[name="created_at"]').val());
+                        formData.append('schedule_time', checkid.find('input[name="schedule_time"]')
+                            .val());
+                        formData.append('created_at', checkid.find('input[name="created_at"]')
+                        .val());
 
                         var url =
                             "{{ route('admin.scheduleManagement.updateStatus', ':editId') }}";
