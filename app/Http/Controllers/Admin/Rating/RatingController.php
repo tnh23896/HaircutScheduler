@@ -17,7 +17,7 @@ class RatingController extends Controller
 			->leftJoin('bookings', 'reviews.booking_id', '=', 'bookings.id')
 			->leftJoin('admins', 'reviews.admin_id', '=', 'admins.id')->latest()->paginate(10);
 		$category = Admin::get(['id', 'username', 'email']);
-		return view('admin.Rating.index', compact('data', 'category'));
+		return view('admin.rating.index', compact('data', 'category'));
 	}
 
 	public function search(Request $request)
@@ -38,7 +38,7 @@ class RatingController extends Controller
 				->paginate(10)
 				->withQueryString();
 
-			return view('admin.Rating.index', compact('data', 'category'));
+			return view('admin.rating.index', compact('data', 'category'));
 		} catch (\Throwable $th) {
 			return response()->json($th);
 		}
@@ -58,7 +58,7 @@ class RatingController extends Controller
 				->where('reviews.admin_id', $filter)
 				->latest()->paginate(10);
 		}
-		return view('admin.Rating.index', compact('data', 'category'));
+		return view('admin.rating.index', compact('data', 'category'));
 	}
 
 	public function destroy(string $id)
