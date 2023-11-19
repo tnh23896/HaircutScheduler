@@ -16,7 +16,7 @@ class RatingController extends Controller
 		$data = Review::select('reviews.*', 'bills.name as user_name', 'admins.username as admin_name')
 			->leftJoin('bills', 'reviews.bill_id', '=', 'bills.id')
 			->leftJoin('admins', 'reviews.admin_id', '=', 'admins.id')->latest()->paginate(10);
-		return view('admin.rating.index', compact('data'));
+		return view('admin.Rating.index', compact('data'));
 	}
 
 	public function search(Request $request)
@@ -36,7 +36,7 @@ class RatingController extends Controller
 				->paginate(10)
 				->withQueryString();
 
-			return view('admin.rating.index', compact('data'));
+			return view('admin.Rating.index', compact('data'));
 		} catch (\Throwable $th) {
 			return response()->json($th);
 		}

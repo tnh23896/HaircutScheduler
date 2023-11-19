@@ -34,7 +34,7 @@ class ScheduleController extends Controller
     public function index()
     {
         $data = Booking::latest()->paginate(10);
-        return view('admin.scheduleManagement.index', compact('data'));
+        return view('admin.ScheduleManagement.index', compact('data'));
     }
 
 
@@ -47,7 +47,7 @@ class ScheduleController extends Controller
                 ->latest()
                 ->paginate(10)
                 ->withQueryString();
-            return view('admin.scheduleManagement.index', compact('data'));
+            return view('admin.ScheduleManagement.index', compact('data'));
         } catch (\Exception $exception) {
             return response()->json([
                 'success' => 'Tìm kiếm thất bại'
@@ -98,10 +98,10 @@ class ScheduleController extends Controller
             $bookingsByDateAndTime = $query->paginate(10)->withQueryString();
 
             if (empty($bookingsByDateAndTime)) {
-                return view('admin.scheduleManagement.index', ['data' => $bookingsByDateAndTime]);
+                return view('admin.ScheduleManagement.index', ['data' => $bookingsByDateAndTime]);
             } else {
                 $bookingsByDateAndTime->count() > 0;
-                return view('admin.scheduleManagement.index', ['data' => $bookingsByDateAndTime]);
+                return view('admin.ScheduleManagement.index', ['data' => $bookingsByDateAndTime]);
             }
         } catch (\Exception $exception) {
             return response()->json([
@@ -122,7 +122,7 @@ class ScheduleController extends Controller
                     ->latest()
                     ->paginate(10);
             }
-            return view('admin.scheduleManagement.index', compact('data'));
+            return view('admin.ScheduleManagement.index', compact('data'));
         } catch (\Exception $exception) {
             return response()->json([
                 'success' => 'Tìm kiếm thất bại'
@@ -164,7 +164,7 @@ class ScheduleController extends Controller
             })->whereHas('work_schedule_details', function ($query) {
                 $query->where('status', 'available');
             })->get()->unique();
-            return view('admin.scheduleManagement.create', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
+            return view('admin.ScheduleManagement.create', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');
@@ -336,7 +336,7 @@ class ScheduleController extends Controller
             $timeSlots = $workSchedules->times;
             $timeSelected = Time::where('time', $data->time)->first();
 
-            return view('admin.scheduleManagement.edit', compact('serviceCategories', 'data', 'staffMembers', 'availableDates', 'timeSlots', 'service', 'timeSelected'));
+            return view('admin.ScheduleManagement.edit', compact('serviceCategories', 'data', 'staffMembers', 'availableDates', 'timeSlots', 'service', 'timeSelected'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');
