@@ -1,11 +1,11 @@
-<div class="modal fade modal_reviews{{ $bill->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade modal_reviews{{ $booking->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-white text-black">
             <div class="page-content container">
                 <div class="page-header text-blue-d2 justify-content-end">
                 </div>
-                <div class="container px-5 pb-5">
+                <div class="container px-5 pb-5 pt-5">
                     <h1 class="text-center text-5xl pt-16 text-secondary-d1">ĐÁNH GIÁ NHÂN VIÊN</h1>
                     <p class="text-center pt-2 text-secondary-d1">HÂN HẠNH ĐƯỢC PHỤC VỤ.</p>
                     <form method="post" action="{{ route('reviews.store') }}">
@@ -14,16 +14,16 @@
                         <div class="mb-3">
                             <label class="form-label" for="">Đánh giá</label>
                             <input type="text" name="user_id" value="{{ auth('web')->user()->id }}" hidden>
-                            <input type="text" name="bill_id" value="{{ $bill->id }}" hidden>
-                            <input type="text" name="admin_id" value="{{ $bill->admin_id }}" hidden>
+                            <input type="text" name="booking_id" value="{{ $booking->id }}" hidden>
+                            <input type="text" name="admin_id" value="{{ $booking->admin_id }}" hidden>
                             <div class="rating">
-                                <span class="star" data-bill-id="{{ $bill->id }}" data-value="1"><i class="fa-regular fa-star "></i></span>
-                                <span class="star" data-bill-id="{{ $bill->id }}" data-value="2"><i class="fa-regular fa-star "></i></span>
-                                <span class="star" data-bill-id="{{ $bill->id }}" data-value="3"><i class="fa-regular fa-star "></i></span>
-                                <span class="star" data-bill-id="{{ $bill->id }}" data-value="4"><i class="fa-regular fa-star "></i></span>
-                                <span class="star" data-bill-id="{{ $bill->id }}" data-value="5"><i class="fa-regular fa-star "></i></span>
+                                <span class="star" data-bill-id="{{ $booking->id }}" data-value="1"><i class="fa-regular fa-star "></i></span>
+                                <span class="star" data-bill-id="{{ $booking->id }}" data-value="2"><i class="fa-regular fa-star "></i></span>
+                                <span class="star" data-bill-id="{{ $booking->id }}" data-value="3"><i class="fa-regular fa-star "></i></span>
+                                <span class="star" data-bill-id="{{ $booking->id }}" data-value="4"><i class="fa-regular fa-star "></i></span>
+                                <span class="star" data-bill-id="{{ $booking->id }}" data-value="5"><i class="fa-regular fa-star "></i></span>
                             </div>
-                            <input type="hidden" name="star" id="ratingInput{{ $bill->id }}" value="" >
+                            <input type="hidden" name="star" id="ratingInput{{ $booking->id }}" value="" >
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Nội dung</label>

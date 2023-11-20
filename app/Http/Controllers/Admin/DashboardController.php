@@ -260,29 +260,29 @@ class DashboardController extends Controller
 			->groupBy('month')
 			->orderBy('month', 'asc');
 
-            $result = $query->get();
+		$result = $query->get();
 
-            $data = [];
-            foreach ($result as $row) {
-                $data[$row->month] = [
-                    'totalBookings' => $row->totalBookings,
-                    'successfulBookings' => $row->successfulBookings,
-                    'cancelledBookings' => $row->cancelledBookings,
-                ];
-            }
+		$data = [];
+		foreach ($result as $row) {
+			$data[$row->month] = [
+				'totalBookings' => $row->totalBookings,
+				'successfulBookings' => $row->successfulBookings,
+				'cancelledBookings' => $row->cancelledBookings,
+			];
+		}
 
-            $allMonths = range(1, 12);
-            foreach ($allMonths as $month) {
-                if (!isset($data[$month])) {
-                    $data[$month] = [
-                        'totalBookings' => 0,
-                        'successfulBookings' => 0,
-                        'cancelledBookings' => 0,
-                    ];
-                }
-            }
+		$allMonths = range(1, 12);
+		foreach ($allMonths as $month) {
+			if (!isset($data[$month])) {
+				$data[$month] = [
+					'totalBookings' => 0,
+					'successfulBookings' => 0,
+					'cancelledBookings' => 0,
+				];
+			}
+		}
 
-        return $data;
+		return $data;
 	}
 	// Lọc theo tháng và năm
 	private function baScheduleSetbyTime(Request $request)
@@ -345,10 +345,12 @@ class DashboardController extends Controller
 			->leftJoin('reviews', function ($join) {
 				$join->on('admins.id', '=', 'reviews.admin_id');
 			})
-			->groupBy('admins.id');
+			->groupBy('admins.id', 'admins.username', 'admins.avatar'); // Include 'admins.username' and 'admins.avatar' in the GROUP BY
+
 		$data = $query->orderByDesc('totalBookings')
 			->take(5)
 			->get();
+
 		return $data;
 	}
 

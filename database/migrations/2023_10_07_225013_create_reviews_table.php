@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('comment')->nullable();
             $table->string('user_id');
             $table->string('admin_id');
-						$table->string('bill_id');
+						$table->string('booking_id');
             $table->timestamps();
             $table->softDeletes();
         });

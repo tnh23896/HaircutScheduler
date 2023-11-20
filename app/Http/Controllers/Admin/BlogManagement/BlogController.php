@@ -26,7 +26,7 @@ class BlogController extends Controller
         //
         $blogs = $this->blogmodel->latest()->paginate(9);
         $categoryBlog = $this->Categorymodel::get(['id', 'title']);
-        return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
+        return view('admin.BlogManagement.Blog.index', compact('blogs', 'categoryBlog'));
     }
 
     public function search(Request $request)
@@ -39,7 +39,7 @@ class BlogController extends Controller
                 ->latest()
                 ->paginate(9)
                 ->withQueryString();
-            return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
+            return view('admin.BlogManagement.Blog.index', compact('blogs', 'categoryBlog'));
         } catch (\Exception $exception) {
             return response()->json([
                 'error' => 'Tìm kiếm thất bại'
@@ -59,7 +59,7 @@ class BlogController extends Controller
                 ->paginate(10)
                 ->withQueryString();
         }
-        return view('admin.blogManagement.blog.index', compact('blogs', 'categoryBlog'));
+        return view('admin.BlogManagement.Blog.index', compact('blogs', 'categoryBlog'));
     }
 
 
@@ -70,7 +70,7 @@ class BlogController extends Controller
     {
         //
         $category_blog = $this->Categorymodel::all();
-        return view('admin.blogManagement.blog.create', compact('category_blog'));
+        return view('admin.BlogManagement.Blog.create', compact('category_blog'));
     }
 
     /**
@@ -107,7 +107,7 @@ class BlogController extends Controller
         //
         $one_blog = $this->blogmodel::find($id);
         $category_blog = $this->Categorymodel::all();
-        return view('admin.blogManagement.blog.edit', compact('one_blog', 'category_blog'));
+        return view('admin.BlogManagement.Blog.edit', compact('one_blog', 'category_blog'));
     }
 
     /**

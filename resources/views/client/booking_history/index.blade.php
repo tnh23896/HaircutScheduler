@@ -1,5 +1,5 @@
 @extends('client.templates.layout_dashboard')
-@section('title', 'Booking History')
+@section('title', 'Danh sách lịch đặt')
 @section('title_page', 'Danh sách lịch đặt')
 @section('content')
     <div id="data-wrapper">
