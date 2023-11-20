@@ -42,6 +42,7 @@
                     },
                     function(error) {
                         console.log(error);
+                        renderTimes([]);
                         toastr.error(error.responseJSON.message);
                     }
                 );
@@ -50,6 +51,7 @@
 
         function renderTimes(times) {
             $('#timeSelect label').remove();
+            times= Array.isArray(times) ? times : Object.values(times);
             if (times.length === 0) {
                 // Nếu không có thời gian, hiển thị trạng thái "rỗng"
                 $('#timeSelect').html('<p>Không có thời gian làm việc trong ngày này.</p>');
