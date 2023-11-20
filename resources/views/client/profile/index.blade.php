@@ -2,7 +2,7 @@
 @section('title', 'Tài Khoản của tôi')
 @section('title_page', 'Thông tin tài khoản')
 @section('content')
-    <div >
+    <div>
         <div class="tabs-wrp account-settings brd-rd5">
             <h4 itemprop="headline">Cài đặt tài khoản</h4>
             <div class="account-settings-inner">
@@ -16,6 +16,7 @@
                                         alt="profile-img1.jpg" itemprop="image">
                                 </div>
                                 <div class="profile-img-upload-btn">
+                                    
                                     <label class="fileContainer brd-rd5 yellow-bg theme-btn-2 rounded">
                                         Tải hình ảnh lên
                                         <input id="crud-form-1" name="avatar" type="file" />
@@ -42,7 +43,8 @@
                                     <input class="brd-rd3" type="text" value="{{ $data->phone }}" disabled>
                                 </div>
                                 <button type="button" id="saveBtn"
-                                    class="fileContainer brd-rd5 yellow-bg theme-btn-2 ml-3 mt-2 rounded">Lưu Thông Tin</button>
+                                    class="fileContainer brd-rd5 yellow-bg theme-btn-2 ml-3 mt-2 rounded">Lưu Thông
+                                    Tin</button>
                             </div>
                         </div>
                     </div>
@@ -75,6 +77,8 @@
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
                         toastr.success('Cập nhật thành công .');
+                        $("#username-error").text("");
+                        $("#email-error").text("");
                     },
                     function showError(error) {
                         if (error.responseJSON && error.responseJSON.errors) {
@@ -91,7 +95,6 @@
                             } else {
                                 $("#email-error").text("");
                             }
-
                             var errorDiv = $('#error-message');
                             errorDiv.html("<p>Có lỗi xảy ra:</p>");
                             errorDiv.hide();

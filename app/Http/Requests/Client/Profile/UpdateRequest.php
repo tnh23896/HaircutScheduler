@@ -30,6 +30,7 @@ class UpdateRequest extends FormRequest
                 Rule::unique('users', 'email')->ignore(auth('web')->user()->id),
                 'email'
             ],
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
             
         ];
     }
@@ -40,6 +41,7 @@ class UpdateRequest extends FormRequest
             'email.email' => 'Email không đúng định dạng',
             'email.unique' => 'Email đã tồn tại',
             'username.max' => 'Không được nhập quá 255 ký tự',
+            'avatar.image' => 'File không đúng định dạng',
         ];
     }
 }
