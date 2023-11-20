@@ -110,10 +110,11 @@
             <div class="intro-y box mt-5 lg:mt-0">
                 <div class="content-center p-5 flex flex-col items-center">
                     <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                        <img alt="{{ $employee->username }}" class="rounded-full" src="{{ asset($employee->avatar) }}">
+                        <img alt="{{ $employee->username }}" class="rounded-full"
+                            src="{{ $employee->avatar ? asset($employee->avatar) : asset('dist/images/default.jpg') }}">
                     </div>
-                    <div class="ml-5 text-center">
-                        <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">
+                    <div class="text-center">
+                        <div class="sm:w-40 truncate sm:whitespace-normal font-medium text-lg">
                             {{ $employee->username }}</div>
                     </div>
                 </div>
@@ -166,6 +167,11 @@
                             </thead>
                             <tbody>
                                 @foreach ($workSchedules as $item)
+                                    @php
+                                        $createdAt = \Carbon\Carbon::parse($item->created_at);
+                                        $timeDifference = now()->diffInHours($createdAt);
+                                        $showEditButton = $timeDifference < 24;
+                                    @endphp
                                     <tr class="intro-x">
                                         <td class="text-center" style="border-right: 1px solid white">{{ $item->day }}
                                         </td>
@@ -207,16 +213,38 @@
                                         <td class="text-center">
                                             <div class="flex justify-center items-center gap-2">
                                                 <div class="flex justify-center items-center">
-                                                    <a data-tw-toggle="modal" data-tw-target="#modal{{ $item->id }}"
-                                                        class="flex items-center text-success cursor-pointer">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="lucide lucide-check-square">
-                                                            <polyline points="9 11 12 14 22 4" />
-                                                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                                                        </svg>
-                                                        Sửa </a>
+                                                    @if ($showEditButton)
+                                                        <a href="javascript:;" data-tw-toggle="modal"
+                                                            data-tw-target="#modal{{ $item->id }}"
+                                                            class="flex items-center cursor-pointer">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="20" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-check-square">
+                                                                <polyline points="9 11 12 14 22 4" />
+                                                                <path
+                                                                    d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                                                            </svg>
+                                                            Sửa
+                                                        </a>
+                                                    @else
+                                                        <a href="javascript:;" style="display: none"
+                                                            data-tw-toggle="modal"
+                                                            data-tw-target="#modal{{ $item->id }}"
+                                                            class="flex items-center cursor-pointer">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="20" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="lucide lucide-check-square">
+                                                                <polyline points="9 11 12 14 22 4" />
+                                                                <path
+                                                                    d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                                                            </svg>
+                                                            Sửa
+                                                        </a>
+                                                    @endif
                                                 </div>
 
                                         </td>
@@ -277,6 +305,7 @@
                     bookingContent4.text('Không có dịch vụ');
                     service.show();
                 }
+
             } else {
                 bookingContent1.text(time);
                 bookingContent2.text(day);

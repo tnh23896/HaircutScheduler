@@ -169,6 +169,9 @@ class ScheduleEmployeeController extends Controller
             }
             $workSchedule->getConnection()->beginTransaction();
             $times = $request->input('times', []);
+            if (count($times) < 4) {
+                return redirect()->back()->with('error', 'Vui lòng chọn ít nhất 4 khoảng thời gian làm việc.');
+            }
             $workSchedule->times()->sync($times);
             $workSchedule->save();
             $workSchedule->getConnection()->commit();
