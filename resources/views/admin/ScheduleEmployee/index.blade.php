@@ -35,6 +35,65 @@
         </div>
     </div>
 </div>
+<div id="superlarge-modal-size-preview1" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-body p-10">
+                <div class="intro-y box p-5">
+                    <h2 class="font-medium text-base mb-5">Đăng ký lịch làm việc </h2> 
+                    <button id="toggleFormButton" class="btn btn-primary mb-2">Đăng ký theo tuần</button>
+                    <div id="formDate" class="schedule-form">
+                    <form action="{{ route('admin.ScheduleEmployee.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="formType" value="date">
+                        
+                        <!-- Các trường cho đăng ký theo ngày -->
+                        <label for="date">Chọn ngày:</label>
+                        <input type="date" class="text-white form-control form-control-lg" name="date" required>
+                        
+                        <!-- Chọn thời gian -->
+                        <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
+                            @foreach($timeSlots as $slot)
+                                <div>
+                                    <input type="checkbox" name="timeSlots[]" value="{{ $slot->id }}" id="timeSlot{{ $slot->id }}">
+                                    <label for="timeSlot{{ $slot->id }}">{{ $slot->time }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        
+                        <!-- Nút submit -->
+                        <button type="submit" class="btn btn-primary mt-5">Đăng ký</button>
+                    </form>
+                </div>
+                    <!-- Form đăng ký theo tuần -->
+                    <div id="formWeek" class="schedule-form" style="display:none;">
+                    <form action="{{ route('admin.ScheduleEmployee.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="formType" value="week">
+                        
+                        <!-- Các trường cho đăng ký theo tuần -->
+                        <label for="week">Chọn tuần:</label>
+                        <input type="week" class="text-white form-control form-control-lg my-2" name="week" required>
+                        
+                        <!-- Chọn thời gian -->
+                        <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
+                            @foreach($timeSlots as $slot)
+                                <div>
+                                    <input type="checkbox" name="timeSlots[]" value="{{ $slot->id }}" id="timeSlot{{ $slot->id }}">
+                                    <label for="timeSlot{{ $slot->id }}">{{ $slot->time }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        
+                        <!-- Nút submit -->
+                        <button type="submit" class="btn btn-primary mt-5">Đăng ký</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="text-center">
     <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white mr-2">Chú thích</h3>
     <span class="btn btn-rounded-success w-24 mr-1 mb-2">Trống lịch</span>
@@ -45,21 +104,23 @@
     <!-- BEGIN: Profile Menu -->
     <div class="col-span-12 lg:col-span-4 2xl:col-span-3 flex lg:block flex-col-reverse">
         <div class="intro-y box mt-5 lg:mt-0">
-            <div class="relative flex items-center p-5">
+            <div class="content-center p-5 flex flex-col items-center">
                 <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
                     <img alt="{{$employee->username}}" class="rounded-full" src="{{asset($employee->avatar)}}">
                 </div>
-                <div class="ml-5">
+                <div class="ml-5 text-center">
                     <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{$employee->username}}</div>
-                    {{-- <div class="text-slate-500">Backend Engineer</div> --}}
                 </div>
-            </div>
+            </div>         
             <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400">
                 <div class="font-medium text-center lg:text-left lg:mt-3">Liên hệ</div>
                 <div class="flex flex-col justify-center items-center lg:items-start mt-4">
                     <div class="truncate sm:whitespace-normal flex items-center"> <i data-lucide="mail" class="w-4 h-4 mr-2"></i>{{$employee->email}}</div>
                     <div class="truncate sm:whitespace-normal flex items-center mt-3"> <i data-lucide="phone" class="w-4 h-4 mr-2"></i>{{$employee->phone}}</div>
                 </div>
+            </div>
+            <div class="py-2 px-4 border border-white whitespace-normal">
+                <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#superlarge-modal-size-preview1" class="btn btn-primary">Đăng kí lịch làm việc</a>
             </div>
         </div>
     </div>
@@ -71,6 +132,16 @@
                     <h2 class="font-medium text-base mr-auto">
                         Lịch làm việc
                     </h2>
+                    <form action="{{ route('admin.ScheduleEmployee.search') }}" method="post">
+                        @csrf
+                            <div class="w-full relative text-slate-500 flex items-center">
+                                <input type="date" name="search" class="form-control w-40 sm:w-auto box pr-10"
+                                    value="{{ request('day') }}">
+                                <button type="submit">
+                                    <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
+                                </button>
+                            </div>
+                    </form>
                     <div class="dropdown ml-auto sm:hidden">
                         <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
                     </div>
@@ -131,6 +202,21 @@
     </div>
 </div>
 <script>
+    var toggleFormButton = document.getElementById('toggleFormButton');
+    var formDate = document.getElementById('formDate');
+    var formWeek = document.getElementById('formWeek');
+
+    toggleFormButton.addEventListener('click', function() {
+        if (formDate.style.display === 'none') {
+            formDate.style.display = 'block';
+            formWeek.style.display = 'none';
+            toggleFormButton.innerText = 'Đăng ký theo tuần';
+        } else {
+            formDate.style.display = 'none';
+            formWeek.style.display = 'block';
+            toggleFormButton.innerText = 'Đăng ký theo ngày';
+        }
+    });
     function openPopup(time, day, employeeId, bookingInfo, serviceName, statusText) {
         const bookingContent1 = $('#bookingContent1');
         const bookingContent2 = $('#bookingContent2');
