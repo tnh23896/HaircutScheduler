@@ -35,15 +35,14 @@ class RoleController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
         try {
             $role = new Role();
             $role->fill($request->all());
             $role->save();
             $role->syncPermissions($request->permissions);
-            return response()->json(['success' => 'Role created successfully']);
+            return response()->json(['success' => 'Thêm mới thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Role created false']);
+            return response()->json(['error' => 'Thêm mới thất bại'], 500);
         }
     }
 
@@ -75,29 +74,26 @@ class RoleController extends Controller
      */
     public function update(UpdateRequest $request, string $id)
     {
-
         try {
             $role = Role::query()->findOrFail($id);
-
             $role->fill($request->all());
-
             $role->save();
-
             $role->syncPermissions($request->permissions);
-
-            return response()->json(['success' => 'Role updated successfully']);
+            return response()->json(['success' => 'Cập nhật thành công']);
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Role updated false']);
+            return response()->json(['error' => 'Cập nhật thất bại'], 500);
         }
-
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        DB::table("roles")->where('id', $id)->delete();
-        return response()->json(['success' => 'Role deleted successfully']);
+        try {
+            DB::table("roles")->where('id', $id)->delete();
+            return response()->json(['success' => 'Xóa thành công']);
+        } catch (\Exception $exception) {
+            return response()->json(['error' => 'Xóa thất bại'], 500);
+        }
     }
 }
