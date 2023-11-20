@@ -98,6 +98,7 @@ return [
     // Schedule Emoloyee
     'admin.ScheduleEmployee.index' => 'Danh sách lịch nhân viên',
     'admin.ScheduleEmployee.store' => 'Đăng ký lịch làm việc nhân viên',
+    'admin.ScheduleEmployee.update' => "Sửa lịch làm việc nhân viên",
 
     // Work Schedule
     'admin.work-schedule.index' => 'Danh sách lịch làm việc',

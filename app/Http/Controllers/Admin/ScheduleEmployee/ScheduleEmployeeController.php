@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin\ScheduleEmployee;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\WorkScheduleemployee\StoreRequest;
+use App\Http\Requests\Admin\WorkScheduleEmployee\StoreRequest;
+use App\Http\Requests\Admin\WorkScheduleEmployee\UpdateRequest;
 use App\Models\Admin;
 use App\Models\Booking;
 use App\Models\Time;
@@ -13,6 +14,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
+use function Laravel\Prompts\alert;
 
 class ScheduleEmployeeController extends Controller
 {
@@ -33,13 +36,12 @@ class ScheduleEmployeeController extends Controller
                 ->join('services', 'booking_details.service_id', '=', 'services.id')
                 ->select('bookings.*', 'services.name as service_name')
                 ->get();
-    
+
             return view('admin.ScheduleEmployee.index', compact('workSchedules', 'employee', 'bookings', 'timeSlots'));
         } catch (\Exception $e) {
             return redirect()->route('admin.ScheduleEmployee.index')->with('error', 'Có lỗi xảy ra khi lấy dữ liệu.');
         }
     }
-    
 
     public function store(StoreRequest $request)
     {
@@ -155,6 +157,25 @@ class ScheduleEmployeeController extends Controller
         } catch (\Exception $e) {
             // Handle the exception, you can log it or redirect with an error message
             return redirect()->route('admin.ScheduleEmployee.index')->with('error', 'Đã xảy ra lỗi.');
+        }
+    }
+    public function update(UpdateRequest $request, $id)
+    {
+        try {
+            $workSchedule = WorkSchedule::findOrFail($id);
+            $editTimeLimit = now()->subHours(24);
+            if ($workSchedule->created_at < $editTimeLimit) {
+                return redirect()->back()->with('error', 'Đã hết thời gian sửa lịch.');
+            }
+            $workSchedule->getConnection()->beginTransaction();
+            $times = $request->input('times', []);
+            $workSchedule->times()->sync($times);
+            $workSchedule->save();
+            $workSchedule->getConnection()->commit();
+    
+            return redirect()->route('admin.ScheduleEmployee.index')->with('success', 'Cập nhật lịch thành công.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.ScheduleEmployee.index')->with('error', 'Có lỗi xảy ra khi cập nhật lịch.');
         }
     }
 }

@@ -257,6 +257,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('employee-schedule', [ScheduleEmployeeController::class, 'index'])->name('admin.ScheduleEmployee.index');
     Route::post('employee-schedule/store', [ScheduleEmployeeController::class, 'store'])->name('admin.ScheduleEmployee.store');
     Route::post('employee-schedule', [ScheduleEmployeeController::class, 'search'])->name('admin.ScheduleEmployee.search');
+    Route::post('schedule-employee/{id}', [ScheduleEmployeeController::class, 'update'])->name('admin.ScheduleEmployee.update');
     //Role Management
     Route::get('role-management', [RoleController::class, 'index'])
         ->name('admin.RoleManagement.index');
