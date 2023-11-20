@@ -533,7 +533,7 @@
                             console.log(response);
                             toastr.success(response.message);
 
-                            //location.href = "{{ route('home.index') }}";
+                            location.href = "{{ route('home.index') }}";
                         },
                         error => {
                             showErrorsWithToastr(error);
