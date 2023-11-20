@@ -102,14 +102,13 @@ class BookingController extends Controller
             $day = $request->day;
             if ($adminId == "random") {
                 if ($day) {
-                    $timeSlots = Time::with('work_schedules')->orderBy('time')
-                        ->whereHas('work_schedules', function ($query) use ($day) {
-                            $query->where('day', $day);
-                        })
-                        ->whereHas('work_schedule_details', function ($query) {
-                            $query->where('status', 'available');
-                        })
-                        ->get();
+                    $timeSlots =Time::whereHas('work_schedule_details', function ($query) use ($day) {
+                        $query->where('status', 'available')
+                              ->whereHas('work_schedules', function ($query) use ($day) {
+                                  $query->where('day', $day);
+                              });
+                    })->get();
+                     
                 } else {
                     $timeSlots = Time::with('work_schedules')->orderBy('time')
                         ->whereHas('work_schedule_details', function ($query) {
@@ -127,7 +126,6 @@ class BookingController extends Controller
                 });
             }
             
-                
                 return response()->json([
                     'times' => $timeSlots,
                 ], 200);
@@ -180,7 +178,6 @@ class BookingController extends Controller
     public function store(StoreRequest $request)
     {
         try {
-
             $admin_id = $request->admin_id;
             $day = $request->day;
             $params = [
@@ -200,6 +197,7 @@ class BookingController extends Controller
                     ->join('work_schedules', 'work_schedule_details.work_schedules_id', '=', 'work_schedules.id')
                     ->where('times.id', $time_id)
                     ->where('work_schedule_details.status', 'available')
+                    ->where('work_schedules.day', $day)
                     ->inRandomOrder() // Lấy ngẫu nhiên
                     ->value('work_schedules.admin_id');
             } else {
@@ -221,15 +219,16 @@ class BookingController extends Controller
                     'price' => $service->price,
                 ]);
             }
-
+           
             $workSchedule = WorkSchedule::query()->where('admin_id', $params['admin_id'])->where('day', $day)->first();
-
+           
             $findWorkScheduleDetail = DB::table('work_schedule_details')
                 ->where('work_schedule_details.time_id', $time->id)
                 ->where('work_schedule_details.work_schedules_id', $workSchedule->id);
             if ($findWorkScheduleDetail->first()->status == 'unavailable') {
                 throw new Exception('Lịch đã được đặt rồi', 400);
             }
+       
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
             event(new AdminNotifications([
                 'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
