@@ -49,9 +49,10 @@ class BookingController extends Controller
     public function index()
     {
         try {
+            $today = Carbon::today();
             // Lấy danh mục dịch vụ
             $serviceCategories = CategoryService::with('services')->get();
-
+            $promotion = Promotion::query()->where('expire_date', '>=' , $today)->get()->toArray();
             // Ngày bắt đầu
             $startDate = Carbon::now()->startOfDay();
 
@@ -88,7 +89,7 @@ class BookingController extends Controller
                     return $slotTime->gt($currentTime);
                 });
             }
-            return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
+            return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots', 'promotion'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');
@@ -108,7 +109,7 @@ class BookingController extends Controller
                                   $query->where('day', $day);
                               });
                     })->get();
-                     
+
                 } else {
                     $timeSlots = Time::with('work_schedules')->orderBy('time')
                         ->whereHas('work_schedule_details', function ($query) {
@@ -125,7 +126,7 @@ class BookingController extends Controller
                     return $slotTime->gt($currentTime);
                 });
             }
-            
+
                 return response()->json([
                     'times' => $timeSlots,
                 ], 200);
@@ -161,7 +162,7 @@ class BookingController extends Controller
                 return response()->json([
                     'times' => $timeSlots,
                 ], 200);
-            } 
+            }
         } catch (ModelNotFoundException $e) {
             $day = Carbon::parse($day)->format('d-m-Y');
             return response()->json([
@@ -178,6 +179,7 @@ class BookingController extends Controller
     public function store(StoreRequest $request)
     {
         try {
+
             $admin_id = $request->admin_id;
             $day = $request->day;
             $params = [
@@ -189,6 +191,9 @@ class BookingController extends Controller
                 'email' => $request->email,
                 'day' => $day,
             ];
+            if ($request->payment == 'vnpay') {
+                $params['payment'] = $request->payment;
+            }
             $time_id = $request->time;
             $time = Time::query()->findOrFail($time_id);
             if ($admin_id == "random") {
@@ -219,16 +224,16 @@ class BookingController extends Controller
                     'price' => $service->price,
                 ]);
             }
-           
+
             $workSchedule = WorkSchedule::query()->where('admin_id', $params['admin_id'])->where('day', $day)->first();
-           
+
             $findWorkScheduleDetail = DB::table('work_schedule_details')
                 ->where('work_schedule_details.time_id', $time->id)
                 ->where('work_schedule_details.work_schedules_id', $workSchedule->id);
             if ($findWorkScheduleDetail->first()->status == 'unavailable') {
                 throw new Exception('Lịch đã được đặt rồi', 400);
             }
-       
+
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
             event(new AdminNotifications([
                 'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
@@ -237,9 +242,22 @@ class BookingController extends Controller
                 'day' => Carbon::parse($request->day)->format('d-m-Y'),
                 'time' => Carbon::parse($time->time)->format('H:i'),
             ]));
-            return response()->json([
-                'message' => 'Thêm lịch đặt thành công',
-            ], 200);
+
+            if ($request->payment == 'vnpay') {
+                return response()->json([
+                    'payment_method' => 'vnpay',
+                    'url' => route('vnpay.process', [
+                        'order_code' => $booking->id,
+                        'amount' => $request->total_price,
+                    ]),
+                ], 200);
+            }
+            else {
+                return response()->json([
+                    'message' => 'Thêm lịch đặt thành công',
+                    'booking' => $booking,
+                ], 200);
+            }
         } catch (\Exception $e) {
             Log::error('Error in store: ' . $e->getMessage());
             if ($e->getCode() === 400) {
@@ -346,4 +364,5 @@ class BookingController extends Controller
             return response()->json(['success' => false]);
         }
     }
+
 }

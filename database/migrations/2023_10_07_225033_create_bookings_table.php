@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,11 +17,12 @@ return new class extends Migration
             $table->string('admin_id');
             $table->string('phone');
             $table->string('promo_id')->nullable();
-            $table->enum('status',['pending','confirmed','waiting','success','canceled'])->default('pending');
+            $table->enum('status', ['pending', 'confirmed', 'waiting', 'success', 'canceled'])->default('pending');
             $table->string('total_price');
             $table->string('email');
             $table->date('day');
             $table->time('time');
+            $table->enum('payment', ['offline', 'vnpay'])->default('offline');
             $table->timestamps();
             $table->softDeletes();
         });

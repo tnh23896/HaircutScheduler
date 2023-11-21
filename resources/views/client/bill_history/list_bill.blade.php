@@ -3,7 +3,7 @@
         <div class="order-item brd-rd5">
             <div class="order-info">
                 <span class="red-clr font-weight-bold mb-2">ID hóa đơn: #{{ $bill->id }}</span>
-                <span class="price font-weight-bold mb-2">Tổng tiền: {{ number_format($bill->total_price) }}</span>
+                <span class="price font-weight-bold mb-2">Tổng tiền: {{ number_format($bill->total_price) }} VND</span>
                 <div class="mt-2 mb-2">
                     <span class="price font-weight-bold">Lịch đặt: {{ Carbon\Carbon::parse($bill->time)->format('H:i') }}
                         {{ Carbon\Carbon::parse($bill->day)->format('d/m/Y') }}</span>

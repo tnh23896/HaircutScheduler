@@ -209,8 +209,8 @@ class ScheduleController extends Controller
                     return $slotTime->gt($currentTime);
                 });
             }
-            
-                
+
+
                 return response()->json([
                     'times' => $timeSlots,
                 ], 200);
@@ -246,7 +246,7 @@ class ScheduleController extends Controller
                 return response()->json([
                     'times' => $timeSlots,
                 ], 200);
-            } 
+            }
         } catch (ModelNotFoundException $e) {
             $day = Carbon::parse($day)->format('d-m-Y');
             return response()->json([
@@ -271,7 +271,7 @@ class ScheduleController extends Controller
             $day = $request->day;
             $params = [
                 'name' => $request->name,
-                
+
                 'phone' => $request->phone,
                 'admin_id' => $admin_id,
                 'total_price' => $request->total_price,
@@ -326,7 +326,7 @@ class ScheduleController extends Controller
                 throw new Exception('Lịch đã được đặt rồi', 400);
             }
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
-            
+
             return response()->json([
                 'message' => 'Thêm lịch đặt thành công',
             ], 200);
@@ -339,8 +339,8 @@ class ScheduleController extends Controller
             }
             return response()->json([
                 'message' => 'Có lỗi xảy ra, vui lòng thử lai sau!',
-                
-                
+
+
             ], 500);
         }
     }
@@ -493,21 +493,13 @@ class ScheduleController extends Controller
                     $sum_price += $item->price;
                 }
             }
-            $promo = Promotion::where('id', $data->promo_id)->first();
-            if ($promo) {
-
-                $sum_price_end = $sum_price - $promo->value;
-            }else{
-                $sum_price_end = $sum_price;
-            }
             if ($data->status == "success") {
                 $bill = Bill::create([
                     'name' => $data->name,
                     'user_id' => $data->user_id,
                     'admin_id' => $data->admin_id,
                     'phone' => $data->phone,
-                    'promo_id' => $data->promo_id,
-                    'total_price' => $sum_price_end,
+                    'total_price' => $data->total_price,
                     'email' => $data->email,
                     'day' => $data->day,
                     'time' => $data->time,
