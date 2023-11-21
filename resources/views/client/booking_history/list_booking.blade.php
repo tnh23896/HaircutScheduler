@@ -3,7 +3,6 @@
     <table>
         <thead>
             <th class="text-nowrap text-center">Thợ cắt tóc</th>
-            <th class="text-nowrap text-center">Giá gốc</th>
             <th class="text-nowrap text-center">Giảm giá</th>
             <th class="text-nowrap text-center">Số tiền thanh toán</th>
             <th class="text-nowrap text-center">Lịch đặt</th>
@@ -14,11 +13,8 @@
             @foreach ($list_booking as $booking)
                 <tr>
                     <td class="text-nowrap text-center">{{ $booking->admin->username }}</td>
-                    <td class="text-nowrap text-center"><span>{{ number_format($booking->total_price) }} vnd</span>
-                    </td>
                     <td class="text-nowrap text-center">{{ number_format($booking->promotion->discount ?? 0) }} vnd</td>
-                    <td class="text-nowrap text-center">
-                        <span>{{ number_format($booking->total_price - ($booking->promotion->discount ?? 0)) }}vnd</span>
+                    <td class="text-nowrap text-center"><span>{{ number_format($booking->total_price) }} vnd</span>
                     </td>
                     <td class="text-center"><span>
                             {{ \Carbon\Carbon::parse($booking->time)->format('H:i') }}

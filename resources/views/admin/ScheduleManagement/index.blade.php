@@ -54,9 +54,9 @@
                     <tr>
                         <th class="whitespace-nowrap">Khách hàng</th>
                         <th class="text-center whitespace-nowrap">Tên nhân viên</th>
-                        <th class="text-center whitespace-nowrap">Giá gốc</th>
                         <th class="text-center whitespace-nowrap">Số tiền thanh toán</th>
                         <th class="text-center whitespace-nowrap">Lịch đặt</th>
+                        <th class="text-center whitespace-nowrap">Thanh toán</th>
                         <th class="text-center whitespace-nowrap">Thời gian tạo đơn</th>
                         <th class="text-center whitespace-nowrap">Trạng thái</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
@@ -77,14 +77,21 @@
                             <td class="text-center"><a class="flex items-center justify-center"
                                     href="javascript:;">{{ $item->admin->username ?? '' }}</a></td>
                             <td class="text-center whitespace-nowrap">{{ number_format($item->total_price) }} vnd</td>
-                            <td class="text-center whitespace-nowrap">
-                                {{ number_format($item->total_price - ($item->promotion->discount ?? 0)) }} vnd</td>
                             <td class="w-40">
                                 <div class="flex items-center justify-center text-center">
                                     {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}
                                     <br>
                                     {{ \Carbon\Carbon::parse($item->day)->format('d/m/Y') }}
                                 </div>
+                            </td>
+                            <td class="text-center">
+                                @if ($item->payment == 'offline')
+                                    <span class="badge">Tại cửa hàng</span>
+                                @elseif ($item->payment == 'vnpay')
+                                    <span class="badge">VNPAY</span>
+
+                                @endif
+
                             </td>
                             <td class="text-center">
                                 {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}
