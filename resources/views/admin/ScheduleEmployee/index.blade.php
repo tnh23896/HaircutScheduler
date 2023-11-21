@@ -54,11 +54,11 @@
 
                                 <!-- Chọn thời gian -->
                                 <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
-                                    @foreach ($timeSlots as $slot)
+                                    @foreach ($shifts as $slot)
                                         <div>
                                             <input type="checkbox" name="timeSlots[]" value="{{ $slot->id }}"
                                                 id="timeSlot{{ $slot->id }}">
-                                            <label for="timeSlot{{ $slot->id }}">{{ $slot->time }}</label>
+                                            <label for="timeSlot{{ $slot->id }}">{{ $slot->name }}</label>
                                         </div>
                                     @endforeach
                                 </div>
@@ -80,11 +80,11 @@
 
                                 <!-- Chọn thời gian -->
                                 <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
-                                    @foreach ($timeSlots as $slot)
+                                    @foreach ($shifts as $slot)
                                         <div>
                                             <input type="checkbox" name="timeSlots[]" value="{{ $slot->id }}"
                                                 id="timeSlot{{ $slot->id }}">
-                                            <label for="timeSlot{{ $slot->id }}">{{ $slot->time }}</label>
+                                            <label for="timeSlot{{ $slot->id }}">{{ $slot->name }}</label>
                                         </div>
                                     @endforeach
                                 </div>
@@ -101,7 +101,6 @@
     <div class="text-center">
         <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white mr-2">Chú thích</h3>
         <span class="btn btn-rounded-success w-24 mr-1 mb-2">Trống lịch</span>
-        <span class="btn btn-rounded-warning w-32 mr-1 mb-2">Đã hoàn thành</span>
         <span class="btn btn-rounded-danger w-32 mr-1 mb-2">Đã được đặt</span>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -173,40 +172,40 @@
                                         $showEditButton = $timeDifference < 24;
                                     @endphp
                                     <tr class="intro-x">
-                                        <td class="text-center" style="border-right: 1px solid white">{{ $item->day }}
+                                        <td class="text-center" style="border-right: 1px solid white">{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y')}}
                                         </td>
                                         <td class="flex flex-wrap">
                                             @foreach ($item->times as $time)
                                                 @php
-                                                    $cellColorClass = 'text-success';
                                                     $bookingInfo = '';
                                                     $serviceNames = [];
                                                     $statusText = 'Chưa có khách hàng đặt lịch';
                                                     foreach ($bookings as $booking) {
                                                         if ($time->time == $booking->time && $item->day == $booking->day) {
                                                             if ($booking->status === 'confirmed') {
-                                                                $cellColorClass = 'text-danger';
                                                                 $bookingInfo = $booking->name;
                                                                 $serviceNames[] = $booking->service_name;
                                                                 $statusText = 'Đã xác nhận';
                                                             } elseif ($booking->status === 'waiting') {
-                                                                $cellColorClass = 'text-danger';
                                                                 $bookingInfo = $booking->name;
                                                                 $serviceNames[] = $booking->service_name;
                                                                 $statusText = 'Đang chờ cắt';
                                                             } elseif ($booking->status === 'success') {
-                                                                $cellColorClass = 'text-warning';
                                                                 $bookingInfo = $booking->name;
                                                                 $serviceNames[] = $booking->service_name;
                                                                 $statusText = 'Đã hoàn thành';
+                                                            }elseif ($booking->status === 'pending') {
+                                                                $bookingInfo = $booking->name;
+                                                                $serviceNames[] = $booking->service_name;
+                                                                $statusText = 'Chờ xác nhận';
                                                             }
+
                                                         }
                                                     }
                                                 @endphp
-                                                <div class="py-2 px-4 border border-white whitespace-normal {{ $cellColorClass }}"
-                                                    onclick="openPopup('{{ $time->time }}', '{{ $item->day }}', '{{ $employee->id }}', '{{ $bookingInfo }}', '{{ json_encode($serviceNames) }}', '{{ $statusText }}')">
-                                                    <a href="javascript:;" data-tw-toggle="modal"
-                                                        data-tw-target="#superlarge-modal-size-preview">{{ $time->time }}</a>
+                                                <div class="py-2 px-4 border border-white whitespace-normal {{ $time->pivot->status == 'available' ? 'text-success' : 'text-danger' }}">
+                                                    <a href="javascript:;" data-tw-toggle="modal"  onclick="openPopup('{{ \Carbon\Carbon::parse($item->time)->format('H:i') }}', '{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y') }}', '{{ $employee->id }}', '{{ $bookingInfo }}', '{{ json_encode($serviceNames) }}', '{{ $statusText }}')"
+                                                        data-tw-target="#superlarge-modal-size-preview">{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</a>
                                                 </div>
                                             @endforeach
                                         </td>
@@ -246,7 +245,6 @@
                                                         </a>
                                                     @endif
                                                 </div>
-
                                         </td>
                                     </tr>
                                 @endforeach

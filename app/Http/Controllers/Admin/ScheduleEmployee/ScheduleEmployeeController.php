@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\WorkScheduleEmployee\StoreRequest;
 use App\Http\Requests\Admin\WorkScheduleEmployee\UpdateRequest;
 use App\Models\Admin;
 use App\Models\Booking;
+use App\Models\Shift;
 use App\Models\Time;
 use App\Models\WorkSchedule;
 use App\Models\WorkScheduleDetail;
@@ -25,6 +26,7 @@ class ScheduleEmployeeController extends Controller
             $employeeId = auth()->guard('admin')->id();
             $employee = Admin::find($employeeId);
             $timeSlots = Time::all();
+            $shifts = Shift::all();
             $workSchedules = WorkSchedule::with('times')
                 ->where('admin_id', $employeeId)
                 ->orderByRaw("day = CURDATE() DESC, STR_TO_DATE(day, '%d/%m/%Y') DESC")
@@ -36,8 +38,7 @@ class ScheduleEmployeeController extends Controller
                 ->join('services', 'booking_details.service_id', '=', 'services.id')
                 ->select('bookings.*', 'services.name as service_name')
                 ->get();
-
-            return view('admin.ScheduleEmployee.index', compact('workSchedules', 'employee', 'bookings', 'timeSlots'));
+            return view('admin.ScheduleEmployee.index', compact('workSchedules', 'employee', 'bookings', 'timeSlots', 'shifts'));
         } catch (\Exception $e) {
             return redirect()->route('admin.ScheduleEmployee.index')->with('error', 'Có lỗi xảy ra khi lấy dữ liệu.');
         }
@@ -80,12 +81,17 @@ class ScheduleEmployeeController extends Controller
                 'admin_id' => $employeeId,
                 'day' => $selectedDate,
             ]);
+            // dd($selectedTimeSlots);
             foreach ($selectedTimeSlots as $timeSlotId) {
-                WorkScheduleDetail::create([
-                    'time_id' => $timeSlotId,
-                    'work_schedules_id' => $workSchedule->id,
-                    'status' => 'available',
-                ]);
+                $times = Time::where('shift_id', $timeSlotId)->get();
+                foreach ($times as $time) {
+                    WorkScheduleDetail::create([
+                        'time_id' => $time->id,
+                        'work_schedules_id' => $workSchedule->id,
+                        'status' => 'available',
+                    ]);
+                }
+
             }
         } catch (\Exception $e) {
             // Handle the exception, you can log it or redirect with an error message
@@ -106,11 +112,15 @@ class ScheduleEmployeeController extends Controller
                     'day' => $date,
                 ]);
                 foreach ($selectedTimeSlots as $timeSlotId) {
-                    WorkScheduleDetail::create([
-                        'time_id' => $timeSlotId,
-                        'work_schedules_id' => $workSchedule->id,
-                        'status' => 'available',
-                    ]);
+                    $times = Time::where('shift_id', $timeSlotId)->get();
+                    foreach ($times as $time) {
+                        WorkScheduleDetail::create([
+                            'time_id' => $time->id,
+                            'work_schedules_id' => $workSchedule->id,
+                            'status' => 'available',
+                        ]);
+                    }
+    
                 }
             }
         } catch (\Exception $e) {
@@ -124,7 +134,7 @@ class ScheduleEmployeeController extends Controller
         try {
             $employeeId = auth()->guard('admin')->id();
             $selectedDate = $request->input('search');
-
+            $shifts = Shift::all();
             if ($selectedDate) {
                 // Lọc danh sách lịch làm việc của nhân viên theo ngày
                 $workSchedules = WorkSchedule::with('times')
@@ -153,7 +163,7 @@ class ScheduleEmployeeController extends Controller
                 ->select('bookings.*', 'services.name as service_name')
                 ->get();
 
-            return view('admin.ScheduleEmployee.index', compact('workSchedules', 'employee', 'timeSlots', 'bookings', 'selectedDate'));
+            return view('admin.ScheduleEmployee.index', compact('workSchedules', 'employee', 'timeSlots', 'bookings', 'selectedDate', 'shifts'));
         } catch (\Exception $e) {
             // Handle the exception, you can log it or redirect with an error message
             return redirect()->route('admin.ScheduleEmployee.index')->with('error', 'Đã xảy ra lỗi.');
@@ -169,13 +179,13 @@ class ScheduleEmployeeController extends Controller
             }
             $workSchedule->getConnection()->beginTransaction();
             $times = $request->input('times', []);
-            if (count($times) < 4) {
-                return redirect()->back()->with('error', 'Vui lòng chọn ít nhất 4 khoảng thời gian làm việc.');
+            if (count($times) < 1) {
+                return redirect()->back()->with('error', 'Vui lòng chọn ít nhất một khoảng thời gian làm việc.');
             }
             $workSchedule->times()->sync($times);
             $workSchedule->save();
             $workSchedule->getConnection()->commit();
-    
+
             return redirect()->route('admin.ScheduleEmployee.index')->with('success', 'Cập nhật lịch thành công.');
         } catch (\Exception $e) {
             return redirect()->route('admin.ScheduleEmployee.index')->with('error', 'Có lỗi xảy ra khi cập nhật lịch.');

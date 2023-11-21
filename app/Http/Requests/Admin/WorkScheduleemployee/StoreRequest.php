@@ -80,7 +80,7 @@ class StoreRequest extends FormRequest
             'timeSlots' => [
                 'required',
                 'array',
-                'min:4',
+                'min:1',
             ],
             'timeSlots.*' => [
                 'required',
@@ -101,7 +101,7 @@ class StoreRequest extends FormRequest
             'date.date' => 'Ngày không hợp lệ.',
             'date.after_or_equal' => 'Không thể chọn ngày ở quá khứ.',
             'timeSlots.required' => 'Vui lòng chọn ít nhất một khoảng thời gian.',
-            'timeSlots.min' => 'Cần đăng ký ít nhất 4 khung giờ làm việc.',
+            'timeSlots.min' => 'Cần đăng ký ít nhất 1 khung giờ làm việc.',
             'timeSlots.*.required' => 'Vui lòng chọn một khoảng thời gian hợp lệ.',
             'timeSlots.*.exists' => 'Một hoặc nhiều khoảng thời gian đã chọn không hợp lệ.',
         ];
