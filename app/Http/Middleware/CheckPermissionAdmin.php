@@ -54,6 +54,8 @@ class CheckPermissionAdmin
 			'admin.rating.filter',
 			'admin.topEmployee',
 			'admin.billManagement.printBill',
+			'admin.ScheduleEmployee.search',
+
 		];
 
 		$name = Route::currentRouteName();
