@@ -71,8 +71,8 @@ return [
 
     //Bill Management
     'admin.billManagement.index' => 'Danh sách hóa đơn',
-    
-    
+
+
 
 
     //Banner
@@ -116,7 +116,13 @@ return [
     //Profile
     'admin.auth.ResetPasswordPost1' => 'Thay đổi mật khẩu',
 
-		//Rating
-		'admin.rating.index' => 'Danh sách đánh giá',
-		'admin.rating.delete' => 'Xóa đánh giá',
+	//Rating
+	'admin.rating.index' => 'Danh sách đánh giá',
+	'admin.rating.delete' => 'Xóa đánh giá',
+
+    //Statistics
+    'admin.Statistical.scheduleStatistics' => 'Thống kê lịch đặt',
+    'admin.Statistical.revenueStatistics' => 'Thống kê doanh thu',
+    'admin.Statistical.serviceUsageStatistics' => 'Thống kê dịch vụ sử dụng',
+    'admin.Statistical.employeeAndCustomerStatistics' => 'Thống kê nhân viên và khách hàng',
 ];

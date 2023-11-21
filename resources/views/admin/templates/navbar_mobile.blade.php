@@ -145,6 +145,50 @@
                 </ul>
             </li>
         @endif
+        @if(auth('admin')->user()->can('admin.Statistical.scheduleStatistics') || auth('admin')->user()->can('admin.Statistical.revenueStatistics') ||
+            auth('admin')->user()->can('admin.Statistical.serviceUsageStatistics') || auth('admin')->user()->can('admin.Statistical.employeeAndCustomerStatistics'))
+            <li>
+                <a href="javascript:;" class="menu">
+                    <div class="menu__icon"><i data-lucide="home"></i></div>
+                    <div class="menu__title">Quản lý thống kê <i data-lucide="pie-chart" class="block mx-auto"></i> </i>
+                    </div>
+                </a>
+                <ul class="">
+                    @if(auth('admin')->user()->can('admin.Statistical.revenueStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.revenueStatistics') }}" class="menu">
+                                <div class="menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="menu__title">Thống kê doanh thu</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if(auth('admin')->user()->can('admin.Statistical.scheduleStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.scheduleStatistics') }}" class="menu">
+                                <div class="menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="menu__title">Thống kê lịch đặt</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if(auth('admin')->user()->can('admin.Statistical.serviceUsageStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.serviceUsageStatistics') }}" class="menu">
+                                <div class="menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="menu__title">Thống kê dịch vụ</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if(auth('admin')->user()->can('admin.Statistical.employeeAndCustomerStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.employeeAndCustomerStatistics') }}" class="menu">
+                                <div class="menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="menu__title">Thống kê nhân viên và khách hàng</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
         <li>
             <a href="{{ route('admin.auth.logout') }}" class="menu">
                 <div class="menu__icon"><i data-lucide="toggle-right"></i></div>

@@ -202,6 +202,57 @@
                 </ul>
             </li>
         @endif
+        @if(auth('admin')->user()->can('admin.Statistical.scheduleStatistics') || auth('admin')->user()->can('admin.Statistical.revenueStatistics') ||
+            auth('admin')->user()->can('admin.Statistical.serviceUsageStatistics') || auth('admin')->user()->can('admin.Statistical.employeeAndCustomerStatistics'))
+            <li>
+                <a href="javascript:;"
+                    class="side-menu {{ request()->routeIs('admin.blogManagement.*') ? 'side-menu--active' : '' }}">
+                    <div class="side-menu__icon"><i data-lucide="pie-chart" class="block mx-auto"></i></div>
+                    <div class="side-menu__title">
+                        Quản thống kê
+                        <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
+                    </div>
+                </a>
+                <ul class="">
+                    @if (auth('admin')->user()->can('admin.Statistical.revenueStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.revenueStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.revenueStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê doanh thu</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.Statistical.scheduleStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.scheduleStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.scheduleStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê lịch đặt</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.Statistical.serviceUsageStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.serviceUsageStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.serviceUsageStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê dịch vụ</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.Statistical.employeeAndCustomerStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.employeeAndCustomerStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.employeeAndCustomerStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê nhân viên và khách hàng</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
     </ul>
 </nav>
 <!-- END: Side Menu -->

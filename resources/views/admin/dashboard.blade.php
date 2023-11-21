@@ -6,58 +6,89 @@
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: General Report -->
                 <div class="col-span-12 mt-8">
-									<div class="intro-y flex items-center h-10">
-											<h2 class="text-lg font-medium truncate mr-5">
-													Báo cáo tổng hợp
-											</h2>
-									</div>
-									<div class="grid grid-cols-12 gap-6 mt-5">
-											<div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
-													<div class="report-box zoom-in">
-															<div class="box p-5">
-																	<div class="flex">
-																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="shopping-cart" data-lucide="shopping-cart" class="lucide lucide-shopping-cart report-box__icon text-primary"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
-																	</div>
-																	<div class="text-3xl font-medium leading-8 mt-6">{{ $getbill }}</div>
-																	<div class="text-base text-slate-500 mt-1">Đơn thành công</div>
-															</div>
-													</div>
-											</div>
-											<div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
-													<div class="report-box zoom-in">
-															<div class="box p-5">
-																	<div class="flex">
-																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="user" data-lucide="user" class="lucide lucide-user report-box__icon text-success"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-																	</div>
-																	<div class="text-3xl font-medium leading-8 mt-6">{{ $getadmin }}</div>
-																	<div class="text-base text-slate-500 mt-1">Nhân viên</div>
-															</div>
-													</div>
-											</div>
-											<div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
-													<div class="report-box zoom-in">
-															<div class="box p-5">
-																	<div class="flex">
-																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card" data-lucide="credit-card" class="lucide lucide-credit-card report-box__icon text-warning"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-																	</div>
-																	<div class="text-3xl font-medium leading-8 mt-6">{{ $getservice }}</div>
-																	<div class="text-base text-slate-500 mt-1">Dịch vụ</div>
-															</div>
-													</div>
-											</div>
-											<div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
-													<div class="report-box zoom-in">
-															<div class="box p-5">
-																	<div class="flex">
-																		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card" data-lucide="users" class="lucide lucide-credit-card report-box__icon text-pending"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-																	</div>
-																	<div class="text-3xl font-medium leading-8 mt-6">{{ $getuser }}</div>
-																	<div class="text-base text-slate-500 mt-1">Khách hàng</div>
-															</div>
-													</div>
-											</div>
-									</div>
-							</div>
+                    <div class="intro-y flex items-center h-10">
+                        <h2 class="text-lg font-medium truncate mr-5">
+                            Báo cáo tổng hợp
+                        </h2>
+                    </div>
+                    <div class="grid grid-cols-12 gap-6 mt-5">
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" icon-name="shopping-cart"
+                                            data-lucide="shopping-cart"
+                                            class="lucide lucide-shopping-cart report-box__icon text-primary">
+                                            <circle cx="9" cy="21" r="1"></circle>
+                                            <circle cx="20" cy="21" r="1"></circle>
+                                            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $getbill }}</div>
+                                    <div class="text-base text-slate-500 mt-1">Đơn thành công</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" icon-name="user"
+                                            data-lucide="user" class="lucide lucide-user report-box__icon text-success">
+                                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $getadmin }}</div>
+                                    <div class="text-base text-slate-500 mt-1">Nhân viên</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card"
+                                            data-lucide="credit-card"
+                                            class="lucide lucide-credit-card report-box__icon text-warning">
+                                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2">
+                                            </rect>
+                                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $getservice }}</div>
+                                    <div class="text-base text-slate-500 mt-1">Dịch vụ</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
+                            <div class="report-box zoom-in">
+                                <div class="box p-5">
+                                    <div class="flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card"
+                                            data-lucide="users"
+                                            class="lucide lucide-credit-card report-box__icon text-pending">
+                                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2">
+                                            </rect>
+                                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="text-3xl font-medium leading-8 mt-6">{{ $getuser }}</div>
+                                    <div class="text-base text-slate-500 mt-1">Khách hàng</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- END: General Report -->
                 <!-- BEGIN: Sales Report -->
                 <div class="col-span-12 lg:col-span-6 mt-8">
@@ -84,7 +115,7 @@
                                     <div class="mt-0.5 text-slate-500">Tháng trước</div>
                                 </div>
                             </div>
-                            <form id="filterRevenueform" method="POST">
+                            {{-- <form id="filterRevenueform" method="POST">
                                 @csrf
                                 <div class="flex justify-end mt-3">
                                     <select name="month" id="month" class="tom-select w-full tomselected mx-3">
@@ -109,7 +140,7 @@
                                         </svg>
                                     </button>
                                 </div>
-                            </form>
+                            </form> --}}
                         </div>
                         <div class="report-chart">
                             <div class="h-[275px]">
@@ -129,7 +160,7 @@
 
                     </div>
                     <div class="intro-y box p-5 mt-5">
-                        <form id="topservice" method="POST">
+                        {{-- <form id="topservice" method="POST">
                             @csrf
                             <div class="flex justify-end">
                                 <select name="month" id="month" class="tom-select w-full tomselected mx-3">
@@ -153,7 +184,7 @@
                                     </svg>
                                 </button>
                             </div>
-                        </form>
+                        </form> --}}
                         <div class="mt-3">
                             <div class="h-[213px]">
                                 <canvas id="report-pie-chart" width="203" height="266"
@@ -176,7 +207,7 @@
                             Thống kê lịch đặt
                         </h2>
                         <div class="intro-y box p-5 mt-12 sm:mt-5">
-                            <div class="">
+                            {{-- <div class="">
                                 <form id="filterForm" method="POST">
                                     @csrf
                                     <div class="flex justify-end">
@@ -203,7 +234,7 @@
                                         </button>
                                     </div>
                                 </form>
-                            </div>
+                            </div> --}}
                             <div id="vertical-bar-chart" class="p-5">
                                 <div class="preview">
                                     <div class="h-[400px]">
@@ -225,8 +256,8 @@
                             Top 5 nhân viên
                         </h2>
                     </div>
-                    <div class="mt-5">
-                        <form id="filterTopEmployee" method="POST">
+                    <div class="mt-2">
+                        {{-- <form id="filterTopEmployee" method="POST">
                             @csrf
                             <div class="flex justify-end">
                                 <select name="month" id="month" class="tom-select w-96 tomselected mx-3"
@@ -252,15 +283,14 @@
                                     </svg>
                                 </button>
                             </div>
-                        </form>
-                        {{-- Display Top Employees --}}
+                        </form> --}}
                         <div id="topEmployeesContent">
                             @foreach ($topEmployeesData as $employee)
                                 <div class="intro-y">
                                     <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                        {{-- Display employee information --}}
                                         <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                            <img alt="Employee Avatar" src="{{asset($employee['avatar'] ?? 'default.jpg')}}">
+                                            <img alt="Employee Avatar"
+                                                src="{{ asset($employee['avatar'] ?? 'default.jpg') }}">
                                         </div>
                                         <div class="ml-4 mr-auto">
                                             <div class="font-medium">{{ $employee['username'] }}</div>
@@ -337,7 +367,7 @@
                                             <div class="text-center flex">
                                                 <div class="w-16 h-16 image-fit zoom-in">
                                                     <img alt="ảnh" class="tooltip rounded-full"
-                                                        src="{{ asset($booker->avatar ?? 'default.jpg')  }}">
+                                                        src="{{ asset($booker->avatar ?? 'default.jpg') }}">
                                                 </div>
                                             </div>
                                         </td>
@@ -357,119 +387,4 @@
             </div>
         </div>
     </div>
-    <script>
-        function formatCurrency(amount) {
-            const formattedAmount = amount.toLocaleString('vi-VN', {
-                style: 'currency',
-                currency: 'VND',
-                minimumFractionDigits: 0,
-            });
-
-            const currencySymbol = "vnd";
-            const replacedSymbol = formattedAmount.replace(/\./g, ',').replace("₫", currencySymbol);
-
-            return replacedSymbol;
-        }
-
-        $(function() {
-            $('#saveFilterBooker').on('click', function() {
-                var formData = new FormData($('#filterBookerForm')[0]);
-                var url = "{{ route('admin.topBooker') }}";
-
-                sendAjaxRequest(url, 'POST', formData,
-                    function(response) {
-                        $('#listbooker').html('');
-
-                        var bookerArray = Object.values(response.bookerData);
-
-                        if (bookerArray.length > 0) {
-                            var bookerItemHtml = `
-                                    <table class="table table-report sm:mt-2">
-                                        <thead>
-                                            <tr>
-                                                <th class="whitespace-nowrap">#</th>
-                                                <th class="whitespace-nowrap">Ảnh</th>
-                                                <th class="text-center whitespace-nowrap">Tên khách hàng</th>
-                                                <th class="text-center whitespace-nowrap">Lượt đặt</th>
-                                                <th class="text-center whitespace-nowrap">Tổng tiền</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            ${bookerArray.map((booker, index) => `
-                                                                        <tr class="intro-x">
-                                                                            <td>${index + 1}</td>
-                                                                            <td class="w-40">
-                                                                                <div class="text-center flex">
-                                                                                    <div class="w-16 h-16 image-fit zoom-in">
-                                                                                        <img alt="ảnh" class="tooltip rounded-full" src="${booker.avatar}">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td class="text-center whitespace-nowrap">
-                                                                                <a href="#" class="text-center font-medium whitespace-nowrap">${booker.name}</a>
-                                                                            </td>
-                                                                            <td class=" text-center">${booker.totalBookings}</td>
-                                                                            <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
-                                                                        </tr> `).join('')}
-                                        </tbody>
-                                    </table>`;
-                            $('#listBooker').html(bookerItemHtml);
-                        } else {
-                            $('#listBooker').html('<p>Không có dữ liệu.</p>');
-                        }
-                    },
-                    function(error) {
-                        alert('Error')
-                    }
-                );
-            });
-        });
-
-        $(function() {
-            $('#saveFilterTopEmployee').on('click', function() {
-                var formData = new FormData($('#filterTopEmployee')[0]);
-                var url = "{{ route('admin.topEmployee') }}";
-
-                sendAjaxRequest(url, 'POST', formData,
-                    function(response) {
-                        console.log(response);
-                        var employeesArray = Object.values(response.topEmployeesData);
-                        var employeeItemHtml = '';
-
-                        if (employeesArray.length > 0) {
-                            employeeItemHtml = employeesArray.map((employee, index) => `
-                        <div class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Employee Avatar" src="${employee.avatar}">
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">${employee.username}</div>
-                                    <div class="text-slate-500 text-xs mt-0.5">
-                                        ${formatRating(employee.avgRating)}
-                                    </div>
-                                </div>
-                                <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    ${employee.totalBookings} Đơn đặt
-                                </div>
-                            </div>
-                        </div>`).join('');
-                        } else {
-                            employeeItemHtml = '<p>Không có dữ liệu.</p>';
-                        }
-
-                        $('#topEmployeesContent').html(employeeItemHtml);
-                    },
-                    function(error) {
-                        alert('Error');
-                    }
-                );
-            });
-            // Định dạng đánh giá
-            function formatRating(avgRating) {
-                return avgRating !== null && avgRating !== undefined ?
-                    `Đánh giá: ${parseFloat(avgRating).toFixed(1)} &#9733` : 'Chưa có đánh giá';
-            }
-        });
-    </script>
 @endsection
