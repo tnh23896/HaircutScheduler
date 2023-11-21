@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Time>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class TimeFactory extends Factory
+class ShiftFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,10 +16,8 @@ class TimeFactory extends Factory
      */
     public function definition(): array
     {
-
         return [
-            'time' => $this->faker->time(),
-            'shift_id' =>$this->faker->numberBetween(1, 5),
+            'name' => $this->faker->name(),
         ];
     }
 }

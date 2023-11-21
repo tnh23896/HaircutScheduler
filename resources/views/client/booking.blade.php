@@ -178,13 +178,13 @@
                                          class="collapse show">
                                         <!-- form send otp -->
                                         <div class="container my-3" style="max-width: 550px">
-                                            <div class="alert alert-danger error" id="" style="display: none;">
-                                            </div>
                                             <h3>Xác thực số điện thoại</h3>
-                                            <div class="alert alert-success successAuth" id=""
-                                                 style="display: none;">
-                                            </div>
                                             <form class="formSendOtp">
+                                                <div class="alert alert-danger error" id="" style="display: none;">
+                                                </div>
+                                                <div class="alert alert-success successAuth" id=""
+                                                    style="display: none;">
+                                                </div>
                                                 <label>Số điện thoại:</label>
                                                 <input type="text" id="phoneOtpInput" name="phoneOtpNumberInput"
                                                        class="form-control " placeholder="+84********">

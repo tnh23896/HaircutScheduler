@@ -92,6 +92,8 @@ return [
     ],
     'lịch nhân viên' => [
         'admin.ScheduleEmployee.index' => 'Danh sách',
+        'admin.ScheduleEmployee.store' => 'Thêm mới',
+        'admin.ScheduleEmployee.update' => "Cập nhật",
     ],
     'lịch làm việc' => [
         'admin.work-schedule.index' => 'Danh sách',

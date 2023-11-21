@@ -30,7 +30,8 @@ class DatabaseSeeder extends Seeder
             BannerSeeder::class,
             WorkScheduleSeeder::class,
             BillSeeder::class,
-            BillDetailSeeder::class
+            BillDetailSeeder::class,
+            ShiftSeeder::class
         ]);
     }
 }
