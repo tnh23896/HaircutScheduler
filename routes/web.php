@@ -66,16 +66,3 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('client.contact');
 Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.sendEmail');
-
-//Vnâpay
-// Route::get('/vnpay/{amount}/{order_code}', [BookingController::class, 'vnpay'])->name('vnpay');
-// Route::get('/vnpay-return', [BookingController::class, 'vnpayReturn'])->name('vnpay.return');
-
-Route::get('/test', function () {
-    return response()->json([
-        'url' => route('vnpay.process', [
-            'order_code' => 182736187236,
-            'amount' => 1000000,
-        ]),
-    ], 200);
-});
