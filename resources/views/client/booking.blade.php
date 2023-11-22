@@ -480,11 +480,26 @@
                 var checked = $('input[name="services[]"]:checked').map(function () {
                     return $(this).data('price');
                 }).get();
+                if(!checked.length){
+                    $('#totalPrice').text(0);
+                }
                 var tottalPrice = checked.reduce(function (a, b) {
                     return a + b;
                 });
-                $('#totalPrice').text(tottalPrice);
-                $('#dataForm').val(tottalPrice);
+                
+                var promoCode = $('textarea[name="promoCode"]').val();
+                if(promoCode){
+                    const dataPromotioncode = @php echo json_encode($promotion) @endphp;
+                    $.each(dataPromotioncode, function (index, promotion) {
+                        if (promotion.promocode == promoCode) {
+                            var discount = promotion.discount;
+                            let newTotalPrice3 = tottalPrice - Number(discount);
+                            $('#totalPrice').text(newTotalPrice3);
+                        }
+                    });
+                }else{
+                    $('#totalPrice').text(tottalPrice);
+                }
 
             });
 
