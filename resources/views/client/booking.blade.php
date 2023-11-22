@@ -216,7 +216,6 @@
                                         @foreach ($serviceCategories as $category)
                                             @if (!$category->services->isEmpty())
                                                 <div class="row mt-4">
-
                                                     <div class="col-12 px-3">
                                                         <div>
                                                             <h5 class="h3">{{ $category->name }}</h5>
@@ -330,7 +329,6 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-
                                         </div>
                                     </div>
 
@@ -377,31 +375,31 @@
                     <form id="info_customer">
                         <h3>Thông tin liên hệ</h3>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="infoUsername" class="form-control"
                                            placeholder="Tên của bạn *" required value="{{ $user->username ?? '' }}"/>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="infoPhone" class="form-control"
                                            placeholder="Số điện thoại *" value="{{ $user->phone ?? '' }}"/>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="infoEmail" class="form-control"
                                            placeholder="Email của bạn *" value="{{ $user->email ?? '' }}"/>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Mã giảm giá</label>
-                                    <textarea class="form-control" name="promoCode" id="promotion" rows="3"></textarea>
+                                    {{-- <label for="">Mã giảm giá</label> --}}
+                                    <input type="text" class="form-control" name="promoCode" id="promotion" placeholder="Mã giảm giá">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <h3>
                                     Hình thức thanh toán
                                 </h3>
@@ -486,7 +484,7 @@
                 var tottalPrice = checked.reduce(function (a, b) {
                     return a + b;
                 });
-                
+
                 var promoCode = $('textarea[name="promoCode"]').val();
                 if(promoCode){
                     const dataPromotioncode = @php echo json_encode($promotion) @endphp;

@@ -43,34 +43,7 @@
             </li>
         @endif
 
-        @if (auth('admin')->user()->can('admin.blogManagement.category.index') ||
-        auth('admin')->user()->can('admin.blogManagement.blog.index'))
-            <li>
-                <a href="javascript:;" class="menu">
-                    <div class="menu__icon"><i data-lucide="book-open" class="block mx-auto"></i></div>
-                    <div class="menu__title"> Quản lý Blog <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                    </div>
-                </a>
-                <ul class="">
-                    @if (auth('admin')->user()->can('admin.blogManagement.category.index'))
-                        <li>
-                            <a href="{{ route('admin.blogManagement.category.index') }}" class="menu">
-                                <div class="menu__icon"><i data-lucide="activity"></i></div>
-                                <div class="menu__title"> Danh mục</div>
-                            </a>
-                        </li>
-                    @endif
-                    @if (auth('admin')->user()->can('admin.blogManagement.blog.index'))
-                        <li>
-                            <a href="{{ route('admin.serviceManagement.service.index') }}" class="menu">
-                                <div class="menu__icon"><i data-lucide="activity"></i></div>
-                                <div class="menu__title"> Dịch vụ</div>
-                            </a>
-                        </li>
-                    @endif
-                </ul>
-            </li>
-        @endif
+
 
         @if (auth('admin')->user()->can('admin.employee.index') ||
                 auth('admin')->user()->can('admin.UserManagement.index')||
