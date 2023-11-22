@@ -358,7 +358,7 @@
                                             <label class="check mx-1">
                                                 <input type="radio" id="time_{{ $time->id }}" name="time_id"
                                                        value="{{ $time->id }}">
-                                                <span>{{ $time->time }}</span>
+                                                <span>{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</span>
                                             </label>
                                         @endforeach
                                     </div>
