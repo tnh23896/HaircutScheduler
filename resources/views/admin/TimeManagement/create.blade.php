@@ -15,7 +15,16 @@
                     <div>
                         <label for="crud-form-1" class="form-label">Thời gian làm việc</label>
                         <input id="crud-form-1" name="time" type="time" class="form-control w-full"
-                            placeholder="Thời gian">
+                            placeholder="Thời gian" >
+                    </div>
+                    <div class="mt-3">
+                        <label for="crud-form-1" class="form-label">Chọn ca</label>
+                        <select name="shift_id" class="form-control w-full ">
+                            <option value="">Chọn Ca</option>
+                            @foreach ($shift as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.TimeManagement.index') }}"> <button type="button"
@@ -36,8 +45,8 @@
                     function(response) {
                         if (response.success) {
                             toastr.success(response.success);
-                                window.location.href =
-                                    "{{ route('admin.TimeManagement.index') }}";
+                            window.location.href =
+                                "{{ route('admin.TimeManagement.index') }}";
                         }
                     },
 
