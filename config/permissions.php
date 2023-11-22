@@ -114,4 +114,11 @@ return [
         'admin.rating.index' => 'Danh sách',
         'admin.rating.delete' => 'Xóa',
     ],
+
+    'thống kê' => [
+        'admin.Statistical.scheduleStatistics' => 'Thống kê lịch đặt',
+        'admin.Statistical.revenueStatistics' => 'Thống kê doanh thu',
+        'admin.Statistical.serviceUsageStatistics' => 'Thống kê dịch vụ sử dụng',
+        'admin.Statistical.employeeAndCustomerStatistics' => 'Thống kê nhân viên và khách hàng',
+    ]
 ];

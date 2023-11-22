@@ -79,29 +79,124 @@
                 </ul>
             </li>
         @endif
-        @if (auth('admin')->user()->can('admin.employee.index'))
+
+        @if (auth('admin')->user()->can('admin.blogManagement.category.index') ||
+                auth('admin')->user()->can('admin.blogManagement.blog.index'))
             <li>
-                <a href="{{ route('admin.employee.index') }}"
-                    class="side-menu {{ request()->routeIs('admin.employee*') ? 'side-menu--active' : '' }} {{ request()->routeIs('admin.work-schedule.*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="contact"></i></div>
-                    <div class="side-menu__title">Quản lý nhân viên</div>
+                <a href="javascript:;"
+                    class="side-menu {{ request()->routeIs('admin.blogManagement.*') ? 'side-menu--active' : '' }}">
+                    <div class="side-menu__icon"><i data-lucide="book-open" class="block mx-auto"></i> </div>
+                    <div class="side-menu__title">
+                        Quản lý Blog
+                        <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
+                    </div>
                 </a>
+                <ul class="">
+                    @if (auth('admin')->user()->can('admin.blogManagement.category.index'))
+                        <li>
+                            <a href="{{ route('admin.blogManagement.category.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.blogManagement.category*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Danh mục</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.blogManagement.blog.index'))
+                        <li>
+                            <a href="{{ route('admin.blogManagement.blog.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.blogManagement.blog*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Blog</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
             </li>
         @endif
-        @if (auth('admin')->user()->can('admin.scheduleManagement.index'))
+
+        @if (auth('admin')->user()->can('admin.employee.index') ||
+                auth('admin')->user()->can('admin.UserManagement.index')||
+                auth('admin')->user()->can('admin.RoleManagement.index'))
             <li>
-                <a href="{{ route('admin.scheduleManagement.index') }}"
-                    class="side-menu {{ request()->routeIs('admin.scheduleManagement*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="calendar"></i></div>
-                    <div class="side-menu__title"> Quản lý lịch đặt</div>
+                <a href="javascript:;"
+                    class="side-menu {{ request()->routeIs('admin.blogManagement.*') ? 'side-menu--active' : '' }}">
+                    <div class="side-menu__icon"><i data-lucide="user"></i></div>
+                    <div class="side-menu__title">
+                        Quản lý người dùng và vai trò
+                        <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
+                    </div>
                 </a>
+                <ul class="">
+                    @if (auth('admin')->user()->can('admin.UserManagement.index'))
+                        <li>
+                            <a href="{{ route('admin.UserManagement.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.UserManagement*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title"> Quản lý người dùng</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.employee.index'))
+                        <li>
+                            <a href="{{ route('admin.employee.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.employee*') ? 'side-menu--active' : '' }} {{ request()->routeIs('admin.work-schedule.*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Quản lý nhân viên</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.RoleManagement.index'))
+                        <li>
+                            <a href="{{ route('admin.RoleManagement.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.RoleManagement*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title"> Quản lý vai trò</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
             </li>
         @endif
+
+        @if (auth('admin')->user()->can('admin.rating.index') ||
+                auth('admin')->user()->can('admin.PromotionManagement.index'))
+            <li>
+                <a href="javascript:;"
+                    class="side-menu {{ request()->routeIs('admin.blogManagement.*') ? 'side-menu--active' : '' }}">
+                    <div class="side-menu__icon"><i data-lucide="ticket"></i></div>
+                    <div class="side-menu__title">
+                        Quản lý đánh giá và ưu đãi
+                        <div class="side-menu__sub-icon"><i data-lucide="chevron-down"></i></div>
+                    </div>
+                </a>
+                <ul class="">
+                    @if (auth('admin')->user()->can('admin.rating.index'))
+				        <li>
+                            <a href="{{ route('admin.rating.index') }}"
+                                    class="side-menu {{ request()->routeIs('admin.rating.index') ? 'side-menu--active' : '' }}">
+                                    <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                    <div class="side-menu__title"> Quản lý đánh giá</div>
+                            </a>
+				        </li>
+		            @endif
+                    @if (auth('admin')->user()->can('admin.PromotionManagement.index'))
+                        <li>
+                            <a href="{{ route('admin.PromotionManagement.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.PromotionManagement*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title"> Quản lý mã giảm giá</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
+
         @if (auth('admin')->user()->can('admin.billManagement.index'))
             <li>
                 <a href="{{ route('admin.billManagement.index') }}"
                     class="side-menu {{ request()->routeIs('admin.billManagement*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="check-square"></i></div>
+                    <div class="side-menu__icon"><i data-lucide="clipboard" class="block mx-auto"></i></div>
                     <div class="side-menu__title"> Quản lý hoá đơn</div>
                 </a>
             </li>
@@ -115,87 +210,95 @@
                 </a>
             </li>
         @endif
-        @if (auth('admin')->user()->can('admin.UserManagement.index'))
-            <li>
-                <a href="{{ route('admin.UserManagement.index') }}"
-                    class="side-menu {{ request()->routeIs('admin.UserManagement*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="user"></i></div>
-                    <div class="side-menu__title"> Quản lý người dùng</div>
-                </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->can('admin.TimeManagement.index'))
-            <li>
-                <a href="{{ route('admin.TimeManagement.index') }}"
-                    class="side-menu {{ request()->routeIs('admin.TimeManagement*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="alarm-clock"></i></div>
-                    <div class="side-menu__title"> Quản lý thời gian làm việc</div>
-                </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->can('admin.ScheduleEmployee.index'))
-            <li>
-                <a href="{{ route('admin.ScheduleEmployee.index') }}"
-                    class="side-menu {{ request()->routeIs('admin.ScheduleEmployee*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="calendar"></i></div>
-                    <div class="side-menu__title"> Xem lịch làm việc</div>
-                </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->can('admin.RoleManagement.index'))
-            <li>
-                <a href="{{ route('admin.RoleManagement.index') }}"
-                    class="side-menu {{ request()->routeIs('admin.RoleManagement*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="git-branch-plus"></i></div>
-                    <div class="side-menu__title"> Quản lý vai trò</div>
-                </a>
-            </li>
-        @endif
-				@if (auth('admin')->user()->can('admin.rating.index'))
-				<li>
-						<a href="{{ route('admin.rating.index') }}"
-								class="side-menu {{ request()->routeIs('admin.rating.index') ? 'side-menu--active' : '' }}">
-								<div class="side-menu__icon"><i data-lucide="star"></i></div>
-								<div class="side-menu__title"> Quản lý đánh giá</div>
-						</a>
-				</li>
-		@endif
-        @if (auth('admin')->user()->can('admin.PromotionManagement.index'))
-            <li>
-                <a href="{{ route('admin.PromotionManagement.index') }}"
-                    class="side-menu {{ request()->routeIs('admin.PromotionManagement*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="ticket"></i></div>
-                    <div class="side-menu__title"> Quản lý mã giảm giá</div>
-                </a>
-            </li>
-        @endif
-        @if (auth('admin')->user()->can('admin.blogManagement.category.index') ||
-                auth('admin')->user()->can('admin.blogManagement.blog.index'))
+        @if (auth('admin')->user()->can('admin.TimeManagement.index') ||
+                auth('admin')->user()->can('admin.ScheduleEmployee.index')||
+                auth('admin')->user()->can('admin.scheduleManagement.index'))
             <li>
                 <a href="javascript:;"
                     class="side-menu {{ request()->routeIs('admin.blogManagement.*') ? 'side-menu--active' : '' }}">
-                    <div class="side-menu__icon"><i data-lucide="align-justify" class="block mx-auto"></i></div>
+                    <div class="side-menu__icon"><i data-lucide="alarm-clock"></i></i></div>
                     <div class="side-menu__title">
-                        Quản lý Blog
+                        Quản lý lịch làm việc
                         <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
                     </div>
                 </a>
                 <ul class="">
-                    @if (auth('admin')->user()->can('admin.blogManagement.category.index'))
+                    @if (auth('admin')->user()->can('admin.TimeManagement.index'))
                         <li>
-                            <a href="{{ route('admin.blogManagement.category.index') }}"
-                                class="side-menu {{ request()->routeIs('admin.blogManagement.category*') ? 'side-menu--active' : '' }}">
-                                <div class="side-menu__icon"><i data-lucide="list-ordered"></i></div>
-                                <div class="side-menu__title">Danh mục</div>
+                            <a href="{{ route('admin.TimeManagement.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.TimeManagement*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title"> Quản lý thời gian làm việc</div>
                             </a>
                         </li>
                     @endif
-                    @if (auth('admin')->user()->can('admin.blogManagement.blog.index'))
+                    @if (auth('admin')->user()->can('admin.scheduleManagement.index'))
                         <li>
-                            <a href="{{ route('admin.blogManagement.blog.index') }}"
-                                class="side-menu {{ request()->routeIs('admin.blogManagement.blog*') ? 'side-menu--active' : '' }}">
+                            <a href="{{ route('admin.scheduleManagement.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.scheduleManagement*') ? 'side-menu--active' : '' }}">
                                 <div class="side-menu__icon"><i data-lucide="activity"></i></div>
-                                <div class="side-menu__title">Blog</div>
+                                <div class="side-menu__title"> Quản lý lịch đặt</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.ScheduleEmployee.index'))
+                        <li>
+                            <a href="{{ route('admin.ScheduleEmployee.index') }}"
+                                class="side-menu {{ request()->routeIs('admin.ScheduleEmployee*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title"> Xem lịch làm việc</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
+
+        @if(auth('admin')->user()->can('admin.Statistical.scheduleStatistics') || auth('admin')->user()->can('admin.Statistical.revenueStatistics') ||
+            auth('admin')->user()->can('admin.Statistical.serviceUsageStatistics') || auth('admin')->user()->can('admin.Statistical.employeeAndCustomerStatistics'))
+            <li>
+                <a href="javascript:;"
+                    class="side-menu {{ request()->routeIs('admin.blogManagement.*') ? 'side-menu--active' : '' }}">
+                    <div class="side-menu__icon"><i data-lucide="pie-chart" class="block mx-auto"></i></div>
+                    <div class="side-menu__title">
+                        Quản lý thống kê
+                        <div class="side-menu__sub-icon "><i data-lucide="chevron-down"></i></div>
+                    </div>
+                </a>
+                <ul class="">
+                    @if (auth('admin')->user()->can('admin.Statistical.revenueStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.revenueStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.revenueStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê doanh thu</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.Statistical.scheduleStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.scheduleStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.scheduleStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê lịch đặt</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.Statistical.serviceUsageStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.serviceUsageStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.serviceUsageStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê dịch vụ</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth('admin')->user()->can('admin.Statistical.employeeAndCustomerStatistics'))
+                        <li>
+                            <a href="{{ route('admin.Statistical.employeeAndCustomerStatistics') }}"
+                                class="side-menu {{ request()->routeIs('admin.Statistical.employeeAndCustomerStatistics*') ? 'side-menu--active' : '' }}">
+                                <div class="side-menu__icon"><i data-lucide="activity"></i></div>
+                                <div class="side-menu__title">Thống kê nhân viên và khách hàng</div>
                             </a>
                         </li>
                     @endif

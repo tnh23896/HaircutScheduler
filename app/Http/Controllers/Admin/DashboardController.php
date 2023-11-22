@@ -11,409 +11,251 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-	public function index()
-	{
-		$getuser = $this->getuser();
-		$getservice = $this->getservice();
-		$getadmin = $this->getadmin();
-		$getbill = $this->getbill();
-		$topservice = $this->baseServiceSetbyTime();
-		$topBooker = $this->basetopBooker();
-		$topEmployeesData = $this->baseTopEmployees();
-		$data = $this->baseScheduleSetbyTime();
-		$totalRevenue = $this->calculateBillRevenue();
-		$lastMonthrevenue = $this->revenue();
-		$revenue = $this->currentMonthRevenue();
+    public function index()
+    {
+        $getuser = $this->getuser();
+        $getservice = $this->getservice();
+        $getadmin = $this->getadmin();
+        $getbill = $this->getbill();
+        $topservice = $this->baseServiceSetbyTime();
+        $topEmployeesData = $this->baseTopEmployees();
+        $data = $this->baseScheduleSetbyTime();
+        $totalRevenue = $this->calculateBillRevenue();
 
-		return view('admin.dashboard', compact('data', 'totalRevenue', 'topBooker', 'topservice', 'revenue', 'lastMonthrevenue', 'topEmployeesData', 'getbill', 'getadmin', 'getservice', 'getuser'));
-	}
-	public function getbill()
-	{
-		$getbill = DB::table('bills')->count();
-		return $getbill;
-	}
-	public function getadmin()
-	{
-		$getadmin = DB::table('admins')->count();
-		return $getadmin;
-	}
-	public function getservice()
-	{
-		$getservice = DB::table('services')->count();
-		return $getservice;
-	}
-	public function getuser()
-	{
-		$getuser = DB::table('users')->count();
-		return $getuser;
-	}
+        return view('admin.dashboard', compact('data', 'totalRevenue', 'topservice', 'topEmployeesData', 'getbill', 'getadmin', 'getservice', 'getuser'));
+    }
+    public function getbill()
+    {
+        $getbill = DB::table('bills')->count();
+        return $getbill;
+    }
+    public function getadmin()
+    {
+        $getadmin = DB::table('admins')->count();
+        return $getadmin;
+    }
+    public function getservice()
+    {
+        $getservice = DB::table('services')->count();
+        return $getservice;
+    }
+    public function getuser()
+    {
+        $getuser = DB::table('users')->count();
+        return $getuser;
+    }
 
-	private function revenue()
-	{
-		// Lấy ngày hiện tại
-		$today = Carbon::now();
+    // Lọc dịch vụ theo ngày
+    public function ServiceSetbyTime(Request $request)
+    {
+        $topservice = $this->baServiceSetbyTime($request);
+        return response()->json(['topservice' => $topservice]);
+    }
 
-		// Lấy ngày đầu tiên của tháng trước
-		$firstDayOfLastMonth = $today->subMonth()->firstOfMonth();
+    // Tổng dịch vụ theo ngày
+    private function baseServiceSetbyTime()
+    {
+        $currentDate = date('Y-m-d'); // Lấy ngày hiện tại
+        // Tổng số lần sử dụng mỗi dịch vụ trong ngày hiện tại
+        $statistics =  DB::table('bill_details')
+            ->join('services', 'bill_details.service_id', '=', 'services.id')
+            ->join('bills', 'bill_details.bill_id', '=', 'bills.id')
+            ->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
+            ->whereDate('bills.day', $currentDate) // Chỉ lấy dữ liệu của ngày hiện tại
+            ->groupBy('bill_details.service_id', 'services.name')
+            ->having('count', '>=', 0) // Chỉ lấy những giá trị có count lớn hơn 1 (tức là trùng nhau)
+            ->orderByDesc('count') // Sắp xếp theo count giảm dần
+            ->get();
 
-		// Lấy tháng và năm của tháng trước
-		$lastMonth = $firstDayOfLastMonth->format('n');
-		$currentYear = $firstDayOfLastMonth->format('Y');
+        // Định dạng dữ liệu để trả về
+        $topService = [];
 
-		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NULL THEN total_price ELSE total_price - promotions.discount END) as totalRevenues')
-			->leftJoin('promotions', 'bills.promo_id', '=', 'promotions.id')
-			->when($lastMonth, function ($query) use ($lastMonth) {
-				return $query->whereMonth('day', $lastMonth);
-			})
-			->when($currentYear, function ($query) use ($currentYear) {
-				return $query->whereYear('day', $currentYear);
-			})
-			->groupBy('month')
-			->orderBy('month')
-			->get();
+        foreach ($statistics as $item) {
+            $serviceId = $item->service_id;
+            $name = $item->name;
 
-		$data = $query->isEmpty() ? 0 : $query[0]->totalRevenues;
+            $topService[$serviceId] = [
+                'name' => $name,
+                'count' => $item->count,
+            ];
+        }
 
-		return $data;
-	}
+        if (empty($topService)) {
+            $topService[] = [
+                'name' => "Không có dữ liệu",
+                'count' => 0,
+            ];
+        }
 
-	private function currentMonthRevenue()
-	{
-		// Lấy ngày hiện tại
-		$today = Carbon::now();
+        return $topService;
+    }
+    
+    // Thống kê dịch vụ ajax
+    private function baServiceSetbyTime(Request $request)
+    {
+        $currentMonth = date('m'); // Lấy tháng hiện tại
 
-		// Lấy ngày đầu tiên của tháng hiện tại
-		$firstDayOfCurrentMonth = $today->firstOfMonth();
+        $day = $request->input('day'); // Lấy ngày từ request
 
-		// Lấy tháng và năm của tháng hiện tại
-		$currentMonth = $firstDayOfCurrentMonth->format('n');
-		$currentYear = $firstDayOfCurrentMonth->format('Y');
+        $statistics = DB::table('bill_details')
+            ->join('services', 'bill_details.service_id', '=', 'services.id')
+            ->join('bills', 'bill_details.bill_id', '=', 'bills.id') // Join với bảng bill
+            ->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
+            ->groupBy('bill_details.service_id', 'services.name')
+            ->having('count', '>=', 0)
+            ->whereMonth('bills.day', $currentMonth) // Lọc theo tháng hiện tại
+            ->whereDay('bills.day', $day) // Lọc theo ngày từ request
+            ->orderByDesc('count')
+            ->get();
 
-		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NULL THEN total_price ELSE total_price - promotions.discount END) as totalRevenues')
-			->leftJoin('promotions', 'bills.promo_id', '=', 'promotions.id')
-			->when($currentMonth, function ($query) use ($currentMonth) {
-				return $query->whereMonth('day', $currentMonth);
-			})
-			->when($currentYear, function ($query) use ($currentYear) {
-				return $query->whereYear('day', $currentYear);
-			})
-			->groupBy('month')
-			->orderBy('month')
-			->get();
+        $topService = [];
 
-		$data = $query->isEmpty() ? 0 : $query[0]->totalRevenues;
+        foreach ($statistics as $item) {
+            $serviceId = $item->service_id;
+            $name = $item->name;
+            $topService[$serviceId] = [
+                'name' => $name,
+                'count' => $item->count,
+            ];
+        }
 
-		return $data;
-	}
-	public function revenueSetbyTime(Request $request)
-	{
-		$totalRevenue = $this->baRevenueSetbyTime($request);
-		return response()->json(['totalRevenue' => $totalRevenue]);
-	}
-	public function topBooker(Request $request)
-	{
-		$bookerData = $this->basefilterTopBooker($request);
-		return response()->json(['bookerData' => $bookerData]);
-	}
-	public function ScheduleSetbyTime(Request $request)
-	{
-		$data = $this->baScheduleSetbyTime($request);
-		return response()->json(['data' => $data]);
-	}
-	public function ServiceSetbyTime(Request $request)
-	{
-		$topservice = $this->baServiceSetbyTime($request);
-		return response()->json(['topservice' => $topservice]);
-	}
-	private function baseServiceSetbyTime()
-	{
-		// Tổng số lần sử dụng mỗi dịch vụ
-		$statistics =  DB::table('bill_details')
-			->join('services', 'bill_details.service_id', '=', 'services.id')
-			->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
-			->groupBy('bill_details.service_id', 'services.name')
-			->having('count', '>=', 0) // Chỉ lấy những giá trị có count lớn hơn 1 (tức là trùng nhau)
-			->orderByDesc('count') // Sắp xếp theo count giảm dần
-			->get();
+        if (empty($topService)) {
+            $topService[] = [
+                'name' => "Không có dữ liệu",
+                'count' => 0,
+            ];
+        }
 
-		// Định dạng dữ liệu để trả về
-		$topservice = [];
-		foreach ($statistics as $item) {
-			$serviceId = $item->service_id;
-			$name = $item->name;
+        return $topService;
+    }
 
-			$topservice[$serviceId] = [
-				'name' => $name,
-				'count' => $item->count,
-			];
-		}
+    // Doanh thu ngày hiện tại
+    private function calculateBillRevenue()
+    {
+        $currentMonth = date('n'); // Lấy tháng hiện tại
 
-		return $topservice;
-	}
-	private function baServiceSetbyTime(Request $request)
-	{
-		$month = $request->month;
-		$year = $request->year;
-		$statistics = DB::table('bill_details')
-			->join('services', 'bill_details.service_id', '=', 'services.id')
-			->join('bills', 'bill_details.bill_id', '=', 'bills.id') // Join với bảng bill
-			->select('bill_details.service_id', 'services.name', DB::raw('COUNT(*) as count'))
-			->groupBy('bill_details.service_id', 'services.name')
-			->having('count', '>=', 0)
-			->when($month, function ($query, $month) {
-				return $query->whereMonth('bills.day', $month); // Sử dụng cột day từ bảng bill
-			})
-			->when($year, function ($query, $year) {
-				return $query->whereYear('bills.day', $year); // Sử dụng cột day từ bảng bill
-			})
-			->orderByDesc('count')
-			->get();
-		$topservice = [];
-		foreach ($statistics as $item) {
-			$serviceId = $item->service_id;
-			$name = $item->name;
-			$topservice[$serviceId] = [
-				'name' => $name,
-				'count' => $item->count,
-			];
-		}
-		if (empty($topservice)) {
-			$topservice[] = [
-				'name' => "Không có dữ liệu",
-				'count' => 0,
-			];
-		}
-		return $topservice;
-	}
+        $daysInMonth = range(1, \Carbon\Carbon::now()->daysInMonth); // Tạo mảng chứa tất cả các ngày trong tháng
 
-	// Tổng hợp dữ liệu của doanh thu của bill
-	private function calculateBillRevenue()
-	{
-		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NULL THEN total_price ELSE total_price - promotions.discount END) as totalRevenues')
-			->leftJoin('promotions', 'bills.promo_id', '=', 'promotions.id')
-			->groupBy('month')
-			->orderBy('month', 'asc');
+        $query = Bill::selectRaw('DAY(day) as day, SUM(total_price) as totalRevenue')
+            ->whereMonth('day', $currentMonth) // Lọc theo tháng hiện tại
+            ->groupBy('day')
+            ->orderBy('day', 'asc');
 
-		$filteredData = $query->get();
+        $result = $query->get();
+
+        $totalRevenue = [];
+
+        // Gộp kết quả từ cơ sở dữ liệu vào mảng chứa tất cả các ngày trong tháng
+        foreach ($daysInMonth as $day) {
+            $totalRevenue[$day] = [
+                'totalRevenue' => 0,
+            ];
+        }
+
+        foreach ($result as $row) {
+            $totalRevenue[$row->day] = [
+                'totalRevenue' => $row->totalRevenue,
+            ];
+        }
+        return $totalRevenue;
+    }
+
+    // Tổng hợp dữ liệu lịch đặt
+    private function baseScheduleSetbyTime()
+    {
+        $currentMonth = date('n'); // Lấy tháng hiện tại
+
+        $daysInMonth = range(1, \Carbon\Carbon::now()->daysInMonth); // Tạo mảng chứa tất cả các ngày trong tháng
+
+        $query = Booking::selectRaw('DAY(day) as day, COUNT(*) as totalBookings')
+            ->selectRaw('SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings')
+            ->selectRaw('SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings')
+            ->whereMonth('day', $currentMonth) // Lọc theo tháng hiện tại
+            ->groupBy('day')
+            ->orderBy('day', 'asc');
+
+        $result = $query->get();
+
+        $data = [];
+
+        // Gộp kết quả từ cơ sở dữ liệu vào mảng chứa tất cả các ngày trong tháng
+        foreach ($daysInMonth as $day) {
+            $data[$day] = [
+                'totalBookings' => 0,
+                'successfulBookings' => 0,
+                'cancelledBookings' => 0,
+            ];
+        }
+
+        foreach ($result as $row) {
+            $data[$row->day] = [
+                'totalBookings' => $row->totalBookings,
+                'successfulBookings' => $row->successfulBookings,
+                'cancelledBookings' => $row->cancelledBookings,
+            ];
+        }
+
+        return $data;
+    }
 
 
-		$totalRevenue = [];
-		foreach ($filteredData as $item) {
-			$month = $item->month;
+    public function topEmployee(Request $request)
+    {
+        $topEmployeesData = $this->basefilterTopEmployee($request);
+        return response()->json(['topEmployeesData' => $topEmployeesData]);
+    }
 
-			$totalRevenue[$month] = [
-				'totalRevenues' => $item->totalRevenues,
-				'totalBills' => $item->totalBills
-			];
-		}
+    private function basefilterTopEmployee(Request $request)
+    {
+        $currentMonth = date('m'); // Lấy tháng hiện tại
 
-		return $totalRevenue;
-	}
-	private function baRevenueSetbyTime(Request $request)
-	{
-		$month = $request->month;
-		$year = $request->year;
+        $day = $request->input('day'); // Lấy ngày từ request
 
-		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NOT NULL THEN total_price - promotions.discount ELSE total_price END) as totalRevenues')
-			->join('promotions', 'bills.promo_id', '=', 'promotions.id')
-			->when($month, function ($query, $month) {
-				return $query->whereMonth('day', $month);
-			})
-			->when($year, function ($query, $year) {
-				return $query->whereYear('day', $year);
-			})
-			->groupBy('month')
-			->orderBy('month');
+        $query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
+            ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "success" THEN bookings.id END) as totalSuccessfulBookings')
+            ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "canceled" THEN bookings.id END) as totalCancelledBookings')
+            ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
+            ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
+            ->join('admins', 'admins.id', '=', 'bookings.admin_id')
+            ->leftJoin('reviews', function ($join) {
+                $join->on('admins.id', '=', 'reviews.admin_id');
+            })
+            ->groupBy('admins.id');
 
-		$result = $query->get();
+        if ($currentMonth) {
+            $query->whereMonth('bookings.day', $currentMonth);
 
-		$totalRevenue = [];
-		foreach ($result as $row) {
-			$totalRevenue[$row->month] = [
-				'totalRevenues' => $row->totalRevenues,
-				'totalBills' => $row->totalBills
-			];
-		}
+            if ($day) {
+                $query->whereDay('bookings.day', $day);
+            }
+        }
 
-		$allMonths = range(1, 12);
-		foreach ($allMonths as $month) {
-			if (!isset($totalRevenue[$month])) {
-				$totalRevenue[$month] = [
-					'totalRevenues' => 0,
-					'totalBills' => 0,
-				];
-			}
-		}
+        $topEmployeesData = $query->orderByDesc('totalBookings')->take(5)->get();
 
-		return $totalRevenue;
-	}
-	// Tổng hợp dữ liệu của tất cả
-	private function baseScheduleSetbyTime()
-	{
-		$query = Booking::selectRaw('MONTH(day) as month, COUNT(*) as totalBookings')
-			->selectRaw('SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings')
-			->selectRaw('SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings')
-			->groupBy('month')
-			->orderBy('month', 'asc');
+        return $topEmployeesData;
+    }
 
-		$result = $query->get();
+    private function baseTopEmployees()
+    {
+        $currentDate = date('Y-m-d');  // Lấy ngày hiện tại
 
-		$data = [];
-		foreach ($result as $row) {
-			$data[$row->month] = [
-				'totalBookings' => $row->totalBookings,
-				'successfulBookings' => $row->successfulBookings,
-				'cancelledBookings' => $row->cancelledBookings,
-			];
-		}
+        $query = Booking::selectRaw('admins.username, admins.avatar')
+            ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
+            ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "success" THEN bookings.id END) as totalSuccessfulBookings')
+            ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "canceled" THEN bookings.id END) as totalCancelledBookings')
+            ->selectRaw('IFNULL(COUNT(DISTINCT reviews.id), 0) as totalRatings')  // Nếu không có đánh giá, đặt giá trị là 0
+            ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')  // Nếu không có đánh giá, đặt giá trị là 0
+            ->join('admins', 'admins.id', '=', 'bookings.admin_id')
+            ->leftJoin('reviews', function ($join) use ($currentDate) {
+                $join->on('admins.id', '=', 'reviews.admin_id')
+                    ->whereDate('reviews.created_at', '=', $currentDate);
+            })
+            ->whereDate('bookings.day', '=', $currentDate)
+            ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
-		$allMonths = range(1, 12);
-		foreach ($allMonths as $month) {
-			if (!isset($data[$month])) {
-				$data[$month] = [
-					'totalBookings' => 0,
-					'successfulBookings' => 0,
-					'cancelledBookings' => 0,
-				];
-			}
-		}
-
-		return $data;
-	}
-	// Lọc theo tháng và năm
-	private function baScheduleSetbyTime(Request $request)
-	{
-		$month = $request->month;
-		$year = $request->year;
-
-		$query = Booking::selectRaw('
-            MONTH(day) as month,
-            COUNT(*) as totalBookings,
-            SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings,
-            SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings
-        ')
-			->when($month, function ($query, $month) {
-				return $query->whereMonth('day', $month);
-			})
-			->when($year, function ($query, $year) {
-				return $query->whereYear('day', $year);
-			})
-			->groupBy('month')
-			->orderBy('month');
-
-		$result = $query->get();
-
-		$data = [];
-		foreach ($result as $row) {
-			$data[$row->month] = [
-				'totalBookings' => $row->totalBookings,
-				'successfulBookings' => $row->successfulBookings,
-				'cancelledBookings' => $row->cancelledBookings,
-			];
-		}
-
-		$allMonths = range(1, 12);
-		foreach ($allMonths as $month) {
-			if (!isset($data[$month])) {
-				$data[$month] = [
-					'totalBookings' => 0,
-					'successfulBookings' => 0,
-					'cancelledBookings' => 0,
-				];
-			}
-		}
-
-		return $data;
-	}
-
-	// Top 5 nhân viên nhiều lịch đặt
-	public function topEmployee(Request $request)
-	{
-		$topEmployeesData = $this->basefilterTopEmployee($request);
-		return response()->json(['topEmployeesData' => $topEmployeesData]);
-	}
-	private function baseTopEmployees()
-	{
-		$query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
-			->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
-			->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
-			->join('admins', 'admins.id', '=', 'bookings.admin_id')
-			->leftJoin('reviews', function ($join) {
-				$join->on('admins.id', '=', 'reviews.admin_id');
-			})
-			->groupBy('admins.id', 'admins.username', 'admins.avatar'); // Include 'admins.username' and 'admins.avatar' in the GROUP BY
-
-		$data = $query->orderByDesc('totalBookings')
-			->take(5)
-			->get();
-
-		return $data;
-	}
-
-	private function basefilterTopEmployee(Request $request)
-	{
-		$month = $request->month;
-		$year = $request->year;
-
-		$query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
-			->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
-			->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
-			->join('admins', 'admins.id', '=', 'bookings.admin_id')
-			->leftJoin('reviews', function ($join) {
-				$join->on('admins.id', '=', 'reviews.admin_id');
-			})
-			->groupBy('admins.id');
-
-		if ($month) {
-			$query->whereMonth('bookings.day', $month);
-		}
-
-		if ($year) {
-			$query->whereYear('bookings.day', $year);
-		}
-
-		$topEmployeesData = $query->orderByDesc('totalBookings')->take(5)->get();
-		return $topEmployeesData;
-	}
-
-	//
-	private function basetopBooker()
-	{
-		$query = Bill::select('bills.name', 'users.avatar')
-			->selectRaw('count(bills.id) as totalBookings')
-			->selectRaw('SUM(bills.total_price) as totalPrice')
-			->join('users', 'bills.user_id', '=', 'users.id')
-			->groupBy('bills.name', 'users.avatar')
-			->orderBy('totalBookings', 'desc')
-			->take(5)
-			->get();
-		return $query;
-	}
-
-	private function basefilterTopBooker(Request $request)
-	{
-		$month = $request->month;
-		$year = $request->year;
-
-		$query = Bill::join('users', 'users.id', '=', 'bills.user_id')
-			->select('bills.name', 'users.avatar', 'bills.user_id')
-			->selectRaw('SUM(bills.total_price) as totalPrice')
-			->selectRaw('COUNT(*) as totalBookings')
-			->groupBy('bills.user_id', 'bills.name', 'users.avatar')
-			->orderByDesc('totalBookings');
-		if ($month) {
-			$query->whereMonth('day', $month);
-		}
-
-		if ($year) {
-			$query->whereYear('day', $year);
-		}
-
-		$bookerData = $query->get();
-		return $bookerData;
-	}
+        $data = $query->orderByDesc('totalBookings')
+            ->take(5)
+            ->get();
+        return $data;
+    }
 }
