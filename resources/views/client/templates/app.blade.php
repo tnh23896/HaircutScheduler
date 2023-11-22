@@ -54,9 +54,9 @@
                 console.log(coderesult);
                 const html = `
                         <h3>Mã code xác minh</h3>
-                        <div class="alert alert-success successOtpAuth" id="" style="display: none;"></div>
-                        <div class="alert alert-danger error" id="" style="display: none;"></div>
                         <form class="formVerifyOtp">
+                            <div class="alert alert-success successOtpAuth" id="" style="display: none;"></div>
+                            <div class="alert alert-danger error" id="" style="display: none;"></div>
                             <input type="text" name="verification" class="form-control"
                                 placeholder="Verification code">
                             <button type="submit" class="btn btn-danger mt-3">Xác minh</button>
@@ -69,7 +69,7 @@
                 })
                 $(containForm).find(".successAuth").show();
             }).catch(function(error) {
-                $(containForm).find(".error").text(error.message);
+                $(containForm).find(".error").text("Sai số điện thoại");
                 $(containForm).find(".error").show();
             });
         }
@@ -103,7 +103,7 @@
                     }
                 )
             }).catch(function(error) {
-                $(form).find(".error").text(error.message);
+                $(form).find(".error").text("Mã code sai");
                 $(form).find(".error").show();
             });
         }

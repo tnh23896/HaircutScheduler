@@ -204,14 +204,11 @@
                                     </div>
                                 @endforeach
                                 <div class="row border-b-2 brc-default-l2"></div>
-                                <hr/>   
-                                <div class="sm:text-left sm:ml-auto" style="text-align: right">
-                                    <div class="text-base">Tổng tiền: {{ $bill->total_price }} vnd</div>
-                                    <div class="text-base">Giảm giá: {{ $bill->promotion->discount ?? 0 }} vnd</div>
-                                    <div class="text-lg">Số tiền phải thanh toán:
-                                        {{ $bill->total_price - ($bill->promotion->discount ?? 0) }} vnd</div>
-                                </div>
                                 <hr/>
+                                <div class="sm:text-left sm:ml-auto" style="text-align: right">
+                                    <div class="text-base">Số tiền phải thanh toán: {{ $bill->total_price }} vnd</div>
+                                </div>
+                                    <hr/>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="sm:text-left mt-10 sm:mt-0">

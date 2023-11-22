@@ -12,12 +12,21 @@
             <!-- BEGIN: Form Layout -->
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
-                    <div>
-                        <label for="crud-form-1" class="form-label">Hình ảnh</label>
-                        <img id="previewImage" style="height:auto;width: 100px;">
-                        <input id="crud-form-1" type="file" class="form-control w-full p-2" name="image"
-                            id="image">
-                    </div>
+									<div class="">
+										<label for="crud-form-3" class="form-label ">Hình ảnh</label>
+										<div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4" style="width: 300px">
+												<div class="grid grid-cols-10 gap-5 pl-4 pr-5">
+														<div class="col-span-5 md:col-span-2 h-auto relative cursor-pointer zoom-in" style="width: 200px">
+																<img class="rounded-md" id="previewImage">
+														</div>
+												</div>
+												<div class="px-4 pb-4 mt-2 flex items-center justify-center cursor-pointer relative">
+														<i data-lucide="image" class="w-4 h-4 mr-2"></i> <span class="text-primary mr-1">
+																Tải ảnh lên
+														<input id="crud-form-1" type="file" name="image" class="w-full h-full top-0 left-0 absolute opacity-0">
+												</div>
+										</div>
+									</div>
                     <div class="mt-3">
                         <label for="crud-form-4" class="form-label">Dường dẫn</label>
                         <div class="input-group">

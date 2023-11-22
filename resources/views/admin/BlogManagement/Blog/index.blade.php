@@ -30,54 +30,48 @@
             </div>
         </div>
         <!-- BEGIN: Data List -->
-        <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
-            <table class="table table-report -mt-2">
-                <thead>
-                    <tr>
-                        <th class="whitespace-nowrap">Hình ảnh</th>
-                        <th class="text-center whitespace-nowrap">Tiêu đề</th>
-                        <th class="text-center whitespace-nowrap">Mô tả</th>
-                        <th class="text-center whitespace-nowrap">Danh mục</th>
-                        <th class="text-center whitespace-nowrap">Hành động</th>
-                    </tr>
-                </thead>
-                @foreach ($blogs as $blog)
-                    <tbody>
-                        <tr class="intro-x">
-                            <td class="!py-3.5">
-                                <img alt="Image blog" class="w-24 h-20 rounded" src="{{ asset($blog->image) }}"
-                                    title="{{ $blog->created_at }}">
-                            </td>
-                            <td class="text-center"><a class="flex items-center justify-center"
-                                    href="">{{ $blog->title }}</a></td>
-                            <td class="text-center"><a class="flex items-center justify-center"
-                                    href="">{{ $blog->description }}</a></td>
-                            <td class="text-center"><a class="flex items-center justify-center"
-                                    href="">{{ $blog->category_blog->title ?? '' }}</a></td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3"
-                                        href="{{ route('admin.blogManagement.blog.edit', $blog->id) }}">
-                                        <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
-                                        Sửa </a>
-                                    <form class="delete-form"
+        @foreach ($blogs as $blog)
+        <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+            <div class="flex items-center border-b border-slate-200/60 dark:border-darkmode-400 px-5 py-4">
+                <div class="mr-auto">
+                    Danh mục: <a href="#" class="font-medium">{{ $blog->category_blog->title ?? '' }}</a> 
+                </div>
+                <div class="dropdown ml-3">
+                    <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-slate-500" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-vertical" class="w-4 h-4"></i> </a>
+                    <div class="dropdown-menu w-40">
+                        <ul class="dropdown-content">
+                            <li>
+                                <a class="flex items-center mr-3 p-2"
+                                href="{{ route('admin.blogManagement.blog.edit', $blog->id) }}">
+                                <i data-lucide="edit-2" class="w-4 h-4 mr-1"></i>
+                                Sửa </a>
+                            </li>
+                            <li>
+                                <form class="delete-form p-2"
                                         action="{{ route('admin.blogManagement.blog.delete', $blog->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
                                             <button type="submit" class="flex items-center text-danger"
                                                 data-id="{{ $blog->id }}">
-                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
+                                                <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i> Xóa
                                             </button>
                                         </div>
                                     </form>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                @endforeach
-            </table>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="p-5">
+                <div class="h-40 2xl:h-56 image-fit">
+                    <img alt="image" class="rounded-md" src="{{ asset($blog->image) }}">
+                </div>
+                <a href="#" class="block font-medium text-base mt-5">{{ $blog->title }}</a> 
+                <div class="text-slate-600 dark:text-slate-500 mt-2">{{ $blog->description }}</div>
+            </div>
         </div>
+        @endforeach
         <script>
             // Sử dụng hàm sendAjaxRequest để xác nhận và xoá phần tử
             $('.delete-form').on('submit', function(e) {

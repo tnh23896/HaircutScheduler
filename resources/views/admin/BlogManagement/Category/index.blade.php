@@ -26,7 +26,7 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap text-center">ID</th>
+                        <th class="whitespace-nowrap text-center">#</th>
                         <th class="text-center whitespace-nowrap">Tiêu đề</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
@@ -34,8 +34,7 @@
                 @foreach ($list_blog_category as $key => $category)
                     <tbody>
                         <tr class="intro-x">
-                            <td class="text-center capitalize">{{ $category->id }}</td>
-
+                            <td class="text-center capitalize">{{ $loop->iteration }}</td>
                             <td class=""><a class="flex items-center justify-center"
                                     href="">{{ $category->title }}</a></td>
                             <td class="table-report__action w-56">
@@ -58,7 +57,6 @@
                                     </form>
                                 </div>
                             </td>
-
                         </tr>
                     </tbody>
                 @endforeach

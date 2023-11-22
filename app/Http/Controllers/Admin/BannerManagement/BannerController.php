@@ -13,12 +13,12 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::orderBy('status', 'desc')->latest()->paginate(10);
-        return view('admin.Banners.index', compact('banners'));
+        return view('admin.banners.index', compact('banners'));
     }
 
     public function create()
     {
-        return view('admin.Banners.create');
+        return view('admin.banners.create');
     }
 
     public function store(StoreRequest $request)
@@ -41,7 +41,7 @@ class BannerController extends Controller
     public function edit($id)
     {
         $one_banner = Banner::find($id);
-        return view('admin.Banners.edit', compact('one_banner'));
+        return view('admin.banners.edit', compact('one_banner'));
     }
 
     public function update(UpdateRequest $request, $id)

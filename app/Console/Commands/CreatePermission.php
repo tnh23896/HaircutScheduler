@@ -28,8 +28,11 @@ class CreatePermission extends Command
     public function handle()
     {
         $dataPermissions = config('permissions');
-
-        foreach ($dataPermissions as $key => $value) {
+        $mergedArray = [];
+        foreach ($dataPermissions as $permissions) {
+            $mergedArray = array_merge($mergedArray, $permissions);
+        }
+        foreach ($mergedArray as $key => $value) {
             Permission::query()->updateOrCreate([
                 'name' => $key,
                 'guard_name' => 'admin'
@@ -38,7 +41,7 @@ class CreatePermission extends Command
 
         Permission::query()
             ->where('guard_name', 'admin')
-            ->whereNotIn('name', array_keys($dataPermissions))
+            ->whereNotIn('name', array_keys($mergedArray))
             ->delete();
 
 

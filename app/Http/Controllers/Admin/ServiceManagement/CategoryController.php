@@ -23,9 +23,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category_service = $this->model->latest()->paginate(5);
+        $category_service = $this->model->latest()->paginate(10);
 
-        return view('admin.serviceManagement.category.index', compact('category_service'));
+        return view('admin.ServiceManagement.Category.index', compact('category_service'));
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.serviceManagement.category.create');
+        return view('admin.ServiceManagement.Category.create');
     }
 
     /**
@@ -65,9 +65,9 @@ class CategoryController extends Controller
 
         $category_service = search(CategoryService::class, $search, $fields)
             ->latest()
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
-        return view('admin.serviceManagement.category.index', compact('category_service'));
+        return view('admin.ServiceManagement.Category.index', compact('category_service'));
     }
 
     public function show(string $id)
@@ -82,7 +82,7 @@ class CategoryController extends Controller
     {
         $one_category_service = $this->model::find($id);
 
-        return view('admin.serviceManagement.category.edit', compact('one_category_service'));
+        return view('admin.ServiceManagement.Category.edit', compact('one_category_service'));
     }
 
     /**

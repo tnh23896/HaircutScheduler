@@ -21,7 +21,7 @@ class EmployeeController extends Controller
     {
         try {
             $employees = Admin::latest()->paginate(10);
-            return view('admin.employee.index', compact('employees'));
+            return view('admin.Employee.index', compact('employees'));
 
         } catch (\Throwable $th) {
             return response()->json($th);
@@ -37,7 +37,7 @@ class EmployeeController extends Controller
                 ->latest()
                 ->paginate(10)
                 ->withQueryString();
-            return view('admin.employee.index', compact('employees'));
+            return view('admin.Employee.index', compact('employees'));
         } catch (\Throwable $th) {
             return response()->json($th);
         }
@@ -50,7 +50,7 @@ class EmployeeController extends Controller
         function create()
         {
             $roles = Role::pluck('name', 'name')->all();
-            return view('admin.employee.create', compact('roles'));
+            return view('admin.Employee.create', compact('roles'));
         }
 
         /**
@@ -94,7 +94,7 @@ class EmployeeController extends Controller
                 $employee = Admin::findOrFail($id);
                 $roles = Role::pluck('name', 'name')->all();
                 $employeeRole = $employee->roles->pluck('name', 'name')->all();
-                return view('admin.employee.edit', compact('employee', 'roles', 'employeeRole'));
+                return view('admin.Employee.edit', compact('employee', 'roles', 'employeeRole'));
             } catch (ModelNotFoundException $exception) {
                 return response(['message' => 'Not found employee'], 404);
             } catch (\Throwable $exception) {
