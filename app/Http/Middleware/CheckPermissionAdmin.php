@@ -54,8 +54,10 @@ class CheckPermissionAdmin
 			'admin.rating.filter',
 			'admin.topEmployee',
 			'admin.billManagement.printBill',
-			'admin.ScheduleEmployee.search',
-
+            'admin.schedulebyTime',
+            'admin.revenueSetTime',
+            'admin.serviceSetTime',
+            'admin.ScheduleEmployee.search',
 		];
 
 		$name = Route::currentRouteName();

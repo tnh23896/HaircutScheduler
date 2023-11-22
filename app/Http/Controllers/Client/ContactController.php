@@ -28,28 +28,28 @@ class ContactController extends Controller
             'message' => 'required',
             'phone' => 'regex:/^[0-9]{10}$/'
         ]);
-    
+
         $email = $request->input('email');
         $message = $request->input('message');
         $phone = $request->input('phone');
-        
+
         $ip = $request->ip();
         $limit = 5; // Số lần giới hạn
         $timeFrame = 60; // Khoảng thời gian (số giây)
         $key = 'email_send_limit_' . $ip;
-    
+
         $sendCount = Session::get($key, 0);
-    
+
         if ($sendCount >= $limit) {
             return response()->json(['error' => 'Exceeded email sending limit.']);
         }
-        SendContactEmail::dispatch($email, $message, $phone)->onQueue('emails');
+        SendContactEmail::dispatch($email, $message, $phone);
         Session::put($key, $sendCount + 1);
         Session::put($key . '_expires', time() + $timeFrame);
-    
+
         return response()->json(['success' => true]);
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */

@@ -6,15 +6,15 @@
     <div class="booking-table">
         <table>
             <thead>
-            <th class="text-nowrap text-center">Mã hóa đơn</th>
+            <th class="text-nowrap text-center">STT</th>
             <th class="text-nowrap text-center">Nhân viên</th>
             <th class="text-nowrap text-center">Số sao</th>
             <th class="text-nowrap text-center">Nội dung</th>
             </thead>
             <tbody>
-                @foreach($list_reviews as $review)
+                @foreach($list_reviews as $key => $review)
                     <tr>
-                        <td class="text-nowrap text-center">{{ $review->booking_id }}</td>
+                        <td class="text-nowrap text-center">{{ $key + 1 }}</td>
                         <td class="text-nowrap text-center">{{$review->admin->username}}</td>
                         <td class="text-center">
                                     @for ($i = 1; $i <= 5; $i++)
