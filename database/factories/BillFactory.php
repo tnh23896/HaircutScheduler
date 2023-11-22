@@ -25,6 +25,8 @@ class BillFactory extends Factory
             'total_price' => $this->faker->numberBetween(100, 200),
             'email' => $this->faker->email(),
             'day' => $this->faker->date(),
-            'time' => $this->faker->time(),        ];
+            'time' => $this->faker->time(),
+            'payment' => $this->faker->randomElement(['offline', 'vnpay']),
+        ];
     }
 }

@@ -33,9 +33,10 @@
                         <div class="accordion-item">
                             <div id="faq-accordion-content-2" class="accordion-header flex form-control py-2 px-1">
                                 <i data-lucide="list" class="block mr-2"></i>
-                                <button class="accordion-button collapsed text-white" type="button" data-tw-toggle="collapse"
-                                    data-tw-target="#faq-accordion-collapse-2" aria-expanded="false"
-                                    aria-controls="faq-accordion-collapse-2" style="font-size: 16px;color: white">
+                                <button class="accordion-button collapsed text-white" type="button"
+                                    data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
+                                    aria-expanded="false" aria-controls="faq-accordion-collapse-2"
+                                    style="font-size: 16px;color: white">
                                     Danh sách dịch vụ
                                 </button>
                             </div>
@@ -50,9 +51,11 @@
                                                         <div id="faq-accordion-content-1" class="accordion-header w-full ">
                                                             <button class="accordion-button collapsed" type="button"
                                                                 data-tw-toggle="collapse"
-                                                                data-tw-target="#faq-accordion-collapse-1" aria-expanded="false"
+                                                                data-tw-target="#faq-accordion-collapse-1"
+                                                                aria-expanded="false"
                                                                 aria-controls="faq-accordion-collapse-1">
-                                                                <h2 class="font-medium text-xl" style="color: #d9842f">{{ $category->name }}</h2>
+                                                                <h2 class="font-medium text-xl" style="color: #d9842f">
+                                                                    {{ $category->name }}</h2>
                                                             </button>
                                                         </div>
 
@@ -60,29 +63,39 @@
                                                             class="accordion-collapse collapse"
                                                             aria-labelledby="faq-category-{{ $category->id }}"
                                                             data-tw-parent="#faq-accordion-1">
-                                                            <div class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
+                                                            <div
+                                                                class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
                                                                 <div class="grid grid-cols-12 gap-6 mt-5">
                                                                     @foreach ($category->services as $service)
                                                                         <div class="intro-y col-span-12 md:col-span-6">
                                                                             <div class="">
-                                                                                <div class="flex flex-col lg:flex-row items-center p-5" >
-                                                                                    <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1" style="width: 100px;height: 100px;">
-                                                                                        <img alt="ảnh" class="rounded-full" src="{{ asset($service->image) }}" >
+                                                                                <div
+                                                                                    class="flex flex-col lg:flex-row items-center p-5">
+                                                                                    <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1"
+                                                                                        style="width: 100px;height: 100px;">
+                                                                                        <img alt="ảnh"
+                                                                                            class="rounded-full"
+                                                                                            src="{{ asset($service->image) }}">
                                                                                     </div>
-                                                                                    <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                                                                                        <a href="#" class="font-medium text-lg text-white">{{ $service->name }}</a>
-                                                                                        <div class="text-slate-500 text-lg mt-0.5">Giá:{{ number_format($service->price) }} VND</div>
+                                                                                    <div
+                                                                                        class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
+                                                                                        <a href="#"
+                                                                                            class="font-medium text-lg text-white">{{ $service->name }}</a>
+                                                                                        <div
+                                                                                            class="text-slate-500 text-lg mt-0.5">
+                                                                                            Giá:{{ number_format($service->price) }}
+                                                                                            VND</div>
                                                                                     </div>
                                                                                     <div class="flex mt-4 lg:mt-0">
-                                                                                            <label class="check py-1 px-2 mr-2">
-                                                                                                <input type="checkbox"
-                                                                                                    id="service_{{ $service->id }}"
-                                                                                                    name="services[]"
-                                                                                                    value="{{ $service->id }}"
-                                                                                                    data-price="{{ $service->price }}">
-                                                                                                <span type="button"
-                                                                                                    class="btn">Chọn</span>
-                                                                                            </label>
+                                                                                        <label class="check py-1 px-2 mr-2">
+                                                                                            <input type="checkbox"
+                                                                                                id="service_{{ $service->id }}"
+                                                                                                name="services[]"
+                                                                                                value="{{ $service->id }}"
+                                                                                                data-price="{{ $service->price }}">
+                                                                                            <span type="button"
+                                                                                                class="btn">Chọn</span>
+                                                                                        </label>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -106,9 +119,10 @@
                         <div class="accordion-item">
                             <div id="faq-accordion-content-2" class="accordion-header flex form-control py-2 px-1">
                                 <i data-lucide="list" class="block mr-2"></i>
-                                <button class="accordion-button collapsed text-white" type="button" data-tw-toggle="collapse"
-                                    data-tw-target="#faq-accordion-collapse-2" aria-expanded="false"
-                                    aria-controls="faq-accordion-collapse-2" style="font-size:16px;color: white">Danh sách nhân viên</button>
+                                <button class="accordion-button collapsed text-white" type="button"
+                                    data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
+                                    aria-expanded="false" aria-controls="faq-accordion-collapse-2"
+                                    style="font-size:16px;color: white">Danh sách nhân viên</button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
                                 aria-labelledby="faq-accordion-content-2" data-tw-parent="#faq-accordion-1">
@@ -117,6 +131,17 @@
                                         <div class="preview">
                                             <div class="mx-6">
                                                 <div class="multiple-items">
+                                                    <div>
+                                                        <label class="radio-button-with-image text-center mx-2">
+                                                            <input type="radio" name="admin_id" id="admin_"
+                                                                value="random" checked hidden>
+                                                            <div class="image-container">
+                                                                <img src="{{ asset('dist/images/default.jpg') }}">
+                                                            </div>
+                                                            <h3 class="text-center text-white font-medium text-lg">
+                                                                Chọn Hộ</h3>
+                                                        </label>
+                                                    </div>
                                                     @foreach ($staffMembers as $staff)
                                                         <div>
                                                             <label class="radio-button-with-image text-center mx-2">
@@ -127,7 +152,8 @@
                                                                     <img src="{{ asset($staff->avatar) }}"
                                                                         alt="{{ $staff->username }}">
                                                                 </div>
-                                                                <h3 class="text-center text-white font-medium text-lg">{{ $staff->username }}</h3>
+                                                                <h3 class="text-center text-white font-medium text-lg">
+                                                                    {{ $staff->username }}</h3>
                                                             </label>
                                                         </div>
                                                     @endforeach
@@ -153,7 +179,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="mt-3 flex flex-col items-center">
-                                                    <h5 class="text-center text-lg mb-3 font-medium text-white">Chọn thời gian</h5>
+                                                    <h5 class="text-center text-lg mb-3 font-medium text-white">Chọn thời
+                                                        gian</h5>
                                                     <div class="d-flex flex-wrap justify-content-center" id="timeSelect">
                                                     </div>
                                                 </div>

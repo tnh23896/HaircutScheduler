@@ -66,4 +66,3 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('client.contact');
 Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.sendEmail');
-

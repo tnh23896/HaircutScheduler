@@ -27,6 +27,7 @@ class BookingFactory extends Factory
             'email' => $this->faker->email(),
             'day' => $this->faker->date(),
             'time' => $this->faker->time(),
+            'payment' => $this->faker->randomElement(['offline', 'vnpay']),
         ];
     }
 }

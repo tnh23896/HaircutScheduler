@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="logo">
-                        <a href="{{ url('/') }}"><img src="{{ asset('dist/images/logonew2.png') }}" 
+                        <a href="{{ url('/') }}"><img src="{{ asset('dist/images/logonew2.png') }}"
                                 alt="header-image"></a>
                         <div class="navbar-toggler active">
                             <span></span><span></span><span></span>
@@ -38,17 +38,17 @@
                                                         style="background-color: #d9842f !important; color: white; size: 30px">
                                                         Xin chào : <span>{{ Auth::user()->phone }}</span>
                                                     </a>
-            
+
                                                     <ul class="dropdown-menu" style="top: 30px;background-color: #d9842f;"
                                                     aria-labelledby="navbarDarkDropdownMenuLink">
                                                         <li ><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá nhân</a></li>
                                                         <li>
                                                             <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
                                                         </li>
-                                                    </ul>   
+                                                    </ul>
                                                 </li>
                                             </ul>
-                                            
+
                                         @else
                                             <a class="theme-btn-2" style="padding: 20px 1px;height: 20px;margin-bottom: 5px; margin-top: 10px"
                                                 href="javascript:void(0)" data-toggle="modal" data-target="#modalAuth">
@@ -101,7 +101,7 @@
                                         Xin chào : <span>{{ Auth::user()->phone }}</span>
                                     </a>
 
-                                    <ul class="dropdown-menu dropdown-menu-dark"
+                                    <ul class="dropdown-menu dropdown-menu-dark" style="top: 45px;"
                                         aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá nhân</a></li>
                                         <li>
@@ -111,14 +111,14 @@
                                 </li>
                             </ul>
                         @else
-                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px ; margin-top: 10px"
+                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px ;"
                                 href="javascript:void(0)" data-toggle="modal" data-target="#modalAuth">
                                 <h6 style="color: white; transform: translateY(-10px)">Đăng nhập</h6>
                             </a>
                         @endif
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@
                     <div class="mb-4">
                         <label for="crud-form-1" class="form-label">Tên vai trò</label>
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
-                            placeholder="Tên vai trò">
+                               placeholder="Tên vai trò">
                     </div>
                     <div class="mb-4">
                         <label for="crud-form-1" class="form-label">Phân quyền cho</label>
@@ -24,46 +24,76 @@
                         </select>
                     </div>
                     <label for="crud-form-1" class="form-label">Quyền</label>
-                    <div id="header">
-                        <div class="preview">
-                            <select data-placeholder="Quyền" name="permissions[]" class="tom-select w-full" multiple>
-                                @foreach (config('permissions') as $key => $value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
+                    <div class="intro-y box">
+                        <div id="checkbox-switch" class="p-3">
+                            <div class="preview">
+                                <div class="mt-3">
+                                    <div>
+                                        <label class="form-label mr-4 font-bold text-lg" for="selectAll">Chọn tất cả</label>
+                                        <input type="checkbox" class="form-check-input mb-1" id="selectAll">
+                                    </div>
+                                    <div class="grid grid-cols-4 sm:grid-cols-2 gap-2">
+                                        @foreach(config('permissions') as $key => $permission)
+                                            <div>
+                                                <label class="font-bold text-lg">Quản lí {{ $key }}</label>
+                                                @foreach($permission as $keys => $value)
+                                                    <div class="form-check mt-2">
+                                                        <input id="checkbox-switch-1 {{ $keys }}"
+                                                               name="permissions[]"
+                                                               class="jqr-checkbox form-check-input"
+                                                               type="checkbox"
+                                                               value="{{ $keys }}">
+                                                        <label class="form-check-label"
+                                                               for="checkbox-switch-1 {{ $keys }}">{{ $value }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.RoleManagement.index') }}" type="button"
-                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                           class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
             </form>
             <!-- END: Form Layout -->
-
         </div>
     </div>
     <script>
-        $(function() {
-            $('#saveBtn').on('click', function() {
+        $(function () {
+            $('#saveBtn').on('click', function () {
                 var formData = new FormData($('#ajaxForm')[0]);
                 var url = "{{ route('admin.RoleManagement.store') }}";
 
                 sendAjaxRequest(url, 'POST', formData,
-                    function(response) {
+                    function (response) {
                         if (response.success) {
                             toastr.success(response.success);
                             $('.clearable').val('');
                             $('#errorDiv').hide();
                         }
                     },
-
-                    function(error) {
+                    function (error) {
                         showErrors(error);
                     }
                 );
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var selectAllCheckbox = document.getElementById("selectAll");
+            var checkboxes = document.querySelectorAll(".jqr-checkbox");
+            selectAllCheckbox.addEventListener("change", function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+            });
+        });
     </script>
+
 @endsection

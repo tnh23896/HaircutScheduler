@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Events\AdminNotifications;
-use App\Events\CancelShcheduleNotifications;
 use Exception;
 use App\Models\Time;
 use App\Models\Admin;
+use App\Models\Review;
 use App\Models\Booking;
 use App\Models\Service;
 use App\Models\Promotion;
@@ -15,9 +14,11 @@ use Illuminate\Http\Request;
 use App\Models\BookingDetail;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
+use App\Events\AdminNotifications;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Events\CancelShcheduleNotifications;
 use App\Http\Requests\Client\Booking\StoreRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -34,12 +35,12 @@ class BookingController extends Controller
                 ->where('user_id', $id)
                 ->latest()
                 ->paginate(10);
-
+								$reviews = Review::all();
             if ($request->ajax()) {
-                return view('client.booking_history.list_booking', compact('list_booking'));
+                return view('client.booking_history.list_booking', compact('list_booking', 'reviews'));
             }
 
-            return view('client.booking_history.index', compact('list_booking'));
+            return view('client.booking_history.index', compact('list_booking','reviews'));
         } catch (\Exception $e) {
             abort(404);
         }
@@ -48,9 +49,10 @@ class BookingController extends Controller
     public function index()
     {
         try {
+            $today = Carbon::today();
             // Lấy danh mục dịch vụ
             $serviceCategories = CategoryService::with('services')->get();
-
+            $promotion = Promotion::query()->where('expire_date', '>=' , $today)->get()->toArray();
             // Ngày bắt đầu
             $startDate = Carbon::now()->startOfDay();
 
@@ -69,18 +71,25 @@ class BookingController extends Controller
                 })->get();
 
             // Lấy danh sách khung giờ
-
+            $dateString = min($availableDates->toArray()) ?? $startDate;
+            $dateToCheck = Carbon::parse($dateString);
             $timeSlots = Time::with('work_schedules')->orderBy('time')
-                ->whereHas('work_schedules', function ($query) use ($startDate) {
-                    $query->where('day', $startDate);
+                ->whereHas('work_schedules', function ($query) use ($dateString) {
+                    $query->where('day', $dateString);
                 })
                 ->whereHas('work_schedule_details', function ($query) {
                     $query->where('status', 'available');
                 })
                 ->get();
-
-
-            return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots'));
+            if ($dateToCheck->isToday()) {
+                // Lọc các time slot sau thời gian quy định (ví dụ: sau 10 giờ)
+                $currentTime = Carbon::now();
+                $timeSlots = $timeSlots->filter(function ($timeSlot) use ($currentTime) {
+                    $slotTime = Carbon::parse($timeSlot->time);
+                    return $slotTime->gt($currentTime);
+                });
+            }
+            return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots', 'promotion'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');
@@ -92,30 +101,36 @@ class BookingController extends Controller
         try {
             $adminId = $request->admin_id;
             $day = $request->day;
-           if($adminId == "random"){
-            if($day){
-                $timeSlots = Time::with('work_schedules')->orderBy('time')
-                    ->whereHas('work_schedules', function ($query) use ($day) {
-                        $query->where('day', $day);
-                    })
-                    ->whereHas('work_schedule_details', function ($query) {
-                        $query->where('status', 'available');
-                    })
-                    ->get();
-                    return response()->json([
-                        'times' => $timeSlots,
-                    ], 200);
-            } else{
-                $timeSlots = Time::with('work_schedules')->orderBy('time')
-                ->whereHas('work_schedule_details', function ($query) {
-                    $query->where('status', 'available');
-                })
-                ->get();
+            if ($adminId == "random") {
+                if ($day) {
+                    $timeSlots =Time::whereHas('work_schedule_details', function ($query) use ($day) {
+                        $query->where('status', 'available')
+                              ->whereHas('work_schedules', function ($query) use ($day) {
+                                  $query->where('day', $day);
+                              });
+                    })->get();
+
+                } else {
+                    $timeSlots = Time::with('work_schedules')->orderBy('time')
+                        ->whereHas('work_schedule_details', function ($query) {
+                            $query->where('status', 'available');
+                        })
+                        ->get();
+                }
+            $dateToCheck = Carbon::parse($day);
+            if ($dateToCheck->isToday()) {
+                // Lọc các time slot sau thời gian quy định (ví dụ: sau 10 giờ)
+                $currentTime = Carbon::now();
+                $timeSlots = $timeSlots->filter(function ($timeSlot) use ($currentTime) {
+                    $slotTime = Carbon::parse($timeSlot->time);
+                    return $slotTime->gt($currentTime);
+                });
+            }
+
                 return response()->json([
                     'times' => $timeSlots,
                 ], 200);
-            }
-           }else if ($adminId && $day) {
+            } else if ($adminId && $day) {
 
                 $workSchedules = WorkSchedule::with(['times' => function ($query) {
                     $query->orderBy('time');
@@ -134,20 +149,16 @@ class BookingController extends Controller
                         'message' => "Nhân viên đang bận vào ngày $day , vui lòng chọn nhân viên hoặc ngày khác",
                     ], 404);
                 }
-                return response()->json([
-                    'times' => $workSchedules->times,
-                ], 200);
-            } elseif ($day) {
-                $timeSlots = Time::with('work_schedules')->orderBy('time')
-                    ->whereHas('work_schedules', function ($query) use ($day) {
-                        $query->where('day', $day);
-                    })
-                    ->whereHas('work_schedule_details', function ($query) {
-                        $query->where('status', 'available');
-                    })
-                    ->get();
-
-
+                $timeSlots = $workSchedules->times;
+                $dateToCheck = Carbon::parse($day);
+                if ($dateToCheck->isToday()) {
+                    // Lọc các time slot sau thời gian quy định (ví dụ: sau 10 giờ)
+                    $currentTime = Carbon::now();
+                    $timeSlots = $workSchedules->times->filter(function ($timeSlot) use ($currentTime) {
+                        $slotTime = Carbon::parse($timeSlot->time);
+                        return $slotTime->gt($currentTime);
+                    });
+                }
                 return response()->json([
                     'times' => $timeSlots,
                 ], 200);
@@ -180,20 +191,23 @@ class BookingController extends Controller
                 'email' => $request->email,
                 'day' => $day,
             ];
+            if ($request->payment == 'vnpay') {
+                $params['payment'] = $request->payment;
+            }
             $time_id = $request->time;
             $time = Time::query()->findOrFail($time_id);
-            if($admin_id == "random"){
-            $admin_id = DB::table('work_schedule_details')
-                ->join('times', 'work_schedule_details.time_id', '=', 'times.id')
-                ->join('work_schedules', 'work_schedule_details.work_schedules_id', '=', 'work_schedules.id')
-                ->where('times.id', $time_id)
-                ->where('work_schedule_details.status', 'available')
-                ->inRandomOrder() // Lấy ngẫu nhiên
-                ->value('work_schedules.admin_id');
-            }else{
-                $admin_id = $admin_id;
+            if ($admin_id == "random") {
+                $params['admin_id'] = DB::table('work_schedule_details')
+                    ->join('times', 'work_schedule_details.time_id', '=', 'times.id')
+                    ->join('work_schedules', 'work_schedule_details.work_schedules_id', '=', 'work_schedules.id')
+                    ->where('times.id', $time_id)
+                    ->where('work_schedule_details.status', 'available')
+                    ->where('work_schedules.day', $day)
+                    ->inRandomOrder() // Lấy ngẫu nhiên
+                    ->value('work_schedules.admin_id');
+            } else {
+                $params['admin_id'] = $admin_id;
             }
-            $params['admin_id'] = $admin_id;
             $params['time'] = $time->time;
             if ($request->promo_code) {
                 $promo = Promotion::where('promocode', $request->promo_code)->first();
@@ -210,8 +224,8 @@ class BookingController extends Controller
                     'price' => $service->price,
                 ]);
             }
-          
-            $workSchedule = WorkSchedule::query()->where('admin_id', $admin_id)->where('day', $day)->first();
+
+            $workSchedule = WorkSchedule::query()->where('admin_id', $params['admin_id'])->where('day', $day)->first();
 
             $findWorkScheduleDetail = DB::table('work_schedule_details')
                 ->where('work_schedule_details.time_id', $time->id)
@@ -219,6 +233,7 @@ class BookingController extends Controller
             if ($findWorkScheduleDetail->first()->status == 'unavailable') {
                 throw new Exception('Lịch đã được đặt rồi', 400);
             }
+
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
             event(new AdminNotifications([
                 'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
@@ -227,9 +242,22 @@ class BookingController extends Controller
                 'day' => Carbon::parse($request->day)->format('d-m-Y'),
                 'time' => Carbon::parse($time->time)->format('H:i'),
             ]));
-            return response()->json([
-                'message' => 'Thêm lịch đặt thành công',
-            ], 200);
+
+            if ($request->payment == 'vnpay') {
+                return response()->json([
+                    'payment_method' => 'vnpay',
+                    'url' => route('vnpay.process', [
+                        'order_code' => $booking->id,
+                        'amount' => $request->total_price,
+                    ]),
+                ], 200);
+            }
+            else {
+                return response()->json([
+                    'message' => 'Thêm lịch đặt thành công',
+                    'booking' => $booking,
+                ], 200);
+            }
         } catch (\Exception $e) {
             Log::error('Error in store: ' . $e->getMessage());
             if ($e->getCode() === 400) {
@@ -336,4 +364,5 @@ class BookingController extends Controller
             return response()->json(['success' => false]);
         }
     }
+
 }

@@ -25,13 +25,36 @@
                             @endif >Quản trị viên</option>
                         </select>
                     </div>
-                    <div id="header">
-                        <div class="preview">
-                            <select data-placeholder="Quyền" name="permissions[]" class="tom-select w-full" multiple>
-                                @foreach (config('permissions') as $key => $value)
-                                    <option value="{{ $key }}" @if(in_array($key, $permissions)) selected @endif>{{ $value }}</option>
-                                @endforeach
-                            </select>
+                    <label for="crud-form-1" class="form-label">Quyền</label>
+                    <div class="intro-y box">
+                        <div id="checkbox-switch" class="p-3">
+                            <div class="preview">
+                                <div class="mt-3">
+                                    <div>
+                                        <label class="form-label mr-4 font-bold text-lg" for="selectAll">Chọn tất cả</label>
+                                        <input type="checkbox" class="form-check-input mb-1" id="selectAll">
+                                    </div>
+                                    <div class="grid grid-cols-4 sm:grid-cols-2 gap-2">
+                                        @foreach(config('permissions') as $key => $permission)
+                                            <div>
+                                                <label class="font-bold text-lg">Quản lí {{ $key }}</label>
+                                                @foreach($permission as $keys => $value)
+                                                    <div class="form-check mt-2">
+                                                        <input id="checkbox-switch-1 {{ $keys }}"
+                                                               name="permissions[]"
+                                                               class="jqr-checkbox form-check-input"
+                                                               type="checkbox"
+                                                               value="{{ $keys }}"
+                                                            {{ in_array($keys, $permissions) ? 'checked' : '' }}>
+                                                        <label class="form-check-label"
+                                                               for="checkbox-switch-1 {{ $keys }}">{{ $value }}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="text-right mt-5">
@@ -51,18 +74,26 @@
             var formData = new FormData($('#ajaxForm')[0]);
             var url = "{{ route('admin.RoleManagement.update', ['id' => ':editId']) }}";
             url = url.replace(':editId', editId);
-
             sendAjaxRequest(url, 'POST', formData,
                 function(response) {
                     if (response.success) {
                         toastr.success(response.success);
                     }
                 },
-
                 function(error) {
                     showErrors(error);
                 }
             );
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var selectAllCheckbox = document.getElementById("selectAll");
+            var checkboxes = document.querySelectorAll(".jqr-checkbox");
+            selectAllCheckbox.addEventListener("change", function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                });
+            });
         });
 
     </script>

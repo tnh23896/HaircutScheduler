@@ -235,11 +235,8 @@
                         </table>
                     </div>
                     <div class="sm:text-left sm:ml-auto py-5 price" style="text-align: right">
-                        <div class="text-base">Tổng tiền: {{ $item->total_price }} VND</div>
-                        <div class="text-base">Giảm giá: {{ $item->promotion->discount ?? 0 }} VND</div>
-                        <hr>
                         <div class="text-lg	">Số tiền phải thanh toán:
-                            {{ $item->total_price - ($item->promotion->discount ?? 0) }} VND</div>
+                            {{ $item->total_price }} VND</div>
                     </div>
                 </div>
                 <div class="custom-container">

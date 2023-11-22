@@ -39,7 +39,7 @@ class ReviewController extends Controller
             $data = new Review();
             $data->fill($request->all());
             $data->save();
-            return redirect()->route('bill')->with('success', 'Đánh giá thành công');
+            return redirect()->route('reviews.index')->with('success', 'Đánh giá thành công');
         } catch (\Exception $e) {
             abort(404);
         }
