@@ -73,14 +73,12 @@ class BookingController extends Controller
             // Lấy danh sách khung giờ
             $dateString = min($availableDates->toArray()) ?? $startDate;
             $dateToCheck = Carbon::parse($dateString);
-            $timeSlots = Time::with('work_schedules')->orderBy('time')
-                ->whereHas('work_schedules', function ($query) use ($dateString) {
-                    $query->where('day', $dateString);
-                })
-                ->whereHas('work_schedule_details', function ($query) {
-                    $query->where('status', 'available');
-                })
-                ->get();
+            $timeSlots =Time::whereHas('work_schedule_details', function ($query) use ($dateString) {
+                $query->where('status', 'available')
+                      ->whereHas('work_schedules', function ($query) use ($dateString) {
+                          $query->where('day', $dateString);
+                      });
+            })->get();
             if ($dateToCheck->isToday()) {
                 // Lọc các time slot sau thời gian quy định (ví dụ: sau 10 giờ)
                 $currentTime = Carbon::now();
