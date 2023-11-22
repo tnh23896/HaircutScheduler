@@ -193,7 +193,7 @@
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Mã giảm giá</label>
-                        <input name="promoCode" type="text" class="form-control w-full" placeholder="Mã giảm giá">
+                        <input name="promoCode" type="text" id="promotion" class="form-control w-full" placeholder="Mã giảm giá">
                     </div>
                     <div class="mt-5">
                         <h3 class="font-medium text-base">Tổng tiền dịch vụ: <span id="totalPrice">

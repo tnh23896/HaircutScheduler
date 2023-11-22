@@ -22,13 +22,15 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'time'=>'required|unique:times'
+            'time'=>'required|unique:times',
+            'shift_id'=>'required'
         ];
     }
     public function messages(){
         return [
             'time.required' => 'Bạn chưa nhập thời gian',
-            'time.unique' => 'Thời gian đã tồn tại'
+            'time.unique' => 'Thời gian đã tồn tại',
+            'shift_id.required' => 'Bạn chưa chọn ca',
         ];
     }
 }

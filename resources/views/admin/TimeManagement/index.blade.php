@@ -31,6 +31,7 @@
                     <tr>
                         <th class="whitespace-nowrap text-center">#</th>
                         <th class="whitespace-nowrap text-center">Thời gian</th>
+                        <th class="whitespace-nowrap text-center">Ca</th>
                         <th class="text-center whitespace-nowrap ">Hành động</th>
                     </tr>
                 </thead>
@@ -39,6 +40,7 @@
                         <tr class="intro-x">
                             <td class="text-center capitalize">{{ $loop->iteration }}</td>
                             <td class="text-center capitalize"> {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}</td>
+                            <td class="text-center capitalize"> {{ $item->shift->name }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a href="{{ route('admin.TimeManagement.edit', $item->id) }}"
