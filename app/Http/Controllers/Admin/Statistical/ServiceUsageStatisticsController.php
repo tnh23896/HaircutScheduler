@@ -43,11 +43,12 @@ class ServiceUsageStatisticsController extends Controller
 		$topservice = $this->baServiceSetbyTime($request);
 		return response()->json(['topservice' => $topservice]);
 	}
-    
+
 	private function baServiceSetbyTime(Request $request)
 	{
 		$month = $request->month;
 		$year = $request->year;
+        
 		$statistics = DB::table('bill_details')
 			->join('services', 'bill_details.service_id', '=', 'services.id')
 			->join('bills', 'bill_details.bill_id', '=', 'bills.id') // Join với bảng bill
