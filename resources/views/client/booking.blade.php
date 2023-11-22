@@ -358,7 +358,7 @@
                                             <label class="check mx-1">
                                                 <input type="radio" id="time_{{ $time->id }}" name="time_id"
                                                        value="{{ $time->id }}">
-                                                <span>{{ $time->time }}</span>
+                                                <span>{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</span>
                                             </label>
                                         @endforeach
                                     </div>
@@ -458,9 +458,10 @@
                 $.each(dataPromotion, function (index, promotion) {
                     if (promotion.promocode == promoCode) {
                         var totalPrice = $('#totalPrice').text();
+                        totalPrice = totalPrice.replace(/,/g, '');
                         var discount = promotion.discount;
                         var newTotalPrice = totalPrice - discount;
-                        $('#totalPrice').text(newTotalPrice);
+                        $('#totalPrice').text(Number(newTotalPrice).toLocaleString());
                         $('#promotion').prop('disabled', true);
                     }
                 });
@@ -494,11 +495,15 @@
                         if (promotion.promocode == promoCode) {
                             var discount = promotion.discount;
                             let newTotalPrice3 = tottalPrice - Number(discount);
+                            newTotalPrice3 = Number(newTotalPrice3).toLocaleString();
+
                             $('#totalPrice').text(newTotalPrice3);
+                            
                         }
                     });
                 }else{
-                    $('#totalPrice').text(tottalPrice);
+                    
+                    $('#totalPrice').text(Number(tottalPrice).toLocaleString());
                 }
 
             });
@@ -608,7 +613,6 @@
                 }
             })
 
-            $('#')
         })
     </script>
 @endsection
