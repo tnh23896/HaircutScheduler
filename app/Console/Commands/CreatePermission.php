@@ -47,10 +47,7 @@ class CreatePermission extends Command
 
         $role = Role::firstOrCreate(['name' => 'super-admin', 'guard_name' => 'admin']);
         $role->givePermissionTo(Permission::all());
+        $this->info('Permissions created successfully.');
+
     }
-
-
-
-
-
 }
