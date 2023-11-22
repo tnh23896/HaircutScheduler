@@ -26,7 +26,6 @@ class UpdateRequest extends FormRequest
         return [
             'time' => [
                 'required',
-                'date_format:H:i',
                 Rule::unique('times', 'time')->ignore($eventId),
             ],
             'shift_id'=>'required'
@@ -36,6 +35,7 @@ class UpdateRequest extends FormRequest
         return [
             'time.required' => 'Bạn chưa nhập thời gian',
             'time.unique' => 'Thời gian đã tồn tại',
+            
             'shift_id.required' => 'Bạn chưa chọn ca',
 
         ];
