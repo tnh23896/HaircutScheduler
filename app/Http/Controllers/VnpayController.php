@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Time;
+use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class VnpayController extends Controller
@@ -102,24 +104,39 @@ class VnpayController extends Controller
                 // Booking::where('id', $_GET['vnp_TxnRef'])->update([
                 //     // 'status' => 'pending',
                 // ]);
-                session()->flash('success', 'Payment successful!');
                 return redirect()->route('home.index');
             }
             else {
+                $id = $_GET['vnp_TxnRef'];
                 Booking::where('id', $_GET['vnp_TxnRef'])->update([
                     'status'     => 'canceled',
                 ]);
-                session()->flash('error', 'Deo duoc');
-            return redirect()->route('home.index');
+                $bookingOld = Booking::query()->findOrFail($id);
+                if ($bookingOld->status == "canceled") {
+                    $timeSelected = Time::where('time', $bookingOld->time)->first();
+                    $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
+                    $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
+                        ->where('work_schedule_details.time_id', $timeSelected->id)
+                        ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
+                }
+                return redirect()->route('home.index');
+
                 // thanh toán thất bại
             }
         } else {
             Booking::where('id', $_GET['vnp_TxnRef'])->update([
                 'status' => 'canceled',
             ]);
+            $id = $_GET['vnp_TxnRef'];
+            $bookingOld = Booking::query()->findOrFail($id);
+            if ($bookingOld->status == "canceled") {
+                $timeSelected = Time::where('time', $bookingOld->time)->first();
+                $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
+                $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
+                    ->where('work_schedule_details.time_id', $timeSelected->id)
+                    ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
+            }
             // lỗi thanh toán
-                session()->flash('error', 'Deo duoc');
-
             return redirect()->route('home.index');
         }
         // return route nào đấy
