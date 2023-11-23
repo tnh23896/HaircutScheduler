@@ -106,7 +106,7 @@ class BookingController extends Controller
                               ->whereHas('work_schedules', function ($query) use ($day) {
                                   $query->where('day', $day);
                               });
-                    })->get();
+                    })->orderBy('time')->get();
 
                 } else {
                     $timeSlots = Time::with('work_schedules')->orderBy('time')
