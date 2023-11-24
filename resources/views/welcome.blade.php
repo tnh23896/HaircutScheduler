@@ -139,3 +139,6 @@
         </div>
     </body>
 </html>
+backgroundColor: $("html").hasClass("dark") ? _colors__WEBPACK_IMPORTED_MODULE_1__["default"].darkmode["200"]() : _colors__WEBPACK_IMPORTED_MODULE_1__["default"].slate["300"]()
+backgroundColor: "#FFCC33"
+C0C0C0

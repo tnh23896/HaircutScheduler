@@ -83,9 +83,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/service-set-by-time', [DashboardController::class, 'ServiceSetbyTime'])
         ->name('admin.serviceSetbyTime');
 
-		// Thống kê khách hàng
-    Route::post('/top-booker', [DashboardController::class, 'topBooker'])
-        ->name('admin.topBooker');
+		// Thống kê nhân viên
     Route::post('/top-employee', [DashboardController::class, 'topEmployee'])
         ->name('admin.topEmployee');
 
@@ -301,7 +299,7 @@ Route::group(['middleware' => 'admin'], function () {
     //Statistical
     Route::get('schedule-statistics', [ScheduleStatisticsController::class, 'index'])
         ->name('admin.Statistical.scheduleStatistics');
-    Route::post('/schedule-by-time', [DashboardController::class, 'scheduleSetbyTime'])
+    Route::post('/schedule-by-time', [ScheduleStatisticsController::class, 'scheduleSetbyTime'])
         ->name('admin.schedulebyTime');
     Route::get('revenue-statistics', [RevenueStatisticsController::class, 'index'])
         ->name('admin.Statistical.revenueStatistics');
@@ -309,8 +307,12 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.revenueSetTime');
     Route::get('service-usage-statistics', [ServiceUsageStatisticsController::class, 'index'])
         ->name('admin.Statistical.serviceUsageStatistics');
-    Route::post('/service-set-time', [DashboardController::class, 'ServiceSetbyTime'])
+    Route::post('/service-set-time', [ServiceUsageStatisticsController::class, 'ServiceSetbyTime'])
         ->name('admin.serviceSetTime');
     Route::get('employee-and-customer-statistics', [EmployeeAndCustomerStatisticsController::class, 'index'])
         ->name('admin.Statistical.employeeAndCustomerStatistics');
+    Route::post('/top-booker', [EmployeeAndCustomerStatisticsController::class, 'topBooker'])
+        ->name('admin.topBooker');
+    Route::post('/top-employees', [EmployeeAndCustomerStatisticsController::class, 'topEmployee'])
+        ->name('admin.topEmployees');
 });

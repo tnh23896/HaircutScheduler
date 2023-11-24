@@ -5,23 +5,20 @@
         <div class="col-span-12 2xl:col-span-12">
             <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-12 sm:col-span-6 lg:col-span-6 mt-8">
-                    <div class="intro-y flex items-center h-10">
+                    <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center" style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Thống kê dịch vụ sử dụng
+                            Thống kê lịch đặt
                         </h2>
-
-                    </div>
-                    <div class="intro-y box p-5 mt-5">
                         <form id="filterTopService" method="POST">
                             @csrf
                             <div class="flex justify-end">
-                                <select name="month" id="month" class="tom-select w-full tomselected mx-3">
+                                <select name="month" id="month" class="tom-select w-full tomselected mx-3" style="width: 8rem;">
                                     <option value="0" selected="true" class="w-96">Chọn tháng</option>
                                     @for ($i = 1; $i <= 12; $i++)
                                         <option value="{{ $i }}">Tháng {{ $i }}</option>
                                     @endfor
                                 </select>
-                                <select name="year" id="year" class="tom-select w-full tomselected mx-3">
+                                <select name="year" id="year" class="tom-select w-full tomselected mx-3" style="width: 8rem;">
                                     <option value="0" selected="true" class="w-96">Chọn năm</option>
                                     @for ($year = 1990; $year <= 2030; $year++)
                                         <option value="{{ $year }}">Năm {{ $year }}</option>
@@ -37,6 +34,8 @@
                                 </button>
                             </div>
                         </form>
+                    </div>
+                    <div class="intro-y box p-5 mt-5">
                         <div class="mt-3">
                             <div class="h-[213px]">
                                 <canvas id="report-pies-chart" width="203" height="266"

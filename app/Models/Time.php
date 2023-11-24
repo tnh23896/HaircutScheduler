@@ -12,6 +12,7 @@ class Time extends Model
     protected $table = 'times';
     protected $fillable = [
         'time',
+        'shift_id',
     ];
     public function work_schedule_details()
     {
@@ -20,5 +21,8 @@ class Time extends Model
     public function work_schedules()
     {
         return $this->belongsToMany(WorkSchedule::class, 'work_schedule_details', 'time_id', 'work_schedules_id')->withPivot('status');
+    }
+    public function Shift(){
+        return $this->belongsTo(Shift::class,'shift_id');
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\TimeManagement;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TimeManagenent\Time\StoreRequest;
+use App\Http\Requests\Admin\TimeManagenent\Time\UpdateRequest;
+use App\Models\Shift;
 use App\Models\Time;
 use Illuminate\Http\Request;
 
@@ -74,7 +76,8 @@ class TimeController extends Controller
      */
     public function create()
     {
-        return view('admin.TimeManagement.create');
+        $shift = Shift::all();
+        return view('admin.TimeManagement.create',compact('shift'));
     }
 
     /**
@@ -111,13 +114,14 @@ class TimeController extends Controller
     public function edit(string $id)
     {
         $data = Time::find($id);
-        return view('admin.TimeManagement.edit', compact('data'));
+        $shift = Shift::all();
+        return view('admin.TimeManagement.edit', compact('data', 'shift'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreRequest $request, string $id)
+    public function update(UpdateRequest $request, string $id)
     {
         try {
 

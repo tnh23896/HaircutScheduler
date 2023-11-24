@@ -87,22 +87,29 @@ class RevenueStatisticsController extends Controller
 	private function calculateBillRevenue()
 	{
 		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NULL THEN total_price ELSE total_price - promotions.discount END) as totalRevenues')
-			->leftJoin('promotions', 'bills.promo_id', '=', 'promotions.id')
-			->groupBy('month')
-			->orderBy('month', 'asc');
-
+                ->selectRaw('SUM(total_price) as totalRevenues') // chỉ tính tổng tiền mà không tính giảm giá
+                ->groupBy('month')
+                ->orderBy('month', 'asc');
 		$filteredData = $query->get();
 
-
 		$totalRevenue = [];
-		foreach ($filteredData as $item) {
-			$month = $item->month;
 
-			$totalRevenue[$month] = [
-				'totalRevenues' => $item->totalRevenues,
-				'totalBills' => $item->totalBills
+		foreach ($filteredData as $row) {
+			$totalRevenue[$row->month] = [
+				'totalRevenues' => $row->totalRevenues,
+				'totalBills' => $row->totalBills
 			];
+		}
+
+		$allMonths = range(1, 12);
+
+		foreach ($allMonths as $month) {
+			if (!isset($totalRevenue[$month])) {
+				$totalRevenue[$month] = [
+					'totalRevenues' => 0,
+					'totalBills' => 0,
+				];
+			}
 		}
 
 		return $totalRevenue;
@@ -113,8 +120,9 @@ class RevenueStatisticsController extends Controller
 		$year = $request->year;
 
 		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NOT NULL THEN total_price - promotions.discount ELSE total_price END) as totalRevenues')
-			->join('promotions', 'bills.promo_id', '=', 'promotions.id')
+                ->selectRaw('SUM(total_price) as totalRevenues') // chỉ tính tổng tiền mà không tính giảm giá
+                ->groupBy('month')
+                ->orderBy('month', 'asc')
 			->when($month, function ($query, $month) {
 				return $query->whereMonth('day', $month);
 			})
@@ -127,6 +135,7 @@ class RevenueStatisticsController extends Controller
 		$result = $query->get();
 
 		$totalRevenue = [];
+
 		foreach ($result as $row) {
 			$totalRevenue[$row->month] = [
 				'totalRevenues' => $row->totalRevenues,
@@ -135,6 +144,7 @@ class RevenueStatisticsController extends Controller
 		}
 
 		$allMonths = range(1, 12);
+        
 		foreach ($allMonths as $month) {
 			if (!isset($totalRevenue[$month])) {
 				$totalRevenue[$month] = [

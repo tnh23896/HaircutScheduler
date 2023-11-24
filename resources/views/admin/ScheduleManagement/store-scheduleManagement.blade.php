@@ -1,5 +1,21 @@
 <script>
     $(document).ready(function() {
+        $('#promotion').on('change', function() {
+            // Xử lý sự kiện onchange ở đây
+            var promoCode = $(this).val();
+            var dataPromotion = @php echo json_encode($promotion) @endphp;
+            for (var i = 0; i < dataPromotion.length; i++) {
+                var promotion = dataPromotion[i];
+                if (promotion.promocode == promoCode) {
+                    var totalPrice = $('#totalPrice').text();
+                    var discount = promotion.discount;
+                    var newTotalPrice = totalPrice - discount;
+                    $('#totalPrice').text(newTotalPrice);
+                    $('#promotion').attr('disabled', true);
+                    break;
+                }
+            }
+        });
         $('input[type="radio"][name="admin_id"]').on('change', function() {
             performAjaxRequest();
         });
@@ -17,13 +33,26 @@
             // Lấy danh sách các giá trị đã chọn
             var checked = $('input[name="services[]"]:checked');
             var totalPrice = 0;
-
             checked.each(function() {
                 var price = parseFloat($(this).data('price'));
                 totalPrice += price;
             });
-
-            $('#totalPrice').text(totalPrice);
+            var promoCode = $('input[name="promoCode"]').val();
+            if (promoCode) {
+                const dataPromotioncode = @php echo json_encode($promotion) @endphp;
+                for (var i = 0; i < dataPromotioncode.length; i++) {
+                    var promotion = dataPromotioncode[i];
+                    if (promotion.promocode == promoCode) {
+                        var discount = promotion.discount;
+                        let newTotalPrice3 = totalPrice - Number(discount);
+                        $('#totalPrice').text(newTotalPrice3);
+                        $('#promotion').attr('disabled', true);
+                        break;
+                    }
+                }
+            } else {
+                $('#totalPrice').text(totalPrice);
+            }
         });
 
         function performAjaxRequest() {
@@ -51,7 +80,7 @@
 
         function renderTimes(times) {
             $('#timeSelect label').remove();
-            times= Array.isArray(times) ? times : Object.values(times);
+            times = Array.isArray(times) ? times : Object.values(times);
             if (times.length === 0) {
                 // Nếu không có thời gian, hiển thị trạng thái "rỗng"
                 $('#timeSelect').html('<p>Không có thời gian làm việc trong ngày này.</p>');
@@ -114,6 +143,4 @@
             );
         });
     })
-
-   
 </script>

@@ -82,15 +82,15 @@
                     @csrf
                     <div class="flex justify-end">
                         <select name="month" id="month" class="tom-select w-96 tomselected mx-3"
-                            style="width: 150px">
-                            <option value="0" selected="true">Tháng</option>
+                            style="width:8rem">
+                            <option value="0" selected="true">Chọn Tháng</option>
                             @for ($m = 1; $m <= 12; $m++)
                                 <option value="{{ $m }}">Tháng {{ $m }}</option>
                             @endfor
                         </select>
                         <select name="year" id="year" class="tom-select w-96 tomselected mx-3"
-                            style="width: 150px">
-                            <option value="0" selected="true">Năm</option>
+                            style="width:8rem">
+                            <option value="0" selected="true">Chọn Năm</option>
                             @for ($year = 1990; $year <= 2030; $year++)
                                 <option value="{{ $year }}">Năm {{ $year }}</option>
                             @endfor
@@ -180,7 +180,7 @@
                                                                                 <td class="w-40">
                                                                                     <div class="text-center flex">
                                                                                         <div class="w-16 h-16 image-fit zoom-in">
-                                                                                            <img alt="ảnh" class="tooltip rounded-full" src="${booker.avatar}">
+                                                                                            <img alt="ảnh" class="tooltip rounded-full" src="{{ asset('${booker.avatar}') }}">
                                                                                         </div>
                                                                                     </div>
                                                                                 </td>
@@ -207,7 +207,7 @@
         $(function() {
             $('#saveFilterTopEmployee').on('click', function() {
                 var formData = new FormData($('#filterTopEmployee')[0]);
-                var url = "{{ route('admin.topEmployee') }}";
+                var url = "{{ route('admin.topEmployees') }}";
 
                 sendAjaxRequest(url, 'POST', formData,
                     function(response) {
@@ -220,7 +220,7 @@
                         <div class="intro-y">
                             <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Employee Avatar" src="${employee.avatar}">
+                                    <img alt="Employee Avatar" src="{{ asset('${employee.avatar}') }}">
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">${employee.username}</div>
@@ -229,7 +229,7 @@
                                     </div>
                                 </div>
                                 <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    ${employee.totalBookings} Đơn đặt
+                                    ${employee.totalBookings} lịch đặt
                                 </div>
                             </div>
                         </div>`).join('');
