@@ -1,5 +1,5 @@
 @extends('client.templates.app')
-@section('title', 'Dịch vụ')
+@section('title', 'Liên hệ')
 @section('content')
     @include('client.templates.navbar2')
     <section class="position-relative footer-area">
@@ -156,7 +156,7 @@
                             @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
-                    
+
                         <form id="contactForm" action="{{ route('contact.sendEmail') }}" method="post">
                             @csrf
                             <div class="form-group">
@@ -173,7 +173,7 @@
                             </div>
                             <button type="button" id="sendEmailBtn" class="btn btn-primary border-0" style="background-color: #d9842f">Gửi</button>
                         </form>
-                        
+
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6 col-sm-12 offset-lg-1">
@@ -258,7 +258,7 @@
                             <img class="image-1 w-100 img-fluid " style="width: 370px;height: 450px;" src="{{asset($employee->avatar)}}" alt="{{$employee->username}}">
                             <figcaption class="ryan-description">
                                 <h3><a href="javascript:void(0)">{{$employee->username}}</a></h3>
-                                <p>Email: {{$employee->email}} 
+                                <p>Email: {{$employee->email}}
                                 <br/>
                                     Điện thoại: {{$employee->phone}}</p>
                                     <ul class="ryan-icon d-flex list-unstyled">
@@ -276,7 +276,7 @@
         $(document).ready(function () {
             $('#sendEmailBtn').on('click', function () {
                 var formData = $('#contactForm').serialize();
-    
+
                 $.ajax({
                     url: "{{ route('contact.sendEmail') }}",
                     type: "POST",

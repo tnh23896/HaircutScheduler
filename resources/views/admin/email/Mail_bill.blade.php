@@ -235,7 +235,7 @@
                                             </td>
                                             <td class="custom-text-right custom-table-cell custom-border-bottom custom-font-medium custom-w-32"
                                                 style="border-bottom: 1px solid #333 ">
-                                                {{ $detail->price }} VND
+                                                {{number_format( $detail->price) }} VND
                                             </td>
                                         </tr>
                                     @endforeach
@@ -243,8 +243,8 @@
                             </table>
                         </div>
                         <div class="sm:text-left sm:ml-auto py-5 price" style="text-align: right">
-                            <div class="text-base">Số tiền phải thanh toán: {{ $bill->total_price }} VND</div>
-                            <div class="text-base">Giảm giá: {{ $bill->promotion->discount ?? 0 }} VND</div>
+                            <div class="text-base">Số tiền phải thanh toán: {{number_format( $bill->total_price) }} VND</div>
+                            <div class="text-base">Giảm giá: {{number_format( $bill->promotion->discount ?? 0) }} VND</div>
                             <hr>
                         </div>
                     </div>

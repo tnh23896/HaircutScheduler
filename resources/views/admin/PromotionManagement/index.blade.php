@@ -39,7 +39,7 @@
                     <tr class="intro-x">
                         <td class="text-center"><a class="flex items-center justify-center"
                                                    href="">{{ $item->promocode }}</a></td>
-                        <td class="text-center whitespace-nowrap">{{number_format($item->discount) }} vnd</td>
+                        <td class="text-center whitespace-nowrap">{{number_format($item->discount) }} VND</td>
                         <td class="text-center">
                             {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
                         </td>

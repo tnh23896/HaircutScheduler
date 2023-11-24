@@ -220,22 +220,21 @@
                                                         </div>
                                                         <div class="row px-2">
                                                             @foreach ($category->services as $service)
-                                                                <div class="col-md-3 col-6 mt-2 px-2">
+                                                                <div class="col-md-3 col-6 mt-2 px-2 mb-5">
                                                                     <div class="card">
                                                                         <div class="card-body p-0">
                                                                             <div class="card-img-actions">
-                                                                                <img src="{{ asset($service->image) }}"
-                                                                                    class="card-img img-fluid"
-                                                                                    height="250" alt="">
+                                                                                <img src="{{ asset($service->image) }}" style="width:258px;height: 237px;"
+                                                                                    class="card-img img-fluid" alt="">
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="card-body  text-center p-0 pt-2 ">
+                                                                        <div class="card-body text-center p-0 pt-2">
                                                                             <div class="">
-                                                                                <h6 class="font-weight-semibold">
+                                                                                <h8 class="font-weight-semibold">
                                                                                     <span href="#"
                                                                                         class="text-default h4">{{ $service->name }}</span>
-                                                                                </h6>
+                                                                                </h8>
                                                                             </div>
                                                                             <span
                                                                                 class="mb-0 font-weight-semibold d-block">{{ number_format($service->price) }}

@@ -57,10 +57,10 @@
                         <td class="text-center whitespace-nowrap">
                             <a class="flex items-center justify-center" href="">{{ $service->name }}</a>
                         </td>
-                        <td class="text-center whitespace-nowrap ">{{ number_format($service->price) }} vnd</td>
+                        <td class="text-center whitespace-nowrap ">{{ number_format($service->price) }} VND</td>
                         <td class="text-center">{{ $service->description }}</td>
                         <td class="text-center whitespace-nowrap">{{ $service->category_services->name ?? '' }}</td>
-                        <td class="text-center whitespace-nowrap">{{ number_format($service->percentage_discount) }} vnd</td>
+                        <td class="text-center whitespace-nowrap">{{ number_format($service->percentage_discount) }} VND</td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
                                 <a class="flex items-center mr-3"
