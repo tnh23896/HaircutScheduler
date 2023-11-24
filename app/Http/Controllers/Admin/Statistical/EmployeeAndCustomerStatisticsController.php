@@ -53,7 +53,7 @@ class EmployeeAndCustomerStatisticsController extends Controller
 			$query->whereYear('day', $year);
 		}
 
-		$bookerData = $query->get();
+		$bookerData = $query->take(5)->get();
 		return $bookerData;
 	}
 

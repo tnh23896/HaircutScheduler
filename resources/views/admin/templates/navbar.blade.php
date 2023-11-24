@@ -214,6 +214,7 @@
                             </a>
                         </li>
                     @endif
+
                     @if (auth('admin')->user()->can('admin.ScheduleEmployee.index'))
                         <li>
                             <a href="{{ route('admin.ScheduleEmployee.index') }}"

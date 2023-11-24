@@ -89,7 +89,7 @@ class DashboardController extends Controller
 
         return $topService;
     }
-    
+
     // Thống kê dịch vụ ajax
     private function baServiceSetbyTime(Request $request)
     {
