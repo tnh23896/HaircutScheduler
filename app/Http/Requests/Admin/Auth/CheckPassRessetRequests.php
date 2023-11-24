@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RessetPasswordRequests extends FormRequest
+class CheckPassRessetRequests extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,23 @@ class RessetPasswordRequests extends FormRequest
     public function rules()
     {
         return [
-            'current_password' => 'required',
-            'new_password' => 'required|min:6|different:current_password',
-            'new_password_confirmation' => 'required|same:new_password',
+            'email' => 'required|email|exists:admins',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'current_password.required' => 'Vui lòng nhập mật khẩu cũ',
-            'new_password.required' => 'Vui lòng nhập mật khẩu mới',
-            'new_password.min' => 'Mật khẩu mới phải chứa ít nhất 6 ký tự',
-            'new_password.different' => 'Mật khẩu mới phải khác mật khẩu cũ',
-            'new_password_confirmation.required' => 'Vui lòng nhập lại mật khẩu mới',
-            'new_password_confirmation.same' => 'Mật khẩu nhập lại không khớp',
+            'email.required' => 'Vui lòng nhập địa chỉ email',
+            'email.email' => 'Địa chỉ email không hợp lệ',
+            'email.exists' => 'Email không tồn tại trong hệ thống',
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'password.string' => 'Mật khẩu phải là một chuỗi',
+            'password.min' => 'Mật khẩu phải chứa ít nhất 8 ký tự',
+            'password.confirmed' => 'Mật khẩu nhập lại không khớp',
+            'password_confirmation.required' => 'Vui lòng nhập lại mật khẩu',
         ];
     }
     protected function failedValidation($validator)

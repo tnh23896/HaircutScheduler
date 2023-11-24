@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Mail\ForgotPasswordEmail;
 use App\Models\AdminPasswordReset;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Auth\CheckPassRessetRequests;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Jobs\SendForgotPasswordEmail;
@@ -36,7 +37,7 @@ class ForgotPasswordController extends Controller
         ]);
         SendForgotPasswordEmail::dispatch( $token, $email );
         
-        return back()->with('success', 'Chúng tôi đã gửi email để đặt lại mật khẩu của bạn.');
+        return redirect()->route('admin.login')->with('success', 'Chúng tôi đã gửi email để đặt lại mật khẩu của bạn.');
     }
 
 
@@ -45,24 +46,18 @@ class ForgotPasswordController extends Controller
         return view('admin.Auth.forget-password-link', ['token' => $token, 'email' => $email]);
     }
 
-    public function ResetPasswordStore(Request $request)
+    public function ResetPasswordStore(CheckPassRessetRequests $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:admins',
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmation' => 'required'
-        ]);
-
-         $checkEmailToken = AdminPasswordReset::where(['email' => $request->email, 'token' => $request->token])->first();
+        $checkEmailToken = AdminPasswordReset::where(['email' => $request->email, 'token' => $request->token])->first();
 
         if (!$checkEmailToken) {
-            return back()->withInput()->with('error', 'Invalid token!');
+            return back()->withInput()->with('error', 'Token không hợp lệ');
         }
 
         Admin::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
 
         AdminPasswordReset::where(['email' => $request->email])->delete();
 
-        return redirect()->route('admin.login')->with('success', 'Your password has been successfully changed!');
+        return redirect()->route('admin.login')->with('success', 'Mật khẩu của bạn đã được thay đổi thành công!');
     }
 }

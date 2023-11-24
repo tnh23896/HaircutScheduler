@@ -42,7 +42,7 @@
                         <option value="confirmed">Đã xác nhận</option>
                         <option value="waiting">Đang chờ cắt</option>
                         <option value="success">Đã hoàn thành</option>
-                        <option value="canceled">Đã hủy</option>
+                        <option value="canceled">Hủy đơn</option>
                     </select>
                 </form>
             </div>
@@ -130,28 +130,25 @@
                                                 xác
                                                 nhận</option>
                                             <option value="confirmed">Đã xác nhận</option>
-                                            <option value="canceled">Đã hủy</option>
+                                            <option value="canceled">Hủy đơn</option>
                                         @elseif ($item->status == 'confirmed')
                                             <option value="confirmed"
                                                 {{ $item->status == 'confirmed' ? 'selected' : '' }}>
                                                 Đã
                                                 xác nhận</option>
-                                            <option value="waiting">Đang chờ cắt</option>
+                                            <option value="waiting">Đang cắt</option>
+                                            <option value="canceled">Hủy đơn</option>
                                         @elseif ($item->status == 'waiting')
                                             <option value="waiting" {{ $item->status == 'waiting' ? 'selected' : '' }}>
-                                                Đang
-                                                chờ
-                                                cắt</option>
+                                                Đang cắt</option>
                                             <option value="success">Đã hoàn thành</option>
-                                            <option value="canceled">Đã hủy</option>
                                         @elseif ($item->status == 'success')
                                             <option value="success" {{ $item->status == 'success' ? 'selected' : '' }}>Đã
                                                 hoàn
                                                 thành</option>
                                         @elseif ($item->status == 'canceled')
                                             <option value="canceled" {{ $item->status == 'canceled' ? 'selected' : '' }}>
-                                                Đã
-                                                hủy
+                                                Hủy đơn
                                             </option>
                                         @endif
                                     </select>
@@ -253,20 +250,20 @@
                 switch (newStatus) {
                     case 'pending':
                         selectElement.html('<option value="confirmed">Đã xác nhận</option>' +
-                            '<option value="canceled">Đã hủy</option>' +
+                            '<option value="canceled">Hủy đơn</option>' +
                             '<option value="pending" selected>Chưa xác nhận</option>');
                         break;
                     case 'confirmed':
                         selectElement.html('<option value="confirmed" selected>Đã xác nhận</option>' +
-                            '<option value="waiting">Đang chờ cắt</option>');
+                            '<option value="waiting">Đang cắt</option>'+
+                            '<option value="canceled">Hủy Đơn</option>');
                         break;
                     case 'waiting':
-                        selectElement.html('<option value="waiting" selected>Đang chờ cắt</option>' +
-                            '<option value="success">Đã hoàn thành</option>' +
-                            '<option value="canceled">Đã hủy</option>');
+                        selectElement.html('<option value="waiting" selected>Đang cắt</option>' +
+                            '<option value="success">Đã hoàn thành</option>');
                         break;
                     case 'canceled':
-                        selectElement.html('<option value="canceled" selected>Đã hủy</option>');
+                        selectElement.html('<option value="canceled" selected>Hủy đơn</option>');
                         hideEdit.hide();
                         break;
                     case 'success':
@@ -289,7 +286,7 @@
                     case 'waiting':
                         return 'Đang chờ cắt';
                     case 'canceled':
-                        return 'Đã hủy';
+                        return 'Hủy đơn';
                     case 'success':
                         return 'Đã hoàn thành';
                     default:

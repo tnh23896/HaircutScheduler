@@ -57,28 +57,17 @@ class RessetPasswordController extends Controller
         // Lấy người dùng hiện tại thông qua Guard 'admin'
         $user = Auth::guard('admin')->user();
 
-        // Kiểm tra mật khẩu cũ
-        if (!(Hash::check($request->input('current_password'), $user->password))) {
-            return back()->with("error", "Mật khẩu cũ không đúng.");
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'Mật khẩu cũ không đúng']);
         }
 
-        // Kiểm tra mật khẩu mới và xác nhận mật khẩu mới
-        $newPassword = $request->input('new_password');
-        $passwordConfirmation = $request->input('new_password_confirmation');
+        // Update the password
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
 
-        if (strlen($newPassword) < 8) {
-            return back()->with("error", "Mật khẩu mới phải có ít nhất 8 ký tự.");
-        }
-
-        if ($newPassword !== $passwordConfirmation) {
-            return back()->with("error", "Mật khẩu mới và xác nhận mật khẩu không khớp.");
-        }
-
-        // Cập nhật mật khẩu mới
-        $user->password = Hash::make($newPassword);
-        $user->save();
-
-        return back()->with("success", "Mật khẩu đã được cập nhật thành công.");
+        // Redirect with success message
+        return redirect()->back()->with('success', 'Mật khẩu đã được thay đổi thành công');
     }
 
 

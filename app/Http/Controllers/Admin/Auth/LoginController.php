@@ -22,7 +22,7 @@ class LoginController extends Controller
     public function adminLogin(LoginRequests $request)
     {
         
-
+        
         $credentials = $request->only(['email', 'password']);
 
         if (Auth::guard('admin')->attempt($credentials, $request->has('remember'))) {
