@@ -54,7 +54,7 @@ Route::post('/booking-service/getStaff', [BookingController::class, 'getStaff'])
 Route::post('/booking-service/store', [BookingController::class, 'store'])->name('booking-service.store');
 // Profile
 
-Route::get('/profile', [ProfileController::class,'edit'])->name('profile.edit');
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //About-us
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');
@@ -66,3 +66,8 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('client.contact');
 Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.sendEmail');
+
+//Policy
+Route::get('/policy', function () {
+	return view('client.policy');
+})->name('client.policy');
