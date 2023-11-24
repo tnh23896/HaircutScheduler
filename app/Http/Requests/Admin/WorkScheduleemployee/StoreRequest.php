@@ -2,21 +2,19 @@
 
 namespace App\Http\Requests\Admin\WorkScheduleEmployee;
 
-use App\Models\Time;
 use App\Models\WorkSchedule;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    // public function authorize(): bool
-    // {
-    //     return false;
-    // }
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -32,13 +30,13 @@ class StoreRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     $selectedWeekStart = Carbon::parse(request('week'))->startOfWeek()->format('Y-m-d');
                     $selectedWeekEnd = Carbon::parse(request('week'))->endOfWeek()->format('Y-m-d');
-                    
+
                     // Kiểm tra xem có ngày nào đã được đăng ký trong tuần này hay không
                     $existingSchedule = WorkSchedule::where('admin_id', auth()->guard('admin')->id())
                         ->where('day', '>=', $selectedWeekStart)
                         ->where('day', '<=', $selectedWeekEnd)
                         ->exists();
-    
+
                     if ($existingSchedule) {
                         $fail('Có ngày trong tuần đã được đăng ký trước đó.');
                     }
@@ -49,12 +47,12 @@ class StoreRequest extends FormRequest
                 'date',
                 function ($attribute, $value, $fail) {
                     $selectedDateTime = Carbon::parse(request('date'));
-    
+
                     if ($selectedDateTime->isSameDay(now())) {
                         $existingSchedule = WorkSchedule::where('admin_id', auth()->guard('admin')->id())
                             ->where('day', $selectedDateTime->format('Y-m-d'))
                             ->exists();
-            
+
                         if ($existingSchedule) {
                             $fail('Ngày đã được đăng ký trước đó.');
                         }
@@ -65,7 +63,7 @@ class StoreRequest extends FormRequest
                         $existingSchedule = WorkSchedule::where('admin_id', auth()->guard('admin')->id())
                             ->where('day', $selectedDateTime->format('Y-m-d'))
                             ->exists();
-            
+
                         if ($existingSchedule) {
                             $fail('Ngày đã được đăng ký trước đó.');
                         }
@@ -76,7 +74,7 @@ class StoreRequest extends FormRequest
                     }
                 },
             ],
-            
+
             'timeSlots' => [
                 'required',
                 'array',
@@ -89,7 +87,7 @@ class StoreRequest extends FormRequest
 
         ];
     }
-    
+
     public function messages()
     {
         return [
