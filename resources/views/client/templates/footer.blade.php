@@ -70,17 +70,21 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-body" id="modal-body">
-                <div class="container" style="max-width: 550px">
-                    <h3>Đăng nhập</h3>
+            <div class="modal-body" id="modal-body" style="background: ; " >
+                <div class="text-center" style="max-width: 550px">
+                    <h3 class="text-center">Đăng nhập</h3>
                     <form class="formSendOtp">
                         <div class="alert alert-danger error" id="" style="display: none;"></div>
                         <div class="alert alert-success successAuth" id="" style="display: none;"></div>
-                        <label>Số điện thoại:</label>
+                        <label>Hãy nhập số điện thoại của bạn:</label>
                         <input type="text" name="phoneOtpNumberInput" class="form-control "
-                            placeholder="+84********">
-                        <div id="recaptcha-container" class="mt-3"></div>
-                        <button class="btn btn-primary mt-3">Gửi OTP</button>
+                            placeholder="Ví dụ: 0912.xxx.xxx" style="border: 2px solid #beced9; height: 50px">
+                            <div class="" style="margin-left: 80px;">
+                                <div id="recaptcha-container" class="mt-3"></div>
+                            </div>
+                            <button class="theme-btn-2" style=" width: 30%;padding: 20px 15px;height: 10px;margin: 10px 0 ;">
+                            <h6 style="color: white; transform: translateY(-10px)">Gửi OTP</h6>
+                        </button>
                     </form>
                 </div>
             </div>

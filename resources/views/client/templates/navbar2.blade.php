@@ -26,36 +26,41 @@
                                     <li class="home-drop" onclick="submenu(2)"><a href="{{ route('blog') }}"
                                             class="home-click">Tin tức</a>
                                     </li>
-                                    <li class="home-drop"><a href="{{route('client.contact')}}">Liên hệ</a></li>
+                                    <li class="home-drop"><a href="{{ route('client.contact') }}">Liên hệ</a></li>
                                     <li class="home-drop"><a href="{{ route('client.aboutus') }}">Giới thiệu</a></li>
-                                    <div class="home-drop">
+                                    <li class="home-drop">
 
                                         @if (Auth::check())
                                             <ul class="navbar-nav">
                                                 <li class="nav-item dropdown">
-                                                    <a class="dropdown-toggle" href="javascript:void(0)"
-                                                        role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                    <a class="dropdown-toggle" href="javascript:void(0)" role="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false"
                                                         style="background-color: #d9842f !important; color: white; size: 30px">
                                                         Xin chào : <span>{{ Auth::user()->phone }}</span>
                                                     </a>
 
-                                                    <ul class="dropdown-menu" style="top: 30px;background-color: #d9842f;"
-                                                    aria-labelledby="navbarDarkDropdownMenuLink">
-                                                        <li ><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá nhân</a></li>
+                                                    <ul class="dropdown-menu"
+                                                        style="top: 30px;background-color: #d9842f;"
+                                                        aria-labelledby="navbarDarkDropdownMenuLink">
+                                                        <li><a class="dropdown-item"
+                                                                href="{{ route('profile.edit') }}">Thông tin cá nhân</a>
+                                                        </li>
                                                         <li>
-                                                            <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
+                                                            <a class="dropdown-item" href="{{ route('logout') }}">Đăng
+                                                                xuất</a>
                                                         </li>
                                                     </ul>
                                                 </li>
                                             </ul>
-
                                         @else
-                                            <a class="theme-btn-2" style="padding: 20px 1px;height: 20px;margin-bottom: 5px; margin-top: 10px"
+                                            <a class="theme-btn-2 home-click"
+                                                style="padding: 20px 1px;height: 20px;margin-bottom: 5px; margin-top: 10px"
                                                 href="javascript:void(0)" data-toggle="modal" data-target="#modalAuth">
-                                                <span style="color: white; transform: translateY(-13px) ">Đăng nhập</span>
+                                                <span style="color: white; transform: translateY(-13px) ">Đăng
+                                                    nhập</span>
                                             </a>
                                         @endif
-                                    </div>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -82,7 +87,7 @@
                         </li>
 
                         <li class="nav-1">
-                            <a class="nav-link" href="{{route('client.contact')}}">Liên hệ</a>
+                            <a class="nav-link" href="{{ route('client.contact') }}">Liên hệ</a>
                         </li>
                         <li class="nav-1">
                             <a class="nav-link" href="{{ route('client.aboutus') }}">Giới thiệu</a>
@@ -103,7 +108,8 @@
 
                                     <ul class="dropdown-menu dropdown-menu-dark" style="top: 45px;"
                                         aria-labelledby="navbarDarkDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá nhân</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Thông tin cá
+                                                nhân</a></li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}">Đăng xuất</a>
                                         </li>

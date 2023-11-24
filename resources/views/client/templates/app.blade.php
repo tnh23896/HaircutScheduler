@@ -58,8 +58,10 @@
                             <div class="alert alert-success successOtpAuth" id="" style="display: none;"></div>
                             <div class="alert alert-danger error" id="" style="display: none;"></div>
                             <input type="text" name="verification" class="form-control"
-                                placeholder="Verification code">
-                            <button type="submit" class="btn btn-danger mt-3">Xác minh</button>
+                                placeholder="Nhập mã xác minh " style="height: 50px">
+                                <button class="theme-btn-2" style=" width: 30%;padding: 20px 15px;height: 10px;margin: 10px 0 ;">
+                            <h6 style="color: white; transform: translateY(-10px)">Xác nhận</h6>
+                        </button>
                         </form>
                 `
                 $(containForm).html(html);
