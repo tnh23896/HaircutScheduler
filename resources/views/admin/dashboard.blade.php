@@ -120,7 +120,7 @@
                             <div class="flex">
                                 <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
                                     <option value="0" selected="true" class="w-24">Chọn ngày</option>
-                                    @for ($i = 1; $i <= 30; $i++)
+                                    @for ($i = 1; $i <= 31; $i++)
                                         <option value="{{ $i }}">Ngày {{ $i }}</option>
                                     @endfor
                                 </select>
@@ -183,7 +183,7 @@
                             <div class="flex">
                                 <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
                                     <option value="0" selected="true" class="w-24">Chọn ngày</option>
-                                    @for ($i = 1; $i <= 30; $i++)
+                                    @for ($i = 1; $i <= 31; $i++)
                                         <option value="{{ $i }}">Ngày {{ $i }}</option>
                                     @endfor
                                 </select>

@@ -478,7 +478,7 @@
                     return a + b;
                 });
 
-                var promoCode = $('textarea[name="promoCode"]').val();
+                var promoCode = $('input[name="promoCode"]').val();
                 if (promoCode) {
                     const dataPromotioncode = @php echo json_encode($promotion) @endphp;
                     $.each(dataPromotioncode, function(index, promotion) {
@@ -508,7 +508,7 @@
                     if (time.pivot) {
                         checkAvailable = time.pivot.status === 'unavailable' ? 'disabled' : ''
                     }
-               
+
                     // formatt time hour:minutes
                     const timeArray = time.time.split(':');
                     const timeFormated = timeArray[0] + ':' + timeArray[1];
@@ -567,7 +567,7 @@
                     const name = $('input[name="infoUsername"]').val() ?? "";
                     const adminId = $('input:radio[name="admin_id"]:checked').val() ?? "";
                     const phone = $('input[name="infoPhone"]').val() ?? "";
-                    const promoCode = $('textarea[name="promoCode"]').val();
+                    const promoCode = $('input[name="promoCode"]').val();
                     totalPrice = totalPrice.replace(/,/g, '');
                     const email = $('input[name="infoEmail"]').val() ?? "";
                     const day = $('select[name="day"]').val() ?? "";
