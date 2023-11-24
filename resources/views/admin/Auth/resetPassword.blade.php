@@ -20,17 +20,17 @@
                     <div>
                         <label for="change-password-form-1" class="form-label">Mật khẩu cũ</label>
                         <input id="change-password-form-1" type="password" name="current_password" class="form-control"
-                            placeholder="Input text" >
+                            placeholder="Mật khẩu cũ" >
                     </div>
                     <div class="mt-3">
                         <label for="change-password-form-2" class="form-label">Mật khẩu mới</label>
                         <input id="change-password-form-2" type="password" name="new_password" class="form-control"
-                            placeholder="Input text" >
+                            placeholder="Mật khẩu mới" >
                     </div>
                     <div class="mt-3">
                         <label for="change-password-form-3" class="form-label">Nhập lại mật khẩu mới</label>
                         <input id="change-password-form-3" type="password" class="form-control"
-                            name="new_password_confirmation" placeholder="Input text" >
+                            name="new_password_confirmation" placeholder="Nhập lại mật khẩu mới" >
                     </div>
                     <button type="submit" class="btn btn-primary mt-4">Sửa mật khẩu</button>
                 </form>

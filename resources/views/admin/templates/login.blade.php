@@ -11,7 +11,7 @@
     <meta name="keywords"
         content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
-    <title>Đăng nhập</title>
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}" />
 </head>
 <!-- END: Head -->
@@ -31,22 +31,7 @@
                 </div>
             </div>
             <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
-                <div
-                    class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-sm bg-black bg-opacity-75 p-2 rounded-lg z-10 w-1/4
-sm:w-full md:w-1/2 lg:w-auto">
-                    @if (Session::has('success'))
-                        <div class="alert alert-success " role="alert">
-                            <strong>{{ Session::get('success') }}</strong>
-                            <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                    @if (Session::has('error'))
-                        <div class="alert alert-danger " role="alert">
-                            <strong>{{ Session::get('error') }}</strong>
-                            <button type="button" class="btn-close" data-toggle="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-                </div>
+                
                 {{-- Form --}}
                 @yield('content')
             </div>

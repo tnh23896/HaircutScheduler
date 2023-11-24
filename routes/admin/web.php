@@ -61,7 +61,7 @@ Route::post(
 // Route cho đặt lại mật khẩu
 Route::get('reset-password/{token}/{email}',
     [ForgotPasswordController::class, 'ResetPassword'])->name('admin.auth.ResetPasswordGet');
-Route::post('reset-password',
+Route::post('reset-password-store',
     [ForgotPasswordController::class, 'ResetPasswordStore'])->name('admin.auth.ResetPasswordPost');
 // Route Reset Password
 Route::post('reset-password',[RessetPasswordController::class,'resetPassword'])->name('admin.auth.ResetPasswordPost1');

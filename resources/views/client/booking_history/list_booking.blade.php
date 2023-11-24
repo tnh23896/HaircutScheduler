@@ -40,7 +40,7 @@
                             $hideReviewButton = false;
                         @endphp
                         @foreach ($reviews as $review)
-                            @if ($review->booking_id == $booking->id && $booking->status == 'success')
+                            @if ($review->booking_id == $booking->id || $review->booking->status == 'success')
                                 @php
                                     $hideReviewButton = true;
                                 @endphp
