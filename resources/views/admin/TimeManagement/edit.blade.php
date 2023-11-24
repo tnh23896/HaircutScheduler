@@ -20,10 +20,10 @@
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Chọn ca</label>
                         <select name="shift_id" class="form-control w-full ">
-                            <option value="{{ $data->shift_id }}">{{ $data->shift->name }}</option>
+                            <option value="{{ $data->shift_id }}">{{ $data->shift->name ?? '' }}</option>
                             @foreach ($shift as $item)
                                 @if ($item->id != $data->shift_id)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name ?? '' }}</option>
                                 @endif
                             @endforeach
                         </select>

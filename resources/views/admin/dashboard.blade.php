@@ -120,7 +120,7 @@
                             <div class="flex">
                                 <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
                                     <option value="0" selected="true" class="w-24">Chọn ngày</option>
-                                    @for ($i = 1; $i <= 30; $i++)
+                                    @for ($i = 1; $i <= 31; $i++)
                                         <option value="{{ $i }}">Ngày {{ $i }}</option>
                                     @endfor
                                 </select>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="mt-2">
                         <div id="topEmployeesContent">
-                            @if (empty($topEmployeesData))
+                            @if (!empty($topEmployeesData))
                                 @foreach ($topEmployeesData as $employee)
                                     <div class="">
                                         <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
@@ -183,7 +183,7 @@
                             <div class="flex">
                                 <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
                                     <option value="0" selected="true" class="w-24">Chọn ngày</option>
-                                    @for ($i = 1; $i <= 30; $i++)
+                                    @for ($i = 1; $i <= 31; $i++)
                                         <option value="{{ $i }}">Ngày {{ $i }}</option>
                                     @endfor
                                 </select>
@@ -249,7 +249,7 @@
 
                         if (employeesArray.length > 0) {
                             employeeItemHtml = employeesArray.map((employee, index) => `
-                        <div class="intro-y">
+                        <div class="">
                             <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                     <img alt="Employee Avatar" src="${employee.avatar}">

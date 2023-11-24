@@ -57,6 +57,7 @@ class CheckPermissionAdmin
             'admin.schedulebyTime',
             'admin.revenueSetTime',
             'admin.serviceSetTime',
+            'admin.topEmployees',
             'admin.ScheduleEmployee.search',
 		];
 
