@@ -13,10 +13,7 @@ use App\Models\WorkSchedule;
 use App\Models\WorkScheduleDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
-use function Laravel\Prompts\alert;
 
 class ScheduleEmployeeController extends Controller
 {
@@ -120,7 +117,7 @@ class ScheduleEmployeeController extends Controller
                             'status' => 'available',
                         ]);
                     }
-    
+
                 }
             }
         } catch (\Exception $e) {
