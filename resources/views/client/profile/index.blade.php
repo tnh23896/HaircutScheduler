@@ -12,7 +12,7 @@
                             <div class="profile-info text-center">
                                 <div class="profile-thumb brd-rd50">
                                     <img id="previewImage"
-                                        src="{{ $data->avatar === null ? asset('client/assets/images/profile-img1.jpg') : asset($data->avatar) }}"
+                                        src="{{ $data->avatar === 'default.jpg' ? asset('dist/images/default.jpg') : asset($data->avatar) }}"
                                         alt="profile-img1.jpg" itemprop="image">
                                 </div>
                                 <div class="profile-img-upload-btn">

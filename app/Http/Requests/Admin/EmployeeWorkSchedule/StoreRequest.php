@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\WorkScheduleEmployee;
+namespace App\Http\Requests\Admin\EmployeeWorkSchedule;
 
 use App\Models\WorkSchedule;
 use Carbon\Carbon;

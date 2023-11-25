@@ -95,7 +95,7 @@
                         }, function(response) {
                             if (response.success) {
                                 toastr.success(response.success);
-                                form.closest('tr').remove();
+                                form.closest('.box').remove();
                             }
                         }, function(error) {
                             showErrors(error);

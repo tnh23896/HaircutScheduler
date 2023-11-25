@@ -18,7 +18,7 @@
     <section class="gap lg-no-bottom md-no-bottom no-bottom sm-no-bottom">
         <div class="container">
             <figure class="text-center">
-                <img class="img-fluid" src="{{ $blog->image }}" alt="blog-image">
+                <img class="img-fluid" src="{{ asset($blog->image) }}" alt="blog-image">
             </figure>
             <div class="row align-items-center">
                 <div class="col-md-10 w-100 m-auto">

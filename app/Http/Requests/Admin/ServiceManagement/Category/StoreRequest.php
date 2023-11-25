@@ -22,13 +22,14 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required | min:2 | max:255',
+            'name' => 'required | min:2 | max:255 | unique:category_services',
             'image' =>'required| image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 		public function messages()
 		{
 			return [
+                'name.unique' => 'Tên danh mục không được trùng',
 				'name.required' => 'Tên danh mục không được để trống',
 				'name.min' => 'Tên danh mục không được nhỏ hơn 2 ký tự',
 				'name.max' => 'Tên danh mục không được lớn hơn 255 ký tự',

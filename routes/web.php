@@ -10,7 +10,6 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\AboutUsController;
 use App\Http\Controllers\Client\BookingController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Client\ContactController;
 use App\Http\Controllers\Client\ServiceController;
 
