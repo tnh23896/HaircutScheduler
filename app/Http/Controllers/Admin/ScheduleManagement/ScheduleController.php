@@ -268,12 +268,10 @@ class ScheduleController extends Controller
     public function store(StoreRequest $request)
     {
         try {
-
             $admin_id = $request->admin_id;
             $day = $request->day;
             $params = [
                 'name' => $request->name,
-
                 'phone' => $request->phone,
                 'admin_id' => $admin_id,
                 'total_price' => $request->total_price,

@@ -36,7 +36,13 @@
                                                     <a class="dropdown-toggle" href="javascript:void(0)" role="button"
                                                         data-bs-toggle="dropdown" aria-expanded="false"
                                                         style="background-color: #d9842f !important; color: white; size: 30px">
-                                                        Xin chào : <span>{{ Auth::user()->phone }}</span>
+                                                        Xin chào : <span>
+                                                            @if(Auth::user()->username)
+                                                            {{ Auth::user()->username }}
+                                                            @else
+                                                            {{ Auth::user()->phone }}
+                                                            @endif
+                                                        </span>
                                                     </a>
 
                                                     <ul class="dropdown-menu"
@@ -103,7 +109,11 @@
                                     <a class="btn btn-secondary dropdown-toggle border-0" href="javascript:void(0)"
                                         role="button" data-bs-toggle="dropdown" aria-expanded="false"
                                         style="background-color: #d9842f !important; color: white;">
-                                        Xin chào : <span>{{ Auth::user()->phone }}</span>
+                                        Xin chào : <span>                                                            @if(Auth::user()->username)
+                                            {{ Auth::user()->username }}
+                                            @else
+                                            {{ Auth::user()->phone }}
+                                            @endif</span>
                                     </a>
 
                                     <ul class="dropdown-menu dropdown-menu-dark" style="top: 45px;"

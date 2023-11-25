@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\Admin\ServiceManagement\Category;
 
+use App\Models\CategoryService;
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class UpdateRequest extends FormRequest
 {
     /**
@@ -21,14 +22,22 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+		$tableName = (new CategoryService())->getTable();
+		$id = request()->segment('4');
         return [
-            'name' => 'required | min:2 | max:255',
+            'name' =>  [
+                'required',
+                'min:2',
+                'max:255',
+				Rule::unique($tableName)->ignore($id)
+            ],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 		public function messages()
 		{
 			return [
+                'name.unique' => 'Tên danh mục không được trùng',
 				'name.required' => 'Tên danh mục không được để trống',
 				'name.min' => 'Tên danh mục không được nhỏ hơn 2 ký tự',
 				'name.max' => 'Tên danh mục không được lớn hơn 255 ký tự',

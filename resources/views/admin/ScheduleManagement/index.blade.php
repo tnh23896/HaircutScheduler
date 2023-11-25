@@ -35,14 +35,13 @@
                 </form>
                 {{-- Form lọc theo trạng thái --}}
                 <form id="filterForm" action="{{ route('admin.scheduleManagement.filter') }}" method="GET">
-                    <select id="filterSelect" name="filter" class="tom-select w-56 xl:w-auto box ml-2" style="width: 150px"
-                        onchange="submitForm()">
-                        <option value="0">Tất cả</option>
+                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
+                        <option value="">Tất cả</option>
                         <option value="pending">Chưa xác nhận</option>
                         <option value="confirmed">Đã xác nhận</option>
                         <option value="waiting">Đang chờ cắt</option>
                         <option value="success">Đã hoàn thành</option>
-                        <option value="canceled">Hủy đơn</option>
+                        <option value="canceled">Đã hủy</option>
                     </select>
                 </form>
             </div>
@@ -89,9 +88,7 @@
                                     <span class="badge">Tại cửa hàng</span>
                                 @elseif ($item->payment == 'vnpay')
                                     <span class="badge">VNPAY</span>
-
                                 @endif
-
                             </td>
                             <td class="text-center">
                                 {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}
@@ -169,8 +166,6 @@
                         </tr>
                     </tbody>
                 @endforeach
-
-
             </table>
         </div>
         <!-- END: Data List -->
@@ -223,13 +218,10 @@
                             function(response) {
                                 if (response.success) {
                                     toastr.success(response.success);
-
                                     // Cập nhật trạng thái hiện tại của select box
                                     selectElement.data("current-status", newStatus);
-
                                     // Thực hiện logic cập nhật trạng thái dựa trên kết quả trả về
                                     updateSelectOptions(selectElement, newStatus, hideEdit);
-
                                     console.log(response);
                                 }
                             },
@@ -244,7 +236,6 @@
                     }
                 });
             });
-
             // Hàm cập nhật tùy chọn của select box dựa trên trạng thái mới
             function updateSelectOptions(selectElement, newStatus, hideEdit) {
                 switch (newStatus) {
@@ -256,7 +247,7 @@
                     case 'confirmed':
                         selectElement.html('<option value="confirmed" selected>Đã xác nhận</option>' +
                             '<option value="waiting">Đang cắt</option>'+
-                            '<option value="canceled">Hủy Đơn</option>');
+                            '<option value="canceled">Hủy đơn</option>');
                         break;
                     case 'waiting':
                         selectElement.html('<option value="waiting" selected>Đang cắt</option>' +
@@ -275,7 +266,6 @@
                         break;
                 }
             }
-
             // Hàm để lấy tên trạng thái bằng tiếng Việt
             function getStatusNameInVietnamese(status) {
                 switch (status) {
@@ -284,7 +274,7 @@
                     case 'confirmed':
                         return 'Đã xác nhận';
                     case 'waiting':
-                        return 'Đang chờ cắt';
+                        return 'Đang cắt';
                     case 'canceled':
                         return 'Hủy đơn';
                     case 'success':
@@ -293,20 +283,9 @@
                         return status; // Trả về trạng thái nguyên thủy nếu không khớp với các trường hợp trên
                 }
             }
-
-
-
-
         });
-    </script>
 
-    {{-- Modal --}}
-    <!-- BEGIN: Modal Toggle -->
-    <!-- END: Modal Toggle --> <!-- BEGIN: Modal Content -->
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var filterSelect = document.getElementById('filterSelect');
             var urlParams = new URLSearchParams(window.location.search);
             var filterValue = urlParams.get('filter');
@@ -318,5 +297,4 @@
             document.getElementById('filterForm').submit();
         }
     </script>
-
 @endsection

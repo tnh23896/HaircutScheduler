@@ -144,7 +144,7 @@
                             @csrf
                             <div class="w-full relative text-slate-500 flex items-center">
                                 <input type="date" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                                    value="{{ request('day') }}">
+                                    value="{{ request('search') }}">
                                 <button type="submit">
                                     <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
                                         data-lucide="search"></i>
@@ -189,7 +189,7 @@
                                                             } elseif ($booking->status === 'waiting') {
                                                                 $bookingInfo = $booking->name;
                                                                 $serviceNames[] = $booking->service_name;
-                                                                $statusText = 'Đang chờ cắt';
+                                                                $statusText = 'Đang cắt';
                                                             } elseif ($booking->status === 'success') {
                                                                 $bookingInfo = $booking->name;
                                                                 $serviceNames[] = $booking->service_name;
