@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\ScheduleEmployee;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\WorkScheduleEmployee\StoreRequest;
-use App\Http\Requests\Admin\WorkScheduleEmployee\UpdateRequest;
+use App\Http\Requests\Admin\EmployeeWorkSchedule\StoreRequest;
+use App\Http\Requests\Admin\EmployeeWorkSchedule\UpdateRequest;
 use App\Models\Admin;
 use App\Models\Booking;
 use App\Models\Shift;
