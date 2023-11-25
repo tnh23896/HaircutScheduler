@@ -33,8 +33,8 @@
             transition: all 0.3s ease-in-out;
         }
 
-        input[type="radio"]:checked+label>img {
-            border: 4px solid #d9842f;
+        input[type="radio"]:checked~label div {
+            border: 8px solid #d9842f !important;
         }
 
         input[type="radio"]:checked+label>h6 {
@@ -290,7 +290,7 @@
                                             </svg></span>
                                     </div>
                                 </div>
-                                <div class="features-product overflow-hidden">
+                                <div class="overflow-hidden">
                                     <div class="position-relative">
                                         <div class="service-prices">
                                             <div class="sec-img position-relative">
@@ -298,8 +298,12 @@
                                                     <input type="radio" name="admin_id" id="admin_" value="random"
                                                         checked hidden>
                                                     <label for="admin_">
-                                                        <img class="img-fluid" style="width: 145px;height: 145px;"
-                                                            src="{{ asset('dist/images/default.jpg') }}" alt="nhân viên">
+                                                        <div style="width: 145px;height: 145px;border-radius: 9999px">
+                                                            <img class=""
+                                                                style="width: 100%;height: 100%;object-fit:cover;border:none"
+                                                                src="{{ asset('dist/images/default.jpg') }}"
+                                                                alt="nhân viên">
+                                                        </div>
                                                     </label>
                                                 </div>
                                             </div>
@@ -320,8 +324,13 @@
                                                                 id="admin_{{ $staff->id }}"
                                                                 value="{{ $staff->id }}" hidden>
                                                             <label for="admin_{{ $staff->id }}">
-                                                                <img class="img-fluid" style="width: 145px;height: 145px;"
-                                                                    src="{{ asset($staff->avatar) }}" alt="nhân viên">
+                                                                <div
+                                                                    style="width: 145px;height: 145px;border-radius: 9999px">
+                                                                    <img class=""
+                                                                        style="width: 100%;height: 100%;object-fit:cover;border:none"
+                                                                        src="{{ asset($staff->avatar) }}"
+                                                                        alt="nhân viên">
+                                                                </div>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -519,7 +528,7 @@
                     const timeFormated = timeArray[0] + ':' + timeArray[1];
 
                     const radioOption = `
-                                <label class="check mx-1">
+                                <label class="check mx-1 my-3">
                                     <input type="radio" id="time_${time.id}" name="time_id"
                                         value="${time.id}" ${checkAvailable}>
                                     <span>${timeFormated}</span>

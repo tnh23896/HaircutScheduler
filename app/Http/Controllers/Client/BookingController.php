@@ -252,7 +252,7 @@ class BookingController extends Controller
             }
             else {
                 return response()->json([
-                    'message' => 'Thêm lịch đặt thành công',
+                    'message' => 'Đặt lịch thành công',
                     'booking' => $booking,
                 ], 200);
             }
