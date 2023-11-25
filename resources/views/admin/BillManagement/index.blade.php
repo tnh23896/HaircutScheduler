@@ -168,7 +168,7 @@
                             <div class="text-base">Thông tin ngân hàng</div>
                             <div class="text-lg font-medium mt-2">Ngân hàng Vietcombank</div>
                             <div class="mt-1">Tên tài khoản : DT Barber</div>
-                            <div class="mt-1">Số tài khoản : 0123 456 789</div>
+                            <div class="mt-1">Số tài khoản : 9358609355</div>
                         </div>
                         <div class="sm:text-left sm:ml-auto" style="text-align: right">
                             <div class="text-base">Liên hệ</div>
