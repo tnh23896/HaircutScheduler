@@ -199,14 +199,14 @@
                                     <div class="text-95 text-secondary-d3">
                                         <div class="row mb-2 mb-sm-0 py-25">
                                             <div class="col-9 col-sm-8">{{$detail->name}}</div>
-                                            <div class="col-4 text-secondary-d2 text-right">{{$detail->price}} vnd</div>
+                                            <div class="col-4 text-secondary-d2 text-right">{{number_format($detail->price)}} VND</div>
                                         </div>
                                     </div>
                                 @endforeach
                                 <div class="row border-b-2 brc-default-l2"></div>
                                 <hr/>
                                 <div class="sm:text-left sm:ml-auto" style="text-align: right">
-                                    <div class="text-base">Số tiền phải thanh toán: {{ $bill->total_price }} vnd</div>
+                                    <div class="text-base">Số tiền phải thanh toán: {{number_format($bill->total_price) }} VND</div>
                                 </div>
                                     <hr/>
                                 <div class="row">

@@ -198,7 +198,7 @@
                     <div class="mt-5">
                         <h3 class="font-medium text-base">Tổng tiền dịch vụ: <span id="totalPrice">
                                 {{ number_format(0) }}
-                            </span> vnd</h3>
+                            </span> VND</h3>
                     </div>
                 </div>
 

@@ -75,7 +75,7 @@
                             </td>
                             <td class="text-center"><a class="flex items-center justify-center"
                                     href="javascript:;">{{ $item->admin->username ?? '' }}</a></td>
-                            <td class="text-center whitespace-nowrap">{{ number_format($item->total_price) }} vnd</td>
+                            <td class="text-center whitespace-nowrap">{{ number_format($item->total_price) }} VND</td>
                             <td class="w-40">
                                 <div class="flex items-center justify-center text-center">
                                     {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}

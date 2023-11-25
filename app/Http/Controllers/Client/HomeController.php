@@ -17,7 +17,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dd($activeBanners);
         $trendingStyle = Service::select('name', 'image')
             ->withCount('bill_details as service_count')
             ->orderByDesc('service_count')
@@ -33,7 +32,7 @@ class HomeController extends Controller
         foreach ($categoryService as $category) {
             $services = Service::select('name','price')
                 ->where('category_services_id', $category->id)
-                ->get();
+                ->take(3)->get();
 
             $listServices[] = [
                 'category' => $category->name,

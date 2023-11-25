@@ -12,13 +12,12 @@
     <section class="position-relative footer-area">
         <div class="container bg-text-area">
             <h2>Chi tiết tin tức</h2>
-            <span>Free Shave Towel with orders $30 or more</span>
         </div>
     </section>
     <section class="gap lg-no-bottom md-no-bottom no-bottom sm-no-bottom">
         <div class="container">
             <figure class="text-center">
-                <img class="img-fluid" src="{{ asset($blog->image) }}" alt="blog-image">
+                <img class="img-fluid" src="{{asset($blog->image) }}" alt="blog-image">
             </figure>
             <div class="row align-items-center">
                 <div class="col-md-10 w-100 m-auto">
@@ -109,7 +108,7 @@
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-12">
-                            <div class="bg-image blg-img" style="background-image: url({{ asset($blog->image) }});"></div>
+                            <div class="bg-image blg-img" style="background-image: url({{ asset($blog->image) }})"></div>
                         </div>
                     </div>
                 @else

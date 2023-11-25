@@ -20,14 +20,14 @@
                         <div class="col-lg-6 col-md-12">
                             <div class="price-content">
                                 <div class="price-title">
-                                    <h3>{{ $category['category'] ?? '' }}</h3>
+                                    <h2 class="text-color">{{ $category['category'] ?? '' }}</h2>
                                 </div>
                                 @foreach ($category['services'] as $service)
                                     <div class="price-inner d-flex justify-content-between align-items-baseline">
-                                        <p class="pr-3" style="white-space: nowrap;">{{ $service->name ?? '' }}</p>
+                                        <h4 class="pr-3" style="white-space: nowrap">{{ $service->name ?? '' }}</h4>
                                         <hr class="w-100 m-0">
-                                        <p class="pl-3" style="white-space: nowrap;">
-                                            {{ number_format($service->price ?? '') }} VND</p>
+                                        <h4 class="pl-3" style="white-space: nowrap;">
+                                            {{ number_format($service->price ?? '') }} VND</h4>
                                     </div>
                                 @endforeach
                             </div>
@@ -48,14 +48,14 @@
                         <div class="col-lg-6 col-md-12">
                             <div class="price-content">
                                 <div class="price-title">
-                                    <h3>{{ $category['category'] ?? '' }}</h3>
+                                    <h2 class="text-color">{{ $category['category'] ?? '' }}</h2>
                                 </div>
                                 @foreach ($category['services'] as $service)
                                     <div class="price-inner d-flex justify-content-between align-items-baseline">
-                                        <p class="pr-3" style="white-space: nowrap;">{{ $service->name ?? '' }}</p>
+                                        <h4 class="pr-3" style="white-space: nowrap;">{{ $service->name ?? '' }}</h4>
                                         <hr class="w-100 m-0">
-                                        <p class="pl-3" style="white-space: nowrap;">
-                                            {{ number_format($service->price ?? '') }} VND</p>
+                                        <h4 class="pl-3" style="white-space: nowrap;">
+                                            {{ number_format($service->price ?? '') }} VND</h4>
                                     </div>
                                 @endforeach
                             </div>

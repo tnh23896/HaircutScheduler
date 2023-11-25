@@ -1,9 +1,14 @@
 @extends('client.templates.app')
-@section('title', 'About Us')
+@section('title', 'Giới Thiệu')
 @section('content')
 @include('client.templates.navbar2')
-@include('client.templates.banner')
-        <div class="container">
+    <section class="position-relative footer-area">
+        <div class="container bg-text-area">
+            <h2>Giới Thiệu</h2>
+        </div>
+    </section>
+    </section>
+        <div class="container mt-5">
             <div class="row align-items-center">
                 <div class="col-lg-5 col-md-12 col-sm-12">
                     <div class="parallax-content">
@@ -51,7 +56,7 @@
             <div class="slider-1 position-relative border text-center">
                 <div class="barber-fig" data-aos="fade-up" data-aos-delay="400">
                     <figure class="position-relative img-hover overflow-hidden mb-0 tilt">
-                        <img class="image-1 w-100 img-fluid " src="{{asset($employee->avatar)}}" alt="{{$employee->username}}">
+                        <img class="image-1 w-100 img-fluid " style="width: 379px;height: 310px" src="{{asset($employee->avatar)}}" alt="{{$employee->username}}">
                         <figcaption class="ryan-description">
                             <h3><a href="javascript:void(0)">{{$employee->username}}</a></h3>
                             <p>Email: {{$employee->email}} </br>
@@ -146,7 +151,7 @@
                     <div class="slider-btn">
                         @foreach ($category['services'] as $service)
                         <dl>
-                            {{$service->name ?? ''}} - {{$service->price}} VNĐ
+                            {{$service->name ?? ''}} - {{number_format($service->price)}} VND
                         </dl>
                         @endforeach
                     </div>
