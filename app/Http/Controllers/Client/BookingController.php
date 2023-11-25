@@ -58,7 +58,7 @@ class BookingController extends Controller
             $startDate = Carbon::now()->startOfDay();
 
             // Ngày kết thúc tính lịch làm việc
-            $endDateForWorkSchedule = $startDate->copy()->addDay(3)->endOfDay();
+            $endDateForWorkSchedule = $startDate->copy()->addDay(5)->endOfDay();
             // Lấy danh sách ngày làm việc
             $availableDates = WorkSchedule::whereBetween('day', [$startDate, $endDateForWorkSchedule])
                 ->groupBy('day')
@@ -72,7 +72,10 @@ class BookingController extends Controller
                 })->get();
 
             // Lấy danh sách khung giờ
-            $dateString = min($availableDates->toArray()) ?? $startDate;
+            $dateString =  $startDate;
+            if(!$availableDates->isEmpty()) {
+                $dateString = min($availableDates->toArray()) ;
+            }
             $dateToCheck = Carbon::parse($dateString);
             $timeSlots = Time::whereHas('work_schedule_details', function ($query) use ($dateString) {
                 $query->where('status', 'available')
