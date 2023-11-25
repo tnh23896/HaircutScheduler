@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\CheckPermissionAdmin;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\Bill\BillController;
 use App\Http\Controllers\Admin\DashboardController;

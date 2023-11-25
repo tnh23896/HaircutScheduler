@@ -6,7 +6,7 @@
                     <div class="widget">
                         <div class="wiget-content">
                             <div>
-                                <a href="javascript:void(0)"><img src="{{ asset('dist/images/logo.png') }}" width="115px"
+                                <a href="javascript:void(0)"><img src="{{ asset('dist/images/LOGO.png') }}" width="115px"
                                         alt="blog-image"></a>
                                 <P class="wiget-description mb-1">Trải nghiệm đặt lịch nhanh chóng và nhiều tiện ích
                                     khác với ứng dụng DTBarber.</P>

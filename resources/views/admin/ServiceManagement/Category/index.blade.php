@@ -21,7 +21,7 @@
         </div>
         <!-- BEGIN: Data List -->
         @foreach ($category_service as $category)
-        <div class="intro-y col-span-12 md:col-span-6">
+        <div class="intro-y col-span-12 md:col-span-6 category_services">
             <div class="box">
                 <div class="flex flex-col lg:flex-row items-center p-5">
                     <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
@@ -79,7 +79,7 @@
                         }, function(response) {
                             if (response.success) {
                                 toastr.success(response.success);
-                                form.closest('tr').remove();
+                                form.closest('.category_services').remove();
 
                             }
                         }, function(error) {
