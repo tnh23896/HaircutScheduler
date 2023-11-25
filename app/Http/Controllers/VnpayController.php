@@ -101,9 +101,9 @@ class VnpayController extends Controller
         $secureHash = hash_hmac('sha512', $hashData, $this->vnp_HashSecret);
         if ($secureHash == $vnp_SecureHash) {
             if ($_GET['vnp_ResponseCode'] == '00') {
-                // Booking::where('id', $_GET['vnp_TxnRef'])->update([
-                //     // 'status' => 'pending',
-                // ]);
+                Booking::where('id', $_GET['vnp_TxnRef'])->update([
+                    'status' => 'comfirmed',
+                ]);
                 return redirect()->route('home.index');
             }
             else {

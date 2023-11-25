@@ -38,15 +38,16 @@
                     <td class="">
                         @php
                             $hideReviewButton = false;
-                        @endphp
-                        @foreach ($reviews as $review)
-                            @if ($review->booking_id == $booking->id || $review->booking->status == 'success')
-                                @php
+
+                            foreach ($reviews as $review) {
+                                if ($review->booking_id == $booking->id) {
                                     $hideReviewButton = true;
-                                @endphp
-                            @endif
-                        @endforeach
-                        @if (!$hideReviewButton)
+                                    break;
+                                }
+                            }
+                        @endphp
+
+                        @if (!$hideReviewButton && $booking->status == 'success')
                             <a data-toggle="modal" data-target=".modal_reviews{{ $booking->id }}"
                                 href="javascript:void(0)" title="" itemprop="url">
                                 <button class="text-center"
