@@ -60,7 +60,7 @@
                 </div>
             </div>
         @else
-            <div class="row mt-5">
+            <div class="row mt-5 mb-5">
                 <div class="col-lg-6 col-md-12">
                     <div class="blog">
                         <div class="justify-content-lg-start justify-md-content-start d-flex"><span
