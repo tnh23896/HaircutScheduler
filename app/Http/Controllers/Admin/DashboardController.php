@@ -93,9 +93,13 @@ class DashboardController extends Controller
     // Thống kê dịch vụ ajax
     private function baServiceSetbyTime(Request $request)
     {
-        $currentMonth = date('m'); // Lấy tháng hiện tại
+        $currentMonth = date('m'); 
 
-        $day = $request->input('day'); // Lấy ngày từ request
+        $day = $request->input('day',0);
+
+        if ($day == 0) {
+            $day = date('d');
+        }
 
         $statistics = DB::table('bill_details')
             ->join('services', 'bill_details.service_id', '=', 'services.id')
@@ -208,19 +212,17 @@ class DashboardController extends Controller
     private function basefilterTopEmployee(Request $request)
     {
         $currentMonth = date('m'); // Lấy tháng hiện tại
+        $day = $request->day; // Lấy ngày từ request
 
-        $day = $request->input('day'); // Lấy ngày từ request
-
-        $query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
+        $query = Booking::selectRaw('admins.id, admins.username, admins.avatar')
+            ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "success" THEN bookings.id END) as totalSuccessfulBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "canceled" THEN bookings.id END) as totalCancelledBookings')
             ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
             ->join('admins', 'admins.id', '=', 'bookings.admin_id')
-            ->leftJoin('reviews', function ($join) {
-                $join->on('admins.id', '=', 'reviews.admin_id');
-            })
-            ->groupBy('admins.id');
+            ->leftJoin('reviews', 'admins.id', '=', 'reviews.admin_id')
+            ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
         if ($currentMonth) {
             $query->whereMonth('bookings.day', $currentMonth);
