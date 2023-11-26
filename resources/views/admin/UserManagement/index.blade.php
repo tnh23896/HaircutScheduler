@@ -58,27 +58,16 @@
                                 </option>
                             </select>
                         </td>
-                        {{-- <td class="table-report__action w-56">
-                            <div class="flex justify-center items-center">
-                                <a href="{{ route('admin.UserManagement.edit', $item->id) }}"
-                                   class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
-                                                                                          class="w-4 h-4 mr-1"></i> Sửa
-                                </a>
-                            </div>
-                        </td> --}}
                     </tr>
                     </tbody>
                 @endforeach
             </table>
         </div>
-        <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
             <nav class="w-full sm:w-auto sm:mr-auto">
                 {{ $data->links('pagination::bootstrap-4') }}
             </nav>
         </div>
-        <!-- END: Pagination -->
     </div>
     <script>
         $(document).ready(function() {

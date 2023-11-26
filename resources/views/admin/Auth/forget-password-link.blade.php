@@ -6,7 +6,6 @@
         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
             Yêu cầu đặt lại mật khẩu
         </h2>
-        
         <form action="{{ url('admin/reset-password-store') }}" method="post">
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">

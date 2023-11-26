@@ -29,16 +29,28 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 //booking history
-Route::get('booking-history', [BookingController::class, 'booking_history'])->name('booking_history');
-Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
-Route::post('/booking-history/destroy/{id}', [BookingController::class, 'destroy'])->name('booking-history.delete');
-//Booking Details
-Route::put('/booking-details/update/{id}', [BookingDetailsController::class, 'update'])->name('booking-details.update');
-Route::post('/booking-details/store/{id}', [BookingDetailsController::class, 'store'])->name('booking-details.store');
-//Bill Payment
-Route::get('bill', [BillController::class, 'index'])->name('bill');
-Route::get('bill_print/{id}', [BillController::class, 'printBill'])->name('print.bill');
+Route::middleware('auth')->group(function () {
+    //Booking History
+    Route::get('booking-history', [BookingController::class, 'booking_history'])->name('booking_history');
+    Route::get('/booking-history/edit/{id}', [BookingController::class, 'edit'])->name('booking-history.edit');
+    Route::post('/booking-history/destroy/{id}', [BookingController::class, 'destroy'])->name('booking-history.delete');
 
+    //Booking Details
+    Route::put('/booking-details/update/{id}', [BookingDetailsController::class, 'update'])->name('booking-details.update');
+    Route::post('/booking-details/store/{id}', [BookingDetailsController::class, 'store'])->name('booking-details.store');
+
+    //Bill Payment
+    Route::get('bill', [BillController::class, 'index'])->name('bill');
+    Route::get('bill_print/{id}', [BillController::class, 'printBill'])->name('print.bill');
+
+    //Profile
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    //Reviews
+    Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+    Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+});
 //Blog
 Route::get('/blog', [BlogController::class, 'list_blog'])->name('blog');
 //Detail Blog
@@ -51,16 +63,9 @@ Route::get('/service', [ServiceController::class, 'list_service'])->name('client
 Route::get('/booking-service', [BookingController::class, 'index'])->name('booking-service.index');
 Route::post('/booking-service/getStaff', [BookingController::class, 'getStaff'])->name('booking-service.getStaff');
 Route::post('/booking-service/store', [BookingController::class, 'store'])->name('booking-service.store');
-// Profile
 
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 //About-us
 Route::get('/about-us', [AboutUsController::class, 'list_employee'])->name('client.aboutus');
-
-//Reviews
-Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
-Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
 
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('client.contact');
@@ -68,5 +73,5 @@ Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.
 
 //Policy
 Route::get('/policy', function () {
-	return view('client.policy');
+    return view('client.policy');
 })->name('client.policy');

@@ -328,7 +328,7 @@ class ScheduleController extends Controller
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
 
             return response()->json([
-                'message' => 'Thêm lịch đặt thành công',
+                'message' => 'Thêm mới thành công',
             ], 200);
         } catch (\Exception $e) {
             Log::error('Error in store: ' . $e->getMessage());
@@ -462,7 +462,7 @@ class ScheduleController extends Controller
 
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
             return response()->json([
-                'message' => 'Thêm lịch đặt thành công',
+                'message' => 'Cập nhật thành công',
             ], 200);
         } catch (\Exception $e) {
             Log::error('Error in store: ' . $e->getMessage());
@@ -528,11 +528,11 @@ class ScheduleController extends Controller
                     ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
             }
             return response()->json([
-                'success' => 'Cập nhật trạng thái đặt lịch thành công',
+                'success' => 'Cập nhật thành công',
             ]);
         } catch (\Exception $exception) {
             return response()->json([
-                'error' => 'Cập nhật trạng thái lịch đặt thất bại',
+                'error' => 'Cập nhật thất bại',
                 'message' => $exception->getMessage()
             ], 500);
         }

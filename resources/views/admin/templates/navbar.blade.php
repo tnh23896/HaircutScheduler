@@ -398,12 +398,8 @@
                 </a>
             </li>
         @endif
-
-
     </ul>
 </nav>
-<!-- END: Side Menu -->
-<!-- BEGIN: Content -->
 <div class="content">
     <!-- BEGIN: Top Bar -->
     <div class="top-bar">
@@ -413,56 +409,6 @@
                 <li class="breadcrumb-item active" aria-current="page">@yield('title')</li>
             </ol>
         </nav>
-        <!-- END: Breadcrumb -->
-        <!-- BEGIN: Search -->
-        <div class="intro-x relative mr-3 sm:mr-6">
-            <div class="search hidden sm:block">
-                <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
-                <i data-lucide="search" class="search__icon dark:text-slate-500"></i>
-            </div>
-            <a class="notification sm:hidden" href="#"> <i data-lucide="search"
-                    class="notification__icon dark:text-slate-500"></i> </a>
-            <div class="search-result">
-                <div class="search-result__content">
-                    <div class="search-result__content__title">Pages</div>
-                    <div class="mb-5">
-                        <a href="#" class="flex items-center">
-                            <div
-                                class="w-8 h-8 bg-success/20 dark:bg-success/10 text-success flex items-center justify-center rounded-full">
-                                <i class="w-4 h-4" data-lucide="inbox"></i>
-                            </div>
-                            <div class="ml-3">Mail Settings</div>
-                        </a>
-
-                    </div>
-                    <div class="search-result__content__title">Users</div>
-                    <div class="mb-5">
-                        <a href="#" class="flex items-center mt-2">
-                            <div class="w-8 h-8 image-fit">
-                                <img alt="Midone - HTML Admin Template" class="rounded-full"
-                                    src="{{ asset('dist/images/profile-9.jpg') }}">
-                            </div>
-                            <div class="ml-3">Will Smith</div>
-                            <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">
-                                willsmith@left4code.com
-                            </div>
-                        </a>
-                    </div>
-                    <div class="search-result__content__title">Products</div>
-                    <a href="#" class="flex items-center mt-2">
-                        <div class="w-8 h-8 image-fit">
-                            <img alt="Midone - HTML Admin Template" class="rounded-full"
-                                src="{{ asset('dist/images/preview-9.jpg') }}">
-                        </div>
-                        <div class="ml-3">Oppo Find X2 Pro</div>
-                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Smartphone &amp; Tablet
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- END: Search -->
-        <!-- BEGIN: Notifications -->
         <div class="intro-x dropdown mr-auto sm:mr-6">
             <div class="dropdown-toggle notification cursor-pointer" role="button" aria-expanded="false"
                 data-tw-toggle="dropdown">

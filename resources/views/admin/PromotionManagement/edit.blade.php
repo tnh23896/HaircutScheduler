@@ -13,28 +13,29 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div class="mb-4">
-                        <label for="crud-form-1" class="form-label">Mã giảm giá</label>
+                        <label for="crud-form-1" class="form-label">Mã giảm giá <span style="color: red">*</span></label>
                         <input type="text" name="promocode" id="promocode" class="clearable form-control w-full"
-                               placeholder="Mã giảm giá" value="{{$promotion->promocode}}">
+                            placeholder="Mã giảm giá" value="{{ $promotion->promocode }}">
                     </div>
 
                     <div class="mb-4">
-                        <label for="crud-form-1" class="form-label">Số tiền giảm giá</label>
+                        <label for="crud-form-1" class="form-label">Số tiền giảm giá <span
+                                style="color: red">*</span></label>
                         <input type="text" name="discount" id="discount" class="clearable form-control w-full"
-                               placeholder="Số tiền giảm" value="{{$promotion->discount}}">
+                            placeholder="Số tiền giảm" value="{{ $promotion->discount }}">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Mô tả</label>
-                        <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10">{{$promotion->description}}</textarea>
+                        <label for="crud-form-1" class="form-label">Mô tả <span style="color: red">*</span></label>
+                        <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10">{{ $promotion->description }}</textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="crud-form-1" class="form-label">Ngày kết thúc</label>
+                        <label for="crud-form-1" class="form-label">Ngày kết thúc <span style="color: red">*</span></label>
                         <input type="date" name="expire_date" id="expire_date" class="clearable form-control w-full"
-                               placeholder="Ngày kết thúc" value="{{$promotion->expire_date}}">
+                            placeholder="Ngày kết thúc" value="{{ $promotion->expire_date }}">
                     </div>
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.PromotionManagement.index') }}" type="button"
-                           class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
+                            class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>
                         <button type="button" id="saveBtn" class="btn btn-primary w-24">Lưu</button>
                     </div>
                 </div>
@@ -42,9 +43,8 @@
             <!-- END: Form Layout -->
         </div>
     </div>
-
     <script>
-        var editId = {{$promotion->id}};
+        var editId = {{ $promotion->id }};
         $('#saveBtn').on('click', function() {
             var formData = new FormData($('#ajaxForm')[0]);
             var url = "{{ route('admin.PromotionManagement.update', ['id' => ':editId']) }}";
@@ -55,16 +55,13 @@
                     if (response.success) {
                         toastr.success(response.success);
                     }
+                    window.location.href = "{{ route('admin.PromotionManagement.index') }}";
                 },
-
                 function(error) {
                     showErrors(error);
                 }
             );
         });
-
     </script>
 
 @endsection
-
-

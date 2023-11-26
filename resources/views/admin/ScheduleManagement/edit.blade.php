@@ -16,18 +16,18 @@
             <form>
                 <div class="intro-y box p-5">
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Họ và tên</label>
+                        <label for="crud-form-1" class="form-label">Họ và tên <span style="color: red">*</span></label>
                         <input id="name" name="name" type="text" class="form-control w-full"
                             placeholder="Họ và tên" value="{{ $data->name }}">
                     </div>
                     <input type="text" name="user_id" value="{{ $data->user_id }}" hidden>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Số điện thoại</label>
+                        <label for="crud-form-1" class="form-label">Số điện thoại <span style="color: red">*</span></label>
                         <input id="phone" name="phone" type="text" class="form-control w-full"
                             placeholder="Số điện thoại" value="{{ $data->phone }}">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Email</label>
+                        <label for="crud-form-1" class="form-label">Email <span style="color: red">*</span></label>
                         <input id="email" name="email" type="text" class="form-control w-full" placeholder="Email"
                             value="{{ $data->email }}">
                     </div>
@@ -38,7 +38,7 @@
                                 <button class="accordion-button collapsed text-white" type="button"
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
-                                    style="font-size:16px;color: white">Danh sách dịch vụ</button>
+                                    style="font-size:16px;color: white">Danh sách dịch vụ <span style="color: red">*</span></button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
                                 aria-labelledby="faq-accordion-content-2" data-tw-parent="#faq-accordion-1">
@@ -124,7 +124,7 @@
                                 <button class="accordion-button collapsed text-white" type="button"
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
-                                    style="font-size:16px;color: white">Danh sách nhân viên</button>
+                                    style="font-size:16px;color: white">Danh sách nhân viên <span style="color: red">*</span></button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
                                 aria-labelledby="faq-accordion-content-2" data-tw-parent="#faq-accordion-1">

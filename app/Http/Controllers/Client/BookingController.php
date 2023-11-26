@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Events\CancelShcheduleNotifications;
 use App\Http\Requests\Client\Booking\StoreRequest;
+use App\Jobs\BookedMail;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BookingController extends Controller
@@ -35,12 +36,12 @@ class BookingController extends Controller
                 ->where('user_id', $id)
                 ->latest()
                 ->paginate(10);
-								$reviews = Review::all();
+            $reviews = Review::all();
             if ($request->ajax()) {
                 return view('client.booking_history.list_booking', compact('list_booking', 'reviews'));
             }
 
-            return view('client.booking_history.index', compact('list_booking','reviews'));
+            return view('client.booking_history.index', compact('list_booking', 'reviews'));
         } catch (\Exception $e) {
             abort(404);
         }
@@ -52,12 +53,12 @@ class BookingController extends Controller
             $today = Carbon::today();
             // Lấy danh mục dịch vụ
             $serviceCategories = CategoryService::with('services')->get();
-            $promotion = Promotion::query()->where('expire_date', '>=' , $today)->get()->toArray();
+            $promotion = Promotion::query()->where('expire_date', '>=', $today)->get()->toArray();
             // Ngày bắt đầu
             $startDate = Carbon::now()->startOfDay();
 
             // Ngày kết thúc tính lịch làm việc
-            $endDateForWorkSchedule = $startDate->copy()->addDay(3)->endOfDay();
+            $endDateForWorkSchedule = $startDate->copy()->addDay(5)->endOfDay();
             // Lấy danh sách ngày làm việc
             $availableDates = WorkSchedule::whereBetween('day', [$startDate, $endDateForWorkSchedule])
                 ->groupBy('day')
@@ -71,13 +72,16 @@ class BookingController extends Controller
                 })->get();
 
             // Lấy danh sách khung giờ
-            $dateString = min($availableDates->toArray()) ?? $startDate;
+            $dateString =  $startDate;
+            if(!$availableDates->isEmpty()) {
+                $dateString = min($availableDates->toArray()) ;
+            }
             $dateToCheck = Carbon::parse($dateString);
-            $timeSlots =Time::whereHas('work_schedule_details', function ($query) use ($dateString) {
+            $timeSlots = Time::whereHas('work_schedule_details', function ($query) use ($dateString) {
                 $query->where('status', 'available')
-                      ->whereHas('work_schedules', function ($query) use ($dateString) {
-                          $query->where('day', $dateString);
-                      });
+                    ->whereHas('work_schedules', function ($query) use ($dateString) {
+                        $query->where('day', $dateString);
+                    });
             })->get();
             if ($dateToCheck->isToday()) {
                 // Lọc các time slot sau thời gian quy định (ví dụ: sau 10 giờ)
@@ -101,13 +105,12 @@ class BookingController extends Controller
             $day = $request->day;
             if ($adminId == "random") {
                 if ($day) {
-                    $timeSlots =Time::whereHas('work_schedule_details', function ($query) use ($day) {
+                    $timeSlots = Time::whereHas('work_schedule_details', function ($query) use ($day) {
                         $query->where('status', 'available')
-                              ->whereHas('work_schedules', function ($query) use ($day) {
-                                  $query->where('day', $day);
-                              });
+                            ->whereHas('work_schedules', function ($query) use ($day) {
+                                $query->where('day', $day);
+                            });
                     })->orderBy('time')->get();
-
                 } else {
                     $timeSlots = Time::with('work_schedules')->orderBy('time')
                         ->whereHas('work_schedule_details', function ($query) {
@@ -115,15 +118,15 @@ class BookingController extends Controller
                         })
                         ->get();
                 }
-            $dateToCheck = Carbon::parse($day);
-            if ($dateToCheck->isToday()) {
-                // Lọc các time slot sau thời gian quy định (ví dụ: sau 10 giờ)
-                $currentTime = Carbon::now();
-                $timeSlots = $timeSlots->filter(function ($timeSlot) use ($currentTime) {
-                    $slotTime = Carbon::parse($timeSlot->time);
-                    return $slotTime->gt($currentTime);
-                });
-            }
+                $dateToCheck = Carbon::parse($day);
+                if ($dateToCheck->isToday()) {
+                    // Lọc các time slot sau thời gian quy định (ví dụ: sau 10 giờ)
+                    $currentTime = Carbon::now();
+                    $timeSlots = $timeSlots->filter(function ($timeSlot) use ($currentTime) {
+                        $slotTime = Carbon::parse($timeSlot->time);
+                        return $slotTime->gt($currentTime);
+                    });
+                }
 
                 return response()->json([
                     'times' => $timeSlots,
@@ -177,7 +180,18 @@ class BookingController extends Controller
     public function store(StoreRequest $request)
     {
         try {
+            $bookingsCount = DB::table('bookings')
+                ->select(DB::raw('COUNT(*) as booking_count'))
+                ->where('user_id', auth('web')->user()->id)
+                ->whereDate('created_at', now()) // Filter by today's date
+                ->groupBy('user_id')
+                ->having('booking_count', '>', 1)
+                ->get();
 
+            if ($bookingsCount->isNotEmpty()) {
+                // User has made more than 3 bookings today, show an error
+                return response()->json(['error' => 'Bạn đã đặt quá nhiều.'], 422);
+            }
             $admin_id = $request->admin_id;
             $day = $request->day;
             $params = [
@@ -240,7 +254,7 @@ class BookingController extends Controller
                 'day' => Carbon::parse($request->day)->format('d-m-Y'),
                 'time' => Carbon::parse($time->time)->format('H:i'),
             ]));
-
+            dispatch(new BookedMail($booking));
             if ($request->payment == 'vnpay') {
                 return response()->json([
                     'payment_method' => 'vnpay',
@@ -249,8 +263,7 @@ class BookingController extends Controller
                         'amount' => $request->total_price,
                     ]),
                 ], 200);
-            }
-            else {
+            } else {
                 return response()->json([
                     'message' => 'Đặt lịch thành công',
                     'booking' => $booking,
@@ -362,5 +375,4 @@ class BookingController extends Controller
             return response()->json(['success' => false]);
         }
     }
-
 }

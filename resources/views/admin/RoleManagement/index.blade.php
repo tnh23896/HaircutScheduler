@@ -74,7 +74,6 @@
                             if (response.success) {
                                 toastr.success(response.success);
                                 form.closest('tr').remove();
-
                             }
                         }, function(error) {
                             showErrors(error);
@@ -93,4 +92,3 @@
         <!-- END: Pagination -->
     </div>
 @endsection
-

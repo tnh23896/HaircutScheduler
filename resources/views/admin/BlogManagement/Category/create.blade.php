@@ -13,7 +13,7 @@
             <form id="ajaxForm">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Tiêu đề</label>
+                        <label for="crud-form-1" class="form-label">Tiêu đề <span style="color: red">*</span></label>
                         <input type="text" name="title" id="title" class="clearable form-control w-full"
                             placeholder="Tiêu đề">
                     </div>

@@ -16,17 +16,17 @@
             <form>
                 <div class="intro-y box p-5">
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Họ và tên</label>
+                        <label for="crud-form-1" class="form-label">Họ và tên <span style="color: red">*</span></label>
                         <input id="name" name="name" type="text" class="form-control w-full"
                             placeholder="Họ và tên">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Số điện thoại</label>
+                        <label for="crud-form-1" class="form-label">Số điện thoại <span style="color: red">*</span></label>
                         <input id="phone" name="phone" type="text" class="form-control w-full"
                             placeholder="Số điện thoại">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Email</label>
+                        <label for="crud-form-1" class="form-label">Email <span style="color: red">*</span></label>
                         <input id="email" name="email" type="text" class="form-control w-full" placeholder="Email">
                     </div>
                     <div id="faq-accordion-2" class="accordion mt-3">
@@ -37,7 +37,7 @@
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
                                     style="font-size: 16px;color: white">
-                                    Danh sách dịch vụ
+                                    Danh sách dịch vụ <span style="color: red">*</span>
                                 </button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
@@ -122,7 +122,7 @@
                                 <button class="accordion-button collapsed text-white" type="button"
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
-                                    style="font-size:16px;color: white">Danh sách nhân viên</button>
+                                    style="font-size:16px;color: white">Danh sách nhân viên <span style="color: red">*</span></button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
                                 aria-labelledby="faq-accordion-content-2" data-tw-parent="#faq-accordion-1">
@@ -192,7 +192,7 @@
                         </div>
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Mã giảm giá</label>
+                        <label for="crud-form-1" class="form-label">Mã giảm giá </label>
                         <input name="promoCode" type="text" id="promotion" class="form-control w-full" placeholder="Mã giảm giá">
                     </div>
                     <div class="mt-5">
@@ -207,7 +207,7 @@
                 <div class="text-left mt-3">
                     <a href="{{ route('admin.scheduleManagement.index') }}"> <button type="button"
                             class="btn btn-outline-secondary w-24 mr-1">Danh
-                            sách</button></a>
+                            sách </button></a>
                     <button type="button" id="bookingConfirm" class="btn btn-primary w-24">Lưu</button>
                 </div>
             </div>
