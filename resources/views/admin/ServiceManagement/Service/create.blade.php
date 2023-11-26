@@ -50,11 +50,6 @@
                         <label for="crud-form-1" class="form-label">Mô tả <span style="color: red">*</span></label>
                         <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10"></textarea>
                     </div>
-                    <div class="mt-3">
-                        <label for="crud-form-1" class="form-label hidden">Giảm giá </label>
-                        <input type="number" name="percentage_discount" id="percentage_discount"
-                            class="clearable form-control w-full" placeholder="Giảm giá" hidden>
-                    </div>
                     <div class="text-right mt-5">
                         <a href="{{ route('admin.serviceManagement.service.index') }}" type="button"
                             class="btn btn-outline-secondary w-24 mr-1">Danh sách</a>

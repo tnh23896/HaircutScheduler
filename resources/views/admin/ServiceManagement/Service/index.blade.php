@@ -41,7 +41,6 @@
                         <th class="text-center whitespace-nowrap">Giá</th>
                         <th class="text-center whitespace-nowrap">Mô tả</th>
                         <th class="text-center whitespace-nowrap">Danh mục</th>
-                        <th class="text-center whitespace-nowrap">Giảm giá</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
                 </thead>
@@ -60,8 +59,6 @@
                             <td class="text-center whitespace-nowrap ">{{ number_format($service->price) }} VND</td>
                             <td class="text-center">{{ $service->description }}</td>
                             <td class="text-center whitespace-nowrap">{{ $service->category_services->name ?? '' }}</td>
-                            <td class="text-center whitespace-nowrap">{{ number_format($service->percentage_discount) }}
-                                VND</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3"
