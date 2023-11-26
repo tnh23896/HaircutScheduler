@@ -51,10 +51,10 @@ class ServiceController extends Controller
                 $newService->image = upload_file('admin/Service', $request->file('image'));
                 $newService->save();
             }
-            return response()->json(['success' => 'Thêm dịch vụ thành công']);
+            return response()->json(['success' => 'Thêm mới thành công']);
         } catch (\Exception $e) {
             // Xử lý lỗi và thông báo cho người dùng
-            return response()->json(['error' => 'Thêm dịch vụ thất bại'], 500);
+            return response()->json(['error' => 'Thêm mới thất bại'], 500);
         }
     }
 
@@ -125,9 +125,9 @@ class ServiceController extends Controller
 
             $category_service->save();
 
-            return response()->json(['success' => 'Cập nhật dịch vụ thành công']);
+            return response()->json(['success' => 'Cập nhật thành công']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Cập nhật dịch vụ thất bại'], 500);
+            return response()->json(['error' => 'Cập nhật thất bại'], 500);
         }
     }
 
@@ -142,10 +142,10 @@ class ServiceController extends Controller
             if ($category_service) {
                 delete_file($imgOld);
                 $category_service->delete();
-                return response()->json(['success' => 'Xóa dịch vụ thành công']);
+                return response()->json(['success' => 'Xóa thành công']);
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Xóa dịch vụ thất bại'], 500);
+            return response()->json(['error' => 'Xóa thất bại'], 500);
         }
     }
 }

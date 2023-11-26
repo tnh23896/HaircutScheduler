@@ -12,11 +12,10 @@
                     gian</button></a>
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
-                <form action="{{route('admin.TimeManagement.search')}}" method="GET" class="mr-3">
+                <form action="{{ route('admin.TimeManagement.search') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10"
-                               placeholder="Tìm kiếm..."
-                               value="{{ request('time') }}">
+                            placeholder="Tìm kiếm..." value="{{ request('time') }}">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -64,8 +63,6 @@
                 @endforeach
             </table>
         </div>
-        <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
             <nav class="w-full sm:w-auto sm:mr-auto">
                 {{ $data->links('pagination::bootstrap-4') }}

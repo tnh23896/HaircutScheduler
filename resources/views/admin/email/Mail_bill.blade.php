@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -180,6 +181,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container__bill">
         <div class="modal-dialog modal-xl modal-content" style="background-color: #cfd1c9">
@@ -193,7 +195,8 @@
                         <p class="container__bill--title" style="color: #354a1d">HÂN HẠNH ĐƯỢC PHỤC VỤ.</p>
                         <div class="container__box--title">
                             <div class="container__title--bill custom-text-bill ">Hóa Đơn</div>
-                            <div class="container__title--number"> số <span class="font-medium">#{{ $bill->id }}</span>
+                            <div class="container__title--number"> số <span
+                                    class="font-medium">#{{ $bill->id }}</span>
                             </div>
                             <div class="container__title--date">Ngày lập: {{ $bill->created_at }}</div>
                         </div>
@@ -235,7 +238,7 @@
                                             </td>
                                             <td class="custom-text-right custom-table-cell custom-border-bottom custom-font-medium custom-w-32"
                                                 style="border-bottom: 1px solid #333 ">
-                                                {{number_format( $detail->price) }} VND
+                                                {{ number_format($detail->price) }} VND
                                             </td>
                                         </tr>
                                     @endforeach
@@ -243,8 +246,10 @@
                             </table>
                         </div>
                         <div class="sm:text-left sm:ml-auto py-5 price" style="text-align: right">
-                            <div class="text-base">Số tiền phải thanh toán: {{number_format( $bill->total_price) }} VND</div>
-                            <div class="text-base">Giảm giá: {{number_format( $bill->promotion->discount ?? 0) }} VND</div>
+                            <div class="text-base">Số tiền phải thanh toán: {{ number_format($bill->total_price) }} VND
+                            </div>
+                            <div class="text-base">Giảm giá: {{ number_format($bill->promotion->discount ?? 0) }} VND
+                            </div>
                             <hr>
                         </div>
                     </div>
@@ -267,9 +272,7 @@
                 <!-- END: Invoice -->
             </div>
         </div>
-     </div>
+    </div>
 </body>
+
 </html>
-
-
-

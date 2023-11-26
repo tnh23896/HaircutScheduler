@@ -29,9 +29,9 @@ class ScheduleDetailsController extends Controller
                     'admin_id' => Auth::guard('admin')->user()->id,
                 ]);
             }
-            return redirect()->back()->with('success', 'Cập nhật chi tiết lịch đặt thành công');
+            return redirect()->back()->with('success', 'Cập nhật thành công');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Cập nhật chi tiết lịch đặt thất bại');
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
         }
     }
 
@@ -44,7 +44,7 @@ class ScheduleDetailsController extends Controller
             $item = Booking::query()->findOrFail($id);
             return view('admin.ScheduleManagement.scheduleDetails', compact('item'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Cập nhật chi tiết lịch thất bại');
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
         }
     }
 
@@ -82,9 +82,9 @@ class ScheduleDetailsController extends Controller
                 $bookingDetail->admin_id = Auth::guard('admin')->user()->id;
                 $bookingDetail->save();
             }
-            return redirect()->back()->with('success', 'Cập nhật chi tiết lịch đặt thành công');
+            return redirect()->back()->with('success', 'Cập nhật thành công');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Cập nhật chi tiết lịch đặt thất bại');
+            return redirect()->back()->with('error', 'Cập nhật thất bại');
         }
     }
 

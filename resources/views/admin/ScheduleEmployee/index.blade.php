@@ -56,7 +56,7 @@
                                 <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
                                     @foreach ($shifts as $slot)
                                         <div>
-                                            <input type="checkbox" name="timeSlots[]" value="{{ $slot->id }}"
+                                            <input type="checkbox" class="form-check-input w-6 h-6 mr-1" name="timeSlots[]" value="{{ $slot->id }}"
                                                 id="timeSlot{{ $slot->id }}">
                                             <label for="timeSlot{{ $slot->id }}">{{ $slot->name }}</label>
                                         </div>
@@ -82,7 +82,7 @@
                                 <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
                                     @foreach ($shifts as $slot)
                                         <div>
-                                            <input type="checkbox" name="timeSlots[]" value="{{ $slot->id }}"
+                                            <input type="checkbox" class="form-check-input w-6 h-6 mr-1" name="timeSlots[]" value="{{ $slot->id }}"
                                                 id="timeSlot{{ $slot->id }}">
                                             <label for="timeSlot{{ $slot->id }}">{{ $slot->name }}</label>
                                         </div>

@@ -13,12 +13,12 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Tiêu đề</label>
+                        <label for="crud-form-1" class="form-label">Tiêu đề <span style="color: red">*</span></label>
                         <input type="text" name="title" id="name" class="clearable form-control w-full"
                             placeholder="Tiêu đề">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Danh mục</label>
+                        <label for="crud-form-1" class="form-label">Danh mục <span style="color: red">*</span></label>
                         <div class="mt-2">
                             <select name="category_blog_id" id="category_blog_id"
                                 data-placeholder="Select your favorite actors" class="tom-select w-full">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="mt-3">
-											<label for="crud-form-3" class="form-label mt-3">Hình ảnh</label>
+											<label for="crud-form-3" class="form-label mt-3">Hình ảnh <span style="color: red">*</span></label>
 											<div class="w-full mt-2 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4" style="width: 300px">
 													<div class="grid grid-cols-10 gap-5 pl-4 pr-5">
 															<div class="col-span-5 md:col-span-2 h-auto relative cursor-pointer zoom-in" style="width: 200px">
@@ -44,7 +44,7 @@
 											</div>
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Mô tả</label>
+                        <label for="crud-form-1" class="form-label">Mô tả <span style="color: red">*</span></label>
                         <textarea class="clearable form-control" name="description" id="description" cols="30" rows="10"></textarea>
                     </div>
                     <div class="text-right mt-5">

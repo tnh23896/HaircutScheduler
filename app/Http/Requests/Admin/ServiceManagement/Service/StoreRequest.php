@@ -25,7 +25,6 @@ class StoreRequest extends FormRequest
 			'name' => 'required|min:2|max:255',
 			'price' => 'required|numeric|min:0',
 			'description' => 'required|string|max:255',
-			'percentage_discount' => 'nullable|numeric|min:0',
 			'category_services_id' => 'required',
 			'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
 		];
@@ -42,9 +41,6 @@ class StoreRequest extends FormRequest
 			'description.required' => 'Mô tả dịch vụ không được để trống',
 			'description.string' => 'Mô tả dịch vụ phải là chuỗi',
 			'description.max' => 'Mô tả dịch vụ phải có tối đa 255 ký tự',
-			'percentage_discount.required' => 'Phần trăm giảm giá không được để trống',
-			'percentage_discount.numeric' => 'Phần trăm giảm giá phải là số',
-			'percentage_discount.min' => 'Phần trăm giảm giá phải lớn hơn 0',
 			'category_services_id.required' => 'Danh mục dịch vụ không được để trống',
 			'image.required' => 'Ảnh dịch vụ không được để trống',
 			'image.image' => 'Ảnh dịch vụ không đúng định dạng',

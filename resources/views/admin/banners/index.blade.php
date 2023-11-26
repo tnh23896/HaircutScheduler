@@ -35,10 +35,12 @@
                             </td>
                             <td class="!py-3.5 status-text" data-banner-id="{{ $banner->id }}"
                                 data-status="{{ $banner->status === 'active' ? 'inactive' : 'active' }}">
-                                @if($banner->status === 'active')
-                                    <div class="flex items-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Hoạt động </div>
+                                @if ($banner->status === 'active')
+                                    <div class="flex items-center text-success"> <i data-lucide="check-square"
+                                            class="w-4 h-4 mr-2"></i> Hoạt động </div>
                                 @else
-                                    <div class="flex items-center text-danger"><i data-lucide="x-circle" class="mr-2 w-4 h-4 mr-2 text-red-500"></i> Không hoạt động </div>
+                                    <div class="flex items-center text-danger"><i data-lucide="x-circle"
+                                            class="mr-2 w-4 h-4 mr-2 text-red-500"></i> Không hoạt động </div>
                                 @endif
                             </td>
                             <td class="table-report__action w-56">

@@ -13,21 +13,24 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Tiêu đề</label>
+                        <label for="crud-form-1" class="form-label">Tiêu đề <span style="color: red">*</span></label>
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
                             placeholder="Tiêu đề">
                     </div>
-                    <label for="crud-form-3" class="form-label mt-3">Hình ảnh</label>
-                    <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4" style="width: 300px">
+                    <label for="crud-form-3" class="form-label mt-3">Hình ảnh <span style="color: red">*</span></label>
+                    <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4"
+                        style="width: 300px">
                         <div class="grid grid-cols-10 gap-5 pl-4 pr-5">
-                            <div class="col-span-5 md:col-span-2 h-auto relative cursor-pointer zoom-in" style="width: 200px">
+                            <div class="col-span-5 md:col-span-2 h-auto relative cursor-pointer zoom-in"
+                                style="width: 200px">
                                 <img class="rounded-md" id="previewImage">
                             </div>
                         </div>
                         <div class="px-4 pb-4 mt-5 flex items-center justify-center cursor-pointer relative">
                             <i data-lucide="image" class="w-4 h-4 mr-2"></i> <span class="text-primary mr-1">
                                 Tải ảnh lên
-                            <input id="crud-form-1" type="file" name="image" class="w-full h-full top-0 left-0 absolute opacity-0">
+                                <input id="crud-form-1" type="file" name="image"
+                                    class="w-full h-full top-0 left-0 absolute opacity-0">
                         </div>
                     </div>
                 </div>
@@ -38,8 +41,6 @@
                 </div>
         </div>
         </form>
-        <!-- END: Form Layout -->
-
     </div>
     </div>
     <script>
@@ -58,7 +59,6 @@
                             $('#errorDiv').hide();
                         }
                     },
-
                     function(error) {
                         showErrors(error);
                     }
