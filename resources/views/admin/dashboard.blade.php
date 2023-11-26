@@ -151,7 +151,7 @@
                                                     @if ($employee['avgRating'] > 0)
                                                         Đánh giá: {{ number_format($employee['avgRating'], 1) }} &#9733
                                                     @else
-                                                        Chưa có đánh giá
+                                                        Đánh giá: 0.0 &#9733
                                                     @endif
                                                 </div>
                                             </div>
