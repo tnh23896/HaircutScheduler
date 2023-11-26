@@ -46,7 +46,7 @@ class PromotionController extends Controller
             }
             return view('admin.PromotionManagement.index', compact('data'));
         } catch (\Exception $exception) {
-            return response()->json(['error' => 'Thêm mới không thành công'], 500);
+            return response()->json(['error' => 'Lọc thất bại'], 500);
         }
     }
 

@@ -59,9 +59,9 @@ class CategoryController extends Controller
         try {
             $newCategory = $this->model::create($request->validated());
             $newCategory->save();
-            return response()->json(['success' => 'Thêm danh mục tin tức thành công']);
+            return response()->json(['success' => 'Thêm mới thành công']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Thêm danh mục tin tức thất bại'], 500);
+            return response()->json(['error' => 'Thêm mới thất bại'], 500);
         }
     }
 
@@ -97,9 +97,9 @@ class CategoryController extends Controller
 
             $category_service->save();
 
-            return response()->json(['success' => 'Cập nhật danh mục tin tức']);
+            return response()->json(['success' => 'Cập nhật thành công']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Cập nhật danh mục tin tức thất bại'], 500);
+            return response()->json(['error' => 'Cập nhật thất bại'], 500);
         }
     }
 
@@ -113,10 +113,10 @@ class CategoryController extends Controller
             $category_service = $this->model::findOrFail($id);
             if ($category_service) {
                 $category_service->delete();
-                return response()->json(['success' => 'Xóa danh mục tin tức thành công']);
+                return response()->json(['success' => 'Xóa danh thành công']);
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Xóa danh mục tin tức thất bại'], 500);
+            return response()->json(['error' => 'Xóa danh thất bại'], 500);
         }
     }
 }

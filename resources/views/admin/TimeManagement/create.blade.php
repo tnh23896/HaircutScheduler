@@ -13,12 +13,13 @@
                 <!-- BEGIN: Form Layout -->
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Thời gian làm việc</label>
+                        <label for="crud-form-1" class="form-label">Thời gian làm việc <span
+                                style="color: red">*</span></label>
                         <input id="crud-form-1" name="time" type="time" class="form-control w-full"
-                            placeholder="Thời gian" >
+                            placeholder="Thời gian">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Chọn ca</label>
+                        <label for="crud-form-1" class="form-label">Chọn ca <span style="color: red">*</span></label>
                         <select name="shift_id" class="form-control w-full ">
                             <option value="">Chọn Ca</option>
                             @foreach ($shift as $item)
@@ -49,7 +50,6 @@
                                 "{{ route('admin.TimeManagement.index') }}";
                         }
                     },
-
                     function(error) {
                         showErrors(error);
                     }

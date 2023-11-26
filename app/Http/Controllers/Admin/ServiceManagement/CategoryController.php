@@ -48,9 +48,9 @@ class CategoryController extends Controller
                 $newCategory->image = upload_file('admin/categoryService', $request->file('image'));
                 $newCategory->save();
             }
-            return response()->json(['success' => 'Cập nhật danh mục dịch vụ thành công']);
+            return response()->json(['success' => 'Thêm mới thành công']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Cập nhật danh mục dịch vụ thất bại'], 500);
+            return response()->json(['error' => 'Thêm mới thất bại'], 500);
         }
     }
 
@@ -105,9 +105,9 @@ class CategoryController extends Controller
 
             $category_service->save();
 
-            return response()->json(['success' => 'Cập nhật danh mục dịch vụ thành công']);
+            return response()->json(['success' => 'Cập nhật thành công']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Cập nhật danh mục dịch vụ thất bại'], 500);
+            return response()->json(['error' => 'Cập nhật thất bại'], 500);
         }
     }
 
@@ -122,10 +122,10 @@ class CategoryController extends Controller
             if ($category_service) {
                 delete_file($imgOld);
                 $category_service->delete();
-                return response()->json(['success' => 'Xóa danh mục dịch vụ thành công']);
+                return response()->json(['success' => 'Xóa thành công']);
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Xóa danh mục dịch vụ thất bại'], 500);
+            return response()->json(['error' => 'Xóa thất bại'], 500);
         }
     }
 }

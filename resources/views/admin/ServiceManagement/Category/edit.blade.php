@@ -13,11 +13,11 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Tiêu đề</label>
+                        <label for="crud-form-1" class="form-label">Tiêu đề <span style="color: red">*</span></label>
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
                             value="{{ $one_category_service->name }}" placeholder="Tiêu đề">
                     </div>
-                    <label for="crud-form-3" class="form-label mt-3">Hình ảnh</label>
+                    <label for="crud-form-3" class="form-label mt-3">Hình ảnh <span style="color: red">*</span></label>
                     <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4" style="width: 300px">
                         <div class="grid grid-cols-10 gap-5 pl-4 pr-5">
                             <div class="col-span-5 md:col-span-2 h-auto relative cursor-pointer zoom-in" style="width: 200px">
@@ -54,8 +54,8 @@
                             toastr.success(response.success);
                             $("#errorDiv").hide();
                         }
+                        window.location.href = "{{ route('admin.serviceManagement.category.index') }}";
                     },
-
                     function(error) {
                         showErrors(error);
                     }

@@ -18,7 +18,6 @@
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
-
 </style>
 @extends('admin.templates.app')
 @section('title', 'Lịch làm việc của nhân viên')
@@ -75,133 +74,134 @@
                 </div>
             </div>
             <div style="overflow-x: auto">
-            <table class="table table-report -mt-2">
-                <thead>
-                    <tr>
-                        <th class="text-center whitespace-nowrap">Ngày làm việc</th>
-                        <th colspan="888" class="whitespace-nowrap" style="padding-left: 350px">Các khoảng thời gian làm việc</th>
-                    </tr>
-                </thead>
-                <tbody id="dataContainer">
-                    @foreach ($workSchedules as $item)
-                        <tr class="intro-x" data-id="{{ $item->id }}">
-                            <td class="text-center border-r">{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y') }}
-                            </td>
-                            @foreach ($item->times as $detail)
-                                <td class="text-center"><a
-                                        href="{{ route('admin.work-schedule.show', ['work_schedule' => $item->id, 'time_id' => $detail->id]) }}"
-                                        class="text-center {{ $detail->pivot->status == 'available' ? 'text-success' : 'text-danger' }}">
-                                        {{ \Carbon\Carbon::parse($detail->time)->format('H:i') }} </a>
-                                </td>
-                            @endforeach
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center gap-2">
-                                    <div class="flex justify-center items-center">
-                                        <a data-tw-toggle="modal" data-tw-target="#modal{{ $item->id }}"
-                                            class="flex items-center text-success cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="lucide lucide-check-square">
-                                                <polyline points="9 11 12 14 22 4" />
-                                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                                            </svg>
-                                            Sửa </a>
-                                    </div>
-                                    <button class="flex items-center text-danger delete-form"
-                                        data-id="{{ $item->id }}"> <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" class="lucide lucide-trash-2">
-                                            <path d="M3 6h18" />
-                                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                                            <line x1="10" x2="10" y1="11" y2="17" />
-                                            <line x1="14" x2="14" y1="11" y2="17" />
-                                        </svg>
-                                        Xóa </button>
-                                </div>
-                            </td>
+                <table class="table table-report -mt-2">
+                    <thead>
+                        <tr>
+                            <th class="text-center whitespace-nowrap">Ngày làm việc</th>
+                            <th colspan="888" class="whitespace-nowrap" style="padding-left: 350px">Các khoảng thời gian
+                                làm việc</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="dataContainer">
+                        @foreach ($workSchedules as $item)
+                            <tr class="intro-x" data-id="{{ $item->id }}">
+                                <td class="text-center border-r">{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y') }}
+                                </td>
+                                @foreach ($item->times as $detail)
+                                    <td class="text-center"><a
+                                            href="{{ route('admin.work-schedule.show', ['work_schedule' => $item->id, 'time_id' => $detail->id]) }}"
+                                            class="text-center {{ $detail->pivot->status == 'available' ? 'text-success' : 'text-danger' }}">
+                                            {{ \Carbon\Carbon::parse($detail->time)->format('H:i') }} </a>
+                                    </td>
+                                @endforeach
+                                <td class="table-report__action w-56">
+                                    <div class="flex justify-center items-center gap-2">
+                                        <div class="flex justify-center items-center">
+                                            <a data-tw-toggle="modal" data-tw-target="#modal{{ $item->id }}"
+                                                class="flex items-center text-success cursor-pointer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-check-square">
+                                                    <polyline points="9 11 12 14 22 4" />
+                                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                                                </svg>
+                                                Sửa </a>
+                                        </div>
+                                        <button class="flex items-center text-danger delete-form"
+                                            data-id="{{ $item->id }}"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" class="lucide lucide-trash-2">
+                                                <path d="M3 6h18" />
+                                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                                <line x1="10" x2="10" y1="11" y2="17" />
+                                                <line x1="14" x2="14" y1="11" y2="17" />
+                                            </svg>
+                                            Xóa </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <!-- END: Data List -->
+            <!-- BEGIN: Pagination -->
+            <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
+                <nav class="w-full sm:w-auto sm:mr-auto">
+                    {{ $workSchedules->appends(['id' => $employee->id])->links('pagination::bootstrap-4') }}
+                </nav>
+            </div>
+            <!-- END: Pagination -->
         </div>
-        <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
-        <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
-            <nav class="w-full sm:w-auto sm:mr-auto">
-                {{ $workSchedules->appends(['id' => $employee->id])->links('pagination::bootstrap-4') }}
-            </nav>
-        </div>
-        <!-- END: Pagination -->
-    </div>
-    @foreach ($workSchedules as $item)
-        @include('admin.WorkSchedule.modal')
-    @endforeach
-    <script>
-        $(document).ready(function() {
-            $('.delete-form').on('click', function(e) {
-                e.preventDefault();
+        @foreach ($workSchedules as $item)
+            @include('admin.WorkSchedule.modal')
+        @endforeach
+        <script>
+            $(document).ready(function() {
+                $('.delete-form').on('click', function(e) {
+                    e.preventDefault();
 
-                var deleteForm = $(this);
-                var deleteUrl = "{{ route('admin.work-schedule.destroy', 'ID') }}";
-                deleteUrl = deleteUrl.replace('ID', $(this).data('id'));
+                    var deleteForm = $(this);
+                    var deleteUrl = "{{ route('admin.work-schedule.destroy', 'ID') }}";
+                    deleteUrl = deleteUrl.replace('ID', $(this).data('id'));
 
-                Swal.fire({
-                    title: 'Xóa?',
-                    text: 'Bạn chắc chắc muốn xoá?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Đồng ý',
-                    cancelButtonText: 'Hủy',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        sendAjaxRequest(deleteUrl, 'DELETE', {}, function(response) {
-                            if (response.success) {
-                                toastr.success(response.success);
+                    Swal.fire({
+                        title: 'Xóa?',
+                        text: 'Bạn chắc chắc muốn xoá?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Đồng ý',
+                        cancelButtonText: 'Hủy',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            sendAjaxRequest(deleteUrl, 'DELETE', {}, function(response) {
+                                if (response.success) {
+                                    toastr.success(response.success);
                                     deleteForm.closest('tr').remove();
-                            }
-                        }, function(error) {
-                            showErrors(error);
-                        });
-                    }
+                                }
+                            }, function(error) {
+                                showErrors(error);
+                            });
+                        }
+                    });
                 });
-            });
-            $('#crud-form').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var url = "{{ route('admin.work-schedule.store') }}";
-                var method = "POST";
-                const formData = new FormData(this);
-                sendAjaxRequest(url, "POST", formData, function(response) {
-                    if (response.success) {
-                        toastr.success(response.success);
-                        location.reload();
-                    }
-                }, function(error) {
-                    showErrors(error);
-                })
-            })
-            $('#crud-form-edit').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var url =
-                    "{{ route('admin.work-schedule.update1', ['work_schedule' => 'workSchedule_id', 'id' => 'employee_id']) }}";
-                url = url.replace('workSchedule_id', $(this).data('id'));
-                url = url.replace('employee_id', "{{ $employee->id }}");
-                var method = "POST";
-                const formData = new FormData(this);
-                sendAjaxRequest(url, method, formData, function(response) {
+                $('#crud-form').on('submit', function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var url = "{{ route('admin.work-schedule.store') }}";
+                    var method = "POST";
+                    const formData = new FormData(this);
+                    sendAjaxRequest(url, "POST", formData, function(response) {
                         if (response.success) {
                             toastr.success(response.success);
                             location.reload();
                         }
-                    },
-                    function(error) {
-                        showErrors(error, "error-work-schedule-edit");
+                    }, function(error) {
+                        showErrors(error);
                     })
-            })
-        });
-    </script>
-@endsection
+                })
+                $('#crud-form-edit').on('submit', function(e) {
+                    e.preventDefault();
+                    var form = $(this);
+                    var url =
+                        "{{ route('admin.work-schedule.update1', ['work_schedule' => 'workSchedule_id', 'id' => 'employee_id']) }}";
+                    url = url.replace('workSchedule_id', $(this).data('id'));
+                    url = url.replace('employee_id', "{{ $employee->id }}");
+                    var method = "POST";
+                    const formData = new FormData(this);
+                    sendAjaxRequest(url, method, formData, function(response) {
+                            if (response.success) {
+                                toastr.success(response.success);
+                                location.reload();
+                            }
+                        },
+                        function(error) {
+                            showErrors(error, "error-work-schedule-edit");
+                        })
+                })
+            });
+        </script>
+    @endsection

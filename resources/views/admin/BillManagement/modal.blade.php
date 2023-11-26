@@ -236,7 +236,7 @@
                     </div>
                     <div class="sm:text-left sm:ml-auto py-5 price" style="text-align: right">
                         <div class="text-lg	">Số tiền phải thanh toán:
-                            {{number_format( $item->total_price) }} VND</div>
+                            {{ number_format($item->total_price) }} VND</div>
                     </div>
                 </div>
                 <div class="custom-container">

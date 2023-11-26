@@ -15,19 +15,19 @@
                 <div class="modal-body">
                     <table class="table table-bordered">
                         <tr>
-                            <th class="text-xl font-bold">ID</th>
-                            <th class="text-xl font-bold">Tên dịch vụ</th>
-                            <th class="text-xl font-bold">Giá tiền</th>
-                            <th class="text-xl font-bold">Dịch vụ sử dụng</th>
+                            <th class="text-xl font-bold text-center">ID</th>
+                            <th class="text-xl font-bold text-center">Tên dịch vụ</th>
+                            <th class="text-xl font-bold text-center">Giá tiền</th>
+                            <th class="text-xl font-bold text-center">Dịch vụ sử dụng</th>
                         </tr>
                         @if($servicesNotInBooking->count() > 0)
                             @foreach($servicesNotInBooking as $service)
                                 <tr>
-                                    <td>{{$service->id}}</td>
-                                    <td>{{$service->name}}</td>
-                                    <td>{{$service->price}}</td>
-                                    <td>
-                                        <input type="checkbox"
+                                    <td class="text-center">{{$service->id}}</td>
+                                    <td class="text-center">{{$service->name}}</td>
+                                    <td class="text-center">{{$service->price}}</td>
+                                    <td class="text-center">
+                                        <input type="checkbox" class="form-check-input"
                                                name="active[]" value="{{$service->id}}">
                                     </td>
                                 </tr>

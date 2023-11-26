@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="mb-2">
-                            <label>Email</label>
+                            <label>Email <span style="color: red">*</span></label>
                             <div class="input-group mt-2">
                                 <div class="input-group-text"><i class="w-4 h-4" data-lucide="mail"></i></div>
                                 <input type="text" class="form-control" placeholder="Email" aria-label="email"
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="mb-2">
-                            <label>Họ và tên</label>
+                            <label>Họ và tên <span style="color: red">*</span></label>
                             <div class="input-group mt-2">
                                 <div class="input-group-text"><i class="w-4 h-4" data-lucide="edit-2"></i></div>
                                 <input type="text" class="form-control" placeholder="Họ và tên" aria-label="username"
@@ -66,7 +66,7 @@
                             <div id="usernameError" class="text-sm text-danger font-medium leading-none mt-3"></div>
                         </div>
                         <div class="mb-2">
-                            <label>Số điện thoại</label>
+                            <label>Số điện thoại <span style="color: red">*</span></label>
                             <div class="input-group mt-2">
                                 <div class="input-group-text"><i class="w-4 h-4" data-lucide="phone"></i></div>
                                 <input type="text" class="form-control" placeholder="Số điện thoại" aria-label="phone"
@@ -75,7 +75,7 @@
                             <div id="phoneError" class="text-sm text-danger font-medium leading-none mt-3"></div>
                         </div>
                         <div class="mb-2">
-                            <label>Vai trò</label>
+                            <label>Vai trò <span style="color: red">*</span></label>
                             <div class="input-group mt-2">
                                 <div class="input-group-text"><i class="w-4 h-4" data-lucide="user"></i></div>
                                 @foreach ($data->getRoleNames() as $v)
@@ -90,7 +90,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
     <script>
@@ -118,7 +117,6 @@
                             $('#phoneError').text('');
                         }
                     },
-
                     function(error) {
                         showErrors(error);
                     }

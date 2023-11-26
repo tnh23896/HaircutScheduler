@@ -84,10 +84,10 @@ class BlogController extends Controller
                 $newblog->image = upload_file('admin/blog', $request->file('image'));
                 $newblog->save();
             }
-            return response()->json(['success' => 'Thêm mới tin tức thành công']);
+            return response()->json(['success' => 'Thêm mới thành công']);
         } catch (\Exception $e) {
             // Xử lý lỗi và thông báo cho người dùng
-            return response()->json(['error' => 'Thêm mới tin tức thất bại'], 500);
+            return response()->json(['error' => 'Thêm mới thất bại'], 500);
         }
     }
 
@@ -129,9 +129,9 @@ class BlogController extends Controller
 
             $category_blog->save();
 
-            return response()->json(['success' => 'Cập nhật tin tức thành công']);
+            return response()->json(['success' => 'Cập nhật thành công']);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Cập nhật tin tức thất bại'], 500);
+            return response()->json(['error' => 'Cập nhật thất bại'], 500);
         }
     }
 
@@ -147,10 +147,10 @@ class BlogController extends Controller
             if ($category_blog) {
                 delete_file($imgOld);
                 $category_blog->delete();
-                return response()->json(['success' => 'Xóa tin tức thành công']);
+                return response()->json(['success' => 'Xóa thành công']);
             }
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Xóa tin tức thất bại'], 500);
+            return response()->json(['error' => 'Xóa thất bại'], 500);
         }
     }
 }

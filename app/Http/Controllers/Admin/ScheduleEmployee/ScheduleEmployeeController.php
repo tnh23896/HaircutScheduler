@@ -183,7 +183,7 @@ class ScheduleEmployeeController extends Controller
             $workSchedule->save();
             $workSchedule->getConnection()->commit();
 
-            return redirect()->route('admin.ScheduleEmployee.index')->with('success', 'Cập nhật lịch thành công.');
+            return redirect()->route('admin.ScheduleEmployee.index')->with('success', 'Cập nhật thành công.');
         } catch (\Exception $e) {
             return redirect()->route('admin.ScheduleEmployee.index')->with('error', 'Có lỗi xảy ra khi cập nhật lịch.');
         }

@@ -13,12 +13,13 @@
                 <!-- BEGIN: Form Layout -->
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Thời gian làm việc</label>
+                        <label for="crud-form-1" class="form-label">Thời gian làm việc <span
+                                style="color: red">*</span></label>
                         <input id="crud-form-1" name="time" type="time" class="form-control w-full"
-                            placeholder="Input time" value="{{ $data->time }}">
+                            placeholder="Input time" value="{{ \Carbon\Carbon::parse($data->time)->format('H:i') }}">
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Chọn ca</label>
+                        <label for="crud-form-1" class="form-label">Chọn ca <span style="color: red">*</span></label>
                         <select name="shift_id" class="form-control w-full ">
                             <option value="{{ $data->shift_id }}">{{ $data->shift->name ?? '' }}</option>
                             @foreach ($shift as $item)
@@ -53,7 +54,6 @@
                                 "{{ route('admin.TimeManagement.index') }}";
                         }
                     },
-
                     function(error) {
                         showErrors(error);
                     }
