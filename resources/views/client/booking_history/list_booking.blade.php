@@ -85,9 +85,8 @@
                         </a>
                         <br>
                         @if ($booking->status == 'pending')
-                            <form class="delete-form" action="{{ route('booking-history.delete', $booking->id) }}">
+                            <form class="delete-form" action="{{ route('booking-history.delete', $booking->id) }}" method="POST">
                                 @csrf
-                                @method('POST')
                                 <button class="text-center mt-2"
                                     style="width: 100px;
                                                height: 30px;
