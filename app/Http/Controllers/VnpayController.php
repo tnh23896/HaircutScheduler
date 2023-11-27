@@ -33,7 +33,7 @@ class VnpayController extends Controller
         $this->vnp_Locale     = 'vn';
         $this->vnp_BankCode   = '';
         $this->vnp_Bill_State   = '';
-        $this->vnp_IpAddr     = $_SERVER['REMOTE_ADDR'];
+        $this->vnp_IpAddr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
     }
     public function process(Request $request)
     {
@@ -102,14 +102,14 @@ class VnpayController extends Controller
         if ($secureHash == $vnp_SecureHash) {
             if ($_GET['vnp_ResponseCode'] == '00') {
                 Booking::where('id', $_GET['vnp_TxnRef'])->update([
-                    'status' => 'comfirmed',
+                    'status' => 'confirmed',
                 ]);
                 return redirect()->route('home.index');
             }
             else {
                 $id = $_GET['vnp_TxnRef'];
                 Booking::where('id', $_GET['vnp_TxnRef'])->update([
-                    'status'     => 'canceled',
+                    'status' => 'canceled',
                 ]);
                 $bookingOld = Booking::query()->findOrFail($id);
                 if ($bookingOld->status == "canceled") {

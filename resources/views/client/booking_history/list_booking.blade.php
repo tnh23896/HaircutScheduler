@@ -5,6 +5,7 @@
             <th class="text-nowrap text-center">Thợ cắt tóc</th>
             <th class="text-nowrap text-center">Giảm giá</th>
             <th class="text-nowrap text-center">Số tiền thanh toán</th>
+            <th class="text-nowrap text-center">Thanh toán</th>
             <th class="text-nowrap text-center">Lịch đặt</th>
             <th class="text-nowrap text-center">Trạng thái</th>
             <th class="text-nowrap text-center">Hành động</th>
@@ -14,7 +15,13 @@
                 <tr>
                     <td class="text-nowrap text-center">{{ $booking->admin->username }}</td>
                     <td class="text-nowrap text-center">{{ number_format($booking->promotion->discount ?? 0) }} VND</td>
-                    <td class="text-nowrap text-center"><span>{{ number_format($booking->total_price) }} VND</span>
+                    <td class="text-nowrap text-center">{{ number_format($booking->total_price) }} VND</td>
+                    <td class="text-nowrap text-center">
+                        @if ($booking->payment == 'offline')
+                        <span class="">Tại cửa hàng</span>
+                    @elseif ($booking->payment == 'vnpay')
+                        <span class="">VNPAY</span>
+                    @endif
                     </td>
                     <td class="text-center"><span>
                             {{ \Carbon\Carbon::parse($booking->time)->format('H:i') }}
@@ -78,43 +85,18 @@
                         </a>
                         <br>
                         @if ($booking->status == 'pending')
-                            @if ($booking)
-                                @php
-                                    $ngay = \Carbon\Carbon::parse($booking->day)->format('Y-m-d');
-                                    $gio = \Carbon\Carbon::parse($booking->time)->format('H:i');
-
-                                    // Gộp ngày và giờ thành một chuỗi datetime
-                                    $ngayGioHopNhat = $ngay . ' ' . $gio;
-
-                                    // Tạo đối tượng Carbon từ chuỗi datetime
-                                    $ngayGioCarbon = \Carbon\Carbon::parse($ngayGioHopNhat);
-
-                                    // Lấy ngày hiện tại
-                                    $ngayHienTai = \Carbon\Carbon::now();
-
-                                    // Tính thời gian giữa thời điểm đặt lịch và thời gian hiện tại trong đơn vị phút
-                                    $thoiGianDenHienTai = $ngayGioCarbon->diffInHours($ngayHienTai);
-                                    $ngayDatLichLonHonNgayHienTai = $ngayGioCarbon->gt($ngayHienTai);
-                                @endphp
-                                {{-- @dd($thoiGianDenHienTai); --}}
-                                @if ($thoiGianDenHienTai >= 24 && $ngayDatLichLonHonNgayHienTai)
-                                    {{-- Hiển thị nút hủy --}}
-                                    <a data-toggle="modal" data-target="#modaldelete{{ $booking->id }}">
-                                        <button class="text-center mt-2"
-                                            style="width: 100px;
+                            <form class="delete-form" action="{{ route('booking-history.delete', $booking->id) }}" method="POST">
+                                @csrf
+                                <button class="text-center mt-2"
+                                    style="width: 100px;
                                                height: 30px;
                                                color: white;
                                                border:none;
                                                background-color: rgb(185, 49, 49);
                                                font-size: 13px;">
-                                            Hủy lịch
-                                        </button>
-                                    </a>
-                                    @include('client.booking_history.modalCancel')
-                                @else
-                                    <p>Không thể hủy lịch do đã qua thời gian cho phép.</p>
-                                @endif
-                            @endif
+                                    Hủy lịch
+                                </button>
+                            </form>
                         @endif
                     </td>
                 </tr>
@@ -125,3 +107,36 @@
 @foreach ($list_booking as $booking)
     @include('client.booking_history.modal')
 @endforeach
+
+<script>
+    // Sử dụng hàm sendAjaxRequest để xác nhận và xoá phần tử
+    $('.delete-form').on('submit', function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var urlToDelete = form.attr('action');
+
+        // Hiển thị hộp thoại xác nhận
+        Swal.fire({
+            title: 'Huỷ lịch?',
+            text: 'Bạn chắc chắc muốn hủy lịch?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest
+                sendAjaxRequest(urlToDelete, 'POST', {
+                    _method: 'POST'
+                }, function(response) {
+                    if (response.success) {
+                        toastr.success(response.success);
+                        window.location.reload();
+                    }
+                }, function(error) {
+                    showErrors(error);
+                });
+            }
+        });
+    });
+</script>

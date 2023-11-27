@@ -175,7 +175,7 @@
                                     <div id="phoneContent" aria-labelledby="phoneHeading" data-parent="#booking"
                                         class="collapse show">
                                         <!-- form send otp -->
-                                        <div class="container my-3" style="max-width: 550px">
+                                        <div class="container my-3 text-center" style="max-width: 550px">
                                             <h3>Xác thực số điện thoại</h3>
                                             <form class="formSendOtp">
                                                 <div class="alert alert-danger error" id="" style="display: none;">
@@ -185,9 +185,13 @@
                                                 </div>
                                                 <label>Số điện thoại:</label>
                                                 <input type="text" id="phoneOtpInput" name="phoneOtpNumberInput"
-                                                    class="form-control " placeholder="+84********">
+                                                    class="form-control " placeholder="Ví dụ: 0912.xxx.xxx"
+                                                    style="border: 2px solid #beced9; height: 50px">
                                                 <div id="recaptcha-container" class="mt-3"></div>
-                                                <button class="btn btn-primary mt-3">Gửi OTP</button>
+                                                <button class="theme-btn-2"
+                                                    style=" width: 30%;padding: 20px 15px;height: 10px;margin: 10px 0 ;">
+                                                    <h6 style="color: white; transform: translateY(-10px)">Gửi OTP</h6>
+                                                </button>
                                             </form>
                                         </div>
                                         <!-- end form send otp -->

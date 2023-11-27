@@ -503,6 +503,7 @@ class ScheduleController extends Controller
                     'email' => $data->email,
                     'day' => $data->day,
                     'time' => $data->time,
+                    'payment' => $data->payment,
                 ]);
 
                 foreach ($data->booking_details as $item) {

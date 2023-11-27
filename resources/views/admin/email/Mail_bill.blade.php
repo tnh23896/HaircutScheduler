@@ -195,7 +195,7 @@
                         <p class="container__bill--title" style="color: #354a1d">HÂN HẠNH ĐƯỢC PHỤC VỤ.</p>
                         <div class="container__box--title">
                             <div class="container__title--bill custom-text-bill ">Hóa Đơn</div>
-                            <div class="container__title--number"> số <span
+                            <div class="container__title--number"> Số <span
                                     class="font-medium">#{{ $bill->id }}</span>
                             </div>
                             <div class="container__title--date">Ngày lập: {{ $bill->created_at }}</div>
