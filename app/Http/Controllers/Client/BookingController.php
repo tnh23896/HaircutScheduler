@@ -72,9 +72,9 @@ class BookingController extends Controller
                 })->get();
 
             // Lấy danh sách khung giờ
-            $dateString =  $startDate;
-            if(!$availableDates->isEmpty()) {
-                $dateString = min($availableDates->toArray()) ;
+            $dateString = $startDate;
+            if (!$availableDates->isEmpty()) {
+                $dateString = min($availableDates->toArray());
             }
             $dateToCheck = Carbon::parse($dateString);
             $timeSlots = Time::whereHas('work_schedule_details', function ($query) use ($dateString) {
@@ -133,9 +133,11 @@ class BookingController extends Controller
                 ], 200);
             } else if ($adminId && $day) {
 
-                $workSchedules = WorkSchedule::with(['times' => function ($query) {
-                    $query->orderBy('time');
-                }])
+                $workSchedules = WorkSchedule::with([
+                    'times' => function ($query) {
+                        $query->orderBy('time');
+                    }
+                ])
                     ->where('day', $day)
                     ->where('admin_id', $adminId)
                     ->firstOrFail();
@@ -341,38 +343,36 @@ class BookingController extends Controller
      */
     public function destroy(Request $request, string $id)
     {
-        $phone = $request->input('phone');
         $booking = Booking::query()->findOrFail($id);
         if ($booking->status === 'pending') {
-            $user = auth()->user();
-            if ($user->phone === $phone) {
-                $booking->status = 'canceled';
-                $booking->save();
-                $bookingOld = Booking::query()->findOrFail($id);
-                if ($bookingOld->status == "canceled") {
-                    $timeSelected = Time::where('time', $bookingOld->time)->first();
-                    $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
-                    $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
-                        ->where('work_schedule_details.time_id', $timeSelected->id)
-                        ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
-                }
-
-                event(new CancelShcheduleNotifications([
-                    'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
-                    'message' => 'Lịch đặt đã bị hủy',
-                    'id' => 'Hóa đơn số' . ' ' . $booking->id,
-                    'day' => Carbon::parse($booking->day)->format('d-m-Y'),
-                    'time' => Carbon::parse($booking->time)->format('H:i'),
-                ]));
-                toastr()->success('Hủy đơn thành công');
-                return response()->json(['success' => true]);
-            } else {
-                toastr()->error('Hủy đơn không thành công');
-                return response()->json(['success' => false]);
+            $booking->status = 'canceled';
+            $booking->save();
+            $bookingOld = Booking::query()->findOrFail($id);
+            if ($bookingOld->status == "canceled") {
+                $timeSelected = Time::where('time', $bookingOld->time)->first();
+                $workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
+                $findWorkScheduleDetailSelected = DB::table('work_schedule_details')
+                    ->where('work_schedule_details.time_id', $timeSelected->id)
+                    ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
             }
+            event(new CancelShcheduleNotifications([
+                'created_at' => Carbon::now()->format('H:i:s d-m-Y'),
+                'message' => 'Lịch đặt đã bị hủy',
+                'id' => 'Hóa đơn số' . ' ' . $booking->id,
+                'day' => Carbon::parse($booking->day)->format('d-m-Y'),
+                'time' => Carbon::parse($booking->time)->format('H:i'),
+            ]));
+            $id = auth('web')->user()->id;
+            $list_booking = Booking::query()
+                ->where('user_id', $id)
+                ->latest()
+                ->paginate(10);
+            // dd($list_booking);
+            return response()->json(['list_booking' => $list_booking,'success' => 'Hủy đơn thành công']);
         } else {
-            toastr()->error('Thao tác không khớp');
-            return response()->json(['success' => false]);
+            return response()->json(['error' => 'Hủy đơn không thành công']);
         }
+
     }
+
 }

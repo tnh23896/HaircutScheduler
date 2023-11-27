@@ -1,5 +1,5 @@
 @extends('client.templates.layout_dashboard')
-@section('title', 'Tài Khoản của tôi')
+@section('title', 'Tài khoản của tôi')
 @section('title_page', 'Thông tin tài khoản')
 @section('content')
     <div>
@@ -16,7 +16,7 @@
                                         alt="profile-img1.jpg" itemprop="image">
                                 </div>
                                 <div class="profile-img-upload-btn">
-                                    
+
                                     <label class="fileContainer brd-rd5 yellow-bg theme-btn-2 rounded">
                                         Tải hình ảnh lên
                                         <input id="crud-form-1" name="avatar" type="file" />

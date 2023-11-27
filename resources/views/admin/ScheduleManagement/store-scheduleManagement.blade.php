@@ -10,7 +10,7 @@
                     var totalPrice = $('#totalPrice').text();
                     var discount = promotion.discount;
                     var newTotalPrice = totalPrice - discount;
-                    $('#totalPrice').text(newTotalPrice);
+                    $('#totalPrice').text(Number(newTotalPrice).toLocaleString('en-US'));
                     $('#promotion').attr('disabled', true);
                     break;
                 }
@@ -45,13 +45,13 @@
                     if (promotion.promocode == promoCode) {
                         var discount = promotion.discount;
                         let newTotalPrice3 = totalPrice - Number(discount);
-                        $('#totalPrice').text(newTotalPrice3);
+                        $('#totalPrice').text(Number(newTotalPrice3).toLocaleString('en-US'));
                         $('#promotion').attr('disabled', true);
                         break;
                     }
                 }
             } else {
-                $('#totalPrice').text(totalPrice);
+            $('#totalPrice').text(Number(totalPrice).toLocaleString('en-US'));
             }
         });
 
