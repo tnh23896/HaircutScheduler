@@ -39,7 +39,7 @@
                         <option value="">Tất cả</option>
                         <option value="pending">Chưa xác nhận</option>
                         <option value="confirmed">Đã xác nhận</option>
-                        <option value="waiting">Đang chờ cắt</option>
+                        <option value="waiting">Đang cắt</option>
                         <option value="success">Đã hoàn thành</option>
                         <option value="canceled">Đã hủy</option>
                     </select>
@@ -114,6 +114,8 @@
                                         value="{{ $item->email }}" hidden>
                                     <input type="text" class="form-control w-full" placeholder="Input text"
                                         value="{{ $item->total_price }}" name="price" disabled hidden>
+                                    <input type="text" class="form-control w-full" placeholder="Input text"
+                                        value="{{ $item->payment }}" name="payment" disabled hidden>
                                     <input name="schedule_time" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->time }} {{ $item->day }}"
                                         disabled hidden>
