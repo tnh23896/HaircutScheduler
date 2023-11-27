@@ -46,7 +46,8 @@ class EmployeeAndCustomerStatisticsController extends Controller
             ->selectRaw('SUM(bills.total_price) as totalPrice')
             ->selectRaw('COUNT(*) as totalBookings')
             ->groupBy('bills.user_id', 'bills.name', 'users.avatar')
-            ->orderByDesc('totalBookings');
+            ->orderByDesc('totalBookings')
+            ->orderByDesc('totalPrice');
         if ($month) {
             $query->whereMonth('day', $month);
         }
@@ -61,8 +62,8 @@ class EmployeeAndCustomerStatisticsController extends Controller
 
     private function baseTopEmployees()
     {
-        $query = Booking::selectRaw('admins.username, admins.avatar, COUNT(DISTINCT bookings.id) as totalBookings')
-            ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
+        $query = Booking::selectRaw('admins.id, admins.username, admins.avatar')
+            ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
             ->join('admins', 'admins.id', '=', 'bookings.admin_id')
             ->leftJoin('reviews', function ($join) {
