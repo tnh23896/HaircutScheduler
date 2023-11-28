@@ -137,7 +137,7 @@
                     </div>
                     <div class="mt-2">
                         <div id="topEmployeesContent">
-                            @if (!empty($topEmployeesData))
+                            @if (count($topEmployeesData) > 0)
                                 @foreach ($topEmployeesData as $employee)
                                     <div class="">
                                         <div class="box px-4 py-4 mb-3 flex items-center zoom-in">

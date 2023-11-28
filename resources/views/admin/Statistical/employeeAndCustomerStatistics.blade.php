@@ -63,7 +63,7 @@
                                             class="text-center font-medium whitespace-nowrap">{{ $booker->name }}</a>
                                     </td>
                                     <td class=" text-center">{{ $booker->totalBookings }}</td>
-                                    <td class="text-center">{{ number_format($booker->totalPrice) }} vnd</td>
+                                    <td class="text-center">{{ number_format($booker->totalPrice) }} VND</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -120,7 +120,7 @@
                                         @if ($employee['avgRating'] > 0)
                                             Đánh giá: {{ number_format($employee['avgRating'], 1) }} &#9733
                                         @else
-                                            Chưa có đánh giá
+                                            Đánh giá: 0.0 &#9733
                                         @endif
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                 minimumFractionDigits: 0,
             });
 
-            const currencySymbol = "vnd";
+            const currencySymbol = "VND";
             const replacedSymbol = formattedAmount.replace(/\./g, ',').replace("₫", currencySymbol);
 
             return replacedSymbol;
