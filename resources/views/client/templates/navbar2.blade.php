@@ -127,7 +127,7 @@
                                 </li>
                             </ul>
                         @else
-                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 5px ;"
+                            <a class="theme-btn-2" style="padding: 20px 15px;height: 10px;margin-bottom: 18px ;"
                                 href="javascript:void(0)" data-toggle="modal" data-target="#modalAuth">
                                 <h6 style="color: white; transform: translateY(-10px)">Đăng nhập</h6>
                             </a>

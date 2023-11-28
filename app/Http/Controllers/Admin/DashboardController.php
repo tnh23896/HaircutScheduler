@@ -93,9 +93,9 @@ class DashboardController extends Controller
     // Thống kê dịch vụ ajax
     private function baServiceSetbyTime(Request $request)
     {
-        $currentMonth = date('m'); 
+        $currentMonth = date('m');
 
-        $day = $request->input('day',0);
+        $day = $request->input('day', 0);
 
         if ($day == 0) {
             $day = date('d');
@@ -211,8 +211,13 @@ class DashboardController extends Controller
 
     private function basefilterTopEmployee(Request $request)
     {
-        $currentMonth = date('m'); // Lấy tháng hiện tại
-        $day = $request->day; // Lấy ngày từ request
+        $currentMonth = date('m');
+
+        $day = $request->input('day', 0);
+
+        if ($day == 0) {
+            $day = date('d');
+        }
 
         $query = Booking::selectRaw('admins.id, admins.username, admins.avatar')
             ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
@@ -256,8 +261,9 @@ class DashboardController extends Controller
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
         $data = $query->orderByDesc('totalBookings')
-            ->take(5)
+            // ->paginate(5);
             ->get();
+
         return $data;
     }
 }

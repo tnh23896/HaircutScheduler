@@ -24,8 +24,8 @@ class StoreRequest extends FormRequest
     {
         // admin_id : "33" day : "2023-10-27" email : "hoang212185@gmail.com" name : "thanh" phone : "+84343112464" promo_code : "4" servicesId : "1,6" time : "3" total_price : "4562"
         return [
-            'name' => 'required',
-            'email' => 'required',
+            'name' => 'required|max:20',
+            'email' => 'required|email',
             'phone' => 'required',
             'day' => 'required',
             'time' => 'required',
@@ -42,6 +42,8 @@ class StoreRequest extends FormRequest
             'day.required' => 'Bạn chưa chọn ngày hẹn cắt tóc',
             'time.required' => 'Bạn chưa chọn thời gian hẹn',
             'servicesId.required' => 'Bạn chưa chọn dịch vụ',
+						'name.max' => 'Tên phải nhỏ hơn hoặc bằng 20 ký tự',
+						'email.email' => 'Email không đúng định dạng',
         ];
 
     }
