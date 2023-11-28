@@ -393,7 +393,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="infoPhone" class="form-control"
+                                    <input type="text" name="infoPhone" class="form-control" disabled
                                         placeholder="Số điện thoại *" value="{{ $user->phone ?? '' }}" />
                                 </div>
                             </div>
