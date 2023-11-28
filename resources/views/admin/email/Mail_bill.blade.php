@@ -179,6 +179,64 @@
             size: A4;
             margin: 0;
         }
+
+        @media only screen and (max-width: 600px) {
+            /* Các kiểu cho màn hình có chiều rộng tối đa là 600 pixel (thông thường cho điện thoại di động) */
+
+            .container__bill--text {
+                font-size: 20px;
+            }
+
+            .container__bill--title,
+            .container__title--bill,
+            .container__title--number,
+            .container__title--date,
+            .custom-table,
+            .custom-table-header,
+            .custom-text-right,
+            .custom-text-left,
+            .custom-table-cell,
+            .custom-font-medium,
+            .custom-overflow-x-auto,
+            .custom-whitespace-nowrap,
+            .custom-w-32,
+            .custom-table-cell-content,
+            .custom-table-cell-content div,
+            .custom-table-cell,
+            .custom-container-box-Information,
+            .custom-container-box-Information-left,
+            .custom-container-box-Information-right,
+            .custom-text-base,
+            .custom-mt-1,
+            .custom-container,
+            .custom-info,
+            .custom-contact,
+            .custom-text-bill,
+            .custom-text-base,
+            .custom-text-lg,
+            .custom-mt-1,
+            .custom-mt-2,
+            .custom-clear,
+            .price {
+                font-size: 10px;
+            }
+
+            .custom-info {
+                float: left;
+                width: 40%;
+                margin-left: 0;
+            }
+
+            .custom-contact {
+                float: right;
+                text-align: right;
+                width: 40%;
+                margin-right: 0;
+            }
+
+
+            /* Thêm các kiểu khác cần thiết cho tính năng đáp ứng trên điện thoại di động */
+        }
     </style>
 </head>
 
@@ -242,16 +300,27 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    <tr>
+                                        <td class="custom-table-cell custom-border-bottom"
+                                            style="border-bottom: 1px solid #333 ">
+                                            <div class="custom-table-cell-content">
+                                                <div class="custom-font-medium custom-whitespace-nowrap">
+
+                                                </div>
+                                        </td>
+                                        <td class="custom-text-right custom-table-cell custom-border-bottom custom-font-medium custom-w-32"
+                                            style="border-bottom: 1px solid #333 ">
+                                            <div class="text-base">Giảm giá:
+                                                {{ number_format($bill->promotion->discount ?? 0) }} VND <br>
+                                                <div class="text-base">Số tiền phải thanh toán:
+                                                    {{ number_format($bill->total_price) }} VND
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
-                        <div class="sm:text-left sm:ml-auto py-5 price" style="text-align: right">
-                            <div class="text-base">Số tiền phải thanh toán: {{ number_format($bill->total_price) }} VND
-                            </div>
-                            <div class="text-base">Giảm giá: {{ number_format($bill->promotion->discount ?? 0) }} VND
-                            </div>
-                            <hr>
-                        </div>
+
                     </div>
                     <div class="custom-container">
                         <div class="custom-info">
@@ -262,7 +331,7 @@
                         </div>
                         <div class="custom-contact">
                             <div class="custom-text-base custom-mt-2">Liên hệ</div>
-                            <div class="custom-mt-1">dtbarber.vn@gmail.com</div>
+                            <div class="custom-mt-1">Website:https://dtbarber.site</div>
                             <div class="custom-mt-1">(+84) 123 456 789</div>
                             <div class="custom-mt-1">Cao đẳng FPT Polytechnic Hà Nội</div>
                         </div>
