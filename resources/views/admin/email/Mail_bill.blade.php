@@ -332,7 +332,7 @@
                         <div class="custom-contact">
                             <div class="custom-text-base custom-mt-2">Liên hệ</div>
                             <div class="custom-mt-1">Website:https://dtbarber.site</div>
-                            <div class="custom-mt-1">(+84) 123 456 789</div>
+                            <div class="custom-mt-1">(+84) 394131363</div>
                             <div class="custom-mt-1">Cao đẳng FPT Polytechnic Hà Nội</div>
                         </div>
                         <div class="custom-clear"></div>
