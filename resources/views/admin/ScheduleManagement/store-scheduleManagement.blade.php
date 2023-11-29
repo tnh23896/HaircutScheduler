@@ -83,7 +83,7 @@
             times = Array.isArray(times) ? times : Object.values(times);
             if (times.length === 0) {
                 // Nếu không có thời gian, hiển thị trạng thái "rỗng"
-                $('#timeSelect').html('<p>Không có thời gian làm việc trong ngày này.</p>');
+                $('#timeSelect').html('<label>Không có thời gian làm việc trong ngày này.</labe>');
             } else {
                 // Nếu có thời gian, thêm thời gian vào #timeSelect
                 times.forEach(function(time) {
