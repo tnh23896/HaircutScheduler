@@ -46,7 +46,7 @@
                                 <div class="flex items-center">
                                     <div class="w-24 h-24 image-fit zoom-in">
                                         <img alt="ảnh" class="rounded-lg border-white shadow-md"
-                                            src="{{ asset($item->avatar) }}">
+                                            src="{{ $item->avatar === 'default.jpg' ? asset('dist/images/default.jpg') : asset($item->avatar) }}">
                                     </div>
                                 </div>
                             </td>

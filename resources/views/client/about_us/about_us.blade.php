@@ -56,7 +56,7 @@
             <div class="slider-1 position-relative border text-center">
                 <div class="barber-fig" data-aos="fade-up" data-aos-delay="400">
                     <figure class="position-relative img-hover overflow-hidden mb-0 tilt">
-                        <img class="image-1 w-100 img-fluid " style="width: 379px;height: 310px" src="{{asset($employee->avatar)}}" alt="{{$employee->username}}">
+                        <img class="image-1 w-100 img-fluid" style="width: 370px;height: 450px;" src="{{asset($employee->avatar)}}" alt="{{$employee->username}}">
                         <figcaption class="ryan-description">
                             <h3><a href="javascript:void(0)">{{$employee->username}}</a></h3>
                             <p>Email: {{$employee->email}} </br>
@@ -81,37 +81,37 @@
                     <div class="barber-list-2">
                         <div class="d-flex w-100 justify-content-between">
                             <h5>Thứ hai</h5>
-                            <h5 class="text-color">7 giờ - 20 giờ</h5>
+                            <h5 class="text-color">8 giờ - 21 giờ</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
                             <h5>Thứ ba</h5>
-                            <h5 class="text-color">7 giờ - 20 giờ</h5>
+                            <h5 class="text-color">8 giờ - 21 giờ</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
                             <h5>Thứ tư</h5>
-                            <h5 class="text-color">7 giờ - 20 giờ</h5>
+                            <h5 class="text-color">8 giờ - 21 giờ</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
                             <h5>Thứ năm</h5>
-                            <h5 class="text-color">7 giờ - 20 giờ</h5>
+                            <h5 class="text-color">8 giờ - 21 giờ</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
                             <h5>Thứ sáu</h5>
-                            <h5 class="text-color">7 giờ - 20 giờ</h5>
+                            <h5 class="text-color">8 giờ - 21 giờ</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
                             <h5>Thứ bảy</h5>
-                            <h5 class="text-color">7 giờ - 20 giờ</h5>
+                            <h5 class="text-color">8 giờ - 21 giờ</h5>
                         </div>
                         <hr>
                         <div class="d-flex w-100 justify-content-between">
                             <h5>Chủ nhật</h5>
-                            <h5 class="text-color">7 giờ - 20 giờ</h5>
+                            <h5 class="text-color">8 giờ - 21 giờ</h5>
                         </div>
                         <hr>
                     </div>

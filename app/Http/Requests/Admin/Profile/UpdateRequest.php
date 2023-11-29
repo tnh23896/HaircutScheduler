@@ -23,7 +23,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username'=>'required|max:255',
+            'username'=>'required|max:255|min:5',
             'phone' => [
                 'required',
                 'regex:/^[0-9]{10}$/',
@@ -36,6 +36,7 @@ class UpdateRequest extends FormRequest
         return [
             'username.required' => 'Bạn chưa nhập họ và tên',
             'username.max' => 'Không được nhập quá 255 ký tự',
+            'username.min' => 'Tên phải gồm 5 ký tự trở lên',
             'phone.required' => 'Bạn chưa nhập số điện thoại',
             'phone.regex' => 'Số điện thoại không đúng định dạng',
             'phone.unique' => 'Số điện thoại đã tồn tại',

@@ -256,7 +256,7 @@
                     </div>
                     <div class="custom-container">
                         <p>Nếu có bất kỳ thay đổi nào về lịch hẹn hoặc nếu bạn cần hỗ trợ thêm, vui lòng liên hệ với
-                            chúng tôi qua số điện thoại <strong>0394131363</strong> hoặc email
+                            chúng tôi qua số điện thoại <strong>0358-609-355</strong> hoặc email
                             <strong>thangcx2810@gmail.com</strong>. Chúng tôi sẽ rất vui lòng giúp đỡ bạn.
                         </p>
 
@@ -267,7 +267,7 @@
 
                         <p>Trân trọng,<br>
                             DTBARBER<br>
-                            0394131363</p>
+                            0358-609-355</p>
                         <div class="custom-clear"></div>
                     </div>
                 </div>

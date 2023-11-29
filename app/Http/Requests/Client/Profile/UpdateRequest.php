@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
     {
 
         return [
-            'username'=>'required|max:255|min:2',
+            'username'=>'required|max:255|min:5',
             'email' => [
                 'required',
                 Rule::unique('users', 'email')->ignore(auth('web')->user()->id),
@@ -42,7 +42,7 @@ class UpdateRequest extends FormRequest
             'email.unique' => 'Email đã tồn tại',
             'username.max' => 'Không được nhập quá 255 ký tự',
             'avatar.image' => 'File không đúng định dạng',
-						'username.min' => 'Không được nhập nhỏ hơn 2 ký tự',
+            'username.min' => 'Tên phải gồm 5 ký tự trở lên',
         ];
     }
 }

@@ -250,7 +250,7 @@ class DashboardController extends Controller
             ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "success" THEN bookings.id END) as totalSuccessfulBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "canceled" THEN bookings.id END) as totalCancelledBookings')
-            ->selectRaw('IFNULL(COUNT(DISTINCT reviews.id), 0) as totalRatings')  // Nếu không có đánh giá, đặt giá trị là 0
+            ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')  // Nếu không có đánh giá, đặt giá trị là 0
             ->join('admins', 'admins.id', '=', 'bookings.admin_id')
             ->leftJoin('reviews', function ($join) use ($currentDate) {
