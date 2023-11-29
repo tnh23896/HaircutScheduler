@@ -38,6 +38,6 @@ class SendContactEmail implements ShouldQueue
     public function handle()
     {
         // Gửi email
-        Mail::to('nguyenvantinh23102003@gmail.com')->send(new ContactMail($this->email, $this->message, $this->phone));
+        Mail::to('dtbarber@gmail.com')->send(new ContactMail($this->email, $this->message, $this->phone));
     }
 }

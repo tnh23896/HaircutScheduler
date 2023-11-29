@@ -42,9 +42,9 @@ class StoreRequest extends FormRequest
             'day.required' => 'Bạn chưa chọn ngày hẹn cắt tóc',
             'time.required' => 'Bạn chưa chọn thời gian hẹn',
             'servicesId.required' => 'Bạn chưa chọn dịch vụ',
-						'name.min' => 'Tên phải lớn hơn 3 ký tự',
-						'name.max' => 'Tên không đúng định dạng',
-						'email.email' => 'Email không đúng định dạng',
+			'name.min' => 'Tên phải lớn hơn 3 ký tự',
+			'name.max' => 'Tên không đúng định dạng',
+			'email.email' => 'Email không đúng định dạng',
         ];
 
     }

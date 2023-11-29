@@ -54,7 +54,7 @@
                                         <div class="text-center flex">
                                             <div class="w-16 h-16 image-fit zoom-in">
                                                 <img alt="ảnh" class="tooltip rounded-full"
-                                                    src="{{ asset($booker->avatar ?? 'default.jpg') }}">
+                                                    src="{{$booker->avatar === 'default.jpg' ? asset('dist/images/default.jpg') : asset($booker->avatar) }}">
                                             </div>
                                         </div>
                                     </td>
@@ -112,7 +112,7 @@
                                 {{-- Display employee information --}}
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                     <img alt="Employee Avatar"
-                                        src="{{ asset($employee['avatar'] ?? 'default.jpg') }}">
+                                        src="{{$employee['avatar'] === 'default.jpg' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">                        
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">{{ $employee['username'] }}</div>

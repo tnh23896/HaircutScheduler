@@ -23,7 +23,7 @@ class UpdateRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			"username" => "required",
+			"username" => "required|min:5|max:255",
 			"avatar" => "image|mimes:jpeg,png,jpg,gif,svg|max:2048",
 			"phone" => "required",
 			'email' => [
@@ -39,6 +39,8 @@ class UpdateRequest extends FormRequest
 	{
 		return [
 			'username.required' => 'Tên không được để trống',
+			'username.min' => 'Tên phải gồm 5 ký tự trở lên',
+			'username.max' => 'Tên không vượt quá 255 kí tự',
 			'avatar.image' => 'Ảnh không đúng định dạng',
 			'avatar.mimes' => 'Ảnh không đúng định dạng',
 			'avatar.max' => 'Ảnh quá kích thức 2048kb',

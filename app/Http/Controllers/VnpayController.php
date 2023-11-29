@@ -104,7 +104,7 @@ class VnpayController extends Controller
                 Booking::where('id', $_GET['vnp_TxnRef'])->update([
                     'status' => 'confirmed',
                 ]);
-                return redirect()->route('home.index');
+                return redirect()->route('booking_history');
             }
             else {
                 $id = $_GET['vnp_TxnRef'];
@@ -119,7 +119,7 @@ class VnpayController extends Controller
                         ->where('work_schedule_details.time_id', $timeSelected->id)
                         ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
                 }
-                return redirect()->route('home.index');
+                return redirect()->route('booking_history');
 
                 // thanh toán thất bại
             }
@@ -137,7 +137,7 @@ class VnpayController extends Controller
                     ->where('work_schedule_details.work_schedules_id', $workScheduleSelected->id)->update(['status' => 'available']);
             }
             // lỗi thanh toán
-            return redirect()->route('home.index');
+            return redirect()->route('booking_history');
         }
         // return route nào đấy
     }

@@ -151,7 +151,7 @@
             <div class="contact-main">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="contact-form">
+                        <div class="">
                             <h2>Có bất kỳ câu hỏi nào xin vui lòng liên hệ với chúng tôi</h2>
                             @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
@@ -160,18 +160,18 @@
                         <form id="contactForm" action="{{ route('contact.sendEmail') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="email">Email:</label>
+                                <label class="form-label"  for="email">Email: <span style="color: red; width: 2px !important;">*</span></label>
                                 <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Số điện thoại:</label>
+                                <label for="phone">Số điện thoại: <span style="color: red">*</span></label>
                                 <input type="number" name="phone" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="message">Lời nhắn:</label>
+                                <label for="message">Lời nhắn: <span style="color: red">*</span></label>
                                 <textarea name="message" class="form-control" rows="5" required></textarea>
                             </div>
-                            <button type="button" id="sendEmailBtn" class="btn btn-primary border-0" style="background-color: #d9842f">Gửi</button>
+                            <button type="button" id="sendEmailBtn" class="btn btn-primary border-0" style="background-color: #d9842f; width:100px;">Gửi</button>
                         </form>
 
                         </div>
@@ -186,37 +186,37 @@
                                 <div class="barber-list-2">
                                     <div class="d-flex w-100 justify-content-between">
                                         <span>Thứ 2</span>
-                                        <span>7 giờ - 20 giờ</span>
+                                        <span>8 giờ - 21 giờ</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex w-100 justify-content-between">
                                         <span>Thứ 3</span>
-                                        <span>7 giờ - 20 giờ</span>
+                                        <span>8 giờ - 21 giờ</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex w-100 justify-content-between">
                                         <span>Thứ 4</span>
-                                        <span>7 giờ - 20 giờ</span>
+                                        <span>8 giờ - 21 giờ</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex w-100 justify-content-between">
                                         <span>Thứ 5</span>
-                                        <span>7 giờ - 20 giờ</span>
+                                        <span>8 giờ - 21 giờ</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex w-100 justify-content-between">
                                         <span>Thứ 6</span>
-                                        <span>7 giờ - 20 giờ</span>
+                                        <span>8 giờ - 21 giờ</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex w-100 justify-content-between">
                                         <span>Thứ 7</span>
-                                        <span>7 giờ - 20 giờ</span>
+                                        <span>8 giờ - 21 giờ</span>
                                     </div>
                                     <hr>
                                     <div class="d-flex w-100 justify-content-between">
                                         <span>Chủ nhật</span>
-                                        <span>7 giờ - 20 giờ</span>
+                                        <span>8 giờ - 21 giờ</span>
                                     </div>
                                 </div>
                             </div>
@@ -281,13 +281,21 @@
                     url: "{{ route('contact.sendEmail') }}",
                     type: "POST",
                     data: formData,
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
-                        toastr.success('Gửi liên hệ thành công');
+                        if (response.success) {
+                            toastr.success('Gửi liên hệ thành công');
+                        } else {
+                            toastr.error('Lỗi khi gửi liên hệ.');
+                        }
                     },
-                    error: function (error) {
-                        console.log(error);
-                        toastr.error('Lỗi khi gửi liên hệ.');
+                    error: function(xhr, status, error) {
+                        console.log(xhr);
+                        if (xhr.status === 429) {
+                            toastr.error('Vượt quá giới hạn gửi email. Vui lòng thử lại sau.');
+                        } else {
+                            toastr.error('Lỗi khi gửi liên hệ.');
+                        }
                     }
                 });
             });

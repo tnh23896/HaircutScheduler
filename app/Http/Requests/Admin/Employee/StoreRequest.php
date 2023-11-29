@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			"username" => "required",
+			"username" => "required|min:5|max:255",
 			"avatar" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
 			"phone" => "required",
 			"email" => "required|email|unique:admins,email",
@@ -34,6 +34,8 @@ class StoreRequest extends FormRequest
 	{
 		return [
             'username.required' => 'Tên không được để trống',
+			'username.min' => 'Tên phải gồm 5 ký tự trở lên',
+			'username.max' => 'Tên không vượt quá 255 ký tự',
 			'email.required' => 'Email không được để trống',
 			'password.required' => 'Mật khẩu không được để trống',
             'email.required' => 'Email không được để trống',

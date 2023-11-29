@@ -410,7 +410,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="form-control">Mã giảm giá<span class="text-danger">*</span></label>
+                                    <label for="form-control">Mã giảm giá</label>
                                     <input type="text" class="form-control" name="promoCode" id="promotion"
                                         placeholder="Mã giảm giá">
                                 </div>
@@ -616,7 +616,7 @@
                                 location.href = response.url;
                             } else {
                                 toastr.success(response.message);
-                                location.href = "{{ route('home.index') }}";
+                                location.href = "{{ route('booking_history') }}";
                                 console.log("🚀 ~ file: booking.blade.php:600 ~ location:", location)
                             }
 
