@@ -26,7 +26,7 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap">#</th>
+                        <th class="whitespace-nowrap">Mã nhân viên</th>
                         <th class="whitespace-nowrap">Ảnh đại diện</th>
                         <th class="text-center whitespace-nowrap">Tên</th>
                         <th class="text-center whitespace-nowrap">Số điện thoại</th>
@@ -40,7 +40,7 @@
                     @foreach ($employees as $item)
                         <tr class="intro-x">
                             <td class="w-10">
-                                <div class="text-center">{{ $count++ }}</div>
+                                <div class="text-center">{{ $item->id < 10 ? 'NV-0' . $item->id : 'NV-' . $item->id }}</div>
                             </td>
                             <td class="!py-3.5">
                                 <div class="flex items-center">
