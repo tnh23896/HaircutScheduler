@@ -49,14 +49,14 @@
 
                                 <!-- Các trường cho đăng ký theo ngày -->
                                 <label for="date">Chọn ngày:</label>
-                                <input type="date" class="text-white form-control form-control-lg" name="date"
+                                <input type="date" class=" form-control form-control-lg" name="date" style="border-color: #312E81"
                                     required>
 
                                 <!-- Chọn thời gian -->
                                 <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
                                     @foreach ($shifts as $slot)
                                         <div>
-                                            <input type="checkbox" class="form-check-input w-6 h-6 mr-1" name="timeSlots[]" value="{{ $slot->id }}"
+                                            <input type="checkbox" class="form-check-input w-6 h-6 mr-1" name="timeSlots[]" value="{{ $slot->id }}"  style="border-color: #312E81"
                                                 id="timeSlot{{ $slot->id }}">
                                             <label for="timeSlot{{ $slot->id }}">{{ $slot->name }}</label>
                                         </div>
@@ -75,14 +75,14 @@
 
                                 <!-- Các trường cho đăng ký theo tuần -->
                                 <label for="week">Chọn tuần:</label>
-                                <input type="week" class="text-white form-control form-control-lg my-2" name="week"
+                                <input type="week" class="form-control form-control-lg my-2" name="week"  style="border-color: #312E81"
                                     required>
 
                                 <!-- Chọn thời gian -->
                                 <div id="timeSlots" class="grid grid-cols-3 gap-4" style="margin-top: 15px">
                                     @foreach ($shifts as $slot)
                                         <div>
-                                            <input type="checkbox" class="form-check-input w-6 h-6 mr-1" name="timeSlots[]" value="{{ $slot->id }}"
+                                            <input type="checkbox" class="form-check-input w-6 h-6 mr-1" name="timeSlots[]" value="{{ $slot->id }}"  style="border-color: #312E81"
                                                 id="timeSlot{{ $slot->id }}">
                                             <label for="timeSlot{{ $slot->id }}">{{ $slot->name }}</label>
                                         </div>
@@ -100,8 +100,8 @@
     </div>
     <div class="text-center">
         <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white mr-2">Chú thích</h3>
-        <span class="btn btn-rounded-success w-24 mr-1 mb-2">Trống lịch</span>
-        <span class="btn btn-rounded-danger w-32 mr-1 mb-2">Đã được đặt</span>
+        <span class="btn btn-rounded-success w-32 mr-1 mb-2 text-white">Trống lịch</span>
+        <span class="btn btn-rounded-danger w-32 mr-1 mb-2 text-white">Đã được đặt</span>
     </div>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <!-- BEGIN: Profile Menu -->
@@ -144,7 +144,7 @@
                             @csrf
                             <div class="w-full relative text-slate-500 flex items-center">
                                 <input type="date" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                                    value="{{ request('search') }}">
+                                    value="{{ request('search') }}" style="border-color: #312E81">
                                 <button type="submit">
                                     <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0"
                                         data-lucide="search"></i>
@@ -172,7 +172,7 @@
                                         $showEditButton = $timeDifference < 24;
                                     @endphp
                                     <tr class="intro-x">
-                                        <td class="text-center" style="border-right: 1px solid white">{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y')}}
+                                        <td class="text-center" style="border-right: 1px solid #1E293B">{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y')}}
                                         </td>
                                         <td class="flex flex-wrap">
                                             @foreach ($item->times as $time)
@@ -203,7 +203,7 @@
                                                         }
                                                     }
                                                 @endphp
-                                                <div class="py-2 px-4 border border-white whitespace-normal {{ $time->pivot->status == 'available' ? 'text-success' : 'text-danger' }}">
+                                                <div class="py-2 px-4 border border-green-700 whitespace-normal {{ $time->pivot->status == 'available' ? 'text-success' : 'text-danger' }}">
                                                     <a href="javascript:;" data-tw-toggle="modal"  onclick="openPopup('{{ \Carbon\Carbon::parse($item->time)->format('H:i') }}', '{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y') }}', '{{ $employee->id }}', '{{ $bookingInfo }}', '{{ json_encode($serviceNames) }}', '{{ $statusText }}')"
                                                         data-tw-target="#superlarge-modal-size-preview">{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</a>
                                                 </div>

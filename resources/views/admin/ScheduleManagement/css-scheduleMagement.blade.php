@@ -1,10 +1,10 @@
 <style>
     input[type="radio"]:checked+label>img {
-        border: 4px solid #d9842f;
+        border: 4px solid ##312E81;
     }
 
     input[type="radio"]:checked+label>h6 {
-        color: #d9842f;
+        color: ##312E81;
     }
 
     label.check {
@@ -21,28 +21,31 @@
 
     label.check span {
         padding: 7px 14px;
-        border: 2px solid #d9842f;
+        border: 2px solid #312E81;
         display: inline-block;
-        color: #d9842f;
+        color: #312E81;
         border-radius: 3px;
         text-transform: uppercase;
     }
 
     label.check input:checked+span {
-        border-color: #d9842f;
-        background-color: #d9842f;
+        border-color: #312E81;
+        background-color: #312E81;
         color: #fff;
     }
 
     label.check input:disabled+span {
-        border-color: #ccc;
-        background-color: #ccc;
+        border-color: #312E81;
+        background-color: #312E81;
         color: #fff;
         cursor: default;
     }
+    #faq-accordion-content-2{
+			border: 2px solid #F1F5F9;
+		}
 
     .card-header {
-        background-color: #d9842f;
+        background-color: #312E81;
     }
 
     .collapsible-link::before {
@@ -85,22 +88,22 @@
 
     label.check span {
         padding: 7px 14px;
-        border: 2px solid #d9842f;
+        border: 2px solid #312E81;
         display: inline-block;
-        color: #d9842f;
+        color: #312E81;
         border-radius: 3px;
         text-transform: uppercase;
     }
 
     label.check input:checked+span {
-        border-color: #d9842f;
-        background-color: #d9842f;
+        border-color: #312E81;
+        background-color: #312E81;
         color: #fff;
     }
 
     label.check input:disabled+span {
-        border-color: #ccc;
-        background-color: #ccc;
+        border-color: #312E81;
+        background-color: #312E81;
         color: #fff;
         cursor: default;
     }
@@ -145,16 +148,16 @@
     }
 
     .radio-button-with-image input[type="radio"]:checked+.image-container {
-        border: 2px solid #d9842f;
+        border: 2px solid #312E81;
     }
 
     .radio-button-with-image:hover .image-container {
-        border: 2px solid #d9842f;
+        border: 2px solid #312E81;
     }
 
     .my-select {
         width: 200px;
-        background-color: #d9842f;
+        background-color: #312E81;
         color: #fff;
         border: 0 none;
         border-radius: 20px;

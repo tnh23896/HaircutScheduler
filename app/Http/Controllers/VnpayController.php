@@ -103,6 +103,7 @@ class VnpayController extends Controller
             if ($_GET['vnp_ResponseCode'] == '00') {
                 Booking::where('id', $_GET['vnp_TxnRef'])->update([
                     'status' => 'confirmed',
+                    'amount_paid' => $_GET['vnp_Amount'] / 100,
                 ]);
                 return redirect()->route('booking_history');
             }
@@ -110,6 +111,7 @@ class VnpayController extends Controller
                 $id = $_GET['vnp_TxnRef'];
                 Booking::where('id', $_GET['vnp_TxnRef'])->update([
                     'status' => 'canceled',
+                    'amount_paid' => '0',
                 ]);
                 $bookingOld = Booking::query()->findOrFail($id);
                 if ($bookingOld->status == "canceled") {
@@ -126,6 +128,7 @@ class VnpayController extends Controller
         } else {
             Booking::where('id', $_GET['vnp_TxnRef'])->update([
                 'status' => 'canceled',
+                'amount_paid' => '0',
             ]);
             $id = $_GET['vnp_TxnRef'];
             $bookingOld = Booking::query()->findOrFail($id);

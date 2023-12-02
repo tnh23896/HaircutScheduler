@@ -13,9 +13,9 @@
                 <form action="{{ route('admin.billManagement.searchDateTime') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="date" name="day" class="form-control box w-40 sm:w-auto mr-2"
-                            value="{{ request('day') }}">
+                            value="{{ request('day') }}" style="border-color: #312E81">
                         <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10"
-                            value="{{ request('time') }}">
+                            value="{{ request('time') }}" style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -25,7 +25,7 @@
                 <form action="{{ route('admin.billManagement.search') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                            placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                            placeholder="Tìm kiếm..." value="{{ request('search') }}" style="border-color: #312E81" >
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -83,7 +83,7 @@
                             </td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a class="flex items-center text-white mr-auto cursor-pointer" data-tw-toggle="modal"
+                                    <a class="flex items-center mr-auto cursor-pointer" data-tw-toggle="modal"
                                         data-tw-target="#modal{{ $item->id }}">
                                         <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
                                         Xem chi tiết
