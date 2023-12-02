@@ -115,6 +115,7 @@
                             toastr.success(response.success);
                             $('#usernameError').text('');
                             $('#phoneError').text('');
+                            window.location.reload();
                         }
                     },
                     function(error) {

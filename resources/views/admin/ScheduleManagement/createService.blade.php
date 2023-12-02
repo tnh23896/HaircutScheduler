@@ -27,7 +27,7 @@
                                     <td class="text-center">{{$service->name}}</td>
                                     <td class="text-center">{{$service->price}}</td>
                                     <td class="text-center">
-                                        <input type="checkbox" class="form-check-input"
+                                        <input type="checkbox"
                                                name="active[]" value="{{$service->id}}">
                                     </td>
                                 </tr>
@@ -41,8 +41,8 @@
                 </div>
                 @if($servicesNotInBooking->count() > 0)
                     <div class="text-right mt-5">
-                        <button type="submit" id="saveBtn" class="btn btn-success w-24 text-white">
-                            Save
+                        <button type="submit" id="saveBtn" class="btn btn-primary w-24">
+                            Lưu
                         </button>
                     </div>
                 @endif

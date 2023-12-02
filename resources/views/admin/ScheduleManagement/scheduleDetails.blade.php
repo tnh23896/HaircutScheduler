@@ -27,7 +27,7 @@
                         <td class="text-center">{{$detail->name}}</td>
                         <td class="text-center">{{$detail->price}}</td>
                         <td class="text-center">
-                            <input type="checkbox" class="form-check-input"
+                            <input type="checkbox"
                                    name="status[]" @checked($detail->status == "success") value="{{$detail->id}}"
                                    @if($item->status == "success")
                                        disabled

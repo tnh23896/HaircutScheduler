@@ -13,14 +13,14 @@
                 <form action="{{ route('admin.blogManagement.blog.search') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                            placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                            placeholder="Tìm kiếm..." value="{{ request('search') }}" style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
                     </div>
                 </form>
                 <form id="filterForm" action="{{ route('admin.blogManagement.blog.filter') }}" method="GET">
-                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
+                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()" style="border-color: #312E81">
                         <option value="">Tất cả</option>
                         @foreach ($categoryBlog as $item)
                             <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -34,7 +34,7 @@
         <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
             <div class="flex items-center border-b border-slate-200/60 dark:border-darkmode-400 px-5 py-4">
                 <div class="mr-auto">
-                    Danh mục: <a href="#" class="font-medium">{{ $blog->category_blog->title ?? '' }}</a> 
+                    Danh mục: <a href="#" class="font-medium">{{ $blog->category_blog->title ?? '' }}</a>
                 </div>
                 <div class="dropdown ml-3">
                     <a href="javascript:;" class="dropdown-toggle w-5 h-5 text-slate-500" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-vertical" class="w-4 h-4"></i> </a>
@@ -67,7 +67,7 @@
                 <div class="h-40 2xl:h-56 image-fit">
                     <img alt="image" class="rounded-md" src="{{ asset($blog->image) }}">
                 </div>
-                <a href="#" class="block font-medium text-base mt-5">{{ $blog->title }}</a> 
+                <a href="#" class="block font-medium text-base mt-5">{{ $blog->title }}</a>
                 <div class="text-slate-600 dark:text-slate-500 mt-2">{{ $blog->description }}</div>
             </div>
         </div>

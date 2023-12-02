@@ -35,10 +35,10 @@
                         <div class="accordion-item">
                             <div id="faq-accordion-content-2" class="accordion-header flex form-control py-2 px-1">
                                 <i data-lucide="list" class="block mr-2"></i>
-                                <button class="accordion-button collapsed text-white" type="button"
+                                <button class="accordion-button collapsed" type="button"
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
-                                    style="font-size:16px;color: white">Danh sách dịch vụ <span style="color: red">*</span></button>
+                                    style="font-size:16px; color: #1B293B;">Danh sách dịch vụ <span style="color: red">*</span></button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
                                 aria-labelledby="faq-accordion-content-2" data-tw-parent="#faq-accordion-1">
@@ -54,7 +54,7 @@
                                                                 data-tw-target="#faq-accordion-collapse-1"
                                                                 aria-expanded="false"
                                                                 aria-controls="faq-accordion-collapse-1">
-                                                                <h2 class="font-medium text-xl" style="color: #d9842f">
+                                                                <h2 class="font-medium text-xl" style="color: #312E81">
                                                                     {{ $category->name }}</h2>
                                                             </button>
                                                         </div>
@@ -121,10 +121,10 @@
                         <div class="accordion-item">
                             <div id="faq-accordion-content-2" class="accordion-header flex form-control py-2 px-1">
                                 <i data-lucide="list" class="block mr-2"></i>
-                                <button class="accordion-button collapsed text-white" type="button"
+                                <button class="accordion-button collapsed" type="button"
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
-                                    style="font-size:16px;color: white">Danh sách nhân viên <span style="color: red">*</span></button>
+                                    style="font-size:16px; color:#1B293B">Danh sách nhân viên <span style="color: red">*</span></button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
                                 aria-labelledby="faq-accordion-content-2" data-tw-parent="#faq-accordion-1">
@@ -144,7 +144,7 @@
                                                                     <img src="{{ asset($staff->avatar) }}"
                                                                         alt="{{ $staff->username }}">
                                                                 </div>
-                                                                <h3
+                                                                <h3 style="color:#1B293B"
                                                                     class="text-center text-xl
                                                                     {{ $data->admin_id == $staff->id ? 'text-red-500 font-bold' : 'text-white' }}">
                                                                     {{ $staff->username }}

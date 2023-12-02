@@ -33,10 +33,10 @@
                         <div class="accordion-item">
                             <div id="faq-accordion-content-2" class="accordion-header flex form-control py-2 px-1">
                                 <i data-lucide="list" class="block mr-2"></i>
-                                <button class="accordion-button collapsed text-white" type="button"
+                                <button class="accordion-button collapsed" type="button"
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
-                                    style="font-size: 16px;color: white">
+                                    style="font-size: 16px; color: #1E293B">
                                     Danh sách dịch vụ <span style="color: red">*</span>
                                 </button>
                             </div>
@@ -54,7 +54,7 @@
                                                                 data-tw-target="#faq-accordion-collapse-1"
                                                                 aria-expanded="false"
                                                                 aria-controls="faq-accordion-collapse-1">
-                                                                <h2 class="font-medium text-xl" style="color: #d9842f">
+                                                                <h2 class="font-medium text-xl" style="color: #312E81">
                                                                     {{ $category->name }}</h2>
                                                             </button>
                                                         </div>
@@ -79,11 +79,11 @@
                                                                                     </div>
                                                                                     <div
                                                                                         class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                                                                                        <a href="#"
-                                                                                            class="font-medium text-lg text-white">{{ $service->name }}</a>
                                                                                         <div
-                                                                                            class="text-slate-500 text-lg mt-0.5">
-                                                                                            Giá:{{ number_format($service->price) }}
+                                                                                            class="font-medium text-lg" style="color: #1E293B">{{ $service->name }}</div>
+                                                                                        <div
+                                                                                            class="text-slate-500 text-lg mt-0.5" style="color: #1E293B">
+                                                                                            Giá: {{ number_format($service->price) }}
                                                                                             VND</div>
                                                                                     </div>
                                                                                     <div class="flex mt-4 lg:mt-0">
@@ -119,10 +119,10 @@
                         <div class="accordion-item">
                             <div id="faq-accordion-content-2" class="accordion-header flex form-control py-2 px-1">
                                 <i data-lucide="list" class="block mr-2"></i>
-                                <button class="accordion-button collapsed text-white" type="button"
+                                <button class="accordion-button collapsed" type="button"
                                     data-tw-toggle="collapse" data-tw-target="#faq-accordion-collapse-2"
                                     aria-expanded="false" aria-controls="faq-accordion-collapse-2"
-                                    style="font-size:16px;color: white">Danh sách nhân viên <span style="color: red">*</span></button>
+                                    style="font-size:16px; color: #1E293B">Danh sách nhân viên <span style="color: red">*</span></button>
                             </div>
                             <div id="faq-accordion-collapse-2" class="accordion-collapse collapse"
                                 aria-labelledby="faq-accordion-content-2" data-tw-parent="#faq-accordion-1">
