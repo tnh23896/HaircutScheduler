@@ -244,16 +244,27 @@
                                                                                 class="mb-0 font-weight-semibold d-block">{{ number_format($service->price) }}
                                                                                 VND
                                                                             </span>
-
-                                                                            <label class="check mt-1">
-                                                                                <input type="checkbox"
-                                                                                    id="service_{{ $service->id }}"
-                                                                                    name="services[]"
-                                                                                    value="{{ $service->id }}"
-                                                                                    data-price="{{ $service->price }}">
-                                                                                <span type="button"
-                                                                                    class="btn ">Chọn</span>
-                                                                            </label>
+                                                                            @if ($category->can_choose == 'one')
+                                                                                <label class="check mt-1">
+                                                                                    <input type="radio"
+                                                                                        id="service_{{ $service->id }}"
+                                                                                        name="{{ $category->id }}services[]"
+                                                                                        value="{{ $service->id }}"
+                                                                                        data-price="{{ $service->price }}">
+                                                                                    <span type="button"
+                                                                                        class="btn ">Chọn</span>
+                                                                                </label>
+                                                                            @else
+                                                                                <label class="check mt-1">
+                                                                                    <input type="checkbox"
+                                                                                        id="service_{{ $service->id }}"
+                                                                                        name="{{ $category->id }}services[]"
+                                                                                        value="{{ $service->id }}"
+                                                                                        data-price="{{ $service->price }}">
+                                                                                    <span type="button"
+                                                                                        class="btn ">Chọn</span>
+                                                                                </label>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -443,6 +454,7 @@
 @endsection
 @section('js_footer_custom')
     <script>
+   
         function getValues(info_customer) {
             const form = $('#' + info_customer);
             return form.serializeArray().reduce(function(obj, item) {
@@ -465,16 +477,24 @@
         });
 
         $(document).ready(function() {
+            const serviceCategories = @json($serviceCategories);
+
             $('#promotion').on('change', function() {
                 // Xử lý sự kiện onchange ở đây
                 var promoCode = $(this).val();
                 var dataPromotion = @php echo json_encode($promotion) @endphp;
                 $.each(dataPromotion, function(index, promotion) {
+                    
                     if (promotion.promocode == promoCode) {
+                    
                         var totalPrice = $('#totalPrice').text();
                         totalPrice = totalPrice.replace(/,/g, '');
                         var discount = promotion.discount;
+                    
                         var newTotalPrice = totalPrice - discount;
+                        if (newTotalPrice < 0) {
+                            newTotalPrice = 0
+                        }
                         $('#totalPrice').text(Number(newTotalPrice).toLocaleString('en-US'));
                         $('#promotion').prop('disabled', true);
                     }
@@ -489,39 +509,63 @@
                 performAjaxRequest();
             });
             // Lắng nghe sự kiện change
-            $('input[name="services[]"]').on('change', function() {
-                // get data-price
-                // Lấy mảng các giá trị đã check
-                var checked = $('input[name="services[]"]:checked').map(function() {
-                    return $(this).data('price');
-                }).get();
-                if (!checked.length) {
-                    $('#totalPrice').text(0);
-                }
-                var tottalPrice = checked.reduce(function(a, b) {
-                    return a + b;
-                });
-
+                    serviceCategories.forEach(function(category) {
+                        $('input[name="' + category.id + 'services[]"]').on('change', function() {
+            
+                var tottalPrice = 0;
                 var promoCode = $('input[name="promoCode"]').val();
                 if (promoCode) {
+                    const selectedServices = [];
+
                     const dataPromotioncode = @php echo json_encode($promotion) @endphp;
                     $.each(dataPromotioncode, function(index, promotion) {
                         if (promotion.promocode == promoCode) {
-                            var discount = promotion.discount;
-                            let newTotalPrice3 = tottalPrice - Number(discount);
-                            newTotalPrice3 = Number(newTotalPrice3).toLocaleString('en-US');
-
-                            $('#totalPrice').text(newTotalPrice3);
+                            serviceCategories.forEach(function(category) {
+                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
+                            selectedServices.push($(this).data('price'));
+                        });
+                    })
+                    tottalPrice = 0
+                    if(!selectedServices.length){
+                        tottalPrice = 0 
+                    }else{   
+                        tottalPrice = selectedServices.reduce(function(a, b) {
+                            return a + b;
+                        })
+                        var discount = promotion.discount;
+                        let newTotalPrice3 = tottalPrice - Number(discount);
+                        newTotalPrice3 = Number(newTotalPrice3).toLocaleString('en-US');
+    
+                        $('#totalPrice').text(newTotalPrice3);
+                    }
 
                         }
                     });
                 } else {
+                    const selectedServices = [];
 
+                    serviceCategories.forEach(function(category) {
+                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
+                            selectedServices.push($(this).data('price'));
+                        });
+                    })
+                    tottalPrice = 0
+                    if(!selectedServices.length){
+                        tottalPrice = 0 
+                    }else{   
+                        tottalPrice = selectedServices.reduce(function(a, b) {
+                            return a + b;
+                        })
+                    }
+                 
+                    console.log(tottalPrice);
                     $('#totalPrice').text(Number(tottalPrice).toLocaleString('en-US'));
                 }
 
             });
 
+                    });
+           
             function renderTimes(times) {
                 $('#timeSelect').empty();
 
@@ -586,7 +630,16 @@
                 var verifyInput = $('input[name="verification"]').length == 0 ? false : true;
                 if (!otpInput && !verifyInput) {
                     const form = new FormData();
-                    const selectedServices = $('input[name="services[]"]:checked');
+                    // const selectedServices = $('input[name="services[]"]:checked');
+                    const serviceCategories = @json($serviceCategories);
+                    const selectedServices = [];
+                    serviceCategories.forEach(function(category) {
+                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
+                            selectedServices.push($(this).val());
+                        });
+                    });
+                    
+                  
                     let totalPrice = $('#totalPrice').text();
                     const name = $('input[name="infoUsername"]').val() ?? "";
                     const adminId = $('input:radio[name="admin_id"]:checked').val() ?? "";
