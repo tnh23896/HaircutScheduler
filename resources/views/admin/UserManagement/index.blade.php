@@ -13,7 +13,7 @@
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10"
                                placeholder="Tìm kiếm..."
-                               value="{{ request('search') }}">
+                               value="{{ request('search') }}" style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -21,7 +21,7 @@
                 </form>
 
                 <form id="filterForm" action="{{route('admin.UserManagement.filter')}}" method="GET">
-                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
+                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()" style="border-color: #312E81">
                         <option value="">Tất cả</option>
                         <option value="0">Kích hoạt</option>
                         <option value="1">Không kích hoạt</option>
@@ -46,10 +46,10 @@
                     <tr class="intro-x">
                         <td class="text-center capitalize">{{ $item->username }}</td>
                         <td class="text-center capitalize">{{ $item->phone }}</td>
-                        <td class="text-center capitalize">{{ $item->email }}</td>
+                        <td class="text-center">{{ $item->email }}</td>
                         <td class="text-center capitalize">
                             <select class="statusSelect form-select w-full text-center w-40 sm:w-auto" data-id="{{ $item->id }}"
-                                data-current-status="{{ $item->black_status }}">
+                                data-current-status="{{ $item->black_status }}" style="border-color: #1E283B" >
                                 <option value="0" {{ $item->black_status == 0 ? 'selected' : '' }}>
                                     Kích hoạt
                                 </option>

@@ -12,7 +12,7 @@
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <form id="filterForm" action="{{ route('admin.PromotionManagement.filter') }}" method="GET">
                     <select class="w-56 xl:w-auto form-select box ml-2" name="filter" id="filterSelect"
-                        onchange="submitForm()">
+                        onchange="submitForm()" style="border-color: #312E81">
                         <option value="">Trạng thái</option>
                         <option value="active">Còn hạn</option>
                         <option value="inactive">Hết hạn</option>

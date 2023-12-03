@@ -12,7 +12,7 @@
             <form action="{{ route('admin.serviceManagement.category.search') }}" method="GET">
                 <div class="w-56 relative text-slate-500 flex items-center">
                     <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Tìm kiếm..."
-                        value="{{ request('search') }}">
+                        value="{{ request('search') }}"  style="border-color: #312E81">
                     <button type="submit">
                         <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                     </button>

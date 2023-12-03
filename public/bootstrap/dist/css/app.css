@@ -2195,7 +2195,7 @@ select{
     --tw-bg-opacity: 1;
     background-color: rgb(var(--color-slate-100) / var(--tw-bg-opacity));
 }
-:is(.dark .form-control:disabled),:is(.dark 
+:is(.dark .form-control:disabled),:is(.dark
     .form-control[readonly]){
     border-color: transparent;
     background-color: rgb(var(--color-darkmode-800) / 0.5);
@@ -2289,7 +2289,7 @@ select{
     --tw-bg-opacity: 1;
     background-color: rgb(var(--color-slate-100) / var(--tw-bg-opacity));
 }
-:is(.dark .form-select:disabled),:is(.dark 
+:is(.dark .form-select:disabled),:is(.dark
     .form-select[readonly]){
     background-color: rgb(var(--color-darkmode-800) / 0.5);
 }
@@ -15565,9 +15565,9 @@ html body{
         .full-calendar.fc-theme-standard .fc-list{
     border-color: rgb(var(--color-slate-200) / 0.6);
 }
-:is(.dark .full-calendar.fc-theme-standard .fc-scrollgrid),:is(.dark 
-        .full-calendar.fc-theme-standard th),:is(.dark 
-        .full-calendar.fc-theme-standard td),:is(.dark 
+:is(.dark .full-calendar.fc-theme-standard .fc-scrollgrid),:is(.dark
+        .full-calendar.fc-theme-standard th),:is(.dark
+        .full-calendar.fc-theme-standard td),:is(.dark
         .full-calendar.fc-theme-standard .fc-list){
     --tw-border-opacity: 1;
     border-color: rgb(var(--color-darkmode-400) / var(--tw-border-opacity));

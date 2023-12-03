@@ -15,9 +15,9 @@
                 <form action="{{ route('admin.scheduleManagement.searchDateTime') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="date" name="day" class="form-control box w-40 sm:w-auto mr-2"
-                            value="{{ request('day') }}">
+                            value="{{ request('day') }}"  style="border-color: #312E81">
                         <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10"
-                            value="{{ request('time') }}">
+                            value="{{ request('time') }}"  style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -27,7 +27,7 @@
                 <form action="{{ route('admin.scheduleManagement.search') }}" method="GET" class="mr-2">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                            placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                            placeholder="Tìm kiếm..." value="{{ request('search') }}"  style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -35,7 +35,7 @@
                 </form>
                 {{-- Form lọc theo trạng thái --}}
                 <form id="filterForm" action="{{ route('admin.scheduleManagement.filter') }}" method="GET">
-                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
+                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()"  style="border-color: #312E81">
                         <option value="">Tất cả</option>
                         <option value="pending">Chưa xác nhận</option>
                         <option value="confirmed">Đã xác nhận</option>
@@ -53,10 +53,10 @@
                     <tr>
                         <th class="whitespace-nowrap">Khách hàng</th>
                         <th class="text-center whitespace-nowrap">Tên nhân viên</th>
-                        <th class="text-center whitespace-nowrap">Số tiền thanh toán</th>
+                        <th class="text-center whitespace-nowrap">Tổng tiền</th>
+                        <th class="text-center whitespace-nowrap">Đã thanh toán</th>
                         <th class="text-center whitespace-nowrap">Lịch đặt</th>
                         <th class="text-center whitespace-nowrap">Thanh toán</th>
-                        <th class="text-center whitespace-nowrap">Thời gian tạo đơn</th>
                         <th class="text-center whitespace-nowrap">Trạng thái</th>
                         <th class="text-center whitespace-nowrap">Hành động</th>
                     </tr>
@@ -76,6 +76,7 @@
                             <td class="text-center"><a class="flex items-center justify-center"
                                     href="javascript:;">{{ $item->admin->username ?? '' }}</a></td>
                             <td class="text-center whitespace-nowrap">{{ number_format($item->total_price) }} VND</td>
+                            <td class="text-center whitespace-nowrap">{{ number_format($item->amount_paid) }} VND</td>
                             <td class="w-40">
                                 <div class="flex items-center justify-center text-center">
                                     {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}
@@ -89,11 +90,6 @@
                                 @elseif ($item->payment == 'vnpay')
                                     <span class="badge">VNPAY</span>
                                 @endif
-                            </td>
-                            <td class="text-center">
-                                {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}
-                                <br>
-                                {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
                             </td>
                             <td class="text-center">
                                 <form class="ajaxForm{{ $item->id }}" enctype="multipart/form-data">
@@ -115,6 +111,8 @@
                                     <input type="text" class="form-control w-full" placeholder="Input text"
                                         value="{{ $item->total_price }}" name="price" disabled hidden>
                                     <input type="text" class="form-control w-full" placeholder="Input text"
+                                           value="{{ $item->amount_paid }}" name="amount_paid" disabled hidden>
+                                    <input type="text" class="form-control w-full" placeholder="Input text"
                                         value="{{ $item->payment }}" name="payment" disabled hidden>
                                     <input name="schedule_time" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->time }} {{ $item->day }}"
@@ -122,7 +120,7 @@
                                     <input name="created_at" type="text" class="form-control w-full"
                                         placeholder="Input text" value="{{ $item->created_at }}" disabled hidden>
                                     <select class="statusSelect form-select w-full" data-id="{{ $item->id }}"
-                                        data-current-status="{{ $item->status }}">
+                                        data-current-status="{{ $item->status }}" style="border-color: #1E283B">
                                         @if ($item->status == 'pending')
                                             <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>
                                                 Chưa
@@ -155,15 +153,15 @@
                             </td>
                             <td class="text-center">
                                 @if ($item->status !== 'success' && $item->status !== 'canceled')
-                                    <a class="flex items-center text-warning mr-3" id="editBtn{{ $item->id }}"
+                                    <a style="color: #312E81" class="flex items-center mr-3" id="editBtn{{ $item->id }}"
                                         href="{{ route('admin.scheduleManagement.edit', $item->id) }}"> <i
                                             data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
                                 @endif
-                                <a class="flex items-center text-white mr-auto mt-3 text-lime-500
+                                <a class="flex items-center mr-auto mt-3 text-lime-500
                                 "
                                     href="{{ route('admin.scheduleManagement.scheduleDetails', $item->id) }}">
                                     <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
-                                    Xem chi tiết</a>
+                                    Chi tiết dịch vụ</a>
                             </td>
                         </tr>
                     </tbody>
@@ -207,6 +205,7 @@
                         formData.append('promo_id', checkid.find('input[name="promo_id"]').val());
                         formData.append('email', checkid.find('input[name="email"]').val());
                         formData.append('price', checkid.find('input[name="price"]').val());
+                        formData.append('amount_paid', checkid.find('input[name="amount_paid"]').val());
                         formData.append('schedule_time', checkid.find('input[name="schedule_time"]')
                             .val());
                         formData.append('created_at', checkid.find('input[name="created_at"]')

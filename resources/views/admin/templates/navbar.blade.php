@@ -442,18 +442,18 @@
                     <li class="p-2">
                         <div class="font-medium">{{ auth('admin')->user()->username }}</div>
                         @foreach (auth('admin')->user()->getRoleNames() as $v)
-                            <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">{{ $v }}</div>
+                            <div class="text-xs text-black/70 mt-0.5 dark:text-slate-500">{{ $v }}</div>
                         @endforeach
                     </li>
                     <li>
-                        <hr class="dropdown-divider border-white/[0.08]">
+                        <hr class="dropdown-divider border-black/[0.08]">
                     </li>
                     <li>
                         <a href="{{ route('admin.profile.edit') }}" class="dropdown-item hover:bg-white/5"> <i
                                 data-lucide="user" class="w-4 h-4 mr-2"></i> Thông tin cá nhân </a>
                     </li>
                     <li>
-                        <hr class="dropdown-divider border-white/[0.08]">
+                        <hr class="dropdown-divider border-black/[0.08]">
                     </li>
                     <li>
                         <a href="{{ route('admin.auth.logout') }}" class="dropdown-item hover:bg-white/5"> <i
@@ -499,7 +499,7 @@
         function updateAdminNotifications(data) {
             var adminNotifications = document.querySelector('#admin-notifications');
             var html = `
-          <hr style="height: 1px" class="mx-auto my-4 bg-white border-0 rounded md:my-10 dark:bg-gray-700">
+          <hr style="height: 1px; color: #312E81;" class="mx-auto my-4 bg-black border-0 rounded md:my-10 dark:bg-gray-700">
           <div class="ml-2 overflow-hidden">
             <div class="flex items-center">
               <a href="javascript:;" class="font-medium truncate mr-5">${data.message.message}</a>
