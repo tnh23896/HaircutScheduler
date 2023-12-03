@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Bảng điều khiển')
+@section('title', 'Thống kê dịch vụ')
 @section('content')
     <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 2xl:col-span-12">
@@ -7,7 +7,7 @@
                 <div class="col-span-12 sm:col-span-6 lg:col-span-6 mt-8">
                     <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center" style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Thống kê lịch đặt
+                            Thống kê dịch vụ
                         </h2>
                         <form id="filterTopService" method="POST">
                             @csrf
