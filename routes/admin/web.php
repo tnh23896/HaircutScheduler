@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Statistical\EmployeeAndCustomerStatisticsControll
 use App\Http\Controllers\Admin\Statistical\RevenueStatisticsController;
 use App\Http\Controllers\Admin\Statistical\ScheduleStatisticsController;
 use App\Http\Controllers\Admin\Statistical\ServiceUsageStatisticsController;
+use App\Http\Controllers\Admin\Statistical\timeStatisticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -298,7 +299,7 @@ Route::group(['middleware' => 'admin'], function () {
     //Statistical
     Route::get('schedule-statistics', [ScheduleStatisticsController::class, 'index'])
         ->name('admin.Statistical.scheduleStatistics');
-    Route::post('/schedule-by-time', [ScheduleStatisticsController::class, 'scheduleSetbyTime'])
+    Route::post('/schedule-by-time', [ScheduleStatisticsController::class, 'search'])
         ->name('admin.schedulebyTime');
     Route::get('revenue-statistics', [RevenueStatisticsController::class, 'index'])
         ->name('admin.Statistical.revenueStatistics');
@@ -314,4 +315,5 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.topBooker');
     Route::post('/top-employees', [EmployeeAndCustomerStatisticsController::class, 'topEmployee'])
         ->name('admin.topEmployees');
+
 });

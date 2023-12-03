@@ -2,101 +2,75 @@
 
 namespace App\Http\Controllers\Admin\Statistical;
 
-use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ScheduleStatisticsController extends Controller
 {
     public function index()
     {
-        $data = $this->baseScheduleSetbyTime();
-        return view('admin.Statistical.scheduleStatistics',compact('data'));
+		$timeslots = $this->mostUsedTime();
+        return view('admin.Statistical.scheduleStatistics',compact('timeslots'));
     }
 
-    public function ScheduleSetbyTime(Request $request)
-	{
-		$data = $this->baScheduleSetbyTime($request);
-		return response()->json(['data' => $data]);
-	}
+	 public function search(Request $request)
+    {
+        $timeslots = $this->searchMostUsedTime($request);
+        return response()->json(['timeslots' => $timeslots]);
+    }
 
-    // Tổng hợp dữ liệu của tất cả
-	private function baseScheduleSetbyTime()
-	{
-		$query = Booking::selectRaw('MONTH(day) as month, COUNT(*) as totalBookings')
-			->selectRaw('SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings')
-			->selectRaw('SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings')
-			->groupBy('month')
-			->orderBy('month', 'asc');
+    private function mostUsedTime()
+    {
+        $timeslots = DB::table('times')
+            ->leftJoin('bookings', function ($join) {
+                $join->on('times.time', '=', 'bookings.time')
+                    ->whereYear('bookings.day', now()->year)
+                    ->whereMonth('bookings.day', now()->month);
+            })
+            ->select(
+                'times.id',
+                'times.time',
+                DB::raw('COUNT(CASE WHEN bookings.status = "success" THEN 1 END) as successful_booking_count'),
+                DB::raw('COUNT(CASE WHEN bookings.status = "canceled" THEN 1 END) as canceled_booking_count'),
+                DB::raw('COUNT(bookings.id) as total_booking_count')
+            )
+            ->groupBy('times.id', 'times.time')
+            ->get();
 
-		$result = $query->get();
+        return $timeslots;
+    }
+    private function searchMostUsedTime(Request $request)
+    {
+        $startDate = $request->start_date; 
+        $endDate = $request->end_date;   
+        $timeslots = DB::table('times')
+            ->leftJoin('bookings', function ($join) use ($startDate, $endDate) {
+                $join->on('times.time', '=', 'bookings.time');
 
-		$data = [];
-		foreach ($result as $row) {
-			$data[$row->month] = [
-				'totalBookings' => $row->totalBookings,
-				'successfulBookings' => $row->successfulBookings,
-				'cancelledBookings' => $row->cancelledBookings,
-			];
-		}
+                // Kiểm tra nếu cả hai ngày đều không rỗng thì sử dụng whereBetween
+                if (!empty($startDate) && !empty($endDate)) {
+                    $join->whereBetween('bookings.day', [$startDate, $endDate]);
+                } else {
+                    // Nếu có ít nhất một ngày rỗng, kiểm tra từng ngày để sử dụng whereDate
+                    if (!empty($startDate)) {
+                        $join->whereDate('bookings.day', $startDate);
+                    } elseif (!empty($endDate)) {
+                        $join->whereDate('bookings.day', $endDate);
+                    }
+                }
+            })
+            ->select(
+                'times.id',
+                'times.time',
+                DB::raw('COUNT(CASE WHEN bookings.status = "success" THEN 1 END) as successful_booking_count'),
+                DB::raw('COUNT(CASE WHEN bookings.status = "canceled" THEN 1 END) as canceled_booking_count'),
+                DB::raw('COUNT(bookings.id) as total_booking_count')
+            )
+            ->groupBy('times.id', 'times.time')
+            ->get();
 
-		$allMonths = range(1, 12);
-		foreach ($allMonths as $month) {
-			if (!isset($data[$month])) {
-				$data[$month] = [
-					'totalBookings' => 0,
-					'successfulBookings' => 0,
-					'cancelledBookings' => 0,
-				];
-			}
-		}
-
-		return $data;
-	}
-
-    // Lọc theo tháng và năm
-	private function baScheduleSetbyTime(Request $request)
-	{
-		$month = $request->month;
-		$year = $request->year;
-
-		$query = Booking::selectRaw('
-            MONTH(day) as month,
-            COUNT(*) as totalBookings,
-            SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings,
-            SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings
-        ')
-			->when($month, function ($query, $month) {
-				return $query->whereMonth('day', $month);
-			})
-			->when($year, function ($query, $year) {
-				return $query->whereYear('day', $year);
-			})
-			->groupBy('month')
-			->orderBy('month');
-
-		$result = $query->get();
-
-		$data = [];
-		foreach ($result as $row) {
-			$data[$row->month] = [
-				'totalBookings' => $row->totalBookings,
-				'successfulBookings' => $row->successfulBookings,
-				'cancelledBookings' => $row->cancelledBookings,
-			];
-		}
-
-		$allMonths = range(1, 12);
-		foreach ($allMonths as $month) {
-			if (!isset($data[$month])) {
-				$data[$month] = [
-					'totalBookings' => 0,
-					'successfulBookings' => 0,
-					'cancelledBookings' => 0,
-				];
-			}
-		}
-
-		return $data;
-	}
+        return $timeslots;
+    }
 }

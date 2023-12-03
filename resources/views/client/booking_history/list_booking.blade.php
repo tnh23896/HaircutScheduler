@@ -14,7 +14,7 @@
         <tbody>
             @foreach ($list_booking as $booking)
                 <tr>
-                    <td class="text-nowrap text-center">{{ $booking->admin->username }}</td>
+                    <td class="text-nowrap text-center">{{ $booking->admin->username ?? '' }}</td>
                     <td class="text-nowrap text-center">{{ number_format($booking->total_price) }} VND</td>
                     <td class="text-nowrap text-center">{{ number_format($booking->promotion->discount ?? 0) }} VND</td>
                     <td class="text-nowrap text-center">{{ number_format($booking->amount_paid) }} VND</td>

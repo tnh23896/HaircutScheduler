@@ -306,30 +306,31 @@
                                                 </svg></span>
                                         </div>
                                     </div>
-                                    <div class="overflow-hidden">
-                                        <div class="position-relative">
-                                            <div class="service-prices">
-                                                <div class="sec-img position-relative">
-                                                    <div class="sec-radius text-center">
-                                                        <input type="radio" name="admin_id" id="admin_"
-                                                            value="random" checked hidden>
-                                                        <label for="admin_">
-                                                            <div style="width: 145px;height: 145px;border-radius: 9999px">
-                                                                <img class=""
-                                                                    style="width: 100%;height: 100%;object-fit:cover;border:none"
-                                                                    src="{{ asset('dist/images/default.jpg') }}"
-                                                                    alt="nhân viên">
-                                                            </div>
-                                                        </label>
+                                    <div class="barber-slider">
+                                        <div class="overflow-hidden">
+                                            <div class="position-relative">
+                                                <div class="service-prices">
+                                                    <div class="sec-img position-relative">
+                                                        <div class="sec-radius text-center">
+                                                            <input type="radio" name="admin_id" id="admin_"
+                                                                value="random" checked hidden>
+                                                            <label for="admin_">
+                                                                <div
+                                                                    style="width: 145px;height: 145px;border-radius: 9999px">
+                                                                    <img class=""
+                                                                        style="width: 100%;height: 100%;object-fit:cover;border:none"
+                                                                        src="{{ asset('dist/images/default.jpg') }}"
+                                                                        alt="nhân viên">
+                                                                </div>
+                                                            </label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="text-center featured-area">
-                                                    <h5><a href="" style="color: black">Chọn hộ</a></h5>
+                                                    <div class="text-center featured-area">
+                                                        <h5><a href="" style="color: black">Chọn hộ</a></h5>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="barber-slider">
                                         @foreach ($staffMembers as $staff)
                                             <div class="">
                                                 <div class="text-center">
