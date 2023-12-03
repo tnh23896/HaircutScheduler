@@ -493,19 +493,27 @@ class ScheduleController extends Controller
                     $sum_price += $item->price;
                 }
             }
+            $promo = Promotion::where('id', $data->promo_id)->first();
+            if ($promo) {
+                
+                $sum_price_end = $sum_price - $promo->discount;
+            }else{
+                $sum_price_end = $sum_price;
+            }
             if ($data->status == "success") {
                 $bill = Bill::create([
                     'name' => $data->name,
                     'user_id' => $data->user_id,
                     'admin_id' => $data->admin_id,
                     'phone' => $data->phone,
-                    'total_price' => $data->total_price,
+                    'total_price' => $sum_price_end,
                     'email' => $data->email,
                     'day' => $data->day,
                     'time' => $data->time,
                     'payment' => $data->payment,
                 ]);
-
+                
+                
                 foreach ($data->booking_details as $item) {
                     if ($item->status == "success") {
                         $bill_detail = $bill->bill_details()->create([

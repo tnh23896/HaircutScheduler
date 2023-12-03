@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\ScheduleManagement;
 
-use App\Http\Controllers\Controller;
 use App\Models\Booking;
-use App\Models\BookingDetail;
 use App\Models\Service;
+use App\Models\Promotion;
 use Illuminate\Http\Request;
+use App\Models\BookingDetail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ScheduleDetailsController extends Controller
@@ -26,7 +27,6 @@ class ScheduleDetailsController extends Controller
                     'status' => 'success',
                     'name' => $service->name,
                     'price' => $service->price,
-                    'admin_id' => Auth::guard('admin')->user()->id,
                 ]);
             }
             return redirect()->back()->with('success', 'Cập nhật thành công');
@@ -52,20 +52,40 @@ class ScheduleDetailsController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
+    {    
+        $booking = Booking::query()->findOrFail($id);
+         $sum_price = 0;
+        foreach ($booking->booking_details as $item) {
+            if ($item->status == "success") {
+                $sum_price += $item->price;
+            }
+        }
+        $promo = Promotion::where('id', $booking->promo_id)->first();
+        if ($promo) {
+            
+            $sum_price_end = $sum_price - $promo->discount;
+        }else{
+            $sum_price_end = $sum_price;
+        }
+        if($booking->amount_paid > $sum_price_end){
+            $retun_price = $booking->amount_paid - $sum_price_end;
+        }elseif($booking->amount_paid < $sum_price_end){
+            $retun_price = $sum_price_end - $booking->amount_paid;
+        }else{
+            $retun_price = 0;
+        }
         $item = Booking::query()->findOrFail($id);
         $servicesNotInBooking = Service::whereDoesntHave('booking_details', function ($query) use ($id) {
             $query->where('booking_id', $id);
         })->get();
-
-        return view('admin.ScheduleManagement.scheduleDetails', compact('item', 'servicesNotInBooking'));
+        return view('admin.ScheduleManagement.scheduleDetails', compact('item', 'servicesNotInBooking','sum_price_end','sum_price'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
+    {   
         try {
             $booking = Booking::query()->findOrFail($id);
             $allIds = $booking->booking_details()->pluck('id');
@@ -73,15 +93,29 @@ class ScheduleDetailsController extends Controller
             foreach ($request->status as $value) {
                 $bookingDetail = BookingDetail::query()->findOrFail($value);
                 $bookingDetail->status = "success";
-                $bookingDetail->admin_id = Auth::guard('admin')->user()->id;
                 $bookingDetail->save();
             }
             foreach ($uncheckedIds as $value) {
                 $bookingDetail = BookingDetail::query()->findOrFail($value);
                 $bookingDetail->status = "cancel";
-                $bookingDetail->admin_id = Auth::guard('admin')->user()->id;
                 $bookingDetail->save();
             }
+            $sum_price = 0;
+            foreach ($booking->booking_details as $item) {
+                if ($item->status == "success") {
+                    $sum_price += $item->price;
+                }
+            }
+            $promo = Promotion::where('id', $booking->promo_id)->first();
+            if ($promo) {
+
+                $sum_price_end = $sum_price - $promo->discount;
+            }else{
+                $sum_price_end = $sum_price;
+            }
+            Booking::where('id', $id)->update([
+                'total_price' => $sum_price_end,
+            ]);
             return redirect()->back()->with('success', 'Cập nhật thành công');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Cập nhật thất bại');
