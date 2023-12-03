@@ -12,7 +12,7 @@
                 <form action="{{ route('admin.rating.search') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                            placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                            placeholder="Tìm kiếm..." value="{{ request('search') }}" style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -20,7 +20,7 @@
                 </form>
             </div>
             <form id="filterForm" action="{{ route('admin.rating.filter') }}" method="GET">
-                <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()">
+                <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()" style="border-color: #312E81">
                     <option value="">Tất cả</option>
                     @foreach ($category as $item)
                         <option value="{{ $item->id }}" class="flex items-center">

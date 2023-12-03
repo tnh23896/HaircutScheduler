@@ -30,8 +30,8 @@
                             <div class="preview">
                                 <div class="mt-3">
                                     <div>
-                                        <label class="form-label mr-4 font-bold text-lg" for="selectAll">Chọn tất cả</label>
-                                        <input type="checkbox" class="form-check-input mb-1" id="selectAll">
+                                        <label class="form-label mr-2 font-bold text-lg" for="selectAll">Chọn tất cả</label>
+                                        <input type="checkbox" style="border-color: #312E81" class="mb-1 form-check-input" id="selectAll">
                                     </div>
                                     <div class="grid grid-cols-4 sm:grid-cols-2 gap-2">
                                         @foreach (config('permissions') as $key => $permission)
@@ -40,7 +40,7 @@
                                                 @foreach ($permission as $keys => $value)
                                                     <div class="form-check mt-2">
                                                         <input id="checkbox-switch-1 {{ $keys }}"
-                                                            name="permissions[]" class="jqr-checkbox form-check-input"
+                                                            name="permissions[]" style="border-color: #312E81" class="jqr-checkbox form-check-input"
                                                             type="checkbox" value="{{ $keys }}"
                                                             {{ in_array($keys, $permissions) ? 'checked' : '' }}>
                                                         <label class="form-check-label"

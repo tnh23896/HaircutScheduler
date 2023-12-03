@@ -3,8 +3,9 @@
     <table>
         <thead>
             <th class="text-nowrap text-center">Thợ cắt tóc</th>
+            <th class="text-nowrap text-center">Tổng tiền</th>
             <th class="text-nowrap text-center">Giảm giá</th>
-            <th class="text-nowrap text-center">Số tiền thanh toán</th>
+            <th class="text-nowrap text-center">Đã thanh toán</th>
             <th class="text-nowrap text-center">Thanh toán</th>
             <th class="text-nowrap text-center">Lịch đặt</th>
             <th class="text-nowrap text-center">Trạng thái</th>
@@ -14,8 +15,9 @@
             @foreach ($list_booking as $booking)
                 <tr>
                     <td class="text-nowrap text-center">{{ $booking->admin->username ?? '' }}</td>
-                    <td class="text-nowrap text-center">{{ number_format($booking->promotion->discount ?? 0) }} VND</td>
                     <td class="text-nowrap text-center">{{ number_format($booking->total_price) }} VND</td>
+                    <td class="text-nowrap text-center">{{ number_format($booking->promotion->discount ?? 0) }} VND</td>
+                    <td class="text-nowrap text-center">{{ number_format($booking->amount_paid) }} VND</td>
                     <td class="text-nowrap text-center">
                         @if ($booking->payment == 'offline')
                         <span class="">Tại cửa hàng</span>
@@ -80,7 +82,7 @@
                             background-color: #d9842f;
                             border: none;
                             font-size: 13px;">
-                                Xem chi tiết
+                                Chi tiết dịch vụ
                             </button>
                         </a>
                         <br>

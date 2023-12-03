@@ -91,17 +91,37 @@
 
                 <div class="col-span-12 xl:col-span-12 mt-6">
                     <div class="col-span-12 lg:col-span-12">
+
                         <div class="intro-y h-10">
+
                             <h2 class="text-lg font-medium truncate mr-5">
                                 Thống kê doanh thu
                             </h2>
                         </div>
                         <div class="intro-y box p-5 mt-12 sm:mt-5">
+                            <div class="mb-3 ml-3">
+                                <div class="flex">
+                                    <div>
+                                        <div class="text-slate-500 text-lg xl:text-xl font-medium">
+                                            {{ number_format($revenue) }} VND</div>
+                                        <div class="mt-0.5 text-slate-500">Hôm qua</div>
+                                    </div>
+                                    <div
+                                        class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5">
+                                    </div>
+                                    <div>
+                                        <div class=" dark:text-slate-300 text-lg xl:text-xl font-medium">
+                                            {{ number_format($revenueDay) }} VND
+                                        </div>
+                                        <div class="mt-0.5 text-slate-500">Hôm nay</div>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div id="vertical-bar-chart" class="p-5">
                                 <div class="preview">
                                     <div class="h-[400px]">
-                                        <canvas id="vertical-widget"
-                                            data-fil-data="{{ json_encode($totalRevenue) }}">
+                                        <canvas id="vertical-widget" data-fil-data="{{ json_encode($totalRevenue) }}">
                                         </canvas>
                                     </div>
                                 </div>
@@ -143,7 +163,7 @@
                                         <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                             <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                                 <img alt="Employee Avatar"
-                                                    src="{{$employee['avatar'] === 'default.jpg' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
+                                                    src="{{ $employee['avatar'] === 'default.jpg' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
                                             </div>
                                             <div class="ml-4 mr-auto">
                                                 <div class="font-medium text-lg">{{ $employee['username'] }}</div>
@@ -269,7 +289,8 @@
                             </div>
                         </div>`).join('');
                         } else {
-                            employeeItemHtml = '<p class ="text-center text-gray-500">Không có dữ liệu.</p>';
+                            employeeItemHtml =
+                                '<p class ="text-center text-gray-500">Không có dữ liệu.</p>';
                         }
 
                         $('#topEmployeesContent').html(employeeItemHtml);

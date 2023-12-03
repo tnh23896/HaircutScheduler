@@ -9,15 +9,18 @@ use Illuminate\Http\Request;
 
 class RevenueStatisticsController extends Controller
 {
-    public function index(){
-        $totalRevenue = $this->calculateBillRevenue();
+	public function index()
+	{
+		$totalRevenue = $this->calculateBillRevenue();
 		$lastMonthrevenue = $this->revenue();
 		$revenue = $this->currentMonthRevenue();
-        return view('admin.Statistical.revenueStatistics',
-                compact('totalRevenue','lastMonthrevenue','revenue'));
-    }
+		return view(
+			'admin.Statistical.revenueStatistics',
+			compact('totalRevenue', 'lastMonthrevenue', 'revenue')
+		);
+	}
 
-    private function revenue()
+	private function revenue()
 	{
 		// Lấy ngày hiện tại
 		$today = Carbon::now();
@@ -30,8 +33,7 @@ class RevenueStatisticsController extends Controller
 		$currentYear = $firstDayOfLastMonth->format('Y');
 
 		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NULL THEN total_price ELSE total_price - promotions.discount END) as totalRevenues')
-			->leftJoin('promotions', 'bills.promo_id', '=', 'promotions.id')
+			->selectRaw('SUM(total_price) as totalRevenues')
 			->when($lastMonth, function ($query) use ($lastMonth) {
 				return $query->whereMonth('day', $lastMonth);
 			})
@@ -47,7 +49,7 @@ class RevenueStatisticsController extends Controller
 		return $data;
 	}
 
-    private function currentMonthRevenue()
+	private function currentMonthRevenue()
 	{
 		// Lấy ngày hiện tại
 		$today = Carbon::now();
@@ -60,8 +62,7 @@ class RevenueStatisticsController extends Controller
 		$currentYear = $firstDayOfCurrentMonth->format('Y');
 
 		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-			->selectRaw('SUM(CASE WHEN promo_id IS NULL THEN total_price ELSE total_price - promotions.discount END) as totalRevenues')
-			->leftJoin('promotions', 'bills.promo_id', '=', 'promotions.id')
+			->selectRaw('SUM(total_price) as totalRevenues')
 			->when($currentMonth, function ($query) use ($currentMonth) {
 				return $query->whereMonth('day', $currentMonth);
 			})
@@ -83,13 +84,32 @@ class RevenueStatisticsController extends Controller
 		return response()->json(['totalRevenue' => $totalRevenue]);
 	}
 
-    // Tổng hợp dữ liệu của doanh thu của bill
+	// Tổng hợp dữ liệu của doanh thu của bill
 	private function calculateBillRevenue()
 	{
+		// Lấy ngày hiện tại
+		$today = Carbon::now();
+
+		// Lấy ngày đầu tiên của tháng hiện tại
+		$firstDayOfCurrentMonth = $today->firstOfMonth();
+
+		// Lấy tháng và năm của tháng hiện tại
+		$currentMonth = $firstDayOfCurrentMonth->format('n');
+		$currentYear = $firstDayOfCurrentMonth->format('Y');
+
 		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-                ->selectRaw('SUM(total_price) as totalRevenues') // chỉ tính tổng tiền mà không tính giảm giá
-                ->groupBy('month')
-                ->orderBy('month', 'asc');
+			->selectRaw('SUM(total_price) as totalRevenues') // chỉ tính tổng tiền mà không tính giảm giá
+			->selectRaw('SUM(CASE WHEN shifts.id = 1 THEN bills.total_price ELSE 0 END) as ca1') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 2 THEN bills.total_price ELSE 0 END) as ca2') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 3 THEN bills.total_price ELSE 0 END) as ca3') // Tính tổng doanh thu cho ca có shift_id = 1
+			->join('times', 'bills.time', '=', 'times.time')
+			->join('shifts', 'times.shift_id', '=', 'shifts.id')
+			->when($currentYear, function ($query) use ($currentYear) {
+				return $query->whereYear('day', $currentYear);
+			})
+			->groupBy('month')
+			->orderBy('month', 'asc');
+
 		$filteredData = $query->get();
 
 		$totalRevenue = [];
@@ -97,7 +117,10 @@ class RevenueStatisticsController extends Controller
 		foreach ($filteredData as $row) {
 			$totalRevenue[$row->month] = [
 				'totalRevenues' => $row->totalRevenues,
-				'totalBills' => $row->totalBills
+				'totalBills' => $row->totalBills,
+				'ca1' => $row->ca1,
+				'ca2' => $row->ca2,
+				'ca3' => $row->ca3
 			];
 		}
 
@@ -108,6 +131,9 @@ class RevenueStatisticsController extends Controller
 				$totalRevenue[$month] = [
 					'totalRevenues' => 0,
 					'totalBills' => 0,
+					'ca1' => 0,
+					'ca2' => 0,
+					'ca3' => 0
 				];
 			}
 		}
@@ -120,9 +146,12 @@ class RevenueStatisticsController extends Controller
 		$year = $request->year;
 
 		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
-                ->selectRaw('SUM(total_price) as totalRevenues') // chỉ tính tổng tiền mà không tính giảm giá
-                ->groupBy('month')
-                ->orderBy('month', 'asc')
+			->selectRaw('SUM(total_price) as totalRevenues') // chỉ tính tổng tiền mà không tính giảm giá
+			->selectRaw('SUM(CASE WHEN shifts.id = 1 THEN bills.total_price ELSE 0 END) as ca1') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 2 THEN bills.total_price ELSE 0 END) as ca2') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 3 THEN bills.total_price ELSE 0 END) as ca3') // Tính tổng doanh thu cho ca có shift_id = 1
+			->join('times', 'bills.time', '=', 'times.time')
+			->join('shifts', 'times.shift_id', '=', 'shifts.id')
 			->when($month, function ($query, $month) {
 				return $query->whereMonth('day', $month);
 			})
@@ -139,17 +168,23 @@ class RevenueStatisticsController extends Controller
 		foreach ($result as $row) {
 			$totalRevenue[$row->month] = [
 				'totalRevenues' => $row->totalRevenues,
-				'totalBills' => $row->totalBills
+				'totalBills' => $row->totalBills,
+				'ca1' => $row->ca1,
+				'ca2' => $row->ca2,
+				'ca3' => $row->ca3,
 			];
 		}
 
 		$allMonths = range(1, 12);
-        
+
 		foreach ($allMonths as $month) {
 			if (!isset($totalRevenue[$month])) {
 				$totalRevenue[$month] = [
 					'totalRevenues' => 0,
 					'totalBills' => 0,
+					'ca1' => 0,
+					'ca2' => 0,
+					'ca3' => 0,
 				];
 			}
 		}

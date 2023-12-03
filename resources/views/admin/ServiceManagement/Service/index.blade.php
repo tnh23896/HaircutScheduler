@@ -13,7 +13,7 @@
                 <form action="{{ route('admin.serviceManagement.service.search') }}" method="GET">
                     <div class="w-56 relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-56 box pr-10" placeholder="Tìm kiếm..."
-                            value="{{ request('search') }}">
+                            value="{{ request('search') }}"  style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -21,7 +21,7 @@
                 </form>
                 <form id="categoryFilter" action="{{ route('admin.serviceManagement.service.filter') }}" method="GET">
                     <select id="filterCategorySelect" name="filter" class="tom-select w-56 xl:w-auto box ml-2"
-                        style="width: 150px" onchange="submitForm()">
+                        style="width: 150px;" onchange="submitForm()" >
                         <option value="0" {{ request('filter') == '' ? 'selected' : '' }}>Danh mục</option>
                         @foreach ($categoryService as $service)
                             <option value="{{ $service->id }}" {{ request('filter') == $service->id ? 'selected' : '' }}>

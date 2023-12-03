@@ -13,7 +13,7 @@
                 <form action="{{ route('admin.blogManagement.category.search') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                            placeholder="Tìm kiếm..." value="{{ request('search') }}">
+                            placeholder="Tìm kiếm..." value="{{ request('search') }}" style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>

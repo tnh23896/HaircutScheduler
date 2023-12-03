@@ -5,20 +5,23 @@
         <div class="col-span-12 2xl:col-span-12">
             <div class="col-span-12 lg:col-span-4 mt-8">
                 <div class="col-span-12 lg:col-span-12">
-                    <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center" style="display: flex;justify-content: space-between">
+                    <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center"
+                        style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
                             Thống kê doanh thu
                         </h2>
                         <form id="filterFormRevenue" method="POST">
                             @csrf
                             <div class="flex">
-                                <select name="month" id="month" class="tom-select tomselected mx-3" style="width:8rem;">
+                                <select name="month" id="month" class="tom-select tomselected mx-3"
+                                    style="width:8rem;">
                                     <option value="0" selected="true">Chọn tháng</option>
                                     @for ($i = 1; $i <= 12; $i++)
                                         <option value="{{ $i }}">Tháng {{ $i }}</option>
                                     @endfor
                                 </select>
-                                <select name="year" id="year" class="tom-select tomselected mx-3" style="width:8rem;">
+                                <select name="year" id="year" class="tom-select tomselected mx-3"
+                                    style="width:8rem;">
                                     <option value="0" selected="true">Chọn năm</option>
                                     @for ($year = 1990; $year <= 2030; $year++)
                                         <option value="{{ $year }}">Năm {{ $year }}</option>
@@ -40,18 +43,19 @@
                         <div class="mb-3 ml-3">
                             <div class="flex">
                                 <div>
-                                    <div class="text-primary dark:text-slate-300 text-lg xl:text-xl font-medium">
-                                        {{ number_format($revenue) }} VND
-                                    </div>
-                                    <div class="mt-0.5 text-slate-500">Tháng này</div>
+                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">
+                                        {{ number_format($lastMonthrevenue) }} VND</div>
+                                    <div class="mt-0.5 text-slate-500">Tháng trước</div>
                                 </div>
                                 <div
                                     class="w-px h-12 border border-r border-dashed border-slate-200 dark:border-darkmode-300 mx-4 xl:mx-5">
                                 </div>
+
                                 <div>
-                                    <div class="text-slate-500 text-lg xl:text-xl font-medium">
-                                        {{ number_format($lastMonthrevenue) }} VND</div>
-                                    <div class="mt-0.5 text-slate-500">Tháng trước</div>
+                                    <div class="dark:text-slate-300 text-lg xl:text-xl font-medium">
+                                        {{ number_format($revenue) }} VND
+                                    </div>
+                                    <div class="mt-0.5 text-slate-500">Tháng này</div>
                                 </div>
                             </div>
 

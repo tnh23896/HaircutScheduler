@@ -76,37 +76,37 @@
                         <div class="barber-list-2">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 2</h5>
-                                <h5 class="text-color">8 giờ - 21 giờ</h5>
+                                <h5 class="text-color">8 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 3</h5>
-                                <h5 class="text-color p-0 m-0">8 giờ - 21 giờ</h5>
+                                <h5 class="text-color p-0 m-0">8 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 4</h5>
-                                <h5 class="text-color">8 giờ - 21 giờ</h5>
+                                <h5 class="text-color">8 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 5</h5>
-                                <h5 class="text-color">8 giờ - 21 giờ</h5>
+                                <h5 class="text-color">8 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 6</h5>
-                                <h5 class="text-color">8 giờ - 21 giờ</h5>
+                                <h5 class="text-color">8 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Thứ 7</h5>
-                                <h5 class="text-color">8 giờ - 21 giờ</h5>
+                                <h5 class="text-color">8 giờ - 20 giờ</h5>
                             </div>
                             <hr>
                             <div class="d-flex w-100 justify-content-between">
                                 <h5>Chủ nhật</h5>
-                                <h5 class="text-color">8 giờ - 21 giờ</h5>
+                                <h5 class="text-color">8 giờ - 20 giờ</h5>
                             </div>
                         </div>
                     </div>
