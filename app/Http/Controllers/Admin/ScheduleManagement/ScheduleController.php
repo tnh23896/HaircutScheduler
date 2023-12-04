@@ -33,10 +33,13 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $data = Booking::latest()->paginate(10);
+        $data = Booking::withTrashed()
+            ->join('admins', 'bookings.admin_id', '=', 'admins.id') 
+            ->select('bookings.*', 'admins.username')
+            ->latest()
+            ->paginate(10);
         return view('admin.ScheduleManagement.index', compact('data'));
-    }
-
+    }   
 
     public function search(Request $request)
     {
