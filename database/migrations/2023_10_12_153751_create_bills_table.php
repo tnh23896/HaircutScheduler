@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('email');
             $table->date('day');
             $table->time('time');
-            $table->enum('payment', ['offline', 'vnpay'])->default('offline');
+            $table->enum('payment', ['offline', 'vnpay', 'momo'])->default('offline');
             $table->timestamps();
             $table->softDeletes();
         });

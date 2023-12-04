@@ -60,7 +60,7 @@
                                 </div>
                             </td>
                             <td class="text-center"><a class="flex items-center justify-center"
-                                    href="javascript:;">{{ $item->admin->username ?? '' }}</a></td>
+                                    href="javascript:;">{{ $item->username ?? '' }}</a></td>
                             <td class="text-center">{{ number_format($item->total_price) }} VND</td>
                             <td class="text-center">
                                 @if ($item->payment == 'offline')
@@ -173,11 +173,12 @@
                                 </table>
                             </div>
                             <div class="sm:text-left sm:ml-auto py-5" style="text-align: right">
-                                <div class="text-lg	">Giảm giá:
-                                    {{ number_format($item->promotion) ?? '' }} VND</div>
-                            </div>
-                                <div class="text-lg	">Số tiền phải thanh toán:
-                                    {{ number_format($item->total_price) }} VND</div>
+                                <div class="text-base">Giảm giá:
+                                    {{ number_format($item->promotion->discount ?? 0) }} VND <br>
+                                    <div class="text-base">Số tiền phải thanh toán:
+                                        {{ number_format($item->total_price) }} VND
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="px-5 sm:px-20 pb-10 sm:pb-20 flex flex-col-reverse sm:flex-row">

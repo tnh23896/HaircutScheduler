@@ -163,7 +163,7 @@
                                         <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                             <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                                 <img alt="Employee Avatar"
-                                                    src="{{ $employee['avatar'] === 'default.jpg' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
+                                                    src="{{ $employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
                                             </div>
                                             <div class="ml-4 mr-auto">
                                                 <div class="font-medium text-lg">{{ $employee['username'] }}</div>

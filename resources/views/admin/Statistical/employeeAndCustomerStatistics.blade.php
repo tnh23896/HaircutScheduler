@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Bảng điều khiển')
+@section('title', 'Thống kê nhân viên và khách hàng')
 @section('content')
     <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 xl:col-span-8 mt-6">
@@ -112,7 +112,7 @@
                                 {{-- Display employee information --}}
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                     <img alt="Employee Avatar"
-                                        src="{{$employee['avatar'] === 'default.jpg' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">                        
+                                        src="{{$employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">                        
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">{{ $employee['username'] }}</div>

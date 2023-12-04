@@ -35,10 +35,13 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $data = Booking::latest()->paginate(10);
+        $data = Booking::withTrashed()
+            ->join('admins', 'bookings.admin_id', '=', 'admins.id') 
+            ->select('bookings.*', 'admins.username')
+            ->latest()
+            ->paginate(10);
         return view('admin.ScheduleManagement.index', compact('data'));
-    }
-
+    }   
 
     public function search(Request $request)
     {
@@ -330,7 +333,7 @@ class ScheduleController extends Controller
                 ->where('work_schedule_details.time_id', $time->id)
                 ->where('work_schedule_details.work_schedules_id', $workSchedule->id);
             if ($findWorkScheduleDetail->first()->status == 'unavailable') {
-                throw new Exception('Lịch đã được đặt rồi', 400);
+                throw new Exception('Lịch đã được đặt. Vui lòng chọn một lịch khác.', 400);
             }
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
             

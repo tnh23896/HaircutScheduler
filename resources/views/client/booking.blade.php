@@ -244,16 +244,27 @@
                                                                                 class="mb-0 font-weight-semibold d-block">{{ number_format($service->price) }}
                                                                                 VND
                                                                             </span>
-
-                                                                            <label class="check mt-1">
-                                                                                <input type="checkbox"
-                                                                                    id="service_{{ $service->id }}"
-                                                                                    name="services[]"
-                                                                                    value="{{ $service->id }}"
-                                                                                    data-price="{{ $service->price }}">
-                                                                                <span type="button"
-                                                                                    class="btn ">Chọn</span>
-                                                                            </label>
+                                                                            @if ($category->can_choose == 'one')
+                                                                                <label class="check mt-1">
+                                                                                    <input type="checkbox"
+                                                                                        id="service_{{ $service->id }}"
+                                                                                        name="{{ $category->id }}services[]"
+                                                                                        value="{{ $service->id }}"
+                                                                                        data-price="{{ $service->price }}">
+                                                                                    <span type="button"
+                                                                                        class="btn ">Chọn</span>
+                                                                                </label>
+                                                                            @else
+                                                                                <label class="check mt-1">
+                                                                                    <input type="checkbox"
+                                                                                        id="service_{{ $service->id }}"
+                                                                                        name="{{ $category->id }}services[]"
+                                                                                        value="{{ $service->id }}"
+                                                                                        data-price="{{ $service->price }}">
+                                                                                    <span type="button"
+                                                                                        class="btn ">Chọn</span>
+                                                                                </label>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -295,30 +306,31 @@
                                                 </svg></span>
                                         </div>
                                     </div>
-                                    <div class="overflow-hidden">
-                                        <div class="position-relative">
-                                            <div class="service-prices">
-                                                <div class="sec-img position-relative">
-                                                    <div class="sec-radius text-center">
-                                                        <input type="radio" name="admin_id" id="admin_"
-                                                            value="random" checked hidden>
-                                                        <label for="admin_">
-                                                            <div style="width: 145px;height: 145px;border-radius: 9999px">
-                                                                <img class=""
-                                                                    style="width: 100%;height: 100%;object-fit:cover;border:none"
-                                                                    src="{{ asset('dist/images/default.jpg') }}"
-                                                                    alt="nhân viên">
-                                                            </div>
-                                                        </label>
+                                    <div class="barber-slider">
+                                        <div class="overflow-hidden">
+                                            <div class="position-relative">
+                                                <div class="service-prices">
+                                                    <div class="sec-img position-relative">
+                                                        <div class="sec-radius text-center">
+                                                            <input type="radio" name="admin_id" id="admin_"
+                                                                value="random" checked hidden>
+                                                            <label for="admin_">
+                                                                <div
+                                                                    style="width: 145px;height: 145px;border-radius: 9999px">
+                                                                    <img class=""
+                                                                        style="width: 100%;height: 100%;object-fit:cover;border:none"
+                                                                        src="{{ asset('dist/images/default.jpg') }}"
+                                                                        alt="nhân viên">
+                                                                </div>
+                                                            </label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="text-center featured-area">
-                                                    <h5><a href="" style="color: black">Chọn hộ</a></h5>
+                                                    <div class="text-center featured-area">
+                                                        <h5><a href="" style="color: black">Chọn hộ</a></h5>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="barber-slider">
                                         @foreach ($staffMembers as $staff)
                                             <div class="">
                                                 <div class="text-center">
@@ -425,6 +437,9 @@
                                     <br>
                                     <input type="radio" name="payment" id="online" value="vnpay" />
                                     <label for="online">Thanh toán VNPAY</label>
+                                    <br>
+                                    <input type="radio" name="payment" id="momo" value="momo" />
+                                    <label for="momo">Thanh toán MOMO</label>
                                 </div>
                             </div>
                         </div>
@@ -464,16 +479,23 @@
         });
 
         $(document).ready(function() {
+            const serviceCategories = @json($serviceCategories);
+
             $('#promotion').on('change', function() {
-                // Xử lý sự kiện onchange ở đây
                 var promoCode = $(this).val();
                 var dataPromotion = @php echo json_encode($promotion) @endphp;
                 $.each(dataPromotion, function(index, promotion) {
+
                     if (promotion.promocode == promoCode) {
+
                         var totalPrice = $('#totalPrice').text();
                         totalPrice = totalPrice.replace(/,/g, '');
                         var discount = promotion.discount;
+
                         var newTotalPrice = totalPrice - discount;
+                        if (newTotalPrice < 0) {
+                            newTotalPrice = 0
+                        }
                         $('#totalPrice').text(Number(newTotalPrice).toLocaleString('en-US'));
                         $('#promotion').prop('disabled', true);
                     }
@@ -487,37 +509,73 @@
             $('select[name="day"]').change(function() {
                 performAjaxRequest();
             });
-            // Lắng nghe sự kiện change
-            $('input[name="services[]"]').on('change', function() {
-                // get data-price
-                // Lấy mảng các giá trị đã check
-                var checked = $('input[name="services[]"]:checked').map(function() {
-                    return $(this).data('price');
-                }).get();
-                if (!checked.length) {
-                    $('#totalPrice').text(0);
-                }
-                var tottalPrice = checked.reduce(function(a, b) {
-                    return a + b;
-                });
-
-                var promoCode = $('input[name="promoCode"]').val();
-                if (promoCode) {
-                    const dataPromotioncode = @php echo json_encode($promotion) @endphp;
-                    $.each(dataPromotioncode, function(index, promotion) {
-                        if (promotion.promocode == promoCode) {
-                            var discount = promotion.discount;
-                            let newTotalPrice3 = tottalPrice - Number(discount);
-                            newTotalPrice3 = Number(newTotalPrice3).toLocaleString('en-US');
-
-                            $('#totalPrice').text(newTotalPrice3);
-
+            serviceCategories.forEach(function(category) {
+                $('input[name="' + category.id + 'services[]"]').on('change', function() {
+                    if (category.can_choose == 'one') {
+                        
+                        if ($(this).is(':checked')) {
+                            $('input[name="' + category.id + 'services[]"]').each(
+                                function() {
+                                    $(this).prop('checked', false);
+                                }
+                            )
+                            $(this).prop('checked', true);
                         }
-                    });
-                } else {
+                    }
+                    var tottalPrice = 0;
+                    var promoCode = $('input[name="promoCode"]').val();
+                    if (promoCode) {
+                        const selectedServices = [];
 
-                    $('#totalPrice').text(Number(tottalPrice).toLocaleString('en-US'));
-                }
+                        const dataPromotioncode = @php echo json_encode($promotion) @endphp;
+                        $.each(dataPromotioncode, function(index, promotion) {
+                            if (promotion.promocode == promoCode) {
+                                serviceCategories.forEach(function(category) {
+                                    $('input[name="' + category.id +
+                                        'services[]"]:checked').each(
+                                function() {
+                                        selectedServices.push($(this).data(
+                                            'price'));
+                                    });
+                                })
+                                tottalPrice = 0
+                                if (!selectedServices.length) {
+                                    tottalPrice = 0
+                                } else {
+                                    tottalPrice = selectedServices.reduce(function(a, b) {
+                                        return a + b;
+                                    })
+                                    var discount = promotion.discount;
+                                    let newTotalPrice3 = tottalPrice - Number(discount);
+                                    newTotalPrice3 = Number(newTotalPrice3).toLocaleString(
+                                        'en-US');
+
+                                    $('#totalPrice').text(newTotalPrice3);
+                                }
+
+                            }
+                        });
+                    } else {
+                        const selectedServices = [];
+
+                        serviceCategories.forEach(function(category) {
+                            $('input[name="' + category.id + 'services[]"]:checked').each(
+                                function() {
+                                    selectedServices.push($(this).data('price'));
+                                });
+                        })
+                        tottalPrice = 0
+                        if (!selectedServices.length) {
+                            tottalPrice = 0
+                        } else {
+                            tottalPrice = selectedServices.reduce(function(a, b) {
+                                return a + b;
+                            })
+                        }
+                        $('#totalPrice').text(Number(tottalPrice).toLocaleString('en-US'));
+                    }
+
+                });
 
             });
 
@@ -532,7 +590,6 @@
                         checkAvailable = time.pivot.status === 'unavailable' ? 'disabled' : ''
                     }
 
-                    // formatt time hour:minutes
                     const timeArray = time.time.split(':');
                     const timeFormated = timeArray[0] + ':' + timeArray[1];
 
@@ -543,7 +600,6 @@
                                     <span>${timeFormated}</span>
                                 </label>
                     `;
-                    // Thêm radio button vào giao diện
                     $('#timeSelect').append(radioOption);
 
                 });
@@ -562,11 +618,9 @@
                 }
                 sendAjaxRequest(url, 'post', data,
                     function(response) {
-                        console.log(response);
                         renderTimes(response.times);
                     },
                     function(error) {
-                        console.log(error);
                         renderTimes([]);
                         toastr.error(error.responseJSON.message);
                     }
@@ -575,17 +629,18 @@
 
             $('#phoneOtpInput').on("input", function(e) {
                 const phone = $('input[name="infoPhone"]');
-                //set phone value = phoneOtpInput
                 phone.val($('#phoneOtpInput').val());
 
             })
             $('#bookingConfirm').click(function() {
-                // phoneOtpNumberInput
                 var otpInput = $('#phoneOtpInput').length == 0 ? false : true;
                 var verifyInput = $('input[name="verification"]').length == 0 ? false : true;
                 if (!otpInput && !verifyInput) {
                     const form = new FormData();
-                    const selectedServices = $('input[name="services[]"]:checked');
+                    const serviceCategories = @json($serviceCategories);
+                    const selectedServices = [];
+
+
                     let totalPrice = $('#totalPrice').text();
                     const name = $('input[name="infoUsername"]').val() ?? "";
                     const adminId = $('input:radio[name="admin_id"]:checked').val() ?? "";
@@ -596,9 +651,12 @@
                     const day = $('select[name="day"]').val() ?? "";
                     const time = $('input[name="time_id"]:checked').val() ?? "";
                     const payment = $('input:radio[name="payment"]:checked').val() ?? "";
-                    const servicesId = selectedServices.map(function() {
-                        return $(this).val();
-                    }).get();
+                    serviceCategories.forEach(function(category) {
+                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
+                            selectedServices.push($(this).val());
+                        });
+                    });
+
                     form.append('name', name);
                     form.append('admin_id', adminId);
                     form.append('phone', phone);
@@ -607,17 +665,17 @@
                     form.append('email', email);
                     form.append('day', day);
                     form.append('time', time);
-                    form.append('servicesId', servicesId);
+                    form.append('servicesId', selectedServices);
                     form.append('payment', payment);
                     sendAjaxRequest("{{ route('booking-service.store') }}", 'post', form,
                         response => {
-                            console.log(response);
                             if (response.payment_method == 'vnpay') {
+                                location.href = response.url;
+                            } else if (response.payment_method == 'momo') {
                                 location.href = response.url;
                             } else {
                                 toastr.success(response.message);
                                 location.href = "{{ route('booking_history') }}";
-                                console.log("🚀 ~ file: booking.blade.php:600 ~ location:", location)
                             }
 
                         },
