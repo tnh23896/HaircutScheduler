@@ -307,6 +307,7 @@
                                                 <div class="custom-font-medium custom-whitespace-nowrap">
 
                                                 </div>
+                                            </div>
                                         </td>
                                         <td class="custom-text-right custom-table-cell custom-border-bottom custom-font-medium custom-w-32"
                                             style="border-bottom: 1px solid #333 ">
@@ -314,6 +315,8 @@
                                                 {{ number_format($bill->promotion->discount ?? 0) }} VND <br>
                                                 <div class="text-base">Số tiền phải thanh toán:
                                                     {{ number_format($bill->total_price) }} VND
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
 

@@ -74,7 +74,7 @@
                                 </div>
                             </td>
                             <td class="text-center"><a class="flex items-center justify-center"
-                                    href="javascript:;">{{ $item->admin->username ?? '' }}</a></td>
+                                    href="javascript:;">{{ $item->username ?? '' }}</a></td>
                             <td class="text-center whitespace-nowrap">{{ number_format($item->total_price) }} VND</td>
                             <td class="text-center whitespace-nowrap">{{ number_format($item->amount_paid) }} VND</td>
                             <td class="w-40">
@@ -89,6 +89,8 @@
                                     <span class="badge">Tại cửa hàng</span>
                                 @elseif ($item->payment == 'vnpay')
                                     <span class="badge">VNPAY</span>
+                                @elseif($item->payment == 'momo')
+                                    <span class="badge">MOMO</span>
                                 @endif
                             </td>
                             <td class="text-center">

@@ -435,7 +435,7 @@
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in"
                 role="button" aria-expanded="false" data-tw-toggle="dropdown">
                 <img alt="{{ auth('admin')->user()->username }}"
-                    src="{{auth('admin')->user()->avatar === 'default.jpg' ? asset('dist/images/default.jpg') : asset(auth('admin')->user()->avatar) }}">
+                    src="{{auth('admin')->user()->avatar === '' ? asset('dist/images/default.jpg') : asset(auth('admin')->user()->avatar) }}">
             </div>
             <div class="dropdown-menu w-56">
                 <ul class="dropdown-content bg-primary text-white">

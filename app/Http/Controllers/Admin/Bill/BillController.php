@@ -17,7 +17,12 @@ class BillController extends Controller
      */
     public function index()
     {
-        $data = Bill::latest()->paginate(10);
+        $data = Bill::withTrashed()
+            ->join('admins', 'bills.admin_id', '=', 'admins.id')
+            ->select('bills.*', 'admins.username')
+            ->latest()
+            ->paginate(10);
+
         return view('admin.BillManagement.index', compact('data'));
     }
 
@@ -86,27 +91,26 @@ class BillController extends Controller
                 $bookingsByDateAndTime->count() > 0;
                 return view('admin.BillManagement.index', ['data' => $bookingsByDateAndTime]);
             }
-
         } catch (\Exception $exception) {
             return response()->json([
                 'success' => 'Tìm kiếm thất bại'
             ], 500);
         }
     }
-   
+
     public function printBill($id)
     {
         $options = new Options();
-        $options->set('defaultFont', 'Dejavu Sans'); 
-       
-      
+        $options->set('defaultFont', 'Dejavu Sans');
+
+
 
         $dompdf = new Dompdf($options);
         $item = Bill::find($id);
-        $pdf = PDF::loadView('admin.BillManagement.modal',compact('item'));
+        $pdf = PDF::loadView('admin.BillManagement.modal', compact('item'));
         $pdf->setPaper('A4', 'portrait');
 
-        return $pdf->download('bill.pdf');  
+        return $pdf->download('bill.pdf');
     }
 
 

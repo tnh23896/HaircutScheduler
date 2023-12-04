@@ -14,6 +14,7 @@ class RevenueStatisticsController extends Controller
 		$totalRevenue = $this->calculateBillRevenue();
 		$lastMonthrevenue = $this->revenue();
 		$revenue = $this->currentMonthRevenue();
+
 		return view(
 			'admin.Statistical.revenueStatistics',
 			compact('totalRevenue', 'lastMonthrevenue', 'revenue')
@@ -80,10 +81,73 @@ class RevenueStatisticsController extends Controller
 
 	public function revenueSetbyTime(Request $request)
 	{
-		$totalRevenue = $this->baRevenueSetbyTime($request);
-		return response()->json(['totalRevenue' => $totalRevenue]);
+		if ($request->month == 0) {
+			$totalRevenue = $this->baRevenueSetbyTime($request);
+			return response()->json(['totalRevenue' => $totalRevenue]);
+		} else {
+			$totalRevenue = $this->calculateBillDayRevenue($request);
+			return response()->json(['totalRevenue' => $totalRevenue]);
+		}
 	}
+	private function calculateBillDayRevenue(Request $request)
+	{
+		// Lấy ngày hiện tại
+		$today = Carbon::now();
 
+		// Lấy ngày đầu tiên của tháng hiện tại
+		$firstDayOfCurrentMonth = $today->firstOfMonth();
+
+		// Lấy tháng và năm của tháng hiện tại
+		$currentYear = $firstDayOfCurrentMonth->format('Y');
+
+		$month = $request->month;
+		$year = $request->year;
+
+		if($request->year == 0) {
+			$year = $currentYear ;
+		} else {
+			$year = $request->year;
+		}
+		$daysInMonth = range(1, Carbon::now()->daysInMonth); // Tạo mảng chứa tất cả các ngày trong tháng
+		$query = Bill::selectRaw('DAY(day) as day, SUM(total_price) as totalRevenue')
+			->selectRaw('SUM(CASE WHEN shifts.id = 1 THEN bills.total_price ELSE 0 END) as ca1') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 2 THEN bills.total_price ELSE 0 END) as ca2') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 3 THEN bills.total_price ELSE 0 END) as ca3') // Tính tổng doanh thu cho ca có shift_id = 1
+			->join('times', 'bills.time', '=', 'times.time')
+			->join('shifts', 'times.shift_id', '=', 'shifts.id')
+			->when($month, function ($query, $month) {
+				return $query->whereMonth('day', $month);
+			})
+			->when($year, function ($query, $year) {
+				return $query->whereYear('day', $year);
+			})
+			->groupBy('day')
+			->orderBy('day', 'asc');
+
+		$result = $query->get();
+
+		$totalRevenue = [];
+
+		// Gộp kết quả từ cơ sở dữ liệu vào mảng chứa tất cả các ngày trong tháng
+		foreach ($daysInMonth as $day) {
+			$totalRevenue[$day] = [
+				'totalRevenue' => 0,
+				'ca1'  => 0,
+				'ca2'  => 0,
+				'ca3'  => 0,
+			];
+		}
+
+		foreach ($result as $row) {
+			$totalRevenue[$row->day] = [
+				'totalRevenue' => $row->totalRevenue,
+				'ca1'  => $row->ca1,
+				'ca2'  => $row->ca2,
+				'ca3'  => $row->ca3,
+			];
+		}
+		return $totalRevenue;
+	}
 	// Tổng hợp dữ liệu của doanh thu của bill
 	private function calculateBillRevenue()
 	{
@@ -94,7 +158,6 @@ class RevenueStatisticsController extends Controller
 		$firstDayOfCurrentMonth = $today->firstOfMonth();
 
 		// Lấy tháng và năm của tháng hiện tại
-		$currentMonth = $firstDayOfCurrentMonth->format('n');
 		$currentYear = $firstDayOfCurrentMonth->format('Y');
 
 		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')

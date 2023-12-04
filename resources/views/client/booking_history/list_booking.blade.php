@@ -20,10 +20,12 @@
                     <td class="text-nowrap text-center">{{ number_format($booking->amount_paid) }} VND</td>
                     <td class="text-nowrap text-center">
                         @if ($booking->payment == 'offline')
-                        <span class="">Tại cửa hàng</span>
-                    @elseif ($booking->payment == 'vnpay')
-                        <span class="">VNPAY</span>
-                    @endif
+                            <span class="">Tại cửa hàng</span>
+                        @elseif ($booking->payment == 'vnpay')
+                            <span class="">VNPAY</span>
+                        @elseif ($booking->payment == 'momo')
+                            <span class="">MOMO</span>
+                        @endif
                     </td>
                     <td class="text-center"><span>
                             {{ \Carbon\Carbon::parse($booking->time)->format('H:i') }}
