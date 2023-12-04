@@ -246,7 +246,7 @@
                                                                             </span>
                                                                             @if ($category->can_choose == 'one')
                                                                                 <label class="check mt-1">
-                                                                                    <input type="radio"
+                                                                                    <input type="checkbox"
                                                                                         id="service_{{ $service->id }}"
                                                                                         name="{{ $category->id }}services[]"
                                                                                         value="{{ $service->id }}"
@@ -457,7 +457,6 @@
 @endsection
 @section('js_footer_custom')
     <script>
-
         function getValues(info_customer) {
             const form = $('#' + info_customer);
             return form.serializeArray().reduce(function(obj, item) {
@@ -510,60 +509,75 @@
             $('select[name="day"]').change(function() {
                 performAjaxRequest();
             });
-                    serviceCategories.forEach(function(category) {
-                        $('input[name="' + category.id + 'services[]"]').on('change', function() {
-
-                var tottalPrice = 0;
-                var promoCode = $('input[name="promoCode"]').val();
-                if (promoCode) {
-                    const selectedServices = [];
-
-                    const dataPromotioncode = @php echo json_encode($promotion) @endphp;
-                    $.each(dataPromotioncode, function(index, promotion) {
-                        if (promotion.promocode == promoCode) {
-                            serviceCategories.forEach(function(category) {
-                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
-                            selectedServices.push($(this).data('price'));
-                        });
-                    })
-                    tottalPrice = 0
-                    if(!selectedServices.length){
-                        tottalPrice = 0
-                    }else{
-                        tottalPrice = selectedServices.reduce(function(a, b) {
-                            return a + b;
-                        })
-                        var discount = promotion.discount;
-                        let newTotalPrice3 = tottalPrice - Number(discount);
-                        newTotalPrice3 = Number(newTotalPrice3).toLocaleString('en-US');
-
-                        $('#totalPrice').text(newTotalPrice3);
-                    }
-
+            serviceCategories.forEach(function(category) {
+                $('input[name="' + category.id + 'services[]"]').on('change', function() {
+                    if (category.can_choose == 'one') {
+                        
+                        if ($(this).is(':checked')) {
+                            $('input[name="' + category.id + 'services[]"]').each(
+                                function() {
+                                    $(this).prop('checked', false);
+                                }
+                            )
+                            $(this).prop('checked', true);
                         }
-                    });
-                } else {
-                    const selectedServices = [];
-
-                    serviceCategories.forEach(function(category) {
-                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
-                            selectedServices.push($(this).data('price'));
-                        });
-                    })
-                    tottalPrice = 0
-                    if(!selectedServices.length){
-                        tottalPrice = 0
-                    }else{
-                        tottalPrice = selectedServices.reduce(function(a, b) {
-                            return a + b;
-                        })
                     }
-                    $('#totalPrice').text(Number(tottalPrice).toLocaleString('en-US'));
-                }
+                    var tottalPrice = 0;
+                    var promoCode = $('input[name="promoCode"]').val();
+                    if (promoCode) {
+                        const selectedServices = [];
+
+                        const dataPromotioncode = @php echo json_encode($promotion) @endphp;
+                        $.each(dataPromotioncode, function(index, promotion) {
+                            if (promotion.promocode == promoCode) {
+                                serviceCategories.forEach(function(category) {
+                                    $('input[name="' + category.id +
+                                        'services[]"]:checked').each(
+                                function() {
+                                        selectedServices.push($(this).data(
+                                            'price'));
+                                    });
+                                })
+                                tottalPrice = 0
+                                if (!selectedServices.length) {
+                                    tottalPrice = 0
+                                } else {
+                                    tottalPrice = selectedServices.reduce(function(a, b) {
+                                        return a + b;
+                                    })
+                                    var discount = promotion.discount;
+                                    let newTotalPrice3 = tottalPrice - Number(discount);
+                                    newTotalPrice3 = Number(newTotalPrice3).toLocaleString(
+                                        'en-US');
+
+                                    $('#totalPrice').text(newTotalPrice3);
+                                }
+
+                            }
+                        });
+                    } else {
+                        const selectedServices = [];
+
+                        serviceCategories.forEach(function(category) {
+                            $('input[name="' + category.id + 'services[]"]:checked').each(
+                                function() {
+                                    selectedServices.push($(this).data('price'));
+                                });
+                        })
+                        tottalPrice = 0
+                        if (!selectedServices.length) {
+                            tottalPrice = 0
+                        } else {
+                            tottalPrice = selectedServices.reduce(function(a, b) {
+                                return a + b;
+                            })
+                        }
+                        $('#totalPrice').text(Number(tottalPrice).toLocaleString('en-US'));
+                    }
+
+                });
 
             });
-
-                    });
 
             function renderTimes(times) {
                 $('#timeSelect').empty();
@@ -657,9 +671,9 @@
                         response => {
                             if (response.payment_method == 'vnpay') {
                                 location.href = response.url;
-                            }else if(response.payment_method == 'momo'){
+                            } else if (response.payment_method == 'momo') {
                                 location.href = response.url;
-                            }else {
+                            } else {
                                 toastr.success(response.message);
                                 location.href = "{{ route('booking_history') }}";
                             }
