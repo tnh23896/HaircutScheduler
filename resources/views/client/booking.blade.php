@@ -437,6 +437,9 @@
                                     <br>
                                     <input type="radio" name="payment" id="online" value="vnpay" />
                                     <label for="online">Thanh toán VNPAY</label>
+                                    <br>
+                                    <input type="radio" name="payment" id="momo" value="momo" />
+                                    <label for="momo">Thanh toán MOMO</label>
                                 </div>
                             </div>
                         </div>
@@ -454,7 +457,7 @@
 @endsection
 @section('js_footer_custom')
     <script>
-   
+
         function getValues(info_customer) {
             const form = $('#' + info_customer);
             return form.serializeArray().reduce(function(obj, item) {
@@ -483,13 +486,13 @@
                 var promoCode = $(this).val();
                 var dataPromotion = @php echo json_encode($promotion) @endphp;
                 $.each(dataPromotion, function(index, promotion) {
-                    
+
                     if (promotion.promocode == promoCode) {
-                    
+
                         var totalPrice = $('#totalPrice').text();
                         totalPrice = totalPrice.replace(/,/g, '');
                         var discount = promotion.discount;
-                    
+
                         var newTotalPrice = totalPrice - discount;
                         if (newTotalPrice < 0) {
                             newTotalPrice = 0
@@ -509,7 +512,7 @@
             });
                     serviceCategories.forEach(function(category) {
                         $('input[name="' + category.id + 'services[]"]').on('change', function() {
-            
+
                 var tottalPrice = 0;
                 var promoCode = $('input[name="promoCode"]').val();
                 if (promoCode) {
@@ -525,15 +528,15 @@
                     })
                     tottalPrice = 0
                     if(!selectedServices.length){
-                        tottalPrice = 0 
-                    }else{   
+                        tottalPrice = 0
+                    }else{
                         tottalPrice = selectedServices.reduce(function(a, b) {
                             return a + b;
                         })
                         var discount = promotion.discount;
                         let newTotalPrice3 = tottalPrice - Number(discount);
                         newTotalPrice3 = Number(newTotalPrice3).toLocaleString('en-US');
-    
+
                         $('#totalPrice').text(newTotalPrice3);
                     }
 
@@ -549,8 +552,8 @@
                     })
                     tottalPrice = 0
                     if(!selectedServices.length){
-                        tottalPrice = 0 
-                    }else{   
+                        tottalPrice = 0
+                    }else{
                         tottalPrice = selectedServices.reduce(function(a, b) {
                             return a + b;
                         })
@@ -561,7 +564,7 @@
             });
 
                     });
-           
+
             function renderTimes(times) {
                 $('#timeSelect').empty();
 
@@ -622,8 +625,8 @@
                     const form = new FormData();
                     const serviceCategories = @json($serviceCategories);
                     const selectedServices = [];
-                  
-                  
+
+
                     let totalPrice = $('#totalPrice').text();
                     const name = $('input[name="infoUsername"]').val() ?? "";
                     const adminId = $('input:radio[name="admin_id"]:checked').val() ?? "";
@@ -639,7 +642,7 @@
                             selectedServices.push($(this).val());
                         });
                     });
-                    
+
                     form.append('name', name);
                     form.append('admin_id', adminId);
                     form.append('phone', phone);
@@ -654,7 +657,9 @@
                         response => {
                             if (response.payment_method == 'vnpay') {
                                 location.href = response.url;
-                            } else {
+                            }else if(response.payment_method == 'momo'){
+                                location.href = response.url;
+                            }else {
                                 toastr.success(response.message);
                                 location.href = "{{ route('booking_history') }}";
                             }
