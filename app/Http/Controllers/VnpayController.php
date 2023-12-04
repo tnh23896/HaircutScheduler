@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\BookedMail;
 use App\Models\Booking;
 use App\Models\Time;
 use App\Models\WorkSchedule;
@@ -101,10 +102,11 @@ class VnpayController extends Controller
         $secureHash = hash_hmac('sha512', $hashData, $this->vnp_HashSecret);
         if ($secureHash == $vnp_SecureHash) {
             if ($_GET['vnp_ResponseCode'] == '00') {
-                Booking::where('id', $_GET['vnp_TxnRef'])->update([
+                $booking = Booking::where('id', $_GET['vnp_TxnRef'])->update([
                     'status' => 'confirmed',
                     'amount_paid' => $_GET['vnp_Amount'] / 100,
                 ]);
+                dispatch(new BookedMail($booking));
                 return redirect()->route('booking_history');
             }
             else {
