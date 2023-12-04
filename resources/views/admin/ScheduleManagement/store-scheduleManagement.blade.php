@@ -8,6 +8,7 @@
                 var promotion = dataPromotion[i];
                 if (promotion.promocode == promoCode) {
                     var totalPrice = $('#totalPrice').text();
+                    totalPrice = totalPrice.replace(/,/g, '');
                     var discount = promotion.discount;
                     var newTotalPrice = totalPrice - discount;
                     $('#totalPrice').text(Number(newTotalPrice).toLocaleString('en-US'));

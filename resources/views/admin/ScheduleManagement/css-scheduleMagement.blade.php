@@ -35,8 +35,8 @@
     }
 
     label.check input:disabled+span {
-        border-color: #312E81;
-        background-color: #312E81;
+        border-color: #b1b1b5;
+        background-color: #a4a4ab;
         color: #fff;
         cursor: default;
     }
@@ -102,8 +102,6 @@
     }
 
     label.check input:disabled+span {
-        border-color: #312E81;
-        background-color: #312E81;
         color: #fff;
         cursor: default;
     }
