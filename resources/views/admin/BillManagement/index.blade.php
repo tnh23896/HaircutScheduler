@@ -173,6 +173,9 @@
                                 </table>
                             </div>
                             <div class="sm:text-left sm:ml-auto py-5" style="text-align: right">
+                                <div class="text-lg	">Giảm giá:
+                                    {{ number_format($item->promotion) ?? '' }} VND</div>
+                            </div>
                                 <div class="text-lg	">Số tiền phải thanh toán:
                                     {{ number_format($item->total_price) }} VND</div>
                             </div>

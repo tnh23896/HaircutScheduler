@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('booking_details', function (Blueprint $table) {
-            $table->string('description')->nullable();
+        Schema::create('history_actions', function (Blueprint $table) {
+            $table->id();
+            $table->string('admin_id');
+            $table->string('action');
+            $table->string('booking_id');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('booking_details', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('history_actions');
     }
 };
