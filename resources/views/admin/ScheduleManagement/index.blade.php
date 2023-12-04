@@ -89,6 +89,8 @@
                                     <span class="badge">Tại cửa hàng</span>
                                 @elseif ($item->payment == 'vnpay')
                                     <span class="badge">VNPAY</span>
+                                @elseif($item->payment == 'momo')
+                                    <span class="badge">MOMO</span>
                                 @endif
                             </td>
                             <td class="text-center">

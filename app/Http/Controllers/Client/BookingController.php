@@ -192,7 +192,7 @@ class BookingController extends Controller
 
             if ($bookingsCount->isNotEmpty()) {
                 // User has made more than 3 bookings today, show an error
-                return response()->json(['error' => 'Bạn đã đặt quá nhiều.'], 422);
+                return response()->json(['error' => 'Yêu cầu đặt lịch bị từ chối do nghi ngờ là spam. Xin lỗi vì sự bất tiện này!'], 422);
             }
             $admin_id = $request->admin_id;
             $day = $request->day;
@@ -206,6 +206,9 @@ class BookingController extends Controller
                 'day' => $day,
             ];
             if ($request->payment == 'vnpay') {
+                $params['payment'] = $request->payment;
+            }
+            if ($request->payment == 'momo') {
                 $params['payment'] = $request->payment;
             }
             $time_id = $request->time;
@@ -245,7 +248,7 @@ class BookingController extends Controller
                 ->where('work_schedule_details.time_id', $time->id)
                 ->where('work_schedule_details.work_schedules_id', $workSchedule->id);
             if ($findWorkScheduleDetail->first()->status == 'unavailable') {
-                throw new Exception('Lịch đã được đặt rồi', 400);
+                throw new Exception('Lịch đã được đặt. Vui lòng chọn một lịch khác.', 400);
             }
 
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
@@ -256,7 +259,6 @@ class BookingController extends Controller
                 'day' => Carbon::parse($request->day)->format('d-m-Y'),
                 'time' => Carbon::parse($time->time)->format('H:i'),
             ]));
-            dispatch(new BookedMail($booking));
             if ($request->payment == 'vnpay') {
                 return response()->json([
                     'payment_method' => 'vnpay',
@@ -265,7 +267,16 @@ class BookingController extends Controller
                         'amount' => $request->total_price,
                     ]),
                 ], 200);
-            } else {
+            }else if ($request->payment == 'momo') {
+                return response()->json([
+                    'payment_method' => 'momo',
+                    'url' => route('momo.momo', [
+                        'order_code' => $booking->id,
+                        'total_price' => $request->total_price,
+                    ]),
+                ], 200);
+            }else {
+                dispatch(new BookedMail($booking));
                 return response()->json([
                     'message' => 'Đặt lịch thành công',
                     'booking' => $booking,
