@@ -480,7 +480,6 @@
             const serviceCategories = @json($serviceCategories);
 
             $('#promotion').on('change', function() {
-                // Xử lý sự kiện onchange ở đây
                 var promoCode = $(this).val();
                 var dataPromotion = @php echo json_encode($promotion) @endphp;
                 $.each(dataPromotion, function(index, promotion) {
@@ -508,7 +507,6 @@
             $('select[name="day"]').change(function() {
                 performAjaxRequest();
             });
-            // Lắng nghe sự kiện change
                     serviceCategories.forEach(function(category) {
                         $('input[name="' + category.id + 'services[]"]').on('change', function() {
             
@@ -557,8 +555,6 @@
                             return a + b;
                         })
                     }
-                 
-                    console.log(tottalPrice);
                     $('#totalPrice').text(Number(tottalPrice).toLocaleString('en-US'));
                 }
 
@@ -577,7 +573,6 @@
                         checkAvailable = time.pivot.status === 'unavailable' ? 'disabled' : ''
                     }
 
-                    // formatt time hour:minutes
                     const timeArray = time.time.split(':');
                     const timeFormated = timeArray[0] + ':' + timeArray[1];
 
@@ -588,7 +583,6 @@
                                     <span>${timeFormated}</span>
                                 </label>
                     `;
-                    // Thêm radio button vào giao diện
                     $('#timeSelect').append(radioOption);
 
                 });
@@ -607,11 +601,9 @@
                 }
                 sendAjaxRequest(url, 'post', data,
                     function(response) {
-                        console.log(response);
                         renderTimes(response.times);
                     },
                     function(error) {
-                        console.log(error);
                         renderTimes([]);
                         toastr.error(error.responseJSON.message);
                     }
@@ -620,25 +612,17 @@
 
             $('#phoneOtpInput').on("input", function(e) {
                 const phone = $('input[name="infoPhone"]');
-                //set phone value = phoneOtpInput
                 phone.val($('#phoneOtpInput').val());
 
             })
             $('#bookingConfirm').click(function() {
-                // phoneOtpNumberInput
                 var otpInput = $('#phoneOtpInput').length == 0 ? false : true;
                 var verifyInput = $('input[name="verification"]').length == 0 ? false : true;
                 if (!otpInput && !verifyInput) {
                     const form = new FormData();
-                    // const selectedServices = $('input[name="services[]"]:checked');
                     const serviceCategories = @json($serviceCategories);
                     const selectedServices = [];
-                    serviceCategories.forEach(function(category) {
-                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
-                            selectedServices.push($(this).val());
-                        });
-                    });
-                    
+                  
                   
                     let totalPrice = $('#totalPrice').text();
                     const name = $('input[name="infoUsername"]').val() ?? "";
@@ -650,9 +634,12 @@
                     const day = $('select[name="day"]').val() ?? "";
                     const time = $('input[name="time_id"]:checked').val() ?? "";
                     const payment = $('input:radio[name="payment"]:checked').val() ?? "";
-                    const servicesId = selectedServices.map(function() {
-                        return $(this).val();
-                    }).get();
+                    serviceCategories.forEach(function(category) {
+                        $('input[name="' + category.id + 'services[]"]:checked').each(function() {
+                            selectedServices.push($(this).val());
+                        });
+                    });
+                    
                     form.append('name', name);
                     form.append('admin_id', adminId);
                     form.append('phone', phone);
@@ -661,17 +648,15 @@
                     form.append('email', email);
                     form.append('day', day);
                     form.append('time', time);
-                    form.append('servicesId', servicesId);
+                    form.append('servicesId', selectedServices);
                     form.append('payment', payment);
                     sendAjaxRequest("{{ route('booking-service.store') }}", 'post', form,
                         response => {
-                            console.log(response);
                             if (response.payment_method == 'vnpay') {
                                 location.href = response.url;
                             } else {
                                 toastr.success(response.message);
                                 location.href = "{{ route('booking_history') }}";
-                                console.log("🚀 ~ file: booking.blade.php:600 ~ location:", location)
                             }
 
                         },
