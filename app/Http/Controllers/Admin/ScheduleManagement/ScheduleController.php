@@ -326,7 +326,7 @@ class ScheduleController extends Controller
                 ->where('work_schedule_details.time_id', $time->id)
                 ->where('work_schedule_details.work_schedules_id', $workSchedule->id);
             if ($findWorkScheduleDetail->first()->status == 'unavailable') {
-                throw new Exception('Lịch đã được đặt rồi', 400);
+                throw new Exception('Lịch đã được đặt. Vui lòng chọn một lịch khác.', 400);
             }
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
 

@@ -19,6 +19,7 @@ class CategoryServiceFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'image' => $this->faker->imageUrl(),
+            'can_choose' => $this->faker->randomElement(['one','many']),
         ];
     }
 }
