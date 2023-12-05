@@ -81,6 +81,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $one_category_service = $this->model::find($id);
+       
 
         return view('admin.ServiceManagement.Category.edit', compact('one_category_service'));
     }

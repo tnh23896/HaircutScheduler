@@ -87,15 +87,29 @@
                                                                                             VND</div>
                                                                                     </div>
                                                                                     <div class="flex mt-4 lg:mt-0">
-                                                                                        <label class="check py-1 px-2 mr-2">
-                                                                                            <input type="checkbox"
-                                                                                                id="service_{{ $service->id }}"
-                                                                                                name="services[]"
-                                                                                                value="{{ $service->id }}"
-                                                                                                data-price="{{ $service->price }}">
-                                                                                            <span type="button"
-                                                                                                class="btn">Chọn</span>
-                                                                                        </label>
+
+                                                                                        @if ($category->can_choose == 'one')
+                                                                                <label class="check mt-1">
+                                                                                    <input type="checkbox"
+                                                                                        id="service_{{ $service->id }}"
+                                                                                        name="{{ $category->id }}services[]"
+                                                                                        value="{{ $service->id }}"
+                                                                                        data-price="{{ $service->price }}">
+                                                                                    <span type="button"
+                                                                                        class="btn ">Chọn</span>
+                                                                                </label>
+                                                                            @else
+                                                                                <label class="check mt-1">
+                                                                                    <input type="checkbox"
+                                                                                        id="service_{{ $service->id }}"
+                                                                                        name="{{ $category->id }}services[]"
+                                                                                        value="{{ $service->id }}"
+                                                                                        data-price="{{ $service->price }}">
+                                                                                    <span type="button"
+                                                                                        class="btn ">Chọn</span>
+                                                                                </label>
+                                                                            @endif
+                                                                                        
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

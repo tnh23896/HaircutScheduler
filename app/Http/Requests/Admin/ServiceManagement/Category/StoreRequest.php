@@ -24,6 +24,7 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required | min:2 | max:255 | unique:category_services',
             'image' =>'required| image|mimes:jpeg,png,jpg,gif|max:2048',
+            'can_choose' => 'required',
         ];
     }
 		public function messages()
@@ -37,6 +38,7 @@ class StoreRequest extends FormRequest
 				'image.image' => 'Ảnh không đúng định dạng',
 				'image.mimes' => 'Ảnh không đúng định dạng',
 				'image.max' => 'Ảnh không được lớn hơn 2MB',
+                'can_choose.required' => 'Vui lòng chọn điều kiện cho danh mục',
 			];
 		}
 }
