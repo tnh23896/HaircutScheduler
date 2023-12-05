@@ -1,3 +1,24 @@
+<style>
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
 @extends('admin.templates.app')
 @section('title', 'Bảng điều khiển')
 @section('content')
@@ -155,12 +176,13 @@
                             </div>
                         </form>
                     </div>
+                    <div class="overflow-x-auto" style="height: 25rem">
                     <div class="mt-2">
                         <div id="topEmployeesContent">
                             @if (count($topEmployeesData) > 0)
                                 @foreach ($topEmployeesData as $employee)
                                     <div class="">
-                                        <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                        <div class="box px-4 py-4 mb-3 flex items-center">
                                             <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                                 <img alt="Employee Avatar"
                                                     src="{{ $employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
@@ -186,11 +208,15 @@
                                         </div>
                                     </div>
                                 @endforeach
+
                             @else
                                 <div class="text-center text-gray-500">Không có dữ liệu.</div>
                             @endif
                         </div>
                     </div>
+                    </div>
+                                {{-- {{ $topEmployeesData->links('pagination::bootstrap-4') }} --}}
+
                 </div>
 
                 <div class="col-span-12 lg:col-span-4 mt-8">
@@ -272,7 +298,7 @@
                         <div class="">
                             <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <img alt="Employee Avatar" src="${employee.avatar}">
+                                    <img alt="Employee Avatar" src="{{ asset('${employee.avatar}') }}">
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium text-lg">${employee.username}</div>
