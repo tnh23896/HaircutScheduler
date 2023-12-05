@@ -24,10 +24,13 @@ class EmployeeAndCustomerStatisticsController extends Controller
 
     private function basetopBooker()
     {
+        $currentYear = now()->year;
+
         $query = Bill::select('bills.name', 'users.avatar')
             ->selectRaw('count(bills.id) as totalBookings')
             ->selectRaw('SUM(bills.total_price) as totalPrice')
             ->join('users', 'bills.user_id', '=', 'users.id')
+            ->whereYear('bills.day', $currentYear)
             ->groupBy('bills.name', 'users.avatar')
             ->orderBy('totalBookings', 'desc')
             ->orderBy('totalPrice', 'desc')
@@ -38,7 +41,6 @@ class EmployeeAndCustomerStatisticsController extends Controller
 
     private function basefilterTopBooker(Request $request)
     {
-        $month = $request->month;
         $year = $request->year;
 
         $query = Bill::join('users', 'users.id', '=', 'bills.user_id')
@@ -48,9 +50,6 @@ class EmployeeAndCustomerStatisticsController extends Controller
             ->groupBy('bills.user_id', 'bills.name', 'users.avatar')
             ->orderByDesc('totalBookings')
             ->orderByDesc('totalPrice');
-        if ($month) {
-            $query->whereMonth('day', $month);
-        }
 
         if ($year) {
             $query->whereYear('day', $year);
@@ -62,6 +61,9 @@ class EmployeeAndCustomerStatisticsController extends Controller
 
     private function baseTopEmployees()
     {
+        // Lấy năm hiện tại
+        $currentYear = now()->year;
+
         $query = Booking::selectRaw('admins.id, admins.username, admins.avatar')
             ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
@@ -69,6 +71,8 @@ class EmployeeAndCustomerStatisticsController extends Controller
             ->leftJoin('reviews', function ($join) {
                 $join->on('admins.id', '=', 'reviews.admin_id');
             })
+            ->where('bookings.status', '=', 'success') // Thêm điều kiện trạng thái
+            ->whereYear('bookings.day', $currentYear) // Thêm điều kiện năm hiện tại
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
         $data = $query->orderByDesc('totalBookings')
@@ -77,6 +81,8 @@ class EmployeeAndCustomerStatisticsController extends Controller
 
         return $data;
     }
+
+
 
     // Top 5 nhân viên nhiều lịch đặt
     public function topEmployee(Request $request)
@@ -87,7 +93,6 @@ class EmployeeAndCustomerStatisticsController extends Controller
 
     private function basefilterTopEmployee(Request $request)
     {
-        $month = $request->month;
         $year = $request->year;
 
         $query = Booking::selectRaw('admins.id, admins.username, admins.avatar')
@@ -98,11 +103,8 @@ class EmployeeAndCustomerStatisticsController extends Controller
             ->leftJoin('reviews', function ($join) {
                 $join->on('admins.id', '=', 'reviews.admin_id');
             })
+            ->where('bookings.status', '=', 'success') // Thêm điều kiện trạng thái
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
-
-        if ($month) {
-            $query->whereMonth('bookings.day', $month);
-        }
 
         if ($year) {
             $query->whereYear('bookings.day', $year);
