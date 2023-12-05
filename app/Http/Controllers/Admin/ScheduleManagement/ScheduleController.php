@@ -544,7 +544,7 @@ class ScheduleController extends Controller
             HistoryAction::create([
                 'booking_id' => $data->id,
                 'admin_id' => Auth::guard('admin')->user()->id,
-                'action' => 'Thay đổi trạng thái '. $statusVn,
+                'action' => 'Thay đổi trạng thái: '. $statusVn,
             ]);
             $sum_price = 0;
             foreach ($data->booking_details as $item) {
