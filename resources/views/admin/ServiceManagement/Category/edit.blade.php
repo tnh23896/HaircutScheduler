@@ -17,6 +17,23 @@
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
                             value="{{ $one_category_service->name }}" placeholder="Tiêu đề">
                     </div>
+                    <div>
+                        <label for="crud-form-1" class="form-label mt-3">Loại danh mục dịch vụ <span style="color: red">*</span></label>
+
+                        <select class="form-select w-full" name="can_choose"
+                            style="border-color: #1E283B" >
+                            <option value="one" {{ $one_category_service->can_choose == "one" ? 'selected' : '' }}>
+                                Chọn một dịch vụ
+                            </option>
+                            <option value="many" {{ $one_category_service->can_choose == "many" ? 'selected' : '' }}>
+                                Chọn nhiều dịch vụ
+                            </option>
+                        </select>
+
+
+
+                        
+                    </div>
                     <label for="crud-form-3" class="form-label mt-3">Hình ảnh <span style="color: red">*</span></label>
                     <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4" style="width: 300px">
                         <div class="grid grid-cols-10 gap-5 pl-4 pr-5">

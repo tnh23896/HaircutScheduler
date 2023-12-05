@@ -32,6 +32,7 @@ class UpdateRequest extends FormRequest
 				Rule::unique($tableName)->ignore($id)
             ],
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'can_choose' => 'required',
         ];
     }
 		public function messages()
@@ -44,6 +45,7 @@ class UpdateRequest extends FormRequest
 				'image.image' => 'Ảnh không đúng định dạng',
 				'image.mimes' => 'Ảnh không đúng định dạng',
 				'image.max' => 'Ảnh không được lớn hơn 2MB',
+                'can_choose.required' => 'Vui lòng chọn điều kiện cho danh mục',
 			];
 		}
 }
