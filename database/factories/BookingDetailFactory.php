@@ -22,7 +22,6 @@ class BookingDetailFactory extends Factory
             'price' => $this->faker->numberBetween(100, 200),
             'booking_id' => $this->faker->numberBetween(1, 5),
             'status' => $this->faker->randomElement(['cancel', 'success']),
-            'admin_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

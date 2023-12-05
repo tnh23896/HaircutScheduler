@@ -100,7 +100,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-2" style="margin-top:18px ;">
+                <div class="col-md-2" style="@if (Auth::check()) margin-top:0px; @else margin-top:18px ;  @endif">
                     <div class="nav-login">
 
                         @if (Auth::check())
