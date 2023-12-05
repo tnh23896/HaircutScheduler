@@ -382,8 +382,9 @@ class ScheduleController extends Controller
     {
         try {
             $data = Booking::query()->findOrFail($id);
-            // dd($data);
             // Lấy danh mục dịch vụ
+            $today = Carbon::today();
+            $promotion = Promotion::query()->where('expire_date', '>=', $today)->get()->toArray();
             $serviceCategories = CategoryService::with('services')->get();
             $service = Service::all();
             // Ngày bắt đầu
@@ -414,7 +415,7 @@ class ScheduleController extends Controller
             $timeSlots = $workSchedules->times;
             $timeSelected = Time::where('time', $data->time)->first();
 
-            return view('admin.ScheduleManagement.edit', compact('serviceCategories', 'data', 'staffMembers', 'availableDates', 'timeSlots', 'service', 'timeSelected'));
+            return view('admin.ScheduleManagement.edit', compact('serviceCategories', 'data', 'staffMembers', 'availableDates', 'timeSlots', 'service', 'timeSelected','promotion'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');
