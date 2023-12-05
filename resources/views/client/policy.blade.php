@@ -186,13 +186,18 @@
                     bạn qua số điện thoại đặt lịch và xác minh khách hàng</span></p>
             <p class="c3"><span class="c11">- &nbsp;</span><span class="c2">Sau khi đã xác minh khách hàng,
                     DTbarber sẽ thanh toán lại khoản tiền cho quý khách.</span></p>
+										<p class="c3"><span class="c11">- &nbsp;</span><span class="c2">Nếu khách hàng đi muộn lịch hẹn 1 ngày sau lịch nhân viên sẽ gọi lại quý khách nếu quá thời gian quy định thì số tiền đã thành toán sẽ không được hoàn trả.</span>
+										</p>
             <p class="c5"><span class="c2">DTbarber sẽ có các bước sau để hoàn lại tiền cho quý khách khi bớt hoặc
                     thêm dịch vụ:</span></p>
             <p class="c3"><span class="c11">- &nbsp;</span><span class="c2">Nếu khách hàng có mong muốn bớt số
                     lượng dịch vụ sử dụng thì sau khi sử dụng xong thì DTbarber sẽ xác nhận và hoàn trả lại số tiền cho quý
                     khách.</span></p>
-            <p class="c3"><span class="c11">- &nbsp;</span><span class="c2">Nếu khách hàng có mong muốn thêm số
-                    lượng dịch vụ sử dụng thì sau khi sử dụng xong thì DTbarber sẽ xác nhận và thêm số tiền phải trả.</span></p>
+            <p class="c3"><span class="c11">- &nbsp;</span><span class="c2">Nếu khách hàng có mong muốn thêm
+                    số
+                    lượng dịch vụ sử dụng thì sau khi sử dụng xong thì DTbarber sẽ xác nhận và thêm số tiền phải trả.</span>
+            </p>
+   
             <p class="c10 fw600"><span class="c7 c29">10. Chuyển thông tin cá nhân ngoài phạm vi địa phương của bạn</span>
             </p>
             <p class="c10"><span class="c24">DTbarber có thể cần chuyển thông tin cá nhân của Người dùng ra ngoài
