@@ -213,7 +213,7 @@
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Mã giảm giá</label>
-                        <input name="promoCode" type="text" class="form-control w-full" value="{{ $data->promotion->promocode }}"
+                        <input name="promoCode" type="text" class="form-control w-full" value="{{ $data->promotion->promocode ?? '' }}"
                             placeholder="Mã giảm giá" disabled>
                     </div>
                     <div class="mt-5">
