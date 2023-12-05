@@ -12,12 +12,6 @@
                         <form id="filterTopService" method="POST">
                             @csrf
                             <div class="flex justify-end">
-                                <select name="month" id="month" class="tom-select w-full tomselected mx-3" style="width: 8rem;">
-                                    <option value="0" selected="true" class="w-96">Chọn tháng</option>
-                                    @for ($i = 1; $i <= 12; $i++)
-                                        <option value="{{ $i }}">Tháng {{ $i }}</option>
-                                    @endfor
-                                </select>
                                 <select name="year" id="year" class="tom-select w-full tomselected mx-3" style="width: 8rem;">
                                     <option value="0" selected="true" class="w-96">Chọn năm</option>
                                     @for ($year = 1990; $year <= 2030; $year++)

@@ -6,18 +6,12 @@
             <div class="col-span-12 lg:col-span-6">
                 <div class="intro-y block sm:flex items-center h-10">
                     <h2 class="text-lg font-medium truncate mr-5">
-                        Top 5 khách hàng đặt lịch nhiều nhất
+                        Top 5 khách hàng đặt lịch nhiều nhất năm
                     </h2>
                 </div>
                 <form id="filterBookerForm" method="POST">
                     @csrf
                     <div class="flex justify-end">
-                        <select name="month" id="month" class="tom-select w-96 tomselected mx-3" style="width: 150px">
-                            <option value="0" selected="true">Chọn tháng</option>
-                            @for ($i = 1; $i <= 12; $i++)
-                                <option value="{{ $i }}">Tháng {{ $i }}</option>
-                            @endfor
-                        </select>
                         <select name="year" id="year" class="tom-select w-96 tomselected mx-3" style="width: 150px">
                             <option value="0" selected="true">Chọn năm</option>
                             @for ($year = 1990; $year <= 2030; $year++)
@@ -52,8 +46,8 @@
                                     <td>{{ $count++ }}</td>
                                     <td class="w-40">
                                         <div class="text-center flex">
-                                            <div class="w-16 h-16 image-fit zoom-in">
-                                                <img alt="ảnh" class="tooltip rounded-full"
+                                            <div class="w-16 h-16 image-fit">
+                                                <img alt="ảnh" class="rounded-full"
                                                     src="{{$booker->avatar === 'default.jpg' ? asset('dist/images/default.jpg') : asset($booker->avatar) }}">
                                             </div>
                                         </div>
@@ -74,20 +68,13 @@
         <div class="col-span-12 xl:col-span-4 mt-6">
             <div class="intro-y flex items-center h-10">
                 <h2 class="text-lg font-medium truncate mr-5">
-                    Top 5 nhân viên
+                    Top 5 nhân viên xuất sắc nhất năm
                 </h2>
             </div>
             <div>
                 <form id="filterTopEmployee" style="margin-bottom:73px" method="POST">
                     @csrf
                     <div class="flex justify-end">
-                        <select name="month" id="month" class="tom-select w-96 tomselected mx-3"
-                            style="width:8rem">
-                            <option value="0" selected="true">Chọn Tháng</option>
-                            @for ($m = 1; $m <= 12; $m++)
-                                <option value="{{ $m }}">Tháng {{ $m }}</option>
-                            @endfor
-                        </select>
                         <select name="year" id="year" class="tom-select w-96 tomselected mx-3"
                             style="width:8rem">
                             <option value="0" selected="true">Chọn Năm</option>
@@ -112,7 +99,7 @@
                                 {{-- Display employee information --}}
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                     <img alt="Employee Avatar"
-                                        src="{{$employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">                        
+                                        src="{{$employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">{{ $employee['username'] }}</div>
@@ -126,7 +113,7 @@
                                 </div>
                                 <div
                                     class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    {{ $employee['totalBookings'] }} Đơn đặt
+                                    {{ $employee['totalBookings'] }} lịch thành công
                                 </div>
                             </div>
                         </div>
@@ -229,7 +216,7 @@
                                     </div>
                                 </div>
                                 <div class="py-1 px-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
-                                    ${employee.totalBookings} lịch đặt
+                                    ${employee.totalBookings} lịch đặt thành công
                                 </div>
                             </div>
                         </div>`).join('');
