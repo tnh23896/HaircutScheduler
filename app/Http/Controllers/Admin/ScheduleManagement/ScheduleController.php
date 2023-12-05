@@ -16,11 +16,13 @@ use App\Models\BillDetail;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use App\Models\BookingDetail;
+use App\Models\HistoryAction;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\Admin\ScheduleManagement\StoreRequest;
@@ -323,6 +325,11 @@ class ScheduleController extends Controller
                 $params['promo_id'] = $promo->id;
             }
             $booking = Booking::query()->create($params);
+            HistoryAction::create([
+                'booking_id' => $booking->id,
+                'admin_id' => Auth::guard('admin')->user()->id,
+                'action' => 'Thêm lịch đặt thành công',
+            ]);
             $idServicesBookingDetail = explode(',', $request->servicesId);
             foreach ($idServicesBookingDetail as $id) {
                 $service = Service::query()->findOrFail($id);
@@ -341,10 +348,11 @@ class ScheduleController extends Controller
                 throw new Exception('Lịch đã được đặt. Vui lòng chọn một lịch khác.', 400);
             }
             $findWorkScheduleDetail->update(['work_schedule_details.status' => 'unavailable']);
-
+            
             return response()->json([
                 'message' => 'Thêm mới thành công',
             ], 200);
+
         } catch (\Exception $e) {
             Log::error('Error in store: ' . $e->getMessage());
             if ($e->getCode() === 400) {
@@ -443,11 +451,44 @@ class ScheduleController extends Controller
                 $promo = Promotion::where('promocode', $request->promo_code)->first();
                 $params['promo_id'] = $promo->id;
             }
+            if ($request->amount_paid) {
+                $params['amount_paid'] = $request->amount_paid;
+            }
             $booking = Booking::query()->findOrFail($id);
             $bookingOld = Booking::query()->findOrFail($id);
-
             $booking->update($params);
+            $changedFields = [];
+
+            if ($bookingOld->name != $booking->name) {
+                $changedFields[] = 'Tên khách hàng';
+            }
+            
+            if ($bookingOld->admin_id != $booking->admin_id) {
+                $changedFields[] = 'Nhân viên';
+            }
+            
+            if ($bookingOld->phone != $booking->phone) {
+                $changedFields[] = 'Số điện thoại';
+            }
+            if ($bookingOld->email != $booking->email) {
+                $changedFields[] = 'Email';
+            }
+            if ($bookingOld->day != $booking->day) {
+                $changedFields[] = 'Ngày cắt tóc';
+            }
+            if ($bookingOld->time != $booking->time) {
+                $changedFields[] = 'Thời gian cắt';
+            }
+            if (!empty($changedFields)) {
+                HistoryAction::create([
+                    'booking_id' => $booking->id,
+                    'admin_id' => Auth::guard('admin')->user()->id,
+                    'action' => "Thay đổi " . implode(', ', $changedFields),
+                ]);
+            }
+            
             $booking->booking_details()->delete();
+           
 
             $idServicesBookingDetail = explode(',', $request->servicesId);
             foreach ($idServicesBookingDetail as $id) {
@@ -457,7 +498,6 @@ class ScheduleController extends Controller
                     'service_id' => $id,
                     'name' => $service->name,
                     'price' => $service->price,
-                    'admin_id' => $admin_id,
                 ]);
             }
 
@@ -502,11 +542,34 @@ class ScheduleController extends Controller
             $data = Booking::query()->findOrFail($id);
             $data->status = $request->status;
             $data->save();
+            if ($data->status == "success") {
+                $statusVn = 'Đã hoàn thành'; 
+            } elseif ($data->status == "canceled") {
+                $statusVn = 'Đã hủy';
+            } elseif ($data->status == "pending") {
+                $statusVn = 'Đang chờ';
+            } elseif ($data->status == "waiting") {   
+                $statusVn = 'Đang cắt';
+            } elseif ($data->status == "confirmed") {
+                $statusVn = 'Đã xác nhận';
+            }
+            HistoryAction::create([
+                'booking_id' => $data->id,
+                'admin_id' => Auth::guard('admin')->user()->id,
+                'action' => 'Thay đổi trạng thái: '. $statusVn,
+            ]);
             $sum_price = 0;
             foreach ($data->booking_details as $item) {
                 if ($item->status == "success") {
                     $sum_price += $item->price;
                 }
+            }
+            $promo = Promotion::where('id', $data->promo_id)->first();
+            if ($promo) {
+                
+                $sum_price_end = $sum_price - $promo->discount;
+            }else{
+                $sum_price_end = $sum_price;
             }
             if ($data->status == "success") {
                 $bill = Bill::create([
@@ -514,13 +577,14 @@ class ScheduleController extends Controller
                     'user_id' => $data->user_id,
                     'admin_id' => $data->admin_id,
                     'phone' => $data->phone,
-                    'total_price' => $data->total_price,
+                    'total_price' => $sum_price_end,
                     'email' => $data->email,
                     'day' => $data->day,
                     'time' => $data->time,
                     'payment' => $data->payment,
                 ]);
-
+                
+                
                 foreach ($data->booking_details as $item) {
                     if ($item->status == "success") {
                         $bill_detail = $bill->bill_details()->create([

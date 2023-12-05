@@ -56,4 +56,7 @@ class Admin extends Authenticatable
         return $this->hasMany(Bill::class);
     }
 
+    public function history_actions(){
+        return $this->hasMany(HistoryAction::class);
+    }
 }

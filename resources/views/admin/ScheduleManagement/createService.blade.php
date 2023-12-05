@@ -25,9 +25,9 @@
                                 <tr>
                                     <td class="text-center">{{$service->id}}</td>
                                     <td class="text-center">{{$service->name}}</td>
-                                    <td class="text-center">{{$service->price}}</td>
+                                    <td class="text-center">{{number_format($service->price)}} VND</td>
                                     <td class="text-center">
-                                        <input type="checkbox"
+                                        <input type="checkbox"class="qr-checkbox form-check-input" style="border-color: #312E81"
                                                name="active[]" value="{{$service->id}}">
                                     </td>
                                 </tr>

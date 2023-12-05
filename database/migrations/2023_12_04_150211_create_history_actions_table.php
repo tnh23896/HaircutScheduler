@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('booking_details', function (Blueprint $table) {
+        Schema::create('history_actions', function (Blueprint $table) {
             $table->id();
-            $table->string('service_id');
-            $table->string('name');
-            $table->string('price');
+            $table->string('admin_id');
+            $table->string('action');
             $table->string('booking_id');
-            $table->enum('status', ['success', 'cancel'])->default('success');
-						$table->string('admin_id')->nullable();
-            $table->timestamps();
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('booking_details');
+        Schema::dropIfExists('history_actions');
     }
 };
