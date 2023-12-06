@@ -59,7 +59,9 @@ class CheckPermissionAdmin
 			'admin.serviceSetTime',
 			'admin.topEmployees',
 			'admin.ScheduleEmployee.search',
-			'admin.revenue.export'
+			'admin.revenue.export',
+			'admin.schedulestatics.export',
+
 		];
 
 		$name = Route::currentRouteName();
