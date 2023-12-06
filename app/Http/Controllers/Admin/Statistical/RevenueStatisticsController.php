@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Statistical;
 
-use App\Http\Controllers\Controller;
-use App\Models\Bill;
 use Carbon\Carbon;
+use App\Models\Bill;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RevuneStatistic;
+use App\Http\Controllers\Controller;
 
 class RevenueStatisticsController extends Controller
 {
@@ -15,6 +17,7 @@ class RevenueStatisticsController extends Controller
 		$lastMonthrevenue = $this->revenue();
 		$revenue = $this->currentMonthRevenue();
 
+		
 		return view(
 			'admin.Statistical.revenueStatistics',
 			compact('totalRevenue', 'lastMonthrevenue', 'revenue')
@@ -103,8 +106,8 @@ class RevenueStatisticsController extends Controller
 		$month = $request->month;
 		$year = $request->year;
 
-		if($request->year == 0) {
-			$year = $currentYear ;
+		if ($request->year == 0) {
+			$year = $currentYear;
 		} else {
 			$year = $request->year;
 		}
@@ -131,6 +134,7 @@ class RevenueStatisticsController extends Controller
 		// Gộp kết quả từ cơ sở dữ liệu vào mảng chứa tất cả các ngày trong tháng
 		foreach ($daysInMonth as $day) {
 			$totalRevenue[$day] = [
+				'day' => $day,
 				'totalRevenue' => 0,
 				'ca1'  => 0,
 				'ca2'  => 0,
@@ -140,6 +144,7 @@ class RevenueStatisticsController extends Controller
 
 		foreach ($result as $row) {
 			$totalRevenue[$row->day] = [
+				'day' => $row->day,
 				'totalRevenue' => $row->totalRevenue,
 				'ca1'  => $row->ca1,
 				'ca2'  => $row->ca2,
@@ -179,6 +184,7 @@ class RevenueStatisticsController extends Controller
 
 		foreach ($filteredData as $row) {
 			$totalRevenue[$row->month] = [
+				'month' => $row->month,
 				'totalRevenues' => $row->totalRevenues,
 				'totalBills' => $row->totalBills,
 				'ca1' => $row->ca1,
@@ -192,6 +198,7 @@ class RevenueStatisticsController extends Controller
 		foreach ($allMonths as $month) {
 			if (!isset($totalRevenue[$month])) {
 				$totalRevenue[$month] = [
+					'month' => $month,
 					'totalRevenues' => 0,
 					'totalBills' => 0,
 					'ca1' => 0,
@@ -230,6 +237,7 @@ class RevenueStatisticsController extends Controller
 
 		foreach ($result as $row) {
 			$totalRevenue[$row->month] = [
+				'month' => $row->month,
 				'totalRevenues' => $row->totalRevenues,
 				'totalBills' => $row->totalBills,
 				'ca1' => $row->ca1,
@@ -243,6 +251,7 @@ class RevenueStatisticsController extends Controller
 		foreach ($allMonths as $month) {
 			if (!isset($totalRevenue[$month])) {
 				$totalRevenue[$month] = [
+					'month' => $month,
 					'totalRevenues' => 0,
 					'totalBills' => 0,
 					'ca1' => 0,
@@ -253,5 +262,12 @@ class RevenueStatisticsController extends Controller
 		}
 
 		return $totalRevenue;
+	}
+	public function export(Request $request)
+	{
+		$export = new RevuneStatistic($request
+			->totalRevenue);
+
+		return Excel::download($export, 'Thống kê doanh thu.xlsx');
 	}
 }
