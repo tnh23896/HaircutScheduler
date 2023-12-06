@@ -598,7 +598,7 @@ class ScheduleController extends Controller
                     }
                 }
                 $bill_detail = BillDetail::where('bill_id', $bill->id)->get();
-                SendMailBill::dispatch($bill, $bill_detail);
+                SendMailBill::dispatch($bill, $bill_detail)->onQueue('email_booked');
             }
             $dataOld = Booking::query()->findOrFail($id);
             if ($dataOld->status == "canceled") {
