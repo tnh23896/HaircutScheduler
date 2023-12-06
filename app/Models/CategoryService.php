@@ -12,7 +12,7 @@ class CategoryService extends Model
     protected $table = 'category_services';
 
     protected $fillable = [
-        'name', 'image',
+        'name', 'image','can_choose'
     ];
     public function services()
     {

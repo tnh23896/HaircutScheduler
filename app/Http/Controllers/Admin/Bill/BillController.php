@@ -31,10 +31,15 @@ class BillController extends Controller
         try {
             $search = $request->input('search');
             $fields = ['name', 'phone'];
-            $data = search(Bill::class, $search, $fields)
+            $data = Bill::withTrashed()
+                ->leftJoin('admins', 'bills.admin_id', '=', 'admins.id')
+                ->select('bills.*', 'admins.username')
+                ->where(function($query) use ($search) {
+                    $query->where('bills.name', 'like', "%$search%")
+                        ->orWhere('bills.phone', 'like', "%$search%");
+                })
                 ->latest()
-                ->paginate(10)
-                ->withQueryString();
+                ->paginate(10);
             return view('admin.BillManagement.index', compact('data'));
         } catch (\Exception $exception) {
             return response()->json([
@@ -73,7 +78,10 @@ class BillController extends Controller
                 $time = sprintf('%02d:%02d', $hour, $minute);
             }
 
-            $query = Bill::latest();
+            $query = Bill::latest()
+            ->withTrashed()
+            ->join('admins', 'bills.admin_id', '=', 'admins.id')
+            ->select('bills.*', 'admins.username');
 
             if (!empty($day)) {
                 $query->whereRaw('DATE(day) = ?', [$day]);

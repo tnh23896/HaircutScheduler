@@ -47,11 +47,16 @@ class ScheduleController extends Controller
     {
         try {
             $search = $request->input('search');
-            $fields = ['name', 'phone'];
-            $data = search(Booking::class, $search, $fields)
-                ->latest()
-                ->paginate(10)
-                ->withQueryString();
+            $fields = ['name','phone'];
+            $data = Booking::withTrashed()
+            ->leftJoin('admins', 'bookings.admin_id', '=', 'admins.id')
+            ->select('bookings.*', 'admins.username')
+            ->where(function($query) use ($search) {
+                $query->where('bookings.name', 'like', "%$search%")
+                    ->orWhere('bookings.phone', 'like', "%$search%");
+            })
+            ->latest()
+            ->paginate(10);
             return view('admin.ScheduleManagement.index', compact('data'));
         } catch (\Exception $exception) {
             return response()->json([
@@ -90,7 +95,10 @@ class ScheduleController extends Controller
                 $time = sprintf('%02d:%02d', $hour, $minute);
             }
 
-            $query = Booking::latest();
+            $query = Booking::latest()
+            ->withTrashed()
+            ->join('admins', 'bookings.admin_id', '=', 'admins.id')
+            ->select('bookings.*', 'admins.username');
 
             if (!empty($day)) {
                 $query->whereRaw('DATE(day) = ?', [$day]);
@@ -120,13 +128,17 @@ class ScheduleController extends Controller
     {
         try {
             $status = $request->input('filter');
-            if ($status == "") {
-                $data = Booking::latest()->paginate(10);
-            } else {
-                $data = Booking::where('status', $status)
-                    ->latest()
-                    ->paginate(10);
-            }
+    
+            $data = Booking::when($status, function ($query) use ($status) {
+                    return $query->where('status', $status);
+                })
+                ->withTrashed()
+                ->join('admins', 'bookings.admin_id', '=', 'admins.id')
+                ->select('bookings.*', 'admins.username')
+                ->latest()
+                ->paginate(10)
+                ->withQueryString();
+    
             return view('admin.ScheduleManagement.index', compact('data'));
         } catch (\Exception $exception) {
             return response()->json([
@@ -370,8 +382,9 @@ class ScheduleController extends Controller
     {
         try {
             $data = Booking::query()->findOrFail($id);
-            // dd($data);
             // Lấy danh mục dịch vụ
+            $today = Carbon::today();
+            $promotion = Promotion::query()->where('expire_date', '>=', $today)->get()->toArray();
             $serviceCategories = CategoryService::with('services')->get();
             $service = Service::all();
             // Ngày bắt đầu
@@ -402,7 +415,7 @@ class ScheduleController extends Controller
             $timeSlots = $workSchedules->times;
             $timeSelected = Time::where('time', $data->time)->first();
 
-            return view('admin.ScheduleManagement.edit', compact('serviceCategories', 'data', 'staffMembers', 'availableDates', 'timeSlots', 'service', 'timeSelected'));
+            return view('admin.ScheduleManagement.edit', compact('serviceCategories', 'data', 'staffMembers', 'availableDates', 'timeSlots', 'service', 'timeSelected','promotion'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');

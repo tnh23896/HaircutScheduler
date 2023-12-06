@@ -75,21 +75,13 @@ Route::group(['middleware' => 'admin'], function () {
 		// Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-		// Thống kê lịch đặt
-    Route::post('/schedule-set-by-time', [DashboardController::class, 'scheduleSetbyTime'])
-        ->name('admin.scheduleSetbyTime');
-
 		// Thống kê dịch vụ
-    Route::post('/service-set-by-time', [DashboardController::class, 'ServiceSetbyTime'])
+    Route::post('/service-set-by-time', [DashboardController::class, 'serviceSetByTime'])
         ->name('admin.serviceSetbyTime');
 
 		// Thống kê nhân viên
     Route::post('/top-employee', [DashboardController::class, 'topEmployee'])
         ->name('admin.topEmployee');
-
-	  // Thông kê doanh thu
-	Route::post('/revenue-set-by-time', [DashboardController::class, 'revenueSetbyTime'])
-        ->name('admin.revenueSetbyTime');
 
     // Logout
     Route::get('logout', [LoginController::class, 'logout'])
@@ -307,7 +299,7 @@ Route::group(['middleware' => 'admin'], function () {
         ->name('admin.revenueSetTime');
     Route::get('service-usage-statistics', [ServiceUsageStatisticsController::class, 'index'])
         ->name('admin.Statistical.serviceUsageStatistics');
-    Route::post('/service-set-time', [ServiceUsageStatisticsController::class, 'ServiceSetbyTime'])
+    Route::post('/service-set-time', [ServiceUsageStatisticsController::class, 'serviceSetByTime'])
         ->name('admin.serviceSetTime');
     Route::get('employee-and-customer-statistics', [EmployeeAndCustomerStatisticsController::class, 'index'])
         ->name('admin.Statistical.employeeAndCustomerStatistics');

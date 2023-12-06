@@ -13,9 +13,17 @@
             <form id="ajaxForm" enctype="multipart/form-data">
                 <div class="intro-y box p-5">
                     <div>
-                        <label for="crud-form-1" class="form-label">Tiêu đề <span style="color: red">*</span></label>
+                        <label for="crud-form-1" class="form-label mt-3">Tiêu đề <span style="color: red">*</span></label>
                         <input type="text" name="name" id="name" class="clearable form-control w-full"
                             placeholder="Tiêu đề">
+                    </div>
+                    <div>
+                        <label for="crud-form-1" class="form-label mt-3">Loại danh mục dịch vụ <span style="color: red">*</span></label>
+                        <select class="form-select w-full" name="can_choose" id="">
+                            <option value="" selected>Chọn số lượng</option>
+                            <option value="one">Chọn một dịch vụ</option>
+                            <option value="many">Chọn nhiều dịch vụ</option>
+                        </select>
                     </div>
                     <label for="crud-form-3" class="form-label mt-3">Hình ảnh <span style="color: red">*</span></label>
                     <div class="w-full mt-3 xl:mt-0 flex-1 border-2 border-dashed dark:border-darkmode-400 rounded-md pt-4"
@@ -33,6 +41,7 @@
                                     class="w-full h-full top-0 left-0 absolute opacity-0">
                         </div>
                     </div>
+
                 </div>
                 <div class="text-right mt-5">
                     <a href="{{ route('admin.serviceManagement.category.index') }}" type="button"

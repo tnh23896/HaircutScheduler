@@ -1,5 +1,6 @@
 <script>
-    $(document).ready(function() {
+    jQuery(document).ready(function() {
+        const serviceCategories = @json($serviceCategories);
         $('#promotion').on('change', function() {
             // Xử lý sự kiện onchange ở đây
             var promoCode = $(this).val();
@@ -30,30 +31,75 @@
         $('select[name="day"]').on('change', function() {
             performAjaxRequest();
         });
-        $('input[name="services[]"]').on('change', function() {
-            // Lấy danh sách các giá trị đã chọn
-            var checked = $('input[name="services[]"]:checked');
-            var totalPrice = 0;
-            checked.each(function() {
-                var price = parseFloat($(this).data('price'));
-                totalPrice += price;
-            });
-            var promoCode = $('input[name="promoCode"]').val();
-            if (promoCode) {
-                const dataPromotioncode = @php echo json_encode($promotion) @endphp;
-                for (var i = 0; i < dataPromotioncode.length; i++) {
-                    var promotion = dataPromotioncode[i];
-                    if (promotion.promocode == promoCode) {
-                        var discount = promotion.discount;
-                        let newTotalPrice3 = totalPrice - Number(discount);
-                        $('#totalPrice').text(Number(newTotalPrice3).toLocaleString('en-US'));
-                        $('#promotion').attr('disabled', true);
-                        break;
+        serviceCategories.forEach(function(category) {
+            $('input[name="' + category.id + 'services[]"]').on('change', function() {
+                if (category.can_choose == 'one') {
+
+                    if ($(this).is(':checked')) {
+                        $('input[name="' + category.id + 'services[]"]').each(
+                            function() {
+                                jQuery(this).prop('checked', false);
+                            }
+                        )
+                        jQuery(this).prop('checked', true);
                     }
                 }
-            } else {
-            $('#totalPrice').text(Number(totalPrice).toLocaleString('en-US'));
-            }
+                var tottalPrice = 0;
+                var promoCode = $('input[name="promoCode"]').val();
+                if (promoCode) {
+                    const selectedServices = [];
+
+                    const dataPromotioncode = @php echo json_encode($promotion) @endphp;
+                    $.each(dataPromotioncode, function(index, promotion) {
+                        if (promotion.promocode == promoCode) {
+                            serviceCategories.forEach(function(category) {
+                                $('input[name="' + category.id +
+                                    'services[]"]:checked').each(
+                                    function() {
+                                        selectedServices.push($(this).data(
+                                            'price'));
+                                    });
+                            })
+                            tottalPrice = 0
+                            if (!selectedServices.length) {
+                                tottalPrice = 0
+                            } else {
+                                tottalPrice = selectedServices.reduce(function(a, b) {
+                                    return Number(a) + Number(b);
+                                })
+                                var discount = promotion.discount;
+                                let newTotalPrice3 = tottalPrice - Number(discount);
+                                newTotalPrice3 = Number(newTotalPrice3).toLocaleString(
+                                    'en-US');
+
+                                $('#totalPrice').text(newTotalPrice3);
+                            }
+
+                        }
+                    });
+                } else {
+                    const selectedServices = [];
+
+                    serviceCategories.forEach(function(category) {
+                        $('input[name="' + category.id + 'services[]"]:checked').each(
+                            function() {
+                                selectedServices.push($(this).data('price'));
+                            });
+                    })
+                    tottalPrice = 0
+                    if (!selectedServices.length) {
+                        tottalPrice = 0
+                    } else {
+                        tottalPrice = selectedServices.reduce(function(a, b) {
+                            return Number(a) + Number(b);
+                        })
+                        console.log(tottalPrice);
+                    }
+                    $('#totalPrice').text(Number(tottalPrice).toLocaleString('en-US'));
+                }
+
+            });
+
         });
 
         function performAjaxRequest() {
@@ -104,7 +150,9 @@
         }
         $('#bookingConfirm').on('click', function() {
             const form = new FormData();
-            const selectedServices = $('input[name="services[]"]:checked');
+            const serviceCategories = @json($serviceCategories);
+            const selectedServices = [];
+
             let totalPrice = $('#totalPrice').text();
             const name = $('input[name="name"]').val() || "";
             const selectedRadio = $('input[type="radio"][name="admin_id"]:checked');
@@ -117,9 +165,10 @@
             const time = selectedTime.length > 0 ? selectedTime.val() : "";
             const promoCode = $('input[name="promoCode"]').val();
             // Khai báo mảng để lưu trữ giá trị của servicesId
-            const servicesId = [];
-            selectedServices.each(function() {
-                servicesId.push($(this).val());
+            serviceCategories.forEach(function(category) {
+                $('input[name="' + category.id + 'services[]"]:checked').each(function() {
+                    selectedServices.push($(this).val());
+                });
             });
             // Chuyển mảng servicesId thành chuỗi JSON
             form.append('name', name);
@@ -131,7 +180,7 @@
             form.append('time', time);
             promoCode ? form.append('promo_code', promoCode) : "";
             // Thêm chuỗi JSON servicesId vào FormData
-            form.append('servicesId', servicesId);
+            form.append('servicesId', selectedServices);
             sendAjaxRequest("{{ route('admin.scheduleManagement.store') }}", 'post', form,
                 response => {
                     toastr.success('Thêm đơn thành công .');
