@@ -288,6 +288,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('promotion-management/filter', [PromotionController::class, 'filter'])
         ->name('admin.PromotionManagement.filter');
 
+
+		//export excel
+		Route::post('revenue-statistics-export',[RevenueStatisticsController::class, 'export'])->name('admin.revenue.export');
     //Statistical
     Route::get('schedule-statistics', [ScheduleStatisticsController::class, 'index'])
         ->name('admin.Statistical.scheduleStatistics');
