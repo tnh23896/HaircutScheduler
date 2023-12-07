@@ -65,7 +65,7 @@
             </div>
             <div class="p-5">
                 <div class="h-40 2xl:h-56 image-fit">
-                    <img alt="image" class="rounded-md" src="{{ asset($blog->image) }}">
+                    <img alt="image" data-action="zoom" class="rounded-md" src="{{ asset($blog->image) }}">
                 </div>
                 <a href="#" class="block font-medium text-base mt-5">{{ $blog->title }}</a>     
                 <div class="text-slate-600 dark:text-slate-500 mt-2 overflow-hidden overflow-ellipsis cursor-pointer">

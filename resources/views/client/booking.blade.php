@@ -126,6 +126,25 @@
             }
 
         }
+        .rating {
+            position: absolute;
+            top: 5px; /* Điều chỉnh vị trí của số sao từ trên xuống */
+            right: 10px !important;
+            background-color: #f39c12;
+            color: #000;
+            width: 50px !important; /* Điều chỉnh chiều rộng của khung tròn */
+            height: 50px !important;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 100%; /* Điều này là để làm mịn cạnh của cả khung tròn và số sao */
+            transform: translateX(-110px) !important; /* Di chuyển cả khung tròn và số sao sang bên trái */
+        }
+        .rating span {
+            position: relative;
+            top: -20%;
+            right: 3%; /* Di chuyển chữ số sang bên trái */
+            font-size: 13px /* Điều chỉnh chiều cao của số sao */
+        }
     </style>
 @endsection
 @section('content')
@@ -350,10 +369,15 @@
                                                                     </div>
                                                                 </label>
                                                             </div>
+
+                                                                @if(isset($averageRatings[$staff->id]) && $averageRatings[$staff->id] > 0)
+                                                                <span class="rating">
+                                                                <span class="rating-number">{{ round($averageRatings[$staff->id], 1) }}<sup>&#9733</sup></span>
+                                                                </span>
+                                                                @endif
                                                         </div>
                                                         <div class="text-center featured-area">
-                                                            <h5><a href=""
-                                                                    style="color: black">{{ $staff->username }}</a></h5>
+                                                            <h5><a href=""style="color: black">{{ $staff->username }}</a></h5>
                                                         </div>
                                                     </div>
                                                 </div>

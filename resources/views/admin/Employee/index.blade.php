@@ -45,7 +45,7 @@
                             <td class="!py-3.5">
                                 <div class="flex items-center">
                                     <div class="w-24 h-24 image-fit zoom-in">
-                                        <img alt="ảnh" class="rounded-lg border-white shadow-md"
+                                        <img alt="ảnh"  data-action="zoom"  class="rounded-lg border-white shadow-md"
                                             src="{{ $item->avatar === '' ? asset('dist/images/default.jpg') : asset($item->avatar) }}">
                                     </div>
                                 </div>

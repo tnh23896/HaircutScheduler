@@ -66,11 +66,28 @@ class BookingController extends Controller
                 ->sort();
 
             // Lấy danh sách nhân viên có lịch trong 3 ngày tới
-            $staffMembers = Admin::with('work_schedules')
+            $staffMembers = Admin::with(['work_schedules', 'reviews'])
                 ->whereHas('work_schedules', function ($query) use ($startDate, $endDateForWorkSchedule) {
                     $query->whereBetween('day', [$startDate, $endDateForWorkSchedule]);
                 })->get();
 
+            //Lấy trung bình đánh giá sao của admin có id tương ứng
+            $averageRatings = [];
+
+            foreach ($staffMembers as $staffMember) {
+                $reviews = Review::where('admin_id', $staffMember->id)->get();
+            
+                $totalRating = $reviews->sum('star');
+                $reviewCount = $reviews->count();
+            
+                $averageRating = $reviewCount > 0 ? $totalRating / $reviewCount : 0;
+            
+                // Cập nhật giá trị trong mảng $averageRatings
+                $averageRatings[$staffMember->id] = $averageRating;
+            }
+
+            // dd($averageRatings);
+            
             // Lấy danh sách khung giờ
             $dateString = $startDate;
             if (!$availableDates->isEmpty()) {
@@ -91,7 +108,7 @@ class BookingController extends Controller
                     return $slotTime->gt($currentTime);
                 });
             }
-            return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots', 'promotion'));
+            return view('client.booking', compact('serviceCategories', 'staffMembers', 'availableDates', 'timeSlots', 'promotion', 'averageRatings'));
         } catch (Exception $e) {
             Log::error('Error in booking index: ' . $e->getMessage());
             return view('client.errors.500');

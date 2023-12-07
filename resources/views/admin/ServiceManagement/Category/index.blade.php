@@ -25,7 +25,7 @@
                 <div class="box">
                     <div class="flex flex-col lg:flex-row items-center p-5">
                         <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                            <img alt="{{ $category->name }}" class="rounded-full" src="{{ asset($category->image) }}">
+                            <img alt="{{ $category->name }}"  data-action="zoom"  class="rounded-full" src="{{ asset($category->image) }}">
                         </div>
                         <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
                             <a href="#" class="font-medium">{{ $category->name }}</a>

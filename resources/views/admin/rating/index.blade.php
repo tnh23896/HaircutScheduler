@@ -55,7 +55,7 @@
 
                             <td class="text-center capitalize">{{ $rating->user_name }}</td>
                             <td class="text-center">
-                                <div class="flex items-center">
+                                <div class="flex items-center justify-center">
                                     @for ($i = 0; $i < $rating->star; $i++)
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
