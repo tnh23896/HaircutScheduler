@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Statistical;
 
-use App\Http\Controllers\Controller;
-use App\Models\Bill;
 use Carbon\Carbon;
+use App\Models\Bill;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RevuneStatistic;
+use App\Http\Controllers\Controller;
 
 class RevenueStatisticsController extends Controller
 {
@@ -14,6 +16,7 @@ class RevenueStatisticsController extends Controller
 		$totalRevenue = $this->calculateBillRevenue();
 		$lastMonthrevenue = $this->revenue();
 		$revenue = $this->currentMonthRevenue();
+
 
 		return view(
 			'admin.Statistical.revenueStatistics',
@@ -103,8 +106,8 @@ class RevenueStatisticsController extends Controller
 		$month = $request->month;
 		$year = $request->year;
 
-		if($request->year == 0) {
-			$year = $currentYear ;
+		if ($request->year == 0) {
+			$year = $currentYear;
 		} else {
 			$year = $request->year;
 		}
@@ -131,6 +134,7 @@ class RevenueStatisticsController extends Controller
 		// Gộp kết quả từ cơ sở dữ liệu vào mảng chứa tất cả các ngày trong tháng
 		foreach ($daysInMonth as $day) {
 			$totalRevenue[$day] = [
+				'day' => $day,
 				'totalRevenue' => 0,
 				'ca1'  => 0,
 				'ca2'  => 0,
@@ -140,6 +144,7 @@ class RevenueStatisticsController extends Controller
 
 		foreach ($result as $row) {
 			$totalRevenue[$row->day] = [
+				'day' => $row->day,
 				'totalRevenue' => $row->totalRevenue,
 				'ca1'  => $row->ca1,
 				'ca2'  => $row->ca2,
@@ -179,6 +184,7 @@ class RevenueStatisticsController extends Controller
 
 		foreach ($filteredData as $row) {
 			$totalRevenue[$row->month] = [
+				'month' => $row->month,
 				'totalRevenues' => $row->totalRevenues,
 				'totalBills' => $row->totalBills,
 				'ca1' => $row->ca1,
@@ -192,6 +198,7 @@ class RevenueStatisticsController extends Controller
 		foreach ($allMonths as $month) {
 			if (!isset($totalRevenue[$month])) {
 				$totalRevenue[$month] = [
+					'month' => $month,
 					'totalRevenues' => 0,
 					'totalBills' => 0,
 					'ca1' => 0,
@@ -230,6 +237,7 @@ class RevenueStatisticsController extends Controller
 
 		foreach ($result as $row) {
 			$totalRevenue[$row->month] = [
+				'month' => $row->month,
 				'totalRevenues' => $row->totalRevenues,
 				'totalBills' => $row->totalBills,
 				'ca1' => $row->ca1,
@@ -243,6 +251,7 @@ class RevenueStatisticsController extends Controller
 		foreach ($allMonths as $month) {
 			if (!isset($totalRevenue[$month])) {
 				$totalRevenue[$month] = [
+					'month' => $month,
 					'totalRevenues' => 0,
 					'totalBills' => 0,
 					'ca1' => 0,
@@ -253,5 +262,59 @@ class RevenueStatisticsController extends Controller
 		}
 
 		return $totalRevenue;
+	}
+	public function export(Request $request)
+	{
+		// Lấy ngày hiện tại
+		$today = Carbon::now();
+
+		// Lấy ngày đầu tiên của tháng hiện tại
+		$firstDayOfCurrentMonth = $today->firstOfMonth();
+
+		// Lấy tháng và năm của tháng hiện tại
+		$currentYear = $request->excelYear;
+
+		$query = Bill::selectRaw('MONTH(day) as month, COUNT(*) as totalBills')
+			->selectRaw('SUM(total_price) as totalRevenues') // chỉ tính tổng tiền mà không tính giảm giá
+			->selectRaw('SUM(CASE WHEN shifts.id = 1 THEN bills.total_price ELSE 0 END) as ca1') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 2 THEN bills.total_price ELSE 0 END) as ca2') // Tính tổng doanh thu cho ca có shift_id = 1
+			->selectRaw('SUM(CASE WHEN shifts.id = 3 THEN bills.total_price ELSE 0 END) as ca3') // Tính tổng doanh thu cho ca có shift_id = 1
+			->join('times', 'bills.time', '=', 'times.time')
+			->join('shifts', 'times.shift_id', '=', 'shifts.id')
+			->when($currentYear, function ($query) use ($currentYear) {
+				return $query->whereYear('day', $currentYear);
+			})
+			->groupBy('month')
+			->orderBy('month', 'asc');
+
+		$filteredData = $query->get();
+		$currentYear = ($currentYear == 0) ? now()->year : $currentYear;
+		$totalRevenue = [];
+
+		foreach ($filteredData as $row) {
+			$totalRevenue[$row->month] = [
+				'month' => Carbon::create($currentYear, $row->month, 1)->format('m/Y'), // Include the year in the month value
+				'totalRevenues' => $row->totalRevenues,
+			];
+		}
+
+		$allMonths = range(1, 12);
+
+		foreach ($allMonths as $month) {
+			if (!isset($totalRevenue[$month])) {
+				$totalRevenue[$month] = [
+					'month' => Carbon::create($currentYear, $month, 1)->format('m/Y'), // Include the year in the month value
+					'totalRevenues' => 0,
+				];
+			}
+		}
+
+		ksort($totalRevenue);
+
+		$totalRevenue = array_values($totalRevenue);
+
+		$export = new RevuneStatistic($totalRevenue);
+
+		return Excel::download($export, 'Thống kê doanh thu.xlsx');
 	}
 }

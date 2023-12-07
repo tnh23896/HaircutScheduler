@@ -106,7 +106,7 @@ class VnpayController extends Controller
                     'status' => 'confirmed',
                     'amount_paid' => $_GET['vnp_Amount'] / 100,
                 ]);
-                dispatch(new BookedMail($booking));
+                dispatch(new BookedMail($booking))->onQueue('email_booked');
                 return redirect()->route('booking_history');
             }
             else {

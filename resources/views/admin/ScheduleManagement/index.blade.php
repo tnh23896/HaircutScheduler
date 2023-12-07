@@ -225,12 +225,10 @@
                                     selectElement.data("current-status", newStatus);
                                     // Thực hiện logic cập nhật trạng thái dựa trên kết quả trả về
                                     updateSelectOptions(selectElement, newStatus, hideEdit);
-                                    console.log(response);
                                 }
                             },
                             function(error) {
                                 showErrors(error);
-                                console.log(error);
                             }
                         );
                     } else {

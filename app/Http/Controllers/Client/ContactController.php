@@ -43,7 +43,7 @@ class ContactController extends Controller
         if ($sendCount >= $limit) {
             return response()->json(['error' => 'Exceeded email sending limit.'], 429);
         }
-        SendContactEmail::dispatch($email, $message, $phone);
+        SendContactEmail::dispatch($email, $message, $phone)->onQueue('email_contact');
         Session::put($key, $sendCount + 1);
         Session::put($key . '_expires', time() + $timeFrame);
 

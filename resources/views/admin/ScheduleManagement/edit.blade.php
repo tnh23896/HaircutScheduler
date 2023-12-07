@@ -80,7 +80,7 @@
                                                                                     <div
                                                                                         class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
                                                                                         <a href="#"
-                                                                                            class="font-medium text-lg text-white">{{ $service->name }}</a>
+                                                                                            class="font-medium text-lg" style="color: #1E293B">{{ $service->name }}</a>
                                                                                         <div
                                                                                             class="text-slate-500 text-lg mt-0.5">
                                                                                             Giá:{{ number_format($service->price) }}
@@ -90,16 +90,30 @@
                                                                                         @php
                                                                                             $bookedServices = $data->booking_details->pluck('service_id')->toArray();
                                                                                         @endphp
-                                                                                        <label class="check py-1 px-2 mr-2">
+
+                                                                                        @if ($category->can_choose == 'one')
+                                                                                        <label class="check mt-1">
                                                                                             <input type="checkbox"
                                                                                                 id="service_{{ $service->id }}"
-                                                                                                name="services[]"
+                                                                                                name="{{ $category->id }}services[]"
                                                                                                 value="{{ $service->id }}"
                                                                                                 data-price="{{ $service->price }}"
                                                                                                 @if (in_array($service->id, $bookedServices)) checked @endif>
                                                                                             <span type="button"
-                                                                                                class="btn">Chọn</span>
+                                                                                                class="btn ">Chọn</span>
                                                                                         </label>
+                                                                                    @else
+                                                                                        <label class="check mt-1">
+                                                                                            <input type="checkbox"
+                                                                                                id="service_{{ $service->id }}"
+                                                                                                name="{{ $category->id }}services[]"
+                                                                                                value="{{ $service->id }}"
+                                                                                                data-price="{{ $service->price }}"
+                                                                                                @if (in_array($service->id, $bookedServices)) checked @endif>
+                                                                                            <span type="button"
+                                                                                                class="btn ">Chọn</span>
+                                                                                        </label>
+                                                                                    @endif
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -199,12 +213,12 @@
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Mã giảm giá</label>
-                        <input name="promoCode" type="text" class="form-control w-full" value=""
-                            placeholder="Mã giảm giá">
+                        <input name="promoCode" type="text" class="form-control w-full" value="{{ $data->promotion->promocode ?? '' }}"
+                            placeholder="Mã giảm giá" disabled>
                     </div>
                     <div class="mt-5">
                         <h3 class="font-medium text-base">Tổng tiền dịch vụ: <span id="totalPrice">
-                                {{ number_format($data->total_price) }}
+                            {{ number_format($data->total_price) }}
                             </span> VND</h3>
                     </div>
                 </div>

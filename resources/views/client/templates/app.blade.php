@@ -93,10 +93,7 @@
                         } else {
                             toastr.success("Xác thực thành công");
                             const user = response.data;
-                            const html =
-                             `
-                                <div class="text-left">Số điện thoại: ${user.phone}</div>
-                            `;
+                            location.reload();  
                             $(form).parent().html(html);
                         }
                     },
