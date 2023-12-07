@@ -60,7 +60,6 @@ class CheckPermissionAdmin
 			'admin.topEmployees',
 			'admin.ScheduleEmployee.search',
 			'admin.revenue.export',
-			'admin.schedulestatics.export',
 
 		];
 

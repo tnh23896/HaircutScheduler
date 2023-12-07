@@ -291,7 +291,6 @@ Route::group(['middleware' => 'admin'], function () {
 
 		//export excel
 		Route::post('revenue-statistics-export',[RevenueStatisticsController::class, 'export'])->name('admin.revenue.export');
-		Route::post('schedule-statistics-export',[ScheduleStatisticsController::class, 'export'])->name('admin.schedulestatics.export');
     //Statistical
     Route::get('schedule-statistics', [ScheduleStatisticsController::class, 'index'])
         ->name('admin.Statistical.scheduleStatistics');

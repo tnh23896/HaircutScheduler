@@ -75,11 +75,5 @@ class ScheduleStatisticsController extends Controller
 
 		return $timeslots;
 	}
-	public function export(Request $request)
-	{
-		$export = new ServiceStatistic($request
-			->timeslots);
-
-		return Excel::download($export, 'Thống kê đơn đặt.xlsx');
-	}
+	
 }

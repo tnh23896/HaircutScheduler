@@ -40,7 +40,7 @@
                         <div class="ml-2">
                             <form action="{{ route('admin.revenue.export') }}" method="POST">
                                 @csrf
-                                @foreach ($totalRevenue as $key => $item)
+                                {{-- @foreach ($totalRevenue as $key => $item)
                                     <input type="hidden" name="totalRevenue[{{ $key }}]['month']"
                                         value="{{ $item['month'] }}">
                                     <input type="hidden" name="totalRevenue[{{ $key }}]['totalRevenues']"
@@ -51,7 +51,8 @@
                                         value="{{ $item['ca2'] }}">
                                     <input type="hidden" name="totalRevenue[{{ $key }}]['ca3']"
                                         value="{{ $item['ca3'] }}">
-                                @endforeach
+                                @endforeach --}}
+																<input type="hidden" name="excelYear" id="resultInput" readonly value="0">	
                                 <button class="btn btn-primary shadow-md mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -102,4 +103,19 @@
         </div>
     </div>
     </div>
+
+
+    <script>
+			// Get the select element
+			var selectElement = document.getElementById('year');
+
+			// Add event listener for change event
+			selectElement.addEventListener('change', function() {
+					// Get the selected value
+					var selectedValue = selectElement.value;
+
+					// Update the input value
+					document.getElementById('resultInput').value = selectedValue;
+			});
+	</script>
 @endsection
