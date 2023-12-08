@@ -42,9 +42,9 @@ class ContactController extends Controller
         $sendCount = Session::get($key, 0);
 
         if ($sendCount >= $limit) {
-            return response()->json(['error' => 'Exceeded email sending limit.'], 429);
+            return response()->json(['error' => 'Chúng tôi thấy bạn có hành động spam!!!.'], 429);
         }
-        event(new SendEmailContactEvent($email, $message, $phone));
+        SendContactEmail::dispatch($email, $message, $phone)->onQueue('email_contact');
         Session::put($key, $sendCount + 1);
         Session::put($key . '_expires', time() + $timeFrame);
 

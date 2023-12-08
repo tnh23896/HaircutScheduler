@@ -20,7 +20,8 @@
                 </form>
             </div>
             <form id="filterForm" action="{{ route('admin.rating.filter') }}" method="GET">
-                <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()" style="border-color: #312E81">
+                <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()"
+                    style="border-color: #312E81">
                     <option value="">Tất cả</option>
                     @foreach ($category as $item)
                         <option value="{{ $item->id }}" class="flex items-center">
@@ -53,7 +54,13 @@
                         <tr class="intro-x">
                             <td class="text-center capitalize">{{ $key + 1 }}</td>
 
-                            <td class="text-center capitalize">{{ $rating->user_name }}</td>
+                            <td class="text-center capitalize">
+                                @if ($rating->user_name)
+                                    {{ $rating->user_name }}
+                                @else
+                                    {{ $rating->user_phone }}
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <div class="flex items-center justify-center">
                                     @for ($i = 0; $i < $rating->star; $i++)

@@ -294,7 +294,7 @@ class BookingController extends Controller
                     ]),
                 ], 200);
             }else {
-                event(new SendEmailBookedEvent($booking));
+                dispatch(new BookedMail($booking))->onQueue('email_booked');
                 return response()->json([
                     'message' => 'Đặt lịch thành công',
                     'booking' => $booking,

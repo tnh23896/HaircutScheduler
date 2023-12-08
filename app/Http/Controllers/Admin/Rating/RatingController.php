@@ -13,7 +13,7 @@ class RatingController extends Controller
 	//
 	public function index()
 	{
-		$data = Review::select('reviews.*', 'bookings.name as user_name', 'admins.username as admin_name')
+		$data = Review::select('reviews.*', 'bookings.name as user_name', 'admins.username as admin_name', 'bookings.phone as user_phone')
 			->leftJoin('bookings', 'reviews.booking_id', '=', 'bookings.id')
 			->leftJoin('admins', 'reviews.admin_id', '=', 'admins.id')->latest()->paginate(10);
 		$category = Admin::get(['id', 'username', 'email']);
