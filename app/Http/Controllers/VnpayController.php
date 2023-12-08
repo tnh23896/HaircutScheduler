@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\BookedMail;
-use App\Models\Booking;
 use App\Models\Time;
+use App\Models\Booking;
+use App\Jobs\BookedMail;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\SendEmailBookedEvent;
 
 
 class VnpayController extends Controller
@@ -106,7 +107,8 @@ class VnpayController extends Controller
                     'status' => 'confirmed',
                     'amount_paid' => $_GET['vnp_Amount'] / 100,
                 ]);
-                dispatch(new BookedMail($booking))->onQueue('email_booked');
+                $bookingSend = Booking::query()->findOrFail($_GET['vnp_TxnRef']);
+                event(new SendEmailBookedEvent($bookingSend));
                 return redirect()->route('booking_history');
             }
             else {
