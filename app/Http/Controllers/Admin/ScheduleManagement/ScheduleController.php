@@ -19,6 +19,7 @@ use App\Models\BookingDetail;
 use App\Models\HistoryAction;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
+use App\Events\SendEmailBillEvent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -506,6 +507,7 @@ class ScheduleController extends Controller
 				->where('work_schedule_details.time_id', $time->id)
 				->where('work_schedule_details.work_schedules_id', $workSchedule->id);
 
+    
 			$timeSelected = Time::where('time', $bookingOld->time)->first();
 			$workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
 			$findWorkScheduleDetailSelected = DB::table('work_schedule_details')
@@ -648,4 +650,5 @@ class ScheduleController extends Controller
 	{
 		//
 	}
+    
 }

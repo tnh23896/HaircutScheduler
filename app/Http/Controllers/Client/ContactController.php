@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
-use App\Jobs\SendContactEmail;
-use App\Mail\ContactMail;
 use App\Models\Admin;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use App\Jobs\SendContactEmail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Events\SendEmailContactEvent;
 use Illuminate\Support\Facades\Session;
 
 class ContactController extends Controller
@@ -43,7 +44,7 @@ class ContactController extends Controller
         if ($sendCount >= $limit) {
             return response()->json(['error' => 'Exceeded email sending limit.'], 429);
         }
-        SendContactEmail::dispatch($email, $message, $phone)->onQueue('email_contact');
+        event(new SendEmailContactEvent($email, $message, $phone));
         Session::put($key, $sendCount + 1);
         Session::put($key . '_expires', time() + $timeFrame);
 

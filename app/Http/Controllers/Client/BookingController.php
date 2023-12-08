@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\Review;
 use App\Models\Booking;
 use App\Models\Service;
+use App\Jobs\BookedMail;
 use App\Models\Promotion;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
@@ -17,10 +18,10 @@ use App\Models\CategoryService;
 use App\Events\AdminNotifications;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Events\SendEmailBookedEvent;
 use App\Http\Controllers\Controller;
 use App\Events\CancelShcheduleNotifications;
 use App\Http\Requests\Client\Booking\StoreRequest;
-use App\Jobs\BookedMail;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BookingController extends Controller
@@ -207,10 +208,10 @@ class BookingController extends Controller
                 ->having('booking_count', '>', 1)
                 ->get();
 
-            if ($bookingsCount->isNotEmpty()) {
-                // User has made more than 3 bookings today, show an error
-                return response()->json(['error' => 'Yêu cầu đặt lịch bị từ chối do nghi ngờ là spam. Xin lỗi vì sự bất tiện này!'], 422);
-            }
+            // if ($bookingsCount->isNotEmpty()) {
+            //     // User has made more than 3 bookings today, show an error
+            //     return response()->json(['error' => 'Yêu cầu đặt lịch bị từ chối do nghi ngờ là spam. Xin lỗi vì sự bất tiện này!'], 422);
+            // }
             $admin_id = $request->admin_id;
             $day = $request->day;
             $params = [
@@ -293,7 +294,7 @@ class BookingController extends Controller
                     ]),
                 ], 200);
             }else {
-                dispatch(new BookedMail($booking))->onQueue('email_booked');
+                event(new SendEmailBookedEvent($booking));
                 return response()->json([
                     'message' => 'Đặt lịch thành công',
                     'booking' => $booking,

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
-
+use App\Events\SendEmailForgotPasswordEvent;
 use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class ForgotPasswordController extends Controller
             'email' => $request->email,
             'token' => $token,
         ]);
-        SendForgotPasswordEmail::dispatch( $token, $email )->onQueue('email_auth');
+        event( new SendEmailForgotPasswordEvent($token,$email));
         
         return redirect()->route('admin.login')->with('success', 'Chúng tôi đã gửi email để đặt lại mật khẩu của bạn.');
     }

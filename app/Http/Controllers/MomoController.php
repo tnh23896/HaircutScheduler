@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\BookedMail;
-use App\Models\Booking;
 use App\Models\Time;
+use App\Models\Booking;
+use App\Jobs\BookedMail;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\SendEmailBookedEvent;
 
 class MomoController extends Controller
 {
@@ -92,7 +93,8 @@ class MomoController extends Controller
                 'status' => 'confirmed',
                 'amount_paid' => $request->amount,
             ]);
-            dispatch(new BookedMail($booking))->onQueue('email_booked');
+            $bookingSend = Booking::query()->findOrFail($id);
+            event(new SendEmailBookedEvent($bookingSend));
             return redirect()->route('booking_history');
         }
     }
