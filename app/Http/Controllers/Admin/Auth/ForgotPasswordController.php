@@ -35,7 +35,7 @@ class ForgotPasswordController extends Controller
             'email' => $request->email,
             'token' => $token,
         ]);
-        event( new SendEmailForgotPasswordEvent($token,$email));
+        SendForgotPasswordEmail::dispatch( $token, $email )->onQueue('email_auth');
         
         return redirect()->route('admin.login')->with('success', 'Chúng tôi đã gửi email để đặt lại mật khẩu của bạn.');
     }

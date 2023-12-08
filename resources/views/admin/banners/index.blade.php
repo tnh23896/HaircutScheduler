@@ -25,10 +25,9 @@
                     @foreach ($banners as $banner)
                         <tr class="intro-x">
                             <td class="!py-3.5">
-                                <a href="{{ asset($banner->image) }}" data-fancybox="images">
-                                    <img alt="Image" class="rounded-lg border-white shadow-md tooltip w-24 h-20 rounded"
-                                        src="{{ asset($banner->image) }}" title="{{ $banner->updated_at }}">
-                                </a>
+                                <img alt="Image" data-action="zoom"
+                                    class="rounded-lg border-white shadow-md tooltip w-24 h-20 rounded"
+                                    src="{{ asset($banner->image) }}" title="{{ $banner->updated_at }}">
                             </td>
                             <td class="!py-3.5">
                                 {{ $banner->link }}

@@ -11,11 +11,12 @@
                 <div class="mt-2 mb-2">
                 <span class="price font-weight-bold">Phương thức thanh toán:
                     @if ($bill->payment == 'offline')
-                        <span class="">Tại cửa hàng</span>
-                    @elseif ($bill->payment == 'vnpay')
-                        <span class="">VNPAY</span>
-                    </span>
-                    @endif
+                    <span class="">Tại cửa hàng</span>
+                @elseif ($bill->payment == 'vnpay')
+                    <span class="">VNPAY</span>
+                @elseif ($bill->payment == 'momo')
+                    <span class="">MOMO</span>
+                @endif
             </div>
                 <span class="price font-weight-bold">Thời gian tạo:
                     {{ Carbon\Carbon::parse($bill->created_at)->format('H:i:s d/m/Y') }}</span>

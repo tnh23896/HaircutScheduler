@@ -157,7 +157,10 @@
             const name = $('input[name="name"]').val() || "";
             const selectedRadio = $('input[type="radio"][name="admin_id"]:checked');
             const adminId = selectedRadio.length > 0 ? selectedRadio.val() : "";
-            const phone = $('input[name="phone"]').val() || "";
+            let phone = $('input[name="phone"]').val() || "";
+            if (phone.startsWith("0")) {
+                phone = "+84" + phone.substring(1);
+            }
             totalPrice = totalPrice.replace(/,/g, '');
             const email = $('input[name="email"]').val() || "";
             const day = $('select[name="day"]').val() || "";
