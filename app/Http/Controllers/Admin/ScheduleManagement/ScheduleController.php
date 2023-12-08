@@ -19,6 +19,7 @@ use App\Models\BookingDetail;
 use App\Models\HistoryAction;
 use Illuminate\Support\Carbon;
 use App\Models\CategoryService;
+use App\Events\SendEmailBillEvent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -598,7 +599,7 @@ class ScheduleController extends Controller
                     }
                 }
                 $bill_detail = BillDetail::where('bill_id', $bill->id)->get();
-                SendMailBill::dispatch($bill, $bill_detail)->onQueue('email_booked');
+                event(new SendEmailBillEvent($bill, $bill_detail));
             }
             $dataOld = Booking::query()->findOrFail($id);
             if ($dataOld->status == "canceled") {
