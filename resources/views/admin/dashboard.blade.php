@@ -296,7 +296,7 @@
                         if (employeesArray.length > 0) {
                             employeeItemHtml = employeesArray.map((employee, index) => `
                         <div class="">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                            <div class="box px-4 py-4 mb-3 flex items-center">
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                     <img alt="Employee Avatar" src="{{ asset('${employee.avatar}') }}">
                                 </div>
