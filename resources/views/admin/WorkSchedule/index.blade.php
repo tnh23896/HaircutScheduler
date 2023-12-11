@@ -1,7 +1,7 @@
 <style>
     ::-webkit-scrollbar {
         width: 10px;
-        height: 4px;
+        height: 10px;
     }
 
     /* Track */

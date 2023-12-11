@@ -60,7 +60,8 @@ class CheckPermissionAdmin
 			'admin.topEmployees',
 			'admin.ScheduleEmployee.search',
 			'admin.revenue.export',
-
+			'admin.scheduleManagement.getStaff',
+			'admin.scheduleManagement.updateStatus'
 		];
 
 		$name = Route::currentRouteName();
