@@ -8,6 +8,7 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 
 class DashboardController extends Controller
 {
@@ -280,7 +281,7 @@ class DashboardController extends Controller
     public function topEmployee(Request $request)
     {
         $topEmployeesData = $this->basefilterTopEmployee($request);
-        // dd($topEmployeesData);
+
         return response()->json(['topEmployeesData' => $topEmployeesData]);
     }
 
@@ -293,21 +294,22 @@ class DashboardController extends Controller
             $day = date('d');
         }
 
-        $query = Booking::selectRaw('admins.id, admins.username, admins.avatar')
+        $query = Admin::select('admins.username', 'admins.avatar')
             ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "success" THEN bookings.id END) as totalSuccessfulBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "canceled" THEN bookings.id END) as totalCancelledBookings')
             ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
-            ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
-            ->join('admins', 'admins.id', '=', 'bookings.admin_id')
+            ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')  // Nếu không có đánh giá, đặt giá trị là 0
+            ->leftJoin('work_schedules', 'admins.id', '=', 'work_schedules.admin_id')
+            ->leftJoin('bookings', 'admins.id', '=', 'bookings.admin_id')
             ->leftJoin('reviews', 'admins.id', '=', 'reviews.admin_id')
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
         if ($currentMonth) {
-            $query->whereMonth('bookings.day', $currentMonth);
+            $query->whereMonth('work_schedules.day', $currentMonth);
 
             if ($day) {
-                $query->whereDay('bookings.day', $day);
+                $query->whereDay('work_schedules.day', $day);
             }
         }
 
@@ -320,20 +322,19 @@ class DashboardController extends Controller
     {
         $currentDate = date('Y-m-d');  // Lấy ngày hiện tại
 
-        $query = Booking::selectRaw('admins.username, admins.avatar')
+        $query = Admin::select('admins.username', 'admins.avatar')
             ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "success" THEN bookings.id END) as totalSuccessfulBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "canceled" THEN bookings.id END) as totalCancelledBookings')
             ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')  // Nếu không có đánh giá, đặt giá trị là 0
-            ->join('admins', 'admins.id', '=', 'bookings.admin_id')
+            ->leftJoin('work_schedules', 'admins.id', '=', 'work_schedules.admin_id')
+            ->leftJoin('bookings', 'admins.id', '=', 'bookings.admin_id')
             ->leftJoin('reviews', 'admins.id', '=', 'reviews.admin_id')
-            ->whereDate('bookings.day', '=', $currentDate)
+            ->whereDate('work_schedules.day', $currentDate)
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
-        $data = $query->orderByDesc('totalBookings')
-            // ->paginate(5);
-        ->get();
+        $data = $query->orderByDesc('totalBookings')->get();
 
         return $data;
     }
