@@ -60,7 +60,7 @@ return [
         'admin.scheduleManagement.update' => 'Cập nhật',
     ],
     'chi tiết lịch đặt' => [
-        'admin.scheduleManagement.scheduleDetails' => 'Danh sách',
+        'admin.scheduleManagement.scheduleDetails.index' => 'Danh sách',
         'admin.scheduleManagement.scheduleDetails.store' => 'Thêm mới dịch vụ',
         'admin.scheduleManagement.scheduleDetails.update' => 'Cập nhật dịch vụ',
     ],

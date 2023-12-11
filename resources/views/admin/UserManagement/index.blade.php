@@ -21,7 +21,8 @@
                 </form>
 
                 <form id="filterForm" action="{{route('admin.UserManagement.filter')}}" method="GET">
-                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()" style="border-color: #312E81">
+                    <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box"
+                            onchange="submitForm()" style="border-color: #312E81">
                         <option value="">Tất cả</option>
                         <option value="0">Kích hoạt</option>
                         <option value="1">Không kích hoạt</option>
@@ -37,8 +38,9 @@
                     <th class="whitespace-nowrap text-center">Tên người dùng</th>
                     <th class="whitespace-nowrap text-center">Điện thoại</th>
                     <th class="whitespace-nowrap text-center">Email</th>
-                    <th class="whitespace-nowrap text-center">Trạng thái tài khoản</th>
-
+                    @if(auth('admin')->user()->can('admin.UserManagement.update'))
+                        <th class="whitespace-nowrap text-center">Trạng thái tài khoản</th>
+                    @endif
                 </tr>
                 </thead>
                 @foreach ($data as $key => $item)
@@ -47,17 +49,20 @@
                         <td class="text-center capitalize">{{ $item->username }}</td>
                         <td class="text-center capitalize">{{ $item->phone }}</td>
                         <td class="text-center">{{ $item->email }}</td>
-                        <td class="text-center capitalize">
-                            <select class="statusSelect form-select w-full text-center w-40 sm:w-auto" data-id="{{ $item->id }}"
-                                data-current-status="{{ $item->black_status }}" style="border-color: #1E283B" >
-                                <option value="0" {{ $item->black_status == 0 ? 'selected' : '' }}>
-                                    Kích hoạt
-                                </option>
-                                <option value="1" {{ $item->black_status == 1 ? 'selected' : '' }}>
-                                    Không kích hoạt
-                                </option>
-                            </select>
-                        </td>
+                        @if(auth('admin')->user()->can('admin.UserManagement.update'))
+                            <td class="text-center capitalize">
+                                <select class="statusSelect form-select w-full text-center w-40 sm:w-auto"
+                                        data-id="{{ $item->id }}"
+                                        data-current-status="{{ $item->black_status }}" style="border-color: #1E283B">
+                                    <option value="0" {{ $item->black_status == 0 ? 'selected' : '' }}>
+                                        Kích hoạt
+                                    </option>
+                                    <option value="1" {{ $item->black_status == 1 ? 'selected' : '' }}>
+                                        Không kích hoạt
+                                    </option>
+                                </select>
+                            </td>
+                        @endif
                     </tr>
                     </tbody>
                 @endforeach
@@ -70,8 +75,8 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $(".statusSelect").on("change", function() {
+        $(document).ready(function () {
+            $(".statusSelect").on("change", function () {
                 var selectElement = $(this);
                 var newStatus = selectElement.val();
                 var editId = selectElement.data("id");
@@ -88,10 +93,10 @@
                         formData.append("black_status", newStatus);
                         var url =
                             "{{ route('admin.UserManagement.update', ':editId') }}";
-                            url = url.replace(':editId', editId);
+                        url = url.replace(':editId', editId);
 
                         sendAjaxRequest(url, 'POST', formData,
-                            function(response) {
+                            function (response) {
                                 if (response.success) {
                                     toastr.success(response.success);
                                     // Cập nhật trạng thái hiện tại của select box
@@ -101,7 +106,7 @@
                                     console.log(response);
                                 }
                             },
-                            function(error) {
+                            function (error) {
                                 showErrors(error);
                                 console.log(error);
                             }
@@ -118,7 +123,7 @@
                 switch (newStatus) {
                     case '0':
                         selectElement.html('<option value="0">Kích hoạt</option>' +
-                            '<option value="1">Không kích hoạt</option>' );
+                            '<option value="1">Không kích hoạt</option>');
                         break;
                     case '1':
                         selectElement.html('<option value="1" selected>Không kích hoạt</option>' +
