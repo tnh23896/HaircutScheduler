@@ -1,0 +1,1 @@
+<h1 class="text-center font-medium text-2xl">Trang quản trị hệ thống DT Barber</h1>

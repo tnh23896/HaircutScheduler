@@ -22,6 +22,7 @@
 @extends('admin.templates.app')
 @section('title', 'Bảng điều khiển')
 @section('content')
+@include('admin.welcome')
     <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 2xl:col-span-12">
             <div class="grid grid-cols-12 gap-6">
