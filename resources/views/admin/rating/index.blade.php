@@ -12,7 +12,7 @@
                 <form action="{{ route('admin.rating.search') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="text" name="search" class="form-control w-40 sm:w-auto box pr-10"
-                            placeholder="Tìm kiếm..." value="{{ request('search') }}" style="border-color: #312E81">
+                               placeholder="Tìm kiếm..." value="{{ request('search') }}" style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -21,7 +21,7 @@
             </div>
             <form id="filterForm" action="{{ route('admin.rating.filter') }}" method="GET">
                 <select id="filterSelect" name="filter" class="w-40 sm:w-auto form-select box" onchange="submitForm()"
-                    style="border-color: #312E81">
+                        style="border-color: #312E81">
                     <option value="">Tất cả</option>
                     @foreach ($category as $item)
                         <option value="{{ $item->id }}" class="flex items-center">
@@ -39,82 +39,88 @@
         <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
             <table class="table table-report -mt-2">
                 <thead>
-                    <tr>
-                        <th class="whitespace-nowrap text-center">#</th>
-                        <th class="text-center whitespace-nowrap">Khách hàng</th>
-                        <th class="text-center whitespace-nowrap">Số sao</th>
-                        <th class="text-center whitespace-nowrap">Nội dung</th>
-                        <th class="text-center whitespace-nowrap">Nhân viên</th>
-                        <th class="text-center whitespace-nowrap">Mã hóa đơn</th>
+                <tr>
+                    <th class="whitespace-nowrap text-center">#</th>
+                    <th class="text-center whitespace-nowrap">Khách hàng</th>
+                    <th class="text-center whitespace-nowrap">Số sao</th>
+                    <th class="text-center whitespace-nowrap">Nội dung</th>
+                    <th class="text-center whitespace-nowrap">Nhân viên</th>
+                    <th class="text-center whitespace-nowrap">Mã hóa đơn</th>
+                    @if(auth('admin')->user()->can('admin.rating.delete'))
                         <th class="text-center whitespace-nowrap">Hành động</th>
-                    </tr>
+                    @endif
+                </tr>
                 </thead>
                 @foreach ($data as $key => $rating)
                     <tbody>
-                        <tr class="intro-x">
-                            <td class="text-center capitalize">{{ $key + 1 }}</td>
+                    <tr class="intro-x">
+                        <td class="text-center capitalize">{{ $key + 1 }}</td>
 
-                            <td class="text-center capitalize">
-                                @if ($rating->user_name)
-                                    {{ $rating->user_name }}
-                                @else
-                                    {{ $rating->user_phone }}
-                                @endif
-                            </td>
-                            <td class="text-center">
-                                <div class="flex items-center justify-center">
-                                    @for ($i = 0; $i < $rating->star; $i++)
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" icon-name="star"
-                                            data-lucide="star"
-                                            class="lucide lucide-star text-pending fill-pending/30 w-4 h-4 mr-1">
-                                            <polygon
-                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                            </polygon>
-                                        </svg>
-                                    @endfor
-                                    @for ($i = 0; $i < 5 - $rating->star; $i++)
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" icon-name="star"
-                                            data-lucide="star"
-                                            class="lucide lucide-star text-slate-400 fill-slate/30 w-4 h-4 mr-1">
-                                            <polygon
-                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                            </polygon>
-                                        </svg>
-                                    @endfor
-                                </div>
-                            </td>
-                            <td class=""><a class="flex items-center justify-center"
-                                    href="">{{ $rating->comment }}</a></td>
-                            <td class="text-center capitalize">{{ $rating->admin_name }}</td>
-                            <td class="text-center capitalize">{{ $rating->booking_id }}</td>
+                        <td class="text-center capitalize">
+                            @if ($rating->user_name)
+                                {{ $rating->user_name }}
+                            @else
+                                {{ $rating->user_phone }}
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <div class="flex items-center justify-center">
+                                @for ($i = 0; $i < $rating->star; $i++)
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round" icon-name="star"
+                                         data-lucide="star"
+                                         class="lucide lucide-star text-pending fill-pending/30 w-4 h-4 mr-1">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                @endfor
+                                @for ($i = 0; $i < 5 - $rating->star; $i++)
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round" icon-name="star"
+                                         data-lucide="star"
+                                         class="lucide lucide-star text-slate-400 fill-slate/30 w-4 h-4 mr-1">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                @endfor
+                            </div>
+                        </td>
+                        <td class=""><a class="flex items-center justify-center"
+                                        href="">{{ $rating->comment }}</a></td>
+                        <td class="text-center capitalize">{{ $rating->admin_name }}</td>
+                        <td class="text-center capitalize">{{ $rating->booking_id }}</td>
+                        @if(auth('admin')->user()->can('admin.rating.delete'))
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <form class="delete-form" action="{{ route('admin.rating.delete', $rating->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
-                                            <button type="submit" class="flex items-center text-danger"
-                                                data-id="{{ $rating->id }}">
-                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
-                                            </button>
-                                        </div>
-                                    </form>
+                                    @if(auth('admin')->user()->can('admin.rating.delete'))
+                                        <form class="delete-form"
+                                              action="{{ route('admin.rating.delete', $rating->id) }}"
+                                              method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
+                                                <button type="submit" class="flex items-center text-danger"
+                                                        data-id="{{ $rating->id }}">
+                                                    <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
+                                                </button>
+                                            </div>
+                                        </form>
+                                    @endif
                                 </div>
                             </td>
-
-                        </tr>
+                        @endif
+                    </tr>
                     </tbody>
                 @endforeach
             </table>
         </div>
         <script>
             // Sử dụng hàm sendAjaxRequest để xác nhận và xoá phần tử
-            $('.delete-form').on('submit', function(e) {
+            $('.delete-form').on('submit', function (e) {
                 e.preventDefault();
                 var form = $(this);
                 var urlToDelete = form.attr('action');
@@ -131,18 +137,18 @@
                         // Nếu xác nhận xoá, thực hiện Ajax request bằng hàm sendAjaxRequest
                         sendAjaxRequest(urlToDelete, 'DELETE', {
                             _method: 'DELETE'
-                        }, function(response) {
+                        }, function (response) {
                             if (response.success) {
                                 form.closest('tr').remove();
                                 toastr.success(response.success);
                             }
-                        }, function(error) {
+                        }, function (error) {
                             showErrors(error);
                         });
                     }
                 });
             });
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 var filterSelect = document.getElementById('filterSelect');
                 var urlParams = new URLSearchParams(window.location.search);
                 var filterValue = urlParams.get('filter');

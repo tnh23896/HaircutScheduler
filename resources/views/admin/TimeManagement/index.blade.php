@@ -7,15 +7,17 @@
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
-            <a href="{{ route('admin.TimeManagement.create') }}"><button class="btn btn-primary shadow-md mr-2">Thêm mới thời
-                    làm việc
-                    gian</button></a>
+            @if(auth('admin')->user()->can('admin.TimeManagement.create'))
+                <a href="{{ route('admin.TimeManagement.create') }}">
+                    <button class="btn btn-primary shadow-md mr-2">Thêm mới thời làm việc gian</button>
+                </a>
+            @endif
             <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <form action="{{ route('admin.TimeManagement.search') }}" method="GET" class="mr-3">
                     <div class="w-full relative text-slate-500 flex items-center">
                         <input type="time" name="time" class="form-control w-40 sm:w-auto box pr-10"
-                            placeholder="Tìm kiếm..." value="{{ request('time') }}" style="border-color: #312E81">
+                               placeholder="Tìm kiếm..." value="{{ request('time') }}" style="border-color: #312E81">
                         <button type="submit">
                             <i class="w-5 h-5 absolute my-auto inset-y-0 mr-3 right-0 top-0" data-lucide="search"></i>
                         </button>
@@ -27,38 +29,48 @@
         <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
             <table class="table table-report -mt-2">
                 <thead>
-                    <tr>
-                        <th class="whitespace-nowrap text-center">#</th>
-                        <th class="whitespace-nowrap text-center">Thời gian</th>
-                        <th class="whitespace-nowrap text-center">Ca</th>
+                <tr>
+                    <th class="whitespace-nowrap text-center">#</th>
+                    <th class="whitespace-nowrap text-center">Thời gian</th>
+                    <th class="whitespace-nowrap text-center">Ca</th>
+                    @if(auth('admin')->user()->can('admin.TimeManagement.edit') || auth('admin')->user()->can('admin.TimeManagement.delete'))
                         <th class="text-center whitespace-nowrap ">Hành động</th>
-                    </tr>
+                    @endif
+                </tr>
                 </thead>
                 @foreach ($data as $key => $item)
                     <tbody>
-                        <tr class="intro-x">
-                            <td class="text-center capitalize">{{ $loop->iteration }}</td>
-                            <td class="text-center capitalize"> {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}</td>
-                            <td class="text-center capitalize"> {{ $item->shift->name ?? '' }}</td>
+                    <tr class="intro-x">
+                        <td class="text-center capitalize">{{ $loop->iteration }}</td>
+                        <td class="text-center capitalize"> {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}</td>
+                        <td class="text-center capitalize"> {{ $item->shift->name ?? '' }}</td>
+                        @if(auth('admin')->user()->can('admin.TimeManagement.edit') || auth('admin')->user()->can('admin.TimeManagement.delete'))
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a href="{{ route('admin.TimeManagement.edit', $item->id) }}"
-                                        class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
-                                            class="w-4 h-4 mr-1"></i> Sửa </a>
-                                    <form class="delete-form" action="{{ route('admin.TimeManagement.delete', $item->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
-                                            <button type="submit" class="flex items-center text-danger"
-                                                data-id="{{ $item->id }}">
-                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
-                                            </button>
-                                        </div>
-                                    </form>
+                                    @if(auth('admin')->user()->can('admin.TimeManagement.edit'))
+                                        <a href="{{ route('admin.TimeManagement.edit', $item->id) }}"
+                                           class="flex items-center mr-3" href="javascript:;"> <i
+                                                data-lucide="check-square"
+                                                class="w-4 h-4 mr-1"></i> Sửa </a>
+                                    @endif
+                                    @if(auth('admin')->user()->can('admin.TimeManagement.delete'))
+                                        <form class="delete-form"
+                                              action="{{ route('admin.TimeManagement.delete', $item->id) }}"
+                                              method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
+                                                <button type="submit" class="flex items-center text-danger"
+                                                        data-id="{{ $item->id }}">
+                                                    <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
+                                                </button>
+                                            </div>
+                                        </form>
+                                    @endif
                                 </div>
                             </td>
-                        </tr>
+                        @endif
+                    </tr>
                     </tbody>
                 @endforeach
             </table>
