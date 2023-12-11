@@ -31,17 +31,21 @@
                                 <div class="mt-3">
                                     <div>
                                         <label class="form-label mr-2 font-bold text-lg" for="selectAll">Chọn tất cả</label>
-                                        <input type="checkbox" style="border-color: #312E81" class="mb-1 form-check-input" id="selectAll">
+                                        <input type="checkbox" style="border-color: #312E81" class="mb-1 form-check-input"
+                                            id="selectAll">
                                     </div>
                                     <div class="grid grid-cols-4 sm:grid-cols-2 gap-2">
                                         @foreach (config('permissions') as $key => $permission)
                                             <div>
                                                 <label class="font-bold text-lg">Quản lí {{ $key }}</label>
                                                 @foreach ($permission as $keys => $value)
-                                                    <div class="form-check mt-2">
+                                                    <div class="form-check mt-2"
+                                                        @if ($keys == 'admin.UserManagement.update') @elseif (strpos($keys, 'update') !== false || strpos($keys, 'store') !== false) style="display: none;" @endif>
                                                         <input id="checkbox-switch-1 {{ $keys }}"
-                                                            name="permissions[]" style="border-color: #312E81" class="jqr-checkbox form-check-input"
-                                                            type="checkbox" value="{{ $keys }}"
+                                                            name="permissions[]" style="border-color: #312E81"
+                                                            class="jqr-checkbox form-check-input" type="checkbox"
+                                                            onchange="checkPermission(this,'<?= $keys ?>')"
+                                                            value="{{ $keys }}"
                                                             {{ in_array($keys, $permissions) ? 'checked' : '' }}>
                                                         <label class="form-check-label"
                                                             for="checkbox-switch-1 {{ $keys }}">{{ $value }}</label>
@@ -66,6 +70,36 @@
     </div>
 
     <script>
+        function checkPermission(per, value) {
+            if (per.checked) {
+                if (value.includes("create")) {
+                    per.parentElement.nextElementSibling.querySelector('input').checked = true
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value.includes("edit")) {
+                    per.parentElement.nextElementSibling.querySelector('input').checked = true
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value.includes("delete") || value.includes("destroy")) {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value == "admin.UserManagement.update") {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                }
+            } else {
+                if (value.includes("create")) {
+                    per.parentElement.nextElementSibling.querySelector('input').checked = false
+                } else if (value.includes("edit")) {
+                    per.parentElement.nextElementSibling.querySelector('input').checked = false
+                } else if (value.includes("index")) {
+                    var e = per.parentElement.parentElement.querySelectorAll('input');
+                    for (var i = 0; i < e.length; i++) {
+                        e[i].checked = false;
+                    }
+                }
+            }
+        }
         var editId = {{ $role->id }};
         $('#saveBtn').on('click', function() {
             var formData = new FormData($('#ajaxForm')[0]);
