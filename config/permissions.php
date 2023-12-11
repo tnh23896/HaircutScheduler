@@ -58,14 +58,11 @@ return [
         'admin.scheduleManagement.store' => 'Lưu',
         'admin.scheduleManagement.edit' => 'Chỉnh sửa',
         'admin.scheduleManagement.update' => 'Cập nhật',
-        'admin.scheduleManagement.getStaff' => 'Hiển thị thông tin',
     ],
     'chi tiết lịch đặt' => [
         'admin.scheduleManagement.scheduleDetails' => 'Danh sách',
         'admin.scheduleManagement.scheduleDetails.store' => 'Thêm mới dịch vụ',
         'admin.scheduleManagement.scheduleDetails.update' => 'Cập nhật dịch vụ',
-        'admin.scheduleManagement.updateStatus' => 'Cập nhật trạng thái',
-        'admin.scheduleManagement.getStaff' => 'Hiển thị thông tin',
     ],
     'hóa đơn' => [
         'admin.billManagement.index' => 'Danh sách',
