@@ -94,7 +94,7 @@ return [
     ],
     'lịch làm việc' => [
         'admin.work-schedule.index' => 'Danh sách',
-        'admin.work-schedule.store' => 'Lưu',
+        'admin.work-schedule.store' => 'Thêm mới',
         'admin.work-schedule.show' => 'Chi tiết',
         'admin.work-schedule.update1' => 'Cập nhật',
         'admin.work-schedule.destroy' => 'Xóa',
