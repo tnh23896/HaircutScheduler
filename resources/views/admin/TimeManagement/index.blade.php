@@ -39,11 +39,13 @@
                     </div>
                     <div class="flex mt-4 lg:mt-0">
                         <div class="flex justify-center items-center">
+                            @if(auth('admin')->user()->can('admin.TimeManagement.edit'))
                             <a class="flex items-center mr-3"
                                 href="{{ route('admin.TimeManagement.edit', $item->id) }}">
                                 <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
                                 Sửa </a>
-
+                            @endif
+                            @if(auth('admin')->user()->can('admin.TimeManagement.delete'))
                             <form class="delete-form"
                                 action="{{ route('admin.TimeManagement.delete', $item->id) }}"
                                 method="POST">
@@ -56,6 +58,7 @@
                                     </button>
                                 </div>
                             </form>
+                            @endif
                         </div>
                     </div>
                 </div>
