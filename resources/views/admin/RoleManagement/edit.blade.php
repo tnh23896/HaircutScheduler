@@ -40,7 +40,12 @@
                                                 <label class="font-bold text-lg">Quản lí {{ $key }}</label>
                                                 @foreach ($permission as $keys => $value)
                                                     <div class="form-check mt-2"
-                                                        @if ($keys == 'admin.UserManagement.update') @elseif (strpos($keys, 'update') !== false || strpos($keys, 'store') !== false) style="display: none;" @endif>
+                                                        @if ($keys == 'admin.UserManagement.update') @elseif ($keys == 'admin.work-schedule.store')
+																												@elseif ($keys == 'admin.ScheduleEmployee.store')
+																												@elseif ($keys == 'admin.ScheduleEmployee.update')
+																												@elseif ($keys == 'admin.work-schedule.update1')
+																												@elseif ($keys == 'admin.scheduleManagement.scheduleDetails.store')
+																												@elseif ($keys == 'admin.scheduleManagement.scheduleDetails.update') @elseif (strpos($keys, 'update') !== false || strpos($keys, 'store') !== false) style="display: none;" @endif>
                                                         <input id="checkbox-switch-1 {{ $keys }}"
                                                             name="permissions[]" style="border-color: #312E81"
                                                             class="jqr-checkbox form-check-input" type="checkbox"
@@ -83,7 +88,29 @@
                 } else if (value.includes("delete") || value.includes("destroy")) {
                     per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
                         true
-                } else if (value == "admin.UserManagement.update") {
+								} else if (value.includes("show")) {
+										per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+												true
+								}
+								 else if (value == "admin.UserManagement.update") {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value == "admin.work-schedule.store") {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value == "admin.ScheduleEmployee.store") {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value == "admin.ScheduleEmployee.update") {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value == "admin.work-schedule.update1") {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value == "admin.scheduleManagement.scheduleDetails.store") {
+                    per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
+                        true
+                } else if (value == "admin.scheduleManagement.scheduleDetails.update") {
                     per.parentElement.parentElement.firstElementChild.nextElementSibling.querySelector('input').checked =
                         true
                 }

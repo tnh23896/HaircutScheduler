@@ -156,8 +156,7 @@
                                             <th class="border-b-2 dark:border-darkmode-400 whitespace-nowrap">Tên dịch vụ
                                             </th>
                                             <th class="border-b-2 dark:border-darkmode-400 text-right whitespace-nowrap">
-                                                Giá
-                                                tiền
+                                                Giá tiền
                                             </th>
                                         </tr>
                                     </thead>

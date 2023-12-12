@@ -60,7 +60,7 @@ return [
         'admin.scheduleManagement.update' => 'Cập nhật',
     ],
     'chi tiết lịch đặt' => [
-        'admin.scheduleManagement.scheduleDetails' => 'Danh sách',
+        'admin.scheduleManagement.scheduleDetails.index' => 'Danh sách',
         'admin.scheduleManagement.scheduleDetails.store' => 'Thêm mới dịch vụ',
         'admin.scheduleManagement.scheduleDetails.update' => 'Cập nhật dịch vụ',
     ],
@@ -94,7 +94,7 @@ return [
     ],
     'lịch làm việc' => [
         'admin.work-schedule.index' => 'Danh sách',
-        'admin.work-schedule.store' => 'Lưu',
+        'admin.work-schedule.store' => 'Thêm mới',
         'admin.work-schedule.show' => 'Chi tiết',
         'admin.work-schedule.update1' => 'Cập nhật',
         'admin.work-schedule.destroy' => 'Xóa',

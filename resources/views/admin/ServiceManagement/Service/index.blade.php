@@ -7,8 +7,10 @@
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap xl:flex-nowrap items-center mt-2">
+            @if(auth('admin')->user()->can('admin.serviceManagement.service.create'))
             <a href="{{ route('admin.serviceManagement.service.create') }}" class="btn btn-primary">Thêm mới dịch vụ</a>
-            <div class="hidden xl:block mx-auto text-slate-500"></div>
+            @endif
+                <div class="hidden xl:block mx-auto text-slate-500"></div>
             <div class="w-full xl:w-auto flex items-center mt-3 xl:mt-0">
                 <form action="{{ route('admin.serviceManagement.service.search') }}" method="GET">
                     <div class="w-56 relative text-slate-500 flex items-center">
@@ -41,7 +43,9 @@
                         <th class="text-center whitespace-nowrap">Giá</th>
                         <th class="text-center whitespace-nowrap">Mô tả</th>
                         <th class="text-center whitespace-nowrap">Danh mục</th>
+                        @if(auth('admin')->user()->can('admin.serviceManagement.service.edit') || auth('admin')->user()->can('admin.serviceManagement.service.delete'))
                         <th class="text-center whitespace-nowrap">Hành động</th>
+                        @endif
                     </tr>
                 </thead>
                 @foreach ($services as $service)
@@ -59,12 +63,16 @@
                             <td class="text-center whitespace-nowrap ">{{ number_format($service->price) }} VND</td>
                             <td class="text-center">{{ $service->description }}</td>
                             <td class="text-center whitespace-nowrap">{{ $service->category_services->name ?? '' }}</td>
+                            @if(auth('admin')->user()->can('admin.serviceManagement.service.edit') || auth('admin')->user()->can('admin.serviceManagement.service.delete'))
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
+                                    @if(auth('admin')->user()->can('admin.serviceManagement.service.edit'))
                                     <a class="flex items-center mr-3"
                                         href="{{ route('admin.serviceManagement.service.edit', $service->id) }}">
                                         <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
                                         Sửa </a>
+                                    @endif
+                                    @if(auth('admin')->user()->can('admin.serviceManagement.service.delete'))
                                     <form class="delete-form"
                                         action="{{ route('admin.serviceManagement.service.delete', $service->id) }}"
                                         method="POST">
@@ -77,8 +85,10 @@
                                             </button>
                                         </div>
                                     </form>
+                                        @endif
                                 </div>
                             </td>
+                            @endif
                         </tr>
                     </tbody>
                 @endforeach
