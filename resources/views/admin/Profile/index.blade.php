@@ -13,20 +13,22 @@
                     <div class="relative flex items-center p-5">
                         <div class="w-12 h-12 image-fit">
                             <img id="profileImage" alt="{{ $data->username }}" class="rounded-full"
-                            src="{{ $data->avatar == '' ? asset('dist/images/default.jpg') : asset($data->avatar) }}" >
+                                src="{{ $data->avatar == '' ? asset('dist/images/default.jpg') : asset($data->avatar) }}">
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="font-medium text-base">{{ $data->username }}</div>
                             @foreach ($data->getRoleNames() as $v)
-                            <div class="text-slate-500">{{ $v }}</div>
+                                <div class="text-slate-500">{{ $v }}</div>
                             @endforeach
                         </div>
                     </div>
                     <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400">
-                        <a class="flex items-center p-3 hover:bg-white/5 rounded hover:rounded-3xl"  href="#" data-tw-toggle="modal" data-tw-target="#modal"> <i data-lucide="lock" class="w-4 h-4 mr-2"></i>
+                        <a class="flex items-center p-3 hover:bg-white/5 rounded hover:rounded-3xl" href="#"
+                            data-tw-toggle="modal" data-tw-target="#modal"> <i data-lucide="lock" class="w-4 h-4 mr-2"></i>
                             Thay đổi mật khẩu </a>
-                        <a class="flex items-center mt-5 p-3 hover:bg-white/5 rounded hover:rounded-3xl" href="{{ route('admin.ScheduleEmployee.index') }}"> <i
-                                data-lucide="calendar" class="w-4 h-4 mr-2"></i> Xem lịch làm việc </a>
+                        <a class="flex items-center mt-5 p-3 hover:bg-white/5 rounded hover:rounded-3xl"
+                            href="{{ route('admin.ScheduleEmployee.index') }}"> <i data-lucide="calendar"
+                                class="w-4 h-4 mr-2"></i> Xem lịch làm việc </a>
                     </div>
                 </div>
             </div>
@@ -38,7 +40,8 @@
                             <div class="profile-info text-center">
                                 <div class="profile-thumb brd-rd50">
                                     <label>Ảnh đại diện</label>
-                                    <img id="previewImage" class="m-5" src="{{$data->avatar == '' ? asset('dist/images/default.jpg') : asset($data->avatar) }}"
+                                    <img id="previewImage" class="m-5"
+                                        src="{{ $data->avatar == '' ? asset('dist/images/default.jpg') : asset($data->avatar) }}"
                                         style="border-radius: 50%; width:200px; height:200px; object-fit:cover;">
                                 </div>
                                 <div class="profile-img-upload-btn">
@@ -80,8 +83,8 @@
                                 <div class="input-group-text"><i class="w-4 h-4" data-lucide="user"></i></div>
                                 @foreach ($data->getRoleNames() as $v)
                                     <input type="text" class="form-control" placeholder="Vai trò" aria-label="role"
-                                    name="role" value="{{ $v }}" disabled>
-                                    @endforeach
+                                        name="role" value="{{ $v }}" disabled>
+                                @endforeach
                             </div>
                         </div>
                         <div class="text-right mt-5">

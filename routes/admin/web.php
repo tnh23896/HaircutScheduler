@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\Statistical\RevenueStatisticsController;
 use App\Http\Controllers\Admin\Statistical\ScheduleStatisticsController;
 use App\Http\Controllers\Admin\Statistical\ServiceUsageStatisticsController;
 use App\Http\Controllers\Admin\Statistical\timeStatisticsController;
+use App\Http\Controllers\Admin\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,8 +73,12 @@ Route::get('404', function () {
 })->name('admin.404');
 
 Route::group(['middleware' => 'admin'], function () {
+    // Route::get('/', function(){
+    //      return view('admin.welcome');
+    //     })->name('admin.welcome');
+    Route::get('/', [WelcomeController::class, 'index'])->name('admin.welcome');
 		// Dashboard
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 		// Thống kê dịch vụ
     Route::post('/service-set-by-time', [DashboardController::class, 'serviceSetByTime'])

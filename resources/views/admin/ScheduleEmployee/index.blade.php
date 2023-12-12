@@ -204,7 +204,7 @@
                                                     }
                                                 @endphp
                                                 <div class="py-2 px-4 border border-green-700 whitespace-normal {{ $time->pivot->status == 'available' ? 'text-success' : 'text-danger' }}">
-                                                    <a href="javascript:;" data-tw-toggle="modal"  onclick="openPopup('{{ \Carbon\Carbon::parse($item->time)->format('H:i') }}', '{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y') }}', '{{ $employee->id }}', '{{ $bookingInfo }}', '{{ json_encode($serviceNames) }}', '{{ $statusText }}')"
+                                                    <a href="javascript:;" data-tw-toggle="modal"  onclick="openPopup('{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}', '{{ \Carbon\Carbon::parse($item->day)->format('d-m-Y') }}', '{{ $employee->id }}', '{{ $bookingInfo }}', '{{ json_encode($serviceNames) }}', '{{ $statusText }}')"
                                                         data-tw-target="#superlarge-modal-size-preview">{{ \Carbon\Carbon::parse($time->time)->format('H:i') }}</a>
                                                 </div>
                                             @endforeach
