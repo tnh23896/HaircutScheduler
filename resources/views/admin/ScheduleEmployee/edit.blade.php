@@ -4,7 +4,7 @@
             <div class="modal-body p-10">
                 <div class="intro-y box p-5">
                     <h2 class="font-medium text-base mb-5">Sửa thời gian làm việc</h2>
-                    <p>Ngày: {{\Carbon\Carbon::parse($time->day)->format('d-m-Y')}}</p>
+                    <p>Ngày: {{\Carbon\Carbon::parse($item->day)->format('d-m-Y')}}</p>
                 </div>
                 <form action="{{ route('admin.ScheduleEmployee.update', $item->id) }}" method="post" class="p-5">
                     @csrf

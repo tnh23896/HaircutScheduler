@@ -20,7 +20,7 @@
     }
 </style>
 @extends('admin.templates.app')
-@section('title', 'Bảng điều khiển')
+@section('title', 'Hệ thống quán trị DT Barber')
 @section('content')
     <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 2xl:col-span-12">

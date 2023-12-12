@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials, $request->has('remember'))) {
             
-            return redirect()->route('admin.dashboard')->with('success','Đăng nhập thành công');
+            return redirect()->route('admin.welcome')->with('success','Đăng nhập thành công');
         }
         return back()->withInput($request->only('email', 'remember'))->with('error','Đăng nhập không thành công');
     }

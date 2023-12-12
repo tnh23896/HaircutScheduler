@@ -38,6 +38,7 @@
     </a>
     <div class="side-nav__devider my-6"></div>
     <ul>
+        @if (auth('admin')->user()->can('admin.dashboard'))
         <li>
             <a href="{{ route('admin.dashboard') }}"
                 class="side-menu {{ request()->routeIs('admin.dashboard') ? 'side-menu--active' : '' }}">
@@ -45,7 +46,7 @@
                 <div class="side-menu__title"> Dashboard</div>
             </a>
         </li>
-
+        @endif
         {{-- Dịch vụ --}}
         @if (auth('admin')->user()->can('admin.serviceManagement.category.index') ||
                 auth('admin')->user()->can('admin.serviceManagement.service.index'))
@@ -435,7 +436,7 @@
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in"
                 role="button" aria-expanded="false" data-tw-toggle="dropdown">
                 <img alt="{{ auth('admin')->user()->username }}"
-                    src="{{auth('admin')->user()->avatar === '' ? asset('dist/images/default.jpg') : asset(auth('admin')->user()->avatar) }}">
+                    src="{{auth('admin')->user()->avatar == '' ? asset('dist/images/default.jpg') : asset(auth('admin')->user()->avatar) }}">
             </div>
             <div class="dropdown-menu w-56">
                 <ul class="dropdown-content bg-primary text-white">
