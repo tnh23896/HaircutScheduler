@@ -9,13 +9,14 @@
         <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle"
                 class="w-8 h-8 text-white transform -rotate-90"></i> </a>
         <ul class="scrollable__content py-2">
+            @if (auth('admin')->user()->can('admin.dashboard'))
             <li>
                 <a href="{{ route('admin.dashboard') }}" class="menu">
                     <div class="menu__icon"><i data-lucide="home"></i></div>
                     <div class="menu__title"> Dashboard</div>
                 </a>
             </li>
-
+            @endif
             {{-- Dịch vụ --}}
             @if (auth('admin')->user()->can('admin.serviceManagement.category.index') ||
                     auth('admin')->user()->can('admin.serviceManagement.service.index'))
@@ -330,7 +331,6 @@
                     <div class="menu__title">Đăng xuất</div>
                 </a>
             </li>
-            <li class="menu__devider my-6"></li>
             <li class="menu__devider my-6"></li>
         </ul>
     </div>

@@ -38,6 +38,7 @@
     </a>
     <div class="side-nav__devider my-6"></div>
     <ul>
+        @if (auth('admin')->user()->can('admin.dashboard'))
         <li>
             <a href="{{ route('admin.dashboard') }}"
                 class="side-menu {{ request()->routeIs('admin.dashboard') ? 'side-menu--active' : '' }}">
@@ -45,7 +46,7 @@
                 <div class="side-menu__title"> Dashboard</div>
             </a>
         </li>
-
+        @endif
         {{-- Dịch vụ --}}
         @if (auth('admin')->user()->can('admin.serviceManagement.category.index') ||
                 auth('admin')->user()->can('admin.serviceManagement.service.index'))
