@@ -113,6 +113,7 @@ return [
     ],
 
     'thống kê' => [
+        'admin.dashboard' => 'Thống kê tổng hợp',
         'admin.Statistical.scheduleStatistics' => 'Thống kê lịch đặt',
         'admin.Statistical.revenueStatistics' => 'Thống kê doanh thu',
         'admin.Statistical.serviceUsageStatistics' => 'Thống kê dịch vụ sử dụng',

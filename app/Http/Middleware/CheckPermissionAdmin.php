@@ -26,7 +26,6 @@ class CheckPermissionAdmin
 			'admin.auth.ResetPasswordPost',
 			'admin.auth.ResetPasswordPost1',
 			'admin.404',
-			'admin.dashboard',
 			'admin.auth.logout',
 			'admin.profile.edit',
 			'admin.profile.update',
@@ -61,7 +60,8 @@ class CheckPermissionAdmin
 			'admin.ScheduleEmployee.search',
 			'admin.revenue.export',
 			'admin.scheduleManagement.getStaff',
-			'admin.scheduleManagement.updateStatus'
+			'admin.scheduleManagement.updateStatus',
+			'admin.welcome'
 		];
 
 		$name = Route::currentRouteName();

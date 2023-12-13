@@ -26,55 +26,45 @@
             </div>
         </div>
         <!-- BEGIN: Data List -->
-        <div class="intro-y col-span-12 overflow-auto 2xl:overflow-visible">
-            <table class="table table-report -mt-2">
-                <thead>
-                <tr>
-                    <th class="whitespace-nowrap text-center">#</th>
-                    <th class="whitespace-nowrap text-center">Thời gian</th>
-                    <th class="whitespace-nowrap text-center">Ca</th>
-                    @if(auth('admin')->user()->can('admin.TimeManagement.edit') || auth('admin')->user()->can('admin.TimeManagement.delete'))
-                        <th class="text-center whitespace-nowrap ">Hành động</th>
-                    @endif
-                </tr>
-                </thead>
-                @foreach ($data as $key => $item)
-                    <tbody>
-                    <tr class="intro-x">
-                        <td class="text-center capitalize">{{ $loop->iteration }}</td>
-                        <td class="text-center capitalize"> {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}</td>
-                        <td class="text-center capitalize"> {{ $item->shift->name ?? '' }}</td>
-                        @if(auth('admin')->user()->can('admin.TimeManagement.edit') || auth('admin')->user()->can('admin.TimeManagement.delete'))
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    @if(auth('admin')->user()->can('admin.TimeManagement.edit'))
-                                        <a href="{{ route('admin.TimeManagement.edit', $item->id) }}"
-                                           class="flex items-center mr-3" href="javascript:;"> <i
-                                                data-lucide="check-square"
-                                                class="w-4 h-4 mr-1"></i> Sửa </a>
-                                    @endif
-                                    @if(auth('admin')->user()->can('admin.TimeManagement.delete'))
-                                        <form class="delete-form"
-                                              action="{{ route('admin.TimeManagement.delete', $item->id) }}"
-                                              method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
-                                                <button type="submit" class="flex items-center text-danger"
-                                                        data-id="{{ $item->id }}">
-                                                    <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
-                                                </button>
-                                            </div>
-                                        </form>
-                                    @endif
+
+        @foreach ($data as $key => $item)
+        <div class="intro-y col-span-12 md:col-span-6 timeSchedule">
+            <div class="box">
+                <div class="flex flex-col lg:flex-row items-center p-5">
+                    <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
+                        <a href="#" class="capitalize">{{ $item->shift->name ?? '' }}</a>
+                    </div>
+                    <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
+                        <a href="#" class="font-medium"> {{ \Carbon\Carbon::parse($item->time)->format('H:i') }}</a>
+                    </div>
+                    <div class="flex mt-4 lg:mt-0">
+                        <div class="flex justify-center items-center">
+                            @if(auth('admin')->user()->can('admin.TimeManagement.edit'))
+                            <a class="flex items-center mr-3"
+                                href="{{ route('admin.TimeManagement.edit', $item->id) }}">
+                                <i data-lucide="check-square" class="w-4 h-4 mr-1"></i>
+                                Sửa </a>
+                            @endif
+                            @if(auth('admin')->user()->can('admin.TimeManagement.delete'))
+                            <form class="delete-form"
+                                action="{{ route('admin.TimeManagement.delete', $item->id) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="col-span-6 sm:col-span-3 lg:col-span-2 xl:col-span-1">
+                                    <button type="submit" class="flex items-center text-danger"
+                                        data-id="{{ $item->id }}">
+                                        <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa
+                                    </button>
                                 </div>
-                            </td>
-                        @endif
-                    </tr>
-                    </tbody>
-                @endforeach
-            </table>
+                            </form>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        @endforeach
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
             <nav class="w-full sm:w-auto sm:mr-auto">
                 {{ $data->links('pagination::bootstrap-4') }}
@@ -105,7 +95,7 @@
                     }, function(response) {
                         if (response.success) {
                             toastr.success(response.success);
-                            form.closest('tr').remove();
+                            form.closest('.timeSchedule').remove();
                         }
                     }, function(error) {
                         showErrors(error);
