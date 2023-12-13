@@ -1,5 +1,5 @@
 @extends('admin.templates.app')
-@section('title', 'Hệ thống quán trị DT Barber')
+@section('title', 'Hệ thống quản trị DT Barber')
 @section('content')
     <div class="intro-y px-5 pt-5 mt-5">
         <div class="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">

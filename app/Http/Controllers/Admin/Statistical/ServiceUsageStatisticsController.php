@@ -138,20 +138,19 @@ class ServiceUsageStatisticsController extends Controller
     {
         $othersCount = $totalCount - array_sum(array_column($sortedServiceStatistics, 'count'));
         $othersTotalRevenues = $totalRevenuesAll - array_sum(array_column($sortedServiceStatistics, 'totalRevenues'));
-        if (!empty($othersCount && $othersTotalRevenues)) {
+        if (count($sortedServiceStatistics) >= 1) {
             return [
                 'name' => 'Dịch vụ khác',
                 'count' => $othersCount,
                 'totalRevenues' => $othersTotalRevenues,
                 'percentage' => 100 - $totalPercentage,
             ];
-        } else {
-            return [
-                'name' => 'Không có dữ liệu',
-                'count' => '0',
-                'totalRevenues' => $othersTotalRevenues,
-                'percentage' => 100 - $totalPercentage,
-            ];
         }
+        return [
+            'name' => 'Không có dữ liệu',
+            'count' => '0',
+            'totalRevenues' => $othersTotalRevenues,
+            'percentage' => 100 - $totalPercentage,
+        ];
     }
 }

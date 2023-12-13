@@ -41,7 +41,7 @@ class HomeController extends Controller
             ];
         }
 
-        $personnels = Admin::take(6)->get();
+        $personnels = Admin::where('id', '<>', 13)->take(6)->get();
 
         return view('client.index', compact(
             'trendingStyle',
