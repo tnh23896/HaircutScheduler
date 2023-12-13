@@ -13,6 +13,6 @@ class BillSeeder extends Seeder
      */
     public function run(): void
     {
-        Bill::factory(10)->create();
+        Bill::factory(500)->create();
     }
 }

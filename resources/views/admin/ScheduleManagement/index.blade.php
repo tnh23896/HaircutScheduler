@@ -99,7 +99,7 @@
                                 <span class="badge">MOMO</span>
                             @endif
                         </td>
-                        <td class="text-center">
+                        <td class="text-center" style="width: 200px">
                             <form class="ajaxForm{{ $item->id }}" enctype="multipart/form-data">
                                 <input name="name" type="text" class="form-control w-full"
                                        placeholder="Input text" value="{{ $item->name }}" disabled hidden>
@@ -163,7 +163,7 @@
                                 </select>
                             </form>
                         </td>
-                        <td class="text-center">
+                        <td class="text-center" style="width: 170px">
                             @if (auth('admin')->user()->can('admin.scheduleManagement.edit'))
                             @if ($item->status !== 'success' && $item->status !== 'canceled')
                                 <a style="color: #312E81" class="flex items-center mr-3" id="editBtn{{ $item->id }}"
@@ -173,7 +173,7 @@
                             @endif
                             @if(auth('admin')->user()->can('admin.scheduleManagement.scheduleDetails.index'))
                             <a class="flex items-center mr-auto mt-3 text-lime-500
-                                "
+                                " 
                                href="{{ route('admin.scheduleManagement.scheduleDetails.index', $item->id) }}">
                                 <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
                                 Chi tiết dịch vụ</a>

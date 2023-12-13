@@ -158,7 +158,7 @@
                 <tbody>
                     @foreach ($history_action as $item)
                         <tr class="stells">
-                            <td class="text-center"style="border: 1px solid #312E81">{{ $item->admin->username }}</td>
+                            <td class="text-center"style="border: 1px solid #312E81">{{ $item->admin->username ?? '' }}</td>
                             @php
                                 // Tách chuỗi thành mảng bằng dấu chấm
                                 $parts = explode('.,', $item->action, 2);

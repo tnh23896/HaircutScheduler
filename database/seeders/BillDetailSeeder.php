@@ -13,6 +13,6 @@ class BillDetailSeeder extends Seeder
      */
     public function run(): void
     {
-        BillDetail::factory(40)->create();
+        BillDetail::factory(500)->create();
     }
 }
