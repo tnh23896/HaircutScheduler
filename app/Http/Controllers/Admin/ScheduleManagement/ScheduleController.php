@@ -39,6 +39,7 @@ class ScheduleController extends Controller
 		$data = Booking::withTrashed()
 			->join('admins', 'bookings.admin_id', '=', 'admins.id')
 			->select('bookings.*', 'admins.username')
+			->orderBy('day', 'desc') // Sắp xếp theo ngày giảm dần
 			->latest()
 			->paginate(10);
 		return view('admin.ScheduleManagement.index', compact('data'));
@@ -56,6 +57,7 @@ class ScheduleController extends Controller
 					$query->where('bookings.name', 'like', "%$search%")
 						->orWhere('bookings.phone', 'like', "%$search%");
 				})
+				->orderBy('day', 'desc') // Sắp xếp theo ngày giảm dần
 				->latest()
 				->paginate(10);
 			return view('admin.ScheduleManagement.index', compact('data'));
@@ -136,6 +138,7 @@ class ScheduleController extends Controller
 				->withTrashed()
 				->join('admins', 'bookings.admin_id', '=', 'admins.id')
 				->select('bookings.*', 'admins.username')
+				->orderBy('day', 'desc') // Sắp xếp theo ngày giảm dần
 				->latest()
 				->paginate(10)
 				->withQueryString();

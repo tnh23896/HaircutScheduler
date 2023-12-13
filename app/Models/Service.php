@@ -18,10 +18,6 @@ class Service extends Model
     {
         return $this->hasMany(BookingDetail::class);
     }
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
     public function reviews()
     {
         return $this->hasMany(Review::class);

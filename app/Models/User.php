@@ -48,14 +48,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
-    }
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class);
-    }
     public function reviews()
     {
         return $this->hasMany(Review::class);

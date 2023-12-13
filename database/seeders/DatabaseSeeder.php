@@ -3,33 +3,24 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Booking;
+use App\Models\Review;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        $this->call([
-            AdminSeeder::class,
-            CategoryServiceSeeder::class,
-            CategoryBlogSeeder::class,
-            BlogSeeder::class,
-            ServiceSeeder::class,
-            ReviewSeeder::class,
-            PromotionSeeder::class,
-            TimeSeeder::class,
-            UserSeeder::class,
-            BookingSeeder::class,
-            BookingDetailSeeder::class,
-            WorkScheduleDetailSeeder::class,
-            BannerSeeder::class,
-            WorkScheduleSeeder::class,
-            BillSeeder::class,
-            BillDetailSeeder::class,
-            ShiftSeeder::class
-        ]);
-    }
+	/**
+	 * Seed the application's database.
+	 */
+	public function run(): void
+	{
+		$this->call([
+			BookingSeeder::class,
+			BookingDetailSeeder::class,
+			BillSeeder::class,
+			BillDetailSeeder::class,
+			ReviewSeeder::class,
+		]);
+	}
 }

@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Booking;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Booking_detail>
- */
 class BookingDetailFactory extends Factory
 {
     /**
@@ -16,12 +15,22 @@ class BookingDetailFactory extends Factory
      */
     public function definition(): array
     {
+        // Lấy ngẫu nhiên một booking và service từ database để sử dụng booking_id và service_id
+        $bookingId = Booking::inRandomOrder()->first()->id;
+        $serviceId = Service::inRandomOrder()->first()->id;
+
+        // Lấy name từ booking_id
+        $bookingName = Booking::find($bookingId)->name;
+
+        // Lấy price từ service_id
+        $servicePrice = Service::find($serviceId)->price;
+
         return [
-            'service_id' => $this->faker->numberBetween(1, 5),
-            'name' => $this->faker->name(),
-            'price' => $this->faker->numberBetween(100, 200),
-            'booking_id' => $this->faker->numberBetween(1, 5),
-            'status' => $this->faker->randomElement(['cancel', 'success']),
+            'service_id' => $serviceId,
+            'name' => $bookingName,
+            'price' => $servicePrice,
+            'booking_id' => $bookingId,
+            'status' => 'success',
         ];
     }
 }

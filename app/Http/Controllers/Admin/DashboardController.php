@@ -210,6 +210,7 @@ class DashboardController extends Controller
             ->selectRaw('SUM(CASE WHEN shifts.id = 3 THEN bills.total_price ELSE 0 END) as ca3') // Tính tổng doanh thu cho ca có shift_id = 1
             ->join('times', 'bills.time', '=', 'times.time')
             ->join('shifts', 'times.shift_id', '=', 'shifts.id')
+						->whereYear('day', date('Y'))
             ->whereMonth('day', $currentMonth) // Lọc theo tháng hiện tại
             ->groupBy('day')
             ->orderBy('day', 'asc');
@@ -249,6 +250,7 @@ class DashboardController extends Controller
         $query = Booking::selectRaw('DAY(day) as day, COUNT(*) as totalBookings')
             ->selectRaw('SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings')
             ->selectRaw('SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings')
+						->whereYear('day', date('Y'))
             ->whereMonth('day', $currentMonth) // Lọc theo tháng hiện tại
             ->groupBy('day')
             ->orderBy('day', 'asc');

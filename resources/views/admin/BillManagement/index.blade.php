@@ -83,9 +83,9 @@
                                 <br>
                                 {{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
                             </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-auto cursor-pointer" data-tw-toggle="modal"
+                            <td class="table-report__action w-56" style="">
+                                <div class="flex justify-center items-center ">
+                                    <a class="flex items-center cursor-pointer" data-tw-toggle="modal"
                                         data-tw-target="#modal{{ $item->id }}">
                                         <i data-lucide="eye" class="w-4 h-4 mr-1"></i>
                                         Xem chi tiết

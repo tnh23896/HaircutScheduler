@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Bill;
+use App\Models\Booking;
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,12 +19,21 @@ class BillDetailFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'service_id' => $this->faker->numberBetween(1, 5),
-            'name' => $this->faker->name(),
-            'price' => $this->faker->numberBetween(100, 200),
-            'bill_id' => $this->faker->numberBetween(1, 5),
-            'admin_id' => $this->faker->numberBetween(1, 5),
-        ];
+         // Lấy ngẫu nhiên một booking và service từ database để sử dụng booking_id và service_id
+				 $billId = Bill::inRandomOrder()->first()->id;
+				 $serviceId = Service::inRandomOrder()->first()->id;
+ 
+				 // Lấy name từ booking_id
+				 $billName = Bill::find($billId)->name;
+ 
+				 // Lấy price từ service_id
+				 $servicePrice = Service::find($serviceId)->price;
+ 
+				 return [
+						 'service_id' => $serviceId,
+						 'name' => $billName,
+						 'price' => $servicePrice,
+						 'bill_id' => $billId,
+				 ];
     }
 }
