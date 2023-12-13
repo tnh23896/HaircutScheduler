@@ -89,7 +89,7 @@
                                             <i
                                                 data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
                                     @endif
-                                    @if(auth('admin')->user()->can('admin.employee.delete'))
+                                    @if(auth('admin')->user()->can('admin.employee.destroy'))
                                         <button class="flex items-center text-danger delete-form"
                                                 data-id="{{ $item->id }}">
                                             <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xoá
