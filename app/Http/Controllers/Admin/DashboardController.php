@@ -180,21 +180,20 @@ class DashboardController extends Controller
     {
         $othersCount = $totalCount - array_sum(array_column($sortedServiceStatistics, 'count'));
         $othersTotalRevenues = $totalRevenuesAll - array_sum(array_column($sortedServiceStatistics, 'totalRevenues'));
-        if (!empty($othersCount && $othersTotalRevenues)) {
+        if (count($sortedServiceStatistics) >= 1) {
             return [
                 'name' => 'Dịch vụ khác',
                 'count' => $othersCount,
                 'totalRevenues' => $othersTotalRevenues,
                 'percentage' => 100 - $totalPercentage,
             ];
-        } else {
-            return [
-                'name' => 'Không có dữ liệu',
-                'count' => '0',
-                'totalRevenues' => '0',
-                'percentage' => 100 - $totalPercentage,
-            ];
         }
+        return [
+            'name' => 'Không có dữ liệu',
+            'count' => '0',
+            'totalRevenues' => '0',
+            'percentage' => 100 - $totalPercentage,
+        ];
     }
 
     // Doanh thu ngày hiện tại
@@ -210,7 +209,7 @@ class DashboardController extends Controller
             ->selectRaw('SUM(CASE WHEN shifts.id = 3 THEN bills.total_price ELSE 0 END) as ca3') // Tính tổng doanh thu cho ca có shift_id = 1
             ->join('times', 'bills.time', '=', 'times.time')
             ->join('shifts', 'times.shift_id', '=', 'shifts.id')
-						->whereYear('day', date('Y'))
+            ->whereYear('day', date('Y'))
             ->whereMonth('day', $currentMonth) // Lọc theo tháng hiện tại
             ->groupBy('day')
             ->orderBy('day', 'asc');
@@ -248,9 +247,12 @@ class DashboardController extends Controller
         $daysInMonth = range(1, \Carbon\Carbon::now()->daysInMonth); // Tạo mảng chứa tất cả các ngày trong tháng
 
         $query = Booking::selectRaw('DAY(day) as day, COUNT(*) as totalBookings')
-            ->selectRaw('SUM(CASE WHEN status = "success" THEN 1 ELSE 0 END) as successfulBookings')
-            ->selectRaw('SUM(CASE WHEN status = "canceled" THEN 1 ELSE 0 END) as cancelledBookings')
-						->whereYear('day', date('Y'))
+            ->selectRaw('SUM(CASE WHEN shifts.id = 1 THEN 1 ELSE 0 END) as ca1')
+            ->selectRaw('SUM(CASE WHEN shifts.id = 2 THEN 1 ELSE 0 END) as ca2')
+            ->selectRaw('SUM(CASE WHEN shifts.id = 3 THEN 1 ELSE 0 END) as ca3')
+            ->join('times', 'bookings.time', '=', 'times.time')
+            ->join('shifts', 'times.shift_id', '=', 'shifts.id')
+            ->whereYear('day', date('Y'))
             ->whereMonth('day', $currentMonth) // Lọc theo tháng hiện tại
             ->groupBy('day')
             ->orderBy('day', 'asc');
@@ -263,16 +265,18 @@ class DashboardController extends Controller
         foreach ($daysInMonth as $day) {
             $data[$day] = [
                 'totalBookings' => 0,
-                'successfulBookings' => 0,
-                'cancelledBookings' => 0,
+                'ca1'  => 0,
+                'ca2'  => 0,
+                'ca3'  => 0,
             ];
         }
 
         foreach ($result as $row) {
             $data[$row->day] = [
                 'totalBookings' => $row->totalBookings,
-                'successfulBookings' => $row->successfulBookings,
-                'cancelledBookings' => $row->cancelledBookings,
+                'ca1'  => $row->ca1,
+                'ca2'  => $row->ca2,
+                'ca3'  => $row->ca3,
             ];
         }
 
@@ -301,9 +305,12 @@ class DashboardController extends Controller
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "success" THEN bookings.id END) as totalSuccessfulBookings')
             ->selectRaw('COUNT(DISTINCT CASE WHEN bookings.status = "canceled" THEN bookings.id END) as totalCancelledBookings')
             ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
-            ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')  // Nếu không có đánh giá, đặt giá trị là 0
+            ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
             ->leftJoin('work_schedules', 'admins.id', '=', 'work_schedules.admin_id')
-            ->leftJoin('bookings', 'admins.id', '=', 'bookings.admin_id')
+            ->leftJoin('bookings', function ($join) {
+                $join->on('admins.id', '=', 'bookings.admin_id')
+                    ->where('bookings.day', '=', date('Y-m-d'));
+            })
             ->leftJoin('reviews', 'admins.id', '=', 'reviews.admin_id')
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
@@ -322,7 +329,7 @@ class DashboardController extends Controller
 
     private function baseTopEmployees()
     {
-        $currentDate = date('Y-m-d');  // Lấy ngày hiện tại
+        $currentDate = now()->format('Y-m-d'); // Lấy ngày hiện tại
 
         $query = Admin::select('admins.username', 'admins.avatar')
             ->selectRaw('COUNT(DISTINCT bookings.id) as totalBookings')
@@ -331,15 +338,19 @@ class DashboardController extends Controller
             ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')  // Nếu không có đánh giá, đặt giá trị là 0
             ->leftJoin('work_schedules', 'admins.id', '=', 'work_schedules.admin_id')
-            ->leftJoin('bookings', 'admins.id', '=', 'bookings.admin_id')
+            ->leftJoin('bookings', function ($join) use ($currentDate) {
+                $join->on('admins.id', '=', 'bookings.admin_id')
+                    ->where('bookings.day', '=', $currentDate);
+            })
             ->leftJoin('reviews', 'admins.id', '=', 'reviews.admin_id')
-            ->whereDate('work_schedules.day', $currentDate)
+            ->where('work_schedules.day', '=', $currentDate)
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
         $data = $query->orderByDesc('totalBookings')->get();
 
         return $data;
     }
+
     private function revenue()
     {
         // Lấy ngày hôm qua
