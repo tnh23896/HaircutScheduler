@@ -292,13 +292,15 @@ class DashboardController extends Controller
 		return response()->json(['topEmployeesData' => $topEmployeesData]);
 	}
 
-    private function basefilterTopEmployee(Request $request)
+	private function basefilterTopEmployee(Request $request)
     {
-        $currentMonth = date('m');
+        $currentMonth = now()->format('m');
+        $currentDay = now()->format('d');
+
         $day = $request->input('day', 0);
 
         if ($day == 0) {
-            $day = date('d');
+            $day = $currentDay;
         }
 
         $query = Admin::select('admins.username', 'admins.avatar')
@@ -308,25 +310,22 @@ class DashboardController extends Controller
             ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
             ->leftJoin('work_schedules', 'admins.id', '=', 'work_schedules.admin_id')
-            ->leftJoin('bookings', function ($join) {
+            ->leftJoin('bookings', function ($join) use ($day) {
                 $join->on('admins.id', '=', 'bookings.admin_id')
-                    ->where('bookings.day', '=', date('Y-m-d'));
+                    ->whereRaw('DATE(bookings.day) = ?', [now()->format('Y-m') . '-' . $day]);
             })
             ->leftJoin('reviews', 'admins.id', '=', 'reviews.admin_id')
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
         if ($currentMonth) {
-            $query->whereMonth('work_schedules.day', $currentMonth);
-
-            if ($day) {
-                $query->whereDay('work_schedules.day', $day);
-            }
+            $query->whereRaw('MONTH(work_schedules.day) = ?', [$currentMonth])
+                ->whereRaw('DAY(work_schedules.day) = ?', [$day]);
         }
 
-		$topEmployeesData = $query->orderByDesc('totalBookings')->get();
+        $topEmployeesData = $query->orderByDesc('totalBookings')->get();
 
-		return $topEmployeesData;
-	}
+        return $topEmployeesData;
+    }
 
 	private function baseTopEmployees()
 	{
