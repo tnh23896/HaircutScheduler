@@ -20,12 +20,11 @@
                                         <option value="{{ $i }}">Tháng {{ $i }}</option>
                                     @endfor
                                 </select>
-                                <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
-                                    <option value="0">Chọn năm</option>
+                                <select name="year" id="year" class="tom-select tomselected mx-3"
+                                    style="width:8rem;">
+                                    <option value="0" selected="true">Chọn năm</option>
                                     @for ($year = 1990; $year <= 2030; $year++)
-                                        <option value="{{ $year }}" {{ $year == now()->year ? 'selected' : '' }}>
-                                            Năm {{ $year }}
-                                        </option>
+                                        <option value="{{ $year }}">Năm {{ $year }}</option>
                                     @endfor
                                 </select>
                                 <button type="button" id="saveFilterFormRevenue" class="btn btn-secondary mr-1 mb-2">

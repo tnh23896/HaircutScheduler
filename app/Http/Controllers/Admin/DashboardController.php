@@ -293,13 +293,11 @@ class DashboardController extends Controller
 
     private function basefilterTopEmployee(Request $request)
     {
-        $currentMonth = now()->format('m');
-        $currentDay = now()->format('d');
-
+        $currentMonth = date('m');
         $day = $request->input('day', 0);
 
         if ($day == 0) {
-            $day = $currentDay;
+            $day = date('d');
         }
 
         $query = Admin::select('admins.username', 'admins.avatar')
@@ -309,23 +307,25 @@ class DashboardController extends Controller
             ->selectRaw('COUNT(DISTINCT reviews.id) as totalRatings')
             ->selectRaw('IFNULL(AVG(reviews.star), 0) as avgRating')
             ->leftJoin('work_schedules', 'admins.id', '=', 'work_schedules.admin_id')
-            ->leftJoin('bookings', function ($join) use ($day) {
+            ->leftJoin('bookings', function ($join) {
                 $join->on('admins.id', '=', 'bookings.admin_id')
-                    ->whereRaw('DATE(bookings.day) = ?', [now()->format('Y-m') . '-' . $day]);
+                    ->where('bookings.day', '=', date('Y-m-d'));
             })
             ->leftJoin('reviews', 'admins.id', '=', 'reviews.admin_id')
             ->groupBy('admins.id', 'admins.username', 'admins.avatar');
 
         if ($currentMonth) {
-            $query->whereRaw('MONTH(work_schedules.day) = ?', [$currentMonth])
-                ->whereRaw('DAY(work_schedules.day) = ?', [$day]);
+            $query->whereMonth('work_schedules.day', $currentMonth);
+
+            if ($day) {
+                $query->whereDay('work_schedules.day', $day);
+            }
         }
 
         $topEmployeesData = $query->orderByDesc('totalBookings')->get();
 
         return $topEmployeesData;
     }
-
 
     private function baseTopEmployees()
     {
