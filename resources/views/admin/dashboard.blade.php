@@ -160,9 +160,11 @@
                             @csrf
                             <div class="flex">
                                 <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
-                                    <option value="0" selected="true" class="w-24">Chọn ngày</option>
+                                    <option value="0">Chọn ngày</option>
                                     @for ($i = 1; $i <= 31; $i++)
-                                        <option value="{{ $i }}">Ngày {{ $i }}</option>
+                                        <option value="{{ $i }}" {{ $i == now()->day ? 'selected' : '' }}>
+                                            Ngày {{ $i }}
+                                        </option>
                                     @endfor
                                 </select>
                                 <button type="button" id="saveFilterTopEmployee" class="btn btn-secondary mr-1 mb-2">
@@ -177,45 +179,44 @@
                         </form>
                     </div>
                     <div class="overflow-x-auto" style="height: 25rem">
-                    <div class="mt-2">
-                        <div id="topEmployeesContent">
-                            @if (count($topEmployeesData) > 0)
-                                @foreach ($topEmployeesData as $employee)
-                                    <div class="">
-                                        <div class="box px-4 py-4 mb-3 flex items-center">
-                                            <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                                <img alt="Employee Avatar"
-                                                    src="{{ $employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
-                                            </div>
-                                            <div class="ml-4 mr-auto">
-                                                <div class="font-medium text-lg">{{ $employee['username'] }}</div>
-                                                <div class="text-slate-500 text-sm mt-0.5">
-                                                    @if ($employee['avgRating'] > 0)
-                                                        Đánh giá: {{ number_format($employee['avgRating'], 1) }} &#9733
-                                                    @else
-                                                        Đánh giá: 0.0 &#9733
-                                                    @endif
+                        <div class="mt-2">
+                            <div id="topEmployeesContent">
+                                @if (count($topEmployeesData) > 0)
+                                    @foreach ($topEmployeesData as $employee)
+                                        <div class="">
+                                            <div class="box px-4 py-4 mb-3 flex items-center">
+                                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
+                                                    <img alt="Employee Avatar"
+                                                        src="{{ $employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
+                                                </div>
+                                                <div class="ml-4 mr-auto">
+                                                    <div class="font-medium text-lg">{{ $employee['username'] }}</div>
+                                                    <div class="text-slate-500 text-sm mt-0.5">
+                                                        @if ($employee['avgRating'] > 0)
+                                                            Đánh giá: {{ number_format($employee['avgRating'], 1) }} &#9733
+                                                        @else
+                                                            Đánh giá: 0.0 &#9733
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="py-2 mr-2 px-3 rounded-full text-sm bg-success text-white cursor-pointer font-medium">
+                                                    {{ $employee['totalSuccessfulBookings'] }} lịch đặt thành công
+                                                </div>
+                                                <div
+                                                    class="py-2 px-3 rounded-full text-sm bg-danger text-white cursor-pointer font-medium">
+                                                    {{ $employee['totalCancelledBookings'] }} lịch huỷ
                                                 </div>
                                             </div>
-                                            <div
-                                                class="py-2 mr-2 px-3 rounded-full text-sm bg-success text-white cursor-pointer font-medium">
-                                                {{ $employee['totalSuccessfulBookings'] }} lịch đặt thành công
-                                            </div>
-                                            <div
-                                                class="py-2 px-3 rounded-full text-sm bg-danger text-white cursor-pointer font-medium">
-                                                {{ $employee['totalCancelledBookings'] }} lịch huỷ
-                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
-
-                            @else
-                                <div class="text-center text-gray-500">Không có dữ liệu.</div>
-                            @endif
+                                    @endforeach
+                                @else
+                                    <div class="text-center text-gray-500">Không có dữ liệu.</div>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                    </div>
-                                {{-- {{ $topEmployeesData->links('pagination::bootstrap-4') }} --}}
+                    {{-- {{ $topEmployeesData->links('pagination::bootstrap-4') }} --}}
 
                 </div>
 
@@ -228,9 +229,11 @@
                             @csrf
                             <div class="flex">
                                 <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
-                                    <option value="0" selected="true" class="w-24">Chọn ngày</option>
+                                    <option value="0">Chọn ngày</option>
                                     @for ($i = 1; $i <= 31; $i++)
-                                        <option value="{{ $i }}">Ngày {{ $i }}</option>
+                                        <option value="{{ $i }}" {{ $i == now()->day ? 'selected' : '' }}>
+                                            Ngày {{ $i }}
+                                        </option>
                                     @endfor
                                 </select>
                                 <button type="button" id="saveservice" class="btn btn-secondary mr-1 mb-2">

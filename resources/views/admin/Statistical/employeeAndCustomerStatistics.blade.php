@@ -12,10 +12,12 @@
                 <form id="filterBookerForm" method="POST">
                     @csrf
                     <div class="flex justify-end">
-                        <select name="year" id="year" class="tom-select w-96 tomselected mx-3" style="width: 150px">
-                            <option value="0" selected="true">Chọn năm</option>
+                        <select name="year" id="year" class="tom-select w-96 tomselected mx-3" style="width:8rem">
+                            <option value="0">Chọn năm</option>
                             @for ($year = 1990; $year <= 2030; $year++)
-                                <option value="{{ $year }}">Năm {{ $year }}</option>
+                                <option value="{{ $year }}" {{ $year == now()->year ? 'selected' : '' }}>
+                                    Năm {{ $year }}
+                                </option>
                             @endfor
                         </select>
                         <button type="button" id="saveFilterBooker" class="btn btn-secondary mr-1 mb-2">
@@ -48,7 +50,7 @@
                                         <div class="text-center flex">
                                             <div class="w-16 h-16 image-fit">
                                                 <img alt="ảnh" class="rounded-full"
-                                                    src="{{$booker->avatar === 'default.jpg' ? asset('dist/images/default.jpg') : asset($booker->avatar) }}">
+                                                    src="{{ $booker->avatar === 'default.jpg' ? asset('dist/images/default.jpg') : asset($booker->avatar) }}">
                                             </div>
                                         </div>
                                     </td>
@@ -75,11 +77,12 @@
                 <form id="filterTopEmployee" style="margin-bottom:73px" method="POST">
                     @csrf
                     <div class="flex justify-end">
-                        <select name="year" id="year" class="tom-select w-96 tomselected mx-3"
-                            style="width:8rem">
-                            <option value="0" selected="true">Chọn Năm</option>
+                        <select name="year" id="year" class="tom-select w-96 tomselected mx-3" style="width:8rem">
+                            <option value="0">Chọn năm</option>
                             @for ($year = 1990; $year <= 2030; $year++)
-                                <option value="{{ $year }}">Năm {{ $year }}</option>
+                                <option value="{{ $year }}" {{ $year == now()->year ? 'selected' : '' }}>
+                                    Năm {{ $year }}
+                                </option>
                             @endfor
                         </select>
                         <button type="button" id="saveFilterTopEmployee" class="btn btn-secondary mr-1 mb-2">
@@ -99,7 +102,7 @@
                                 {{-- Display employee information --}}
                                 <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                     <img alt="Employee Avatar"
-                                        src="{{$employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
+                                        src="{{ $employee['avatar'] === '' ? asset('dist/images/default.jpg') : asset($employee['avatar']) }}">
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium">{{ $employee['username'] }}</div>
@@ -162,21 +165,21 @@
                                         </thead>
                                         <tbody>
                                             ${bookerArray.map((booker, index) => `
-                                                                            <tr class="intro-x">
-                                                                                <td>${index + 1}</td>
-                                                                                <td class="w-40">
-                                                                                    <div class="text-center flex">
-                                                                                        <div class="w-16 h-16 image-fit zoom-in">
-                                                                                            <img alt="ảnh" class="tooltip rounded-full" src="{{ asset('${booker.avatar}') }}">
+                                                                                <tr class="intro-x">
+                                                                                    <td>${index + 1}</td>
+                                                                                    <td class="w-40">
+                                                                                        <div class="text-center flex">
+                                                                                            <div class="w-16 h-16 image-fit zoom-in">
+                                                                                                <img alt="ảnh" class="tooltip rounded-full" src="{{ asset('${booker.avatar}') }}">
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td class="text-center whitespace-nowrap">
-                                                                                    <a href="#" class="text-center font-medium whitespace-nowrap">${booker.name}</a>
-                                                                                </td>
-                                                                                <td class=" text-center">${booker.totalBookings}</td>
-                                                                                <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
-                                                                            </tr> `).join('')}
+                                                                                    </td>
+                                                                                    <td class="text-center whitespace-nowrap">
+                                                                                        <a href="#" class="text-center font-medium whitespace-nowrap">${booker.name}</a>
+                                                                                    </td>
+                                                                                    <td class=" text-center">${booker.totalBookings}</td>
+                                                                                    <td class="text-center">${ formatCurrency(booker.totalPrice)}</td>
+                                                                                </tr> `).join('')}
                                         </tbody>
                                     </table>`;
                             $('#listBooker').html(bookerItemHtml);
