@@ -5,17 +5,20 @@
         <div class="col-span-12 2xl:col-span-12">
             <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-12 sm:col-span-6 lg:col-span-6 mt-8">
-                    <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center" style="display: flex;justify-content: space-between">
+                    <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center"
+                        style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
                             Thống kê dịch vụ
                         </h2>
                         <form id="filterTopService" method="POST">
                             @csrf
                             <div class="flex justify-end">
-                                <select name="year" id="year" class="tom-select w-full tomselected mx-3" style="width: 8rem;">
-                                    <option value="0" selected="true" class="w-96">Chọn năm</option>
+                                <select name="day" id="day" class="tom-select w-32 tomselected mx-3">
+                                    <option value="0">Chọn năm</option>
                                     @for ($year = 1990; $year <= 2030; $year++)
-                                        <option value="{{ $year }}">Năm {{ $year }}</option>
+                                        <option value="{{ $year }}" {{ $year == now()->year ? 'selected' : '' }}>
+                                            Năm {{ $year }}
+                                        </option>
                                     @endfor
                                 </select>
                                 <button type="button" id="saveFormService" class="btn btn-secondary mr-1 mb-2">

@@ -33,9 +33,9 @@
                                         </polygon>
                                     </svg>
                                 </button>
+                            </div>
                         </form>
                     </div>
-
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5">
 
