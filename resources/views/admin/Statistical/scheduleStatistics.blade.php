@@ -8,7 +8,7 @@
                     <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center"
                         style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Thống kê lịch đặt
+                            Thống kê lịch đặt theo tháng
                         </h2>
                         <form id="searchTime" method="POST">
                             @csrf
@@ -33,9 +33,9 @@
                                         </polygon>
                                     </svg>
                                 </button>
+                            </div>
                         </form>
                     </div>
-
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5">
 

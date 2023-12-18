@@ -8,7 +8,7 @@
                     <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center"
                         style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Thống kê doanh thu
+                            Thống kê doanh thu theo năm
                         </h2>
                         <form id="filterFormRevenue" method="POST">
                             @csrf
@@ -54,7 +54,7 @@
                                     <input type="hidden" name="totalRevenue[{{ $key }}]['ca3']"
                                         value="{{ $item['ca3'] }}">
                                 @endforeach --}}
-                                <input type="hidden" name="excelYear" id="resultInput" readonly value="0">
+																<input type="hidden" name="excelYear" id="resultInput" readonly value="0">
                                 <button class="btn btn-primary shadow-md mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

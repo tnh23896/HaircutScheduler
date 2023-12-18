@@ -8,7 +8,7 @@
                     <div class="intro-y h-10 mb-5 flex flex-col lg:flex-row justify-between items-center"
                         style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Thống kê dịch vụ
+                            Thống kê doanh thu dịch vụ theo năm
                         </h2>
                         <form id="filterTopService" method="POST">
                             @csrf
