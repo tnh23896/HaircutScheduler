@@ -28,7 +28,7 @@
                 <div class="col-span-12 mt-8">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Báo cáo tổng hợp
+                            Thông kê tổng hợp
                         </h2>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-5">
@@ -116,7 +116,7 @@
                         <div class="intro-y h-10">
 
                             <h2 class="text-lg font-medium truncate mr-5">
-                                Thống kê doanh thu
+                                Thống kê doanh thu theo tháng
                             </h2>
                         </div>
                         <div class="intro-y box p-5 mt-12 sm:mt-5">
@@ -154,7 +154,7 @@
                 <div class="col-span-12 lg:col-span-8 mt-8">
                     <div class="intro-y h-10 mb-5" style="display: flex;justify-content: space-between">
                         <h2 class="text-lg font-medium truncate mr-5">
-                            Thống kê nhân viên
+                            Thống kê nhân viên theo  ngày
                         </h2>
                         <form id="filterTopEmployee" method="POST">
                             @csrf
@@ -262,7 +262,7 @@
                     <div class="col-span-12 lg:col-span-12">
                         <div class="intro-y h-10">
                             <h2 class="text-lg font-medium truncate mr-5">
-                                Thống kê lịch đặt
+                                Thống kê lịch đặt theo tháng
                             </h2>
                         </div>
                         <div class="intro-y box p-5 mt-12 sm:mt-5">
