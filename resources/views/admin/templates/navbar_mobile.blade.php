@@ -1,5 +1,5 @@
     <div class="mobile-menu-bar">
-        <a href="#" class="flex mr-auto">
+        <a href="{{ route('admin.welcome') }}" class="flex mr-auto">
             <img alt="Midone - HTML Admin Template" class="" style="width: 60px" src="{{ asset('dist/images/LOGO.png') }}">
         </a>
         <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2"

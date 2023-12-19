@@ -127,21 +127,25 @@
             <a href="{{ route('admin.scheduleManagement.index') }}" class="btn btn-outline-secondary w-36 mr-1"
                 style="border: 1px solid #312E81">Trang danh
                 sách</a>
-            @if ($item->status == 'pending' || $item->status == 'waiting' || $item->status == 'confirmed')
-                <button type="submit" id="saveBtn" class="btn btn-primary w-32 text-white">
-                    Lưu thay đổi
-                </button>
+            @if (auth('admin')->user()->can('admin.scheduleManagement.scheduleDetails.update'))
+                @if ($item->status == 'pending' || $item->status == 'waiting' || $item->status == 'confirmed')
+                    <button type="submit" id="saveBtn" class="btn btn-primary w-32 text-white">
+                        Lưu thay đổi
+                    </button>
+                @endif
             @endif
         </div>
 
     </form>
-    @if ($item->status == 'pending' || $item->status == 'waiting' || $item->status == 'confirmed')
-        <div class="ml-4 mb-2 mt-2">
-            <a data-tw-toggle="modal" data-tw-target="#modal{{ $item->id }}">
-                <button class="btn btn-primary w-32">Thêm dịch vụ</button>
-            </a>
-        </div>
-        @include('admin.ScheduleManagement.createService')
+    @if (auth('admin')->user()->can('admin.scheduleManagement.scheduleDetails.store'))
+        @if ($item->status == 'pending' || $item->status == 'waiting' || $item->status == 'confirmed')
+            <div class="ml-4 mb-2 mt-2">
+                <a data-tw-toggle="modal" data-tw-target="#modal{{ $item->id }}">
+                    <button class="btn btn-primary w-32">Thêm dịch vụ</button>
+                </a>
+            </div>
+            @include('admin.ScheduleManagement.createService')
+        @endif
     @endif
     {{-- Lịch sử thay đổi --}}
     <label for="" class="font-bold text-2xl mb-3  ml-4">Lịch sử thay đổi</label>
@@ -158,7 +162,8 @@
                 <tbody>
                     @foreach ($history_action as $item)
                         <tr class="stells">
-                            <td class="text-center"style="border: 1px solid #312E81">{{ $item->admin->username ?? '' }}</td>
+                            <td class="text-center"style="border: 1px solid #312E81">{{ $item->admin->username ?? '' }}
+                            </td>
                             @php
                                 // Tách chuỗi thành mảng bằng dấu chấm
                                 $parts = explode('.,', $item->action, 2);

@@ -93,7 +93,8 @@ class MomoController extends Controller
                 'status' => 'confirmed',
                 'amount_paid' => $request->amount,
             ]);
-            dispatch(new BookedMail($booking))->onQueue('email_booked');
+            $getBooking = Booking::query()->findOrFail($id);
+            dispatch(new BookedMail($getBooking))->onQueue('email_booked');
             return redirect()->route('booking_history');
         }
     }

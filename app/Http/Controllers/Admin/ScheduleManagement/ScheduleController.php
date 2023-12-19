@@ -510,7 +510,7 @@ class ScheduleController extends Controller
 				->where('work_schedule_details.time_id', $time->id)
 				->where('work_schedule_details.work_schedules_id', $workSchedule->id);
 
-    
+
 			$timeSelected = Time::where('time', $bookingOld->time)->first();
 			$workScheduleSelected = WorkSchedule::query()->where('admin_id', $bookingOld->admin_id)->where('day', $bookingOld->day)->first();
 			$findWorkScheduleDetailSelected = DB::table('work_schedule_details')
@@ -601,7 +601,7 @@ class ScheduleController extends Controller
 					}
 				}
 				$bill_detail = BillDetail::where('bill_id', $bill->id)->get();
-				SendMailBill::dispatch($bill, $bill_detail)->onQueue('email_booked');
+				SendMailBill::dispatch($bill, $bill_detail)->onQueue('email_sendbill');
 			}
 			if ($data->status == "canceled" && $data->amount_paid >= 0) {
 				$bill = Bill::create([
@@ -653,5 +653,5 @@ class ScheduleController extends Controller
 	{
 		//
 	}
-    
+
 }

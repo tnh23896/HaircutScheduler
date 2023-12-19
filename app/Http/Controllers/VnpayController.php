@@ -107,7 +107,8 @@ class VnpayController extends Controller
                     'status' => 'confirmed',
                     'amount_paid' => $_GET['vnp_Amount'] / 100,
                 ]);
-                dispatch(new BookedMail($booking))->onQueue('email_booked');
+                $getBooking = Booking::query()->findOrFail($_GET['vnp_TxnRef']);
+                dispatch(new BookedMail($getBooking))->onQueue('email_booked');
                 return redirect()->route('booking_history');
             }
             else {
