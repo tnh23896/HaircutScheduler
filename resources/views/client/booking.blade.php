@@ -345,7 +345,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="text-center featured-area">
-                                                        <h5><a href="" style="color: black">Chọn hộ</a></h5>
+                                                        <h5><a href="" style="color: black">Chọn ngẫu nhiên</a></h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -536,7 +536,7 @@
             serviceCategories.forEach(function(category) {
                 $('input[name="' + category.id + 'services[]"]').on('change', function() {
                     if (category.can_choose == 'one') {
-                        
+
                         if ($(this).is(':checked')) {
                             $('input[name="' + category.id + 'services[]"]').each(
                                 function() {

@@ -32,7 +32,7 @@
 </style>
 
 <nav class="side-nav">
-    <a href="#" class="intro-x flex items-center pl-5 pt-4">
+    <a href="{{ route('admin.welcome') }}" class="intro-x flex items-center pl-5 pt-4">
         <img alt="Midone - HTML Admin Template" class="w-10" src="{{ asset('dist/images/LOGO.png') }}">
         <span class="hidden xl:block text-white text-lg ml-3"> DT BARBER </span>
     </a>
