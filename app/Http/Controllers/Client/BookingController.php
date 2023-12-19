@@ -77,18 +77,18 @@ class BookingController extends Controller
 
             foreach ($staffMembers as $staffMember) {
                 $reviews = Review::where('admin_id', $staffMember->id)->get();
-            
+
                 $totalRating = $reviews->sum('star');
                 $reviewCount = $reviews->count();
-            
+
                 $averageRating = $reviewCount > 0 ? $totalRating / $reviewCount : 0;
-            
+
                 // Cập nhật giá trị trong mảng $averageRatings
                 $averageRatings[$staffMember->id] = $averageRating;
             }
 
             // dd($averageRatings);
-            
+
             // Lấy danh sách khung giờ
             $dateString = $startDate;
             if (!$availableDates->isEmpty()) {
@@ -208,10 +208,10 @@ class BookingController extends Controller
                 ->having('booking_count', '>', 1)
                 ->get();
 
-            // if ($bookingsCount->isNotEmpty()) {
-            //     // User has made more than 3 bookings today, show an error
-            //     return response()->json(['error' => 'Yêu cầu đặt lịch bị từ chối do nghi ngờ là spam. Xin lỗi vì sự bất tiện này!'], 422);
-            // }
+            if ($bookingsCount->isNotEmpty()) {
+                // User has made more than 3 bookings today, show an error
+                return response()->json(['error' => 'Yêu cầu đặt lịch bị từ chối do nghi ngờ là spam. Xin lỗi vì sự bất tiện này!'], 422);
+            }
             $admin_id = $request->admin_id;
             $day = $request->day;
             $params = [
