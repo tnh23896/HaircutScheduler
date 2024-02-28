@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MomoController;
+use App\Http\Controllers\VnpayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('vnpay')->as('vnpay.')->group(function () {
+    Route::get('process', [VnpayController::class, 'process'])->name('process');
+    Route::get('callback', [VnpayController::class, 'callback'])->name('callback');
+});
+Route::prefix('momo')->as('momo.')->group(function () {
+    Route::get('momo', [MomoController::class, 'momo_payment'])->name('momo');
+    Route::get('momo/callback', [MomoController::class, 'momo_callback'])->name('callback');
 });

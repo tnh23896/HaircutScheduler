@@ -596,6 +596,7 @@ select{
         max-width: 1536px;
     }
 }
+
 .form-input,.form-textarea,.form-select,.form-multiselect{
     -webkit-appearance: none;
        -moz-appearance: none;
@@ -756,7 +757,7 @@ select{
     border-color: rgb(var(--color-secondary) / 0.7);
     background-color: rgb(var(--color-secondary) / 0.7);
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .alert-secondary){
     --tw-border-opacity: 1;
@@ -844,7 +845,7 @@ select{
     --tw-border-opacity: 1;
     border-color: rgb(var(--color-secondary) / var(--tw-border-opacity));
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .alert-outline-secondary){
     border-color: rgb(var(--color-darkmode-100) / 0.4);
@@ -923,7 +924,7 @@ select{
     background-color: rgb(var(--color-slate-300) / var(--tw-bg-opacity));
     --tw-bg-opacity: 0.1;
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .alert-secondary-soft){
     border-color: rgb(var(--color-darkmode-100) / 0.3);
@@ -1074,7 +1075,7 @@ select{
     border-color: rgb(var(--color-secondary) / 0.7);
     background-color: rgb(var(--color-secondary) / 0.7);
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .btn-secondary){
     --tw-border-opacity: 1;
@@ -1182,7 +1183,7 @@ select{
     border-color: rgb(var(--color-secondary) / 0.7);
     background-color: rgb(var(--color-secondary) / 0.7);
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .btn-elevated-secondary){
     --tw-border-opacity: 1;
@@ -1321,7 +1322,7 @@ select{
     border-color: rgb(var(--color-secondary) / 0.7);
     background-color: rgb(var(--color-secondary) / 0.7);
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .btn-rounded-secondary){
     --tw-border-opacity: 1;
@@ -1448,7 +1449,7 @@ select{
     border-color: rgb(var(--color-secondary) / 0.7);
     background-color: rgb(var(--color-secondary) / 0.7);
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .btn-elevated-rounded-secondary){
     --tw-border-opacity: 1;
@@ -1637,7 +1638,7 @@ select{
     --tw-border-opacity: 1;
     border-color: rgb(var(--color-secondary) / var(--tw-border-opacity));
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .btn-outline-secondary){
     border-color: rgb(var(--color-darkmode-100) / 0.4);
@@ -1747,7 +1748,7 @@ select{
     background-color: rgb(var(--color-slate-300) / var(--tw-bg-opacity));
     --tw-bg-opacity: 0.2;
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .btn-secondary-soft){
     border-color: rgb(var(--color-darkmode-100) / 0.3);
@@ -2195,7 +2196,7 @@ select{
     --tw-bg-opacity: 1;
     background-color: rgb(var(--color-slate-100) / var(--tw-bg-opacity));
 }
-:is(.dark .form-control:disabled),:is(.dark 
+:is(.dark .form-control:disabled),:is(.dark
     .form-control[readonly]){
     border-color: transparent;
     background-color: rgb(var(--color-darkmode-800) / 0.5);
@@ -2226,7 +2227,7 @@ select{
     font-size: 0.75rem;
     line-height: 1rem;
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 .form-inline{
     display: flex;
@@ -2289,7 +2290,7 @@ select{
     --tw-bg-opacity: 1;
     background-color: rgb(var(--color-slate-100) / var(--tw-bg-opacity));
 }
-:is(.dark .form-select:disabled),:is(.dark 
+:is(.dark .form-select:disabled),:is(.dark
     .form-select[readonly]){
     background-color: rgb(var(--color-darkmode-800) / 0.5);
 }
@@ -4167,7 +4168,7 @@ select{
 }
 .text-slate-500{
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 .text-slate-600{
     --tw-text-opacity: 1;
@@ -13641,7 +13642,7 @@ html body{
             line-height: 2.25rem;
             font-weight: 300;
             --tw-text-opacity: 1;
-            color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+            color: black;
         }
 .toastify-content{
     border-radius: 0.5rem;
@@ -14028,7 +14029,7 @@ html body{
     align-items: center;
     justify-content: center;
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 .post .post__tabs .nav-item .nav-link:hover:not(.disabled):not(.active):hover{
     border-color: transparent;
@@ -14158,7 +14159,7 @@ html body{
 .litepicker .container__footer .button-cancel{
     background-color: rgb(var(--color-slate-200) / 0.7);
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 .litepicker .container__months{
     padding-left: 0.25rem;
@@ -14789,7 +14790,7 @@ html body{
     line-height: 1.25rem;
     font-weight: 400;
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 .tabulator .tabulator-loader {
         background: #ffffffbd;
@@ -15565,9 +15566,9 @@ html body{
         .full-calendar.fc-theme-standard .fc-list{
     border-color: rgb(var(--color-slate-200) / 0.6);
 }
-:is(.dark .full-calendar.fc-theme-standard .fc-scrollgrid),:is(.dark 
-        .full-calendar.fc-theme-standard th),:is(.dark 
-        .full-calendar.fc-theme-standard td),:is(.dark 
+:is(.dark .full-calendar.fc-theme-standard .fc-scrollgrid),:is(.dark
+        .full-calendar.fc-theme-standard th),:is(.dark
+        .full-calendar.fc-theme-standard td),:is(.dark
         .full-calendar.fc-theme-standard .fc-list){
     --tw-border-opacity: 1;
     border-color: rgb(var(--color-darkmode-400) / var(--tw-border-opacity));
@@ -15629,7 +15630,7 @@ html body{
     .full-calendar .fc-daygrid-more-link{
         font-size: 10px;
         --tw-text-opacity: 1;
-        color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+        color: black;
     }
   }
 @media (max-width: calc(640px - 1px)) {
@@ -15660,7 +15661,7 @@ html body{
     padding-bottom: 0.4em !important;
     text-transform: capitalize !important;
     --tw-text-opacity: 1 !important;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity)) !important;
+    color: black !important;
     display: inline-flex;
     cursor: pointer;
     align-items: center;
@@ -16096,7 +16097,7 @@ html body{
 }
 :is(.dark .dark\:text-slate-500){
     --tw-text-opacity: 1;
-    color: rgb(var(--color-slate-500) / var(--tw-text-opacity));
+    color: black;
 }
 :is(.dark .dark\:text-white){
     --tw-text-opacity: 1;

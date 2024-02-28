@@ -2,10 +2,18 @@
 
 namespace App\Providers;
 
+use App\Events\SendEmailBillEvent;
+use App\Events\SendEmailBookedEvent;
+use App\Events\SendEmailContactEvent;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\SendEmailBookedListener;
+use App\Listeners\SendEmailContactListener;
+use App\Events\SendEmailForgotPasswordEvent;
+use App\Listeners\SendEmailBillListener;
+use App\Listeners\SendEmailForgotPasswordListener;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +26,22 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        SendEmailForgotPasswordEvent::class => [
+            SendEmailForgotPasswordListener::class
+        ],
+
+        SendEmailContactEvent::class => [
+            SendEmailContactListener::class
+        ],
+
+        SendEmailBookedEvent::class => [
+            SendEmailBookedListener::class
+        ],
+
+        SendEmailBillEvent::class => [
+            SendEmailBillListener::class
+        ]
     ];
 
     /**

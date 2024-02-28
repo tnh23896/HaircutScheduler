@@ -1,0 +1,2669 @@
+@media (max-width: 1920px) {
+    .no-bottom {
+        padding-bottom: 0;
+    }
+    .no-top {
+        padding-top: 0;
+    }
+    .barber-hipster h3 {
+        line-height: 2.5rem;
+    }
+    .nav-tabs .nav-item {
+        display: block;
+    }
+    .side-image img {
+        height: 600px;
+    }
+    .pattern-img img {
+        height: 659px;
+    }
+    .main-content {
+        max-width: 55%;
+    }
+
+    .price-image img {
+        min-height: 740px;
+        max-height: 740px;
+    }
+    .about-table img {
+        min-height: 470px;
+    }
+    .navbar-close {
+        display: none;
+    }
+    .barber-gallery img {
+        min-height: 370px;
+    }
+    .nav li {
+        display: block;
+    }
+    .appointment-main img {
+        min-height: 100%;
+    }
+    .appointment-box {
+        min-height: 100%;
+    }
+}
+@media all and (max-width: 1920px) and (min-width: 1600px) {
+    .barber-shop {
+        width: 72%;
+    }
+    .ml-xxl-50 {
+        margin-left: 50px;
+    }
+    .about-sec {
+        max-width: 91%;
+        padding-left: 26rem;
+    }
+}
+@media all and (max-width: 1600px) and (min-width: 1370px) {
+    .barber-shop {
+        width: 75%;
+    }
+    .about-sec {
+        max-width: 80%;
+    }
+    .about-sec p {
+        padding-bottom: 1rem;
+    }
+    .about-table h2 {
+        padding-top: 2rem;
+    }
+    .about-table {
+        height: 310px;
+    }
+}
+@media (max-width: 1366px) {
+    .main-gallery {
+        margin-top: 3rem;
+    }
+    .service-img {
+        top: 80px;
+    }
+    .main-content {
+        max-width: 65%;
+    }
+    .pattern-img img {
+        height: 550px;
+    }
+    .main-content {
+        left: 15%;
+    }
+    .barber-quote {
+        right: 0;
+    }
+    .inner-logo {
+        bottom: 30px;
+        left: -300px;
+    }
+    .service-img img {
+        max-height: 300px;
+    }
+    .logo img {
+			width: 100px;
+	}
+    .about-sec {
+        padding-left: 7.25rem;
+        padding-bottom: 100px;
+    }
+    .about-table img {
+        min-height: 470px;
+    }
+    .barber-gallery img {
+        min-height: 340px;
+    }
+    .main-area img {
+        max-width: 480px;
+    }
+    .main-img {
+        border: 2.125rem solid;
+    }
+    .main-area img {
+        max-width: 400px;
+    }
+    .main-img {
+        bottom: -91px;
+        left: -111px;
+    }
+}
+@media all and (max-width: 1370px) and (min-width: 1030px) {
+    .barber-shop {
+        width: 85%;
+    }
+    .error-page img {
+        max-height: 400px;
+    }
+}
+@media (max-width: 1300px) {
+    .price-image img {
+        min-height: 640px;
+    }
+}
+@media all and (max-width: 1030px) and (min-width: 900px) {
+}
+@media (max-width: 1400px) {
+    .gap {
+        padding: 6.25rem 0;
+    }
+    .no-top {
+        padding-top: 0;
+    }
+    .no-bottom {
+        padding-bottom: 0;
+    }
+    .xxl-no-top {
+        padding-top: 0;
+    }
+    .xxl-no-bottom {
+        padding-bottom: 0;
+    }
+    .py-177 {
+        padding-bottom: 8rem;
+    }
+    .video-paralax {
+        width: 100%;
+        max-width: unset;
+    }
+}
+@media (max-width: 1200px) {
+    .gap {
+        padding: 5rem 0;
+    }
+    .blog {
+        padding: 0;
+    }
+    .barber-quote {
+        display: none;
+    }
+    .xl-no-top {
+        padding-top: 0;
+    }
+    .xl-no-bottom {
+        padding-bottom: 0;
+    }
+    .table-img {
+        padding: 46px;
+        margin-top: 0;
+        margin-top: 5rem;
+    }
+    .main-content h2 {
+        font-size: 3rem;
+        line-height: 3.5rem;
+    }
+    .pattern-img img {
+        height: 469px;
+    }
+    .navbar-brand {
+        padding-right: 1rem;
+    }
+    .header-text h2 {
+        max-width: 60%;
+    }
+    .barber-item-2 {
+        padding: 2.375rem;
+    }
+    .about-sec h2 {
+        font-size: 2.75rem;
+        line-height: 2.75rem;
+    }
+    .nav .nav-link {
+        margin: 0.5rem 0.5rem;
+    }
+    .shop-1 .theme-btn-2 {
+        margin-left: 21px;
+    }
+    .about-head .topbar ul {
+        flex-wrap: wrap;
+    }
+    .about-head .topbar ul li {
+        flex-basis: 50%;
+        display: flex;
+        align-items: center;
+    }
+    .woocommerce .content-area {
+        padding: 0px 30px;
+    }
+    .boxes {
+        padding: 1.875rem 2rem 1rem 2rem;
+    }
+
+    .comment-heading img {
+        min-height: 175px;
+    }
+    .comment-inner {
+        padding: 20px 20px;
+    }
+    header .navbar-expand .navbar-nav.toggle {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+    .error-page {
+        max-width: 100%;
+    }
+    .error-page h2 {
+        font-size: 100px;
+    }
+    .table-img-descrip {
+        margin: 0.5rem 0;
+    }
+    .main-area-img {
+        min-height: 100%;
+    }
+    .main-content {
+        left: 2.875rem;
+    }
+    .heading-style h2 {
+        font-size: 45px;
+        line-height: 2.187rem;
+    }
+    .heading-style span {
+        line-height: 0.937rem;
+        margin-top: 0.937rem;
+    }
+    .heading-style {
+        margin-bottom: 1.25rem;
+    }
+    .parallax {
+        display: none;
+    }
+    .appointment-box {
+        padding: 0.375rem 1.312rem;
+    }
+    .arrow:before {
+        content: "";
+        right: 14.437rem;
+    }
+    .arrow-2:before {
+        left: -0.062rem;
+    }
+    .parallax-content h2 {
+        font-size: 2.125rem;
+        line-height: 2.5rem;
+    }
+    .slick-prev:before {
+        width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        margin-left: -1.312rem;
+    }
+    .slider-1 .slider-btn a {
+        left: 44%;
+    }
+    .slider-1 span {
+        right: 52px;
+        top: 21.437rem;
+    }
+    .theme-btn {
+        padding: 0.625rem 2.625rem;
+    }
+    .barber-shadow h3 {
+        font-size: 1.312rem;
+    }
+    .barber-shadow span {
+        font-size: 0.687rem;
+    }
+    .shadow-image .shadow-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        font-size: 0.875rem;
+    }
+    .wiget ul {
+        font-size: 1rem;
+    }
+    .footer-mail input {
+        padding: 0.875rem 2.125rem;
+    }
+    .wiget-li {
+        padding-left: 0.8rem;
+    }
+}
+
+@media (max-width: 1030px) {
+    .nav-login {
+        display: none;
+    }
+    .barber-shop {
+        width: 95%;
+        padding-left: 1.562rem;
+        padding-right: 0;
+        margin-top: 3.125rem;
+        text-align: center;
+    }
+    .side-image {
+        width: 100%;
+    }
+
+    .side-t .barber-item-2 {
+        left: 0;
+    }
+    .about-sec {
+        padding-bottom: 40px;
+    }
+    .side-t {
+        margin-top: 20px;
+    }
+    .parallax {
+        display: none;
+    }
+    .appointment-box {
+        padding: 6px 1.312rem;
+    }
+    .arrow:before {
+        content: "";
+        right: 14.437rem;
+    }
+    .arrow-2:before {
+        left: -0.062rem;
+    }
+
+    .parallax-content h2 {
+        font-size: 2.125rem;
+        line-height: 2.5rem;
+    }
+    .slick-prev:before {
+        width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        margin-left: -1.312rem;
+    }
+    .slider-1 .slider-btn a {
+        left: 44%;
+    }
+    .slider-1 span {
+        right: 52px;
+        top: 21.437rem;
+    }
+    .theme-btn {
+        padding: 0.625rem 2.625rem;
+    }
+    .barber-shadow h3 {
+        font-size: 1.312rem;
+    }
+    .barber-shadow span {
+        font-size: 0.687rem;
+    }
+    .shadow-image .shadow-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        font-size: 0.875rem;
+    }
+    .wiget ul {
+        font-size: 1rem;
+    }
+    .footer-mail input {
+        padding: 0.875rem 2.125rem;
+    }
+    .theme-btn span {
+        left: 1.375rem;
+    }
+    .nav .nav-link {
+        padding-left: 0.937rem;
+    }
+    .user {
+        margin-right: -3.312rem;
+    }
+    .about-us h2 {
+        font-size: 2.7rem;
+        line-height: 2.7rem;
+    }
+    .about-us p {
+        font-size: 1rem;
+    }
+    .barber-description h3 {
+        font-size: 1.375rem;
+    }
+    .price-image img {
+        min-height: 540px;
+        max-height: 540px;
+    }
+    .price-content {
+        padding: 80px 0px;
+    }
+    .snap-description {
+        padding: 2.5rem;
+    }
+    .contact-us h3 {
+        font-size: 1.062rem;
+    }
+    .contact-form h2 {
+        font-size: 2.125rem;
+        line-height: 40px;
+    }
+    .contact-form span {
+        font-size: 2.125rem;
+    }
+    .barber-list h4 {
+        font-size: 1rem;
+    }
+    .contact-form .snap-description {
+        padding: 0.187rem;
+    }
+    .nav-btn {
+        margin-left: 0;
+    }
+    .navbar-brand {
+        padding-right: 58px;
+    }
+
+    .barber-list-2 h4 {
+        font-size: 1rem;
+        padding-bottom: 1.125rem;
+    }
+    .border-bottom-right::after {
+        display: none;
+    }
+    .border-bottom-left::before {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar-brand {
+        display: none;
+    }
+    .stick .main-logo {
+        padding: 0px;
+    }
+    .product-img img {
+        width: 100%;
+    }
+    .hamburger-navigation .nav-menu li {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .profile-sidebar-inner > ul {
+        display: flex;
+    }
+    .flex-active-slide {
+        flex-wrap: wrap;
+    }
+    .home-drop.active .home-page {
+        position: relative;
+        opacity: 1;
+        top: 0;
+        transform: translateY(0);
+        transition: 0.2s linear;
+        padding: 0;
+    }
+    .hamburger-navigation .nav-menu {
+        position: relative;
+        transform: translate(0);
+        top: 0;
+        left: 0;
+        transition-delay: 1.5s;
+        margin-top: 121px;
+        overflow: auto;
+    }
+    .hamburger-navigation-active .hamburger-navigation .nav-menu {
+        flex-direction: column;
+    }
+    .entry-summary p {
+        padding-top: 0;
+    }
+    .expandedImg {
+        width: 100%;
+    }
+    .home-page-2 {
+        font-size: 17px !important;
+    }
+    .home-drop a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .shop-1 a {
+        position: absolute;
+        right: 140px;
+    }
+    .nav-top {
+        padding-bottom: 0;
+        padding-top: 1.5rem;
+    }
+    .hair-fit img {
+        min-height: 450px;
+    }
+    .about-table {
+        width: 250px;
+        left: 5.4rem;
+        padding: 25px 0px;
+    }
+    .comment-text span {
+        padding-top: 0;
+    }
+    .navbar {
+        max-width: 100%;
+        margin: 0;
+    }
+    .heading-barber h2 {
+        margin-bottom: 0.7rem;
+        padding-top: 1rem;
+    }
+    .heading-barber {
+        margin-bottom: 35px;
+    }
+    .heading-barber {
+        border: none !important;
+    }
+    .button-gallery {
+        margin-top: 1.75rem;
+    }
+    .build-own p {
+        margin-bottom: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    .shop-1 a {
+        margin-right: 40px;
+    }
+    .main-gallery {
+        margin-top: 1.8rem;
+    }
+    .py-177 {
+        padding-bottom: 5rem;
+    }
+    .blog {
+        padding-left: 0px;
+    }
+    .gap {
+        padding: 4.5rem 0;
+    }
+    .service-prices {
+        padding-bottom: 70px;
+    }
+    .parallax-content {
+        padding-top: 0px;
+    }
+    .lg-no-top {
+        padding-top: 0;
+    }
+    .lg-no-bottom {
+        padding-bottom: 0;
+    }
+    .table-content {
+        padding: 4.375rem 0;
+    }
+    .parallax-content p {
+        margin-bottom: 10px;
+    }
+    .parallax-content {
+        padding-bottom: 25px;
+    }
+    .pattern-img img {
+        height: 450px;
+    }
+    .main-content {
+        max-width: 100%;
+    }
+    .main-content h2 {
+        font-size: 4rem;
+        line-height: 3.5rem;
+    }
+    .main-content {
+        top: 20px;
+        left: 15%;
+    }
+    .client-description p {
+        margin: 10px 0;
+    }
+    .collapse:not(.show) {
+        display: block;
+        z-index: 99;
+    }
+    .video-paralax {
+        width: unset;
+    }
+    .bg-text {
+        min-height: 512px;
+        padding-top: 110px;
+    }
+    .navbar .hamburger-menu {
+        display: block;
+    }
+    .shop-1 {
+        position: absolute;
+        top: -75px;
+        left: 189px;
+    }
+    .main-content {
+        text-align: center;
+        max-width: 100%;
+        left: 0;
+    }
+    .pattern-overlay {
+        padding-bottom: 50px;
+    }
+    .shop-1 span {
+        top: -5px;
+    }
+    .inner-logo {
+        display: none;
+    }
+    .heading-style-2 h2 {
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+    .service-style h2 {
+        font-size: 2rem;
+    }
+    .build-own h2 {
+        font-size: 2.5rem;
+        line-height: 2rem;
+    }
+    .client-slider button.slick-prev {
+        top: 91%;
+    }
+    .client-description p {
+        max-width: 100%;
+    }
+    .client-description {
+        padding-left: 0;
+    }
+    .client-slider .slick-next {
+        top: 90%;
+    }
+    .image-12 {
+        bottom: 0;
+    }
+    .product-img:before {
+        height: 420px;
+        top: 89px;
+    }
+    .pt-190 {
+        padding-top: 70px;
+    }
+    .inner-img-2 {
+        width: 100%;
+    }
+    .main-area img {
+        bottom: 0;
+        left: 0;
+    }
+    .main-content {
+        top: 10%;
+        left: 20%;
+    }
+    .inner-img-1 {
+        width: 100%;
+    }
+    .main-img {
+        bottom: 0;
+        left: 0;
+    }
+    .second-page h2 {
+        margin: auto;
+    }
+    .bg-text {
+        min-height: 500px;
+    }
+    .navbar-close {
+        display: block;
+    }
+    .menu-on {
+        display: block;
+    }
+    .woocommerce .woocommerce-Tabs-panel--description {
+        padding-top: 0px;
+    }
+    .woocommerce .style-2 .additional-title {
+        padding-top: 2rem;
+    }
+    .woocommerce .style-2 .flex-control-nav {
+        left: -40px;
+    }
+    .barber-item-2 p {
+        font-size: 1rem;
+    }
+    .barber-item-2 h3 {
+        font-size: 2rem;
+        padding-bottom: 0.5rem;
+    }
+    .contact-us {
+        margin-bottom: 15px;
+    }
+    .boxes {
+        margin-bottom: 70px;
+    }
+    .nav-top .nav-menu {
+        width: 0px;
+        background-color: #d9842f;
+        position: fixed;
+        color: #fff;
+        top: 0;
+        right: 0;
+        z-index: 9999;
+
+        height: 100%;
+        transition-duration: 500ms;
+        padding: 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        padding-top: 70px;
+        transition: 0.3s all ease-in-out;
+    }
+    .nav-top .nav-menu a {
+        color: #fff;
+    }
+    .nav-top .nav-menu ul {
+        list-style: none;
+
+        font-size: 22px;
+    }
+
+    .about-head .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        position: relative;
+    }
+    .navbar-toggler {
+        display: block;
+    }
+    .about-head .nav {
+        display: none;
+    }
+    .about-1 {
+        padding-top: 20px;
+    }
+    .about-head .topbar {
+        padding: 10px 0px;
+    }
+    .nav {
+        padding-bottom: 0;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information ul {
+        flex-direction: column;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information ul li {
+        padding-bottom: 20px;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information ul li h2 {
+        font-size: 3rem;
+    }
+
+    .woocommerce .woocommerce-Tabs-panel--additional_information ul li {
+        width: 100%;
+    }
+    .header-text h2 {
+        font-size: 60px;
+        line-height: 63px;
+    }
+    .comment-area {
+        margin-left: 50px;
+    }
+    .comment-inner {
+        padding: 10px 20px;
+    }
+    .comment-heading img {
+        min-height: 161px;
+    }
+    .about-head .user {
+        width: 100%;
+        margin: 0;
+    }
+    .user-content {
+        justify-content: center !important;
+    } /*
+	.nav li{
+		display: none;
+	}*/
+    .shop-1 .theme-btn-2 {
+        display: none;
+    }
+    .navbar-nav {
+        display: none;
+    }
+    .navbar img {
+        display: none;
+    }
+    .nav-btn {
+        display: none;
+    }
+    .gallerybtn-1 {
+        left: 0;
+    }
+    .error-page img {
+        max-height: 300px;
+    }
+    .error-page h4 {
+        margin-bottom: 1rem;
+    }
+    .error-page {
+        max-width: 100%;
+    }
+    .about-sec {
+        padding-bottom: 90px;
+    }
+    .woocommerce .entry-summary {
+        padding: 0;
+        width: 100%;
+    }
+    .main-area-img {
+        width: 100%;
+    }
+
+    .main-content h2 {
+        padding-top: 20px;
+        font-size: 3rem;
+        line-height: 3rem;
+    }
+    .main-area-img {
+        min-height: 356px;
+    }
+    .main-img {
+        left: -50px;
+        bottom: -132px;
+        max-width: 400px;
+        border: 2rem solid;
+    }
+    .service-style {
+        margin-bottom: 30px;
+    }
+    .intro-kit {
+        margin-bottom: 50px;
+    }
+    .inner-img-1 {
+        padding-right: 0;
+    }
+    .inner-img-2 {
+        padding-left: 0;
+    }
+    .woocommerce-product-gallery__image {
+        width: 100%;
+    }
+    .comment-text {
+        flex-direction: column;
+    }
+    .woocommerce .style-2 .additional-main {
+        flex-direction: column;
+    }
+    .woocommerce .style-2 .woocommerce-Tabs-panel--additional_information {
+        flex-wrap: wrap;
+    }
+    .woocommerce .style-2 .flex-active-slide {
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .blg-img {
+        position: relative;
+        min-height: 350px;
+        width: 100%;
+    }
+    .appointent-content {
+        flex-direction: column;
+        text-align: left;
+    }
+    .instagram-img ul li {
+        padding: 0.5rem;
+    }
+    .barber-main figure {
+        padding-right: 0rem;
+        padding-left: 1.25rem;
+    }
+    .heading-style-3 {
+        width: 100%;
+    }
+    .barber-fig,
+    .Service-box,
+    .hair-fade {
+        margin-bottom: 1.875rem;
+    }
+    .icon-3 svg {
+        width: 25%;
+        height: 25%;
+    }
+    .Service-box {
+        padding: 2.187rem 1.25rem;
+    }
+    .parallax-content h2 {
+        font-size: 2.5rem;
+    }
+    .service-img {
+        display: none;
+    }
+    .service-img {
+        font-size: 0.812rem;
+    }
+    .service-content span {
+        font-size: 1.125rem;
+        line-height: 2.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .price-image {
+        width: 100%;
+        margin-bottom: 80px;
+    }
+    .service-content h3 {
+        font-size: 2rem;
+        padding-top: 1rem;
+    }
+    h3 {
+        font-size: 1.562rem;
+    }
+    .appointment-box h4 {
+        font-size: 1rem;
+    }
+    .theme-btn {
+        padding: 0.437rem 1.875rem;
+    }
+    .appointment-box button {
+        margin-top: 2.437rem;
+    }
+    .appointment-box ul {
+        font-size: 1rem;
+    }
+    .arrow:before {
+        right: 21.5rem;
+    }
+    .theme-btn {
+        padding: 0.437rem 1.75rem;
+    }
+    .slider-1 span {
+        right: 1.125rem;
+        top: 10.437rem;
+    }
+    .slider-1 span {
+        padding: 0.687rem 1.062rem;
+    }
+    .barber-shadow h3 {
+        font-size: 0.937rem;
+    }
+    .shadow-image .shadow-icon {
+        margin: 0;
+    }
+    .heading-barber h2 {
+        font-size: 3.437rem;
+    }
+    .blog h2 {
+        font-size: 2.5rem;
+        line-height: 2.687rem;
+    }
+    .footer-mail button {
+        padding: 0.625rem 0.937rem;
+    }
+    .footer-mail input {
+        padding: 0.625rem 0.625rem;
+        font-size: 0.812rem;
+    }
+    .wiget-content p {
+        font-size: 0.875rem;
+    }
+    .wiget ul {
+        font-size: 1rem;
+        line-height: 1.687rem;
+    }
+    .wiget-contact span {
+        padding-left: 0.937rem;
+    }
+    .bg-text h2 {
+        font-size: 2.375rem;
+    }
+    h2 {
+        font-size: 3.437rem;
+    }
+    .wiget-content p {
+        margin-top: 1rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+    .boxes svg {
+        height: 3.75rem;
+    }
+    .pt-120 {
+        padding-top: 5.625rem;
+    }
+    .py-120 {
+        padding-bottom: 5.625rem;
+    }
+    .bg-text {
+        padding-bottom: 6.25rem;
+    }
+    .slider-item img {
+        margin-top: 0.937rem;
+    }
+    .slider-item h5 {
+        font-size: 0.937rem;
+        margin-bottom: 1.25rem;
+    }
+    .slider-item h3 {
+        font-size: 1.437rem;
+        margin-top: 0.937rem;
+    }
+}
+@media (max-width: 768px) {
+    
+    p {
+        font-size: 1rem;
+    }
+    .wiget-content {
+        margin-top: 0;
+    }
+    .order-info {
+        padding-left: 0;
+        padding-top: 10px;
+    }
+    .shop-1 {
+        top: -75px;
+        left: 75px;
+    }
+    .post-meta-2 ul {
+        flex-wrap: wrap;
+    }
+    .tab-content .tab-pane {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    .order-item img {
+        width: 100%;
+    }
+    .statement-table table,
+    .booking-table > table {
+        display: block;
+        overflow-x: auto;
+    }
+    .order-item {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .tabs-wrp {
+        padding: 0;
+    }
+    .order-item + .order-item {
+        display: flex;
+    }
+    .featured-restaurant-box.style3 {
+        flex-wrap: wrap;
+    }
+    .view-menu-liks > a {
+        padding: 10px 20px !important;
+    }
+    .popuo-button {
+        transform: translate(0px);
+    }
+    .featured-sub {
+        margin-bottom: 0;
+    }
+    .featured-area h2 {
+        font-size: 1.5rem;
+    }
+    .cart-item .featured-area {
+        text-align: center;
+    }
+    .popuo-button span {
+        opacity: 1;
+        visibility: visible;
+    }
+    .popup-main {
+        margin: 27px;
+    }
+    .cart-item {
+        flex-wrap: wrap;
+    }
+    .cart-item .featured-area {
+        text-align: left;
+    }
+    .heading-barber {
+        border: none !important;
+        border-bottom: 1px solid #dee2e6 !important;
+        max-width: 52%;
+        margin: auto;
+        margin-bottom: 35px;
+    }
+    .heading-barber p {
+        padding-bottom: 12px;
+    }
+    .heading-barber h2 {
+        margin-bottom: 0.7rem;
+        padding-top: 1rem;
+    }
+    .wiget-title {
+        margin-top: 3rem;
+    }
+    .service-prices {
+        padding-bottom: 50px;
+    }
+    .gap {
+        padding: 3.75rem 0;
+    }
+    .md-no-top {
+        padding-top: 0;
+    }
+    .md-no-bottom {
+        padding-bottom: 0;
+    }
+    .barber-fix {
+        margin-bottom: 1.875rem;
+    }
+    .team-table {
+        width: 450px;
+    }
+    .nav-tabs .nav-item {
+        width: 100%;
+        text-align: center;
+    }
+    .nav-tabs .nav-item a {
+        width: 50%;
+    }
+    .header-text {
+        min-height: 582px;
+    }
+    .header-text h2 {
+        padding-top: 0;
+    }
+    .barber-slider .slick-arrow {
+        top: 102%;
+    }
+    .barber-slider .slick-next {
+        right: 50%;
+    }
+    .barber-slider .slick-prev {
+        left: 45%;
+    }
+    .bg-text-area h2 {
+        font-size: 3rem;
+    }
+    .woocommerce .tabs li {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+    }
+    .woocommerce .tabs li a {
+        width: 50%;
+    }
+    .featured-area {
+        text-align: center;
+    }
+    .client-description p {
+        margin-top: 10px !important;
+    }
+    .main-area img {
+        display: none;
+    }
+    .over-logo {
+        display: none;
+    }
+    .heading-style-2 h2 {
+        max-width: 100%;
+    }
+    .client-slider .slick-next {
+        right: 0;
+        top: 85%;
+    }
+    .client-slider .slick-prev {
+        left: 55% !important;
+        top: 85% !important;
+    }
+    .about-sec {
+        padding-left: 40px;
+        max-width: 100%;
+    }
+    .features-product-2 .featured-area {
+        padding-top: 0.5rem;
+    }
+    .features-product-2 .featured-area h2 {
+        margin: 0;
+    }
+    .product-main {
+        padding-top: 0;
+    }
+    .featured-sub {
+        margin-top: -10px;
+        padding-bottom: 20px;
+    }
+    .product-heading {
+        max-width: 100%;
+    }
+    .product-heading h1 {
+        font-size: 45px;
+    }
+    .build-own h2 {
+        font-size: 2rem;
+        line-height: 1rem;
+    }
+    .service-style h2 {
+        font-size: 2rem;
+    }
+    .main-content {
+        width: 100%;
+        left: 0;
+    }
+    .post-meta h2 {
+        font-size: 2.5rem;
+    }
+    .comment-main h3 {
+        margin-bottom: 0;
+    }
+
+    .post-detail p {
+        font-size: 17px;
+        margin: 1rem 0;
+    }
+    .comment-text span {
+        padding-left: 0;
+    }
+    .comment-heading {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    .post-detail p {
+        font-size: 17px;
+        margin: 1rem 0;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information li {
+        flex-wrap: wrap;
+    }
+    .client-slider .slick-next {
+        right: 27%;
+    }
+    .img-over {
+        margin-bottom: 0;
+    }
+    .heading-style-3 h2 {
+        max-width: 100%;
+        line-height: 30px;
+    }
+    .woocommerce .woocommerce-tabs .theme-btn-2 {
+        margin-bottom: 10px;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information ul li h2 {
+        font-size: 2rem;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information ul li span {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information p {
+        line-height: 20px;
+    }
+    .woocommerce
+        .woocommerce-Tabs-panel--additional_information
+        ul
+        li
+        .list-inner {
+        max-width: 100%;
+    }
+    .about-head .topbar span {
+        display: none;
+    }
+    .comment-text h3 {
+        margin: 0;
+    }
+    .woocommerce .woocommerce-Reviews .comment-1 {
+        flex-wrap: wrap;
+    }
+    .woocommerce .woocommerce-Reviews {
+        flex-wrap: wrap;
+    }
+    .woocommerce .woocommerce-Reviews .comment-text {
+        padding: 0px 10px;
+    }
+    .comment-text p {
+        padding-left: 2px;
+    }
+    .side-image img {
+        display: none;
+    }
+    .main-content h2 {
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
+    .client-slider img {
+        max-width: 250px;
+    }
+    .about-img img {
+        padding-bottom: 20px;
+    }
+    .blog {
+        padding-left: 0px;
+    }
+    .client-slider .slick-next:before,
+    .barber-slider .slick-next:before,
+    .barber-slider .slick-prev:before {
+        height: 3.125rem !important;
+        width: 3.125rem !important;
+        line-height: 3.125rem !important;
+    }
+    .resp-padd {
+        padding-top: 0;
+    }
+
+    .about-img-1 {
+        padding-bottom: 20px;
+    }
+    .woocommerce-tabs ul {
+        flex-wrap: wrap;
+    }
+    .woocommerce-tabs ul li {
+        line-height: 30px;
+        font-size: 16px;
+    }
+    .woocommerce .style-2 .woocommerce-Tabs-panel--reviews {
+        padding-top: 0px;
+    }
+    .woocommerce .woocommerce-Reviews {
+        margin-top: 10px;
+    }
+    .additional-title {
+        padding-top: 1rem;
+    }
+    .woocommerce .style-2 .additional-title {
+        font-size: 2rem;
+        margin: 0;
+    }
+    .gallery .gallery-columns-4 {
+        width: 50%;
+    }
+    .header-text h2 {
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .error-page span {
+        font-size: 2rem;
+    }
+    .main-gallery {
+        margin-top: 1rem;
+    }
+    .gallerybtn-1 {
+        font-size: 1rem;
+    }
+    .client-description p {
+        font-size: 1rem;
+    }
+    .client-slider img {
+        padding-top: 0;
+    }
+    .bg-text-area {
+        padding-top: 90px;
+        padding-bottom: 90px;
+        text-align: center;
+    }
+    .woocommerce .sale .onsale {
+        display: none;
+    }
+    .woocommerce .woocommerce-product-gallery__wrapper {
+        padding-top: 40px;
+    }
+    .error-content {
+        padding: 40px 40px;
+    }
+    .main-content h2 {
+        max-width: 100%;
+    }
+    .error-content {
+        max-width: 100%;
+    }
+    .heading-style-2 h2 {
+        max-width: 70%;
+        font-size: 2rem;
+        line-height: 34px;
+    }
+    .woocommerce .style-2 .woocommerce-Tabs-panel--additional_information ul {
+        flex-wrap: wrap;
+    }
+    .appointent-content h2 {
+        width: 100%;
+    }
+
+    .barber-description-main {
+        padding-top: 30px;
+    }
+
+    .about-1 img {
+        width: 100%;
+        padding-top: 30px;
+    }
+    .price-title p {
+        margin-bottom: 2rem;
+    }
+    .parallax-content h2 {
+        font-size: 2.5rem;
+        padding-bottom: 0;
+    }
+    .about-us h2 {
+        font-size: 3rem;
+    }
+    .service-img {
+        display: none;
+    }
+    .service-img {
+        font-size: 0.812rem;
+    }
+    .price-image img {
+        min-height: 450px;
+        max-height: 450px;
+    }
+    .price-image {
+        width: 100%;
+    }
+    h3 {
+        font-size: 1.562rem;
+    }
+    .appointment-box {
+        padding: 0.9rem 1.937rem;
+    }
+    .theme-btn {
+        padding: 0.437rem 1.875rem;
+    }
+    .appointment-box button {
+        margin-top: 2.437rem;
+    }
+    .arrow:before {
+        display: none;
+    }
+    .slider-item img {
+        margin-top: 0.937rem;
+    }
+    .slider-item h5 {
+        font-size: 0.937rem;
+        margin-bottom: 1.25rem;
+    }
+    .slider-item h3 {
+        font-size: 1.437rem;
+        margin-top: 0.937rem;
+    }
+    .theme-btn {
+        padding: 0.437rem 1.75rem;
+    }
+    .slider-1 span {
+        right: 1.125rem;
+        top: 11.312rem;
+    }
+    .slider-1 span {
+        padding: 0.687rem 1.062rem;
+    }
+    .bg-text p {
+        font-size: 15px;
+    }
+    .barber-shadow h3 {
+        font-size: 0.937rem;
+    }
+    .shadow-image .shadow-icon {
+        margin: 0;
+    }
+    .heading-barber h2 {
+        font-size: 3.437rem;
+    }
+    .boxes p {
+        font-size: 0.812rem;
+    }
+    .blog h2 {
+        font-size: 2.5rem;
+        line-height: 2.687rem;
+    }
+    .footer-mail button {
+        padding: 0.625rem 0.937rem;
+    }
+    .footer-mail input {
+        padding: 0.625rem 0.625rem;
+        font-size: 1rem;
+    }
+    .wiget-content p {
+        font-size: 0.875rem;
+    }
+    .wiget ul {
+        font-size: 1rem;
+        line-height: 1.687rem;
+    }
+    .wiget-contact span {
+        padding-left: 0.937rem;
+    }
+    .bg-text h2 {
+        font-size: 2.375rem;
+    }
+    .bg-text {
+        padding-top: 50px;
+        padding-bottom: 6.25rem;
+    }
+    .barber-shop h2 {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+    .barber-shop p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .barber-shop a,
+    a.theme-btn-2 {
+        padding: 0.625rem 1.562rem;
+    }
+    .barber-shop span {
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+    .wiget-content p {
+        margin-top: 2rem;
+        line-height: 1.5rem;
+        font-size: 1rem;
+    }
+    .boxes svg {
+        height: 3.75rem;
+    }
+    .pt-120 {
+        padding-top: 5.625rem;
+    }
+    .py-120 {
+        padding-bottom: 5.625rem;
+    }
+    .shop-1 .theme-btn {
+        margin-left: 2.5rem;
+    }
+    .nav .nav-link {
+        padding-left: 0;
+    }
+    .theme-btn span {
+        left: -0.187rem;
+    }
+    .blog-table h4 {
+        font-size: 0.875rem;
+    }
+    .blog-detail h2 {
+        font-size: 2.437rem;
+    }
+    .comment-area {
+        margin-left: 0;
+    }
+    .comment-sec {
+        margin-left: 0;
+    }
+    .comment-sec p {
+        padding-left: 0;
+    }
+    .form-comment input {
+        margin-bottom: 0.625rem;
+    }
+    .blog-detail h2 {
+        font-size: 1.562rem;
+    }
+    .barber-hipster {
+        padding: 2rem;
+    }
+    .barber-shop {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        width: 100%;
+    }
+    .border-bottom-right::after {
+        display: none;
+    }
+    .border-bottom-left::before {
+        display: none;
+    }
+    .table-img span {
+        padding: 0.625rem 0rem 0.625rem 0.625rem;
+    }
+    .ryan-description h3 {
+        font-size: 1.875rem;
+    }
+    .ryan-description {
+        padding-left: 1.25rem;
+        padding-top: 0.625rem;
+        padding-bottom: 0.625rem;
+    }
+    .ryan-description p {
+        font-size: 0.875rem;
+    }
+    .hair-fade h2 {
+        font-size: 1.562rem;
+    }
+    .hair-fade img {
+        padding-top: 0.625rem;
+        padding-bottom: 0.625rem;
+    }
+    .Service-box p {
+        font-size: 0.875rem;
+    }
+
+    .barber-hipster h1 {
+        font-size: 2rem;
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+    .barber-item-con {
+        padding-top: 3.125rem;
+        padding-left: 2.625rem;
+    }
+    .barber-list-2 h4 {
+        font-size: 0.687rem;
+        padding-bottom: 0.812rem;
+    }
+    .barber-item-con h3 {
+        font-size: 2rem;
+        padding-bottom: 0;
+    }
+    .woocommerce .content-area .woocommerce-product-gallery {
+        flex-wrap: wrap;
+    }
+    .woocommerce .content-area .woocommerce-product-gallery .star-rating span {
+        font-size: 1rem;
+    }
+    .woocommerce .comment-form-comment input {
+        width: 100%;
+    }
+    .woocommerce .comment-form-reason input {
+        width: 100%;
+    }
+    .woocommerce .gallery-caption {
+        font-size: 1.25rem;
+    }
+    .featured-main .slick-arrow {
+        right: 46%;
+    }
+}
+@media (max-width: 680px) {
+    .Service-box {
+        padding: 1.875rem 4.375rem;
+    }
+    .contact-us {
+        padding: 2rem;
+    }
+    .woocommerce .product_title {
+        padding-top: 0;
+        font-size: 2rem;
+    }
+    .entry-summary p {
+        font-size: 16px;
+    }
+    .popup-items {
+        width: 458px;
+    }
+    .barber-slider .slick-next {
+        right: 30%;
+    }
+    .navbar-toggler {
+        z-index: 9;
+    }
+    .header-text h2 {
+        max-width: 90%;
+    }
+    .header-text h2 {
+        padding-top: 8px;
+    }
+    .parallax-content {
+        padding-top: 0px;
+    }
+    .featured-main .slick-arrow {
+        right: 40%;
+    }
+    .parallax-content h2 {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+    .header-text h2 {
+        font-size: 40px;
+        line-height: 45px;
+    }
+    .heading-style-3 h2 {
+        line-height: 30px;
+    }
+    .topbar ul li:last-child {
+        padding-left: 0;
+    }
+    .side-t {
+        margin-top: 20px;
+    }
+    .main-img {
+        display: none;
+    }
+    .barber-item-2 {
+        padding: 0.8rem 0.8rem;
+    }
+    .icon-3 svg {
+        width: 20%;
+        height: 20%;
+    }
+    .price-title p {
+        margin-bottom: 2rem;
+    }
+    .bg-text h2 {
+        font-size: 2.187rem;
+        max-height: 250px;
+        max-width: 250px;
+    }
+    .client-description p {
+        font-size: 0.875rem;
+        margin-top: 0;
+    }
+    .barber-quote {
+        right: -16.25rem;
+        z-index: 1;
+    }
+    .slick-next:before {
+        left: -2.375rem;
+    }
+    .heading-style-2 {
+        margin-bottom: 0rem;
+    }
+    .slick-prev:before {
+        margin-left: 9px;
+    }
+    .sec-img {
+        max-width: 70%;
+        margin-left: 3.125rem;
+    }
+    .service-content span {
+        right: 4.937rem;
+        top: 1.375rem;
+    }
+    .boxes {
+        margin-bottom: 3.437rem;
+    }
+    .pt-120 {
+        padding-top: 3.125rem;
+    }
+    .py-120 {
+        padding-bottom: 3.75rem;
+    }
+    .blog-image {
+        padding-top: 3.125rem;
+    }
+    .blog-table h4 {
+        font-size: 0.875rem;
+    }
+
+    .comment-text p {
+        padding-left: 3.125rem;
+    }
+    .form-comment input {
+        margin-bottom: 0.625rem;
+    }
+}
+@media (max-width: 570px) {
+    .sm-no-top {
+        padding-top: 0;
+    }
+    .sm-no-bottom {
+        padding-bottom: 0;
+    }
+    .bg-text h2 {
+        font-size: 2.187rem;
+        line-height: 1.875rem;
+    }
+    .client-slider .slick-prev {
+        left: 48% !important;
+    }
+    .heading-style-2 h2 {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        font-size: 2.5rem !important;
+    }
+    .main-content {
+        top: 10%;
+        left: 10%;
+    }
+    .heading-style-2 h2 {
+        font-size: 2.5rem;
+    }
+    .woocommerce .woocommerce-tabs {
+        padding-top: 2rem;
+    }
+    .woocommerce .style-2 .woocommerce-Tabs-panel--additional_information ul p {
+        width: 100%;
+    }
+    .topbar {
+        flex-wrap: wrap;
+    }
+    .client-slider img {
+        padding: 0 20px;
+    }
+    .client-description {
+        padding-right: 0;
+        padding-left: 22px;
+    }
+    .post-meta ul {
+        flex-wrap: wrap;
+    }
+    .error-bg-2 {
+        display: none;
+    }
+    .appointent-content .theme-btn-2 {
+        margin-left: 0;
+    }
+    .error-page h4 {
+        margin-bottom: 0;
+    }
+    .error-page p {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        line-height: 26px;
+    }
+    .error-page h2 {
+        font-size: 80px;
+        padding-bottom: 0;
+        line-height: 61px;
+    }
+    .about-sec h2 {
+        font-size: 2.75rem;
+        line-height: 40px;
+    }
+    .price-title p {
+        margin-bottom: 1rem;
+    }
+    .appoint-inner {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .price-title h2 {
+        font-size: 2rem;
+    }
+    .price-inner {
+        margin-bottom: 0;
+    }
+    .price-inner h3 {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+    .client-description p {
+        font-size: 0.875rem;
+        margin-top: 0;
+    }
+
+    .barber-quote {
+        right: -16.25rem;
+        z-index: 1;
+    }
+    .slick-next:before {
+        left: -2.375rem;
+    }
+    .heading-style-2 {
+        margin-bottom: 0rem;
+    }
+    .instagram-img ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .instagram-img ul li {
+        flex-wrap: wrap;
+        padding: 0.625rem;
+    }
+    .slick-prev:before {
+        margin-left: 9px;
+    }
+    .sec-img {
+        max-width: 70%;
+        margin-left: 3.125rem;
+    }
+    .service-content span {
+        right: 4.937rem;
+        top: 1.375rem;
+    }
+    .boxes {
+        margin-bottom: 3.437rem;
+    }
+    .pt-120 {
+        padding-top: 3.125rem;
+    }
+    .py-120 {
+        padding-bottom: 3.75rem;
+    }
+    .blog-image {
+        padding-top: 3.125rem;
+    }
+    .blog-table h4 {
+        font-size: 0.875rem;
+    }
+    .form-comment input {
+        margin-bottom: 0.625rem;
+    }
+    .price-content {
+        padding: 40px 0px;
+    }
+}
+@media (max-width: 480px) {
+    .nav-right {
+        display: none;
+
+    }
+    .hamburger-navigation .nav-menu li a {
+        font-size: 30px;
+    }
+
+    .footer-area {
+        padding: 60px 0px;
+    }
+    .shop-1 {
+        top: -44px;
+        left: 244px;
+    }
+    .tabs-wrp .featured-restaurant-box.style3 {
+        padding: 15px 24px;
+    }
+    .table-img-con {
+        width: 100%;
+    }
+    .tab-content .tab-pane {
+        padding-top: 0;
+    }
+    .img-height img {
+        height: 293px;
+    }
+    .featured-area {
+        padding-top: 0.8rem;
+    }
+    .featured-area h2 {
+        margin-bottom: 0;
+    }
+    .logo img {
+        width: 75px;
+    }
+    .blog h2 {
+        font-size: 2rem;
+        line-height: 2.3rem;
+        padding-top: 1rem;
+    }
+    .blog p {
+        margin-top: 0px;
+        padding-bottom: 0px;
+    }
+    .appointment-box ul {
+        padding-top: 0;
+    }
+    .main-logo img {
+        width: 133px;
+    }
+    .popup-items {
+        width: 321px;
+    }
+    .heading-barber {
+        max-width: 89%;
+    }
+    .service-prices p {
+        padding: 0 50px;
+    }
+    .parallax-content {
+        text-align: center;
+    }
+    .hair-fit img {
+        min-height: 390px;
+    }
+    .parallax-content p {
+        margin-bottom: 0rem;
+    }
+    .header-inner p {
+        font-size: 16px;
+    }
+    .service-prices {
+        padding-bottom: 30px;
+    }
+    .header-inner img {
+        margin-bottom: 0;
+    }
+    .inner-img-1 img {
+        min-height: 415px;
+    }
+    .heading-style span {
+        font-size: 0.8rem;
+    }
+    .main-content h2 {
+        width: 100%;
+        text-align: center;
+    }
+    .main-content {
+        left: 0;
+    }
+    .heading-style h2 {
+        font-size: 35px;
+        margin: 0;
+    }
+    .button-gallery {
+        margin-top: 0;
+    }
+    .pattern-img img {
+        height: 331px;
+    }
+    .heading-style-2 h2 {
+        max-width: 100%;
+    }
+    .featured-main button.slick-prev {
+        left: 30%;
+    }
+    .about-sec h2 {
+        font-size: 2rem;
+        line-height: 1rem;
+    }
+    .about-sec p {
+        padding: 10px;
+    }
+    .featured-area {
+        text-align: center;
+    }
+    .img-over {
+        padding-top: 10px;
+    }
+    .features-product {
+        padding-right: 0;
+        margin-right: 0;
+    }
+    .slick-slider {
+        margin: 0;
+    }
+    .client-slider img {
+        width: 100%;
+        margin: auto;
+        display: block;
+    }
+    .client-slider {
+        width: 100%;
+    }
+    .client-description {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+    .table-img-con h2 {
+        font-size: 2rem;
+        line-height: 33px;
+    }
+    .client-slider .slick-next {
+        right: 169px !important;
+        top: 94% !important;
+    }
+    .about-table {
+        left: 110px;
+        padding: 40px 0px;
+        width: 266px;
+    }
+    .client-slider .slick-prev {
+        left: 30% !important;
+        top: 94% !important;
+    }
+    .product-heading h1 {
+        font-size: 32px;
+        text-align: center;
+    }
+    .product-heading {
+        margin-bottom: 1rem;
+    }
+    .service-style {
+        font-size: 35px;
+    }
+    .build-own h2 {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+    .heading-style-2 h2 {
+        font-size: 1.5rem;
+        line-height: 36px;
+        font-weight: 500;
+        padding-bottom: 20px;
+    }
+    .intro-kit {
+        text-align: center;
+    }
+    .build-own p {
+        margin-bottom: 0.5rem;
+    }
+    .woocommerce .woocommerce-product-gallery__wrapper {
+        padding-top: 70px;
+    }
+    .woocommerce .content-area {
+        padding: 0 10px;
+    }
+    .woocommerce .style-2 .woocommerce-Tabs-panel--additional_information ul p {
+        width: 100%;
+    }
+    .woocommerce
+        .style-2
+        .woocommerce-Tabs-panel--additional_information
+        ul
+        h2 {
+        font-size: 30px;
+        padding-top: 10px;
+        margin: 0;
+    }
+    .about-us {
+        padding-right: 0;
+    }
+    .shop-1 a {
+        position: absolute;
+        left: -40px;
+        top: -17px;
+    }
+    .shop-1 span {
+        top: 0px;
+        left: 1rem;
+    }
+    .woocommerce .product_title {
+        font-size: 1.812rem;
+        padding-bottom: 5px;
+    }
+    .barber-description h2 span {
+        font-size: 2.5rem;
+    }
+    .barber-description h2 {
+        font-size: 2.5rem;
+    }
+    .bg-text-area h2 {
+        font-size: 3.5rem;
+    }
+    .woocommerce
+        .woocommerce-Tabs-panel--additional_information
+        ul
+        li
+        .list-inner {
+        max-width: 100%;
+    }
+    .woocommerce .woocommerce-Tabs-panel--additional_information ul li {
+        flex-wrap: wrap;
+    }
+    .gallery .gallery-columns-4 {
+        width: 100%;
+    }
+    .blg-img {
+        min-height: 250px;
+    }
+    .error-page {
+        margin-bottom: 50px;
+    }
+    .error-page img {
+        max-height: 250px;
+    }
+    .error-page h4 {
+        font-size: 1.5rem;
+        padding-top: 0rem;
+        margin-bottom: 10px;
+        line-height: 29px;
+    }
+    .post-meta h2 {
+        font-size: 2.125rem;
+        line-height: 35px;
+    }
+    .barber-hipster {
+        padding: 2rem;
+    }
+    .Service-box {
+        padding: 1.875rem;
+    }
+    .price-image {
+        margin-bottom: 50px;
+    }
+    .bg-text h2 {
+        font-size: 2.187rem;
+        line-height: 1.875rem;
+    }
+    .client-description p {
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+    .client-description p:last-child {
+        padding-top: 0;
+        margin-top: 0 !important;
+        padding-bottom: 75px;
+    }
+    .instagram-img ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .instagram-img ul li {
+        flex-wrap: wrap;
+        padding: 0.625rem;
+    }
+    .barber-quote {
+        z-index: 1;
+    }
+    .slick-next:before {
+        left: -2.375rem;
+    }
+    .heading-style-2 {
+        margin-bottom: 0rem;
+    }
+    .slick-prev:before {
+        margin-left: 9px;
+    }
+    .bg-text p {
+        font-size: 0.812rem;
+    }
+    .sec-img {
+        max-width: 70%;
+        margin-left: 3.125rem;
+    }
+    .service-content span {
+        right: 4.937rem;
+        top: 1.375rem;
+    }
+    .boxes {
+        margin-bottom: 3.437rem;
+    }
+    .pt-120 {
+        padding-top: 3.125rem;
+    }
+    .py-120 {
+        padding-bottom: 3.75rem;
+    }
+    .snap-description h2 {
+        font-size: 2.312rem;
+    }
+    .snap-description {
+        padding: 5;
+    }
+    .barber-list h4 {
+        font-size: 0.937rem;
+    }
+    .blog-table h4 {
+        font-size: 0.875rem;
+    }
+    .form-comment input {
+        margin-bottom: 0.625rem;
+    }
+    .pr-100 {
+        padding-right: 0;
+    }
+    .pl-100 {
+        padding-left: 0;
+    }
+    .border-bottom-right::after {
+        display: none;
+    }
+    .border-bottom-left::before {
+        display: none;
+    }
+
+    .price-inner h3 {
+        font-size: 1.2rem;
+        margin: 0;
+    }
+    .barber-description h3 {
+        font-size: 1.2rem;
+        line-height: 22px;
+    }
+    .about-us h2 {
+        font-size: 2.5rem;
+        line-height: 35px;
+    }
+}
+@media (max-width: 425px) {
+    .hair-fade span {
+        padding-top: 1.875rem;
+    }
+    button.scrollTopStick {
+        right: 25px;
+    }
+    .video-img2 {
+        margin-top: 10px;
+    }
+    .barber-main figure {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+    .nav-tabs .nav-item a {
+        width: 100%;
+    }
+    .barber-hipster h1 {
+        line-height: 33px;
+    }
+    .instagram-content h1 {
+        font-size: 32px;
+        line-height: 32px;
+    }
+    .build-hair {
+        text-align: center;
+    }
+    .comment-area p {
+        padding-left: 0;
+    }
+    .comment-text {
+        padding-left: 0;
+    }
+    .barber-main figure {
+        width: 100%;
+    }
+    .barber-description h2 {
+        font-size: 3.375rem;
+    }
+    .barber-description h2 span {
+        font-size: 3.375rem;
+    }
+    .bg-text-area h2 {
+        font-size: 3.375rem;
+    }
+    .woocommerce .gallery .gallery-item {
+        width: 100%;
+    }
+    .bg-text-area {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    .contact-us {
+        padding: 1rem;
+    }
+    .barber-item-2 {
+        padding: 0.9rem 0.9rem;
+    }
+    .barber-description span {
+        font-size: 2rem;
+    }
+    .barber-item-2 h3 {
+        font-size: 2rem;
+    }
+    .table-img {
+        padding: 0.937rem;
+    }
+    .price-image img {
+        min-height: 300px;
+        max-height: 300px;
+    }
+    .instagram-img ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .wiget p {
+        margin-bottom: 0;
+    }
+    .wiget-contact li,
+    .wiget p {
+        font-size: 1rem;
+    }
+    .instagram-img ul li {
+        flex-wrap: wrap;
+        padding: 0.625rem;
+    }
+    .price-inner {
+        margin-bottom: 0;
+    }
+    .price-title h2 {
+        font-size: 2rem;
+    }
+
+    .table-img {
+        margin-top: 3.75rem;
+    }
+    .blog-image {
+        padding-top: 3.125rem;
+    }
+    .Service-box h2 {
+        font-size: 1.562rem;
+        padding-top: 0.937rem;
+    }
+    .theme-btn span {
+        left: 5.062rem;
+    }
+    .shop-1 span {
+        font-size: 1.25rem;
+    }
+    .bg-text-area h2 {
+        font-size: 3rem;
+    }
+    .about-us h2 {
+        font-size: 2.5rem;
+    }
+    .about-img img {
+        padding: 0.625rem;
+    }
+    .nav .nav-link {
+        padding-left: 0rem;
+    }
+    .snap-description {
+        padding: 1.187rem;
+    }
+    .pt-120 {
+        padding-top: 1.25rem;
+    }
+    h2 {
+        font-size: 45px;
+    }
+    .snap-description h2 {
+        font-size: 2.312rem;
+    }
+    .snap-description {
+        padding: 5;
+    }
+    .barber-list h4 {
+        font-size: 0.937rem;
+    }
+    .blog-table h4 {
+        font-size: 0.875rem;
+    }
+    .pl-100 {
+        padding-left: 0;
+    }
+    .pr-100 {
+        padding-right: 0;
+    }
+    .barber-hipster h1 {
+        font-size: 1.6rem;
+    }
+    .heading-style-3 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .barber-shop {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .bg-text h2 {
+        font-size: 1.437rem;
+    }
+    .table-img-descrip {
+        margin-bottom: 0.625rem;
+    }
+    .barber-shop h2 {
+        font-size: 1.875rem;
+    }
+    .barber-shop p {
+        font-size: 0.875rem;
+    }
+    .woocommerce .gallery-item {
+        width: calc(100% / 3);
+    }
+    .woocommerce .woocommerce-Reviews {
+        flex-direction: column;
+    }
+    .woocommerce .woocommerce-Reviews .comment-text {
+        padding-left: 0.937rem;
+        padding-top: 1.562rem;
+    }
+    .woocommerce .content-area .woocommerce-Tabs-panel--additional_information {
+        flex-direction: column;
+    }
+    .woocommerce
+        .content-area
+        .woocommerce-Tabs-panel--additional_information
+        ul {
+        padding-right: 0;
+    }
+
+    .wiget-title {
+        margin-top: 2rem;
+    }
+    .about-head .topbar ul {
+        font-size: 0.937rem;
+    }
+    header.about-head ul {
+        flex-wrap: wrap;
+    }
+    .event-default img {
+        min-height: 275px;
+    }
+}
+@media (max-width: 375px) {
+    .bg-text h2 {
+        font-size: 2.187rem;
+        line-height: 1.875rem;
+    }
+    .client-slider .slick-next {
+        right: 128px !important;
+    }
+    .woocommerce .woocommerce-Reviews img {
+        width: 100%;
+    }
+    .woocommerce .woocommerce-Reviews p {
+        padding-left: 0;
+    }
+    .about-head .topbar ul {
+        font-size: 0.937rem;
+    }
+    header.about-head ul {
+        flex-wrap: wrap;
+    }
+    .instagram-img ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .instagram-img ul li {
+        flex-wrap: wrap;
+        padding: 0.625rem;
+    }
+    .wiget-contact li {
+        font-size: 0.875rem;
+    }
+    .wiget-title {
+        margin-top: 1rem;
+    }
+    .wiget p {
+        font-size: 0.875rem;
+        margin-bottom: 0;
+    }
+    .price-inner {
+        margin-bottom: 0;
+    }
+    .price-image img {
+        min-height: 300px;
+        max-height: 300px;
+    }
+    .client-description p {
+        font-size: 0.875rem;
+        margin-top: 0;
+    }
+    .barber-quote {
+        right: -16.25rem;
+        z-index: 1;
+    }
+    .slick-next:before {
+        left: -2.375rem;
+    }
+    .heading-style-2 {
+        margin-bottom: 0rem;
+    }
+    .slick-prev:before {
+        margin-left: 0.562rem;
+    }
+    .bg-text p {
+        font-size: 0.812rem;
+    }
+    .sec-img {
+        max-width: 70%;
+        margin-left: 3.125rem;
+    }
+    .service-content span {
+        right: 4.937rem;
+        top: 1.375rem;
+    }
+    .boxes {
+        margin-bottom: 3.437rem;
+    }
+    .pt-120 {
+        padding-top: 3.125rem;
+    }
+    .py-120 {
+        padding-bottom: 3.75rem;
+    }
+    .blog-image {
+        padding-top: 3.125rem;
+    }
+    .topbar ul li:last-child {
+        padding-left: 0;
+    }
+    .topbar ul {
+        padding: 0rem;
+    }
+    .nav .nav-link {
+        padding-left: 36px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .theme-btn span {
+        left: 3.437rem;
+    }
+    .about-us h2 {
+        font-size: 2.125rem;
+    }
+    .snap-description h2 {
+        font-size: 2.312rem;
+    }
+    .snap-description {
+        padding: 5;
+    }
+    .barber-list h4 {
+        font-size: 0.937rem;
+    }
+    .about-img {
+        flex-direction: column;
+    }
+    .contact-us {
+        margin-bottom: 0.625rem;
+    }
+    .blog-table h4 {
+        font-size: 0.875rem;
+    }
+    .form-comment input {
+        margin-bottom: 0.625rem;
+    }
+    .form-comment input {
+        margin-bottom: 0.625rem;
+    }
+    .pl-100 {
+        padding-left: 0;
+    }
+    .pr-100 {
+        padding-right: 0;
+    }
+    .heading-style-3 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .barber-shop {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .bg-text h2 {
+        font-size: 1.437rem;
+    }
+    .border-bottom-right::after {
+        display: none;
+    }
+    .border-bottom-left::before {
+        display: none;
+    }
+    .table-img-descrip {
+        margin-bottom: 0.625rem;
+    }
+    .barber-list-2 h4 {
+        font-size: 0.875rem;
+        padding-bottom: 0.875rem;
+    }
+    .barber-shop h2 {
+        font-size: 1.875rem;
+    }
+    .barber-shop p {
+        font-size: 0.875rem;
+    }
+    .woocommerce .gallery-item {
+        width: calc(100% / 3);
+    }
+    .woocommerce .woocommerce-Reviews {
+        flex-direction: column;
+    }
+    .woocommerce .woocommerce-Reviews .comment-text {
+        padding-left: 0.937rem;
+        padding-top: 1.562rem;
+    }
+    .woocommerce .content-area .woocommerce-Tabs-panel--additional_information {
+        flex-direction: column;
+    }
+    .woocommerce
+        .content-area
+        .woocommerce-Tabs-panel--additional_information
+        ul {
+        padding-right: 0;
+    }
+    .about-sec h2 {
+        font-size: 2rem;
+        line-height: 33px;
+    }
+}
